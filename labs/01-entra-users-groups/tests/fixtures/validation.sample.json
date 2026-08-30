@@ -1,0 +1,18 @@
+{
+  "labId": "LAB-01",
+  "runId": "az104l01-sample",
+  "generatedAt": "2026-08-30T12:00:00Z",
+  "result": "pass",
+  "checks": [
+    {
+      "id": "context.tenant",
+      "status": "pass",
+      "message": "Active Azure CLI tenant matches the recorded tenant."
+    },
+    {
+      "id": "relationship.member",
+      "status": "pass",
+      "message": "User A is a direct member of the lab group."
+    }
+  ]
+}

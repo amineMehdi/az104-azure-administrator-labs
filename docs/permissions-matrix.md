@@ -12,3 +12,10 @@ Each lab declares its exact requirements in `lab.yml`. This summary describes th
 | Data plane | Service-specific data roles | Blob, Files, and backup validation |
 
 The broad `Owner` role is not a default. Preflight should fail or mark a gated path when the narrow required permission is unavailable.
+
+## Implemented identity labs
+
+| Lab | Microsoft Entra requirement | Azure RBAC requirement | Notes |
+|---|---|---|---|
+| 00 Safe bootstrap | None | Reader recommended for discovery | Read-only; creates no Azure or tenant object. |
+| 01 Entra users and groups | User Administrator recommended at the intended tenant scope | None | Creates two disposable users and one security group; subscription Owner is not a substitute. |

@@ -1,0 +1,68 @@
+id: LAB-01
+slug: 01-entra-users-groups
+title: Create and manage Microsoft Entra users and groups
+blueprintVersion: "2026-04-17"
+domain: Manage Azure identities and governance
+objectives:
+  - IG-USERS-01
+  - IG-USERS-02
+track: azure-cli-graph
+status: offline-validated
+testedToolVersions:
+  azureCli: "2.88.0"
+  bash: "5.x (Git for Windows lane)"
+  jq: ">=1.6"
+estimatedMinutes: 75
+difficulty: foundational
+cost:
+  class: none
+  billableResources: []
+  notes: Basic cloud-only users and a security group do not create Azure resource charges.
+permissions:
+  azureRbacRoles: []
+  entraRoles:
+    - User Administrator at tenant scope is recommended for the complete exercise
+  graphScopes:
+    - Delegated user and group write permissions exposed to Azure CLI by the signed-in tenant
+prerequisites:
+  - A disposable non-production Microsoft Entra tenant
+  - Authorization to create and delete two cloud-only users and one security group
+  - Azure CLI, Bash, and jq 1.6 or newer
+  - A verified tenant domain that can be used for cloud-only user principal names
+providers:
+  observed: []
+  registeredByLab: []
+regions:
+  applicable: false
+creates:
+  azureResources: []
+  entraObjects:
+    - Two cloud-only member users
+    - One security group
+    - One group membership
+    - One group owner assignment
+  localArtifacts:
+    - .state/<run-id>/run.json
+    - .state/<run-id>/validation.json
+tenantScopedChanges:
+  - Microsoft Entra user objects
+  - Microsoft Entra security group, membership, and ownership
+externalRequirements: []
+validation:
+  commandLanes:
+    - scripts/cli/validate.sh
+  output: .state/<run-id>/validation.json
+  statuses:
+    - pass
+    - fail
+    - warning
+    - skipped
+screenshotStatus: pending
+cleanup:
+  azureDeletion: none
+  entraDeletion: exact recorded object IDs only
+  reportOnlyByDefault: true
+  requiresExecuteFlag: true
+  softDeleteNote: User deletion is recoverable until deleted-item retention expires unless explicitly purged.
+lastOfflineValidated: "2026-08-30"
+lastLiveVerified: null

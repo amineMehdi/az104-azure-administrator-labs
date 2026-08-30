@@ -33,6 +33,11 @@ Only first-party Microsoft sources are authoritative for the exam blueprint and 
 | `SRC-BICEP` | [Bicep documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/) | Infrastructure-as-code interpretation, deployment, export, and decompilation | 2026-08-30 |
 | `SRC-AZCOPY` | [Get started with AzCopy](https://learn.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-v10) | Storage data movement exercises | 2026-08-30 |
 | `SRC-KQL` | [Kusto Query Language overview](https://learn.microsoft.com/en-us/kusto/query/) | Azure Monitor log queries and troubleshooting | 2026-08-30 |
+| `SRC-CLI-ENTRA-USERS` | [Azure CLI Microsoft Entra user commands](https://learn.microsoft.com/en-us/cli/azure/ad/user?view=azure-cli-latest) | Lab 01 user creation, reading, updating, and deletion | 2026-08-30 |
+| `SRC-CLI-ENTRA-GROUPS` | [Azure CLI Microsoft Entra group commands](https://learn.microsoft.com/en-us/cli/azure/ad/group?view=azure-cli-latest) | Lab 01 security group, membership, and ownership operations | 2026-08-30 |
+| `SRC-GRAPH-USERS` | [Microsoft Graph create user](https://learn.microsoft.com/en-us/graph/api/user-post-users?view=graph-rest-1.0) | Lab 01 required user properties and least-privileged API context | 2026-08-30 |
+| `SRC-GRAPH-GROUPS` | [Microsoft Graph create group](https://learn.microsoft.com/en-us/graph/api/group-post-groups?view=graph-rest-1.0) | Lab 01 group type and property behavior | 2026-08-30 |
+| `SRC-ENTRA-ROLES` | [Microsoft Entra built-in roles](https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/permissions-reference) | Lab 01 directory-role boundary and least-privilege discussion | 2026-08-30 |
 
 ## Domain documentation hubs
 

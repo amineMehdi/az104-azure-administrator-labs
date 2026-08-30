@@ -1,0 +1,208 @@
+- id: LAB01-Q01
+  objectiveIds: [IG-USERS-01]
+  difficulty: foundational
+  stem: "An administrator is creating a cloud-only Microsoft Entra user. Which UPN requirement must be satisfied?"
+  options:
+    A: "The UPN must match the administrator's email address."
+    B: "The UPN must use the tenant's initial domain only."
+    C: "The UPN suffix must be one of the tenant's verified domains."
+    D: "The UPN must use the same name as an Azure subscription."
+  correctOption: C
+  explanation: "A cloud user's userPrincipalName uses an Internet-style alias@domain format, and the domain must belong to the tenant's verified domains collection."
+  distractorExplanations:
+    A: "The new identity is independent of the administrator's email address."
+    B: "Any suitable verified tenant domain can be used; it is not limited to the initial domain."
+    C: "Correct. Microsoft Graph and Azure CLI require a verified-domain UPN suffix."
+    D: "Azure subscription names do not determine Microsoft Entra UPN suffixes."
+  sourceUrls:
+    - https://learn.microsoft.com/en-us/graph/api/user-post-users?view=graph-rest-1.0
+    - https://learn.microsoft.com/en-us/cli/azure/ad/user?view=azure-cli-latest
+  lastVerified: "2026-08-30"
+
+- id: LAB01-Q02
+  objectiveIds: [IG-USERS-01]
+  difficulty: foundational
+  stem: "You need a Microsoft Entra group for assigning access to Azure resources, without creating an email collaboration group. Which group properties fit the requirement?"
+  options:
+    A: "securityEnabled=true and mailEnabled=false"
+    B: "securityEnabled=false and mailEnabled=true"
+    C: "securityEnabled=false and mailEnabled=false"
+    D: "securityEnabled=true and mailEnabled=true with dynamic membership"
+  correctOption: A
+  explanation: "A standard security group used for access assignments is security-enabled and can be non-mail-enabled. Microsoft 365 collaboration capabilities are not required."
+  distractorExplanations:
+    A: "Correct. These values describe a non-mail-enabled security group."
+    B: "This describes a mail-enabled object without the required security capability."
+    C: "A group that is not security-enabled cannot satisfy the access-assignment requirement."
+    D: "Mail and dynamic membership add capabilities that the requirement does not request."
+  sourceUrls:
+    - https://learn.microsoft.com/en-us/graph/api/group-post-groups?view=graph-rest-1.0
+    - https://learn.microsoft.com/en-us/cli/azure/ad/group?view=azure-cli-latest
+  lastVerified: "2026-08-30"
+
+- id: LAB01-Q03
+  objectiveIds: [IG-USERS-01, IG-USERS-02]
+  difficulty: foundational
+  stem: "A learner is Owner of an Azure subscription but receives an authorization error when creating Microsoft Entra users. What is the best explanation?"
+  options:
+    A: "The Owner role works only after the Microsoft.Graph resource provider is registered."
+    B: "Azure RBAC Owner does not grant Microsoft Entra directory-management permissions."
+    C: "Cloud-only users can be created only by Microsoft Support."
+    D: "The subscription must be moved to the same region as the tenant."
+  correctOption: B
+  explanation: "Azure RBAC and Microsoft Entra roles protect different resource systems. A suitable directory role such as User Administrator is normally required for the exercise."
+  distractorExplanations:
+    A: "Microsoft Graph access is not enabled by registering an Azure resource provider."
+    B: "Correct. Subscription ownership and tenant identity administration are separate authorization planes."
+    C: "Authorized tenant administrators can create cloud-only users directly."
+    D: "Microsoft Entra user creation is tenant-scoped and not tied to an Azure region."
+  sourceUrls:
+    - https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/concept-understand-roles
+    - https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/permissions-reference
+  lastVerified: "2026-08-30"
+
+- id: LAB01-Q04
+  objectiveIds: [IG-USERS-01, IG-USERS-02]
+  difficulty: applied
+  stem: "You create a temporary cloud user for a lab. Which password-profile choice most directly reduces the risk of the bootstrap password remaining valid as the user's long-term secret?"
+  options:
+    A: "Store the password in the group's description for the owner."
+    B: "Disable password expiration for the account."
+    C: "Reuse the administrator's password and delete shell history."
+    D: "Set forceChangePasswordNextSignIn to true and avoid persisting the password."
+  correctOption: D
+  explanation: "The bootstrap password should be handled as a secret, omitted from state, and changed at the user's first sign-in by setting forceChangePasswordNextSignIn."
+  distractorExplanations:
+    A: "Group descriptions are visible directory data and must never hold passwords."
+    B: "Disabling expiration does not replace the temporary bootstrap secret."
+    C: "Password reuse is unsafe and deleting history does not correct the design."
+    D: "Correct. The setting forces replacement of the temporary password at first sign-in."
+  sourceUrls:
+    - https://learn.microsoft.com/en-us/graph/api/user-post-users?view=graph-rest-1.0
+    - https://learn.microsoft.com/en-us/cli/azure/ad/user?view=azure-cli-latest
+  lastVerified: "2026-08-30"
+
+- id: LAB01-Q05
+  objectiveIds: [IG-USERS-02]
+  difficulty: applied
+  stem: "A script has the exact object ID of a security group and the exact object ID of a user. Which Azure CLI operation creates the intended direct membership?"
+  options:
+    A: "az ad group member add --group <group-id> --member-id <user-id>"
+    B: "az role assignment create --assignee <group-id> --scope <user-id>"
+    C: "az ad user update --id <user-id> --group <group-id>"
+    D: "az group update --name <group-id> --add members <user-id>"
+  correctOption: A
+  explanation: "The az ad group member command group manages Microsoft Entra group membership, and member add accepts the group and member object IDs."
+  distractorExplanations:
+    A: "Correct. This adds the recorded directory object as a direct member."
+    B: "Azure role assignments grant resource access; they do not edit directory membership."
+    C: "az ad user update does not expose a group-membership parameter."
+    D: "az group manages Azure resource groups, not Microsoft Entra groups."
+  sourceUrls:
+    - https://learn.microsoft.com/en-us/cli/azure/ad/group/member?view=azure-cli-latest
+  lastVerified: "2026-08-30"
+
+- id: LAB01-Q06
+  objectiveIds: [IG-USERS-02]
+  difficulty: applied
+  stem: "The simplified az ad user update command does not expose the department and jobTitle properties you must change. What is the most appropriate command-first approach?"
+  options:
+    A: "Rename the Azure subscription so that its tags become user properties."
+    B: "Create a second user with the desired properties and leave the first user active."
+    C: "Send an authenticated Microsoft Graph PATCH request for the recorded user ID with az rest."
+    D: "Edit the local Azure CLI token cache and repeat az ad user show."
+  correctOption: C
+  explanation: "Azure CLI can authenticate an az rest request to Microsoft Graph. PATCHing the exact user object exposes writable properties not offered by a simplified command."
+  distractorExplanations:
+    A: "Azure subscription metadata has no relationship to Microsoft Entra user properties."
+    B: "Creating duplicates introduces drift and does not manage the existing identity."
+    C: "Correct. Microsoft Graph is the appropriate supported property-management surface."
+    D: "Credential caches must not be edited and a show operation is read-only."
+  sourceUrls:
+    - https://learn.microsoft.com/en-us/cli/azure/reference-index?view=azure-cli-latest#az-rest
+    - https://learn.microsoft.com/en-us/graph/api/user-update?view=graph-rest-1.0
+  lastVerified: "2026-08-30"
+
+- id: LAB01-Q07
+  objectiveIds: [IG-USERS-02]
+  difficulty: applied
+  stem: "User B is added as an owner of a security group but is intentionally not added as a member. Which statement correctly describes the result?"
+  options:
+    A: "The owner is always treated as a transitive member for every access assignment."
+    B: "Ownership and membership are separate relationships; ownership does not automatically grant member-based access."
+    C: "A group cannot have an owner unless that owner is also a direct member."
+    D: "Ownership converts the security group into a Microsoft 365 group."
+  correctOption: B
+  explanation: "Owners manage a group according to directory policy, while members receive access or app behavior associated with membership. One relationship does not imply the other."
+  distractorExplanations:
+    A: "Owner status does not universally create direct or transitive membership."
+    B: "Correct. Validate owners and members independently."
+    C: "Microsoft Entra supports group owners who are not direct members."
+    D: "Changing an owner does not alter mail or group-type properties."
+  sourceUrls:
+    - https://learn.microsoft.com/en-us/cli/azure/ad/group/owner?view=azure-cli-latest
+    - https://learn.microsoft.com/en-us/cli/azure/ad/group/member?view=azure-cli-latest
+  lastVerified: "2026-08-30"
+
+- id: LAB01-Q08
+  objectiveIds: [IG-USERS-01, IG-USERS-02]
+  difficulty: applied
+  stem: "A tenant contains two groups with similar display names. Which value should an automated cleanup use to delete only the group created by its own run?"
+  options:
+    A: "The first group returned by a display-name prefix search"
+    B: "The group's position in the Microsoft Entra admin center list"
+    C: "The Azure subscription ID active when the group was created"
+    D: "The exact immutable group object ID recorded immediately after creation"
+  correctOption: D
+  explanation: "Display names can be duplicated or changed. A run manifest should record the returned object ID and cleanup should verify that exact object before deletion."
+  distractorExplanations:
+    A: "Prefix search results are ambiguous and can target an unrelated group."
+    B: "Portal list ordering is not a stable identity or automation input."
+    C: "Microsoft Entra groups are tenant objects and are not owned by an Azure subscription."
+    D: "Correct. Exact recorded object IDs provide the safest cleanup boundary."
+  sourceUrls:
+    - https://learn.microsoft.com/en-us/graph/api/resources/group?view=graph-rest-1.0
+    - https://learn.microsoft.com/en-us/cli/azure/ad/group?view=azure-cli-latest
+  lastVerified: "2026-08-30"
+
+- id: LAB01-Q09
+  objectiveIds: [IG-USERS-01, IG-USERS-02]
+  difficulty: advanced
+  stem: "Cleanup deletes the lab security group and both cloud users by exact ID. Validation can no longer read the active users, but they appear under Deleted users. How should this state be interpreted?"
+  options:
+    A: "Cleanup failed because user deletion is unsupported in Microsoft Entra ID."
+    B: "Active cleanup succeeded; user deletion is recoverable until retention expires or an authorized permanent deletion occurs."
+    C: "The users automatically became external guests and must be invited again."
+    D: "The Azure subscription must be deleted to remove the user objects permanently."
+  correctOption: B
+  explanation: "Microsoft Entra normally soft-deletes users so they can be restored during a retention window. Permanent deletion is a separate, irreversible operation with its own authorization needs."
+  distractorExplanations:
+    A: "The presence of recoverable deleted users is expected lifecycle behavior, not proof of failure."
+    B: "Correct. Audit active-object cleanup separately from deleted-item retention."
+    C: "Deletion does not transform a member user into a B2B guest."
+    D: "Microsoft Entra users are tenant objects and are not removed by deleting a subscription."
+  sourceUrls:
+    - https://learn.microsoft.com/en-us/entra/fundamentals/users-restore
+    - https://learn.microsoft.com/en-us/graph/api/directory-deleteditems-delete?view=graph-rest-1.0
+  lastVerified: "2026-08-30"
+
+- id: LAB01-Q10
+  objectiveIds: [IG-USERS-02]
+  difficulty: advanced
+  stem: "A validation report must prove the intended group relationships and detect accidental privilege expansion. Which pair of checks provides the strongest evidence for this lab design?"
+  options:
+    A: "Confirm user A is a direct member and independently confirm user B is an owner but not a direct member."
+    B: "Confirm the group display name starts with AZ104 and assume all relationships are correct."
+    C: "Confirm both users exist and skip group relationship queries to reduce API calls."
+    D: "Confirm user B is an owner and automatically add every owner as a member."
+  correctOption: A
+  explanation: "The design has a positive membership assertion and a negative membership control while ownership is validated separately. Together they detect missing access and unintended expansion."
+  distractorExplanations:
+    A: "Correct. Independent positive, negative, and ownership checks prove the intended relationship model."
+    B: "A naming convention cannot establish membership or ownership state."
+    C: "Object existence alone does not prove the required relationships."
+    D: "Automatic repair would destroy the negative control and broaden access."
+  sourceUrls:
+    - https://learn.microsoft.com/en-us/cli/azure/ad/group/member?view=azure-cli-latest
+    - https://learn.microsoft.com/en-us/cli/azure/ad/group/owner?view=azure-cli-latest
+  lastVerified: "2026-08-30"

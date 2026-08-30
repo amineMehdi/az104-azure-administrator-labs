@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="520" viewBox="0 0 1120 520" role="img" aria-labelledby="title desc">
+  <title id="title">Lab 01 Microsoft Entra identity architecture</title>
+  <desc id="desc">An administrator uses Azure CLI and Microsoft Graph to create two users and a security group. One user is a member and the other is an owner. Exact object IDs are written to local state and used by read-only validation.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#4d4d4d"/></marker>
+    <style>.box{rx:12;stroke-width:2}.id{fill:#eef6ff;stroke:#0078d4}.local{fill:#f4f4f4;stroke:#666}.actor{fill:#fff4ce;stroke:#986f0b}.t{font:600 18px 'Segoe UI',sans-serif;fill:#172b4d}.s{font:14px 'Segoe UI',sans-serif;fill:#333}.line{stroke:#4d4d4d;stroke-width:2;fill:none;marker-end:url(#arrow)}</style>
+  </defs>
+  <rect x="35" y="205" width="170" height="82" class="box actor"/><text x="120" y="240" text-anchor="middle" class="t">Administrator</text><text x="120" y="264" text-anchor="middle" class="s">authorized sandbox</text>
+  <rect x="255" y="205" width="170" height="82" class="box id"/><text x="340" y="240" text-anchor="middle" class="t">Azure CLI</text><text x="340" y="264" text-anchor="middle" class="s">az ad + az rest</text>
+  <rect x="475" y="205" width="190" height="82" class="box id"/><text x="570" y="240" text-anchor="middle" class="t">Microsoft Graph</text><text x="570" y="264" text-anchor="middle" class="s">v1.0 directory APIs</text>
+  <rect x="735" y="55" width="300" height="82" class="box id"/><text x="885" y="89" text-anchor="middle" class="t">Cloud user A</text><text x="885" y="113" text-anchor="middle" class="s">member of the security group</text>
+  <rect x="735" y="205" width="300" height="82" class="box id"/><text x="885" y="239" text-anchor="middle" class="t">Security group</text><text x="885" y="263" text-anchor="middle" class="s">description, member, and owner</text>
+  <rect x="735" y="355" width="300" height="82" class="box id"/><text x="885" y="389" text-anchor="middle" class="t">Cloud user B</text><text x="885" y="413" text-anchor="middle" class="s">owner of the security group</text>
+  <rect x="255" y="375" width="190" height="82" class="box local"/><text x="350" y="409" text-anchor="middle" class="t">Local state</text><text x="350" y="433" text-anchor="middle" class="s">exact object IDs; no password</text>
+  <rect x="500" y="375" width="165" height="82" class="box local"/><text x="582" y="409" text-anchor="middle" class="t">Validation</text><text x="582" y="433" text-anchor="middle" class="s">read-only checks</text>
+  <path d="M205 246 H255" class="line"/><path d="M425 246 H475" class="line"/><path d="M665 225 C700 190 705 105 735 96" class="line"/><path d="M665 246 H735" class="line"/><path d="M665 267 C700 300 705 386 735 396" class="line"/>
+  <path d="M340 287 V375" class="line"/><path d="M445 416 H500" class="line"/><path d="M582 375 V300 C582 292 582 292 582 287" class="line"/>
+</svg>

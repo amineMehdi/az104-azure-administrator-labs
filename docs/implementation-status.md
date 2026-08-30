@@ -3,7 +3,7 @@
 | Lab | Folder | Domain | Track | Lab status | Screenshot status |
 |---:|---|---|---|---|---|
 | 00 | `00-safe-bootstrap` | foundation | both | offline-validated | pending |
-| 01 | `01-entra-users-groups` | identity-governance | azure-cli-graph | planned | pending |
+| 01 | `01-entra-users-groups` | identity-governance | azure-cli-graph | offline-validated | pending |
 | 02 | `02-entra-licenses-guests-sspr` | identity-governance | graph-entra-powershell | planned | pending |
 | 03 | `03-azure-rbac-scopes` | identity-governance | az-powershell | planned | pending |
 | 04 | `04-resource-hierarchy-tags-locks` | identity-governance | azure-cli | planned | pending |

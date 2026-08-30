@@ -1,0 +1,16 @@
+flowchart LR
+    learner[Administrator] --> cli[Azure CLI]
+    cli --> graph[Microsoft Graph v1.0]
+    graph --> userA[Cloud user A<br/>group member]
+    graph --> userB[Cloud user B<br/>group owner]
+    graph --> group[Security group]
+    userA -->|memberOf| group
+    userB -->|owns| group
+    cli --> state[Local run.json<br/>object IDs only]
+    state --> validate[Read-only validation]
+    validate --> graph
+
+    classDef identity fill:#eef6ff,stroke:#0078d4,color:#10253f;
+    classDef local fill:#f4f4f4,stroke:#666,color:#222;
+    class userA,userB,group,graph identity;
+    class state,validate local;

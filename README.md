@@ -7,7 +7,7 @@ A command-first, self-paced lab curriculum for the Microsoft Certified: Azure Ad
 
 ## Current milestone
 
-Repository foundation and the `00-safe-bootstrap` golden lab are offline-validated. No live Azure deployment or Portal capture is part of this foundation milestone.
+Repository foundation, `00-safe-bootstrap`, and `01-entra-users-groups` are offline-validated. Lab 01 live tenant execution and real Portal capture remain pending authorization.
 
 ## Exam coverage
 
@@ -51,7 +51,7 @@ Every lab is self-contained under `labs/<number>-<slug>/`. It does not import ru
 | Lab | Topic | Primary surface | Status |
 |---:|---|---|---|
 | 00 | Safe bootstrap | CLI + PowerShell | Offline-validated |
-| 01 | Entra users and groups | Azure CLI/Graph | Planned |
+| 01 | Entra users and groups | Azure CLI/Graph | Offline-validated |
 | 02 | Entra licenses, guests, and SSPR | Graph/Entra PowerShell | Planned |
 | 03 | Azure RBAC scopes | Az PowerShell | Planned |
 | 04 | Resource hierarchy, tags, and locks | Azure CLI | Planned |
@@ -84,7 +84,8 @@ Every lab is self-contained under `labs/<number>-<slug>/`. It does not import ru
 1. Read [prerequisites](docs/prerequisites.md).
 2. Read [cost and cleanup safety](docs/cost-and-cleanup.md).
 3. Complete [Lab 00: Safe bootstrap](labs/00-safe-bootstrap/README.md).
-4. Follow the generated [lab catalog](labs/catalog.yml) and [objective map](docs/objective-map.md).
+4. In an authorized disposable tenant, complete [Lab 01: Entra users and groups](labs/01-entra-users-groups/README.md).
+5. Follow the generated [lab catalog](labs/catalog.yml) and [objective map](docs/objective-map.md).
 
 Labs can be run locally, in GitHub Codespaces, or in Azure Cloud Shell. Tool versions and permissions are checked by each lab rather than assumed.
 

@@ -4,7 +4,7 @@ expectedLabCount: 28
 generatedFrom: lab.yml
 labs:
   - { id: "00", slug: safe-bootstrap, domain: foundation, track: both, status: offline-validated, estimatedMinutes: 60 }
-  - { id: "01", slug: entra-users-groups, domain: identity-governance, track: azure-cli-graph, status: planned, estimatedMinutes: 75 }
+  - { id: "01", slug: entra-users-groups, domain: identity-governance, track: azure-cli-graph, status: offline-validated, estimatedMinutes: 75 }
   - { id: "02", slug: entra-licenses-guests-sspr, domain: identity-governance, track: graph-entra-powershell, status: planned, estimatedMinutes: 105 }
   - { id: "03", slug: azure-rbac-scopes, domain: identity-governance, track: az-powershell, status: planned, estimatedMinutes: 90 }
   - { id: "04", slug: resource-hierarchy-tags-locks, domain: identity-governance, track: azure-cli, status: planned, estimatedMinutes: 90 }
