@@ -1,0 +1,40 @@
+# Runtime state and Azure command output
+**/.state/
+**/validation.json
+**/cleanup-plan.json
+**/*.secrets.*
+
+# Local environment and credentials
+.env
+.env.*
+!.env.example
+.azure/
+*.pem
+*.pfx
+*.key
+
+# Editors and operating systems
+.vscode/
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+.DS_Store
+Thumbs.db
+
+# Tool caches and generated output
+node_modules/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.cache/
+dist/
+build/
+coverage/
+reports/
+**/testResults.xml
+**/TestResults/
+*.trx
+tmp/

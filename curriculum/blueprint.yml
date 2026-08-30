@@ -1,0 +1,372 @@
+schemaVersion: "1.0"
+exam:
+  code: "AZ-104"
+  title: "Microsoft Azure Administrator"
+  blueprintEffectiveDate: "2026-04-17"
+  researchedDate: "2026-08-30"
+  officialObjectiveCount: 82
+  domainCount: 5
+  groupCount: 15
+  primarySourceId: "SRC-EXAM-GUIDE"
+  primarySourceUrl: "https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104"
+
+# These are repository prerequisites, not Microsoft exam objectives. They are
+# intentionally excluded from officialObjectiveCount.
+foundationObjectives:
+  - id: "FD-TOOLS-01"
+    title: "Verify the required Azure CLI and PowerShell toolchain"
+    labs: ["00-safe-bootstrap"]
+    examObjective: false
+  - id: "FD-CONTEXT-01"
+    title: "Confirm the intended Azure tenant and subscription context before changes"
+    labs: ["00-safe-bootstrap"]
+    examObjective: false
+  - id: "FD-COST-01"
+    title: "Review service, quota, region, and cost gates before deployment"
+    labs: ["00-safe-bootstrap"]
+    examObjective: false
+  - id: "FD-SAFETY-01"
+    title: "Use deterministic names, tags, run IDs, and state records"
+    labs: ["00-safe-bootstrap"]
+    examObjective: false
+  - id: "FD-CLEANUP-01"
+    title: "Preview, perform, and verify scoped and idempotent cleanup"
+    labs: ["00-safe-bootstrap"]
+    examObjective: false
+
+domains:
+  - id: "IG"
+    name: "Manage Azure identities and governance"
+    weight: "20-25%"
+    objectiveCount: 15
+    groups:
+      - id: "IG-USERS"
+        name: "Manage Microsoft Entra users and groups"
+        objectiveCount: 5
+        objectives:
+          - id: "IG-USERS-01"
+            title: "Create users and groups"
+            labs: ["01-entra-users-groups"]
+          - id: "IG-USERS-02"
+            title: "Manage user and group properties"
+            labs: ["01-entra-users-groups"]
+          - id: "IG-USERS-03"
+            title: "Manage licenses in Microsoft Entra ID"
+            labs: ["02-entra-licenses-guests-sspr"]
+          - id: "IG-USERS-04"
+            title: "Manage external users"
+            labs: ["02-entra-licenses-guests-sspr"]
+          - id: "IG-USERS-05"
+            title: "Configure self-service password reset (SSPR)"
+            labs: ["02-entra-licenses-guests-sspr"]
+      - id: "IG-ACCESS"
+        name: "Manage access to Azure resources"
+        objectiveCount: 3
+        objectives:
+          - id: "IG-ACCESS-01"
+            title: "Manage built-in Azure roles"
+            labs: ["03-azure-rbac-scopes", "26-capstone-build"]
+          - id: "IG-ACCESS-02"
+            title: "Assign roles at different scopes"
+            labs: ["03-azure-rbac-scopes", "26-capstone-build"]
+          - id: "IG-ACCESS-03"
+            title: "Interpret access assignments"
+            labs: ["03-azure-rbac-scopes", "27-capstone-operate-recover"]
+      - id: "IG-GOVERN"
+        name: "Manage Azure subscriptions and governance"
+        objectiveCount: 7
+        objectives:
+          - id: "IG-GOVERN-01"
+            title: "Implement and manage Azure Policy"
+            labs: ["05-policy-costs-advisor", "26-capstone-build", "27-capstone-operate-recover"]
+          - id: "IG-GOVERN-02"
+            title: "Configure resource locks"
+            labs: ["04-resource-hierarchy-tags-locks", "27-capstone-operate-recover"]
+          - id: "IG-GOVERN-03"
+            title: "Apply and manage tags on resources"
+            labs: ["00-safe-bootstrap", "04-resource-hierarchy-tags-locks", "26-capstone-build"]
+          - id: "IG-GOVERN-04"
+            title: "Manage resource groups"
+            labs: ["00-safe-bootstrap", "04-resource-hierarchy-tags-locks", "26-capstone-build", "27-capstone-operate-recover"]
+          - id: "IG-GOVERN-05"
+            title: "Manage subscriptions"
+            labs: ["00-safe-bootstrap", "04-resource-hierarchy-tags-locks"]
+          - id: "IG-GOVERN-06"
+            title: "Manage costs by using alerts, budgets, and Azure Advisor recommendations"
+            labs: ["05-policy-costs-advisor", "27-capstone-operate-recover"]
+          - id: "IG-GOVERN-07"
+            title: "Configure management groups"
+            labs: ["04-resource-hierarchy-tags-locks", "05-policy-costs-advisor"]
+
+  - id: "ST"
+    name: "Implement and manage storage"
+    weight: "15-20%"
+    objectiveCount: 17
+    groups:
+      - id: "ST-ACCESS"
+        name: "Configure access to storage"
+        objectiveCount: 5
+        objectives:
+          - id: "ST-ACCESS-01"
+            title: "Configure Azure Storage firewalls and virtual networks"
+            labs: ["07-storage-network-sas", "19-service-private-endpoints"]
+          - id: "ST-ACCESS-02"
+            title: "Create and use shared access signature (SAS) tokens"
+            labs: ["07-storage-network-sas"]
+          - id: "ST-ACCESS-03"
+            title: "Configure stored access policies"
+            labs: ["07-storage-network-sas"]
+          - id: "ST-ACCESS-04"
+            title: "Manage access keys"
+            labs: ["06-storage-accounts-security", "07-storage-network-sas"]
+          - id: "ST-ACCESS-05"
+            title: "Configure identity-based access for Azure Files"
+            labs: ["09-azure-files-identity"]
+      - id: "ST-ACCOUNTS"
+        name: "Configure and manage storage accounts"
+        objectiveCount: 5
+        objectives:
+          - id: "ST-ACCOUNTS-01"
+            title: "Create and configure storage accounts"
+            labs: ["06-storage-accounts-security", "26-capstone-build"]
+          - id: "ST-ACCOUNTS-02"
+            title: "Configure Azure Storage redundancy"
+            labs: ["06-storage-accounts-security"]
+          - id: "ST-ACCOUNTS-03"
+            title: "Configure object replication"
+            labs: ["08-blob-lifecycle-replication"]
+          - id: "ST-ACCOUNTS-04"
+            title: "Configure storage account encryption"
+            labs: ["06-storage-accounts-security"]
+          - id: "ST-ACCOUNTS-05"
+            title: "Manage data by using Azure Storage Explorer and AzCopy"
+            labs: ["08-blob-lifecycle-replication", "09-azure-files-identity"]
+      - id: "ST-DATA"
+        name: "Configure Azure Files and Azure Blob Storage"
+        objectiveCount: 7
+        objectives:
+          - id: "ST-DATA-01"
+            title: "Create and configure a file share in Azure Files"
+            labs: ["09-azure-files-identity"]
+          - id: "ST-DATA-02"
+            title: "Create and configure a container in Azure Blob Storage"
+            labs: ["08-blob-lifecycle-replication"]
+          - id: "ST-DATA-03"
+            title: "Configure storage tiers"
+            labs: ["08-blob-lifecycle-replication"]
+          - id: "ST-DATA-04"
+            title: "Configure soft delete for blobs and containers"
+            labs: ["08-blob-lifecycle-replication"]
+          - id: "ST-DATA-05"
+            title: "Configure snapshots and soft delete for Azure Files"
+            labs: ["09-azure-files-identity"]
+          - id: "ST-DATA-06"
+            title: "Configure blob lifecycle management"
+            labs: ["08-blob-lifecycle-replication"]
+          - id: "ST-DATA-07"
+            title: "Configure blob versioning"
+            labs: ["08-blob-lifecycle-replication"]
+
+  - id: "CP"
+    name: "Deploy and manage Azure compute resources"
+    weight: "20-25%"
+    objectiveCount: 24
+    groups:
+      - id: "CP-IAC"
+        name: "Automate deployment of resources by using Azure Resource Manager (ARM) templates or Bicep files"
+        objectiveCount: 5
+        objectives:
+          - id: "CP-IAC-01"
+            title: "Interpret an Azure Resource Manager template or a Bicep file"
+            labs: ["10-arm-bicep-lifecycle"]
+          - id: "CP-IAC-02"
+            title: "Modify an existing Azure Resource Manager template"
+            labs: ["10-arm-bicep-lifecycle"]
+          - id: "CP-IAC-03"
+            title: "Modify an existing Bicep file"
+            labs: ["10-arm-bicep-lifecycle"]
+          - id: "CP-IAC-04"
+            title: "Deploy resources by using an Azure Resource Manager template or a Bicep file"
+            labs: ["10-arm-bicep-lifecycle", "26-capstone-build"]
+          - id: "CP-IAC-05"
+            title: "Export a deployment as an Azure Resource Manager template or convert an Azure Resource Manager template to a Bicep file"
+            labs: ["10-arm-bicep-lifecycle"]
+      - id: "CP-VM"
+        name: "Create and configure virtual machines"
+        objectiveCount: 7
+        objectives:
+          - id: "CP-VM-01"
+            title: "Create a virtual machine"
+            labs: ["11-vm-lifecycle-disks-encryption", "26-capstone-build"]
+          - id: "CP-VM-02"
+            title: "Configure encryption at host for Azure virtual machines"
+            labs: ["11-vm-lifecycle-disks-encryption"]
+          - id: "CP-VM-03"
+            title: "Move a virtual machine to another resource group, subscription, or region"
+            labs: ["12-vm-resilience-scale-mobility"]
+          - id: "CP-VM-04"
+            title: "Manage virtual machine sizes"
+            labs: ["11-vm-lifecycle-disks-encryption", "12-vm-resilience-scale-mobility"]
+          - id: "CP-VM-05"
+            title: "Manage virtual machine disks"
+            labs: ["11-vm-lifecycle-disks-encryption"]
+          - id: "CP-VM-06"
+            title: "Deploy virtual machines to availability zones and availability sets"
+            labs: ["12-vm-resilience-scale-mobility", "26-capstone-build"]
+          - id: "CP-VM-07"
+            title: "Deploy and configure an Azure Virtual Machine Scale Sets"
+            labs: ["12-vm-resilience-scale-mobility", "26-capstone-build"]
+      - id: "CP-CONTAINERS"
+        name: "Provision and manage containers in the Azure portal"
+        objectiveCount: 4
+        objectives:
+          - id: "CP-CONTAINERS-01"
+            title: "Create and manage an Azure Container Registry"
+            labs: ["13-acr-aci"]
+          - id: "CP-CONTAINERS-02"
+            title: "Provision a container by using Azure Container Instances"
+            labs: ["13-acr-aci"]
+          - id: "CP-CONTAINERS-03"
+            title: "Provision a container by using Azure Container Apps"
+            labs: ["14-container-apps"]
+          - id: "CP-CONTAINERS-04"
+            title: "Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps"
+            labs: ["13-acr-aci", "14-container-apps"]
+      - id: "CP-APP"
+        name: "Create and configure Azure App Service"
+        objectiveCount: 8
+        objectives:
+          - id: "CP-APP-01"
+            title: "Provision an App Service plan"
+            labs: ["15-app-service-scale-slots"]
+          - id: "CP-APP-02"
+            title: "Configure scaling for an App Service plan"
+            labs: ["15-app-service-scale-slots"]
+          - id: "CP-APP-03"
+            title: "Create an App Service"
+            labs: ["15-app-service-scale-slots"]
+          - id: "CP-APP-04"
+            title: "Configure certificates and Transport Layer Security (TLS) for an App Service"
+            labs: ["16-app-service-tls-dns-backup-network"]
+          - id: "CP-APP-05"
+            title: "Map an existing custom DNS name to an App Service"
+            labs: ["16-app-service-tls-dns-backup-network"]
+          - id: "CP-APP-06"
+            title: "Configure backup for an App Service"
+            labs: ["16-app-service-tls-dns-backup-network"]
+          - id: "CP-APP-07"
+            title: "Configure networking settings for an App Service"
+            labs: ["16-app-service-tls-dns-backup-network", "19-service-private-endpoints"]
+          - id: "CP-APP-08"
+            title: "Configure deployment slots for an App Service"
+            labs: ["15-app-service-scale-slots"]
+
+  - id: "NW"
+    name: "Implement and manage virtual networking"
+    weight: "15-20%"
+    objectiveCount: 13
+    groups:
+      - id: "NW-VNET"
+        name: "Configure and manage virtual networks in Azure"
+        objectiveCount: 5
+        objectives:
+          - id: "NW-VNET-01"
+            title: "Create and configure virtual networks and subnets"
+            labs: ["17-vnet-subnets-peering-public-ip", "26-capstone-build"]
+          - id: "NW-VNET-02"
+            title: "Create and configure virtual network peering"
+            labs: ["17-vnet-subnets-peering-public-ip"]
+          - id: "NW-VNET-03"
+            title: "Configure public IP addresses"
+            labs: ["17-vnet-subnets-peering-public-ip"]
+          - id: "NW-VNET-04"
+            title: "Configure user-defined routes"
+            labs: ["18-routing-nsg-asg"]
+          - id: "NW-VNET-05"
+            title: "Troubleshoot network connectivity"
+            labs: ["18-routing-nsg-asg", "21-load-balancer-network-watcher", "27-capstone-operate-recover"]
+      - id: "NW-SECURE"
+        name: "Configure secure access to virtual networks"
+        objectiveCount: 5
+        objectives:
+          - id: "NW-SECURE-01"
+            title: "Create and configure network security groups (NSGs) and application security groups"
+            labs: ["18-routing-nsg-asg", "26-capstone-build"]
+          - id: "NW-SECURE-02"
+            title: "Evaluate effective security rules in NSGs"
+            labs: ["18-routing-nsg-asg", "27-capstone-operate-recover"]
+          - id: "NW-SECURE-03"
+            title: "Implement Azure Bastion"
+            labs: ["20-azure-dns-bastion"]
+          - id: "NW-SECURE-04"
+            title: "Configure service endpoints for Azure platform as a service (PaaS)"
+            labs: ["19-service-private-endpoints"]
+          - id: "NW-SECURE-05"
+            title: "Configure private endpoints for Azure PaaS"
+            labs: ["19-service-private-endpoints", "26-capstone-build"]
+      - id: "NW-DNSLB"
+        name: "Configure name resolution and load balancing"
+        objectiveCount: 3
+        objectives:
+          - id: "NW-DNSLB-01"
+            title: "Configure Azure DNS"
+            labs: ["20-azure-dns-bastion", "16-app-service-tls-dns-backup-network"]
+          - id: "NW-DNSLB-02"
+            title: "Configure an internal or public load balancer"
+            labs: ["21-load-balancer-network-watcher", "26-capstone-build"]
+          - id: "NW-DNSLB-03"
+            title: "Troubleshoot load balancing"
+            labs: ["21-load-balancer-network-watcher", "27-capstone-operate-recover"]
+
+  - id: "MR"
+    name: "Monitor and maintain Azure resources"
+    weight: "10-15%"
+    objectiveCount: 13
+    groups:
+      - id: "MR-MONITOR"
+        name: "Monitor resources in Azure"
+        objectiveCount: 6
+        objectives:
+          - id: "MR-MONITOR-01"
+            title: "Interpret metrics in Azure Monitor"
+            labs: ["22-azure-monitor-logs-insights"]
+          - id: "MR-MONITOR-02"
+            title: "Configure log settings in Azure Monitor"
+            labs: ["22-azure-monitor-logs-insights", "26-capstone-build"]
+          - id: "MR-MONITOR-03"
+            title: "Query and analyze logs in Azure Monitor"
+            labs: ["22-azure-monitor-logs-insights", "27-capstone-operate-recover"]
+          - id: "MR-MONITOR-04"
+            title: "Set up alert rules, action groups, and alert processing rules in Azure Monitor"
+            labs: ["23-monitor-alerts-actions", "26-capstone-build", "27-capstone-operate-recover"]
+          - id: "MR-MONITOR-05"
+            title: "Configure and interpret monitoring of virtual machines, storage accounts, and networks by using Azure Monitor Insights"
+            labs: ["22-azure-monitor-logs-insights", "27-capstone-operate-recover"]
+          - id: "MR-MONITOR-06"
+            title: "Use Azure Network Watcher and Connection monitor"
+            labs: ["21-load-balancer-network-watcher", "22-azure-monitor-logs-insights", "27-capstone-operate-recover"]
+      - id: "MR-RECOVERY"
+        name: "Implement backup and recovery"
+        objectiveCount: 7
+        objectives:
+          - id: "MR-RECOVERY-01"
+            title: "Create a Recovery Services vault"
+            labs: ["24-azure-backup-restore"]
+          - id: "MR-RECOVERY-02"
+            title: "Create an Azure Backup vault"
+            labs: ["24-azure-backup-restore"]
+          - id: "MR-RECOVERY-03"
+            title: "Create and configure a backup policy"
+            labs: ["24-azure-backup-restore"]
+          - id: "MR-RECOVERY-04"
+            title: "Perform backup and restore operations by using Azure Backup"
+            labs: ["24-azure-backup-restore", "27-capstone-operate-recover"]
+          - id: "MR-RECOVERY-05"
+            title: "Configure Azure Site Recovery for Azure resources"
+            labs: ["25-site-recovery-failover"]
+          - id: "MR-RECOVERY-06"
+            title: "Perform a failover to a secondary region by using Site Recovery"
+            labs: ["25-site-recovery-failover", "27-capstone-operate-recover"]
+          - id: "MR-RECOVERY-07"
+            title: "Configure and interpret reports and alerts for backups"
+            labs: ["24-azure-backup-restore", "27-capstone-operate-recover"]

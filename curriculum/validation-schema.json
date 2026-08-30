@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/az104/validation-schema.json",
+  "title": "AZ-104 lab validation result",
+  "type": "object",
+  "required": ["labId", "runId", "generatedAt", "result", "checks"],
+  "properties": {
+    "labId": { "type": "string", "pattern": "^LAB-[0-9]{2}$" },
+    "runId": { "type": "string", "minLength": 3 },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "result": { "enum": ["pass", "fail", "partial", "skipped"] },
+    "checks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "status", "message"],
+        "properties": {
+          "id": { "type": "string" },
+          "status": { "enum": ["pass", "fail", "warning", "skipped"] },
+          "message": { "type": "string" }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}

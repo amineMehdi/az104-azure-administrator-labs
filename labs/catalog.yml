@@ -1,0 +1,33 @@
+schemaVersion: 1.0.0
+blueprintVersion: "2026-04-17"
+expectedLabCount: 28
+generatedFrom: lab.yml
+labs:
+  - { id: "00", slug: safe-bootstrap, domain: foundation, track: both, status: offline-validated, estimatedMinutes: 60 }
+  - { id: "01", slug: entra-users-groups, domain: identity-governance, track: azure-cli-graph, status: planned, estimatedMinutes: 75 }
+  - { id: "02", slug: entra-licenses-guests-sspr, domain: identity-governance, track: graph-entra-powershell, status: planned, estimatedMinutes: 105 }
+  - { id: "03", slug: azure-rbac-scopes, domain: identity-governance, track: az-powershell, status: planned, estimatedMinutes: 90 }
+  - { id: "04", slug: resource-hierarchy-tags-locks, domain: identity-governance, track: azure-cli, status: planned, estimatedMinutes: 90 }
+  - { id: "05", slug: policy-costs-advisor, domain: identity-governance, track: az-powershell, status: planned, estimatedMinutes: 120 }
+  - { id: "06", slug: storage-accounts-security, domain: storage, track: azure-cli, status: planned, estimatedMinutes: 90 }
+  - { id: "07", slug: storage-network-sas, domain: storage, track: az-powershell, status: planned, estimatedMinutes: 105 }
+  - { id: "08", slug: blob-lifecycle-replication, domain: storage, track: azure-cli, status: planned, estimatedMinutes: 120 }
+  - { id: "09", slug: azure-files-identity, domain: storage, track: az-powershell, status: planned, estimatedMinutes: 135 }
+  - { id: "10", slug: arm-bicep-lifecycle, domain: compute, track: both, status: planned, estimatedMinutes: 120 }
+  - { id: "11", slug: vm-lifecycle-disks-encryption, domain: compute, track: azure-cli, status: planned, estimatedMinutes: 120 }
+  - { id: "12", slug: vm-resilience-scale-mobility, domain: compute, track: az-powershell, status: planned, estimatedMinutes: 150 }
+  - { id: "13", slug: acr-aci, domain: compute, track: azure-cli, status: planned, estimatedMinutes: 105 }
+  - { id: "14", slug: container-apps, domain: compute, track: azure-cli, status: planned, estimatedMinutes: 120 }
+  - { id: "15", slug: app-service-scale-slots, domain: compute, track: az-powershell, status: planned, estimatedMinutes: 120 }
+  - { id: "16", slug: app-service-tls-dns-backup-network, domain: compute, track: azure-cli, status: planned, estimatedMinutes: 150 }
+  - { id: "17", slug: vnet-subnets-peering-public-ip, domain: networking, track: az-powershell, status: planned, estimatedMinutes: 105 }
+  - { id: "18", slug: routing-nsg-asg, domain: networking, track: azure-cli, status: planned, estimatedMinutes: 120 }
+  - { id: "19", slug: service-private-endpoints, domain: networking, track: az-powershell, status: planned, estimatedMinutes: 120 }
+  - { id: "20", slug: azure-dns-bastion, domain: networking, track: azure-cli, status: planned, estimatedMinutes: 120 }
+  - { id: "21", slug: load-balancer-network-watcher, domain: networking, track: az-powershell, status: planned, estimatedMinutes: 150 }
+  - { id: "22", slug: azure-monitor-logs-insights, domain: monitor-recovery, track: both, status: planned, estimatedMinutes: 135 }
+  - { id: "23", slug: monitor-alerts-actions, domain: monitor-recovery, track: azure-cli, status: planned, estimatedMinutes: 105 }
+  - { id: "24", slug: azure-backup-restore, domain: monitor-recovery, track: az-powershell, status: planned, estimatedMinutes: 150 }
+  - { id: "25", slug: site-recovery-failover, domain: monitor-recovery, track: az-powershell, status: planned, estimatedMinutes: 180 }
+  - { id: "26", slug: capstone-build, domain: capstone, track: learner-choice, status: planned, estimatedMinutes: 180 }
+  - { id: "27", slug: capstone-operate-recover, domain: capstone, track: opposite-surface, status: planned, estimatedMinutes: 180 }

@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/az104/screenshot-schema.json",
+  "title": "AZ-104 Portal screenshot manifest",
+  "type": "object",
+  "required": ["labId", "status", "images"],
+  "properties": {
+    "labId": { "type": "string", "pattern": "^LAB-[0-9]{2}$" },
+    "status": { "enum": ["pending", "captured", "sanitized", "verified"] },
+    "images": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "file", "labStep", "portalBlade", "evidence", "status", "realAzurePortal"],
+        "properties": {
+          "id": { "type": "string" },
+          "file": { "type": "string", "pattern": "^portal/.+\\.png$" },
+          "labStep": { "type": "string" },
+          "portalBlade": { "type": "string" },
+          "evidence": { "type": "string" },
+          "status": { "enum": ["pending", "captured", "sanitized", "verified"] },
+          "captureDate": { "type": ["string", "null"], "format": "date" },
+          "redactionsRequired": { "type": "array", "items": { "type": "string" } },
+          "redactionsApplied": { "type": "array", "items": { "type": "string" } },
+          "metadataStripped": { "type": "boolean" },
+          "realAzurePortal": { "type": "boolean" }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}

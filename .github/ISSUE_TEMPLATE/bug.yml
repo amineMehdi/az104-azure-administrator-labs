@@ -1,0 +1,37 @@
+name: Lab problem
+description: Report an error in a lab without exposing Azure account data.
+title: "[Lab NN] "
+labels:
+  - lab-bug
+body:
+  - type: input
+    id: lab
+    attributes:
+      label: Lab ID
+      placeholder: "00"
+    validations:
+      required: true
+  - type: input
+    id: step
+    attributes:
+      label: Step or checkpoint
+    validations:
+      required: true
+  - type: textarea
+    id: observed
+    attributes:
+      label: Sanitized observed result
+      description: Remove tenant, subscription, identity, secret, token, key, and SAS data.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected result
+    validations:
+      required: true
+  - type: input
+    id: versions
+    attributes:
+      label: Tool versions
+      placeholder: "Azure CLI / PowerShell / module versions"

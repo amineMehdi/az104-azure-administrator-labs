@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "1.0",
+  "labId": "LAB-00",
+  "runId": "az10400-sample",
+  "generatedAt": "2026-08-30T00:00:00Z",
+  "result": "partial",
+  "checks": [
+    {
+      "id": "state.identity",
+      "status": "pass",
+      "message": "The local run manifest belongs to the selected lab run."
+    },
+    {
+      "id": "azure.compute-quota",
+      "status": "warning",
+      "message": "Quota could not be read in the offline fixture."
+    }
+  ]
+}

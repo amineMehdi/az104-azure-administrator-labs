@@ -1,0 +1,28 @@
+{
+  "name": "AZ-104 CLI and PowerShell Labs",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
+  "features": {
+    "ghcr.io/devcontainers/features/azure-cli:1": {},
+    "ghcr.io/devcontainers/features/powershell:1": {},
+    "ghcr.io/devcontainers/features/python:1": {
+      "version": "3.12"
+    },
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "22"
+    }
+  },
+  "postCreateCommand": "python -m pip install --user -r requirements-dev.txt && python tools/check_toolchain.py",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-vscode.azure-account",
+        "ms-vscode.azurecli",
+        "ms-vscode.powershell",
+        "ms-azuretools.vscode-bicep",
+        "redhat.vscode-yaml",
+        "davidanson.vscode-markdownlint"
+      ]
+    }
+  },
+  "remoteUser": "vscode"
+}

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="520" viewBox="0 0 1120 520" role="img" aria-labelledby="title desc">
+  <title id="title">Safe bootstrap workflow</title>
+  <desc id="desc">A learner uses either Azure CLI or Az PowerShell to read Azure account, location, provider, and quota information. Setup and validation write only to a lab-local state folder. Cleanup removes only that selected local run.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#57606a"/></marker>
+    <style>
+      .box{stroke-width:2;rx:14}.label{font:600 18px 'Segoe UI',Arial,sans-serif;fill:#24292f}.small{font:14px 'Segoe UI',Arial,sans-serif;fill:#57606a}.line{stroke:#57606a;stroke-width:2;fill:none;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1120" height="520" fill="#ffffff"/>
+  <text x="560" y="38" text-anchor="middle" class="label" font-size="24">Lab 00: safe, read-only Azure bootstrap</text>
+  <rect class="box" x="40" y="195" width="160" height="90" fill="#f6f8fa" stroke="#24292f"/>
+  <text x="120" y="235" text-anchor="middle" class="label">Learner</text>
+  <text x="120" y="260" text-anchor="middle" class="small">selects a lane</text>
+  <rect class="box" x="300" y="105" width="220" height="90" fill="#e7f3ff" stroke="#0969da"/>
+  <text x="410" y="145" text-anchor="middle" class="label">Azure CLI</text>
+  <text x="410" y="170" text-anchor="middle" class="small">preflight • setup • validate</text>
+  <rect class="box" x="300" y="285" width="220" height="90" fill="#e7f3ff" stroke="#0969da"/>
+  <text x="410" y="325" text-anchor="middle" class="label">Az PowerShell</text>
+  <text x="410" y="350" text-anchor="middle" class="small">preflight • setup • validate</text>
+  <rect class="box" x="670" y="105" width="390" height="120" fill="#eaf5ea" stroke="#1a7f37"/>
+  <text x="865" y="145" text-anchor="middle" class="label">Azure control plane</text>
+  <text x="865" y="173" text-anchor="middle" class="small">account + tenant + subscription</text>
+  <text x="865" y="198" text-anchor="middle" class="small">regions + provider registration + compute quota</text>
+  <rect class="box" x="670" y="300" width="390" height="120" fill="#fff8c5" stroke="#9a6700"/>
+  <text x="865" y="340" text-anchor="middle" class="label">Local .state/&lt;run-id&gt;/</text>
+  <text x="865" y="368" text-anchor="middle" class="small">run.json + validation.json</text>
+  <text x="865" y="395" text-anchor="middle" class="small">no secrets • no Azure resources</text>
+  <path class="line" d="M200 225 L300 165"/>
+  <path class="line" d="M200 255 L300 315"/>
+  <path class="line" d="M520 150 L670 150"/>
+  <path class="line" d="M520 315 C600 315 600 200 670 190"/>
+  <path class="line" d="M520 175 C590 185 590 335 670 345"/>
+  <path class="line" d="M520 340 L670 375"/>
+  <text x="565" y="135" text-anchor="middle" class="small">read only</text>
+  <text x="600" y="392" text-anchor="middle" class="small">local writes only</text>
+  <rect x="40" y="455" width="1020" height="38" rx="8" fill="#fff1e5" stroke="#bc4c00"/>
+  <text x="550" y="480" text-anchor="middle" class="small">Safety boundary: this lab never registers providers, changes context, deploys resources, or alters tenant/subscription settings.</text>
+</svg>
