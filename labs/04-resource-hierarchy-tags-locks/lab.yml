@@ -1,0 +1,77 @@
+id: LAB-04
+slug: 04-resource-hierarchy-tags-locks
+title: Manage hierarchy, resource groups, tags, and locks
+blueprintVersion: '2026-04-17'
+domain: Manage Azure identities and governance
+objectives:
+- IG-GOVERN-02
+- IG-GOVERN-03
+- IG-GOVERN-04
+- IG-GOVERN-05
+- IG-GOVERN-07
+track: azure-cli
+status: offline-validated
+testedToolVersions:
+  azureCli: 2.88.0
+  bash: 5.x (Git for Windows lane)
+  jq: '>=1.6'
+estimatedMinutes: 90
+difficulty: foundational
+cost:
+  class: none
+  billableResources: []
+  notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator
+    before execution and clean up immediately.
+permissions:
+  azureRbacRoles:
+  - Contributor plus User Access Administrator for lock management; Management Group Contributor for the optional
+    hierarchy path
+  entraRoles: []
+  graphScopes: []
+prerequisites:
+- A disposable non-production Azure environment
+- An active context that matches the explicitly supplied tenant and subscription
+- The command surface and dependencies for Azure CLI
+- 'Authorization boundary: Contributor plus User Access Administrator for lock management; Management Group Contributor
+  for the optional hierarchy path'
+- 'External gate review: Management-group creation is optional and requires explicit tenant hierarchy authorization.'
+providers:
+  observed:
+  - Microsoft.Authorization
+  - Microsoft.Management
+  - Microsoft.Resources
+  registeredByLab: []
+regions:
+  applicable: true
+  primary: supplied at execution time
+  secondary: null
+creates:
+  azureResources:
+  - resource group
+  - resource lock
+  - optional management group
+  entraObjects: []
+  localArtifacts:
+  - .state/<run-id>/run.json
+  - .state/<run-id>/validation.json
+tenantScopedChanges: []
+externalRequirements:
+- Management-group creation is optional and requires explicit tenant hierarchy authorization.
+validation:
+  commandLanes:
+  - scripts/cli/validate.sh
+  output: .state/<run-id>/validation.json
+  statuses:
+  - pass
+  - fail
+  - warning
+  - skipped
+  liveExecutionRequiredForLiveVerified: true
+cleanup:
+  azureDeletion: exact recorded resource-group ID after tag verification
+  entraDeletion: none
+  reportOnlyByDefault: true
+  requiresExecuteFlag: true
+  residualAuditRequired: true
+lastOfflineValidated: '2026-08-30'
+lastLiveVerified: null

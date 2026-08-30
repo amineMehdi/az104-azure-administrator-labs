@@ -1,0 +1,81 @@
+id: LAB-19
+slug: 19-service-private-endpoints
+title: Compare service endpoints and private endpoints
+blueprintVersion: '2026-04-17'
+domain: Implement and manage storage / Deploy and manage Azure compute resources / Implement and manage virtual
+  networking
+objectives:
+- ST-ACCESS-01
+- CP-APP-07
+- NW-SECURE-04
+- NW-SECURE-05
+track: az-powershell
+status: offline-validated
+testedToolVersions:
+  powershell: '>=7.4'
+  modules:
+  - Az.Accounts
+  - Az.Resources
+  - Az.Network
+  - Az.Storage
+  - Az.PrivateDns
+estimatedMinutes: 120
+difficulty: intermediate
+cost:
+  class: moderate
+  billableResources: &id001
+  - resource group
+  - virtual network
+  - service-endpoint subnet
+  - private-endpoint subnet
+  - storage account
+  - private endpoint
+  - private DNS zone
+  notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator
+    before execution and clean up immediately.
+permissions:
+  azureRbacRoles:
+  - Network Contributor and Storage Account Contributor on the lab resource group
+  entraRoles: []
+  graphScopes: []
+prerequisites:
+- A disposable non-production Azure environment
+- An active context that matches the explicitly supplied tenant and subscription
+- The command surface and dependencies for Az PowerShell
+- 'Authorization boundary: Network Contributor and Storage Account Contributor on the lab resource group'
+- 'External gate review: None beyond the declared role and a disposable subscription.'
+providers:
+  observed:
+  - Microsoft.Network
+  - Microsoft.Storage
+  registeredByLab: []
+regions:
+  applicable: true
+  primary: supplied at execution time
+  secondary: null
+creates:
+  azureResources: *id001
+  entraObjects: []
+  localArtifacts:
+  - .state/<run-id>/run.json
+  - .state/<run-id>/validation.json
+tenantScopedChanges: []
+externalRequirements: []
+validation:
+  commandLanes:
+  - scripts/powershell/Validate.ps1
+  output: .state/<run-id>/validation.json
+  statuses:
+  - pass
+  - fail
+  - warning
+  - skipped
+  liveExecutionRequiredForLiveVerified: true
+cleanup:
+  azureDeletion: exact recorded resource-group ID after tag verification
+  entraDeletion: none
+  reportOnlyByDefault: true
+  requiresExecuteFlag: true
+  residualAuditRequired: true
+lastOfflineValidated: '2026-08-30'
+lastLiveVerified: null

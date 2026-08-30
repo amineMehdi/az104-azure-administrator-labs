@@ -1,0 +1,72 @@
+id: LAB-03
+slug: 03-azure-rbac-scopes
+title: Assign and interpret Azure RBAC at multiple scopes
+blueprintVersion: '2026-04-17'
+domain: Manage Azure identities and governance
+objectives:
+- IG-ACCESS-01
+- IG-ACCESS-02
+- IG-ACCESS-03
+track: az-powershell
+status: offline-validated
+testedToolVersions:
+  powershell: '>=7.4'
+  modules:
+  - Az.Accounts
+  - Az.Resources
+estimatedMinutes: 90
+difficulty: foundational
+cost:
+  class: none
+  billableResources: []
+  notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator
+    before execution and clean up immediately.
+permissions:
+  azureRbacRoles:
+  - User Access Administrator or Owner at the lab resource-group scope
+  entraRoles: []
+  graphScopes: []
+prerequisites:
+- A disposable non-production Azure environment
+- An active context that matches the explicitly supplied tenant and subscription
+- The command surface and dependencies for Az PowerShell
+- 'Authorization boundary: User Access Administrator or Owner at the lab resource-group scope'
+- 'External gate review: Requires the object ID of a disposable principal in AZ104_PRINCIPAL_OBJECT_ID.'
+providers:
+  observed:
+  - Microsoft.Authorization
+  - Microsoft.Resources
+  registeredByLab: []
+regions:
+  applicable: true
+  primary: supplied at execution time
+  secondary: null
+creates:
+  azureResources:
+  - resource group
+  - resource-group-scoped role assignment
+  entraObjects: []
+  localArtifacts:
+  - .state/<run-id>/run.json
+  - .state/<run-id>/validation.json
+tenantScopedChanges: []
+externalRequirements:
+- Requires the object ID of a disposable principal in AZ104_PRINCIPAL_OBJECT_ID.
+validation:
+  commandLanes:
+  - scripts/powershell/Validate.ps1
+  output: .state/<run-id>/validation.json
+  statuses:
+  - pass
+  - fail
+  - warning
+  - skipped
+  liveExecutionRequiredForLiveVerified: true
+cleanup:
+  azureDeletion: exact recorded resource-group ID after tag verification
+  entraDeletion: none
+  reportOnlyByDefault: true
+  requiresExecuteFlag: true
+  residualAuditRequired: true
+lastOfflineValidated: '2026-08-30'
+lastLiveVerified: null

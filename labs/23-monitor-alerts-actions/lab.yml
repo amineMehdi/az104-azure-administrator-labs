@@ -1,0 +1,75 @@
+id: LAB-23
+slug: 23-monitor-alerts-actions
+title: Build Azure Monitor alerts, action groups, and processing rules
+blueprintVersion: '2026-04-17'
+domain: Monitor and maintain Azure resources
+objectives:
+- MR-MONITOR-04
+track: azure-cli
+status: offline-validated
+testedToolVersions:
+  azureCli: 2.88.0
+  bash: 5.x (Git for Windows lane)
+  jq: '>=1.6'
+estimatedMinutes: 105
+difficulty: intermediate
+cost:
+  class: low
+  billableResources: &id001
+  - resource group
+  - storage account
+  - action group
+  - metric alert
+  - activity-log alert
+  - alert processing rule
+  notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator
+    before execution and clean up immediately.
+permissions:
+  azureRbacRoles:
+  - Monitoring Contributor on the lab resource group
+  entraRoles: []
+  graphScopes: []
+prerequisites:
+- A disposable non-production Azure environment
+- An active context that matches the explicitly supplied tenant and subscription
+- The command surface and dependencies for Azure CLI
+- 'Authorization boundary: Monitoring Contributor on the lab resource group'
+- 'External gate review: Email delivery and action-group testing require AZ104_ALERT_EMAIL; otherwise a receiver-free
+  action group is used for configuration practice.'
+providers:
+  observed:
+  - Microsoft.Insights
+  - Microsoft.Storage
+  registeredByLab: []
+regions:
+  applicable: true
+  primary: supplied at execution time
+  secondary: null
+creates:
+  azureResources: *id001
+  entraObjects: []
+  localArtifacts:
+  - .state/<run-id>/run.json
+  - .state/<run-id>/validation.json
+tenantScopedChanges: []
+externalRequirements:
+- Email delivery and action-group testing require AZ104_ALERT_EMAIL; otherwise a receiver-free action group is used
+  for configuration practice.
+validation:
+  commandLanes:
+  - scripts/cli/validate.sh
+  output: .state/<run-id>/validation.json
+  statuses:
+  - pass
+  - fail
+  - warning
+  - skipped
+  liveExecutionRequiredForLiveVerified: true
+cleanup:
+  azureDeletion: exact recorded resource-group ID after tag verification
+  entraDeletion: none
+  reportOnlyByDefault: true
+  requiresExecuteFlag: true
+  residualAuditRequired: true
+lastOfflineValidated: '2026-08-30'
+lastLiveVerified: null

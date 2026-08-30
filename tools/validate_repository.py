@@ -192,24 +192,6 @@ def validate_assessment(
     return mapped
 
 
-def validate_screenshot_manifest(lab_dir: Path, results: Results) -> None:
-    path = lab_dir / "images" / "manifest.yml"
-    if not path.exists():
-        results.error(f"{lab_dir.name}: missing images/manifest.yml")
-        return
-    manifest = load_yaml(path)
-    validate_with_schema(
-        manifest,
-        ROOT / "curriculum" / "screenshot-schema.json",
-        f"{lab_dir.name}/images/manifest.yml",
-        results,
-    )
-    for image in manifest.get("images", []):
-        image_path = lab_dir / "images" / image.get("file", "")
-        if image.get("status") != "pending" and not image_path.exists():
-            results.error(f"{lab_dir.name}: non-pending screenshot does not exist: {image_path}")
-
-
 def validate_lab_dirs(
     official: set[str],
     foundations: set[str],
@@ -220,7 +202,7 @@ def validate_lab_dirs(
     labs_root = ROOT / "labs"
     lab_dirs = sorted(path for path in labs_root.iterdir() if path.is_dir() and LAB_PATTERN.fullmatch(path.name))
     question_coverage: set[str] = set()
-    required_files = ["README.md", "lab.yml", "diagrams/architecture.mmd", "images/README.md"]
+    required_files = ["README.md", "lab.yml", "diagrams/architecture.mmd"]
 
     for lab_dir in lab_dirs:
         number = lab_dir.name[:2]
@@ -254,7 +236,6 @@ def validate_lab_dirs(
                 if not any(name.startswith(stage.lower()) for name in names):
                     results.error(f"{lab_dir.name}: {lane.name} lane is missing {stage}")
 
-        validate_screenshot_manifest(lab_dir, results)
         question_coverage |= validate_assessment(lab_dir, official | foundations, results)
 
         validation_fixture = lab_dir / "tests" / "fixtures" / "validation.sample.json"

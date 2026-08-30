@@ -21,7 +21,7 @@ Never use production or an employer tenant unless the owner has explicitly appro
 - PowerShell 7 and the current Az modules
 - Python 3 with the development requirements
 - Bicep and AzCopy for the labs that declare them
-- A browser with access to the Azure Portal for live-verification screenshots
+- A secure location for temporary, redacted Azure CLI or PowerShell live-verification output
 
 The dev container provides a reproducible starting point. Every lab still checks its own required extensions and modules.
 

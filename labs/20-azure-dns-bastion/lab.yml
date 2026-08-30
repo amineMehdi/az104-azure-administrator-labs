@@ -1,0 +1,75 @@
+id: LAB-20
+slug: 20-azure-dns-bastion
+title: Configure Azure DNS and secure administration with Bastion
+blueprintVersion: '2026-04-17'
+domain: Implement and manage virtual networking
+objectives:
+- NW-SECURE-03
+- NW-DNSLB-01
+track: azure-cli
+status: offline-validated
+testedToolVersions:
+  azureCli: 2.88.0
+  bash: 5.x (Git for Windows lane)
+  jq: '>=1.6'
+estimatedMinutes: 120
+difficulty: intermediate
+cost:
+  class: elevated
+  billableResources: &id001
+  - resource group
+  - virtual network
+  - AzureBastionSubnet
+  - Standard public IP
+  - Bastion host
+  - public DNS zone and recordsets
+  notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator
+    before execution and clean up immediately.
+permissions:
+  azureRbacRoles:
+  - Network Contributor; DNS Zone Contributor for an owned zone
+  entraRoles: []
+  graphScopes: []
+prerequisites:
+- A disposable non-production Azure environment
+- An active context that matches the explicitly supplied tenant and subscription
+- The command surface and dependencies for Azure CLI
+- 'Authorization boundary: Network Contributor; DNS Zone Contributor for an owned zone'
+- 'External gate review: Real public DNS delegation requires AZ104_OWNED_DNS_ZONE and control of the parent registrar;
+  the isolated zone path is always available.'
+providers:
+  observed:
+  - Microsoft.Network
+  registeredByLab: []
+regions:
+  applicable: true
+  primary: supplied at execution time
+  secondary: null
+creates:
+  azureResources: *id001
+  entraObjects: []
+  localArtifacts:
+  - .state/<run-id>/run.json
+  - .state/<run-id>/validation.json
+tenantScopedChanges: []
+externalRequirements:
+- Real public DNS delegation requires AZ104_OWNED_DNS_ZONE and control of the parent registrar; the isolated zone
+  path is always available.
+validation:
+  commandLanes:
+  - scripts/cli/validate.sh
+  output: .state/<run-id>/validation.json
+  statuses:
+  - pass
+  - fail
+  - warning
+  - skipped
+  liveExecutionRequiredForLiveVerified: true
+cleanup:
+  azureDeletion: exact recorded resource-group ID after tag verification
+  entraDeletion: none
+  reportOnlyByDefault: true
+  requiresExecuteFlag: true
+  residualAuditRequired: true
+lastOfflineValidated: '2026-08-30'
+lastLiveVerified: null

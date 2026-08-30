@@ -1,0 +1,13 @@
+{
+  "labId": "LAB-25",
+  "runId": "az104l25-sample",
+  "generatedAt": "2026-08-30T12:00:00Z",
+  "result": "pass",
+  "checks": [
+    {
+      "id": "contract.recorded-boundary",
+      "status": "pass",
+      "message": "The sample demonstrates the required validation document shape; it is not live evidence."
+    }
+  ]
+}

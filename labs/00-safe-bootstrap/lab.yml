@@ -64,7 +64,6 @@ validation:
     - fail
     - warning
     - skipped
-screenshotStatus: pending
 cleanup:
   azureDeletion: none
   localOnly: true

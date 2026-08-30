@@ -1,0 +1,82 @@
+id: LAB-25
+slug: 25-site-recovery-failover
+title: Replicate and fail over an Azure VM with Site Recovery
+blueprintVersion: '2026-04-17'
+domain: Monitor and maintain Azure resources
+objectives:
+- MR-RECOVERY-05
+- MR-RECOVERY-06
+track: az-powershell
+status: offline-validated
+testedToolVersions:
+  powershell: '>=7.4'
+  modules:
+  - Az.Accounts
+  - Az.Resources
+  - Az.RecoveryServices
+  - Az.Compute
+  - Az.Network
+estimatedMinutes: 180
+difficulty: advanced
+cost:
+  class: elevated
+  billableResources: &id001
+  - resource group
+  - source and recovery VNets
+  - source VM
+  - Recovery Services vault
+  - ASR fabric/container mappings
+  - replicated item
+  notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator
+    before execution and clean up immediately.
+permissions:
+  azureRbacRoles:
+  - Site Recovery Contributor, Virtual Machine Contributor, and Network Contributor on both region scopes
+  entraRoles: []
+  graphScopes: []
+prerequisites:
+- A disposable non-production Azure environment
+- An active context that matches the explicitly supplied tenant and subscription
+- The command surface and dependencies for Az PowerShell
+- 'Authorization boundary: Site Recovery Contributor, Virtual Machine Contributor, and Network Contributor on both
+  region scopes'
+- 'External gate review: This elevated lab requires two approved regions and explicit cost review before live execution;
+  test failover must use an isolated network.'
+providers:
+  observed:
+  - Microsoft.Compute
+  - Microsoft.Network
+  - Microsoft.RecoveryServices
+  registeredByLab: []
+regions:
+  applicable: true
+  primary: supplied at execution time
+  secondary: required only for multi-region checkpoints
+creates:
+  azureResources: *id001
+  entraObjects: []
+  localArtifacts:
+  - .state/<run-id>/run.json
+  - .state/<run-id>/validation.json
+tenantScopedChanges: []
+externalRequirements:
+- This elevated lab requires two approved regions and explicit cost review before live execution; test failover
+  must use an isolated network.
+validation:
+  commandLanes:
+  - scripts/powershell/Validate.ps1
+  output: .state/<run-id>/validation.json
+  statuses:
+  - pass
+  - fail
+  - warning
+  - skipped
+  liveExecutionRequiredForLiveVerified: true
+cleanup:
+  azureDeletion: exact recorded resource-group ID after tag verification
+  entraDeletion: none
+  reportOnlyByDefault: true
+  requiresExecuteFlag: true
+  residualAuditRequired: true
+lastOfflineValidated: '2026-08-30'
+lastLiveVerified: null

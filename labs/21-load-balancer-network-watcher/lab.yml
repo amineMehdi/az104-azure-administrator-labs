@@ -1,0 +1,79 @@
+id: LAB-21
+slug: 21-load-balancer-network-watcher
+title: Load balance workloads and troubleshoot with Network Watcher
+blueprintVersion: '2026-04-17'
+domain: Implement and manage virtual networking / Monitor and maintain Azure resources
+objectives:
+- NW-VNET-05
+- NW-DNSLB-02
+- NW-DNSLB-03
+- MR-MONITOR-06
+track: az-powershell
+status: offline-validated
+testedToolVersions:
+  powershell: '>=7.4'
+  modules:
+  - Az.Accounts
+  - Az.Resources
+  - Az.Network
+  - Az.Compute
+estimatedMinutes: 150
+difficulty: intermediate
+cost:
+  class: elevated
+  billableResources: &id001
+  - resource group
+  - virtual network
+  - two backend VMs
+  - Standard load balancer
+  - health probe
+  - load-balancing rule
+  - Network Watcher connection monitor
+  notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator
+    before execution and clean up immediately.
+permissions:
+  azureRbacRoles:
+  - Network Contributor and Virtual Machine Contributor on the lab resource group
+  entraRoles: []
+  graphScopes: []
+prerequisites:
+- A disposable non-production Azure environment
+- An active context that matches the explicitly supplied tenant and subscription
+- The command surface and dependencies for Az PowerShell
+- 'Authorization boundary: Network Contributor and Virtual Machine Contributor on the lab resource group'
+- 'External gate review: None beyond the declared role and a disposable subscription.'
+providers:
+  observed:
+  - Microsoft.Compute
+  - Microsoft.Network
+  registeredByLab: []
+regions:
+  applicable: true
+  primary: supplied at execution time
+  secondary: null
+creates:
+  azureResources: *id001
+  entraObjects: []
+  localArtifacts:
+  - .state/<run-id>/run.json
+  - .state/<run-id>/validation.json
+tenantScopedChanges: []
+externalRequirements: []
+validation:
+  commandLanes:
+  - scripts/powershell/Validate.ps1
+  output: .state/<run-id>/validation.json
+  statuses:
+  - pass
+  - fail
+  - warning
+  - skipped
+  liveExecutionRequiredForLiveVerified: true
+cleanup:
+  azureDeletion: exact recorded resource-group ID after tag verification
+  entraDeletion: none
+  reportOnlyByDefault: true
+  requiresExecuteFlag: true
+  residualAuditRequired: true
+lastOfflineValidated: '2026-08-30'
+lastLiveVerified: null

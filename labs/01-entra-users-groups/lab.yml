@@ -57,7 +57,6 @@ validation:
     - fail
     - warning
     - skipped
-screenshotStatus: pending
 cleanup:
   azureDeletion: none
   entraDeletion: exact recorded object IDs only

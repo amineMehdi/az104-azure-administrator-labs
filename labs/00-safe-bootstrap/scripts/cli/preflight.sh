@@ -112,7 +112,7 @@ cloud_name="$(az cloud show --query name --output tsv 2>/dev/null || true)"
 [[ -n "$subscription_id" ]] || subscription_id="$current_subscription_id"
 
 echo
-echo "Exact active context (do not include this block in screenshots):"
+echo "Exact active context (redact identifiers from any retained evidence):"
 printf '  Cloud:        %s\n' "$cloud_name"
 printf '  Subscription: %s\n' "$current_subscription_name"
 printf '  Subscription ID: %s\n' "$current_subscription_id"

@@ -1,0 +1,101 @@
+id: LAB-26
+slug: 26-capstone-build
+title: Capstone — Build a governed, secure, observable Azure workload
+blueprintVersion: '2026-04-17'
+domain: Manage Azure identities and governance / Implement and manage storage / Deploy and manage Azure compute
+  resources / Implement and manage virtual networking / Monitor and maintain Azure resources
+objectives:
+- IG-ACCESS-01
+- IG-ACCESS-02
+- IG-GOVERN-01
+- IG-GOVERN-03
+- IG-GOVERN-04
+- ST-ACCOUNTS-01
+- CP-IAC-04
+- CP-VM-01
+- CP-VM-06
+- CP-VM-07
+- NW-VNET-01
+- NW-SECURE-01
+- NW-SECURE-05
+- NW-DNSLB-02
+- MR-MONITOR-02
+- MR-MONITOR-04
+track: azure-cli-bicep
+status: offline-validated
+testedToolVersions:
+  azureCli: 2.88.0
+  bash: 5.x (Git for Windows lane)
+  jq: '>=1.6'
+estimatedMinutes: 180
+difficulty: advanced
+cost:
+  class: moderate
+  billableResources: &id001
+  - resource group
+  - Bicep deployment
+  - segmented VNet
+  - NSG
+  - private storage
+  - resilient compute
+  - load balancer
+  - Log Analytics workspace
+  - diagnostic settings
+  - alerts
+  notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator
+    before execution and clean up immediately.
+permissions:
+  azureRbacRoles:
+  - Contributor, User Access Administrator, Resource Policy Contributor, and Monitoring Contributor on the capstone
+    resource group
+  entraRoles: []
+  graphScopes: []
+prerequisites:
+- A disposable non-production Azure environment
+- An active context that matches the explicitly supplied tenant and subscription
+- The command surface and dependencies for Azure CLI and Bicep
+- 'Authorization boundary: Contributor, User Access Administrator, Resource Policy Contributor, and Monitoring Contributor
+  on the capstone resource group'
+- 'External gate review: Requires AZ104_PRINCIPAL_OBJECT_ID for the RBAC checkpoint; the workload path remains deployable
+  without assigning a role when the value is absent.'
+providers:
+  observed:
+  - Microsoft.Authorization
+  - Microsoft.Compute
+  - Microsoft.Insights
+  - Microsoft.Network
+  - Microsoft.OperationalInsights
+  - Microsoft.Storage
+  registeredByLab: []
+regions:
+  applicable: true
+  primary: supplied at execution time
+  secondary: null
+creates:
+  azureResources: *id001
+  entraObjects: []
+  localArtifacts:
+  - .state/<run-id>/run.json
+  - .state/<run-id>/validation.json
+tenantScopedChanges: []
+externalRequirements:
+- Requires AZ104_PRINCIPAL_OBJECT_ID for the RBAC checkpoint; the workload path remains deployable without assigning
+  a role when the value is absent.
+validation:
+  commandLanes:
+  - scripts/cli/validate.sh
+  output: .state/<run-id>/validation.json
+  statuses:
+  - pass
+  - fail
+  - warning
+  - skipped
+  liveExecutionRequiredForLiveVerified: true
+cleanup:
+  azureDeletion: exact recorded resource-group ID after tag verification
+  entraDeletion: none
+  reportOnlyByDefault: true
+  requiresExecuteFlag: true
+  residualAuditRequired: true
+lastOfflineValidated: '2026-08-30'
+lastLiveVerified: null

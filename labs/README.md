@@ -7,8 +7,8 @@ Each completed lab includes:
 - `README.md` and `lab.yml`
 - one complete Azure CLI or PowerShell lane
 - read-only validation and scoped cleanup
-- architecture diagram and Portal-image manifest
+- architecture diagram and command-evidence guidance
 - ten questions in `assessment/QUESTIONS.md`
 - explanations in `assessment/ANSWERS.md`
 
-The machine-readable catalog is [catalog.yml](catalog.yml). Planned labs are listed there before their folders are implemented; a planned catalog entry must not be mistaken for completed content.
+The machine-readable catalog is [catalog.yml](catalog.yml). All 28 folders are currently implemented and offline-validated; this does not claim a live Azure run.

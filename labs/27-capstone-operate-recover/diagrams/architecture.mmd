@@ -1,0 +1,15 @@
+flowchart LR
+    A["Operator<br/>Az PowerShell and KQL"] --> P["Preview and preflight"]
+    P --> S["Recorded Lab 27 boundary"]
+    S --> R1["resource group"]
+    S --> R2["test workload"]
+    S --> R3["Log Analytics workspace"]
+    S --> R4["alerts"]
+    S --> R5["Recovery Services vault"]
+    S --> V["Independent validation"]
+    V --> E["Sanitized evidence"]
+    V --> C["Previewed cleanup"]
+    classDef control fill:#e8f1ff,stroke:#2563eb,color:#102a43;
+    classDef resource fill:#e9f8ef,stroke:#16803a,color:#102a43;
+    class A,P,S,V,E,C control;
+    class R1,R2,R3,R4,R5 resource;

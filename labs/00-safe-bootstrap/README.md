@@ -1,6 +1,6 @@
 # Lab 00 — Safe Azure lab bootstrap
 
-> **Status:** Offline-validated; live Azure queries and Portal screenshots are pending authorization.
+> **Status:** Offline-validated; live Azure queries are pending.
 > **Blueprint:** AZ-104 skills measured as of 2026-04-17.
 > **Azure changes:** None. The scripts observe Azure and prepare lab-local state only.
 
@@ -148,7 +148,7 @@ Expected state:
 
 Exit code `0` means all checks passed, `1` means a required check failed, and `2` means required checks passed with an optional warning. In PowerShell, inspect `$LASTEXITCODE`; in Bash, inspect `$?` immediately after the command.
 
-Portal evidence is pending. After a separately authorized live run, `images/portal/01-subscription-overview.png` will show the sanitized subscription overview. Do not add a placeholder image.
+Record only redacted Azure CLI or PowerShell validation output from the exact active context. Never commit the complete account object.
 
 ## Checkpoint 2 — Prepare a run record
 
@@ -221,7 +221,7 @@ Get-AzResourceProvider -ProviderNamespace Microsoft.Compute |
   Select-Object ProviderNamespace, RegistrationState -Unique
 ```
 
-These are read-only commands. Do not run `az provider register` or `Register-AzResourceProvider` in this lab. Portal evidence `02-resource-providers.png` remains pending until authorized capture and sanitization.
+These are read-only commands. Do not run `az provider register` or `Register-AzResourceProvider` in this lab.
 
 ## Checkpoint 4 — Inspect regional quota and cost risk
 
@@ -244,7 +244,7 @@ Get-AzVMUsage -Location westeurope |
   Select-Object -First 10 Name, CurrentValue, Limit
 ```
 
-Expected state: usage and limit rows are returned, or the scripts record a warning explaining that permissions/provider readiness must be reviewed. This lab never requests quota. Portal evidence `03-usage-quotas.png` is pending.
+Expected state: usage and limit rows are returned, or the scripts record a warning explaining that permissions/provider readiness must be reviewed. This lab never requests quota.
 
 ## Checkpoint 5 — Positive and negative tests
 
@@ -351,4 +351,4 @@ Last verified: **2026-08-30**.
 - [Use tags to organize Azure resources](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources)
 - [Create and manage Cost Management budgets](https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-acm-create-budgets)
 
-Portal UI and command output can change. Replace screenshots and update their manifest when the interface changes; do not patch instructions around stale evidence.
+Command output and service behavior can change. Recheck the linked Microsoft documentation and keep validation assertions current.

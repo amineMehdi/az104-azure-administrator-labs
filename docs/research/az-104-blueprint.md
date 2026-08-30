@@ -58,7 +58,7 @@ Lab 00 also has five `FD-*` foundation outcomes for tools, Azure context, cost g
 ## Curriculum interpretation
 
 - Azure CLI or PowerShell is the canonical execution surface for each lab. Graph/Entra PowerShell, Bicep, AzCopy, KQL, and Portal inspection are used where an objective requires them.
-- The official containers group retains the words “in the Azure portal.” The hands-on implementation remains command-first, while real Portal screenshots provide interface recognition and verification evidence.
+- The official containers group retains the words “in the Azure portal.” This curriculum still implements and validates the objectives through Azure CLI or PowerShell so the lab workflow remains reproducible and command-first.
 - Some tenant-wide, licensed, paid, quota-sensitive, or long-running objectives need a gated or partial path. Their objective remains mapped even when live execution requires separate authorization.
 - Capstone mappings reinforce earlier teaching; they do not replace the primary instructional lab for an objective.
 - The objective map covers every official bullet at least once. Lab metadata and assessment questions will reference the same IDs so coverage can be tested automatically.

@@ -1,17 +1,17 @@
 # AZ-104 Azure Administrator Labs
 
-A command-first, self-paced lab curriculum for the Microsoft Certified: Azure Administrator Associate exam. The repository follows the official skills measured as of **April 17, 2026** and is designed around Azure CLI, Az PowerShell, real validation, safe cleanup, architecture diagrams, and sanitized Azure Portal evidence.
+A command-first, self-paced lab curriculum for the Microsoft Certified: Azure Administrator Associate exam. The repository follows the official skills measured as of **April 17, 2026** and is designed around Azure CLI, Az/Graph PowerShell, real validation, safe cleanup, and architecture diagrams.
 
 > [!IMPORTANT]
 > This is an independent learning project, not an official Microsoft course. Azure resources can incur charges. Use a disposable sandbox subscription, read each cost notice, and complete cleanup before leaving a lab.
 
 ## Current milestone
 
-Repository foundation, `00-safe-bootstrap`, and `01-entra-users-groups` are offline-validated. Lab 01 live tenant execution and real Portal capture remain pending authorization.
+All 28 labs are implemented and offline-validated. Live Azure execution remains pending for each lab and must use a disposable environment with the declared permissions, cost gates, validation, and cleanup boundary.
 
 ## Exam coverage
 
-| Domain | Exam weight | Planned labs |
+| Domain | Exam weight | Labs |
 |---|---:|---:|
 | Manage Azure identities and governance | 20–25% | 5 |
 | Implement and manage storage | 15–20% | 4 |
@@ -40,44 +40,44 @@ Each lab follows the same loop:
 2. Implement with one complete Azure CLI or PowerShell lane.
 3. Test both expected and denied/failure behavior where relevant.
 4. Validate using read-only commands and machine-readable results.
-5. Inspect the result in the Azure Portal and capture sanitized evidence.
+5. Record redacted Azure CLI or PowerShell validation evidence.
 6. Clean up and audit for residual resources.
 7. Complete ten original multiple-choice questions using the separate answer key.
 
 Every lab is self-contained under `labs/<number>-<slug>/`. It does not import runtime files from another lab.
 
-## Planned curriculum
+## Curriculum
 
 | Lab | Topic | Primary surface | Status |
 |---:|---|---|---|
 | 00 | Safe bootstrap | CLI + PowerShell | Offline-validated |
 | 01 | Entra users and groups | Azure CLI/Graph | Offline-validated |
-| 02 | Entra licenses, guests, and SSPR | Graph/Entra PowerShell | Planned |
-| 03 | Azure RBAC scopes | Az PowerShell | Planned |
-| 04 | Resource hierarchy, tags, and locks | Azure CLI | Planned |
-| 05 | Policy, costs, and Advisor | Az PowerShell | Planned |
-| 06 | Storage accounts and security | Azure CLI | Planned |
-| 07 | Storage networking and SAS | Az PowerShell | Planned |
-| 08 | Blob lifecycle and replication | Azure CLI | Planned |
-| 09 | Azure Files identity | Az PowerShell | Planned |
-| 10 | ARM and Bicep lifecycle | CLI + PowerShell | Planned |
-| 11 | VM lifecycle, disks, and host encryption | Azure CLI | Planned |
-| 12 | VM resilience, scale, and mobility | Az PowerShell | Planned |
-| 13 | ACR and ACI | Azure CLI | Planned |
-| 14 | Azure Container Apps | Azure CLI | Planned |
-| 15 | App Service scaling and slots | Az PowerShell | Planned |
-| 16 | App Service TLS, DNS, backup, and networking | Azure CLI | Planned |
-| 17 | VNets, subnets, peering, and public IPs | Az PowerShell | Planned |
-| 18 | Routing, NSGs, and ASGs | Azure CLI | Planned |
-| 19 | Service and private endpoints | Az PowerShell | Planned |
-| 20 | Azure DNS and Bastion | Azure CLI | Planned |
-| 21 | Load Balancer and Network Watcher | Az PowerShell | Planned |
-| 22 | Azure Monitor logs and Insights | CLI + PowerShell | Planned |
-| 23 | Monitor alerts and actions | Azure CLI | Planned |
-| 24 | Azure Backup and restore | Az PowerShell | Planned |
-| 25 | Site Recovery and failover | Az PowerShell | Planned |
-| 26 | Capstone: build | Learner choice | Planned |
-| 27 | Capstone: operate and recover | Opposite surface | Planned |
+| 02 | Entra licenses, guests, and SSPR | Graph/Entra PowerShell | Offline-validated |
+| 03 | Azure RBAC scopes | Az PowerShell | Offline-validated |
+| 04 | Resource hierarchy, tags, and locks | Azure CLI | Offline-validated |
+| 05 | Policy, costs, and Advisor | Az PowerShell | Offline-validated |
+| 06 | Storage accounts and security | Azure CLI | Offline-validated |
+| 07 | Storage networking and SAS | Az PowerShell | Offline-validated |
+| 08 | Blob lifecycle and replication | Azure CLI | Offline-validated |
+| 09 | Azure Files identity | Az PowerShell | Offline-validated |
+| 10 | ARM and Bicep lifecycle | Azure CLI + Bicep | Offline-validated |
+| 11 | VM lifecycle, disks, and host encryption | Azure CLI | Offline-validated |
+| 12 | VM resilience, scale, and mobility | Az PowerShell | Offline-validated |
+| 13 | ACR and ACI | Azure CLI | Offline-validated |
+| 14 | Azure Container Apps | Azure CLI | Offline-validated |
+| 15 | App Service scaling and slots | Az PowerShell | Offline-validated |
+| 16 | App Service TLS, DNS, backup, and networking | Azure CLI | Offline-validated |
+| 17 | VNets, subnets, peering, and public IPs | Az PowerShell | Offline-validated |
+| 18 | Routing, NSGs, and ASGs | Azure CLI | Offline-validated |
+| 19 | Service and private endpoints | Az PowerShell | Offline-validated |
+| 20 | Azure DNS and Bastion | Azure CLI | Offline-validated |
+| 21 | Load Balancer and Network Watcher | Az PowerShell | Offline-validated |
+| 22 | Azure Monitor logs and Insights | Azure CLI + KQL | Offline-validated |
+| 23 | Monitor alerts and actions | Azure CLI | Offline-validated |
+| 24 | Azure Backup and restore | Az PowerShell | Offline-validated |
+| 25 | Site Recovery and failover | Az PowerShell | Offline-validated |
+| 26 | Capstone: build | Azure CLI + Bicep | Offline-validated |
+| 27 | Capstone: operate and recover | Az PowerShell + KQL | Offline-validated |
 
 ## Start here
 
@@ -97,7 +97,7 @@ Labs can be run locally, in GitHub Codespaces, or in Azure Cloud Shell. Tool ver
 - [Study plan](docs/study-plan.md)
 - [Troubleshooting](docs/troubleshooting.md)
 - [Command cheat sheet](docs/command-cheatsheet.md)
-- [Screenshot style guide](docs/screenshot-style-guide.md)
+- [CLI and PowerShell evidence handling](docs/evidence-handling.md)
 - [Assessment authoring guide](docs/assessment-guide.md)
 - [Question bank index](docs/question-bank-index.md)
 - [Implementation status](docs/implementation-status.md)
@@ -110,7 +110,7 @@ Labs can be run locally, in GitHub Codespaces, or in Azure Cloud Shell. Tool ver
 - Preflight and validation are read-only.
 - Cleanup is idempotent and limited to the recorded run ID.
 - Pull-request CI never authenticates to Azure.
-- Real Portal screenshots are required for live-verified labs; synthetic Portal images are forbidden.
+- Live verification is based on redacted Azure CLI or PowerShell validation output and cleanup evidence.
 
 ## License
 

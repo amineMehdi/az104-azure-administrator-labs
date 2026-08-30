@@ -1,0 +1,76 @@
+id: LAB-02
+slug: 02-entra-licenses-guests-sspr
+title: Manage Entra licenses, guests, and self-service password reset
+blueprintVersion: '2026-04-17'
+domain: Manage Azure identities and governance
+objectives:
+- IG-USERS-03
+- IG-USERS-04
+- IG-USERS-05
+track: powershell-graph
+status: offline-validated
+testedToolVersions:
+  powershell: '>=7.4'
+  modules: &id001
+  - Microsoft.Graph.Authentication
+  - Microsoft.Graph.Users
+  - Microsoft.Graph.Groups
+  - Microsoft.Graph.Identity.SignIns
+estimatedMinutes: 105
+difficulty: foundational
+cost:
+  class: none
+  billableResources: []
+  notes: No Azure resource charge is expected, but tenant licensing can still gate features.
+permissions:
+  azureRbacRoles: []
+  entraRoles:
+  - User Administrator and License Administrator; Authentication Policy Administrator for the SSPR policy path
+  graphScopes: *id001
+prerequisites:
+- A disposable non-production Azure environment
+- An active context that matches the explicitly supplied tenant and subscription
+- The command surface and dependencies for Microsoft Graph PowerShell
+- 'Authorization boundary: User Administrator and License Administrator; Authentication Policy Administrator for
+  the SSPR policy path'
+- 'External gate review: Requires a real disposable guest email for invitation, an available SKU for license assignment,
+  and an authorized tenant policy change for SSPR.'
+providers:
+  observed: []
+  registeredByLab: []
+regions:
+  applicable: false
+  primary: null
+  secondary: null
+creates:
+  azureResources: []
+  entraObjects: &id002
+  - security group
+  - invited guest user
+  - optional license assignment
+  - optional SSPR scope
+  localArtifacts:
+  - .state/<run-id>/run.json
+  - .state/<run-id>/validation.json
+tenantScopedChanges: *id002
+externalRequirements:
+- Requires a real disposable guest email for invitation, an available SKU for license assignment, and an authorized
+  tenant policy change for SSPR.
+validation:
+  commandLanes:
+  - scripts/powershell/Validate.ps1
+  output: .state/<run-id>/validation.json
+  statuses:
+  - pass
+  - fail
+  - warning
+  - skipped
+  liveExecutionRequiredForLiveVerified: true
+cleanup:
+  azureDeletion: none
+  entraDeletion: exact recorded object IDs only
+  reportOnlyByDefault: true
+  requiresExecuteFlag: true
+  residualAuditRequired: true
+lastOfflineValidated: '2026-08-30'
+lastLiveVerified: null

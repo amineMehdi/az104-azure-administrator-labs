@@ -1,0 +1,82 @@
+id: LAB-24
+slug: 24-azure-backup-restore
+title: Configure Azure Backup policies, protection, restore, reports, and alerts
+blueprintVersion: '2026-04-17'
+domain: Monitor and maintain Azure resources
+objectives:
+- MR-RECOVERY-01
+- MR-RECOVERY-02
+- MR-RECOVERY-03
+- MR-RECOVERY-04
+- MR-RECOVERY-07
+track: az-powershell
+status: offline-validated
+testedToolVersions:
+  powershell: '>=7.4'
+  modules:
+  - Az.Accounts
+  - Az.Resources
+  - Az.RecoveryServices
+  - Az.DataProtection
+  - Az.Compute
+  - Az.Network
+estimatedMinutes: 150
+difficulty: advanced
+cost:
+  class: moderate
+  billableResources: &id001
+  - resource group
+  - Recovery Services vault
+  - Backup vault
+  - backup policy
+  - protected test VM
+  - backup instance and restore job
+  notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator
+    before execution and clean up immediately.
+permissions:
+  azureRbacRoles:
+  - Backup Contributor and Virtual Machine Contributor on the lab resource group
+  entraRoles: []
+  graphScopes: []
+prerequisites:
+- A disposable non-production Azure environment
+- An active context that matches the explicitly supplied tenant and subscription
+- The command surface and dependencies for Az PowerShell
+- 'Authorization boundary: Backup Contributor and Virtual Machine Contributor on the lab resource group'
+- 'External gate review: None beyond the declared role and a disposable subscription.'
+providers:
+  observed:
+  - Microsoft.Compute
+  - Microsoft.DataProtection
+  - Microsoft.RecoveryServices
+  registeredByLab: []
+regions:
+  applicable: true
+  primary: supplied at execution time
+  secondary: null
+creates:
+  azureResources: *id001
+  entraObjects: []
+  localArtifacts:
+  - .state/<run-id>/run.json
+  - .state/<run-id>/validation.json
+tenantScopedChanges: []
+externalRequirements: []
+validation:
+  commandLanes:
+  - scripts/powershell/Validate.ps1
+  output: .state/<run-id>/validation.json
+  statuses:
+  - pass
+  - fail
+  - warning
+  - skipped
+  liveExecutionRequiredForLiveVerified: true
+cleanup:
+  azureDeletion: exact recorded resource-group ID after tag verification
+  entraDeletion: none
+  reportOnlyByDefault: true
+  requiresExecuteFlag: true
+  residualAuditRequired: true
+lastOfflineValidated: '2026-08-30'
+lastLiveVerified: null

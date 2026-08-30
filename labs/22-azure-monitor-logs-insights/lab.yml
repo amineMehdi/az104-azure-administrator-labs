@@ -1,0 +1,76 @@
+id: LAB-22
+slug: 22-azure-monitor-logs-insights
+title: Collect and analyze Azure Monitor metrics, logs, and Insights
+blueprintVersion: '2026-04-17'
+domain: Monitor and maintain Azure resources
+objectives:
+- MR-MONITOR-01
+- MR-MONITOR-02
+- MR-MONITOR-03
+- MR-MONITOR-05
+- MR-MONITOR-06
+track: azure-cli
+status: offline-validated
+testedToolVersions:
+  azureCli: 2.88.0
+  bash: 5.x (Git for Windows lane)
+  jq: '>=1.6'
+estimatedMinutes: 135
+difficulty: intermediate
+cost:
+  class: moderate
+  billableResources: &id001
+  - resource group
+  - Log Analytics workspace
+  - storage account
+  - diagnostic setting
+  - optional data collection rule
+  notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator
+    before execution and clean up immediately.
+permissions:
+  azureRbacRoles:
+  - Monitoring Contributor and Log Analytics Contributor on the lab resource group
+  entraRoles: []
+  graphScopes: []
+prerequisites:
+- A disposable non-production Azure environment
+- An active context that matches the explicitly supplied tenant and subscription
+- The command surface and dependencies for Azure CLI and KQL
+- 'Authorization boundary: Monitoring Contributor and Log Analytics Contributor on the lab resource group'
+- 'External gate review: None beyond the declared role and a disposable subscription.'
+providers:
+  observed:
+  - Microsoft.Insights
+  - Microsoft.OperationalInsights
+  - Microsoft.Storage
+  registeredByLab: []
+regions:
+  applicable: true
+  primary: supplied at execution time
+  secondary: null
+creates:
+  azureResources: *id001
+  entraObjects: []
+  localArtifacts:
+  - .state/<run-id>/run.json
+  - .state/<run-id>/validation.json
+tenantScopedChanges: []
+externalRequirements: []
+validation:
+  commandLanes:
+  - scripts/cli/validate.sh
+  output: .state/<run-id>/validation.json
+  statuses:
+  - pass
+  - fail
+  - warning
+  - skipped
+  liveExecutionRequiredForLiveVerified: true
+cleanup:
+  azureDeletion: exact recorded resource-group ID after tag verification
+  entraDeletion: none
+  reportOnlyByDefault: true
+  requiresExecuteFlag: true
+  residualAuditRequired: true
+lastOfflineValidated: '2026-08-30'
+lastLiveVerified: null

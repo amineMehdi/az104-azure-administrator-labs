@@ -37,9 +37,9 @@ Build **28 separate lab folders**:
 - 4 monitoring and recovery labs
 - 2 cross-domain capstones
 
-Twenty-four labs are a workable minimum if related services are compressed into long exercises. Twenty-eight is the better full curriculum: it keeps most labs focused, independently resumable, and suitable for approximately 60–120 minutes of work. Expect roughly **45–60 hands-on hours**, including validation, troubleshooting, Portal verification, screenshots, and cleanup.
+Twenty-four labs are a workable minimum if related services are compressed into long exercises. Twenty-eight is the better full curriculum: it keeps most labs focused, independently resumable, and suitable for approximately 60–120 minutes of work. Expect roughly **45–60 hands-on hours**, including validation, troubleshooting, and cleanup.
 
-Every lab remains Azure CLI or PowerShell-first. Real Azure Portal screenshots are added after the command-line work to teach UI recognition and prove the expected state; Portal clicking must not become the primary implementation path.
+Every lab remains Azure CLI or PowerShell-first. Architecture diagrams explain relationships, while redacted structured command output and independent validation prove the expected state.
 
 ---
 
@@ -61,11 +61,11 @@ The repository must:
 
 1. Trace every current official AZ-104 objective to at least one lab.
 2. Use Azure CLI, Az PowerShell, Microsoft Graph/Entra PowerShell, or `az rest` as the canonical implementation surface for every required administrative action.
-3. Include real, current, sanitized Azure Portal screenshots captured after executing each lab in an authorized Azure sandbox.
+3. Produce redacted, structured Azure CLI or PowerShell validation evidence for live-tested labs.
 4. Include an architecture diagram and objective validation for every lab.
 5. Include safe, idempotent cleanup and a residual-resource check for every lab.
 6. Be pleasant to browse and learn from directly on GitHub.
-7. Never claim that a command, screenshot, live test, or objective was completed when it was not.
+7. Never claim that a command, live test, or objective was completed when it was not.
 
 ## Success criteria
 
@@ -78,10 +78,10 @@ The work is complete only when all of the following are true:
 - Each lab has at least one complete command-line lane; there are no incomplete pseudo-equivalents.
 - Each lab can be copied out of the repository and used without importing runtime files from another lab.
 - Offline lint, schema, syntax, and documentation checks pass.
-- Live-tested labs record the date, tenant type, region, tool versions, result, screenshot manifest, and cleanup result without exposing identifiers.
+- Live-tested labs record the date, tenant type, region, tool versions, redacted command evidence, result, and cleanup result without exposing identifiers.
 - Gated or untested labs are clearly marked `partial`, `blocked`, or `offline-validated`; they are never labeled fully verified.
 - No credentials, tokens, keys, passwords, SAS values, personal email addresses, tenant IDs, subscription IDs, or sensitive Portal details are committed.
-- README tables, objective mappings, image links, and lab metadata agree with one another.
+- README tables, objective mappings, diagram links, and lab metadata agree with one another.
 
 ## Configuration defaults
 
@@ -95,8 +95,7 @@ labCount: 28
 commandMode: hybrid
 primaryCommandSurface: Azure CLI
 secondaryCommandSurface: Az PowerShell
-portalRole: verification-and-ui-recognition
-screenshotMode: real-portal-only
+evidenceMode: redacted-cli-or-powershell
 defaultRegion: configurable
 secondaryRegion: configurable
 liveAzureDeployment: requires-user-authorization
@@ -109,7 +108,7 @@ Do not hardcode a tenant, subscription, region, domain, username, public IP, SKU
 
 You are authorized to research, plan, create and edit local repository files, run non-destructive local validation, and prepare scripts.
 
-Before signing in to Azure, deploying resources, inviting users, assigning licenses, changing tenant settings, creating billable services, registering features, changing subscription or management-group state, or capturing real Portal screenshots:
+Before signing in to Azure, deploying resources, inviting users, assigning licenses, changing tenant settings, creating billable services, registering features, or changing subscription or management-group state:
 
 1. Inspect the intended live changes.
 2. Present one concise batch summary containing the target tenant/subscription, roles needed, regions, billable resources, expected duration, and cleanup strategy.
@@ -330,12 +329,6 @@ labs/
 ├── 00-safe-bootstrap/
 │   ├── README.md
 │   ├── lab.yml
-│   ├── images/
-│   │   ├── README.md
-│   │   ├── manifest.yml
-│   │   └── portal/
-│   │       ├── 01-subscription-context.png
-│   │       └── 02-resource-result.png
 │   ├── diagrams/
 │   │   ├── architecture.mmd
 │   │   └── architecture.svg
@@ -383,57 +376,23 @@ Rules:
 - Where the blueprint explicitly names the Portal or Azure Storage Explorer, add a concise UI-recognition or optional interface exercise. Do not mislabel a conceptual note as a completed hands-on objective.
 - Commands must be copyable, use parameters/variables, avoid deprecated aliases, and show expected output or a meaningful assertion.
 - Explain why a command matters before asking the learner to run it.
-- Never expose passwords, keys, connection strings, SAS values, or tokens in commands, screenshots, shell history, logs, or committed state.
+- Never expose passwords, keys, connection strings, SAS values, or tokens in commands, shell history, logs, evidence files, or committed state.
 - Prefer SSH keys, managed identities, Entra authentication, and least-privilege RBAC.
 
-## Real Azure Portal screenshot policy
+## CLI and PowerShell evidence policy
 
-Each lab must include real screenshots made by walking through the deployed lab resources in the Azure Portal after the command-line steps succeed.
+Every live-tested lab must prove its result with commands from the declared Azure CLI, Az PowerShell, or Microsoft Graph PowerShell lane.
 
-Portal images are evidence and visual orientation, not the primary procedure.
+For each live run:
 
-For each lab:
+1. Run setup only after reviewing the preview, context, permissions, cost, and external gates.
+2. Run the independent validation stage and retain its machine-readable result under the ignored `.state/<run-id>/` path.
+3. Save only the smallest useful redacted excerpt when a durable verification report is required.
+4. Remove tenant IDs, subscription IDs, object IDs, personal email addresses, public endpoints when sensitive, tokens, keys, SAS values, passwords, and unrelated resources.
+5. Record the tool versions, date, region, result, cleanup result, and residual-state audit.
+6. Never copy output from another tenant or edit a failing result into a pass.
 
-1. Run the lab in an explicitly authorized Azure sandbox.
-2. Run validation and confirm the intended state.
-3. Open the Azure Portal using the user's already authenticated browser session.
-4. Navigate to the most useful blades for understanding and verifying the result.
-5. Capture 2–5 meaningful screenshots; use more only for a genuinely complex workflow.
-6. Place them in that lab's `images/portal/` folder.
-7. Reference each image next to the matching verification step in the lab README.
-8. Add accurate alt text, a short caption, and what the screenshot proves.
-9. Record capture metadata in `images/manifest.yml`.
-10. Perform cleanup only after all required evidence is captured.
-
-The manifest must record:
-
-```yaml
-- file:
-  step:
-  portalBlade:
-  proves:
-  capturedAt:
-  azureRegion:
-  portalUiVersionOrNotes:
-  redactions:
-  source: real-azure-portal
-```
-
-Screenshot rules:
-
-- Never generate or substitute AI-made Portal screenshots.
-- Never use another person's screenshots as proof of this repository's live test.
-- Never capture sign-in pages, account menus, access tokens, keys, passwords, connection strings, SAS tokens, billing details, or unrelated resources.
-- Crop away or irreversibly flatten redactions over tenant IDs, subscription IDs, object IDs, personal emails, custom domains, and other account-specific details not essential to learning.
-- Prefer framing that avoids sensitive data rather than adding many redactions.
-- Strip image metadata.
-- Use a consistent Portal theme, browser zoom, and readable viewport.
-- Optimize PNGs without making Portal text blurry.
-- Use descriptive filenames such as `02-private-endpoint-approved.png`.
-- Add `Captured YYYY-MM-DD; Portal UI may change` below the image.
-- Validate every relative image link and enforce reasonable image dimensions/file sizes in CI.
-- If live access or authorization is unavailable, create the README, manifest schema, and a clearly marked screenshot checklist. Do not create fake PNGs, do not show broken image links, and report the screenshots as pending.
-- When the Portal UI has changed since an image was captured, replace the screenshot and update its manifest rather than patching instructions around stale visuals.
+Command evidence is the canonical verification surface. Architecture SVGs and Mermaid diagrams remain the visual teaching aids.
 
 ## Architecture visuals
 
@@ -484,7 +443,6 @@ creates:
 tenantScopedChanges:
 externalRequirements:
 validation:
-screenshotStatus:
 cleanup:
 lastOfflineValidated:
 lastLiveVerified:
@@ -507,7 +465,7 @@ Use the same high-quality structure without making the writing robotic:
 9. Resources created and naming pattern.
 10. Preflight instructions and expected checks.
 11. Learning exercises divided into checkpoints rather than one giant solution script.
-12. For each checkpoint: explanation, command, expected state/output, validation, and relevant real Portal screenshot.
+12. For each checkpoint: explanation, command, expected state/output, and independent CLI or PowerShell validation.
 13. At least one positive test and, when relevant, one negative security test.
 14. One realistic break/fix challenge with hints separated from the solution.
 15. A read-only validation command and explanation of pass/fail/warning/skipped.
@@ -515,7 +473,7 @@ Use the same high-quality structure without making the writing robotic:
 17. Tenant-level restoration steps when the lab changes shared settings.
 18. Exam takeaways, common misconceptions, and 3–5 reasoning questions.
 19. Official Microsoft references with a `last verified` date.
-20. Accessibility-friendly captions and alt text for all visuals.
+20. Accessibility-friendly descriptions and alt text for architecture visuals.
 
 Do not turn a lab into a wall of commands. Use the learning loop:
 
@@ -525,7 +483,7 @@ Do not turn a lab into a wall of commands. Use the learning loop:
 4. Test a success case.
 5. Test or diagnose a failure case.
 6. Validate objectively.
-7. Inspect the result in the Portal and capture evidence.
+7. Record redacted CLI or PowerShell validation evidence.
 8. Clean up.
 9. Reflect with exam-style questions.
 
@@ -548,7 +506,7 @@ Each conditional lab needs:
 - A safe observation, what-if, or partial fallback.
 - An honest coverage status.
 - A clear list of what the fallback does not prove.
-- No fabricated screenshot or validation result.
+- No fabricated command output or validation result.
 
 ## Preflight, validation, and cleanup
 
@@ -630,7 +588,7 @@ docs/
   study-plan.md
   troubleshooting.md
   command-cheatsheet.md
-  screenshot-style-guide.md
+  evidence-handling.md
   visuals/
 labs/
   README.md
@@ -651,7 +609,7 @@ The root README must include:
 - A quick-start path for local use, Azure Cloud Shell, and GitHub Codespaces.
 - A Mermaid curriculum roadmap.
 - The five domain weights.
-- A generated table of all 28 labs with domain, tool, time, cost class, permissions, screenshot status, and verification status.
+- A generated table of all 28 labs with domain, tool, time, cost class, permissions, and verification status.
 - A CLI path, a PowerShell path, and a recommended mixed path.
 - A progress checklist.
 - Links to the objective map, study plan, prerequisites, troubleshooting, and official Microsoft resources.
@@ -663,7 +621,7 @@ Generate repeated index data from `lab.yml` rather than hand-maintaining contrad
 
 Pull-request CI must not authenticate to Azure. It should perform:
 
-- Markdown lint, spelling, and internal-link/image checks.
+- Markdown lint, spelling, and internal-link checks.
 - Mermaid parse/render checks.
 - YAML and JSON schema validation.
 - Coverage validation: every official objective maps to at least one lab and a verification method.
@@ -673,7 +631,7 @@ Pull-request CI must not authenticate to Azure. It should perform:
 - Bicep build/lint and ARM template validation.
 - GitHub Actions lint.
 - Secret-pattern scanning.
-- Checks for required cost, permissions, validation, cleanup, screenshot, reference, and blueprint metadata.
+- Checks for required cost, permissions, validation, cleanup, reference, and blueprint metadata.
 - Checks that third-party GitHub Actions are pinned to full commit SHAs.
 
 If live Azure smoke tests are later authorized, make them manual or tightly bounded scheduled jobs with OIDC, a protected sandbox environment, concurrency one, `if: always()` cleanup, and post-cleanup inventory. Never run expensive or tenant-wide labs automatically.
@@ -687,10 +645,10 @@ Work in phases and keep the repository usable after each phase:
 3. Build `00-safe-bootstrap` as the golden lab and validate the pattern.
 4. Build labs domain by domain, updating the objective matrix continuously.
 5. Run offline validation after each domain.
-6. Prepare a consolidated live-test and screenshot plan with cost/permission gates.
-7. After authorization, execute labs in small batches, validate, capture sanitized Portal images, and clean up each batch.
+6. Prepare a consolidated live-test plan with cost/permission gates.
+7. After authorization, execute labs in small batches, validate, retain redacted command evidence, and clean up each batch.
 8. Complete both capstones.
-9. Run the full objective, portability, documentation, image, secret, and residual-resource audits.
+9. Run the full objective, portability, documentation, secret, and residual-resource audits.
 10. Produce a final verification report.
 
 Do not create 28 superficial placeholder READMEs merely to satisfy the folder count. Finish a domain to the quality bar before moving on. If the full implementation cannot fit in one working session, leave a precise status document and continue from it; do not lower the definition of done.
@@ -712,10 +670,10 @@ Lead with the outcome and include:
 2. Number of complete, partial, blocked, offline-validated, and live-verified labs.
 3. Objective coverage totals and any uncovered objective IDs.
 4. Offline validation results.
-5. Live test, screenshot, and cleanup results.
+5. Live test, command-evidence, and cleanup results.
 6. Costs or billable resources created during testing.
 7. Material limitations and exact next actions.
-8. Links to the root README, objective map, catalog, screenshot guide, and verification report.
+8. Links to the root README, objective map, catalog, evidence-handling guide, and verification report.
 
 # END MEGA PROMPT
 
@@ -723,9 +681,9 @@ Lead with the outcome and include:
 
 ## Notes for the project owner
 
-The prompt intentionally separates local repository creation from live Azure execution. Building scripts and documentation is safe local work; producing genuine Portal screenshots requires an authenticated Azure environment, suitable permissions and licenses, live deployments, and cost authorization.
+The prompt intentionally separates local repository creation from live Azure execution. Building scripts and documentation is safe local work; producing live command evidence requires an authenticated Azure environment, suitable permissions and licenses, live deployments, and cost authorization.
 
-The CLI/PowerShell-first rule is compatible with the exam's administration topics, but Microsoft also explicitly expects Portal familiarity and names Azure Storage Explorer and AzCopy. The repository should therefore use command-line implementation plus real Portal verification images and short interface-awareness notes rather than claiming that the other interfaces do not matter.
+The CLI/PowerShell-first rule is compatible with the exam's administration topics, while Microsoft also names Azure Storage Explorer and AzCopy. The repository should use command-line implementation and verification, with concise interface-awareness notes where an objective explicitly names another tool.
 
 ## Approved assessment addendum
 

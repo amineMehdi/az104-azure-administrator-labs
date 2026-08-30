@@ -74,7 +74,7 @@ if ($TenantId -notmatch $guidPattern) {
 }
 
 Write-Host ''
-Write-Host 'Exact active context (do not include this block in screenshots):'
+Write-Host 'Exact active context (redact identifiers from any retained evidence):'
 Write-Host "  Environment:     $($context.Environment.Name)"
 Write-Host "  Subscription:    $($context.Subscription.Name)"
 Write-Host "  Subscription ID: $currentSubscriptionId"

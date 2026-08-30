@@ -1,0 +1,70 @@
+id: LAB-06
+slug: 06-storage-accounts-security
+title: Secure storage accounts, redundancy, encryption, and keys
+blueprintVersion: '2026-04-17'
+domain: Implement and manage storage
+objectives:
+- ST-ACCESS-04
+- ST-ACCOUNTS-01
+- ST-ACCOUNTS-02
+- ST-ACCOUNTS-04
+track: azure-cli
+status: offline-validated
+testedToolVersions:
+  azureCli: 2.88.0
+  bash: 5.x (Git for Windows lane)
+  jq: '>=1.6'
+estimatedMinutes: 90
+difficulty: foundational
+cost:
+  class: low
+  billableResources: &id001
+  - resource group
+  - StorageV2 account
+  notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator
+    before execution and clean up immediately.
+permissions:
+  azureRbacRoles:
+  - Contributor on the lab resource group
+  entraRoles: []
+  graphScopes: []
+prerequisites:
+- A disposable non-production Azure environment
+- An active context that matches the explicitly supplied tenant and subscription
+- The command surface and dependencies for Azure CLI
+- 'Authorization boundary: Contributor on the lab resource group'
+- 'External gate review: None beyond the declared role and a disposable subscription.'
+providers:
+  observed:
+  - Microsoft.Storage
+  registeredByLab: []
+regions:
+  applicable: true
+  primary: supplied at execution time
+  secondary: null
+creates:
+  azureResources: *id001
+  entraObjects: []
+  localArtifacts:
+  - .state/<run-id>/run.json
+  - .state/<run-id>/validation.json
+tenantScopedChanges: []
+externalRequirements: []
+validation:
+  commandLanes:
+  - scripts/cli/validate.sh
+  output: .state/<run-id>/validation.json
+  statuses:
+  - pass
+  - fail
+  - warning
+  - skipped
+  liveExecutionRequiredForLiveVerified: true
+cleanup:
+  azureDeletion: exact recorded resource-group ID after tag verification
+  entraDeletion: none
+  reportOnlyByDefault: true
+  requiresExecuteFlag: true
+  residualAuditRequired: true
+lastOfflineValidated: '2026-08-30'
+lastLiveVerified: null

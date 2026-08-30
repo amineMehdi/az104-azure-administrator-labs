@@ -32,4 +32,4 @@ The contract confirms that:
 - soft deletion and permanent purge are separate decisions; and
 - all runtime dependencies stay inside this lab folder.
 
-Live acceptance additionally requires an authorized disposable tenant, successful positive and negative validation, cleanup audit, and real sanitized Portal screenshots. Until then, keep `lastLiveVerified: null` and screenshot status `pending`.
+Live acceptance additionally requires a disposable tenant, successful positive and negative command validation, and a cleanup audit. Until then, keep `lastLiveVerified: null`.

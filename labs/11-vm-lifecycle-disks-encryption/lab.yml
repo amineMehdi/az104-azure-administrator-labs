@@ -1,0 +1,75 @@
+id: LAB-11
+slug: 11-vm-lifecycle-disks-encryption
+title: Manage VM lifecycle, size, disks, and host encryption
+blueprintVersion: '2026-04-17'
+domain: Deploy and manage Azure compute resources
+objectives:
+- CP-VM-01
+- CP-VM-02
+- CP-VM-04
+- CP-VM-05
+track: azure-cli
+status: offline-validated
+testedToolVersions:
+  azureCli: 2.88.0
+  bash: 5.x (Git for Windows lane)
+  jq: '>=1.6'
+estimatedMinutes: 120
+difficulty: intermediate
+cost:
+  class: moderate
+  billableResources: &id001
+  - resource group
+  - virtual network
+  - network security group
+  - network interface
+  - Linux virtual machine
+  - managed data disk
+  notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator
+    before execution and clean up immediately.
+permissions:
+  azureRbacRoles:
+  - Virtual Machine Contributor and Network Contributor on the lab resource group
+  entraRoles: []
+  graphScopes: []
+prerequisites:
+- A disposable non-production Azure environment
+- An active context that matches the explicitly supplied tenant and subscription
+- The command surface and dependencies for Azure CLI
+- 'Authorization boundary: Virtual Machine Contributor and Network Contributor on the lab resource group'
+- 'External gate review: None beyond the declared role and a disposable subscription.'
+providers:
+  observed:
+  - Microsoft.Compute
+  - Microsoft.Network
+  registeredByLab: []
+regions:
+  applicable: true
+  primary: supplied at execution time
+  secondary: null
+creates:
+  azureResources: *id001
+  entraObjects: []
+  localArtifacts:
+  - .state/<run-id>/run.json
+  - .state/<run-id>/validation.json
+tenantScopedChanges: []
+externalRequirements: []
+validation:
+  commandLanes:
+  - scripts/cli/validate.sh
+  output: .state/<run-id>/validation.json
+  statuses:
+  - pass
+  - fail
+  - warning
+  - skipped
+  liveExecutionRequiredForLiveVerified: true
+cleanup:
+  azureDeletion: exact recorded resource-group ID after tag verification
+  entraDeletion: none
+  reportOnlyByDefault: true
+  requiresExecuteFlag: true
+  residualAuditRequired: true
+lastOfflineValidated: '2026-08-30'
+lastLiveVerified: null

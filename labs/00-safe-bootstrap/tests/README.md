@@ -1,6 +1,6 @@
 # Lab 00 offline test contract
 
-These checks validate repository content without signing in to Azure. Live query results and Portal screenshots require separate authorization and are not part of offline acceptance.
+These checks validate repository content without signing in to Azure. Live query results require a deliberate authenticated context and are not part of offline acceptance.
 
 ## Static checks
 
@@ -86,4 +86,4 @@ These require a signed-in sandbox only because setup verifies context and region
 
 ## Acceptance boundary
 
-Offline validation proves syntax, documentation, metadata, and safety design. It does not prove Azure permissions, current provider state, quota availability, Portal layout, or live cleanup. Keep `lastLiveVerified: null` and screenshot status `pending` until those checks are performed in an explicitly authorized sandbox.
+Offline validation proves syntax, documentation, metadata, and safety design. It does not prove Azure permissions, current provider state, quota availability, or live cleanup. Keep `lastLiveVerified: null` until those checks are performed in a disposable sandbox.

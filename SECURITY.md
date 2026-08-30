@@ -11,7 +11,7 @@ Do not open a public issue containing credentials or account identifiers. Report
 - Use interactive authentication locally and OIDC for any future GitHub-to-Azure workflow.
 - Use the narrowest practical role and scope.
 - Never expose SSH or RDP to `0.0.0.0/0`.
-- Review screenshots for tenant, subscription, identity, billing, and secret data before commit.
+- Review saved CLI and PowerShell evidence for tenant, subscription, identity, billing, and secret data before commit.
 - Live tests must use an explicitly approved sandbox, never production.
 
 Pull-request workflows perform offline validation only and must not contain Azure credentials.

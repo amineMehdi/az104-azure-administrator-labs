@@ -1,0 +1,79 @@
+id: LAB-09
+slug: 09-azure-files-identity
+title: Configure Azure Files, snapshots, soft delete, and identity access
+blueprintVersion: '2026-04-17'
+domain: Implement and manage storage
+objectives:
+- ST-ACCESS-05
+- ST-ACCOUNTS-05
+- ST-DATA-01
+- ST-DATA-05
+track: az-powershell
+status: offline-validated
+testedToolVersions:
+  powershell: '>=7.4'
+  modules:
+  - Az.Accounts
+  - Az.Resources
+  - Az.Storage
+estimatedMinutes: 135
+difficulty: foundational
+cost:
+  class: low
+  billableResources: &id001
+  - resource group
+  - storage account
+  - Azure file share
+  - share snapshot
+  notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator
+    before execution and clean up immediately.
+permissions:
+  azureRbacRoles:
+  - Contributor and Storage File Data SMB Share Contributor; directory permissions for the optional identity-source
+    path
+  entraRoles: []
+  graphScopes: []
+prerequisites:
+- A disposable non-production Azure environment
+- An active context that matches the explicitly supplied tenant and subscription
+- The command surface and dependencies for Az PowerShell
+- 'Authorization boundary: Contributor and Storage File Data SMB Share Contributor; directory permissions for the
+  optional identity-source path'
+- 'External gate review: Identity-based SMB configuration is gated by AZ104_FILES_IDENTITY_SOURCE because Entra
+  Kerberos, AD DS, and Entra Domain Services have different prerequisites.'
+providers:
+  observed:
+  - Microsoft.Storage
+  registeredByLab: []
+regions:
+  applicable: true
+  primary: supplied at execution time
+  secondary: null
+creates:
+  azureResources: *id001
+  entraObjects: []
+  localArtifacts:
+  - .state/<run-id>/run.json
+  - .state/<run-id>/validation.json
+tenantScopedChanges: []
+externalRequirements:
+- Identity-based SMB configuration is gated by AZ104_FILES_IDENTITY_SOURCE because Entra Kerberos, AD DS, and Entra
+  Domain Services have different prerequisites.
+validation:
+  commandLanes:
+  - scripts/powershell/Validate.ps1
+  output: .state/<run-id>/validation.json
+  statuses:
+  - pass
+  - fail
+  - warning
+  - skipped
+  liveExecutionRequiredForLiveVerified: true
+cleanup:
+  azureDeletion: exact recorded resource-group ID after tag verification
+  entraDeletion: none
+  reportOnlyByDefault: true
+  requiresExecuteFlag: true
+  residualAuditRequired: true
+lastOfflineValidated: '2026-08-30'
+lastLiveVerified: null

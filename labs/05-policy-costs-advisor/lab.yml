@@ -1,0 +1,79 @@
+id: LAB-05
+slug: 05-policy-costs-advisor
+title: Enforce policy and manage costs with budgets and Advisor
+blueprintVersion: '2026-04-17'
+domain: Manage Azure identities and governance
+objectives:
+- IG-GOVERN-01
+- IG-GOVERN-06
+- IG-GOVERN-07
+track: az-powershell
+status: offline-validated
+testedToolVersions:
+  powershell: '>=7.4'
+  modules:
+  - Az.Accounts
+  - Az.Resources
+  - Az.Advisor
+estimatedMinutes: 120
+difficulty: foundational
+cost:
+  class: none
+  billableResources: []
+  notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator
+    before execution and clean up immediately.
+permissions:
+  azureRbacRoles:
+  - Resource Policy Contributor at the lab scope; Cost Management Contributor for the optional budget path
+  entraRoles: []
+  graphScopes: []
+prerequisites:
+- A disposable non-production Azure environment
+- An active context that matches the explicitly supplied tenant and subscription
+- The command surface and dependencies for Az PowerShell
+- 'Authorization boundary: Resource Policy Contributor at the lab scope; Cost Management Contributor for the optional
+  budget path'
+- 'External gate review: Budget creation requires AZ104_BUDGET_EMAIL and Cost Management authorization; otherwise
+  the lab inventories cost controls without creating one.'
+providers:
+  observed:
+  - Microsoft.Authorization
+  - Microsoft.Advisor
+  - Microsoft.Consumption
+  - Microsoft.CostManagement
+  registeredByLab: []
+regions:
+  applicable: true
+  primary: supplied at execution time
+  secondary: null
+creates:
+  azureResources:
+  - resource group
+  - policy assignment
+  - optional cost budget
+  entraObjects: []
+  localArtifacts:
+  - .state/<run-id>/run.json
+  - .state/<run-id>/validation.json
+tenantScopedChanges: []
+externalRequirements:
+- Budget creation requires AZ104_BUDGET_EMAIL and Cost Management authorization; otherwise the lab inventories cost
+  controls without creating one.
+validation:
+  commandLanes:
+  - scripts/powershell/Validate.ps1
+  output: .state/<run-id>/validation.json
+  statuses:
+  - pass
+  - fail
+  - warning
+  - skipped
+  liveExecutionRequiredForLiveVerified: true
+cleanup:
+  azureDeletion: exact recorded resource-group ID after tag verification
+  entraDeletion: none
+  reportOnlyByDefault: true
+  requiresExecuteFlag: true
+  residualAuditRequired: true
+lastOfflineValidated: '2026-08-30'
+lastLiveVerified: null

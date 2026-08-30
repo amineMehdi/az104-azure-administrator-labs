@@ -1,6 +1,6 @@
 # Lab 01 — Create and manage Microsoft Entra users and groups
 
-> **Status:** Offline-validated; tenant execution and real Portal evidence are pending authorization.
+> **Status:** Offline-validated; tenant execution is pending.
 > **Blueprint:** AZ-104 skills measured as of 2026-04-17.
 > **Tenant changes:** Two cloud-only users, one security group, one membership, and one owner assignment.
 
@@ -171,11 +171,9 @@ jq '{labId,runId,tenantId,domain,status,names,resources,relationships,expected,p
 
 Expected result: three resources are recorded and `passwordStored` is `false`.
 
-### Portal evidence: users
+### Command evidence: users
 
-Open the [Microsoft Entra admin center](https://entra.microsoft.com), go to **Identity > Users > All users**, and filter using the `AZ104-L01-<run-id>` display-name prefix. Confirm both accounts are enabled.
-
-After a live run, capture the sanitized evidence described in `images/manifest.yml` as `portal/01-lab-users.png`. Do not capture the temporary password, other users, or personal browser information.
+Use the independent validator and exact object IDs to confirm both accounts are enabled. Retain only a minimal redacted result; do not retain the bootstrap password, access tokens, unrelated users, or a complete tenant inventory.
 
 ## Checkpoint 3 — Inspect managed properties
 
@@ -207,7 +205,7 @@ az rest \
 
 Expected group type: `securityEnabled=true` and `mailEnabled=false`. Its description contains this run ID. Display names are convenient for people but are not safe cleanup identifiers because directories can contain duplicates.
 
-Capture `portal/02-group-properties.png` only after a live run and sanitization.
+Record the exact redacted Graph response fields needed to prove the group type and managed description.
 
 ## Checkpoint 4 — Compare membership and ownership
 
@@ -238,7 +236,7 @@ az ad group owner list \
 
 User B owns the group but is not automatically a member. Ownership grants group-management capability according to tenant policy; it does not grant access that is assigned to group members.
 
-Capture the sanitized member and owner blades as `portal/03-group-members.png` and `portal/04-group-owners.png`.
+Use the redacted member and owner command results as separate evidence; ownership must not be inferred from membership or vice versa.
 
 ## Checkpoint 5 — Validate positive and negative state
 
@@ -306,7 +304,7 @@ If tenant policy requires immediate permanent removal and you are explicitly aut
 
 Permanent purge cannot be undone and can require additional permissions. Do not use it on an ID that was not recorded by this run.
 
-Cleanup retains local `run.json` as audit evidence. After reviewing the cleanup status and before publishing screenshots, you may remove only `.state/$RUN_ID/` locally. The entire `.state/` tree is excluded from Git.
+Cleanup retains local `run.json` as audit evidence. After reviewing the cleanup status, you may remove only `.state/$RUN_ID/` locally. The entire `.state/` tree is excluded from Git.
 
 ## Administrator and exam takeaways
 
@@ -337,4 +335,4 @@ Last verified: **2026-08-30**.
 - [Microsoft Entra built-in roles](https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/permissions-reference)
 - [Recover or permanently remove recently deleted users](https://learn.microsoft.com/en-us/entra/fundamentals/users-restore)
 
-Portal layout, permissions, and commands evolve. Revalidate the documentation and replace screenshots whenever the interface or behavior changes.
+Permissions and commands evolve. Revalidate the documentation and command assertions whenever service behavior changes.

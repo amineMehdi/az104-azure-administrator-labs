@@ -1,0 +1,82 @@
+id: LAB-16
+slug: 16-app-service-tls-dns-backup-network
+title: Configure App Service TLS, DNS, backup, and networking
+blueprintVersion: '2026-04-17'
+domain: Deploy and manage Azure compute resources / Implement and manage virtual networking
+objectives:
+- CP-APP-04
+- CP-APP-05
+- CP-APP-06
+- CP-APP-07
+- NW-DNSLB-01
+track: azure-cli
+status: offline-validated
+testedToolVersions:
+  azureCli: 2.88.0
+  bash: 5.x (Git for Windows lane)
+  jq: '>=1.6'
+estimatedMinutes: 150
+difficulty: intermediate
+cost:
+  class: moderate
+  billableResources: &id001
+  - resource group
+  - App Service plan
+  - web app
+  - storage account
+  - virtual network integration subnet
+  - optional custom hostname and TLS binding
+  notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator
+    before execution and clean up immediately.
+permissions:
+  azureRbacRoles:
+  - Website Contributor, Network Contributor, and Storage Account Contributor; control of the DNS zone and certificate
+    for gated paths
+  entraRoles: []
+  graphScopes: []
+prerequisites:
+- A disposable non-production Azure environment
+- An active context that matches the explicitly supplied tenant and subscription
+- The command surface and dependencies for Azure CLI
+- 'Authorization boundary: Website Contributor, Network Contributor, and Storage Account Contributor; control of
+  the DNS zone and certificate for gated paths'
+- 'External gate review: Custom DNS and certificate steps require AZ104_CUSTOM_HOSTNAME plus an owned DNS zone and
+  an authorized certificate; they remain gated otherwise.'
+providers:
+  observed:
+  - Microsoft.Network
+  - Microsoft.Storage
+  - Microsoft.Web
+  registeredByLab: []
+regions:
+  applicable: true
+  primary: supplied at execution time
+  secondary: null
+creates:
+  azureResources: *id001
+  entraObjects: []
+  localArtifacts:
+  - .state/<run-id>/run.json
+  - .state/<run-id>/validation.json
+tenantScopedChanges: []
+externalRequirements:
+- Custom DNS and certificate steps require AZ104_CUSTOM_HOSTNAME plus an owned DNS zone and an authorized certificate;
+  they remain gated otherwise.
+validation:
+  commandLanes:
+  - scripts/cli/validate.sh
+  output: .state/<run-id>/validation.json
+  statuses:
+  - pass
+  - fail
+  - warning
+  - skipped
+  liveExecutionRequiredForLiveVerified: true
+cleanup:
+  azureDeletion: exact recorded resource-group ID after tag verification
+  entraDeletion: none
+  reportOnlyByDefault: true
+  requiresExecuteFlag: true
+  residualAuditRequired: true
+lastOfflineValidated: '2026-08-30'
+lastLiveVerified: null

@@ -1,0 +1,102 @@
+id: LAB-27
+slug: 27-capstone-operate-recover
+title: Capstone — Operate, troubleshoot, back up, and recover an Azure workload
+blueprintVersion: '2026-04-17'
+domain: Manage Azure identities and governance / Implement and manage virtual networking / Monitor and maintain
+  Azure resources
+objectives:
+- IG-ACCESS-03
+- IG-GOVERN-01
+- IG-GOVERN-02
+- IG-GOVERN-04
+- IG-GOVERN-06
+- NW-VNET-05
+- NW-SECURE-02
+- NW-DNSLB-03
+- MR-MONITOR-03
+- MR-MONITOR-04
+- MR-MONITOR-05
+- MR-MONITOR-06
+- MR-RECOVERY-04
+- MR-RECOVERY-06
+- MR-RECOVERY-07
+track: az-powershell
+status: offline-validated
+testedToolVersions:
+  powershell: '>=7.4'
+  modules:
+  - Az.Accounts
+  - Az.Resources
+  - Az.Network
+  - Az.Compute
+  - Az.Monitor
+  - Az.OperationalInsights
+  - Az.RecoveryServices
+estimatedMinutes: 180
+difficulty: advanced
+cost:
+  class: elevated
+  billableResources: &id001
+  - resource group
+  - test workload
+  - Log Analytics workspace
+  - alerts
+  - Recovery Services vault
+  - backup policy
+  - fault injection and recovery evidence
+  notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator
+    before execution and clean up immediately.
+permissions:
+  azureRbacRoles:
+  - Contributor, Monitoring Contributor, Backup Contributor, and Network Contributor on the capstone resource group
+  entraRoles: []
+  graphScopes: []
+prerequisites:
+- A disposable non-production Azure environment
+- An active context that matches the explicitly supplied tenant and subscription
+- The command surface and dependencies for Az PowerShell and KQL
+- 'Authorization boundary: Contributor, Monitoring Contributor, Backup Contributor, and Network Contributor on the
+  capstone resource group'
+- 'External gate review: The live recovery drill requires cost review and an isolated workload; production failover
+  or irreversible deletion is never inferred from this capstone.'
+providers:
+  observed:
+  - Microsoft.Authorization
+  - Microsoft.Compute
+  - Microsoft.Insights
+  - Microsoft.Network
+  - Microsoft.OperationalInsights
+  - Microsoft.RecoveryServices
+  registeredByLab: []
+regions:
+  applicable: true
+  primary: supplied at execution time
+  secondary: required only for multi-region checkpoints
+creates:
+  azureResources: *id001
+  entraObjects: []
+  localArtifacts:
+  - .state/<run-id>/run.json
+  - .state/<run-id>/validation.json
+tenantScopedChanges: []
+externalRequirements:
+- The live recovery drill requires cost review and an isolated workload; production failover or irreversible deletion
+  is never inferred from this capstone.
+validation:
+  commandLanes:
+  - scripts/powershell/Validate.ps1
+  output: .state/<run-id>/validation.json
+  statuses:
+  - pass
+  - fail
+  - warning
+  - skipped
+  liveExecutionRequiredForLiveVerified: true
+cleanup:
+  azureDeletion: exact recorded resource-group ID after tag verification
+  entraDeletion: none
+  reportOnlyByDefault: true
+  requiresExecuteFlag: true
+  residualAuditRequired: true
+lastOfflineValidated: '2026-08-30'
+lastLiveVerified: null

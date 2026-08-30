@@ -1,0 +1,76 @@
+id: LAB-08
+slug: 08-blob-lifecycle-replication
+title: Manage Blob lifecycle, tiers, versioning, replication, and AzCopy
+blueprintVersion: '2026-04-17'
+domain: Implement and manage storage
+objectives:
+- ST-ACCOUNTS-03
+- ST-ACCOUNTS-05
+- ST-DATA-02
+- ST-DATA-03
+- ST-DATA-04
+- ST-DATA-06
+- ST-DATA-07
+track: azure-cli
+status: offline-validated
+testedToolVersions:
+  azureCli: 2.88.0
+  bash: 5.x (Git for Windows lane)
+  jq: '>=1.6'
+estimatedMinutes: 120
+difficulty: foundational
+cost:
+  class: low
+  billableResources: &id001
+  - resource group
+  - two StorageV2 accounts
+  - blob containers
+  - lifecycle policy
+  - object replication policy
+  notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator
+    before execution and clean up immediately.
+permissions:
+  azureRbacRoles:
+  - Contributor and Storage Blob Data Contributor on the lab resource group
+  entraRoles: []
+  graphScopes: []
+prerequisites:
+- A disposable non-production Azure environment
+- An active context that matches the explicitly supplied tenant and subscription
+- The command surface and dependencies for Azure CLI
+- 'Authorization boundary: Contributor and Storage Blob Data Contributor on the lab resource group'
+- 'External gate review: None beyond the declared role and a disposable subscription.'
+providers:
+  observed:
+  - Microsoft.Storage
+  registeredByLab: []
+regions:
+  applicable: true
+  primary: supplied at execution time
+  secondary: required only for multi-region checkpoints
+creates:
+  azureResources: *id001
+  entraObjects: []
+  localArtifacts:
+  - .state/<run-id>/run.json
+  - .state/<run-id>/validation.json
+tenantScopedChanges: []
+externalRequirements: []
+validation:
+  commandLanes:
+  - scripts/cli/validate.sh
+  output: .state/<run-id>/validation.json
+  statuses:
+  - pass
+  - fail
+  - warning
+  - skipped
+  liveExecutionRequiredForLiveVerified: true
+cleanup:
+  azureDeletion: exact recorded resource-group ID after tag verification
+  entraDeletion: none
+  reportOnlyByDefault: true
+  requiresExecuteFlag: true
+  residualAuditRequired: true
+lastOfflineValidated: '2026-08-30'
+lastLiveVerified: null
