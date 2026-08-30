@@ -96,7 +96,50 @@ The script records its run before creating resources. If a cloud operation fails
 
 ### 3. Complete and reason through the checkpoints
 
-### Checkpoint 1: Create a virtual network subnet with the MicrosoftCreate a virtual network subnet with the Microsoft.Storage service endpoint.Evidence to retain:- The command output or exact resource/object ID for checkpoint 1.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.### Checkpoint 2: Create a secure StorageV2 account and change the network default action to DenyCreate a secure StorageV2 account and change the network default action to Deny.Evidence to retain:- The command output or exact resource/object ID for checkpoint 2.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.### Checkpoint 3: Add the subnet as an allowed storage network ruleAdd the subnet as an allowed storage network rule.Evidence to retain:- The command output or exact resource/object ID for checkpoint 3.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.### Checkpoint 4: Create a private container and stored access policy, then generate a short-lived service SAS only in memoryCreate a private container and stored access policy, then generate a short-lived service SAS only in memory.Evidence to retain:- The command output or exact resource/object ID for checkpoint 4.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.
+### Checkpoint 1: Create a virtual network subnet with the Microsoft
+
+Create a virtual network subnet with the Microsoft.Storage service endpoint.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 1.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
+### Checkpoint 2: Create a secure StorageV2 account and change the network default action to Deny
+
+Create a secure StorageV2 account and change the network default action to Deny.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 2.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
+### Checkpoint 3: Add the subnet as an allowed storage network rule
+
+Add the subnet as an allowed storage network rule.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 3.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
+### Checkpoint 4: Create a private container and stored access policy, then generate a short-lived service SAS only in memory
+
+Create a private container and stored access policy, then generate a short-lived service SAS only in memory.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 4.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
 ### 4. Validate independently
 
 ```ps1
@@ -106,6 +149,17 @@ pwsh ./scripts/powershell/Validate.ps1 -RunId az104l07-01 -SubscriptionId <subsc
 Inspect `.state/az104l07-01/validation.json`. A `pass` applies only to checks that could be executed. A gated or asynchronous path must remain `warning` or `skipped` until its evidence exists.
 
 Positive checks should prove the intended resources, configuration, relationships, or health. Negative checks should prove that anonymous access, excess scope, accidental inheritance, unresolved DNS, unhealthy probes, or unrecorded resources were not introduced where the scenario forbids them.
+
+## Portal evidence
+
+Portal screenshots are planned evidence captured only during an authorized live run. Until then every entry in [images/portal/manifest.yml](images/portal/manifest.yml) stays `pending`, and no placeholder image is committed. Capture and sanitization rules live in [images/README.md](images/README.md).
+
+| Planned file | Checkpoint | Portal blade | Evidence |
+|---|---:|---|---|
+| `01-storage-account-networking.png` | 3 | Storage account > Networking | Default deny and the allowed virtual network rule |
+| `02-storage-account-containers.png` | 4 | Storage account > Containers | The private container |
+| `03-container-access-policy.png` | 4 | Container > Access policy | The stored access policy and expiry |
+| `04-storage-account-shared-access-signature.png` | 4 | Storage account > Shared access signature | SAS controls with token values excluded |
 
 ## Break/fix exercise
 

@@ -1,0 +1,42 @@
+schemaVersion: '1.0'
+labId: LAB-16
+status: pending
+source: Every capture must come from a signed-in session of the real Azure Portal (https://portal.azure.com) against
+  the disposable lab environment; fabricated or placeholder images are forbidden.
+captures:
+- file: 01-configuration-general-settings.png
+  checkpoint: 1
+  portalBlade: App Service > Configuration > General settings
+  evidenceShown: HTTPS-only and minimum inbound TLS
+  captureDate: null
+  region: null
+  redactions: []
+  portalConfirmed: false
+  status: pending
+- file: 02-app-service-networking.png
+  checkpoint: 2
+  portalBlade: App Service > Networking
+  evidenceShown: Regional VNet integration
+  captureDate: null
+  region: null
+  redactions: []
+  portalConfirmed: false
+  status: pending
+- file: 03-app-service-backups.png
+  checkpoint: 3
+  portalBlade: App Service > Backups
+  evidenceShown: Backup destination and schedule with secrets hidden
+  captureDate: null
+  region: null
+  redactions: []
+  portalConfirmed: false
+  status: pending
+- file: 04-app-service-custom-domains.png
+  checkpoint: 4
+  portalBlade: App Service > Custom domains
+  evidenceShown: Validated custom hostname and TLS binding when gated inputs exist
+  captureDate: null
+  region: null
+  redactions: []
+  portalConfirmed: false
+  status: pending

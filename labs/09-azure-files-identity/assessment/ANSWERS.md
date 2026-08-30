@@ -14,7 +14,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/storage/files/storage-how-to-create-file-share
+Source: <https://learn.microsoft.com/en-us/azure/storage/files/storage-how-to-create-file-share>
 
 ## 2. B (`LAB09-Q02`)
 
@@ -28,7 +28,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/storage/files/storage-snapshots-files
+Source: <https://learn.microsoft.com/en-us/azure/storage/files/storage-snapshots-files>
 
 ## 3. C (`LAB09-Q03`)
 
@@ -42,7 +42,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/storage/files/storage-files-prevent-file-share-deletion
+Source: <https://learn.microsoft.com/en-us/azure/storage/files/storage-files-prevent-file-share-deletion>
 
 ## 4. D (`LAB09-Q04`)
 
@@ -56,7 +56,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/storage/files/storage-files-active-directory-overview
+Source: <https://learn.microsoft.com/en-us/azure/storage/files/storage-files-active-directory-overview>
 
 ## 5. A (`LAB09-Q05`)
 
@@ -70,7 +70,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-files
+Source: <https://learn.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-files>
 
 ## 6. B (`LAB09-Q06`)
 
@@ -84,7 +84,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/storage/files/storage-how-to-create-file-share
+Source: <https://learn.microsoft.com/en-us/azure/storage/files/storage-how-to-create-file-share>
 
 ## 7. C (`LAB09-Q07`)
 
@@ -98,7 +98,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/storage/files/storage-snapshots-files
+Source: <https://learn.microsoft.com/en-us/azure/storage/files/storage-snapshots-files>
 
 ## 8. D (`LAB09-Q08`)
 
@@ -112,7 +112,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/storage/files/storage-files-prevent-file-share-deletion
+Source: <https://learn.microsoft.com/en-us/azure/storage/files/storage-files-prevent-file-share-deletion>
 
 ## 9. A (`LAB09-Q09`)
 
@@ -126,7 +126,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/storage/files/storage-files-active-directory-overview
+Source: <https://learn.microsoft.com/en-us/azure/storage/files/storage-files-active-directory-overview>
 
 ## 10. B (`LAB09-Q10`)
 
@@ -140,4 +140,4 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-files
+Source: <https://learn.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-files>

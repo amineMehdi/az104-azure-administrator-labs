@@ -14,7 +14,12 @@ All notable changes to this curriculum are documented here.
 - Labs 02–27 as separate, self-contained Azure CLI or PowerShell lab folders with lifecycle scripts, validation contracts, diagrams, solution notes, and ten questions with answers per lab.
 - Full assessment coverage for all 82 official objectives in the April 17, 2026 AZ-104 blueprint.
 - A command-evidence policy based on redacted Azure CLI and PowerShell validation output.
+- A portal screenshot contract: per-lab `images/portal/manifest.yml` manifests (2–5 planned captures mapped to checkpoints), a screenshot-manifest schema, `screenshots` status metadata in every lab, validator enforcement, and a sanitization workflow in the evidence-handling guide.
 
 ### Changed
 
-- Removed the Azure Portal capture requirement and related manifests; architecture Mermaid/SVG files remain the visual learning aids.
+- Reinstated Azure Portal screenshots as manifest-tracked supporting evidence captured during authorized live batches; the earlier removal of the portal capture requirement is reversed. Architecture Mermaid/SVG files remain the visual learning aids, and command output remains the canonical evidence.
+
+### Fixed
+
+- Generated lab READMEs now render each checkpoint as a separate section; previously the checkpoint headings and evidence lists were collapsed onto a single line.

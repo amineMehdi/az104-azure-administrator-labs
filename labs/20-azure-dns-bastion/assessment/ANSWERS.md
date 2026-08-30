@@ -14,7 +14,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/bastion/tutorial-create-host-cli
+Source: <https://learn.microsoft.com/en-us/azure/bastion/tutorial-create-host-cli>
 
 ## 2. B (`LAB20-Q02`)
 
@@ -28,7 +28,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/bastion/configuration-settings
+Source: <https://learn.microsoft.com/en-us/azure/bastion/configuration-settings>
 
 ## 3. C (`LAB20-Q03`)
 
@@ -42,7 +42,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/dns/dns-getstarted-cli
+Source: <https://learn.microsoft.com/en-us/azure/dns/dns-getstarted-cli>
 
 ## 4. D (`LAB20-Q04`)
 
@@ -56,7 +56,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/dns/dns-domain-delegation
+Source: <https://learn.microsoft.com/en-us/azure/dns/dns-domain-delegation>
 
 ## 5. A (`LAB20-Q05`)
 
@@ -70,7 +70,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/bastion/tutorial-create-host-cli
+Source: <https://learn.microsoft.com/en-us/azure/bastion/tutorial-create-host-cli>
 
 ## 6. B (`LAB20-Q06`)
 
@@ -84,7 +84,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/bastion/configuration-settings
+Source: <https://learn.microsoft.com/en-us/azure/bastion/configuration-settings>
 
 ## 7. C (`LAB20-Q07`)
 
@@ -98,7 +98,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/dns/dns-getstarted-cli
+Source: <https://learn.microsoft.com/en-us/azure/dns/dns-getstarted-cli>
 
 ## 8. D (`LAB20-Q08`)
 
@@ -112,7 +112,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/dns/dns-domain-delegation
+Source: <https://learn.microsoft.com/en-us/azure/dns/dns-domain-delegation>
 
 ## 9. A (`LAB20-Q09`)
 
@@ -126,7 +126,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/bastion/tutorial-create-host-cli
+Source: <https://learn.microsoft.com/en-us/azure/bastion/tutorial-create-host-cli>
 
 ## 10. B (`LAB20-Q10`)
 
@@ -140,4 +140,4 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/bastion/configuration-settings
+Source: <https://learn.microsoft.com/en-us/azure/bastion/configuration-settings>

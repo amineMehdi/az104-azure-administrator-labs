@@ -14,7 +14,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/storage/common/storage-network-security
+Source: <https://learn.microsoft.com/en-us/azure/storage/common/storage-network-security>
 
 ## 2. B (`LAB07-Q02`)
 
@@ -28,7 +28,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/storage/common/storage-sas-overview
+Source: <https://learn.microsoft.com/en-us/azure/storage/common/storage-sas-overview>
 
 ## 3. C (`LAB07-Q03`)
 
@@ -42,7 +42,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/rest/api/storageservices/define-stored-access-policy
+Source: <https://learn.microsoft.com/en-us/rest/api/storageservices/define-stored-access-policy>
 
 ## 4. D (`LAB07-Q04`)
 
@@ -56,7 +56,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/powershell/module/az.storage/
+Source: <https://learn.microsoft.com/en-us/powershell/module/az.storage/>
 
 ## 5. A (`LAB07-Q05`)
 
@@ -70,7 +70,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/storage/common/storage-network-security
+Source: <https://learn.microsoft.com/en-us/azure/storage/common/storage-network-security>
 
 ## 6. B (`LAB07-Q06`)
 
@@ -84,7 +84,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/storage/common/storage-sas-overview
+Source: <https://learn.microsoft.com/en-us/azure/storage/common/storage-sas-overview>
 
 ## 7. C (`LAB07-Q07`)
 
@@ -98,7 +98,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/rest/api/storageservices/define-stored-access-policy
+Source: <https://learn.microsoft.com/en-us/rest/api/storageservices/define-stored-access-policy>
 
 ## 8. D (`LAB07-Q08`)
 
@@ -112,7 +112,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/powershell/module/az.storage/
+Source: <https://learn.microsoft.com/en-us/powershell/module/az.storage/>
 
 ## 9. A (`LAB07-Q09`)
 
@@ -126,7 +126,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/storage/common/storage-network-security
+Source: <https://learn.microsoft.com/en-us/azure/storage/common/storage-network-security>
 
 ## 10. B (`LAB07-Q10`)
 
@@ -140,4 +140,4 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/storage/common/storage-sas-overview
+Source: <https://learn.microsoft.com/en-us/azure/storage/common/storage-sas-overview>

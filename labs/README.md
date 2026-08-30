@@ -8,6 +8,7 @@ Each completed lab includes:
 - one complete Azure CLI or PowerShell lane
 - read-only validation and scoped cleanup
 - architecture diagram and command-evidence guidance
+- a portal screenshot manifest under `images/portal/` with 2–5 planned captures
 - ten questions in `assessment/QUESTIONS.md`
 - explanations in `assessment/ANSWERS.md`
 

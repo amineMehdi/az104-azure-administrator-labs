@@ -94,7 +94,50 @@ The script records its run before creating resources. If a cloud operation fails
 
 ### 3. Complete and reason through the checkpoints
 
-### Checkpoint 1: Create an action group with a test email receiver only when AZ104_ALERT_EMAIL is suppliedCreate an action group with a test email receiver only when AZ104_ALERT_EMAIL is supplied.Evidence to retain:- The command output or exact resource/object ID for checkpoint 1.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.### Checkpoint 2: Create a metric alert with explicit scope, aggregation, threshold, frequency, and windowCreate a metric alert with explicit scope, aggregation, threshold, frequency, and window.Evidence to retain:- The command output or exact resource/object ID for checkpoint 2.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.### Checkpoint 3: Create an activity-log alert for a resource operation and inspect the common alert schemaCreate an activity-log alert for a resource operation and inspect the common alert schema.Evidence to retain:- The command output or exact resource/object ID for checkpoint 3.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.### Checkpoint 4: Create a time-bounded alert processing rule and prove it suppresses actions rather than alert evaluationCreate a time-bounded alert processing rule and prove it suppresses actions rather than alert evaluation.Evidence to retain:- The command output or exact resource/object ID for checkpoint 4.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.
+### Checkpoint 1: Create an action group with a test email receiver only when AZ104_ALERT_EMAIL is supplied
+
+Create an action group with a test email receiver only when AZ104_ALERT_EMAIL is supplied.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 1.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
+### Checkpoint 2: Create a metric alert with explicit scope, aggregation, threshold, frequency, and window
+
+Create a metric alert with explicit scope, aggregation, threshold, frequency, and window.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 2.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
+### Checkpoint 3: Create an activity-log alert for a resource operation and inspect the common alert schema
+
+Create an activity-log alert for a resource operation and inspect the common alert schema.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 3.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
+### Checkpoint 4: Create a time-bounded alert processing rule and prove it suppresses actions rather than alert evaluation
+
+Create a time-bounded alert processing rule and prove it suppresses actions rather than alert evaluation.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 4.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
 ### 4. Validate independently
 
 ```sh
@@ -104,6 +147,17 @@ The script records its run before creating resources. If a cloud operation fails
 Inspect `.state/az104l23-01/validation.json`. A `pass` applies only to checks that could be executed. A gated or asynchronous path must remain `warning` or `skipped` until its evidence exists.
 
 Positive checks should prove the intended resources, configuration, relationships, or health. Negative checks should prove that anonymous access, excess scope, accidental inheritance, unresolved DNS, unhealthy probes, or unrecorded resources were not introduced where the scenario forbids them.
+
+## Portal evidence
+
+Portal screenshots are planned evidence captured only during an authorized live run. Until then every entry in [images/portal/manifest.yml](images/portal/manifest.yml) stays `pending`, and no placeholder image is committed. Capture and sanitization rules live in [images/README.md](images/README.md).
+
+| Planned file | Checkpoint | Portal blade | Evidence |
+|---|---:|---|---|
+| `01-alerts-alert-rules.png` | 3 | Monitor > Alerts > Alert rules | Metric and activity-log conditions and scopes |
+| `02-alerts-action-groups.png` | 1 | Monitor > Alerts > Action groups | Receivers and common alert schema |
+| `03-alerts-alert-processing-rules.png` | 4 | Monitor > Alerts > Alert processing rules | Schedule, filters, and action behavior |
+| `04-monitor-alerts.png` | 4 | Monitor > Alerts | A test or historical alert lifecycle when available |
 
 ## Break/fix exercise
 

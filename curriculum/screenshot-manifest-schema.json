@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/az104/screenshot-manifest-schema.json",
+  "title": "AZ-104 lab portal screenshot manifest",
+  "description": "Per-lab manifest for sanitized Azure Portal evidence. Files exist on disk only once a capture reaches sanitized or verified status; raw captures never enter the repository.",
+  "type": "object",
+  "required": ["schemaVersion", "labId", "status", "source", "captures"],
+  "properties": {
+    "schemaVersion": { "const": "1.0" },
+    "labId": { "type": "string", "pattern": "^LAB-[0-9]{2}$" },
+    "status": { "enum": ["pending", "captured", "sanitized", "verified"] },
+    "source": {
+      "type": "string",
+      "description": "Statement that captures come from a signed-in session of the real Azure Portal.",
+      "minLength": 10
+    },
+    "captures": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "required": [
+          "file",
+          "checkpoint",
+          "portalBlade",
+          "evidenceShown",
+          "captureDate",
+          "region",
+          "redactions",
+          "portalConfirmed",
+          "status"
+        ],
+        "properties": {
+          "file": { "type": "string", "pattern": "^[0-9]{2}-[a-z0-9]+(?:-[a-z0-9]+)*\\.png$" },
+          "checkpoint": { "type": "integer", "minimum": 1, "maximum": 8 },
+          "portalBlade": { "type": "string", "minLength": 5 },
+          "evidenceShown": { "type": "string", "minLength": 10 },
+          "captureDate": { "type": ["string", "null"], "format": "date" },
+          "region": {
+            "type": ["string", "null"],
+            "description": "Region shown in the capture, or not-applicable for tenant-plane blades."
+          },
+          "redactions": {
+            "type": "array",
+            "items": { "type": "string", "minLength": 3 }
+          },
+          "portalConfirmed": {
+            "type": "boolean",
+            "description": "True only when the image came from the real signed-in Azure Portal."
+          },
+          "status": { "enum": ["pending", "captured", "sanitized", "verified"] }
+        },
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "if": { "properties": { "status": { "enum": ["captured", "sanitized", "verified"] } } },
+            "then": {
+              "properties": {
+                "captureDate": { "type": "string", "format": "date" },
+                "region": { "type": "string", "minLength": 2 },
+                "portalConfirmed": { "const": true }
+              }
+            }
+          },
+          {
+            "if": { "properties": { "status": { "const": "pending" } } },
+            "then": {
+              "properties": {
+                "captureDate": { "type": "null" },
+                "portalConfirmed": { "const": false }
+              }
+            }
+          },
+          {
+            "if": { "properties": { "status": { "enum": ["sanitized", "verified"] } } },
+            "then": {
+              "properties": {
+                "redactions": { "minItems": 1 }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "additionalProperties": false
+}

@@ -14,7 +14,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/container-apps/get-started
+Source: <https://learn.microsoft.com/en-us/azure/container-apps/get-started>
 
 ## 2. B (`LAB14-Q02`)
 
@@ -28,7 +28,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/container-apps/revisions
+Source: <https://learn.microsoft.com/en-us/azure/container-apps/revisions>
 
 ## 3. C (`LAB14-Q03`)
 
@@ -42,7 +42,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/container-apps/scale-app
+Source: <https://learn.microsoft.com/en-us/azure/container-apps/scale-app>
 
 ## 4. D (`LAB14-Q04`)
 
@@ -56,7 +56,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/container-apps/ingress-overview
+Source: <https://learn.microsoft.com/en-us/azure/container-apps/ingress-overview>
 
 ## 5. A (`LAB14-Q05`)
 
@@ -70,7 +70,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/container-apps/get-started
+Source: <https://learn.microsoft.com/en-us/azure/container-apps/get-started>
 
 ## 6. B (`LAB14-Q06`)
 
@@ -84,7 +84,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/container-apps/revisions
+Source: <https://learn.microsoft.com/en-us/azure/container-apps/revisions>
 
 ## 7. C (`LAB14-Q07`)
 
@@ -98,7 +98,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/container-apps/scale-app
+Source: <https://learn.microsoft.com/en-us/azure/container-apps/scale-app>
 
 ## 8. D (`LAB14-Q08`)
 
@@ -112,7 +112,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/container-apps/ingress-overview
+Source: <https://learn.microsoft.com/en-us/azure/container-apps/ingress-overview>
 
 ## 9. A (`LAB14-Q09`)
 
@@ -126,7 +126,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/container-apps/get-started
+Source: <https://learn.microsoft.com/en-us/azure/container-apps/get-started>
 
 ## 10. B (`LAB14-Q10`)
 
@@ -140,4 +140,4 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/container-apps/revisions
+Source: <https://learn.microsoft.com/en-us/azure/container-apps/revisions>

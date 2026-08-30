@@ -14,7 +14,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/governance/policy/assign-policy-powershell
+Source: <https://learn.microsoft.com/en-us/azure/governance/policy/assign-policy-powershell>
 
 ## 2. B (`LAB05-Q02`)
 
@@ -28,7 +28,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-acm-create-budgets
+Source: <https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-acm-create-budgets>
 
 ## 3. C (`LAB05-Q03`)
 
@@ -42,7 +42,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/advisor/advisor-cost-recommendations
+Source: <https://learn.microsoft.com/en-us/azure/advisor/advisor-cost-recommendations>
 
 ## 4. D (`LAB05-Q04`)
 
@@ -56,7 +56,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/governance/policy/assign-policy-powershell
+Source: <https://learn.microsoft.com/en-us/azure/governance/policy/assign-policy-powershell>
 
 ## 5. A (`LAB05-Q05`)
 
@@ -70,7 +70,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-acm-create-budgets
+Source: <https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-acm-create-budgets>
 
 ## 6. B (`LAB05-Q06`)
 
@@ -84,7 +84,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/advisor/advisor-cost-recommendations
+Source: <https://learn.microsoft.com/en-us/azure/advisor/advisor-cost-recommendations>
 
 ## 7. C (`LAB05-Q07`)
 
@@ -98,7 +98,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/governance/policy/assign-policy-powershell
+Source: <https://learn.microsoft.com/en-us/azure/governance/policy/assign-policy-powershell>
 
 ## 8. D (`LAB05-Q08`)
 
@@ -112,7 +112,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-acm-create-budgets
+Source: <https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-acm-create-budgets>
 
 ## 9. A (`LAB05-Q09`)
 
@@ -126,7 +126,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/advisor/advisor-cost-recommendations
+Source: <https://learn.microsoft.com/en-us/azure/advisor/advisor-cost-recommendations>
 
 ## 10. B (`LAB05-Q10`)
 
@@ -140,4 +140,4 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/governance/policy/assign-policy-powershell
+Source: <https://learn.microsoft.com/en-us/azure/governance/policy/assign-policy-powershell>

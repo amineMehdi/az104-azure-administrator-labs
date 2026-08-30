@@ -96,7 +96,50 @@ The script records its run before creating resources. If a cloud operation fails
 
 ### 3. Complete and reason through the checkpoints
 
-### Checkpoint 1: Build and lint the supplied Bicep file and inspect its generated ARM JSONBuild and lint the supplied Bicep file and inspect its generated ARM JSON.Evidence to retain:- The command output or exact resource/object ID for checkpoint 1.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.### Checkpoint 2: Modify parameter values and run a resource-group what-if before deploymentModify parameter values and run a resource-group what-if before deployment.Evidence to retain:- The command output or exact resource/object ID for checkpoint 2.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.### Checkpoint 3: Deploy through Azure CLI and inspect deployment operations and outputsDeploy through Azure CLI and inspect deployment operations and outputs.Evidence to retain:- The command output or exact resource/object ID for checkpoint 3.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.### Checkpoint 4: Export the resource group template and decompile a reviewed ARM template into a separate comparison fileExport the resource group template and decompile a reviewed ARM template into a separate comparison file.Evidence to retain:- The command output or exact resource/object ID for checkpoint 4.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.
+### Checkpoint 1: Build and lint the supplied Bicep file and inspect its generated ARM JSON
+
+Build and lint the supplied Bicep file and inspect its generated ARM JSON.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 1.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
+### Checkpoint 2: Modify parameter values and run a resource-group what-if before deployment
+
+Modify parameter values and run a resource-group what-if before deployment.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 2.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
+### Checkpoint 3: Deploy through Azure CLI and inspect deployment operations and outputs
+
+Deploy through Azure CLI and inspect deployment operations and outputs.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 3.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
+### Checkpoint 4: Export the resource group template and decompile a reviewed ARM template into a separate comparison file
+
+Export the resource group template and decompile a reviewed ARM template into a separate comparison file.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 4.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
 ### 4. Validate independently
 
 ```sh
@@ -106,6 +149,16 @@ The script records its run before creating resources. If a cloud operation fails
 Inspect `.state/az104l10-01/validation.json`. A `pass` applies only to checks that could be executed. A gated or asynchronous path must remain `warning` or `skipped` until its evidence exists.
 
 Positive checks should prove the intended resources, configuration, relationships, or health. Negative checks should prove that anonymous access, excess scope, accidental inheritance, unresolved DNS, unhealthy probes, or unrecorded resources were not introduced where the scenario forbids them.
+
+## Portal evidence
+
+Portal screenshots are planned evidence captured only during an authorized live run. Until then every entry in [images/portal/manifest.yml](images/portal/manifest.yml) stays `pending`, and no placeholder image is committed. Capture and sanitization rules live in [images/README.md](images/README.md).
+
+| Planned file | Checkpoint | Portal blade | Evidence |
+|---|---:|---|---|
+| `01-resource-group-deployments.png` | 3 | Resource group > Deployments | Deployment inputs, outputs, and operations |
+| `02-resource-group-export-template.png` | 4 | Resource group > Export template | The generated ARM representation and limitations |
+| `03-storage-account-overview.png` | 3 | Storage account > Overview | The resource produced from Bicep |
 
 ## Break/fix exercise
 

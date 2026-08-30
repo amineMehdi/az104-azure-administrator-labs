@@ -14,7 +14,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/storage/blobs/lifecycle-management-overview
+Source: <https://learn.microsoft.com/en-us/azure/storage/blobs/lifecycle-management-overview>
 
 ## 2. B (`LAB08-Q02`)
 
@@ -28,7 +28,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/storage/blobs/versioning-overview
+Source: <https://learn.microsoft.com/en-us/azure/storage/blobs/versioning-overview>
 
 ## 3. C (`LAB08-Q03`)
 
@@ -42,7 +42,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/storage/blobs/soft-delete-blob-overview
+Source: <https://learn.microsoft.com/en-us/azure/storage/blobs/soft-delete-blob-overview>
 
 ## 4. D (`LAB08-Q04`)
 
@@ -56,7 +56,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/storage/blobs/object-replication-overview
+Source: <https://learn.microsoft.com/en-us/azure/storage/blobs/object-replication-overview>
 
 ## 5. A (`LAB08-Q05`)
 
@@ -70,7 +70,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-v10
+Source: <https://learn.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-v10>
 
 ## 6. B (`LAB08-Q06`)
 
@@ -84,7 +84,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/storage/blobs/lifecycle-management-overview
+Source: <https://learn.microsoft.com/en-us/azure/storage/blobs/lifecycle-management-overview>
 
 ## 7. C (`LAB08-Q07`)
 
@@ -98,7 +98,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/storage/blobs/versioning-overview
+Source: <https://learn.microsoft.com/en-us/azure/storage/blobs/versioning-overview>
 
 ## 8. D (`LAB08-Q08`)
 
@@ -112,7 +112,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/storage/blobs/soft-delete-blob-overview
+Source: <https://learn.microsoft.com/en-us/azure/storage/blobs/soft-delete-blob-overview>
 
 ## 9. A (`LAB08-Q09`)
 
@@ -126,7 +126,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/storage/blobs/object-replication-overview
+Source: <https://learn.microsoft.com/en-us/azure/storage/blobs/object-replication-overview>
 
 ## 10. B (`LAB08-Q10`)
 
@@ -140,4 +140,4 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-v10
+Source: <https://learn.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-v10>

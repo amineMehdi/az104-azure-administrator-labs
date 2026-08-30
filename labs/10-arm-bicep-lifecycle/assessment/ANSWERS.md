@@ -14,7 +14,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/overview
+Source: <https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/overview>
 
 ## 2. B (`LAB10-Q02`)
 
@@ -28,7 +28,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/deploy-cli
+Source: <https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/deploy-cli>
 
 ## 3. C (`LAB10-Q03`)
 
@@ -42,7 +42,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/decompile
+Source: <https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/decompile>
 
 ## 4. D (`LAB10-Q04`)
 
@@ -56,7 +56,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/export-template-portal
+Source: <https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/export-template-portal>
 
 ## 5. A (`LAB10-Q05`)
 
@@ -70,7 +70,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/overview
+Source: <https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/overview>
 
 ## 6. B (`LAB10-Q06`)
 
@@ -84,7 +84,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/deploy-cli
+Source: <https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/deploy-cli>
 
 ## 7. C (`LAB10-Q07`)
 
@@ -98,7 +98,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/decompile
+Source: <https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/decompile>
 
 ## 8. D (`LAB10-Q08`)
 
@@ -112,7 +112,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/export-template-portal
+Source: <https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/export-template-portal>
 
 ## 9. A (`LAB10-Q09`)
 
@@ -126,7 +126,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/overview
+Source: <https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/overview>
 
 ## 10. B (`LAB10-Q10`)
 
@@ -140,4 +140,4 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/deploy-cli
+Source: <https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/deploy-cli>

@@ -96,7 +96,50 @@ The script records its run before creating resources. If a cloud operation fails
 
 ### 3. Complete and reason through the checkpoints
 
-### Checkpoint 1: Create a Linux App Service plan and web app with deterministic namesCreate a Linux App Service plan and web app with deterministic names.Evidence to retain:- The command output or exact resource/object ID for checkpoint 1.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.### Checkpoint 2: Scale the plan manually and configure bounded CPU-based autoscale where the SKU supports itScale the plan manually and configure bounded CPU-based autoscale where the SKU supports it.Evidence to retain:- The command output or exact resource/object ID for checkpoint 2.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.### Checkpoint 3: Create a staging slot and mark an application setting as a deployment-slot settingCreate a staging slot and mark an application setting as a deployment-slot setting.Evidence to retain:- The command output or exact resource/object ID for checkpoint 3.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.### Checkpoint 4: Warm and swap staging into production, then verify which settings followed content and which remained stickyWarm and swap staging into production, then verify which settings followed content and which remained sticky.Evidence to retain:- The command output or exact resource/object ID for checkpoint 4.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.
+### Checkpoint 1: Create a Linux App Service plan and web app with deterministic names
+
+Create a Linux App Service plan and web app with deterministic names.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 1.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
+### Checkpoint 2: Scale the plan manually and configure bounded CPU-based autoscale where the SKU supports it
+
+Scale the plan manually and configure bounded CPU-based autoscale where the SKU supports it.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 2.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
+### Checkpoint 3: Create a staging slot and mark an application setting as a deployment-slot setting
+
+Create a staging slot and mark an application setting as a deployment-slot setting.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 3.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
+### Checkpoint 4: Warm and swap staging into production, then verify which settings followed content and which remained sticky
+
+Warm and swap staging into production, then verify which settings followed content and which remained sticky.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 4.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
 ### 4. Validate independently
 
 ```ps1
@@ -106,6 +149,17 @@ pwsh ./scripts/powershell/Validate.ps1 -RunId az104l15-01 -SubscriptionId <subsc
 Inspect `.state/az104l15-01/validation.json`. A `pass` applies only to checks that could be executed. A gated or asynchronous path must remain `warning` or `skipped` until its evidence exists.
 
 Positive checks should prove the intended resources, configuration, relationships, or health. Negative checks should prove that anonymous access, excess scope, accidental inheritance, unresolved DNS, unhealthy probes, or unrecorded resources were not introduced where the scenario forbids them.
+
+## Portal evidence
+
+Portal screenshots are planned evidence captured only during an authorized live run. Until then every entry in [images/portal/manifest.yml](images/portal/manifest.yml) stays `pending`, and no placeholder image is committed. Capture and sanitization rules live in [images/README.md](images/README.md).
+
+| Planned file | Checkpoint | Portal blade | Evidence |
+|---|---:|---|---|
+| `01-app-service-plan-scale-out.png` | 2 | App Service plan > Scale out | Manual capacity and autoscale configuration |
+| `02-app-service-deployment-slots.png` | 3 | App Service > Deployment slots | Production and staging slots |
+| `03-deployment-slot-configuration.png` | 3 | Deployment slot > Configuration | Slot-specific application settings |
+| `04-app-service-activity-log.png` | 4 | App Service > Activity log | Slot swap operation and result |
 
 ## Break/fix exercise
 

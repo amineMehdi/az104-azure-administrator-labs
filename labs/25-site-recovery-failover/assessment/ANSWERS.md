@@ -14,7 +14,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-powershell
+Source: <https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-powershell>
 
 ## 2. B (`LAB25-Q02`)
 
@@ -28,7 +28,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-dr-drill
+Source: <https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-dr-drill>
 
 ## 3. C (`LAB25-Q03`)
 
@@ -42,7 +42,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-failover-failback
+Source: <https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-failover-failback>
 
 ## 4. D (`LAB25-Q04`)
 
@@ -56,7 +56,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/site-recovery/site-recovery-manage-registration-and-protection
+Source: <https://learn.microsoft.com/en-us/azure/site-recovery/site-recovery-manage-registration-and-protection>
 
 ## 5. A (`LAB25-Q05`)
 
@@ -70,7 +70,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-powershell
+Source: <https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-powershell>
 
 ## 6. B (`LAB25-Q06`)
 
@@ -84,7 +84,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-dr-drill
+Source: <https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-dr-drill>
 
 ## 7. C (`LAB25-Q07`)
 
@@ -98,7 +98,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-failover-failback
+Source: <https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-failover-failback>
 
 ## 8. D (`LAB25-Q08`)
 
@@ -112,7 +112,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/site-recovery/site-recovery-manage-registration-and-protection
+Source: <https://learn.microsoft.com/en-us/azure/site-recovery/site-recovery-manage-registration-and-protection>
 
 ## 9. A (`LAB25-Q09`)
 
@@ -126,7 +126,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-powershell
+Source: <https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-powershell>
 
 ## 10. B (`LAB25-Q10`)
 
@@ -140,4 +140,4 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-dr-drill
+Source: <https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-dr-drill>

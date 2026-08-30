@@ -1,0 +1,42 @@
+schemaVersion: '1.0'
+labId: LAB-11
+status: pending
+source: Every capture must come from a signed-in session of the real Azure Portal (https://portal.azure.com) against
+  the disposable lab environment; fabricated or placeholder images are forbidden.
+captures:
+- file: 01-virtual-machine-overview.png
+  checkpoint: 1
+  portalBlade: Virtual machine > Overview
+  evidenceShown: VM size, power state, and availability metadata
+  captureDate: null
+  region: null
+  redactions: []
+  portalConfirmed: false
+  status: pending
+- file: 02-virtual-machine-disks.png
+  checkpoint: 3
+  portalBlade: Virtual machine > Disks
+  evidenceShown: OS/data disk attachment and caching
+  captureDate: null
+  region: null
+  redactions: []
+  portalConfirmed: false
+  status: pending
+- file: 03-virtual-machine-configuration.png
+  checkpoint: 2
+  portalBlade: Virtual machine > Configuration
+  evidenceShown: Encryption at host state when supported
+  captureDate: null
+  region: null
+  redactions: []
+  portalConfirmed: false
+  status: pending
+- file: 04-virtual-machine-size.png
+  checkpoint: 4
+  portalBlade: Virtual machine > Size
+  evidenceShown: Available resize choices and current SKU
+  captureDate: null
+  region: null
+  redactions: []
+  portalConfirmed: false
+  status: pending

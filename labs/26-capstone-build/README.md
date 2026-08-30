@@ -113,7 +113,50 @@ The script records its run before creating resources. If a cloud operation fails
 
 ### 3. Complete and reason through the checkpoints
 
-### Checkpoint 1: Run Bicep build and what-if, then deploy the governed resource group and deterministic tagsRun Bicep build and what-if, then deploy the governed resource group and deterministic tags.Evidence to retain:- The command output or exact resource/object ID for checkpoint 1.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.### Checkpoint 2: Create segmented networking, NSG/ASG controls, resilient compute, load balancing, and a private storage endpointCreate segmented networking, NSG/ASG controls, resilient compute, load balancing, and a private storage endpoint.Evidence to retain:- The command output or exact resource/object ID for checkpoint 2.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.### Checkpoint 3: Apply the least-privileged recorded RBAC assignment and a scoped governance policyApply the least-privileged recorded RBAC assignment and a scoped governance policy.Evidence to retain:- The command output or exact resource/object ID for checkpoint 3.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.### Checkpoint 4: Enable diagnostic settings, queries, alerts, and an operator dashboard before running end-to-end validation and cleanupEnable diagnostic settings, queries, alerts, and an operator dashboard before running end-to-end validation and cleanup.Evidence to retain:- The command output or exact resource/object ID for checkpoint 4.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.
+### Checkpoint 1: Run Bicep build and what-if, then deploy the governed resource group and deterministic tags
+
+Run Bicep build and what-if, then deploy the governed resource group and deterministic tags.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 1.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
+### Checkpoint 2: Create segmented networking, NSG/ASG controls, resilient compute, load balancing, and a private storage endpoint
+
+Create segmented networking, NSG/ASG controls, resilient compute, load balancing, and a private storage endpoint.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 2.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
+### Checkpoint 3: Apply the least-privileged recorded RBAC assignment and a scoped governance policy
+
+Apply the least-privileged recorded RBAC assignment and a scoped governance policy.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 3.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
+### Checkpoint 4: Enable diagnostic settings, queries, alerts, and an operator dashboard before running end-to-end validation and cleanup
+
+Enable diagnostic settings, queries, alerts, and an operator dashboard before running end-to-end validation and cleanup.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 4.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
 ### 4. Validate independently
 
 ```sh
@@ -123,6 +166,17 @@ The script records its run before creating resources. If a cloud operation fails
 Inspect `.state/az104l26-01/validation.json`. A `pass` applies only to checks that could be executed. A gated or asynchronous path must remain `warning` or `skipped` until its evidence exists.
 
 Positive checks should prove the intended resources, configuration, relationships, or health. Negative checks should prove that anonymous access, excess scope, accidental inheritance, unresolved DNS, unhealthy probes, or unrecorded resources were not introduced where the scenario forbids them.
+
+## Portal evidence
+
+Portal screenshots are planned evidence captured only during an authorized live run. Until then every entry in [images/portal/manifest.yml](images/portal/manifest.yml) stays `pending`, and no placeholder image is committed. Capture and sanitization rules live in [images/README.md](images/README.md).
+
+| Planned file | Checkpoint | Portal blade | Evidence |
+|---|---:|---|---|
+| `01-resource-group-overview.png` | 1 | Resource group > Overview | Complete tagged deployment inventory |
+| `02-network-topology.png` | 2 | Network topology | Subnets, NSGs, private endpoint, and load balancer |
+| `03-resource-group-access-control-and-policies.png` | 3 | Resource group > Access control and Policies | Scoped RBAC and policy evidence |
+| `04-monitor-logs-and-alerts.png` | 4 | Monitor > Logs and Alerts | Diagnostics, query results, and alert rules |
 
 ## Break/fix exercise
 

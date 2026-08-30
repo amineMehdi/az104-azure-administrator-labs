@@ -97,7 +97,50 @@ The script records its run before creating resources. If a cloud operation fails
 
 ### 3. Complete and reason through the checkpoints
 
-### Checkpoint 1: Create frontend and backend ASGs and associate test NIC configurationsCreate frontend and backend ASGs and associate test NIC configurations.Evidence to retain:- The command output or exact resource/object ID for checkpoint 1.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.### Checkpoint 2: Create ordered NSG rules that allow only the intended application flow and preserve default deny behaviorCreate ordered NSG rules that allow only the intended application flow and preserve default deny behavior.Evidence to retain:- The command output or exact resource/object ID for checkpoint 2.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.### Checkpoint 3: Associate a route table containing a documented user-defined route with the application subnetAssociate a route table containing a documented user-defined route with the application subnet.Evidence to retain:- The command output or exact resource/object ID for checkpoint 3.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.### Checkpoint 4: Use effective NSG and route queries plus Network Watcher diagnostics to explain a blocked connectionUse effective NSG and route queries plus Network Watcher diagnostics to explain a blocked connection.Evidence to retain:- The command output or exact resource/object ID for checkpoint 4.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.
+### Checkpoint 1: Create frontend and backend ASGs and associate test NIC configurations
+
+Create frontend and backend ASGs and associate test NIC configurations.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 1.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
+### Checkpoint 2: Create ordered NSG rules that allow only the intended application flow and preserve default deny behavior
+
+Create ordered NSG rules that allow only the intended application flow and preserve default deny behavior.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 2.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
+### Checkpoint 3: Associate a route table containing a documented user-defined route with the application subnet
+
+Associate a route table containing a documented user-defined route with the application subnet.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 3.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
+### Checkpoint 4: Use effective NSG and route queries plus Network Watcher diagnostics to explain a blocked connection
+
+Use effective NSG and route queries plus Network Watcher diagnostics to explain a blocked connection.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 4.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
 ### 4. Validate independently
 
 ```sh
@@ -107,6 +150,17 @@ The script records its run before creating resources. If a cloud operation fails
 Inspect `.state/az104l18-01/validation.json`. A `pass` applies only to checks that could be executed. A gated or asynchronous path must remain `warning` or `skipped` until its evidence exists.
 
 Positive checks should prove the intended resources, configuration, relationships, or health. Negative checks should prove that anonymous access, excess scope, accidental inheritance, unresolved DNS, unhealthy probes, or unrecorded resources were not introduced where the scenario forbids them.
+
+## Portal evidence
+
+Portal screenshots are planned evidence captured only during an authorized live run. Until then every entry in [images/portal/manifest.yml](images/portal/manifest.yml) stays `pending`, and no placeholder image is committed. Capture and sanitization rules live in [images/README.md](images/README.md).
+
+| Planned file | Checkpoint | Portal blade | Evidence |
+|---|---:|---|---|
+| `01-network-security-group-security-rules.png` | 2 | Network security group > Security rules | Custom priorities, source ASG, destination ASG, and port |
+| `02-network-interface-effective-security-rules.png` | 4 | Network interface > Effective security rules | Combined subnet and NIC rule evaluation |
+| `03-network-interface-effective-routes.png` | 4 | Network interface > Effective routes | System and user-defined route selection |
+| `04-network-watcher-ip-flow-verify.png` | 4 | Network Watcher > IP flow verify | Allow or deny result and matching rule |
 
 ## Break/fix exercise
 

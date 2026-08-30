@@ -14,7 +14,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/action-groups
+Source: <https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/action-groups>
 
 ## 2. B (`LAB23-Q02`)
 
@@ -28,7 +28,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-create-metric-alert-rule
+Source: <https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-create-metric-alert-rule>
 
 ## 3. C (`LAB23-Q03`)
 
@@ -42,7 +42,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-activity-log
+Source: <https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-activity-log>
 
 ## 4. D (`LAB23-Q04`)
 
@@ -56,7 +56,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-processing-rules
+Source: <https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-processing-rules>
 
 ## 5. A (`LAB23-Q05`)
 
@@ -70,7 +70,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/action-groups
+Source: <https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/action-groups>
 
 ## 6. B (`LAB23-Q06`)
 
@@ -84,7 +84,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-create-metric-alert-rule
+Source: <https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-create-metric-alert-rule>
 
 ## 7. C (`LAB23-Q07`)
 
@@ -98,7 +98,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-activity-log
+Source: <https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-activity-log>
 
 ## 8. D (`LAB23-Q08`)
 
@@ -112,7 +112,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-processing-rules
+Source: <https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-processing-rules>
 
 ## 9. A (`LAB23-Q09`)
 
@@ -126,7 +126,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/action-groups
+Source: <https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/action-groups>
 
 ## 10. B (`LAB23-Q10`)
 
@@ -140,4 +140,4 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-create-metric-alert-rule
+Source: <https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-create-metric-alert-rule>

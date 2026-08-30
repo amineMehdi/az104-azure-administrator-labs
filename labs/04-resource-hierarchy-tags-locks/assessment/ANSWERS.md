@@ -14,7 +14,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-cli
+Source: <https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-cli>
 
 ## 2. B (`LAB04-Q02`)
 
@@ -28,7 +28,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources-cli
+Source: <https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources-cli>
 
 ## 3. C (`LAB04-Q03`)
 
@@ -42,7 +42,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources
+Source: <https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources>
 
 ## 4. D (`LAB04-Q04`)
 
@@ -56,7 +56,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/governance/management-groups/create-management-group-portal
+Source: <https://learn.microsoft.com/en-us/azure/governance/management-groups/create-management-group-portal>
 
 ## 5. A (`LAB04-Q05`)
 
@@ -70,7 +70,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-cli
+Source: <https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-cli>
 
 ## 6. B (`LAB04-Q06`)
 
@@ -84,7 +84,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources-cli
+Source: <https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources-cli>
 
 ## 7. C (`LAB04-Q07`)
 
@@ -98,7 +98,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources
+Source: <https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources>
 
 ## 8. D (`LAB04-Q08`)
 
@@ -112,7 +112,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/governance/management-groups/create-management-group-portal
+Source: <https://learn.microsoft.com/en-us/azure/governance/management-groups/create-management-group-portal>
 
 ## 9. A (`LAB04-Q09`)
 
@@ -126,7 +126,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-cli
+Source: <https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-cli>
 
 ## 10. B (`LAB04-Q10`)
 
@@ -140,4 +140,4 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources-cli
+Source: <https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources-cli>

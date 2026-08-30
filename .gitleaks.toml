@@ -1,0 +1,13 @@
+# Extends the built-in gitleaks ruleset; scans tracked content for committed secrets.
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Documented placeholders that are not credentials"
+regexes = [
+  '''<subscription-id>''',
+  '''00000000-0000-0000-0000-00000000000[0-9]''',
+]
+paths = [
+  '''tests/fixtures/validation\.sample\.json$''',
+]

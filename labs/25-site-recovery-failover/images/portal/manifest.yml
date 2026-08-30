@@ -1,0 +1,42 @@
+schemaVersion: '1.0'
+labId: LAB-25
+status: pending
+source: Every capture must come from a signed-in session of the real Azure Portal (https://portal.azure.com) against
+  the disposable lab environment; fabricated or placeholder images are forbidden.
+captures:
+- file: 01-recovery-services-vault-replicated-items.png
+  checkpoint: 3
+  portalBlade: Recovery Services vault > Replicated items
+  evidenceShown: Replication health, RPO, and recovery region
+  captureDate: null
+  region: null
+  redactions: []
+  portalConfirmed: false
+  status: pending
+- file: 02-replicated-item-compute-and-network.png
+  checkpoint: 3
+  portalBlade: Replicated item > Compute and Network
+  evidenceShown: Target VM, disk, VNet, subnet, and IP choices
+  captureDate: null
+  region: null
+  redactions: []
+  portalConfirmed: false
+  status: pending
+- file: 03-recovery-services-vault-site-recovery-jobs.png
+  checkpoint: 4
+  portalBlade: Recovery Services vault > Site Recovery jobs
+  evidenceShown: Test failover and cleanup job sequence
+  captureDate: null
+  region: null
+  redactions: []
+  portalConfirmed: false
+  status: pending
+- file: 04-resource-group-recovery-vm.png
+  checkpoint: 3
+  portalBlade: Resource group > Recovery VM
+  evidenceShown: Isolated test-failover VM before cleanup
+  captureDate: null
+  region: null
+  redactions: []
+  portalConfirmed: false
+  status: pending

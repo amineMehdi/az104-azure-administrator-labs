@@ -14,7 +14,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/entra/fundamentals/how-to-manage-user-profile-info
+Source: <https://learn.microsoft.com/en-us/entra/fundamentals/how-to-manage-user-profile-info>
 
 ## 2. B (`LAB02-Q02`)
 
@@ -28,7 +28,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/entra/external-id/b2b-quickstart-invite-powershell
+Source: <https://learn.microsoft.com/en-us/entra/external-id/b2b-quickstart-invite-powershell>
 
 ## 3. C (`LAB02-Q03`)
 
@@ -42,7 +42,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/entra/identity/users/licensing-powershell-graph-examples
+Source: <https://learn.microsoft.com/en-us/entra/identity/users/licensing-powershell-graph-examples>
 
 ## 4. D (`LAB02-Q04`)
 
@@ -56,7 +56,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/entra/identity/authentication/tutorial-enable-sspr
+Source: <https://learn.microsoft.com/en-us/entra/identity/authentication/tutorial-enable-sspr>
 
 ## 5. A (`LAB02-Q05`)
 
@@ -70,7 +70,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/entra/fundamentals/how-to-manage-user-profile-info
+Source: <https://learn.microsoft.com/en-us/entra/fundamentals/how-to-manage-user-profile-info>
 
 ## 6. B (`LAB02-Q06`)
 
@@ -84,7 +84,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/entra/external-id/b2b-quickstart-invite-powershell
+Source: <https://learn.microsoft.com/en-us/entra/external-id/b2b-quickstart-invite-powershell>
 
 ## 7. C (`LAB02-Q07`)
 
@@ -98,7 +98,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/entra/identity/users/licensing-powershell-graph-examples
+Source: <https://learn.microsoft.com/en-us/entra/identity/users/licensing-powershell-graph-examples>
 
 ## 8. D (`LAB02-Q08`)
 
@@ -112,7 +112,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/entra/identity/authentication/tutorial-enable-sspr
+Source: <https://learn.microsoft.com/en-us/entra/identity/authentication/tutorial-enable-sspr>
 
 ## 9. A (`LAB02-Q09`)
 
@@ -126,7 +126,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/entra/fundamentals/how-to-manage-user-profile-info
+Source: <https://learn.microsoft.com/en-us/entra/fundamentals/how-to-manage-user-profile-info>
 
 ## 10. B (`LAB02-Q10`)
 
@@ -140,4 +140,4 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/entra/external-id/b2b-quickstart-invite-powershell
+Source: <https://learn.microsoft.com/en-us/entra/external-id/b2b-quickstart-invite-powershell>

@@ -63,5 +63,8 @@ cleanup:
   reportOnlyByDefault: true
   requiresExecuteFlag: true
   softDeleteNote: User deletion is recoverable until deleted-item retention expires unless explicitly purged.
+screenshots:
+  status: pending
+  manifest: images/portal/manifest.yml
 lastOfflineValidated: "2026-08-30"
 lastLiveVerified: null

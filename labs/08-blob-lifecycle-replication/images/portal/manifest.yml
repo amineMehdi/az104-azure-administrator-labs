@@ -1,0 +1,42 @@
+schemaVersion: '1.0'
+labId: LAB-08
+status: pending
+source: Every capture must come from a signed-in session of the real Azure Portal (https://portal.azure.com) against
+  the disposable lab environment; fabricated or placeholder images are forbidden.
+captures:
+- file: 01-storage-account-data-protection.png
+  checkpoint: 2
+  portalBlade: Storage account > Data protection
+  evidenceShown: Versioning, change feed, and soft-delete settings
+  captureDate: null
+  region: null
+  redactions: []
+  portalConfirmed: false
+  status: pending
+- file: 02-storage-account-lifecycle-management.png
+  checkpoint: 3
+  portalBlade: Storage account > Lifecycle management
+  evidenceShown: The tiering and version cleanup rule
+  captureDate: null
+  region: null
+  redactions: []
+  portalConfirmed: false
+  status: pending
+- file: 03-storage-account-object-replication.png
+  checkpoint: 4
+  portalBlade: Storage account > Object replication
+  evidenceShown: Source and destination replication policy
+  captureDate: null
+  region: null
+  redactions: []
+  portalConfirmed: false
+  status: pending
+- file: 04-container-blobs.png
+  checkpoint: 4
+  portalBlade: Container > Blobs
+  evidenceShown: Sample blob versions and access tier
+  captureDate: null
+  region: null
+  redactions: []
+  portalConfirmed: false
+  status: pending

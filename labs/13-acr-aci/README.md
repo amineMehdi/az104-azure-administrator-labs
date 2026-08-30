@@ -93,7 +93,50 @@ The script records its run before creating resources. If a cloud operation fails
 
 ### 3. Complete and reason through the checkpoints
 
-### Checkpoint 1: Create a globally unique Basic ACR with the admin account disabledCreate a globally unique Basic ACR with the admin account disabled.Evidence to retain:- The command output or exact resource/object ID for checkpoint 1.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.### Checkpoint 2: Import a public Microsoft sample image and inspect repository and tag metadataImport a public Microsoft sample image and inspect repository and tag metadata.Evidence to retain:- The command output or exact resource/object ID for checkpoint 2.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.### Checkpoint 3: Create an ACI container group using a managed identity or time-bounded registry authentication pathCreate an ACI container group using a managed identity or time-bounded registry authentication path.Evidence to retain:- The command output or exact resource/object ID for checkpoint 3.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.### Checkpoint 4: Inspect CPU, memory, restart policy, events, logs, and current container stateInspect CPU, memory, restart policy, events, logs, and current container state.Evidence to retain:- The command output or exact resource/object ID for checkpoint 4.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.
+### Checkpoint 1: Create a globally unique Basic ACR with the admin account disabled
+
+Create a globally unique Basic ACR with the admin account disabled.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 1.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
+### Checkpoint 2: Import a public Microsoft sample image and inspect repository and tag metadata
+
+Import a public Microsoft sample image and inspect repository and tag metadata.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 2.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
+### Checkpoint 3: Create an ACI container group using a managed identity or time-bounded registry authentication path
+
+Create an ACI container group using a managed identity or time-bounded registry authentication path.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 3.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
+### Checkpoint 4: Inspect CPU, memory, restart policy, events, logs, and current container state
+
+Inspect CPU, memory, restart policy, events, logs, and current container state.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 4.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
 ### 4. Validate independently
 
 ```sh
@@ -103,6 +146,16 @@ The script records its run before creating resources. If a cloud operation fails
 Inspect `.state/az104l13-01/validation.json`. A `pass` applies only to checks that could be executed. A gated or asynchronous path must remain `warning` or `skipped` until its evidence exists.
 
 Positive checks should prove the intended resources, configuration, relationships, or health. Negative checks should prove that anonymous access, excess scope, accidental inheritance, unresolved DNS, unhealthy probes, or unrecorded resources were not introduced where the scenario forbids them.
+
+## Portal evidence
+
+Portal screenshots are planned evidence captured only during an authorized live run. Until then every entry in [images/portal/manifest.yml](images/portal/manifest.yml) stays `pending`, and no placeholder image is committed. Capture and sanitization rules live in [images/README.md](images/README.md).
+
+| Planned file | Checkpoint | Portal blade | Evidence |
+|---|---:|---|---|
+| `01-container-registry-repositories.png` | 2 | Container registry > Repositories | Imported repository, tag, and digest |
+| `02-container-instance-containers.png` | 3 | Container instance > Containers | Image, resources, restart policy, and status |
+| `03-container-instance-logs.png` | 4 | Container instance > Logs | Application output from the running sample |
 
 ## Break/fix exercise
 

@@ -14,7 +14,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/network-watcher/network-watcher-ip-flow-verify-overview
+Source: <https://learn.microsoft.com/en-us/azure/network-watcher/network-watcher-ip-flow-verify-overview>
 
 ## 2. B (`LAB27-Q02`)
 
@@ -28,7 +28,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/azure-monitor/logs/log-query-overview
+Source: <https://learn.microsoft.com/en-us/azure/azure-monitor/logs/log-query-overview>
 
 ## 3. C (`LAB27-Q03`)
 
@@ -42,7 +42,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-overview
+Source: <https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-overview>
 
 ## 4. D (`LAB27-Q04`)
 
@@ -56,7 +56,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/backup/backup-azure-vms-introduction
+Source: <https://learn.microsoft.com/en-us/azure/backup/backup-azure-vms-introduction>
 
 ## 5. A (`LAB27-Q05`)
 
@@ -70,7 +70,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/role-based-access-control/check-access
+Source: <https://learn.microsoft.com/en-us/azure/role-based-access-control/check-access>
 
 ## 6. B (`LAB27-Q06`)
 
@@ -84,7 +84,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/network-watcher/network-watcher-ip-flow-verify-overview
+Source: <https://learn.microsoft.com/en-us/azure/network-watcher/network-watcher-ip-flow-verify-overview>
 
 ## 7. C (`LAB27-Q07`)
 
@@ -98,7 +98,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/azure-monitor/logs/log-query-overview
+Source: <https://learn.microsoft.com/en-us/azure/azure-monitor/logs/log-query-overview>
 
 ## 8. D (`LAB27-Q08`)
 
@@ -112,7 +112,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-overview
+Source: <https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-overview>
 
 ## 9. A (`LAB27-Q09`)
 
@@ -126,7 +126,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/backup/backup-azure-vms-introduction
+Source: <https://learn.microsoft.com/en-us/azure/backup/backup-azure-vms-introduction>
 
 ## 10. B (`LAB27-Q10`)
 
@@ -140,4 +140,4 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/role-based-access-control/check-access
+Source: <https://learn.microsoft.com/en-us/azure/role-based-access-control/check-access>

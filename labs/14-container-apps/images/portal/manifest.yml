@@ -1,0 +1,42 @@
+schemaVersion: '1.0'
+labId: LAB-14
+status: pending
+source: Every capture must come from a signed-in session of the real Azure Portal (https://portal.azure.com) against
+  the disposable lab environment; fabricated or placeholder images are forbidden.
+captures:
+- file: 01-container-app-overview.png
+  checkpoint: 2
+  portalBlade: Container App > Overview
+  evidenceShown: Application URL, environment, and provisioning state
+  captureDate: null
+  region: null
+  redactions: []
+  portalConfirmed: false
+  status: pending
+- file: 02-container-app-revisions-and-replicas.png
+  checkpoint: 3
+  portalBlade: Container App > Revisions and replicas
+  evidenceShown: Active revisions, traffic, and replicas
+  captureDate: null
+  region: null
+  redactions: []
+  portalConfirmed: false
+  status: pending
+- file: 03-container-app-scale.png
+  checkpoint: 4
+  portalBlade: Container App > Scale
+  evidenceShown: Minimum, maximum, and HTTP scaling rule
+  captureDate: null
+  region: null
+  redactions: []
+  portalConfirmed: false
+  status: pending
+- file: 04-container-app-log-stream.png
+  checkpoint: 4
+  portalBlade: Container App > Log stream
+  evidenceShown: Runtime output from a selected replica
+  captureDate: null
+  region: null
+  redactions: []
+  portalConfirmed: false
+  status: pending

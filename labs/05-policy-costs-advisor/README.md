@@ -93,7 +93,50 @@ The script records its run before creating resources. If a cloud operation fails
 
 ### 3. Complete and reason through the checkpoints
 
-### Checkpoint 1: Create the tagged policy-test resource groupCreate the tagged policy-test resource group.Evidence to retain:- The command output or exact resource/object ID for checkpoint 1.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.### Checkpoint 2: Assign the built-in Require a tag and its value on resources policy at resource-group scopeAssign the built-in Require a tag and its value on resources policy at resource-group scope.Evidence to retain:- The command output or exact resource/object ID for checkpoint 2.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.### Checkpoint 3: Trigger and interpret a policy compliance scan without claiming immediate convergenceTrigger and interpret a policy compliance scan without claiming immediate convergence.Evidence to retain:- The command output or exact resource/object ID for checkpoint 3.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.### Checkpoint 4: Read Advisor cost recommendations and create an optional low-threshold budget with AZ104_BUDGET_EMAILRead Advisor cost recommendations and create an optional low-threshold budget with AZ104_BUDGET_EMAIL.Evidence to retain:- The command output or exact resource/object ID for checkpoint 4.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.
+### Checkpoint 1: Create the tagged policy-test resource group
+
+Create the tagged policy-test resource group.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 1.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
+### Checkpoint 2: Assign the built-in Require a tag and its value on resources policy at resource-group scope
+
+Assign the built-in Require a tag and its value on resources policy at resource-group scope.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 2.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
+### Checkpoint 3: Trigger and interpret a policy compliance scan without claiming immediate convergence
+
+Trigger and interpret a policy compliance scan without claiming immediate convergence.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 3.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
+### Checkpoint 4: Read Advisor cost recommendations and create an optional low-threshold budget with AZ104_BUDGET_EMAIL
+
+Read Advisor cost recommendations and create an optional low-threshold budget with AZ104_BUDGET_EMAIL.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 4.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
 ### 4. Validate independently
 
 ```ps1
@@ -103,6 +146,17 @@ pwsh ./scripts/powershell/Validate.ps1 -RunId az104l05-01 -SubscriptionId <subsc
 Inspect `.state/az104l05-01/validation.json`. A `pass` applies only to checks that could be executed. A gated or asynchronous path must remain `warning` or `skipped` until its evidence exists.
 
 Positive checks should prove the intended resources, configuration, relationships, or health. Negative checks should prove that anonymous access, excess scope, accidental inheritance, unresolved DNS, unhealthy probes, or unrecorded resources were not introduced where the scenario forbids them.
+
+## Portal evidence
+
+Portal screenshots are planned evidence captured only during an authorized live run. Until then every entry in [images/portal/manifest.yml](images/portal/manifest.yml) stays `pending`, and no placeholder image is committed. Capture and sanitization rules live in [images/README.md](images/README.md).
+
+| Planned file | Checkpoint | Portal blade | Evidence |
+|---|---:|---|---|
+| `01-resource-group-policies.png` | 2 | Resource group > Policies | The scoped policy assignment and parameter value |
+| `02-policy-compliance.png` | 3 | Policy > Compliance | The evaluated compliance state and timestamp |
+| `03-cost-management-budgets.png` | 4 | Cost Management > Budgets | The optional lab budget and notifications |
+| `04-advisor-cost.png` | 4 | Advisor > Cost | Current cost recommendations or an empty recommendation state |
 
 ## Break/fix exercise
 

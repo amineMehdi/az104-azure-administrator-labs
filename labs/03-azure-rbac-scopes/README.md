@@ -92,7 +92,50 @@ The script records its run before creating resources. If a cloud operation fails
 
 ### 3. Complete and reason through the checkpoints
 
-### Checkpoint 1: Create the dedicated tagged resource groupCreate the dedicated tagged resource group.Evidence to retain:- The command output or exact resource/object ID for checkpoint 1.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.### Checkpoint 2: Resolve Reader and Contributor built-in role definitions without creating custom rolesResolve Reader and Contributor built-in role definitions without creating custom roles.Evidence to retain:- The command output or exact resource/object ID for checkpoint 2.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.### Checkpoint 3: Assign Reader at resource-group scope to AZ104_PRINCIPAL_OBJECT_IDAssign Reader at resource-group scope to AZ104_PRINCIPAL_OBJECT_ID.Evidence to retain:- The command output or exact resource/object ID for checkpoint 3.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.### Checkpoint 4: Interpret the principal's direct and inherited access at resource-group and subscription scopesInterpret the principal's direct and inherited access at resource-group and subscription scopes.Evidence to retain:- The command output or exact resource/object ID for checkpoint 4.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.
+### Checkpoint 1: Create the dedicated tagged resource group
+
+Create the dedicated tagged resource group.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 1.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
+### Checkpoint 2: Resolve Reader and Contributor built-in role definitions without creating custom roles
+
+Resolve Reader and Contributor built-in role definitions without creating custom roles.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 2.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
+### Checkpoint 3: Assign Reader at resource-group scope to AZ104_PRINCIPAL_OBJECT_ID
+
+Assign Reader at resource-group scope to AZ104_PRINCIPAL_OBJECT_ID.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 3.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
+### Checkpoint 4: Interpret the principal's direct and inherited access at resource-group and subscription scopes
+
+Interpret the principal's direct and inherited access at resource-group and subscription scopes.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 4.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
 ### 4. Validate independently
 
 ```ps1
@@ -102,6 +145,16 @@ pwsh ./scripts/powershell/Validate.ps1 -RunId az104l03-01 -SubscriptionId <subsc
 Inspect `.state/az104l03-01/validation.json`. A `pass` applies only to checks that could be executed. A gated or asynchronous path must remain `warning` or `skipped` until its evidence exists.
 
 Positive checks should prove the intended resources, configuration, relationships, or health. Negative checks should prove that anonymous access, excess scope, accidental inheritance, unresolved DNS, unhealthy probes, or unrecorded resources were not introduced where the scenario forbids them.
+
+## Portal evidence
+
+Portal screenshots are planned evidence captured only during an authorized live run. Until then every entry in [images/portal/manifest.yml](images/portal/manifest.yml) stays `pending`, and no placeholder image is committed. Capture and sanitization rules live in [images/README.md](images/README.md).
+
+| Planned file | Checkpoint | Portal blade | Evidence |
+|---|---:|---|---|
+| `01-access-control-iam-role-assignments.png` | 3 | Resource group > Access control (IAM) > Role assignments | The direct Reader assignment and its scope |
+| `02-access-control-iam-check-access.png` | 4 | Resource group > Access control (IAM) > Check access | The principal's effective assignments |
+| `03-subscriptions-access-control-iam.png` | 4 | Subscriptions > Access control (IAM) | The contrast between subscription and resource-group scope |
 
 ## Break/fix exercise
 

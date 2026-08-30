@@ -1,0 +1,42 @@
+schemaVersion: '1.0'
+labId: LAB-15
+status: pending
+source: Every capture must come from a signed-in session of the real Azure Portal (https://portal.azure.com) against
+  the disposable lab environment; fabricated or placeholder images are forbidden.
+captures:
+- file: 01-app-service-plan-scale-out.png
+  checkpoint: 2
+  portalBlade: App Service plan > Scale out
+  evidenceShown: Manual capacity and autoscale configuration
+  captureDate: null
+  region: null
+  redactions: []
+  portalConfirmed: false
+  status: pending
+- file: 02-app-service-deployment-slots.png
+  checkpoint: 3
+  portalBlade: App Service > Deployment slots
+  evidenceShown: Production and staging slots
+  captureDate: null
+  region: null
+  redactions: []
+  portalConfirmed: false
+  status: pending
+- file: 03-deployment-slot-configuration.png
+  checkpoint: 3
+  portalBlade: Deployment slot > Configuration
+  evidenceShown: Slot-specific application settings
+  captureDate: null
+  region: null
+  redactions: []
+  portalConfirmed: false
+  status: pending
+- file: 04-app-service-activity-log.png
+  checkpoint: 4
+  portalBlade: App Service > Activity log
+  evidenceShown: Slot swap operation and result
+  captureDate: null
+  region: null
+  redactions: []
+  portalConfirmed: false
+  status: pending

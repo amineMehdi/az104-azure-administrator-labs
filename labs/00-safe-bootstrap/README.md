@@ -286,6 +286,16 @@ Az PowerShell:
   -SecondaryLocation westeurope
 ```
 
+## Portal evidence
+
+Portal screenshots are planned evidence captured only during an authorized live run. Until then every entry in [images/portal/manifest.yml](images/portal/manifest.yml) stays `pending`, and no placeholder image is committed. Capture and sanitization rules live in [images/README.md](images/README.md).
+
+| Planned file | Checkpoint | Portal blade | Evidence |
+|---|---:|---|---|
+| `01-subscriptions-overview.png` | 1 | Subscriptions | The disposable lab subscription, its state, and the signed-in tenant context |
+| `02-resource-providers.png` | 3 | Subscription > Settings > Resource providers | Registration state for the providers that preflight reports |
+| `03-usage-quotas.png` | 4 | Subscription > Settings > Usage + quotas | Regional quota headroom for the configured primary region |
+
 ## Break/fix challenge — Configuration drift
 
 Create a backup of `run.json`, change only `regions.primary` in the working copy to the nonexistent value `moonbase-1`, and run validation. You should get a failed `azure.primary-region` check and exit code `1`.

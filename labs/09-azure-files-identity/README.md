@@ -95,7 +95,50 @@ The script records its run before creating resources. If a cloud operation fails
 
 ### 3. Complete and reason through the checkpoints
 
-### Checkpoint 1: Create a secure StorageV2 account and transaction-optimized file share with quotaCreate a secure StorageV2 account and transaction-optimized file share with quota.Evidence to retain:- The command output or exact resource/object ID for checkpoint 1.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.### Checkpoint 2: Enable Azure Files share soft delete and create a point-in-time share snapshotEnable Azure Files share soft delete and create a point-in-time share snapshot.Evidence to retain:- The command output or exact resource/object ID for checkpoint 2.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.### Checkpoint 3: Upload sample content with AzCopy or AzUpload sample content with AzCopy or Az.Storage without storing account keys.Evidence to retain:- The command output or exact resource/object ID for checkpoint 3.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.### Checkpoint 4: Inventory identity-based SMB options and configure only the authorized AZ104_FILES_IDENTITY_SOURCE pathInventory identity-based SMB options and configure only the authorized AZ104_FILES_IDENTITY_SOURCE path.Evidence to retain:- The command output or exact resource/object ID for checkpoint 4.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.
+### Checkpoint 1: Create a secure StorageV2 account and transaction-optimized file share with quota
+
+Create a secure StorageV2 account and transaction-optimized file share with quota.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 1.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
+### Checkpoint 2: Enable Azure Files share soft delete and create a point-in-time share snapshot
+
+Enable Azure Files share soft delete and create a point-in-time share snapshot.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 2.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
+### Checkpoint 3: Upload sample content with AzCopy or Az
+
+Upload sample content with AzCopy or Az.Storage without storing account keys.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 3.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
+### Checkpoint 4: Inventory identity-based SMB options and configure only the authorized AZ104_FILES_IDENTITY_SOURCE path
+
+Inventory identity-based SMB options and configure only the authorized AZ104_FILES_IDENTITY_SOURCE path.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 4.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
 ### 4. Validate independently
 
 ```ps1
@@ -105,6 +148,17 @@ pwsh ./scripts/powershell/Validate.ps1 -RunId az104l09-01 -SubscriptionId <subsc
 Inspect `.state/az104l09-01/validation.json`. A `pass` applies only to checks that could be executed. A gated or asynchronous path must remain `warning` or `skipped` until its evidence exists.
 
 Positive checks should prove the intended resources, configuration, relationships, or health. Negative checks should prove that anonymous access, excess scope, accidental inheritance, unresolved DNS, unhealthy probes, or unrecorded resources were not introduced where the scenario forbids them.
+
+## Portal evidence
+
+Portal screenshots are planned evidence captured only during an authorized live run. Until then every entry in [images/portal/manifest.yml](images/portal/manifest.yml) stays `pending`, and no placeholder image is committed. Capture and sanitization rules live in [images/README.md](images/README.md).
+
+| Planned file | Checkpoint | Portal blade | Evidence |
+|---|---:|---|---|
+| `01-storage-account-file-shares.png` | 1 | Storage account > File shares | The share, quota, and selected tier |
+| `02-file-share-snapshots.png` | 2 | File share > Snapshots | The point-in-time share snapshot |
+| `03-storage-account-data-protection.png` | 2 | Storage account > Data protection | Azure Files soft-delete retention |
+| `04-file-shares-identity-based-access.png` | 4 | Storage account > File shares > Identity-based access | The configured or gated directory source |
 
 ## Break/fix exercise
 

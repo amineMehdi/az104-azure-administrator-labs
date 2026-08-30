@@ -14,7 +14,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/virtual-network/quick-create-powershell
+Source: <https://learn.microsoft.com/en-us/azure/virtual-network/quick-create-powershell>
 
 ## 2. B (`LAB17-Q02`)
 
@@ -28,7 +28,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-manage-peering
+Source: <https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-manage-peering>
 
 ## 3. C (`LAB17-Q03`)
 
@@ -42,7 +42,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/public-ip-addresses
+Source: <https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/public-ip-addresses>
 
 ## 4. D (`LAB17-Q04`)
 
@@ -56,7 +56,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/virtual-network/quick-create-powershell
+Source: <https://learn.microsoft.com/en-us/azure/virtual-network/quick-create-powershell>
 
 ## 5. A (`LAB17-Q05`)
 
@@ -70,7 +70,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-manage-peering
+Source: <https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-manage-peering>
 
 ## 6. B (`LAB17-Q06`)
 
@@ -84,7 +84,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/public-ip-addresses
+Source: <https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/public-ip-addresses>
 
 ## 7. C (`LAB17-Q07`)
 
@@ -98,7 +98,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/virtual-network/quick-create-powershell
+Source: <https://learn.microsoft.com/en-us/azure/virtual-network/quick-create-powershell>
 
 ## 8. D (`LAB17-Q08`)
 
@@ -112,7 +112,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-manage-peering
+Source: <https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-manage-peering>
 
 ## 9. A (`LAB17-Q09`)
 
@@ -126,7 +126,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/public-ip-addresses
+Source: <https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/public-ip-addresses>
 
 ## 10. B (`LAB17-Q10`)
 
@@ -140,4 +140,4 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/virtual-network/quick-create-powershell
+Source: <https://learn.microsoft.com/en-us/azure/virtual-network/quick-create-powershell>

@@ -109,7 +109,50 @@ The script records its run before creating resources. If a cloud operation fails
 
 ### 3. Complete and reason through the checkpoints
 
-### Checkpoint 1: Inventory the workload, interpret direct/inherited access, policy compliance, tags, locks, and current health before changing anythingInventory the workload, interpret direct/inherited access, policy compliance, tags, locks, and current health before changing anything.Evidence to retain:- The command output or exact resource/object ID for checkpoint 1.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.### Checkpoint 2: Inject one bounded NSG or load-balancer fault, use effective rules and Network Watcher evidence to diagnose it, then repair only the identified causeInject one bounded NSG or load-balancer fault, use effective rules and Network Watcher evidence to diagnose it, then repair only the identified cause.Evidence to retain:- The command output or exact resource/object ID for checkpoint 2.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.### Checkpoint 3: Query metrics/logs, process an alert, and record the operational timeline and validation outputQuery metrics/logs, process an alert, and record the operational timeline and validation output.Evidence to retain:- The command output or exact resource/object ID for checkpoint 3.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.### Checkpoint 4: Protect the test workload, run a restore or isolated recovery drill, verify recovered state, and remove protection/resources in dependency orderProtect the test workload, run a restore or isolated recovery drill, verify recovered state, and remove protection/resources in dependency order.Evidence to retain:- The command output or exact resource/object ID for checkpoint 4.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.
+### Checkpoint 1: Inventory the workload, interpret direct/inherited access, policy compliance, tags, locks, and current health before changing anything
+
+Inventory the workload, interpret direct/inherited access, policy compliance, tags, locks, and current health before changing anything.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 1.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
+### Checkpoint 2: Inject one bounded NSG or load-balancer fault, use effective rules and Network Watcher evidence to diagnose it, then repair only the identified cause
+
+Inject one bounded NSG or load-balancer fault, use effective rules and Network Watcher evidence to diagnose it, then repair only the identified cause.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 2.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
+### Checkpoint 3: Query metrics/logs, process an alert, and record the operational timeline and validation output
+
+Query metrics/logs, process an alert, and record the operational timeline and validation output.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 3.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
+### Checkpoint 4: Protect the test workload, run a restore or isolated recovery drill, verify recovered state, and remove protection/resources in dependency order
+
+Protect the test workload, run a restore or isolated recovery drill, verify recovered state, and remove protection/resources in dependency order.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 4.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
 ### 4. Validate independently
 
 ```ps1
@@ -119,6 +162,17 @@ pwsh ./scripts/powershell/Validate.ps1 -RunId az104l27-01 -SubscriptionId <subsc
 Inspect `.state/az104l27-01/validation.json`. A `pass` applies only to checks that could be executed. A gated or asynchronous path must remain `warning` or `skipped` until its evidence exists.
 
 Positive checks should prove the intended resources, configuration, relationships, or health. Negative checks should prove that anonymous access, excess scope, accidental inheritance, unresolved DNS, unhealthy probes, or unrecorded resources were not introduced where the scenario forbids them.
+
+## Portal evidence
+
+Portal screenshots are planned evidence captured only during an authorized live run. Until then every entry in [images/portal/manifest.yml](images/portal/manifest.yml) stays `pending`, and no placeholder image is committed. Capture and sanitization rules live in [images/README.md](images/README.md).
+
+| Planned file | Checkpoint | Portal blade | Evidence |
+|---|---:|---|---|
+| `01-resource-group-activity-log.png` | 3 | Resource group > Activity log | Operational timeline for fault, repair, backup, and cleanup |
+| `02-network-watcher.png` | 2 | Network Watcher | Effective-rule or connection diagnostic evidence |
+| `03-monitor-logs-and-alerts.png` | 3 | Monitor > Logs and Alerts | KQL diagnosis and alert lifecycle |
+| `04-recovery-services-vault-jobs.png` | 4 | Recovery Services vault > Jobs | Backup and restore/recovery drill result |
 
 ## Break/fix exercise
 

@@ -258,6 +258,16 @@ Expected checks include:
 
 Exit code `0` means pass, `1` means one or more required checks failed, and `2` means partial validation with warnings. The validator never repairs drift.
 
+## Portal evidence
+
+Portal screenshots are planned evidence captured only during an authorized live run. Until then every entry in [images/portal/manifest.yml](images/portal/manifest.yml) stays `pending`, and no placeholder image is committed. Capture and sanitization rules live in [images/README.md](images/README.md).
+
+| Planned file | Checkpoint | Portal blade | Evidence |
+|---|---:|---|---|
+| `01-users-all-users.png` | 2 | Microsoft Entra ID > Users > All users | The two lab-created cloud-only users filtered by the run prefix |
+| `02-user-properties.png` | 3 | Microsoft Entra ID > Users > user > Properties | The managed profile properties recorded for one lab user |
+| `03-group-members-owners.png` | 4 | Microsoft Entra ID > Groups > group > Members and Owners | The membership and ownership contrast for the lab security group |
+
 ## Break/fix challenge — Missing membership
 
 Simulate a common access incident by removing only user A's membership:

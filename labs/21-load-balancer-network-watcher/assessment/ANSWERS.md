@@ -14,7 +14,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/load-balancer/quickstart-load-balancer-standard-public-powershell
+Source: <https://learn.microsoft.com/en-us/azure/load-balancer/quickstart-load-balancer-standard-public-powershell>
 
 ## 2. B (`LAB21-Q02`)
 
@@ -28,7 +28,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/load-balancer/load-balancer-troubleshoot-health-probe-status
+Source: <https://learn.microsoft.com/en-us/azure/load-balancer/load-balancer-troubleshoot-health-probe-status>
 
 ## 3. C (`LAB21-Q03`)
 
@@ -42,7 +42,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/network-watcher/connection-troubleshoot-overview
+Source: <https://learn.microsoft.com/en-us/azure/network-watcher/connection-troubleshoot-overview>
 
 ## 4. D (`LAB21-Q04`)
 
@@ -56,7 +56,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/network-watcher/connection-monitor-overview
+Source: <https://learn.microsoft.com/en-us/azure/network-watcher/connection-monitor-overview>
 
 ## 5. A (`LAB21-Q05`)
 
@@ -70,7 +70,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/load-balancer/quickstart-load-balancer-standard-public-powershell
+Source: <https://learn.microsoft.com/en-us/azure/load-balancer/quickstart-load-balancer-standard-public-powershell>
 
 ## 6. B (`LAB21-Q06`)
 
@@ -84,7 +84,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/load-balancer/load-balancer-troubleshoot-health-probe-status
+Source: <https://learn.microsoft.com/en-us/azure/load-balancer/load-balancer-troubleshoot-health-probe-status>
 
 ## 7. C (`LAB21-Q07`)
 
@@ -98,7 +98,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/network-watcher/connection-troubleshoot-overview
+Source: <https://learn.microsoft.com/en-us/azure/network-watcher/connection-troubleshoot-overview>
 
 ## 8. D (`LAB21-Q08`)
 
@@ -112,7 +112,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/network-watcher/connection-monitor-overview
+Source: <https://learn.microsoft.com/en-us/azure/network-watcher/connection-monitor-overview>
 
 ## 9. A (`LAB21-Q09`)
 
@@ -126,7 +126,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/load-balancer/quickstart-load-balancer-standard-public-powershell
+Source: <https://learn.microsoft.com/en-us/azure/load-balancer/quickstart-load-balancer-standard-public-powershell>
 
 ## 10. B (`LAB21-Q10`)
 
@@ -140,4 +140,4 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/load-balancer/load-balancer-troubleshoot-health-probe-status
+Source: <https://learn.microsoft.com/en-us/azure/load-balancer/load-balancer-troubleshoot-health-probe-status>

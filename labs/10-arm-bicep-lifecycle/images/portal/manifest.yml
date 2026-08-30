@@ -1,0 +1,33 @@
+schemaVersion: '1.0'
+labId: LAB-10
+status: pending
+source: Every capture must come from a signed-in session of the real Azure Portal (https://portal.azure.com) against
+  the disposable lab environment; fabricated or placeholder images are forbidden.
+captures:
+- file: 01-resource-group-deployments.png
+  checkpoint: 3
+  portalBlade: Resource group > Deployments
+  evidenceShown: Deployment inputs, outputs, and operations
+  captureDate: null
+  region: null
+  redactions: []
+  portalConfirmed: false
+  status: pending
+- file: 02-resource-group-export-template.png
+  checkpoint: 4
+  portalBlade: Resource group > Export template
+  evidenceShown: The generated ARM representation and limitations
+  captureDate: null
+  region: null
+  redactions: []
+  portalConfirmed: false
+  status: pending
+- file: 03-storage-account-overview.png
+  checkpoint: 3
+  portalBlade: Storage account > Overview
+  evidenceShown: The resource produced from Bicep
+  captureDate: null
+  region: null
+  redactions: []
+  portalConfirmed: false
+  status: pending

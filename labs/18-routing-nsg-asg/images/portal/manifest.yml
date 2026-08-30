@@ -1,0 +1,42 @@
+schemaVersion: '1.0'
+labId: LAB-18
+status: pending
+source: Every capture must come from a signed-in session of the real Azure Portal (https://portal.azure.com) against
+  the disposable lab environment; fabricated or placeholder images are forbidden.
+captures:
+- file: 01-network-security-group-security-rules.png
+  checkpoint: 2
+  portalBlade: Network security group > Security rules
+  evidenceShown: Custom priorities, source ASG, destination ASG, and port
+  captureDate: null
+  region: null
+  redactions: []
+  portalConfirmed: false
+  status: pending
+- file: 02-network-interface-effective-security-rules.png
+  checkpoint: 4
+  portalBlade: Network interface > Effective security rules
+  evidenceShown: Combined subnet and NIC rule evaluation
+  captureDate: null
+  region: null
+  redactions: []
+  portalConfirmed: false
+  status: pending
+- file: 03-network-interface-effective-routes.png
+  checkpoint: 4
+  portalBlade: Network interface > Effective routes
+  evidenceShown: System and user-defined route selection
+  captureDate: null
+  region: null
+  redactions: []
+  portalConfirmed: false
+  status: pending
+- file: 04-network-watcher-ip-flow-verify.png
+  checkpoint: 4
+  portalBlade: Network Watcher > IP flow verify
+  evidenceShown: Allow or deny result and matching rule
+  captureDate: null
+  region: null
+  redactions: []
+  portalConfirmed: false
+  status: pending

@@ -98,7 +98,50 @@ The script records its run before creating resources. If a cloud operation fails
 
 ### 3. Complete and reason through the checkpoints
 
-### Checkpoint 1: Create a Recovery Services vault and a separate modern Backup vault and compare their supported workloadsCreate a Recovery Services vault and a separate modern Backup vault and compare their supported workloads.Evidence to retain:- The command output or exact resource/object ID for checkpoint 1.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.### Checkpoint 2: Create a bounded-retention VM backup policy and enable protection for the test VMCreate a bounded-retention VM backup policy and enable protection for the test VM.Evidence to retain:- The command output or exact resource/object ID for checkpoint 2.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.### Checkpoint 3: Trigger an on-demand backup, monitor its asynchronous job, and preserve evidence before restore testingTrigger an on-demand backup, monitor its asynchronous job, and preserve evidence before restore testing.Evidence to retain:- The command output or exact resource/object ID for checkpoint 3.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.### Checkpoint 4: Run a restore workflow, inspect Backup reports/alerts prerequisites, then stop protection and delete backup data before vault cleanupRun a restore workflow, inspect Backup reports/alerts prerequisites, then stop protection and delete backup data before vault cleanup.Evidence to retain:- The command output or exact resource/object ID for checkpoint 4.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.
+### Checkpoint 1: Create a Recovery Services vault and a separate modern Backup vault and compare their supported workloads
+
+Create a Recovery Services vault and a separate modern Backup vault and compare their supported workloads.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 1.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
+### Checkpoint 2: Create a bounded-retention VM backup policy and enable protection for the test VM
+
+Create a bounded-retention VM backup policy and enable protection for the test VM.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 2.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
+### Checkpoint 3: Trigger an on-demand backup, monitor its asynchronous job, and preserve evidence before restore testing
+
+Trigger an on-demand backup, monitor its asynchronous job, and preserve evidence before restore testing.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 3.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
+### Checkpoint 4: Run a restore workflow, inspect Backup reports/alerts prerequisites, then stop protection and delete backup data before vault cleanup
+
+Run a restore workflow, inspect Backup reports/alerts prerequisites, then stop protection and delete backup data before vault cleanup.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 4.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
 ### 4. Validate independently
 
 ```ps1
@@ -108,6 +151,17 @@ pwsh ./scripts/powershell/Validate.ps1 -RunId az104l24-01 -SubscriptionId <subsc
 Inspect `.state/az104l24-01/validation.json`. A `pass` applies only to checks that could be executed. A gated or asynchronous path must remain `warning` or `skipped` until its evidence exists.
 
 Positive checks should prove the intended resources, configuration, relationships, or health. Negative checks should prove that anonymous access, excess scope, accidental inheritance, unresolved DNS, unhealthy probes, or unrecorded resources were not introduced where the scenario forbids them.
+
+## Portal evidence
+
+Portal screenshots are planned evidence captured only during an authorized live run. Until then every entry in [images/portal/manifest.yml](images/portal/manifest.yml) stays `pending`, and no placeholder image is committed. Capture and sanitization rules live in [images/README.md](images/README.md).
+
+| Planned file | Checkpoint | Portal blade | Evidence |
+|---|---:|---|---|
+| `01-recovery-services-vault-backup-policies.png` | 2 | Recovery Services vault > Backup policies | Schedule, retention, and protected item count |
+| `02-recovery-services-vault-backup-jobs.png` | 3 | Recovery Services vault > Backup jobs | On-demand backup or restore job status |
+| `03-backup-vault-backup-instances.png` | 1 | Backup vault > Backup instances | Modern vault workload and protection state |
+| `04-business-continuity-center-alerts-or-reports.png` | 4 | Business Continuity Center > Alerts or Reports | Configured monitoring destination and current state |
 
 ## Break/fix exercise
 

@@ -98,7 +98,50 @@ The script records its run before creating resources. If a cloud operation fails
 
 ### 3. Complete and reason through the checkpoints
 
-### Checkpoint 1: Create two backend NICs/VMs in an NSG-protected subnet without individual public IPsCreate two backend NICs/VMs in an NSG-protected subnet without individual public IPs.Evidence to retain:- The command output or exact resource/object ID for checkpoint 1.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.### Checkpoint 2: Create a Standard public load balancer, backend pool, TCP probe, and frontend ruleCreate a Standard public load balancer, backend pool, TCP probe, and frontend rule.Evidence to retain:- The command output or exact resource/object ID for checkpoint 2.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.### Checkpoint 3: Install a minimal HTTP response on each backend and verify probe health before testing the frontendInstall a minimal HTTP response on each backend and verify probe health before testing the frontend.Evidence to retain:- The command output or exact resource/object ID for checkpoint 3.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.### Checkpoint 4: Run Network Watcher connection troubleshooting and configure a bounded connection monitor for the backend pathRun Network Watcher connection troubleshooting and configure a bounded connection monitor for the backend path.Evidence to retain:- The command output or exact resource/object ID for checkpoint 4.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.
+### Checkpoint 1: Create two backend NICs/VMs in an NSG-protected subnet without individual public IPs
+
+Create two backend NICs/VMs in an NSG-protected subnet without individual public IPs.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 1.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
+### Checkpoint 2: Create a Standard public load balancer, backend pool, TCP probe, and frontend rule
+
+Create a Standard public load balancer, backend pool, TCP probe, and frontend rule.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 2.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
+### Checkpoint 3: Install a minimal HTTP response on each backend and verify probe health before testing the frontend
+
+Install a minimal HTTP response on each backend and verify probe health before testing the frontend.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 3.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
+### Checkpoint 4: Run Network Watcher connection troubleshooting and configure a bounded connection monitor for the backend path
+
+Run Network Watcher connection troubleshooting and configure a bounded connection monitor for the backend path.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 4.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
 ### 4. Validate independently
 
 ```ps1
@@ -108,6 +151,17 @@ pwsh ./scripts/powershell/Validate.ps1 -RunId az104l21-01 -SubscriptionId <subsc
 Inspect `.state/az104l21-01/validation.json`. A `pass` applies only to checks that could be executed. A gated or asynchronous path must remain `warning` or `skipped` until its evidence exists.
 
 Positive checks should prove the intended resources, configuration, relationships, or health. Negative checks should prove that anonymous access, excess scope, accidental inheritance, unresolved DNS, unhealthy probes, or unrecorded resources were not introduced where the scenario forbids them.
+
+## Portal evidence
+
+Portal screenshots are planned evidence captured only during an authorized live run. Until then every entry in [images/portal/manifest.yml](images/portal/manifest.yml) stays `pending`, and no placeholder image is committed. Capture and sanitization rules live in [images/README.md](images/README.md).
+
+| Planned file | Checkpoint | Portal blade | Evidence |
+|---|---:|---|---|
+| `01-load-balancer-backend-pools.png` | 2 | Load balancer > Backend pools | Both backend NIC configurations |
+| `02-load-balancer-health-probes.png` | 3 | Load balancer > Health probes | Probe protocol, port, and health status |
+| `03-load-balancer-insights.png` | 3 | Load balancer > Insights | Data-path health and frontend/backend mapping |
+| `04-network-watcher-connection-troubleshoot.png` | 4 | Network Watcher > Connection troubleshoot | Reachability, latency, and fault details |
 
 ## Break/fix exercise
 

@@ -1,0 +1,42 @@
+schemaVersion: '1.0'
+labId: LAB-24
+status: pending
+source: Every capture must come from a signed-in session of the real Azure Portal (https://portal.azure.com) against
+  the disposable lab environment; fabricated or placeholder images are forbidden.
+captures:
+- file: 01-recovery-services-vault-backup-policies.png
+  checkpoint: 2
+  portalBlade: Recovery Services vault > Backup policies
+  evidenceShown: Schedule, retention, and protected item count
+  captureDate: null
+  region: null
+  redactions: []
+  portalConfirmed: false
+  status: pending
+- file: 02-recovery-services-vault-backup-jobs.png
+  checkpoint: 3
+  portalBlade: Recovery Services vault > Backup jobs
+  evidenceShown: On-demand backup or restore job status
+  captureDate: null
+  region: null
+  redactions: []
+  portalConfirmed: false
+  status: pending
+- file: 03-backup-vault-backup-instances.png
+  checkpoint: 1
+  portalBlade: Backup vault > Backup instances
+  evidenceShown: Modern vault workload and protection state
+  captureDate: null
+  region: null
+  redactions: []
+  portalConfirmed: false
+  status: pending
+- file: 04-business-continuity-center-alerts-or-reports.png
+  checkpoint: 4
+  portalBlade: Business Continuity Center > Alerts or Reports
+  evidenceShown: Configured monitoring destination and current state
+  captureDate: null
+  region: null
+  redactions: []
+  portalConfirmed: false
+  status: pending

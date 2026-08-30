@@ -17,7 +17,8 @@
     "permissions",
     "prerequisites",
     "validation",
-    "cleanup"
+    "cleanup",
+    "screenshots"
   ],
   "properties": {
     "id": { "type": "string", "pattern": "^LAB-[0-9]{2}$" },
@@ -49,6 +50,15 @@
     "prerequisites": { "type": "array", "items": { "type": "string" } },
     "validation": { "type": "object" },
     "cleanup": { "type": "object" },
+    "screenshots": {
+      "type": "object",
+      "required": ["status", "manifest"],
+      "properties": {
+        "status": { "enum": ["pending", "captured", "sanitized", "verified"] },
+        "manifest": { "const": "images/portal/manifest.yml" }
+      },
+      "additionalProperties": false
+    },
     "lastOfflineValidated": { "type": ["string", "null"], "format": "date" },
     "lastLiveVerified": { "type": ["string", "null"], "format": "date" }
   },

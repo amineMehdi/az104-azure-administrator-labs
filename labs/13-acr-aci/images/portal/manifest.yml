@@ -1,0 +1,33 @@
+schemaVersion: '1.0'
+labId: LAB-13
+status: pending
+source: Every capture must come from a signed-in session of the real Azure Portal (https://portal.azure.com) against
+  the disposable lab environment; fabricated or placeholder images are forbidden.
+captures:
+- file: 01-container-registry-repositories.png
+  checkpoint: 2
+  portalBlade: Container registry > Repositories
+  evidenceShown: Imported repository, tag, and digest
+  captureDate: null
+  region: null
+  redactions: []
+  portalConfirmed: false
+  status: pending
+- file: 02-container-instance-containers.png
+  checkpoint: 3
+  portalBlade: Container instance > Containers
+  evidenceShown: Image, resources, restart policy, and status
+  captureDate: null
+  region: null
+  redactions: []
+  portalConfirmed: false
+  status: pending
+- file: 03-container-instance-logs.png
+  checkpoint: 4
+  portalBlade: Container instance > Logs
+  evidenceShown: Application output from the running sample
+  captureDate: null
+  region: null
+  redactions: []
+  portalConfirmed: false
+  status: pending

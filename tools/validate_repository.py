@@ -18,6 +18,8 @@ from jsonschema import Draft202012Validator, FormatChecker
 ROOT = Path(__file__).resolve().parents[1]
 LAB_PATTERN = re.compile(r"^(\d{2})-[a-z0-9]+(?:-[a-z0-9]+)*$")
 MARKDOWN_LINK = re.compile(r"!?\[[^\]]*\]\(([^)]+)\)")
+SCREENSHOT_STAGES = ["pending", "captured", "sanitized", "verified"]
+MERMAID_TYPES = ("flowchart", "graph", "sequenceDiagram", "classDiagram", "stateDiagram", "erDiagram")
 IGNORED_DIRECTORY_NAMES = {
     ".cache",
     ".git",
@@ -192,6 +194,69 @@ def validate_assessment(
     return mapped
 
 
+def validate_screenshots(lab_dir: Path, lab: dict, results: Results) -> None:
+    manifest_path = lab_dir / "images" / "portal" / "manifest.yml"
+    if not manifest_path.exists():
+        results.error(f"{lab_dir.name}: missing images/portal/manifest.yml")
+        return
+    manifest = load_yaml(manifest_path)
+    validate_with_schema(
+        manifest,
+        ROOT / "curriculum" / "screenshot-manifest-schema.json",
+        f"{lab_dir.name}/images/portal/manifest.yml",
+        results,
+    )
+    if not isinstance(manifest, dict):
+        return
+    if manifest.get("labId") != lab.get("id"):
+        results.error(f"{lab_dir.name}: screenshot manifest labId does not match lab.yml")
+
+    captures = manifest.get("captures") or []
+    files = [item.get("file") for item in captures]
+    if len(files) != len(set(files)):
+        results.error(f"{lab_dir.name}: duplicate capture file names in screenshot manifest")
+
+    stages = [item.get("status") for item in captures if item.get("status") in SCREENSHOT_STAGES]
+    expected = min(stages, key=SCREENSHOT_STAGES.index) if stages else "pending"
+    if manifest.get("status") != expected:
+        results.error(
+            f"{lab_dir.name}: manifest status must equal the least-advanced capture stage ({expected})"
+        )
+    if (lab.get("screenshots") or {}).get("status") != manifest.get("status"):
+        results.error(f"{lab_dir.name}: lab.yml screenshots.status disagrees with the manifest status")
+
+    portal_dir = manifest_path.parent
+    for item in captures:
+        file_name = item.get("file") or ""
+        image_path = portal_dir / file_name
+        committed_allowed = item.get("status") in {"sanitized", "verified"}
+        if committed_allowed and not image_path.exists():
+            results.error(f"{lab_dir.name}: {file_name} is {item.get('status')} but the image file is missing")
+        if not committed_allowed and image_path.exists():
+            results.error(
+                f"{lab_dir.name}: {file_name} exists on disk but its status is {item.get('status')}; "
+                "only sanitized or verified images may be committed"
+            )
+    listed = set(files)
+    for png in (lab_dir / "images").rglob("*.png"):
+        if png.name not in listed:
+            results.error(f"{lab_dir.name}: {png.relative_to(lab_dir)} has no screenshot manifest entry")
+
+
+def validate_diagram(lab_dir: Path, results: Results) -> None:
+    mmd = lab_dir / "diagrams" / "architecture.mmd"
+    svg = lab_dir / "diagrams" / "architecture.svg"
+    if mmd.exists():
+        lines = mmd.read_text(encoding="utf-8", errors="replace").splitlines()
+        first = next((line.strip() for line in lines if line.strip() and not line.strip().startswith("%%")), "")
+        if not first.startswith(MERMAID_TYPES):
+            results.error(f"{lab_dir.name}: architecture.mmd does not declare a known Mermaid diagram type")
+    if not svg.exists():
+        results.error(f"{lab_dir.name}: missing diagrams/architecture.svg")
+    elif "<svg" not in svg.read_text(encoding="utf-8", errors="replace"):
+        results.error(f"{lab_dir.name}: diagrams/architecture.svg is not a rendered SVG document")
+
+
 def validate_lab_dirs(
     official: set[str],
     foundations: set[str],
@@ -202,7 +267,7 @@ def validate_lab_dirs(
     labs_root = ROOT / "labs"
     lab_dirs = sorted(path for path in labs_root.iterdir() if path.is_dir() and LAB_PATTERN.fullmatch(path.name))
     question_coverage: set[str] = set()
-    required_files = ["README.md", "lab.yml", "diagrams/architecture.mmd"]
+    required_files = ["README.md", "lab.yml", "diagrams/architecture.mmd", "images/README.md"]
 
     for lab_dir in lab_dirs:
         number = lab_dir.name[:2]
@@ -237,6 +302,8 @@ def validate_lab_dirs(
                     results.error(f"{lab_dir.name}: {lane.name} lane is missing {stage}")
 
         question_coverage |= validate_assessment(lab_dir, official | foundations, results)
+        validate_screenshots(lab_dir, lab, results)
+        validate_diagram(lab_dir, results)
 
         validation_fixture = lab_dir / "tests" / "fixtures" / "validation.sample.json"
         if validation_fixture.exists():

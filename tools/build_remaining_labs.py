@@ -659,6 +659,101 @@ def safe_id(value: str) -> str:
     return re.sub(r"[^a-z0-9]+", "-", value.lower()).strip("-")
 
 
+# Checkpoint that each authored portal capture evidences, per generated lab.
+PORTAL_CHECKPOINT_MAP: dict[str, list[int]] = {
+    "02": [1, 2, 4],
+    "03": [3, 4, 4],
+    "04": [2, 3, 4],
+    "05": [2, 3, 4, 4],
+    "06": [1, 2, 3, 4],
+    "07": [3, 4, 4, 4],
+    "08": [2, 3, 4, 4],
+    "09": [1, 2, 2, 4],
+    "10": [3, 4, 3],
+    "11": [1, 3, 2, 4],
+    "12": [2, 3, 1, 4],
+    "13": [2, 3, 4],
+    "14": [2, 3, 4, 4],
+    "15": [2, 3, 3, 4],
+    "16": [1, 2, 3, 4],
+    "17": [1, 1, 2, 3],
+    "18": [2, 4, 4, 4],
+    "19": [2, 4, 4, 1],
+    "20": [2, 1, 4, 3],
+    "21": [2, 3, 3, 4],
+    "22": [4, 3, 2, 4],
+    "23": [3, 1, 4, 4],
+    "24": [2, 3, 1, 4],
+    "25": [3, 3, 4, 3],
+    "26": [1, 2, 3, 4],
+    "27": [3, 2, 3, 4],
+}
+
+
+def portal_captures(number: str, spec: dict) -> list[dict]:
+    checkpoints = PORTAL_CHECKPOINT_MAP[number]
+    if len(checkpoints) != len(spec["portal"]):
+        raise ValueError(f"Lab {number}: portal capture and checkpoint-map lengths differ")
+    captures: list[dict] = []
+    for index, ((blade, evidence), checkpoint) in enumerate(zip(spec["portal"], checkpoints), 1):
+        segments = [safe_id(part) for part in blade.split(">")]
+        name = "-".join(segments[-2:]) if len(segments) > 1 else segments[0]
+        captures.append(
+            {
+                "file": f"{index:02d}-{name}.png",
+                "checkpoint": checkpoint,
+                "portalBlade": blade.strip(),
+                "evidenceShown": evidence.strip(),
+                "captureDate": None,
+                "region": None,
+                "redactions": [],
+                "portalConfirmed": False,
+                "status": "pending",
+            }
+        )
+    return captures
+
+
+def render_portal_manifest(number: str, spec: dict) -> dict:
+    return {
+        "schemaVersion": "1.0",
+        "labId": f"LAB-{number}",
+        "status": "pending",
+        "source": (
+            "Every capture must come from a signed-in session of the real Azure Portal "
+            "(https://portal.azure.com) against the disposable lab environment; fabricated or "
+            "placeholder images are forbidden."
+        ),
+        "captures": portal_captures(number, spec),
+    }
+
+
+def render_images_readme(number: str) -> str:
+    return f"""# Lab {number} portal evidence
+
+This folder holds sanitized Azure Portal screenshots for Lab {number} and the manifest that tracks them.
+
+## Contract
+
+- [portal/manifest.yml](portal/manifest.yml) lists every planned capture with its checkpoint, blade, and expected evidence.
+- A PNG enters this folder only after an authorized live run and full sanitization; fabricated or placeholder images are forbidden.
+- Statuses progress `pending` → `captured` → `sanitized` → `verified`; raw (`captured`) files must never be committed.
+- Two to five captures per lab, PNG only, at most 1920 px wide, and roughly 500 KB or less after optimization.
+
+## Sanitization checklist
+
+Before a capture may be recorded as `sanitized`:
+
+1. Crop to the relevant blade and remove browser chrome, bookmarks, other tabs, and unrelated resources.
+2. Irreversibly redact tenant and subscription GUIDs, account names, email addresses and UPNs, tokens, keys, public IPs, and billing details.
+3. Strip all image metadata (EXIF, XMP, and text chunks) and re-encode as an optimized PNG.
+4. Update the matching manifest entry: capture date, region (or `not-applicable` for tenant-plane blades), the redactions performed, `portalConfirmed: true`, and the new status.
+5. Record `verified` only after a second manual review confirms no identifying content remains.
+
+Repository-wide rules live in [docs/evidence-handling.md](../../../docs/evidence-handling.md).
+"""
+
+
 def command_lane(spec: dict) -> str:
     return "cli" if "CLI" in spec["surface"] else "powershell"
 
@@ -834,7 +929,7 @@ def render_questions(number: str, title: str, questions: list[dict]) -> tuple[st
         for letter, explanation in question["distractorExplanations"].items():
             if letter != question["correctOption"]:
                 answer_lines.append(f"- **{letter}:** {explanation}")
-        answer_lines.extend(["", f"Source: {question['sourceUrls'][0]}", ""])
+        answer_lines.extend(["", f"Source: <{question['sourceUrls'][0]}>", ""])
     return "\n".join(question_lines), "\n".join(answer_lines)
 
 
@@ -919,6 +1014,10 @@ def make_lab_metadata(number: str, slug: str, spec: dict, objectives: list[dict]
             "requiresExecuteFlag": True,
             "residualAuditRequired": True,
         },
+        "screenshots": {
+            "status": "pending",
+            "manifest": "images/portal/manifest.yml",
+        },
         "lastOfflineValidated": REVIEW_DATE if status == "offline-validated" else None,
         "lastLiveVerified": None,
     }
@@ -967,6 +1066,11 @@ def render_readme(number: str, slug: str, spec: dict, objectives: list[dict]) ->
                 "",
             ]
         )
+    actions_block = "\n".join(action_sections)
+    portal_rows = "\n".join(
+        f"| `{item['file']}` | {item['checkpoint']} | {item['portalBlade']} | {item['evidenceShown']} |"
+        for item in portal_captures(number, spec)
+    )
     providers = ", ".join(f"`{provider}`" for provider in spec["providers"]) or "No Azure resource provider; tenant/Graph plane only"
     modules = ", ".join(f"`{module}`" for module in spec["modules"]) or "No extra PowerShell modules"
     return f"""# Lab {number}: {spec['title']}
@@ -1060,7 +1164,7 @@ The script records its run before creating resources. If a cloud operation fails
 
 ### 3. Complete and reason through the checkpoints
 
-{''.join(action_sections)}
+{actions_block}
 ### 4. Validate independently
 
 ```{script_ext}
@@ -1070,6 +1174,14 @@ The script records its run before creating resources. If a cloud operation fails
 Inspect `.state/az104l{number}-01/validation.json`. A `pass` applies only to checks that could be executed. A gated or asynchronous path must remain `warning` or `skipped` until its evidence exists.
 
 Positive checks should prove the intended resources, configuration, relationships, or health. Negative checks should prove that anonymous access, excess scope, accidental inheritance, unresolved DNS, unhealthy probes, or unrecorded resources were not introduced where the scenario forbids them.
+
+## Portal evidence
+
+Portal screenshots are planned evidence captured only during an authorized live run. Until then every entry in [images/portal/manifest.yml](images/portal/manifest.yml) stays `pending`, and no placeholder image is committed. Capture and sanitization rules live in [images/README.md](images/README.md).
+
+| Planned file | Checkpoint | Portal blade | Evidence |
+|---|---:|---|---|
+{portal_rows}
 
 ## Break/fix exercise
 
@@ -2522,6 +2634,8 @@ def generate_lab(number: str, spec: dict, objectives_index: dict[str, dict], for
         "tests/Contract.Tests.ps1": test,
         "tests/README.md": test_readme,
         "tests/fixtures/validation.sample.json": json.dumps(fixture, indent=2),
+        "images/README.md": render_images_readme(number),
+        "images/portal/manifest.yml": yaml_text(render_portal_manifest(number, spec)),
     }
     if lane == "cli":
         files.update(

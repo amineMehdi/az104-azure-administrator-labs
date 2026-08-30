@@ -14,7 +14,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/deploy-cli
+Source: <https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/deploy-cli>
 
 ## 2. B (`LAB26-Q02`)
 
@@ -28,7 +28,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/architecture/framework/
+Source: <https://learn.microsoft.com/en-us/azure/architecture/framework/>
 
 ## 3. C (`LAB26-Q03`)
 
@@ -42,7 +42,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/private-link/private-endpoint-overview
+Source: <https://learn.microsoft.com/en-us/azure/private-link/private-endpoint-overview>
 
 ## 4. D (`LAB26-Q04`)
 
@@ -56,7 +56,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/diagnostic-settings
+Source: <https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/diagnostic-settings>
 
 ## 5. A (`LAB26-Q05`)
 
@@ -70,7 +70,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-cli
+Source: <https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-cli>
 
 ## 6. B (`LAB26-Q06`)
 
@@ -84,7 +84,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/deploy-cli
+Source: <https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/deploy-cli>
 
 ## 7. C (`LAB26-Q07`)
 
@@ -98,7 +98,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/architecture/framework/
+Source: <https://learn.microsoft.com/en-us/azure/architecture/framework/>
 
 ## 8. D (`LAB26-Q08`)
 
@@ -112,7 +112,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/private-link/private-endpoint-overview
+Source: <https://learn.microsoft.com/en-us/azure/private-link/private-endpoint-overview>
 
 ## 9. A (`LAB26-Q09`)
 
@@ -126,7 +126,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/diagnostic-settings
+Source: <https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/diagnostic-settings>
 
 ## 10. B (`LAB26-Q10`)
 
@@ -140,4 +140,4 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-cli
+Source: <https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-cli>

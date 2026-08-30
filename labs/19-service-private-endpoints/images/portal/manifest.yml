@@ -1,0 +1,42 @@
+schemaVersion: '1.0'
+labId: LAB-19
+status: pending
+source: Every capture must come from a signed-in session of the real Azure Portal (https://portal.azure.com) against
+  the disposable lab environment; fabricated or placeholder images are forbidden.
+captures:
+- file: 01-storage-account-networking.png
+  checkpoint: 2
+  portalBlade: Storage account > Networking
+  evidenceShown: Service endpoint rule, private endpoint, and default access
+  captureDate: null
+  region: null
+  redactions: []
+  portalConfirmed: false
+  status: pending
+- file: 02-private-endpoint-dns-configuration.png
+  checkpoint: 4
+  portalBlade: Private endpoint > DNS configuration
+  evidenceShown: FQDN and private IP mapping
+  captureDate: null
+  region: null
+  redactions: []
+  portalConfirmed: false
+  status: pending
+- file: 03-private-dns-zone-recordsets.png
+  checkpoint: 4
+  portalBlade: Private DNS zone > Recordsets
+  evidenceShown: Storage-account private A record
+  captureDate: null
+  region: null
+  redactions: []
+  portalConfirmed: false
+  status: pending
+- file: 04-virtual-network-subnets.png
+  checkpoint: 1
+  portalBlade: Virtual network > Subnets
+  evidenceShown: Endpoint policies and service endpoint state
+  captureDate: null
+  region: null
+  redactions: []
+  portalConfirmed: false
+  status: pending

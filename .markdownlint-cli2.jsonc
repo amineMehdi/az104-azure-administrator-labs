@@ -1,0 +1,9 @@
+{
+  // markdownlint-cli2 file globs and ignores; rule config lives in .markdownlint.json
+  "globs": ["**/*.md"],
+  "ignores": [
+    "node_modules/**",
+    ".github/PULL_REQUEST_TEMPLATE.md",
+    "AZ-104-GITHUB-LABS-MEGA-PROMPT.md"
+  ]
+}

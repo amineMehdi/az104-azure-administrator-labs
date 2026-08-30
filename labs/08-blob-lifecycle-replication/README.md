@@ -99,7 +99,50 @@ The script records its run before creating resources. If a cloud operation fails
 
 ### 3. Complete and reason through the checkpoints
 
-### Checkpoint 1: Create source and destination general-purpose v2 accounts with change feed and blob versioningCreate source and destination general-purpose v2 accounts with change feed and blob versioning.Evidence to retain:- The command output or exact resource/object ID for checkpoint 1.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.### Checkpoint 2: Enable blob and container soft delete and create private containersEnable blob and container soft delete and create private containers.Evidence to retain:- The command output or exact resource/object ID for checkpoint 2.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.### Checkpoint 3: Apply a lifecycle rule that moves older block blobs to cool storage and deletes old versionsApply a lifecycle rule that moves older block blobs to cool storage and deletes old versions.Evidence to retain:- The command output or exact resource/object ID for checkpoint 3.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.### Checkpoint 4: Configure object replication and use AzCopy for a sample upload when AZCOPY is installedConfigure object replication and use AzCopy for a sample upload when AZCOPY is installed.Evidence to retain:- The command output or exact resource/object ID for checkpoint 4.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.
+### Checkpoint 1: Create source and destination general-purpose v2 accounts with change feed and blob versioning
+
+Create source and destination general-purpose v2 accounts with change feed and blob versioning.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 1.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
+### Checkpoint 2: Enable blob and container soft delete and create private containers
+
+Enable blob and container soft delete and create private containers.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 2.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
+### Checkpoint 3: Apply a lifecycle rule that moves older block blobs to cool storage and deletes old versions
+
+Apply a lifecycle rule that moves older block blobs to cool storage and deletes old versions.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 3.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
+### Checkpoint 4: Configure object replication and use AzCopy for a sample upload when AZCOPY is installed
+
+Configure object replication and use AzCopy for a sample upload when AZCOPY is installed.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 4.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
 ### 4. Validate independently
 
 ```sh
@@ -109,6 +152,17 @@ The script records its run before creating resources. If a cloud operation fails
 Inspect `.state/az104l08-01/validation.json`. A `pass` applies only to checks that could be executed. A gated or asynchronous path must remain `warning` or `skipped` until its evidence exists.
 
 Positive checks should prove the intended resources, configuration, relationships, or health. Negative checks should prove that anonymous access, excess scope, accidental inheritance, unresolved DNS, unhealthy probes, or unrecorded resources were not introduced where the scenario forbids them.
+
+## Portal evidence
+
+Portal screenshots are planned evidence captured only during an authorized live run. Until then every entry in [images/portal/manifest.yml](images/portal/manifest.yml) stays `pending`, and no placeholder image is committed. Capture and sanitization rules live in [images/README.md](images/README.md).
+
+| Planned file | Checkpoint | Portal blade | Evidence |
+|---|---:|---|---|
+| `01-storage-account-data-protection.png` | 2 | Storage account > Data protection | Versioning, change feed, and soft-delete settings |
+| `02-storage-account-lifecycle-management.png` | 3 | Storage account > Lifecycle management | The tiering and version cleanup rule |
+| `03-storage-account-object-replication.png` | 4 | Storage account > Object replication | Source and destination replication policy |
+| `04-container-blobs.png` | 4 | Container > Blobs | Sample blob versions and access tier |
 
 ## Break/fix exercise
 

@@ -1,34 +1,34 @@
 # Implementation status
 
-| Lab | Folder | Domain | Track | Lab status |
-|---:|---|---|---|---|
-| 00 | `00-safe-bootstrap` | foundation | both | offline-validated |
-| 01 | `01-entra-users-groups` | identity-governance | azure-cli-graph | offline-validated |
-| 02 | `02-entra-licenses-guests-sspr` | identity-governance | graph-entra-powershell | offline-validated |
-| 03 | `03-azure-rbac-scopes` | identity-governance | az-powershell | offline-validated |
-| 04 | `04-resource-hierarchy-tags-locks` | identity-governance | azure-cli | offline-validated |
-| 05 | `05-policy-costs-advisor` | identity-governance | az-powershell | offline-validated |
-| 06 | `06-storage-accounts-security` | storage | azure-cli | offline-validated |
-| 07 | `07-storage-network-sas` | storage | az-powershell | offline-validated |
-| 08 | `08-blob-lifecycle-replication` | storage | azure-cli | offline-validated |
-| 09 | `09-azure-files-identity` | storage | az-powershell | offline-validated |
-| 10 | `10-arm-bicep-lifecycle` | compute | both | offline-validated |
-| 11 | `11-vm-lifecycle-disks-encryption` | compute | azure-cli | offline-validated |
-| 12 | `12-vm-resilience-scale-mobility` | compute | az-powershell | offline-validated |
-| 13 | `13-acr-aci` | compute | azure-cli | offline-validated |
-| 14 | `14-container-apps` | compute | azure-cli | offline-validated |
-| 15 | `15-app-service-scale-slots` | compute | az-powershell | offline-validated |
-| 16 | `16-app-service-tls-dns-backup-network` | compute | azure-cli | offline-validated |
-| 17 | `17-vnet-subnets-peering-public-ip` | networking | az-powershell | offline-validated |
-| 18 | `18-routing-nsg-asg` | networking | azure-cli | offline-validated |
-| 19 | `19-service-private-endpoints` | networking | az-powershell | offline-validated |
-| 20 | `20-azure-dns-bastion` | networking | azure-cli | offline-validated |
-| 21 | `21-load-balancer-network-watcher` | networking | az-powershell | offline-validated |
-| 22 | `22-azure-monitor-logs-insights` | monitor-recovery | both | offline-validated |
-| 23 | `23-monitor-alerts-actions` | monitor-recovery | azure-cli | offline-validated |
-| 24 | `24-azure-backup-restore` | monitor-recovery | az-powershell | offline-validated |
-| 25 | `25-site-recovery-failover` | monitor-recovery | az-powershell | offline-validated |
-| 26 | `26-capstone-build` | capstone | learner-choice | offline-validated |
-| 27 | `27-capstone-operate-recover` | capstone | opposite-surface | offline-validated |
+| Lab | Folder | Domain | Track | Lab status | Screenshots |
+|---:|---|---|---|---|---|
+| 00 | `00-safe-bootstrap` | foundation | both | offline-validated | pending |
+| 01 | `01-entra-users-groups` | identity-governance | azure-cli-graph | offline-validated | pending |
+| 02 | `02-entra-licenses-guests-sspr` | identity-governance | graph-entra-powershell | offline-validated | pending |
+| 03 | `03-azure-rbac-scopes` | identity-governance | az-powershell | offline-validated | pending |
+| 04 | `04-resource-hierarchy-tags-locks` | identity-governance | azure-cli | offline-validated | pending |
+| 05 | `05-policy-costs-advisor` | identity-governance | az-powershell | offline-validated | pending |
+| 06 | `06-storage-accounts-security` | storage | azure-cli | offline-validated | pending |
+| 07 | `07-storage-network-sas` | storage | az-powershell | offline-validated | pending |
+| 08 | `08-blob-lifecycle-replication` | storage | azure-cli | offline-validated | pending |
+| 09 | `09-azure-files-identity` | storage | az-powershell | offline-validated | pending |
+| 10 | `10-arm-bicep-lifecycle` | compute | both | offline-validated | pending |
+| 11 | `11-vm-lifecycle-disks-encryption` | compute | azure-cli | offline-validated | pending |
+| 12 | `12-vm-resilience-scale-mobility` | compute | az-powershell | offline-validated | pending |
+| 13 | `13-acr-aci` | compute | azure-cli | offline-validated | pending |
+| 14 | `14-container-apps` | compute | azure-cli | offline-validated | pending |
+| 15 | `15-app-service-scale-slots` | compute | az-powershell | offline-validated | pending |
+| 16 | `16-app-service-tls-dns-backup-network` | compute | azure-cli | offline-validated | pending |
+| 17 | `17-vnet-subnets-peering-public-ip` | networking | az-powershell | offline-validated | pending |
+| 18 | `18-routing-nsg-asg` | networking | azure-cli | offline-validated | pending |
+| 19 | `19-service-private-endpoints` | networking | az-powershell | offline-validated | pending |
+| 20 | `20-azure-dns-bastion` | networking | azure-cli | offline-validated | pending |
+| 21 | `21-load-balancer-network-watcher` | networking | az-powershell | offline-validated | pending |
+| 22 | `22-azure-monitor-logs-insights` | monitor-recovery | both | offline-validated | pending |
+| 23 | `23-monitor-alerts-actions` | monitor-recovery | azure-cli | offline-validated | pending |
+| 24 | `24-azure-backup-restore` | monitor-recovery | az-powershell | offline-validated | pending |
+| 25 | `25-site-recovery-failover` | monitor-recovery | az-powershell | offline-validated | pending |
+| 26 | `26-capstone-build` | capstone | learner-choice | offline-validated | pending |
+| 27 | `27-capstone-operate-recover` | capstone | opposite-surface | offline-validated | pending |
 
-Generated by `python tools/generate_indexes.py`. `offline-validated` confirms repository quality gates, not a live Azure deployment.
+Generated by `python tools/generate_indexes.py`. `offline-validated` confirms repository quality gates, not a live Azure deployment. Screenshot statuses follow the portal evidence contract: `pending`, `captured`, `sanitized`, then `verified`.

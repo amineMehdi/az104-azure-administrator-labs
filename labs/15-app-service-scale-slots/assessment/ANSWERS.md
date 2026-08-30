@@ -14,7 +14,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/app-service/quickstart-powershell
+Source: <https://learn.microsoft.com/en-us/azure/app-service/quickstart-powershell>
 
 ## 2. B (`LAB15-Q02`)
 
@@ -28,7 +28,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/app-service/manage-scale-up
+Source: <https://learn.microsoft.com/en-us/azure/app-service/manage-scale-up>
 
 ## 3. C (`LAB15-Q03`)
 
@@ -42,7 +42,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/app-service/manage-scale-per-app
+Source: <https://learn.microsoft.com/en-us/azure/app-service/manage-scale-per-app>
 
 ## 4. D (`LAB15-Q04`)
 
@@ -56,7 +56,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/app-service/deploy-staging-slots
+Source: <https://learn.microsoft.com/en-us/azure/app-service/deploy-staging-slots>
 
 ## 5. A (`LAB15-Q05`)
 
@@ -70,7 +70,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/app-service/quickstart-powershell
+Source: <https://learn.microsoft.com/en-us/azure/app-service/quickstart-powershell>
 
 ## 6. B (`LAB15-Q06`)
 
@@ -84,7 +84,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/app-service/manage-scale-up
+Source: <https://learn.microsoft.com/en-us/azure/app-service/manage-scale-up>
 
 ## 7. C (`LAB15-Q07`)
 
@@ -98,7 +98,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/app-service/manage-scale-per-app
+Source: <https://learn.microsoft.com/en-us/azure/app-service/manage-scale-per-app>
 
 ## 8. D (`LAB15-Q08`)
 
@@ -112,7 +112,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/app-service/deploy-staging-slots
+Source: <https://learn.microsoft.com/en-us/azure/app-service/deploy-staging-slots>
 
 ## 9. A (`LAB15-Q09`)
 
@@ -126,7 +126,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/app-service/quickstart-powershell
+Source: <https://learn.microsoft.com/en-us/azure/app-service/quickstart-powershell>
 
 ## 10. B (`LAB15-Q10`)
 
@@ -140,4 +140,4 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/app-service/manage-scale-up
+Source: <https://learn.microsoft.com/en-us/azure/app-service/manage-scale-up>

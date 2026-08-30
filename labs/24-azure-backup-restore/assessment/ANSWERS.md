@@ -14,7 +14,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/backup/backup-create-recovery-services-vault
+Source: <https://learn.microsoft.com/en-us/azure/backup/backup-create-recovery-services-vault>
 
 ## 2. B (`LAB24-Q02`)
 
@@ -28,7 +28,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/backup/create-manage-backup-vault
+Source: <https://learn.microsoft.com/en-us/azure/backup/create-manage-backup-vault>
 
 ## 3. C (`LAB24-Q03`)
 
@@ -42,7 +42,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/backup/quick-backup-vm-powershell
+Source: <https://learn.microsoft.com/en-us/azure/backup/quick-backup-vm-powershell>
 
 ## 4. D (`LAB24-Q04`)
 
@@ -56,7 +56,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/backup/backup-azure-restore-files-from-vm
+Source: <https://learn.microsoft.com/en-us/azure/backup/backup-azure-restore-files-from-vm>
 
 ## 5. A (`LAB24-Q05`)
 
@@ -70,7 +70,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/backup/configure-reports
+Source: <https://learn.microsoft.com/en-us/azure/backup/configure-reports>
 
 ## 6. B (`LAB24-Q06`)
 
@@ -84,7 +84,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/backup/backup-azure-monitoring-built-in-monitor
+Source: <https://learn.microsoft.com/en-us/azure/backup/backup-azure-monitoring-built-in-monitor>
 
 ## 7. C (`LAB24-Q07`)
 
@@ -98,7 +98,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/backup/backup-create-recovery-services-vault
+Source: <https://learn.microsoft.com/en-us/azure/backup/backup-create-recovery-services-vault>
 
 ## 8. D (`LAB24-Q08`)
 
@@ -112,7 +112,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/backup/create-manage-backup-vault
+Source: <https://learn.microsoft.com/en-us/azure/backup/create-manage-backup-vault>
 
 ## 9. A (`LAB24-Q09`)
 
@@ -126,7 +126,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/backup/quick-backup-vm-powershell
+Source: <https://learn.microsoft.com/en-us/azure/backup/quick-backup-vm-powershell>
 
 ## 10. B (`LAB24-Q10`)
 
@@ -140,4 +140,4 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/backup/backup-azure-restore-files-from-vm
+Source: <https://learn.microsoft.com/en-us/azure/backup/backup-azure-restore-files-from-vm>

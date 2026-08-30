@@ -1,0 +1,22 @@
+# Local offline gates mirroring .github/workflows/quality.yml (no Azure access).
+repos:
+  - repo: local
+    hooks:
+      - id: validate-repository
+        name: Validate repository contract
+        entry: python tools/validate_repository.py
+        language: system
+        pass_filenames: false
+        always_run: true
+      - id: generated-indexes-current
+        name: Confirm generated indexes are current
+        entry: python tools/generate_indexes.py --check
+        language: system
+        pass_filenames: false
+        always_run: true
+      - id: validate-images
+        name: Validate committed portal images
+        entry: python tools/validate_images.py
+        language: system
+        pass_filenames: false
+        always_run: true

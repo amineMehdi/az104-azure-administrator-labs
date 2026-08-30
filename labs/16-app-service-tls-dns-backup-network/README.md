@@ -98,7 +98,50 @@ The script records its run before creating resources. If a cloud operation fails
 
 ### 3. Complete and reason through the checkpoints
 
-### Checkpoint 1: Create an App Service plan and web app with HTTPS-only and minimum TLS 1Create an App Service plan and web app with HTTPS-only and minimum TLS 1.2.Evidence to retain:- The command output or exact resource/object ID for checkpoint 1.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.### Checkpoint 2: Create a delegated integration subnet and configure regional VNet integrationCreate a delegated integration subnet and configure regional VNet integration.Evidence to retain:- The command output or exact resource/object ID for checkpoint 2.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.### Checkpoint 3: Create a private backup container and configure an App Service backup schedule without exposing its SASCreate a private backup container and configure an App Service backup schedule without exposing its SAS.Evidence to retain:- The command output or exact resource/object ID for checkpoint 3.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.### Checkpoint 4: Validate the DNS TXT/CNAME records and bind AZ104_CUSTOM_HOSTNAME and AZ104_CERTIFICATE_PATH only when suppliedValidate the DNS TXT/CNAME records and bind AZ104_CUSTOM_HOSTNAME and AZ104_CERTIFICATE_PATH only when supplied.Evidence to retain:- The command output or exact resource/object ID for checkpoint 4.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.
+### Checkpoint 1: Create an App Service plan and web app with HTTPS-only and minimum TLS 1
+
+Create an App Service plan and web app with HTTPS-only and minimum TLS 1.2.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 1.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
+### Checkpoint 2: Create a delegated integration subnet and configure regional VNet integration
+
+Create a delegated integration subnet and configure regional VNet integration.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 2.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
+### Checkpoint 3: Create a private backup container and configure an App Service backup schedule without exposing its SAS
+
+Create a private backup container and configure an App Service backup schedule without exposing its SAS.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 3.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
+### Checkpoint 4: Validate the DNS TXT/CNAME records and bind AZ104_CUSTOM_HOSTNAME and AZ104_CERTIFICATE_PATH only when supplied
+
+Validate the DNS TXT/CNAME records and bind AZ104_CUSTOM_HOSTNAME and AZ104_CERTIFICATE_PATH only when supplied.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 4.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
 ### 4. Validate independently
 
 ```sh
@@ -108,6 +151,17 @@ The script records its run before creating resources. If a cloud operation fails
 Inspect `.state/az104l16-01/validation.json`. A `pass` applies only to checks that could be executed. A gated or asynchronous path must remain `warning` or `skipped` until its evidence exists.
 
 Positive checks should prove the intended resources, configuration, relationships, or health. Negative checks should prove that anonymous access, excess scope, accidental inheritance, unresolved DNS, unhealthy probes, or unrecorded resources were not introduced where the scenario forbids them.
+
+## Portal evidence
+
+Portal screenshots are planned evidence captured only during an authorized live run. Until then every entry in [images/portal/manifest.yml](images/portal/manifest.yml) stays `pending`, and no placeholder image is committed. Capture and sanitization rules live in [images/README.md](images/README.md).
+
+| Planned file | Checkpoint | Portal blade | Evidence |
+|---|---:|---|---|
+| `01-configuration-general-settings.png` | 1 | App Service > Configuration > General settings | HTTPS-only and minimum inbound TLS |
+| `02-app-service-networking.png` | 2 | App Service > Networking | Regional VNet integration |
+| `03-app-service-backups.png` | 3 | App Service > Backups | Backup destination and schedule with secrets hidden |
+| `04-app-service-custom-domains.png` | 4 | App Service > Custom domains | Validated custom hostname and TLS binding when gated inputs exist |
 
 ## Break/fix exercise
 

@@ -14,7 +14,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-powershell
+Source: <https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-powershell>
 
 ## 2. B (`LAB03-Q02`)
 
@@ -28,7 +28,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles
+Source: <https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles>
 
 ## 3. C (`LAB03-Q03`)
 
@@ -42,7 +42,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/role-based-access-control/check-access
+Source: <https://learn.microsoft.com/en-us/azure/role-based-access-control/check-access>
 
 ## 4. D (`LAB03-Q04`)
 
@@ -56,7 +56,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-powershell
+Source: <https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-powershell>
 
 ## 5. A (`LAB03-Q05`)
 
@@ -70,7 +70,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles
+Source: <https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles>
 
 ## 6. B (`LAB03-Q06`)
 
@@ -84,7 +84,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/role-based-access-control/check-access
+Source: <https://learn.microsoft.com/en-us/azure/role-based-access-control/check-access>
 
 ## 7. C (`LAB03-Q07`)
 
@@ -98,7 +98,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-powershell
+Source: <https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-powershell>
 
 ## 8. D (`LAB03-Q08`)
 
@@ -112,7 +112,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles
+Source: <https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles>
 
 ## 9. A (`LAB03-Q09`)
 
@@ -126,7 +126,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/role-based-access-control/check-access
+Source: <https://learn.microsoft.com/en-us/azure/role-based-access-control/check-access>
 
 ## 10. B (`LAB03-Q10`)
 
@@ -140,4 +140,4 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-powershell
+Source: <https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-powershell>

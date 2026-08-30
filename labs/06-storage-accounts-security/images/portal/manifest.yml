@@ -1,0 +1,42 @@
+schemaVersion: '1.0'
+labId: LAB-06
+status: pending
+source: Every capture must come from a signed-in session of the real Azure Portal (https://portal.azure.com) against
+  the disposable lab environment; fabricated or placeholder images are forbidden.
+captures:
+- file: 01-storage-account-overview.png
+  checkpoint: 1
+  portalBlade: Storage account > Overview
+  evidenceShown: Account kind, location, and redundancy
+  captureDate: null
+  region: null
+  redactions: []
+  portalConfirmed: false
+  status: pending
+- file: 02-storage-account-configuration.png
+  checkpoint: 2
+  portalBlade: Storage account > Configuration
+  evidenceShown: Secure transfer, TLS, and public access settings
+  captureDate: null
+  region: null
+  redactions: []
+  portalConfirmed: false
+  status: pending
+- file: 03-storage-account-encryption.png
+  checkpoint: 3
+  portalBlade: Storage account > Encryption
+  evidenceShown: Encryption services and infrastructure encryption
+  captureDate: null
+  region: null
+  redactions: []
+  portalConfirmed: false
+  status: pending
+- file: 04-storage-account-access-keys.png
+  checkpoint: 4
+  portalBlade: Storage account > Access keys
+  evidenceShown: Key-management interface with all key values redacted
+  captureDate: null
+  region: null
+  redactions: []
+  portalConfirmed: false
+  status: pending

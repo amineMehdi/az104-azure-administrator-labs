@@ -14,7 +14,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/container-registry/container-registry-get-started-azure-cli
+Source: <https://learn.microsoft.com/en-us/azure/container-registry/container-registry-get-started-azure-cli>
 
 ## 2. B (`LAB13-Q02`)
 
@@ -28,7 +28,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/container-registry/container-registry-import-images
+Source: <https://learn.microsoft.com/en-us/azure/container-registry/container-registry-import-images>
 
 ## 3. C (`LAB13-Q03`)
 
@@ -42,7 +42,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/container-instances/container-instances-quickstart
+Source: <https://learn.microsoft.com/en-us/azure/container-instances/container-instances-quickstart>
 
 ## 4. D (`LAB13-Q04`)
 
@@ -56,7 +56,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/container-instances/container-instances-container-groups
+Source: <https://learn.microsoft.com/en-us/azure/container-instances/container-instances-container-groups>
 
 ## 5. A (`LAB13-Q05`)
 
@@ -70,7 +70,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/container-registry/container-registry-get-started-azure-cli
+Source: <https://learn.microsoft.com/en-us/azure/container-registry/container-registry-get-started-azure-cli>
 
 ## 6. B (`LAB13-Q06`)
 
@@ -84,7 +84,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/container-registry/container-registry-import-images
+Source: <https://learn.microsoft.com/en-us/azure/container-registry/container-registry-import-images>
 
 ## 7. C (`LAB13-Q07`)
 
@@ -98,7 +98,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/container-instances/container-instances-quickstart
+Source: <https://learn.microsoft.com/en-us/azure/container-instances/container-instances-quickstart>
 
 ## 8. D (`LAB13-Q08`)
 
@@ -112,7 +112,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/container-instances/container-instances-container-groups
+Source: <https://learn.microsoft.com/en-us/azure/container-instances/container-instances-container-groups>
 
 ## 9. A (`LAB13-Q09`)
 
@@ -126,7 +126,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/container-registry/container-registry-get-started-azure-cli
+Source: <https://learn.microsoft.com/en-us/azure/container-registry/container-registry-get-started-azure-cli>
 
 ## 10. B (`LAB13-Q10`)
 
@@ -140,4 +140,4 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/container-registry/container-registry-import-images
+Source: <https://learn.microsoft.com/en-us/azure/container-registry/container-registry-import-images>

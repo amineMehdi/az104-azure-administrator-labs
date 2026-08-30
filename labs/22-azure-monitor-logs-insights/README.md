@@ -97,7 +97,50 @@ The script records its run before creating resources. If a cloud operation fails
 
 ### 3. Complete and reason through the checkpoints
 
-### Checkpoint 1: Create a Log Analytics workspace with bounded retention and a monitored storage accountCreate a Log Analytics workspace with bounded retention and a monitored storage account.Evidence to retain:- The command output or exact resource/object ID for checkpoint 1.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.### Checkpoint 2: Discover diagnostic categories and create settings that send supported logs and metrics to the workspaceDiscover diagnostic categories and create settings that send supported logs and metrics to the workspace.Evidence to retain:- The command output or exact resource/object ID for checkpoint 2.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.### Checkpoint 3: Run KQL queries that summarize activity by operation, result, and time range without assuming immediate ingestionRun KQL queries that summarize activity by operation, result, and time range without assuming immediate ingestion.Evidence to retain:- The command output or exact resource/object ID for checkpoint 3.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.### Checkpoint 4: Query platform metrics and compare baseline monitoring with VM, Storage, and Network Insights dependenciesQuery platform metrics and compare baseline monitoring with VM, Storage, and Network Insights dependencies.Evidence to retain:- The command output or exact resource/object ID for checkpoint 4.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.
+### Checkpoint 1: Create a Log Analytics workspace with bounded retention and a monitored storage account
+
+Create a Log Analytics workspace with bounded retention and a monitored storage account.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 1.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
+### Checkpoint 2: Discover diagnostic categories and create settings that send supported logs and metrics to the workspace
+
+Discover diagnostic categories and create settings that send supported logs and metrics to the workspace.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 2.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
+### Checkpoint 3: Run KQL queries that summarize activity by operation, result, and time range without assuming immediate ingestion
+
+Run KQL queries that summarize activity by operation, result, and time range without assuming immediate ingestion.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 3.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
+### Checkpoint 4: Query platform metrics and compare baseline monitoring with VM, Storage, and Network Insights dependencies
+
+Query platform metrics and compare baseline monitoring with VM, Storage, and Network Insights dependencies.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 4.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
 ### 4. Validate independently
 
 ```sh
@@ -107,6 +150,17 @@ The script records its run before creating resources. If a cloud operation fails
 Inspect `.state/az104l22-01/validation.json`. A `pass` applies only to checks that could be executed. A gated or asynchronous path must remain `warning` or `skipped` until its evidence exists.
 
 Positive checks should prove the intended resources, configuration, relationships, or health. Negative checks should prove that anonymous access, excess scope, accidental inheritance, unresolved DNS, unhealthy probes, or unrecorded resources were not introduced where the scenario forbids them.
+
+## Portal evidence
+
+Portal screenshots are planned evidence captured only during an authorized live run. Until then every entry in [images/portal/manifest.yml](images/portal/manifest.yml) stays `pending`, and no placeholder image is committed. Capture and sanitization rules live in [images/README.md](images/README.md).
+
+| Planned file | Checkpoint | Portal blade | Evidence |
+|---|---:|---|---|
+| `01-monitor-metrics.png` | 4 | Monitor > Metrics | Selected resource metric, aggregation, and time grain |
+| `02-log-analytics-workspace-logs.png` | 3 | Log Analytics workspace > Logs | KQL query text and returned schema/results |
+| `03-resource-diagnostic-settings.png` | 2 | Resource > Diagnostic settings | Destination workspace and enabled categories |
+| `04-monitor-insights.png` | 4 | Monitor > Insights | Onboarding or interpreted health for VM, storage, and network |
 
 ## Break/fix exercise
 

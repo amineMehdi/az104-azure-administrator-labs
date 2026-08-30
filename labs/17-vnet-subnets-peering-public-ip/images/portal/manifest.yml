@@ -1,0 +1,42 @@
+schemaVersion: '1.0'
+labId: LAB-17
+status: pending
+source: Every capture must come from a signed-in session of the real Azure Portal (https://portal.azure.com) against
+  the disposable lab environment; fabricated or placeholder images are forbidden.
+captures:
+- file: 01-virtual-network-address-space.png
+  checkpoint: 1
+  portalBlade: Virtual network > Address space
+  evidenceShown: Non-overlapping hub and spoke prefixes
+  captureDate: null
+  region: null
+  redactions: []
+  portalConfirmed: false
+  status: pending
+- file: 02-virtual-network-subnets.png
+  checkpoint: 1
+  portalBlade: Virtual network > Subnets
+  evidenceShown: Application and management subnet boundaries
+  captureDate: null
+  region: null
+  redactions: []
+  portalConfirmed: false
+  status: pending
+- file: 03-virtual-network-peerings.png
+  checkpoint: 2
+  portalBlade: Virtual network > Peerings
+  evidenceShown: Connected bidirectional peerings
+  captureDate: null
+  region: null
+  redactions: []
+  portalConfirmed: false
+  status: pending
+- file: 04-public-ip-address-overview.png
+  checkpoint: 3
+  portalBlade: Public IP address > Overview
+  evidenceShown: Standard SKU, static allocation, and zones
+  captureDate: null
+  region: null
+  redactions: []
+  portalConfirmed: false
+  status: pending

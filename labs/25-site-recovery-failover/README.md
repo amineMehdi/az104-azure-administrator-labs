@@ -95,7 +95,50 @@ The script records its run before creating resources. If a cloud operation fails
 
 ### 3. Complete and reason through the checkpoints
 
-### Checkpoint 1: Create non-overlapping source and recovery VNets in the configured primary and secondary regionsCreate non-overlapping source and recovery VNets in the configured primary and secondary regions.Evidence to retain:- The command output or exact resource/object ID for checkpoint 1.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.### Checkpoint 2: Create a source VM and Recovery Services vault, then configure Azure-to-Azure fabric, container, policy, and network mappingsCreate a source VM and Recovery Services vault, then configure Azure-to-Azure fabric, container, policy, and network mappings.Evidence to retain:- The command output or exact resource/object ID for checkpoint 2.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.### Checkpoint 3: Enable replication and wait for protected health before running an isolated test failover into a test subnetEnable replication and wait for protected health before running an isolated test failover into a test subnet.Evidence to retain:- The command output or exact resource/object ID for checkpoint 3.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.### Checkpoint 4: Clean up test failover, compare planned and unplanned failover, and remove replication in the required order before vault deletionClean up test failover, compare planned and unplanned failover, and remove replication in the required order before vault deletion.Evidence to retain:- The command output or exact resource/object ID for checkpoint 4.- A positive assertion proving the intended state.- A negative assertion showing that broader or anonymous access was not introduced.- Any asynchronous operation state, timestamp, and final result.
+### Checkpoint 1: Create non-overlapping source and recovery VNets in the configured primary and secondary regions
+
+Create non-overlapping source and recovery VNets in the configured primary and secondary regions.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 1.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
+### Checkpoint 2: Create a source VM and Recovery Services vault, then configure Azure-to-Azure fabric, container, policy, and network mappings
+
+Create a source VM and Recovery Services vault, then configure Azure-to-Azure fabric, container, policy, and network mappings.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 2.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
+### Checkpoint 3: Enable replication and wait for protected health before running an isolated test failover into a test subnet
+
+Enable replication and wait for protected health before running an isolated test failover into a test subnet.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 3.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
+### Checkpoint 4: Clean up test failover, compare planned and unplanned failover, and remove replication in the required order before vault deletion
+
+Clean up test failover, compare planned and unplanned failover, and remove replication in the required order before vault deletion.
+
+Evidence to retain:
+
+- The command output or exact resource/object ID for checkpoint 4.
+- A positive assertion proving the intended state.
+- A negative assertion showing that broader or anonymous access was not introduced.
+- Any asynchronous operation state, timestamp, and final result.
+
 ### 4. Validate independently
 
 ```ps1
@@ -105,6 +148,17 @@ pwsh ./scripts/powershell/Validate.ps1 -RunId az104l25-01 -SubscriptionId <subsc
 Inspect `.state/az104l25-01/validation.json`. A `pass` applies only to checks that could be executed. A gated or asynchronous path must remain `warning` or `skipped` until its evidence exists.
 
 Positive checks should prove the intended resources, configuration, relationships, or health. Negative checks should prove that anonymous access, excess scope, accidental inheritance, unresolved DNS, unhealthy probes, or unrecorded resources were not introduced where the scenario forbids them.
+
+## Portal evidence
+
+Portal screenshots are planned evidence captured only during an authorized live run. Until then every entry in [images/portal/manifest.yml](images/portal/manifest.yml) stays `pending`, and no placeholder image is committed. Capture and sanitization rules live in [images/README.md](images/README.md).
+
+| Planned file | Checkpoint | Portal blade | Evidence |
+|---|---:|---|---|
+| `01-recovery-services-vault-replicated-items.png` | 3 | Recovery Services vault > Replicated items | Replication health, RPO, and recovery region |
+| `02-replicated-item-compute-and-network.png` | 3 | Replicated item > Compute and Network | Target VM, disk, VNet, subnet, and IP choices |
+| `03-recovery-services-vault-site-recovery-jobs.png` | 4 | Recovery Services vault > Site Recovery jobs | Test failover and cleanup job sequence |
+| `04-resource-group-recovery-vm.png` | 3 | Resource group > Recovery VM | Isolated test-failover VM before cleanup |
 
 ## Break/fix exercise
 

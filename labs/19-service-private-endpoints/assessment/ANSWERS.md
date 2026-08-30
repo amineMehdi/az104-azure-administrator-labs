@@ -14,7 +14,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-service-endpoints-overview
+Source: <https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-service-endpoints-overview>
 
 ## 2. B (`LAB19-Q02`)
 
@@ -28,7 +28,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/private-link/private-endpoint-overview
+Source: <https://learn.microsoft.com/en-us/azure/private-link/private-endpoint-overview>
 
 ## 3. C (`LAB19-Q03`)
 
@@ -42,7 +42,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/storage/common/storage-private-endpoints
+Source: <https://learn.microsoft.com/en-us/azure/storage/common/storage-private-endpoints>
 
 ## 4. D (`LAB19-Q04`)
 
@@ -56,7 +56,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/dns/private-dns-privatednszone
+Source: <https://learn.microsoft.com/en-us/azure/dns/private-dns-privatednszone>
 
 ## 5. A (`LAB19-Q05`)
 
@@ -70,7 +70,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-service-endpoints-overview
+Source: <https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-service-endpoints-overview>
 
 ## 6. B (`LAB19-Q06`)
 
@@ -84,7 +84,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/private-link/private-endpoint-overview
+Source: <https://learn.microsoft.com/en-us/azure/private-link/private-endpoint-overview>
 
 ## 7. C (`LAB19-Q07`)
 
@@ -98,7 +98,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/storage/common/storage-private-endpoints
+Source: <https://learn.microsoft.com/en-us/azure/storage/common/storage-private-endpoints>
 
 ## 8. D (`LAB19-Q08`)
 
@@ -112,7 +112,7 @@ Why the other choices do not fit:
 - **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/dns/private-dns-privatednszone
+Source: <https://learn.microsoft.com/en-us/azure/dns/private-dns-privatednszone>
 
 ## 9. A (`LAB19-Q09`)
 
@@ -126,7 +126,7 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-service-endpoints-overview
+Source: <https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-service-endpoints-overview>
 
 ## 10. B (`LAB19-Q10`)
 
@@ -140,4 +140,4 @@ Why the other choices do not fit:
 - **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 - **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
 
-Source: https://learn.microsoft.com/en-us/azure/private-link/private-endpoint-overview
+Source: <https://learn.microsoft.com/en-us/azure/private-link/private-endpoint-overview>
