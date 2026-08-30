@@ -1,5 +1,7 @@
 # AZ-104 Azure Administrator Labs
 
+![AZ-104 Azure Administrator Labs cover](docs/visuals/az104-lab-cover.png)
+
 A command-first, self-paced lab curriculum for the Microsoft Certified: Azure Administrator Associate exam. The repository follows the official skills measured as of **April 17, 2026** and is designed around Azure CLI, Az/Graph PowerShell, real validation, safe cleanup, and architecture diagrams.
 
 > [!IMPORTANT]
