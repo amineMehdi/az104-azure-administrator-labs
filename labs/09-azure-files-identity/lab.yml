@@ -22,21 +22,20 @@ cost:
   - storage account
   - Azure file share
   - share snapshot
-  notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator
-    before execution and clean up immediately.
+  notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator before
+    execution and clean up immediately.
 permissions:
   azureRbacRoles:
-  - Contributor and Storage File Data SMB Share Contributor; directory permissions for the optional identity-source
-    path
+  - Contributor and Storage File Data SMB Share Contributor; directory permissions for the optional identity-source path
   entraRoles: []
   graphScopes: []
 prerequisites:
 - A disposable non-production Azure environment
 - An active context that matches the explicitly supplied tenant and subscription
-- 'Authorization boundary: Contributor and Storage File Data SMB Share Contributor; directory permissions for the
-  optional identity-source path'
-- 'External gate review: Identity-based SMB configuration is gated by AZ104_FILES_IDENTITY_SOURCE because Entra
-  Kerberos, AD DS, and Entra Domain Services have different prerequisites.'
+- 'Authorization boundary: Contributor and Storage File Data SMB Share Contributor; directory permissions for the optional
+  identity-source path'
+- 'External gate review: Identity-based SMB configuration is gated by AZ104_FILES_IDENTITY_SOURCE because Entra Kerberos,
+  AD DS, and Entra Domain Services have different prerequisites.'
 - Azure CLI hosted in PowerShell 7.4 or later
 providers:
   observed:
@@ -54,8 +53,8 @@ creates:
   - .state/<run-id>/validation.json
 tenantScopedChanges: []
 externalRequirements:
-- Identity-based SMB configuration is gated by AZ104_FILES_IDENTITY_SOURCE because Entra Kerberos, AD DS, and Entra
-  Domain Services have different prerequisites.
+- Identity-based SMB configuration is gated by AZ104_FILES_IDENTITY_SOURCE because Entra Kerberos, AD DS, and Entra Domain
+  Services have different prerequisites.
 validation:
   commandLanes:
   - scripts/cli/Validate.ps1
@@ -74,7 +73,7 @@ cleanup:
   residualAuditRequired: true
 assessment:
   enabled: true
-  questionCount: 12
+  questionCount: 50
   primaryDomain: storage
 lastOfflineValidated: '2026-08-30'
 lastLiveVerified: null

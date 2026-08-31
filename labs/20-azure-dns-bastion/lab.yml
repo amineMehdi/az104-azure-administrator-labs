@@ -22,8 +22,8 @@ cost:
   - Standard public IP
   - Bastion host
   - public DNS zone and recordsets
-  notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator
-    before execution and clean up immediately.
+  notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator before
+    execution and clean up immediately.
 permissions:
   azureRbacRoles:
   - Network Contributor; DNS Zone Contributor for an owned zone
@@ -33,8 +33,8 @@ prerequisites:
 - A disposable non-production Azure environment
 - An active context that matches the explicitly supplied tenant and subscription
 - 'Authorization boundary: Network Contributor; DNS Zone Contributor for an owned zone'
-- 'External gate review: Real public DNS delegation requires AZ104_OWNED_DNS_ZONE and control of the parent registrar;
-  the isolated zone path is always available.'
+- 'External gate review: Real public DNS delegation requires AZ104_OWNED_DNS_ZONE and control of the parent registrar; the
+  isolated zone path is always available.'
 - Azure CLI hosted in PowerShell 7.4 or later
 providers:
   observed:
@@ -52,8 +52,8 @@ creates:
   - .state/<run-id>/validation.json
 tenantScopedChanges: []
 externalRequirements:
-- Real public DNS delegation requires AZ104_OWNED_DNS_ZONE and control of the parent registrar; the isolated zone
-  path is always available.
+- Real public DNS delegation requires AZ104_OWNED_DNS_ZONE and control of the parent registrar; the isolated zone path is
+  always available.
 validation:
   commandLanes:
   - scripts/cli/Validate.ps1
@@ -72,7 +72,7 @@ cleanup:
   residualAuditRequired: true
 assessment:
   enabled: true
-  questionCount: 10
+  questionCount: 50
   primaryDomain: networking
 lastOfflineValidated: '2026-08-30'
 lastLiveVerified: null

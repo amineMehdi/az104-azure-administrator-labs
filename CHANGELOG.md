@@ -8,13 +8,13 @@ All notable changes to this curriculum are documented here.
 
 - Local Git repository foundation.
 - Current AZ-104 blueprint baseline dated April 17, 2026.
-- Planned 28-lab curriculum and 250-question domain assessment contract.
+- Planned 28-lab curriculum and 1,250-question lab assessment contract.
 - Offline-validated golden Lab 00 for safe tooling and Azure context, with CLI and PowerShell lanes, contract tests, and diagram.
 - Offline-validated Lab 01 for Microsoft Entra users and groups, with an Azure CLI/Graph lane, partial-run recovery, domain assessment, and diagram.
 - Labs 02–27 as separate, self-contained Azure CLI or PowerShell lab folders with inline lifecycle commands, synchronized scripts, validation contracts, diagrams, and solution notes.
 - Full assessment coverage for all 82 official objectives in the April 17, 2026 AZ-104 blueprint.
 - A command-evidence policy based on redacted Azure CLI and PowerShell validation output.
-- Exactly 50 questions for each of the five official domains, with separate learner and answer files in Labs 01–25.
+- Exactly 50 questions in every assessment-enabled lab, with separate learner and answer files in Labs 01–25.
 
 ### Changed
 

@@ -24,8 +24,8 @@ cost:
   - two application security groups
   - route table
   - test network interfaces
-  notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator
-    before execution and clean up immediately.
+  notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator before
+    execution and clean up immediately.
 permissions:
   azureRbacRoles:
   - Network Contributor on the lab resource group
@@ -71,7 +71,7 @@ cleanup:
   residualAuditRequired: true
 assessment:
   enabled: true
-  questionCount: 10
+  questionCount: 50
   primaryDomain: networking
 lastOfflineValidated: '2026-08-30'
 lastLiveVerified: null

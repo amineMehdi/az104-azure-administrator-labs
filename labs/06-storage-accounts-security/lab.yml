@@ -20,8 +20,8 @@ cost:
   billableResources: &id001
   - resource group
   - StorageV2 account
-  notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator
-    before execution and clean up immediately.
+  notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator before
+    execution and clean up immediately.
 permissions:
   azureRbacRoles:
   - Contributor on the lab resource group
@@ -67,7 +67,7 @@ cleanup:
   residualAuditRequired: true
 assessment:
   enabled: true
-  questionCount: 12
+  questionCount: 50
   primaryDomain: storage
 lastOfflineValidated: '2026-08-30'
 lastLiveVerified: null

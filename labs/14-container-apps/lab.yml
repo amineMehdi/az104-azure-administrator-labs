@@ -20,8 +20,8 @@ cost:
   - Log Analytics workspace
   - Container Apps environment
   - container app
-  notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator
-    before execution and clean up immediately.
+  notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator before
+    execution and clean up immediately.
 permissions:
   azureRbacRoles:
   - Contributor on the lab resource group
@@ -68,7 +68,7 @@ cleanup:
   residualAuditRequired: true
 assessment:
   enabled: true
-  questionCount: 4
+  questionCount: 50
   primaryDomain: compute
 lastOfflineValidated: '2026-08-30'
 lastLiveVerified: null

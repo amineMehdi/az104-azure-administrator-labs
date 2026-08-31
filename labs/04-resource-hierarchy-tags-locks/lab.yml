@@ -19,19 +19,19 @@ difficulty: foundational
 cost:
   class: none
   billableResources: []
-  notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator
-    before execution and clean up immediately.
+  notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator before
+    execution and clean up immediately.
 permissions:
   azureRbacRoles:
-  - Contributor plus User Access Administrator for lock management; Management Group Contributor for the optional
-    hierarchy path
+  - Contributor plus User Access Administrator for lock management; Management Group Contributor for the optional hierarchy
+    path
   entraRoles: []
   graphScopes: []
 prerequisites:
 - A disposable non-production Azure environment
 - An active context that matches the explicitly supplied tenant and subscription
-- 'Authorization boundary: Contributor plus User Access Administrator for lock management; Management Group Contributor
-  for the optional hierarchy path'
+- 'Authorization boundary: Contributor plus User Access Administrator for lock management; Management Group Contributor for
+  the optional hierarchy path'
 - 'External gate review: Management-group creation is optional and requires explicit tenant hierarchy authorization.'
 - Azure CLI hosted in PowerShell 7.4 or later
 providers:
@@ -74,7 +74,7 @@ cleanup:
   residualAuditRequired: true
 assessment:
   enabled: true
-  questionCount: 10
+  questionCount: 50
   primaryDomain: identity-governance
 lastOfflineValidated: '2026-08-30'
 lastLiveVerified: null

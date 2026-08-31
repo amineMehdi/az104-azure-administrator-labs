@@ -17,8 +17,8 @@ difficulty: foundational
 cost:
   class: none
   billableResources: []
-  notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator
-    before execution and clean up immediately.
+  notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator before
+    execution and clean up immediately.
 permissions:
   azureRbacRoles:
   - User Access Administrator or Owner at the lab resource-group scope
@@ -68,7 +68,7 @@ cleanup:
   residualAuditRequired: true
 assessment:
   enabled: true
-  questionCount: 10
+  questionCount: 50
   primaryDomain: identity-governance
 lastOfflineValidated: '2026-08-30'
 lastLiveVerified: null

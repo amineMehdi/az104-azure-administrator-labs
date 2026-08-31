@@ -2,23 +2,23 @@
   objectiveIds:
   - ST-ACCESS-01
   difficulty: foundational
-  stem: Which principle is most important when working on 'Configure Azure Storage firewalls and virtual networks'
-    in Lab 07?
+  stem: Which principle is most important when working on 'Configure Azure Storage firewalls and virtual networks' in Lab
+    07?
   options:
-    A: A stored access policy can revoke or change a service SAS, while account SAS and access keys have broader
-      authority and require stricter handling.
-    B: The shortest command is always correct even when it changes a broader scope.
-    C: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-    D: A recognizable resource name removes the need for validation and scoped cleanup.
-  correctOption: A
-  explanation: 'The lab establishes this design principle: A stored access policy can revoke or change a service
-    SAS, while account SAS and access keys have broader authority and require stricter handling.'
+    A: The shortest command is always correct even when it changes a broader scope.
+    B: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+    C: A recognizable resource name removes the need for validation and scoped cleanup.
+    D: A stored access policy can revoke or change a service SAS, while account SAS and access keys have broader authority
+      and require stricter handling.
+  correctOption: D
+  explanation: 'The lab establishes this design principle: A stored access policy can revoke or change a service SAS, while
+    account SAS and access keys have broader authority and require stricter handling.'
   distractorExplanations:
-    A: 'Correct. The lab establishes this design principle: A stored access policy can revoke or change a service
-      SAS, while account SAS and access keys have broader authority and require stricter handling.'
-    B: This choice changes or trusts a broader scope than the recorded lab boundary.
-    C: This choice skips independent evidence or relies on ambiguous resource identity.
-    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: 'Correct. The lab establishes this design principle: A stored access policy can revoke or change a service SAS, while
+      account SAS and access keys have broader authority and require stricter handling.'
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/storage/common/storage-network-security
   lastVerified: '2026-08-30'
@@ -28,19 +28,19 @@
   difficulty: foundational
   stem: Which lab action directly supports the objective 'Create and use shared access signature (SAS) tokens'?
   options:
-    A: Change the active tenant without displaying or confirming the resulting context.
-    B: Create a secure StorageV2 account and change the network default action to Deny.
-    C: Search the whole tenant for a similar display name and modify the first match.
-    D: Mark the objective complete after reading documentation without checking any state.
-  correctOption: B
-  explanation: 'The reviewed hands-on action for this objective is: Create a secure StorageV2 account and change
-    the network default action to Deny.'
+    A: Create a secure StorageV2 account and change the network default action to Deny.
+    B: Search the whole tenant for a similar display name and modify the first match.
+    C: Mark the objective complete after reading documentation without checking any state.
+    D: Change the active tenant without displaying or confirming the resulting context.
+  correctOption: A
+  explanation: 'The reviewed hands-on action for this objective is: Create a secure StorageV2 account and change the network
+    default action to Deny.'
   distractorExplanations:
-    A: This choice changes or trusts a broader scope than the recorded lab boundary.
-    B: 'Correct. The reviewed hands-on action for this objective is: Create a secure StorageV2 account and change
-      the network default action to Deny.'
-    C: This choice skips independent evidence or relies on ambiguous resource identity.
-    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    A: 'Correct. The reviewed hands-on action for this objective is: Create a secure StorageV2 account and change the network
+      default action to Deny.'
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/storage/common/storage-sas-overview
   lastVerified: '2026-08-30'
@@ -50,20 +50,20 @@
   difficulty: foundational
   stem: Which authorization approach is appropriate before practicing 'Configure stored access policies'?
   options:
-    A: Use a production subscription because its resources already exist.
-    B: Assign Global Administrator and subscription Owner for every lab regardless of the operation.
-    C: 'Confirm the active context and use only the declared role boundary: Contributor plus Storage Account Contributor
-      on the lab resource group'
-    D: Skip role checks when the run ID contains the lab number.
-  correctOption: C
-  explanation: 'Least privilege requires the documented boundary: Contributor plus Storage Account Contributor on
-    the lab resource group'
+    A: Assign Global Administrator and subscription Owner for every lab regardless of the operation.
+    B: 'Confirm the active context and use only the declared role boundary: Contributor plus Storage Account Contributor on
+      the lab resource group'
+    C: Skip role checks when the run ID contains the lab number.
+    D: Use a production subscription because its resources already exist.
+  correctOption: B
+  explanation: 'Least privilege requires the documented boundary: Contributor plus Storage Account Contributor on the lab
+    resource group'
   distractorExplanations:
-    A: This choice changes or trusts a broader scope than the recorded lab boundary.
-    B: This choice skips independent evidence or relies on ambiguous resource identity.
-    C: 'Correct. Least privilege requires the documented boundary: Contributor plus Storage Account Contributor
-      on the lab resource group'
-    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: 'Correct. Least privilege requires the documented boundary: Contributor plus Storage Account Contributor on the lab
+      resource group'
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
   sourceUrls:
   - https://learn.microsoft.com/en-us/rest/api/storageservices/define-stored-access-policy
   lastVerified: '2026-08-30'
@@ -73,26 +73,406 @@
   difficulty: foundational
   stem: Which resource or object belongs inside the recorded boundary for 'Manage access keys'?
   options:
-    A: Use whichever similarly named object appears first in a broad search.
-    B: Use an unrelated shared resource without recording its immutable ID.
-    C: Use a production object when the sandbox prerequisite is unavailable.
-    D: Use the exact recorded identity and scope for blob container.
-  correctOption: D
+    A: Use an unrelated shared resource without recording its immutable ID.
+    B: Use a production object when the sandbox prerequisite is unavailable.
+    C: Use the exact recorded identity and scope for blob container.
+    D: Use whichever similarly named object appears first in a broad search.
+  correctOption: C
   explanation: The lab records the exact scope and identity of blob container before validation and cleanup.
   distractorExplanations:
-    A: This choice changes or trusts a broader scope than the recorded lab boundary.
-    B: This choice skips independent evidence or relies on ambiguous resource identity.
-    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-    D: Correct. The lab records the exact scope and identity of blob container before validation and cleanup.
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: Correct. The lab records the exact scope and identity of blob container before validation and cleanup.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
   sourceUrls:
   - https://learn.microsoft.com/en-us/cli/azure/storage
   lastVerified: '2026-08-30'
 - id: LAB07-Q05
   objectiveIds:
   - ST-ACCESS-01
+  difficulty: foundational
+  stem: 'During a design vocabulary review, the team evaluates this situation: Which principle is most important when working
+    on ''Configure Azure Storage firewalls and virtual networks'' in Lab 07?'
+  options:
+    A: The shortest command is always correct even when it changes a broader scope.
+    B: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+    C: A recognizable resource name removes the need for validation and scoped cleanup.
+    D: A stored access policy can revoke or change a service SAS, while account SAS and access keys have broader authority
+      and require stricter handling.
+  correctOption: D
+  explanation: 'The lab establishes this design principle: A stored access policy can revoke or change a service SAS, while
+    account SAS and access keys have broader authority and require stricter handling.'
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: 'Correct. The lab establishes this design principle: A stored access policy can revoke or change a service SAS, while
+      account SAS and access keys have broader authority and require stricter handling.'
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/storage/common/storage-network-security
+  lastVerified: '2026-08-30'
+- id: LAB07-Q06
+  objectiveIds:
+  - ST-ACCESS-02
+  difficulty: foundational
+  stem: 'In a command-planning session, an administrator asks this question: Which lab action directly supports the objective
+    ''Create and use shared access signature (SAS) tokens''?'
+  options:
+    A: Create a secure StorageV2 account and change the network default action to Deny.
+    B: Search the whole tenant for a similar display name and modify the first match.
+    C: Mark the objective complete after reading documentation without checking any state.
+    D: Change the active tenant without displaying or confirming the resulting context.
+  correctOption: A
+  explanation: 'The reviewed hands-on action for this objective is: Create a secure StorageV2 account and change the network
+    default action to Deny.'
+  distractorExplanations:
+    A: 'Correct. The reviewed hands-on action for this objective is: Create a secure StorageV2 account and change the network
+      default action to Deny.'
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/storage/common/storage-sas-overview
+  lastVerified: '2026-08-30'
+- id: LAB07-Q07
+  objectiveIds:
+  - ST-ACCESS-03
+  difficulty: foundational
+  stem: 'While preparing the lab, a learner verifies this platform rule: Which authorization approach is appropriate before
+    practicing ''Configure stored access policies''?'
+  options:
+    A: Assign Global Administrator and subscription Owner for every lab regardless of the operation.
+    B: 'Confirm the active context and use only the declared role boundary: Contributor plus Storage Account Contributor on
+      the lab resource group'
+    C: Skip role checks when the run ID contains the lab number.
+    D: Use a production subscription because its resources already exist.
+  correctOption: B
+  explanation: 'Least privilege requires the documented boundary: Contributor plus Storage Account Contributor on the lab
+    resource group'
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: 'Correct. Least privilege requires the documented boundary: Contributor plus Storage Account Contributor on the lab
+      resource group'
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/rest/api/storageservices/define-stored-access-policy
+  lastVerified: '2026-08-30'
+- id: LAB07-Q08
+  objectiveIds:
+  - ST-ACCESS-04
+  difficulty: foundational
+  stem: 'During peer review, the team must identify the accurate response to this scenario: Which resource or object belongs
+    inside the recorded boundary for ''Manage access keys''?'
+  options:
+    A: Use an unrelated shared resource without recording its immutable ID.
+    B: Use a production object when the sandbox prerequisite is unavailable.
+    C: Use the exact recorded identity and scope for blob container.
+    D: Use whichever similarly named object appears first in a broad search.
+  correctOption: C
+  explanation: The lab records the exact scope and identity of blob container before validation and cleanup.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: Correct. The lab records the exact scope and identity of blob container before validation and cleanup.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/cli/azure/storage
+  lastVerified: '2026-08-30'
+- id: LAB07-Q09
+  objectiveIds:
+  - ST-ACCESS-01
+  difficulty: foundational
+  stem: 'In an operations briefing, a new team member receives this question: Which principle is most important when working
+    on ''Configure Azure Storage firewalls and virtual networks'' in Lab 07?'
+  options:
+    A: The shortest command is always correct even when it changes a broader scope.
+    B: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+    C: A recognizable resource name removes the need for validation and scoped cleanup.
+    D: A stored access policy can revoke or change a service SAS, while account SAS and access keys have broader authority
+      and require stricter handling.
+  correctOption: D
+  explanation: 'The lab establishes this design principle: A stored access policy can revoke or change a service SAS, while
+    account SAS and access keys have broader authority and require stricter handling.'
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: 'Correct. The lab establishes this design principle: A stored access policy can revoke or change a service SAS, while
+      account SAS and access keys have broader authority and require stricter handling.'
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/storage/common/storage-network-security
+  lastVerified: '2026-08-30'
+- id: LAB07-Q10
+  objectiveIds:
+  - ST-ACCESS-02
+  difficulty: foundational
+  stem: 'While building a support checklist, an engineer reviews this requirement: Which lab action directly supports the
+    objective ''Create and use shared access signature (SAS) tokens''?'
+  options:
+    A: Create a secure StorageV2 account and change the network default action to Deny.
+    B: Search the whole tenant for a similar display name and modify the first match.
+    C: Mark the objective complete after reading documentation without checking any state.
+    D: Change the active tenant without displaying or confirming the resulting context.
+  correctOption: A
+  explanation: 'The reviewed hands-on action for this objective is: Create a secure StorageV2 account and change the network
+    default action to Deny.'
+  distractorExplanations:
+    A: 'Correct. The reviewed hands-on action for this objective is: Create a secure StorageV2 account and change the network
+      default action to Deny.'
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/storage/common/storage-sas-overview
+  lastVerified: '2026-08-30'
+- id: LAB07-Q11
+  objectiveIds:
+  - ST-ACCESS-03
+  difficulty: foundational
+  stem: 'During a readiness check, the administrator considers this behavior: Which authorization approach is appropriate
+    before practicing ''Configure stored access policies''?'
+  options:
+    A: Assign Global Administrator and subscription Owner for every lab regardless of the operation.
+    B: 'Confirm the active context and use only the declared role boundary: Contributor plus Storage Account Contributor on
+      the lab resource group'
+    C: Skip role checks when the run ID contains the lab number.
+    D: Use a production subscription because its resources already exist.
+  correctOption: B
+  explanation: 'Least privilege requires the documented boundary: Contributor plus Storage Account Contributor on the lab
+    resource group'
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: 'Correct. Least privilege requires the documented boundary: Contributor plus Storage Account Contributor on the lab
+      resource group'
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/rest/api/storageservices/define-stored-access-policy
+  lastVerified: '2026-08-30'
+- id: LAB07-Q12
+  objectiveIds:
+  - ST-ACCESS-04
+  difficulty: foundational
+  stem: 'In a service overview, the team discusses this scenario: Which resource or object belongs inside the recorded boundary
+    for ''Manage access keys''?'
+  options:
+    A: Use an unrelated shared resource without recording its immutable ID.
+    B: Use a production object when the sandbox prerequisite is unavailable.
+    C: Use the exact recorded identity and scope for blob container.
+    D: Use whichever similarly named object appears first in a broad search.
+  correctOption: C
+  explanation: The lab records the exact scope and identity of blob container before validation and cleanup.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: Correct. The lab records the exact scope and identity of blob container before validation and cleanup.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/cli/azure/storage
+  lastVerified: '2026-08-30'
+- id: LAB07-Q13
+  objectiveIds:
+  - ST-ACCESS-01
+  difficulty: foundational
+  stem: 'While reviewing official guidance, a learner must resolve this question: Which principle is most important when working
+    on ''Configure Azure Storage firewalls and virtual networks'' in Lab 07?'
+  options:
+    A: The shortest command is always correct even when it changes a broader scope.
+    B: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+    C: A recognizable resource name removes the need for validation and scoped cleanup.
+    D: A stored access policy can revoke or change a service SAS, while account SAS and access keys have broader authority
+      and require stricter handling.
+  correctOption: D
+  explanation: 'The lab establishes this design principle: A stored access policy can revoke or change a service SAS, while
+    account SAS and access keys have broader authority and require stricter handling.'
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: 'Correct. The lab establishes this design principle: A stored access policy can revoke or change a service SAS, while
+      account SAS and access keys have broader authority and require stricter handling.'
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/storage/common/storage-network-security
+  lastVerified: '2026-08-30'
+- id: LAB07-Q14
+  objectiveIds:
+  - ST-ACCESS-02
+  difficulty: foundational
+  stem: 'During a configuration walkthrough, the instructor asks about this situation: Which lab action directly supports
+    the objective ''Create and use shared access signature (SAS) tokens''?'
+  options:
+    A: Create a secure StorageV2 account and change the network default action to Deny.
+    B: Search the whole tenant for a similar display name and modify the first match.
+    C: Mark the objective complete after reading documentation without checking any state.
+    D: Change the active tenant without displaying or confirming the resulting context.
+  correctOption: A
+  explanation: 'The reviewed hands-on action for this objective is: Create a secure StorageV2 account and change the network
+    default action to Deny.'
+  distractorExplanations:
+    A: 'Correct. The reviewed hands-on action for this objective is: Create a secure StorageV2 account and change the network
+      default action to Deny.'
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/storage/common/storage-sas-overview
+  lastVerified: '2026-08-30'
+- id: LAB07-Q15
+  objectiveIds:
+  - ST-ACCESS-03
+  difficulty: foundational
+  stem: 'In a preflight knowledge check, the operator evaluates this requirement: Which authorization approach is appropriate
+    before practicing ''Configure stored access policies''?'
+  options:
+    A: Assign Global Administrator and subscription Owner for every lab regardless of the operation.
+    B: 'Confirm the active context and use only the declared role boundary: Contributor plus Storage Account Contributor on
+      the lab resource group'
+    C: Skip role checks when the run ID contains the lab number.
+    D: Use a production subscription because its resources already exist.
+  correctOption: B
+  explanation: 'Least privilege requires the documented boundary: Contributor plus Storage Account Contributor on the lab
+    resource group'
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: 'Correct. Least privilege requires the documented boundary: Contributor plus Storage Account Contributor on the lab
+      resource group'
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/rest/api/storageservices/define-stored-access-policy
+  lastVerified: '2026-08-30'
+- id: LAB07-Q16
+  objectiveIds:
+  - ST-ACCESS-01
   difficulty: applied
-  stem: A learner previews the implementation for 'Configure Azure Storage firewalls and virtual networks'. What
-    behavior is required?
+  stem: A learner previews the implementation for 'Configure Azure Storage firewalls and virtual networks'. What behavior
+    is required?
+  options:
+    A: Select the first accessible subscription and hide the resulting context.
+    B: Delete any older resource whose name resembles the new run ID.
+    C: Display the context, intended changes, cost and gated branches without mutating Azure.
+    D: Create the baseline immediately and request approval only before cleanup.
+  correctOption: C
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/storage/common/storage-network-security
+  lastVerified: '2026-08-30'
+- id: LAB07-Q17
+  objectiveIds:
+  - ST-ACCESS-02
+  difficulty: applied
+  stem: Which implementation step should the learner perform for 'Create and use shared access signature (SAS) tokens'?
+  options:
+    A: Copy resource identifiers from another run instead of recording returned IDs.
+    B: Skip the operation and edit validation.json to show a passing result.
+    C: Replace the lab action with a tenant-wide change that is easier to discover.
+    D: Create a secure StorageV2 account and change the network default action to Deny.
+  correctOption: D
+  explanation: 'The lab''s reviewed command path performs this bounded action: Create a secure StorageV2 account and change
+    the network default action to Deny.'
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: 'Correct. The lab''s reviewed command path performs this bounded action: Create a secure StorageV2 account and change
+      the network default action to Deny.'
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/storage/common/storage-sas-overview
+  lastVerified: '2026-08-30'
+- id: LAB07-Q18
+  objectiveIds:
+  - ST-ACCESS-03
+  difficulty: applied
+  stem: Which evidence most directly validates 'Configure stored access policies' for virtual network and subnet?
+  options:
+    A: Query the exact recorded scope and independently verify Microsoft.Network/virtualNetworks.
+    B: Record a credential so another learner can replay the authenticated session.
+    C: Treat the setup exit code as proof of every configuration and relationship.
+    D: List the entire subscription and assume similarly named resources belong to this run.
+  correctOption: A
+  explanation: The independent validation path must prove Microsoft.Network/virtualNetworks for the exact recorded object.
+  distractorExplanations:
+    A: Correct. The independent validation path must prove Microsoft.Network/virtualNetworks for the exact recorded object.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/rest/api/storageservices/define-stored-access-policy
+  lastVerified: '2026-08-30'
+- id: LAB07-Q19
+  objectiveIds:
+  - ST-ACCESS-04
+  difficulty: applied
+  stem: The 'Manage access keys' checkpoint reaches an external prerequisite. What should happen?
+  options:
+    A: Mark the branch passed because its command syntax was checked offline.
+    B: 'Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.'
+    C: Invent a domain, notification target, license, quota, or tenant value and continue.
+    D: Broaden permissions until the prerequisite can no longer block the operation.
+  correctOption: B
+  explanation: 'Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared
+    role and a disposable subscription.'
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: 'Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared
+      role and a disposable subscription.'
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/cli/azure/storage
+  lastVerified: '2026-08-30'
+- id: LAB07-Q20
+  objectiveIds:
+  - ST-ACCESS-01
+  difficulty: applied
+  stem: What is the safest command-evidence practice after completing 'Configure Azure Storage firewalls and virtual networks'?
+  options:
+    A: Save tokens, keys, passwords, or SAS values beside the validation result.
+    B: Reuse successful output from an earlier run with a similar resource name.
+    C: Retain only redacted structured output from an independent query of the recorded run.
+    D: Commit the complete account object so reviewers can identify the tenant.
+  correctOption: C
+  explanation: Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: Correct. Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/storage/common/storage-network-security
+  lastVerified: '2026-08-30'
+- id: LAB07-Q21
+  objectiveIds:
+  - ST-ACCESS-02
+  difficulty: applied
+  stem: Which negative check strengthens validation of 'Create and use shared access signature (SAS) tokens'?
+  options:
+    A: Repair every warning automatically before recording what caused it.
+    B: Ignore denied queries and record them as passing checks.
+    C: Check only that at least one resource exists in the subscription.
+    D: Confirm the intended state and also prove that broader, anonymous, or unintended access was not introduced.
+  correctOption: D
+  explanation: A bounded negative assertion detects accidental privilege or exposure beyond the intended state.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: Correct. A bounded negative assertion detects accidental privilege or exposure beyond the intended state.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/storage/common/storage-sas-overview
+  lastVerified: '2026-08-30'
+- id: LAB07-Q22
+  objectiveIds:
+  - ST-ACCESS-01
+  difficulty: applied
+  stem: 'A delegated administrator receives the following support request: A learner previews the implementation for ''Configure
+    Azure Storage firewalls and virtual networks''. What behavior is required?'
   options:
     A: Display the context, intended changes, cost and gated branches without mutating Azure.
     B: Create the baseline immediately and request approval only before cleanup.
@@ -108,79 +488,79 @@
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/storage/common/storage-network-security
   lastVerified: '2026-08-30'
-- id: LAB07-Q06
+- id: LAB07-Q23
   objectiveIds:
   - ST-ACCESS-02
   difficulty: applied
-  stem: Which implementation step should the learner perform for 'Create and use shared access signature (SAS) tokens'?
+  stem: 'During a maintenance window, an engineer must decide how to respond: Which implementation step should the learner
+    perform for ''Create and use shared access signature (SAS) tokens''?'
   options:
     A: Replace the lab action with a tenant-wide change that is easier to discover.
     B: Create a secure StorageV2 account and change the network default action to Deny.
     C: Copy resource identifiers from another run instead of recording returned IDs.
     D: Skip the operation and edit validation.json to show a passing result.
   correctOption: B
-  explanation: 'The lab''s reviewed command path performs this bounded action: Create a secure StorageV2 account
-    and change the network default action to Deny.'
+  explanation: 'The lab''s reviewed command path performs this bounded action: Create a secure StorageV2 account and change
+    the network default action to Deny.'
   distractorExplanations:
     A: This choice changes or trusts a broader scope than the recorded lab boundary.
-    B: 'Correct. The lab''s reviewed command path performs this bounded action: Create a secure StorageV2 account
-      and change the network default action to Deny.'
+    B: 'Correct. The lab''s reviewed command path performs this bounded action: Create a secure StorageV2 account and change
+      the network default action to Deny.'
     C: This choice skips independent evidence or relies on ambiguous resource identity.
     D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/storage/common/storage-sas-overview
   lastVerified: '2026-08-30'
-- id: LAB07-Q07
+- id: LAB07-Q24
   objectiveIds:
   - ST-ACCESS-03
   difficulty: applied
-  stem: Which evidence most directly validates 'Configure stored access policies' for virtual network and subnet?
+  stem: 'A deployment pipeline reaches this decision point: Which evidence most directly validates ''Configure stored access
+    policies'' for virtual network and subnet?'
   options:
     A: Treat the setup exit code as proof of every configuration and relationship.
     B: List the entire subscription and assume similarly named resources belong to this run.
     C: Query the exact recorded scope and independently verify Microsoft.Network/virtualNetworks.
     D: Record a credential so another learner can replay the authenticated session.
   correctOption: C
-  explanation: The independent validation path must prove Microsoft.Network/virtualNetworks for the exact recorded
-    object.
+  explanation: The independent validation path must prove Microsoft.Network/virtualNetworks for the exact recorded object.
   distractorExplanations:
     A: This choice changes or trusts a broader scope than the recorded lab boundary.
     B: This choice skips independent evidence or relies on ambiguous resource identity.
-    C: Correct. The independent validation path must prove Microsoft.Network/virtualNetworks for the exact recorded
-      object.
+    C: Correct. The independent validation path must prove Microsoft.Network/virtualNetworks for the exact recorded object.
     D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
   sourceUrls:
   - https://learn.microsoft.com/en-us/rest/api/storageservices/define-stored-access-policy
   lastVerified: '2026-08-30'
-- id: LAB07-Q08
+- id: LAB07-Q25
   objectiveIds:
   - ST-ACCESS-04
   difficulty: applied
-  stem: The 'Manage access keys' checkpoint reaches an external prerequisite. What should happen?
+  stem: 'While applying least-privilege controls, the administrator reviews this scenario: The ''Manage access keys'' checkpoint
+    reaches an external prerequisite. What should happen?'
   options:
     A: Invent a domain, notification target, license, quota, or tenant value and continue.
     B: Broaden permissions until the prerequisite can no longer block the operation.
     C: Mark the branch passed because its command syntax was checked offline.
-    D: 'Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable
-      subscription.'
+    D: 'Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.'
   correctOption: D
-  explanation: 'Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the
-    declared role and a disposable subscription.'
+  explanation: 'Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared
+    role and a disposable subscription.'
   distractorExplanations:
     A: This choice changes or trusts a broader scope than the recorded lab boundary.
     B: This choice skips independent evidence or relies on ambiguous resource identity.
     C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-    D: 'Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the
-      declared role and a disposable subscription.'
+    D: 'Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared
+      role and a disposable subscription.'
   sourceUrls:
   - https://learn.microsoft.com/en-us/cli/azure/storage
   lastVerified: '2026-08-30'
-- id: LAB07-Q09
+- id: LAB07-Q26
   objectiveIds:
   - ST-ACCESS-01
   difficulty: applied
-  stem: What is the safest command-evidence practice after completing 'Configure Azure Storage firewalls and virtual
-    networks'?
+  stem: 'A repeatable Azure CLI workflow must address this requirement: What is the safest command-evidence practice after
+    completing ''Configure Azure Storage firewalls and virtual networks''?'
   options:
     A: Retain only redacted structured output from an independent query of the recorded run.
     B: Commit the complete account object so reviewers can identify the tenant.
@@ -196,11 +576,12 @@
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/storage/common/storage-network-security
   lastVerified: '2026-08-30'
-- id: LAB07-Q10
+- id: LAB07-Q27
   objectiveIds:
   - ST-ACCESS-02
   difficulty: applied
-  stem: Which negative check strengthens validation of 'Create and use shared access signature (SAS) tokens'?
+  stem: 'During an environment handoff, the receiving team asks this question: Which negative check strengthens validation
+    of ''Create and use shared access signature (SAS) tokens''?'
   options:
     A: Check only that at least one resource exists in the subscription.
     B: Confirm the intended state and also prove that broader, anonymous, or unintended access was not introduced.
@@ -216,46 +597,502 @@
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/storage/common/storage-sas-overview
   lastVerified: '2026-08-30'
-- id: LAB07-Q11
+- id: LAB07-Q28
+  objectiveIds:
+  - ST-ACCESS-01
+  difficulty: applied
+  stem: 'A configuration change produces the following operational choice: A learner previews the implementation for ''Configure
+    Azure Storage firewalls and virtual networks''. What behavior is required?'
+  options:
+    A: Select the first accessible subscription and hide the resulting context.
+    B: Delete any older resource whose name resembles the new run ID.
+    C: Display the context, intended changes, cost and gated branches without mutating Azure.
+    D: Create the baseline immediately and request approval only before cleanup.
+  correctOption: C
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/storage/common/storage-network-security
+  lastVerified: '2026-08-30'
+- id: LAB07-Q29
+  objectiveIds:
+  - ST-ACCESS-02
+  difficulty: applied
+  stem: 'While preparing independent validation, an engineer considers this scenario: Which implementation step should the
+    learner perform for ''Create and use shared access signature (SAS) tokens''?'
+  options:
+    A: Copy resource identifiers from another run instead of recording returned IDs.
+    B: Skip the operation and edit validation.json to show a passing result.
+    C: Replace the lab action with a tenant-wide change that is easier to discover.
+    D: Create a secure StorageV2 account and change the network default action to Deny.
+  correctOption: D
+  explanation: 'The lab''s reviewed command path performs this bounded action: Create a secure StorageV2 account and change
+    the network default action to Deny.'
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: 'Correct. The lab''s reviewed command path performs this bounded action: Create a secure StorageV2 account and change
+      the network default action to Deny.'
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/storage/common/storage-sas-overview
+  lastVerified: '2026-08-30'
+- id: LAB07-Q30
+  objectiveIds:
+  - ST-ACCESS-03
+  difficulty: applied
+  stem: 'A service owner asks the administrator to resolve this requirement: Which evidence most directly validates ''Configure
+    stored access policies'' for virtual network and subnet?'
+  options:
+    A: Query the exact recorded scope and independently verify Microsoft.Network/virtualNetworks.
+    B: Record a credential so another learner can replay the authenticated session.
+    C: Treat the setup exit code as proof of every configuration and relationship.
+    D: List the entire subscription and assume similarly named resources belong to this run.
+  correctOption: A
+  explanation: The independent validation path must prove Microsoft.Network/virtualNetworks for the exact recorded object.
+  distractorExplanations:
+    A: Correct. The independent validation path must prove Microsoft.Network/virtualNetworks for the exact recorded object.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/rest/api/storageservices/define-stored-access-policy
+  lastVerified: '2026-08-30'
+- id: LAB07-Q31
+  objectiveIds:
+  - ST-ACCESS-04
+  difficulty: applied
+  stem: 'During a scoped cleanup review, the team evaluates this situation: The ''Manage access keys'' checkpoint reaches
+    an external prerequisite. What should happen?'
+  options:
+    A: Mark the branch passed because its command syntax was checked offline.
+    B: 'Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.'
+    C: Invent a domain, notification target, license, quota, or tenant value and continue.
+    D: Broaden permissions until the prerequisite can no longer block the operation.
+  correctOption: B
+  explanation: 'Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared
+    role and a disposable subscription.'
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: 'Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared
+      role and a disposable subscription.'
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/cli/azure/storage
+  lastVerified: '2026-08-30'
+- id: LAB07-Q32
+  objectiveIds:
+  - ST-ACCESS-01
+  difficulty: applied
+  stem: 'An automation author must choose the correct response to this scenario: What is the safest command-evidence practice
+    after completing ''Configure Azure Storage firewalls and virtual networks''?'
+  options:
+    A: Save tokens, keys, passwords, or SAS values beside the validation result.
+    B: Reuse successful output from an earlier run with a similar resource name.
+    C: Retain only redacted structured output from an independent query of the recorded run.
+    D: Commit the complete account object so reviewers can identify the tenant.
+  correctOption: C
+  explanation: Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: Correct. Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/storage/common/storage-network-security
+  lastVerified: '2026-08-30'
+- id: LAB07-Q33
+  objectiveIds:
+  - ST-ACCESS-02
+  difficulty: applied
+  stem: 'A lab run with a unique run ID reaches this decision: Which negative check strengthens validation of ''Create and
+    use shared access signature (SAS) tokens''?'
+  options:
+    A: Repair every warning automatically before recording what caused it.
+    B: Ignore denied queries and record them as passing checks.
+    C: Check only that at least one resource exists in the subscription.
+    D: Confirm the intended state and also prove that broader, anonymous, or unintended access was not introduced.
+  correctOption: D
+  explanation: A bounded negative assertion detects accidental privilege or exposure beyond the intended state.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: Correct. A bounded negative assertion detects accidental privilege or exposure beyond the intended state.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/storage/common/storage-sas-overview
+  lastVerified: '2026-08-30'
+- id: LAB07-Q34
+  objectiveIds:
+  - ST-ACCESS-01
+  difficulty: applied
+  stem: 'While comparing the intended and actual states, the operator asks this question: A learner previews the implementation
+    for ''Configure Azure Storage firewalls and virtual networks''. What behavior is required?'
+  options:
+    A: Display the context, intended changes, cost and gated branches without mutating Azure.
+    B: Create the baseline immediately and request approval only before cleanup.
+    C: Select the first accessible subscription and hide the resulting context.
+    D: Delete any older resource whose name resembles the new run ID.
+  correctOption: A
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  distractorExplanations:
+    A: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/storage/common/storage-network-security
+  lastVerified: '2026-08-30'
+- id: LAB07-Q35
+  objectiveIds:
+  - ST-ACCESS-02
+  difficulty: applied
+  stem: 'A peer reviewer examines the proposed implementation for this scenario: Which implementation step should the learner
+    perform for ''Create and use shared access signature (SAS) tokens''?'
+  options:
+    A: Replace the lab action with a tenant-wide change that is easier to discover.
+    B: Create a secure StorageV2 account and change the network default action to Deny.
+    C: Copy resource identifiers from another run instead of recording returned IDs.
+    D: Skip the operation and edit validation.json to show a passing result.
+  correctOption: B
+  explanation: 'The lab''s reviewed command path performs this bounded action: Create a secure StorageV2 account and change
+    the network default action to Deny.'
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: 'Correct. The lab''s reviewed command path performs this bounded action: Create a secure StorageV2 account and change
+      the network default action to Deny.'
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/storage/common/storage-sas-overview
+  lastVerified: '2026-08-30'
+- id: LAB07-Q36
+  objectiveIds:
+  - ST-ACCESS-03
+  difficulty: applied
+  stem: 'During a controlled rollout, the change team encounters this requirement: Which evidence most directly validates
+    ''Configure stored access policies'' for virtual network and subnet?'
+  options:
+    A: Treat the setup exit code as proof of every configuration and relationship.
+    B: List the entire subscription and assume similarly named resources belong to this run.
+    C: Query the exact recorded scope and independently verify Microsoft.Network/virtualNetworks.
+    D: Record a credential so another learner can replay the authenticated session.
+  correctOption: C
+  explanation: The independent validation path must prove Microsoft.Network/virtualNetworks for the exact recorded object.
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: Correct. The independent validation path must prove Microsoft.Network/virtualNetworks for the exact recorded object.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/rest/api/storageservices/define-stored-access-policy
+  lastVerified: '2026-08-30'
+- id: LAB07-Q37
+  objectiveIds:
+  - ST-ACCESS-04
+  difficulty: applied
+  stem: 'A support engineer reproduces the following situation in a test environment: The ''Manage access keys'' checkpoint
+    reaches an external prerequisite. What should happen?'
+  options:
+    A: Invent a domain, notification target, license, quota, or tenant value and continue.
+    B: Broaden permissions until the prerequisite can no longer block the operation.
+    C: Mark the branch passed because its command syntax was checked offline.
+    D: 'Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.'
+  correctOption: D
+  explanation: 'Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared
+    role and a disposable subscription.'
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: 'Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared
+      role and a disposable subscription.'
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/cli/azure/storage
+  lastVerified: '2026-08-30'
+- id: LAB07-Q38
+  objectiveIds:
+  - ST-ACCESS-01
+  difficulty: applied
+  stem: 'While recording validation evidence, the administrator evaluates this question: What is the safest command-evidence
+    practice after completing ''Configure Azure Storage firewalls and virtual networks''?'
+  options:
+    A: Retain only redacted structured output from an independent query of the recorded run.
+    B: Commit the complete account object so reviewers can identify the tenant.
+    C: Save tokens, keys, passwords, or SAS values beside the validation result.
+    D: Reuse successful output from an earlier run with a similar resource name.
+  correctOption: A
+  explanation: Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
+  distractorExplanations:
+    A: Correct. Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/storage/common/storage-network-security
+  lastVerified: '2026-08-30'
+- id: LAB07-Q39
+  objectiveIds:
+  - ST-ACCESS-02
+  difficulty: applied
+  stem: 'A configuration owner must approve one response to this scenario: Which negative check strengthens validation of
+    ''Create and use shared access signature (SAS) tokens''?'
+  options:
+    A: Check only that at least one resource exists in the subscription.
+    B: Confirm the intended state and also prove that broader, anonymous, or unintended access was not introduced.
+    C: Repair every warning automatically before recording what caused it.
+    D: Ignore denied queries and record them as passing checks.
+  correctOption: B
+  explanation: A bounded negative assertion detects accidental privilege or exposure beyond the intended state.
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: Correct. A bounded negative assertion detects accidental privilege or exposure beyond the intended state.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/storage/common/storage-sas-overview
+  lastVerified: '2026-08-30'
+- id: LAB07-Q40
+  objectiveIds:
+  - ST-ACCESS-01
+  difficulty: applied
+  stem: 'During post-deployment verification, the team reviews this situation: A learner previews the implementation for ''Configure
+    Azure Storage firewalls and virtual networks''. What behavior is required?'
+  options:
+    A: Select the first accessible subscription and hide the resulting context.
+    B: Delete any older resource whose name resembles the new run ID.
+    C: Display the context, intended changes, cost and gated branches without mutating Azure.
+    D: Create the baseline immediately and request approval only before cleanup.
+  correctOption: C
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/storage/common/storage-network-security
+  lastVerified: '2026-08-30'
+- id: LAB07-Q41
   objectiveIds:
   - ST-ACCESS-03
   - ST-ACCESS-04
   difficulty: advanced
   stem: Validation for 'Configure stored access policies' fails after setup. What is the best break/fix method?
   options:
-    A: Rerun setup repeatedly with new names until one attempt appears successful.
-    B: Change validation.json directly so the failed result reads pass.
-    C: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-    D: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-  correctOption: C
+    A: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+    B: Rerun setup repeatedly with new names until one attempt appears successful.
+    C: Change validation.json directly so the failed result reads pass.
+    D: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+  correctOption: D
   explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
   distractorExplanations:
-    A: This choice changes or trusts a broader scope than the recorded lab boundary.
-    B: This choice skips independent evidence or relies on ambiguous resource identity.
-    C: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
-    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
   sourceUrls:
   - https://learn.microsoft.com/en-us/rest/api/storageservices/define-stored-access-policy
   lastVerified: '2026-08-30'
-- id: LAB07-Q12
+- id: LAB07-Q42
   objectiveIds:
   - ST-ACCESS-04
   - ST-ACCESS-01
   difficulty: advanced
   stem: The operation for 'Manage access keys' is asynchronous or gated. How should completion be recorded?
   options:
-    A: Record pass as soon as the request is accepted, regardless of its final state.
-    B: Fabricate expected output so the assessment and documentation appear complete.
-    C: Remove the check from validation whenever the service takes longer than expected.
-    D: Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence
-      exists.
-  correctOption: D
+    A: Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
+    B: Record pass as soon as the request is accepted, regardless of its final state.
+    C: Fabricate expected output so the assessment and documentation appear complete.
+    D: Remove the check from validation whenever the service takes longer than expected.
+  correctOption: A
   explanation: Accepted requests and offline checks do not prove the final live state.
   distractorExplanations:
-    A: This choice changes or trusts a broader scope than the recorded lab boundary.
-    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    A: Correct. Accepted requests and offline checks do not prove the final live state.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/cli/azure/storage
+  lastVerified: '2026-08-30'
+- id: LAB07-Q43
+  objectiveIds:
+  - ST-ACCESS-03
+  - ST-ACCESS-04
+  difficulty: advanced
+  stem: 'A security and reliability review identifies this design decision: Validation for ''Configure stored access policies''
+    fails after setup. What is the best break/fix method?'
+  options:
+    A: Change validation.json directly so the failed result reads pass.
+    B: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+    C: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+    D: Rerun setup repeatedly with new names until one attempt appears successful.
+  correctOption: B
+  explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
     C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-    D: Correct. Accepted requests and offline checks do not prove the final live state.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/rest/api/storageservices/define-stored-access-policy
+  lastVerified: '2026-08-30'
+- id: LAB07-Q44
+  objectiveIds:
+  - ST-ACCESS-04
+  - ST-ACCESS-01
+  difficulty: advanced
+  stem: 'While diagnosing unexpected Azure behavior, the engineer considers this situation: The operation for ''Manage access
+    keys'' is asynchronous or gated. How should completion be recorded?'
+  options:
+    A: Fabricate expected output so the assessment and documentation appear complete.
+    B: Remove the check from validation whenever the service takes longer than expected.
+    C: Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
+    D: Record pass as soon as the request is accepted, regardless of its final state.
+  correctOption: C
+  explanation: Accepted requests and offline checks do not prove the final live state.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: Correct. Accepted requests and offline checks do not prove the final live state.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/cli/azure/storage
+  lastVerified: '2026-08-30'
+- id: LAB07-Q45
+  objectiveIds:
+  - ST-ACCESS-03
+  - ST-ACCESS-04
+  difficulty: advanced
+  stem: 'An architecture review requires the strongest response to this scenario: Validation for ''Configure stored access
+    policies'' fails after setup. What is the best break/fix method?'
+  options:
+    A: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+    B: Rerun setup repeatedly with new names until one attempt appears successful.
+    C: Change validation.json directly so the failed result reads pass.
+    D: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+  correctOption: D
+  explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/rest/api/storageservices/define-stored-access-policy
+  lastVerified: '2026-08-30'
+- id: LAB07-Q46
+  objectiveIds:
+  - ST-ACCESS-04
+  - ST-ACCESS-01
+  difficulty: advanced
+  stem: 'During break/fix validation, the operator encounters this question: The operation for ''Manage access keys'' is asynchronous
+    or gated. How should completion be recorded?'
+  options:
+    A: Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
+    B: Record pass as soon as the request is accepted, regardless of its final state.
+    C: Fabricate expected output so the assessment and documentation appear complete.
+    D: Remove the check from validation whenever the service takes longer than expected.
+  correctOption: A
+  explanation: Accepted requests and offline checks do not prove the final live state.
+  distractorExplanations:
+    A: Correct. Accepted requests and offline checks do not prove the final live state.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/cli/azure/storage
+  lastVerified: '2026-08-30'
+- id: LAB07-Q47
+  objectiveIds:
+  - ST-ACCESS-03
+  - ST-ACCESS-04
+  difficulty: advanced
+  stem: 'A complex support case depends on correctly interpreting this requirement: Validation for ''Configure stored access
+    policies'' fails after setup. What is the best break/fix method?'
+  options:
+    A: Change validation.json directly so the failed result reads pass.
+    B: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+    C: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+    D: Rerun setup repeatedly with new names until one attempt appears successful.
+  correctOption: B
+  explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/rest/api/storageservices/define-stored-access-policy
+  lastVerified: '2026-08-30'
+- id: LAB07-Q48
+  objectiveIds:
+  - ST-ACCESS-04
+  - ST-ACCESS-01
+  difficulty: advanced
+  stem: 'While correcting configuration drift, the team evaluates this scenario: The operation for ''Manage access keys''
+    is asynchronous or gated. How should completion be recorded?'
+  options:
+    A: Fabricate expected output so the assessment and documentation appear complete.
+    B: Remove the check from validation whenever the service takes longer than expected.
+    C: Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
+    D: Record pass as soon as the request is accepted, regardless of its final state.
+  correctOption: C
+  explanation: Accepted requests and offline checks do not prove the final live state.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: Correct. Accepted requests and offline checks do not prove the final live state.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/cli/azure/storage
+  lastVerified: '2026-08-30'
+- id: LAB07-Q49
+  objectiveIds:
+  - ST-ACCESS-03
+  - ST-ACCESS-04
+  difficulty: advanced
+  stem: 'A recovery exercise exposes the following technical decision: Validation for ''Configure stored access policies''
+    fails after setup. What is the best break/fix method?'
+  options:
+    A: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+    B: Rerun setup repeatedly with new names until one attempt appears successful.
+    C: Change validation.json directly so the failed result reads pass.
+    D: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+  correctOption: D
+  explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/rest/api/storageservices/define-stored-access-policy
+  lastVerified: '2026-08-30'
+- id: LAB07-Q50
+  objectiveIds:
+  - ST-ACCESS-04
+  - ST-ACCESS-01
+  difficulty: advanced
+  stem: 'During final design assurance, the reviewer must resolve this situation: The operation for ''Manage access keys''
+    is asynchronous or gated. How should completion be recorded?'
+  options:
+    A: Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
+    B: Record pass as soon as the request is accepted, regardless of its final state.
+    C: Fabricate expected output so the assessment and documentation appear complete.
+    D: Remove the check from validation whenever the service takes longer than expected.
+  correctOption: A
+  explanation: Accepted requests and offline checks do not prove the final live state.
+  distractorExplanations:
+    A: Correct. Accepted requests and offline checks do not prove the final live state.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
   sourceUrls:
   - https://learn.microsoft.com/en-us/cli/azure/storage
   lastVerified: '2026-08-30'

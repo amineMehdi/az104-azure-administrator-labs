@@ -25,8 +25,8 @@ cost:
   - backup policy
   - protected test VM
   - backup instance and restore job
-  notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator
-    before execution and clean up immediately.
+  notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator before
+    execution and clean up immediately.
 permissions:
   azureRbacRoles:
   - Backup Contributor and Virtual Machine Contributor on the lab resource group
@@ -74,7 +74,7 @@ cleanup:
   residualAuditRequired: true
 assessment:
   enabled: true
-  questionCount: 15
+  questionCount: 50
   primaryDomain: monitor-recovery
 lastOfflineValidated: '2026-08-30'
 lastLiveVerified: null

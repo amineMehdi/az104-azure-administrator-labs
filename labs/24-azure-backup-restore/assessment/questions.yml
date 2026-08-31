@@ -4,22 +4,20 @@
   difficulty: foundational
   stem: Which principle is most important when working on 'Create a Recovery Services vault' in Lab 24?
   options:
-    A: The shortest command is always correct even when it changes a broader scope.
-    B: Vault type must match the workload, protection creates retained recovery points, and vault deletion requires
-      ordered removal of protected items, soft-delete state, and dependencies.
-    C: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-    D: A recognizable resource name removes the need for validation and scoped cleanup.
-  correctOption: B
-  explanation: 'The lab establishes this design principle: Vault type must match the workload, protection creates
-    retained recovery points, and vault deletion requires ordered removal of protected items, soft-delete state,
-    and dependencies.'
+    A: Vault type must match the workload, protection creates retained recovery points, and vault deletion requires ordered
+      removal of protected items, soft-delete state, and dependencies.
+    B: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+    C: A recognizable resource name removes the need for validation and scoped cleanup.
+    D: The shortest command is always correct even when it changes a broader scope.
+  correctOption: A
+  explanation: 'The lab establishes this design principle: Vault type must match the workload, protection creates retained
+    recovery points, and vault deletion requires ordered removal of protected items, soft-delete state, and dependencies.'
   distractorExplanations:
-    A: This choice changes or trusts a broader scope than the recorded lab boundary.
-    B: 'Correct. The lab establishes this design principle: Vault type must match the workload, protection creates
-      retained recovery points, and vault deletion requires ordered removal of protected items, soft-delete state,
-      and dependencies.'
-    C: This choice skips independent evidence or relies on ambiguous resource identity.
-    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    A: 'Correct. The lab establishes this design principle: Vault type must match the workload, protection creates retained
+      recovery points, and vault deletion requires ordered removal of protected items, soft-delete state, and dependencies.'
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/backup/backup-create-recovery-services-vault
   lastVerified: '2026-08-30'
@@ -29,19 +27,19 @@
   difficulty: foundational
   stem: Which lab action directly supports the objective 'Create an Azure Backup vault'?
   options:
-    A: Change the active tenant without displaying or confirming the resulting context.
-    B: Search the whole tenant for a similar display name and modify the first match.
-    C: Create a bounded-retention VM backup policy and enable protection for the test VM.
-    D: Mark the objective complete after reading documentation without checking any state.
-  correctOption: C
-  explanation: 'The reviewed hands-on action for this objective is: Create a bounded-retention VM backup policy
-    and enable protection for the test VM.'
+    A: Search the whole tenant for a similar display name and modify the first match.
+    B: Create a bounded-retention VM backup policy and enable protection for the test VM.
+    C: Mark the objective complete after reading documentation without checking any state.
+    D: Change the active tenant without displaying or confirming the resulting context.
+  correctOption: B
+  explanation: 'The reviewed hands-on action for this objective is: Create a bounded-retention VM backup policy and enable
+    protection for the test VM.'
   distractorExplanations:
-    A: This choice changes or trusts a broader scope than the recorded lab boundary.
-    B: This choice skips independent evidence or relies on ambiguous resource identity.
-    C: 'Correct. The reviewed hands-on action for this objective is: Create a bounded-retention VM backup policy
-      and enable protection for the test VM.'
-    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: 'Correct. The reviewed hands-on action for this objective is: Create a bounded-retention VM backup policy and enable
+      protection for the test VM.'
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/backup/create-manage-backup-vault
   lastVerified: '2026-08-30'
@@ -51,20 +49,20 @@
   difficulty: foundational
   stem: Which authorization approach is appropriate before practicing 'Create and configure a backup policy'?
   options:
-    A: Use a production subscription because its resources already exist.
-    B: Assign Global Administrator and subscription Owner for every lab regardless of the operation.
-    C: Skip role checks when the run ID contains the lab number.
-    D: 'Confirm the active context and use only the declared role boundary: Backup Contributor and Virtual Machine
-      Contributor on the lab resource group'
-  correctOption: D
-  explanation: 'Least privilege requires the documented boundary: Backup Contributor and Virtual Machine Contributor
-    on the lab resource group'
-  distractorExplanations:
-    A: This choice changes or trusts a broader scope than the recorded lab boundary.
-    B: This choice skips independent evidence or relies on ambiguous resource identity.
-    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-    D: 'Correct. Least privilege requires the documented boundary: Backup Contributor and Virtual Machine Contributor
+    A: Assign Global Administrator and subscription Owner for every lab regardless of the operation.
+    B: Skip role checks when the run ID contains the lab number.
+    C: 'Confirm the active context and use only the declared role boundary: Backup Contributor and Virtual Machine Contributor
       on the lab resource group'
+    D: Use a production subscription because its resources already exist.
+  correctOption: C
+  explanation: 'Least privilege requires the documented boundary: Backup Contributor and Virtual Machine Contributor on the
+    lab resource group'
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: 'Correct. Least privilege requires the documented boundary: Backup Contributor and Virtual Machine Contributor on the
+      lab resource group'
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/backup/quick-backup-vm-powershell
   lastVerified: '2026-08-30'
@@ -72,198 +70,1013 @@
   objectiveIds:
   - MR-RECOVERY-04
   difficulty: foundational
-  stem: Which resource or object belongs inside the recorded boundary for 'Perform backup and restore operations
-    by using Azure Backup'?
+  stem: Which resource or object belongs inside the recorded boundary for 'Perform backup and restore operations by using
+    Azure Backup'?
   options:
-    A: Use the exact recorded identity and scope for backup policy.
-    B: Use whichever similarly named object appears first in a broad search.
-    C: Use an unrelated shared resource without recording its immutable ID.
-    D: Use a production object when the sandbox prerequisite is unavailable.
-  correctOption: A
+    A: Use whichever similarly named object appears first in a broad search.
+    B: Use an unrelated shared resource without recording its immutable ID.
+    C: Use a production object when the sandbox prerequisite is unavailable.
+    D: Use the exact recorded identity and scope for backup policy.
+  correctOption: D
   explanation: The lab records the exact scope and identity of backup policy before validation and cleanup.
   distractorExplanations:
-    A: Correct. The lab records the exact scope and identity of backup policy before validation and cleanup.
-    B: This choice changes or trusts a broader scope than the recorded lab boundary.
-    C: This choice skips independent evidence or relies on ambiguous resource identity.
-    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: Correct. The lab records the exact scope and identity of backup policy before validation and cleanup.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/backup/backup-azure-restore-files-from-vm
   lastVerified: '2026-08-30'
 - id: LAB24-Q05
   objectiveIds:
-  - MR-RECOVERY-07
-  difficulty: applied
-  stem: A learner previews the implementation for 'Configure and interpret reports and alerts for backups'. What
-    behavior is required?
+  - MR-RECOVERY-01
+  difficulty: foundational
+  stem: 'During a design vocabulary review, the team evaluates this situation: Which principle is most important when working
+    on ''Create a Recovery Services vault'' in Lab 24?'
   options:
-    A: Create the baseline immediately and request approval only before cleanup.
-    B: Display the context, intended changes, cost and gated branches without mutating Azure.
-    C: Select the first accessible subscription and hide the resulting context.
-    D: Delete any older resource whose name resembles the new run ID.
+    A: Vault type must match the workload, protection creates retained recovery points, and vault deletion requires ordered
+      removal of protected items, soft-delete state, and dependencies.
+    B: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+    C: A recognizable resource name removes the need for validation and scoped cleanup.
+    D: The shortest command is always correct even when it changes a broader scope.
+  correctOption: A
+  explanation: 'The lab establishes this design principle: Vault type must match the workload, protection creates retained
+    recovery points, and vault deletion requires ordered removal of protected items, soft-delete state, and dependencies.'
+  distractorExplanations:
+    A: 'Correct. The lab establishes this design principle: Vault type must match the workload, protection creates retained
+      recovery points, and vault deletion requires ordered removal of protected items, soft-delete state, and dependencies.'
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/backup/backup-create-recovery-services-vault
+  lastVerified: '2026-08-30'
+- id: LAB24-Q06
+  objectiveIds:
+  - MR-RECOVERY-02
+  difficulty: foundational
+  stem: 'In a command-planning session, an administrator asks this question: Which lab action directly supports the objective
+    ''Create an Azure Backup vault''?'
+  options:
+    A: Search the whole tenant for a similar display name and modify the first match.
+    B: Create a bounded-retention VM backup policy and enable protection for the test VM.
+    C: Mark the objective complete after reading documentation without checking any state.
+    D: Change the active tenant without displaying or confirming the resulting context.
   correctOption: B
-  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  explanation: 'The reviewed hands-on action for this objective is: Create a bounded-retention VM backup policy and enable
+    protection for the test VM.'
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: 'Correct. The reviewed hands-on action for this objective is: Create a bounded-retention VM backup policy and enable
+      protection for the test VM.'
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/backup/create-manage-backup-vault
+  lastVerified: '2026-08-30'
+- id: LAB24-Q07
+  objectiveIds:
+  - MR-RECOVERY-03
+  difficulty: foundational
+  stem: 'While preparing the lab, a learner verifies this platform rule: Which authorization approach is appropriate before
+    practicing ''Create and configure a backup policy''?'
+  options:
+    A: Assign Global Administrator and subscription Owner for every lab regardless of the operation.
+    B: Skip role checks when the run ID contains the lab number.
+    C: 'Confirm the active context and use only the declared role boundary: Backup Contributor and Virtual Machine Contributor
+      on the lab resource group'
+    D: Use a production subscription because its resources already exist.
+  correctOption: C
+  explanation: 'Least privilege requires the documented boundary: Backup Contributor and Virtual Machine Contributor on the
+    lab resource group'
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: 'Correct. Least privilege requires the documented boundary: Backup Contributor and Virtual Machine Contributor on the
+      lab resource group'
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/backup/quick-backup-vm-powershell
+  lastVerified: '2026-08-30'
+- id: LAB24-Q08
+  objectiveIds:
+  - MR-RECOVERY-04
+  difficulty: foundational
+  stem: 'During peer review, the team must identify the accurate response to this scenario: Which resource or object belongs
+    inside the recorded boundary for ''Perform backup and restore operations by using Azure Backup''?'
+  options:
+    A: Use whichever similarly named object appears first in a broad search.
+    B: Use an unrelated shared resource without recording its immutable ID.
+    C: Use a production object when the sandbox prerequisite is unavailable.
+    D: Use the exact recorded identity and scope for backup policy.
+  correctOption: D
+  explanation: The lab records the exact scope and identity of backup policy before validation and cleanup.
   distractorExplanations:
     A: This choice changes or trusts a broader scope than the recorded lab boundary.
-    B: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
-    C: This choice skips independent evidence or relies on ambiguous resource identity.
-    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: Correct. The lab records the exact scope and identity of backup policy before validation and cleanup.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/backup/backup-azure-restore-files-from-vm
+  lastVerified: '2026-08-30'
+- id: LAB24-Q09
+  objectiveIds:
+  - MR-RECOVERY-01
+  difficulty: foundational
+  stem: 'In an operations briefing, a new team member receives this question: Which principle is most important when working
+    on ''Create a Recovery Services vault'' in Lab 24?'
+  options:
+    A: Vault type must match the workload, protection creates retained recovery points, and vault deletion requires ordered
+      removal of protected items, soft-delete state, and dependencies.
+    B: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+    C: A recognizable resource name removes the need for validation and scoped cleanup.
+    D: The shortest command is always correct even when it changes a broader scope.
+  correctOption: A
+  explanation: 'The lab establishes this design principle: Vault type must match the workload, protection creates retained
+    recovery points, and vault deletion requires ordered removal of protected items, soft-delete state, and dependencies.'
+  distractorExplanations:
+    A: 'Correct. The lab establishes this design principle: Vault type must match the workload, protection creates retained
+      recovery points, and vault deletion requires ordered removal of protected items, soft-delete state, and dependencies.'
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/backup/backup-create-recovery-services-vault
+  lastVerified: '2026-08-30'
+- id: LAB24-Q10
+  objectiveIds:
+  - MR-RECOVERY-02
+  difficulty: foundational
+  stem: 'While building a support checklist, an engineer reviews this requirement: Which lab action directly supports the
+    objective ''Create an Azure Backup vault''?'
+  options:
+    A: Search the whole tenant for a similar display name and modify the first match.
+    B: Create a bounded-retention VM backup policy and enable protection for the test VM.
+    C: Mark the objective complete after reading documentation without checking any state.
+    D: Change the active tenant without displaying or confirming the resulting context.
+  correctOption: B
+  explanation: 'The reviewed hands-on action for this objective is: Create a bounded-retention VM backup policy and enable
+    protection for the test VM.'
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: 'Correct. The reviewed hands-on action for this objective is: Create a bounded-retention VM backup policy and enable
+      protection for the test VM.'
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/backup/create-manage-backup-vault
+  lastVerified: '2026-08-30'
+- id: LAB24-Q11
+  objectiveIds:
+  - MR-RECOVERY-03
+  difficulty: foundational
+  stem: 'During a readiness check, the administrator considers this behavior: Which authorization approach is appropriate
+    before practicing ''Create and configure a backup policy''?'
+  options:
+    A: Assign Global Administrator and subscription Owner for every lab regardless of the operation.
+    B: Skip role checks when the run ID contains the lab number.
+    C: 'Confirm the active context and use only the declared role boundary: Backup Contributor and Virtual Machine Contributor
+      on the lab resource group'
+    D: Use a production subscription because its resources already exist.
+  correctOption: C
+  explanation: 'Least privilege requires the documented boundary: Backup Contributor and Virtual Machine Contributor on the
+    lab resource group'
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: 'Correct. Least privilege requires the documented boundary: Backup Contributor and Virtual Machine Contributor on the
+      lab resource group'
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/backup/quick-backup-vm-powershell
+  lastVerified: '2026-08-30'
+- id: LAB24-Q12
+  objectiveIds:
+  - MR-RECOVERY-04
+  difficulty: foundational
+  stem: 'In a service overview, the team discusses this scenario: Which resource or object belongs inside the recorded boundary
+    for ''Perform backup and restore operations by using Azure Backup''?'
+  options:
+    A: Use whichever similarly named object appears first in a broad search.
+    B: Use an unrelated shared resource without recording its immutable ID.
+    C: Use a production object when the sandbox prerequisite is unavailable.
+    D: Use the exact recorded identity and scope for backup policy.
+  correctOption: D
+  explanation: The lab records the exact scope and identity of backup policy before validation and cleanup.
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: Correct. The lab records the exact scope and identity of backup policy before validation and cleanup.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/backup/backup-azure-restore-files-from-vm
+  lastVerified: '2026-08-30'
+- id: LAB24-Q13
+  objectiveIds:
+  - MR-RECOVERY-01
+  difficulty: foundational
+  stem: 'While reviewing official guidance, a learner must resolve this question: Which principle is most important when working
+    on ''Create a Recovery Services vault'' in Lab 24?'
+  options:
+    A: Vault type must match the workload, protection creates retained recovery points, and vault deletion requires ordered
+      removal of protected items, soft-delete state, and dependencies.
+    B: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+    C: A recognizable resource name removes the need for validation and scoped cleanup.
+    D: The shortest command is always correct even when it changes a broader scope.
+  correctOption: A
+  explanation: 'The lab establishes this design principle: Vault type must match the workload, protection creates retained
+    recovery points, and vault deletion requires ordered removal of protected items, soft-delete state, and dependencies.'
+  distractorExplanations:
+    A: 'Correct. The lab establishes this design principle: Vault type must match the workload, protection creates retained
+      recovery points, and vault deletion requires ordered removal of protected items, soft-delete state, and dependencies.'
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/backup/backup-create-recovery-services-vault
+  lastVerified: '2026-08-30'
+- id: LAB24-Q14
+  objectiveIds:
+  - MR-RECOVERY-02
+  difficulty: foundational
+  stem: 'During a configuration walkthrough, the instructor asks about this situation: Which lab action directly supports
+    the objective ''Create an Azure Backup vault''?'
+  options:
+    A: Search the whole tenant for a similar display name and modify the first match.
+    B: Create a bounded-retention VM backup policy and enable protection for the test VM.
+    C: Mark the objective complete after reading documentation without checking any state.
+    D: Change the active tenant without displaying or confirming the resulting context.
+  correctOption: B
+  explanation: 'The reviewed hands-on action for this objective is: Create a bounded-retention VM backup policy and enable
+    protection for the test VM.'
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: 'Correct. The reviewed hands-on action for this objective is: Create a bounded-retention VM backup policy and enable
+      protection for the test VM.'
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/backup/create-manage-backup-vault
+  lastVerified: '2026-08-30'
+- id: LAB24-Q15
+  objectiveIds:
+  - MR-RECOVERY-03
+  difficulty: foundational
+  stem: 'In a preflight knowledge check, the operator evaluates this requirement: Which authorization approach is appropriate
+    before practicing ''Create and configure a backup policy''?'
+  options:
+    A: Assign Global Administrator and subscription Owner for every lab regardless of the operation.
+    B: Skip role checks when the run ID contains the lab number.
+    C: 'Confirm the active context and use only the declared role boundary: Backup Contributor and Virtual Machine Contributor
+      on the lab resource group'
+    D: Use a production subscription because its resources already exist.
+  correctOption: C
+  explanation: 'Least privilege requires the documented boundary: Backup Contributor and Virtual Machine Contributor on the
+    lab resource group'
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: 'Correct. Least privilege requires the documented boundary: Backup Contributor and Virtual Machine Contributor on the
+      lab resource group'
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/backup/quick-backup-vm-powershell
+  lastVerified: '2026-08-30'
+- id: LAB24-Q16
+  objectiveIds:
+  - MR-RECOVERY-07
+  difficulty: applied
+  stem: A learner previews the implementation for 'Configure and interpret reports and alerts for backups'. What behavior
+    is required?
+  options:
+    A: Select the first accessible subscription and hide the resulting context.
+    B: Delete any older resource whose name resembles the new run ID.
+    C: Create the baseline immediately and request approval only before cleanup.
+    D: Display the context, intended changes, cost and gated branches without mutating Azure.
+  correctOption: D
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/backup/configure-reports
   lastVerified: '2026-08-30'
-- id: LAB24-Q06
+- id: LAB24-Q17
   objectiveIds:
   - MR-RECOVERY-01
   difficulty: applied
   stem: Which implementation step should the learner perform for 'Create a Recovery Services vault'?
   options:
-    A: Replace the lab action with a tenant-wide change that is easier to discover.
-    B: Copy resource identifiers from another run instead of recording returned IDs.
-    C: Create a bounded-retention VM backup policy and enable protection for the test VM.
-    D: Skip the operation and edit validation.json to show a passing result.
-  correctOption: C
-  explanation: 'The lab''s reviewed command path performs this bounded action: Create a bounded-retention VM backup
-    policy and enable protection for the test VM.'
+    A: Create a bounded-retention VM backup policy and enable protection for the test VM.
+    B: Skip the operation and edit validation.json to show a passing result.
+    C: Replace the lab action with a tenant-wide change that is easier to discover.
+    D: Copy resource identifiers from another run instead of recording returned IDs.
+  correctOption: A
+  explanation: 'The lab''s reviewed command path performs this bounded action: Create a bounded-retention VM backup policy
+    and enable protection for the test VM.'
   distractorExplanations:
-    A: This choice changes or trusts a broader scope than the recorded lab boundary.
-    B: This choice skips independent evidence or relies on ambiguous resource identity.
-    C: 'Correct. The lab''s reviewed command path performs this bounded action: Create a bounded-retention VM backup
-      policy and enable protection for the test VM.'
-    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    A: 'Correct. The lab''s reviewed command path performs this bounded action: Create a bounded-retention VM backup policy
+      and enable protection for the test VM.'
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/backup/backup-azure-monitoring-built-in-monitor
   lastVerified: '2026-08-30'
-- id: LAB24-Q07
+- id: LAB24-Q18
   objectiveIds:
   - MR-RECOVERY-02
   difficulty: applied
   stem: Which evidence most directly validates 'Create an Azure Backup vault' for resource group?
   options:
-    A: Treat the setup exit code as proof of every configuration and relationship.
-    B: List the entire subscription and assume similarly named resources belong to this run.
-    C: Record a credential so another learner can replay the authenticated session.
-    D: Query the exact recorded scope and independently verify Microsoft.RecoveryServices/vaults.
-  correctOption: D
-  explanation: The independent validation path must prove Microsoft.RecoveryServices/vaults for the exact recorded
-    object.
+    A: Record a credential so another learner can replay the authenticated session.
+    B: Query the exact recorded scope and independently verify Microsoft.RecoveryServices/vaults.
+    C: Treat the setup exit code as proof of every configuration and relationship.
+    D: List the entire subscription and assume similarly named resources belong to this run.
+  correctOption: B
+  explanation: The independent validation path must prove Microsoft.RecoveryServices/vaults for the exact recorded object.
   distractorExplanations:
-    A: This choice changes or trusts a broader scope than the recorded lab boundary.
-    B: This choice skips independent evidence or relies on ambiguous resource identity.
-    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-    D: Correct. The independent validation path must prove Microsoft.RecoveryServices/vaults for the exact recorded
-      object.
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: Correct. The independent validation path must prove Microsoft.RecoveryServices/vaults for the exact recorded object.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/backup/backup-create-recovery-services-vault
   lastVerified: '2026-08-30'
-- id: LAB24-Q08
+- id: LAB24-Q19
   objectiveIds:
   - MR-RECOVERY-03
   difficulty: applied
   stem: The 'Create and configure a backup policy' checkpoint reaches an external prerequisite. What should happen?
   options:
-    A: 'Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable
-      subscription.'
-    B: Invent a domain, notification target, license, quota, or tenant value and continue.
-    C: Broaden permissions until the prerequisite can no longer block the operation.
-    D: Mark the branch passed because its command syntax was checked offline.
-  correctOption: A
-  explanation: 'Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the
-    declared role and a disposable subscription.'
+    A: Broaden permissions until the prerequisite can no longer block the operation.
+    B: Mark the branch passed because its command syntax was checked offline.
+    C: 'Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.'
+    D: Invent a domain, notification target, license, quota, or tenant value and continue.
+  correctOption: C
+  explanation: 'Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared
+    role and a disposable subscription.'
   distractorExplanations:
-    A: 'Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the
-      declared role and a disposable subscription.'
-    B: This choice changes or trusts a broader scope than the recorded lab boundary.
-    C: This choice skips independent evidence or relies on ambiguous resource identity.
-    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: 'Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared
+      role and a disposable subscription.'
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/backup/create-manage-backup-vault
   lastVerified: '2026-08-30'
-- id: LAB24-Q09
+- id: LAB24-Q20
   objectiveIds:
   - MR-RECOVERY-04
   difficulty: applied
-  stem: What is the safest command-evidence practice after completing 'Perform backup and restore operations by
-    using Azure Backup'?
+  stem: What is the safest command-evidence practice after completing 'Perform backup and restore operations by using Azure
+    Backup'?
   options:
-    A: Commit the complete account object so reviewers can identify the tenant.
-    B: Retain only redacted structured output from an independent query of the recorded run.
-    C: Save tokens, keys, passwords, or SAS values beside the validation result.
-    D: Reuse successful output from an earlier run with a similar resource name.
-  correctOption: B
+    A: Save tokens, keys, passwords, or SAS values beside the validation result.
+    B: Reuse successful output from an earlier run with a similar resource name.
+    C: Commit the complete account object so reviewers can identify the tenant.
+    D: Retain only redacted structured output from an independent query of the recorded run.
+  correctOption: D
   explanation: Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
   distractorExplanations:
-    A: This choice changes or trusts a broader scope than the recorded lab boundary.
-    B: Correct. Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
-    C: This choice skips independent evidence or relies on ambiguous resource identity.
-    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: Correct. Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/backup/quick-backup-vm-powershell
   lastVerified: '2026-08-30'
-- id: LAB24-Q10
+- id: LAB24-Q21
   objectiveIds:
   - MR-RECOVERY-07
   difficulty: applied
   stem: Which negative check strengthens validation of 'Configure and interpret reports and alerts for backups'?
   options:
-    A: Check only that at least one resource exists in the subscription.
-    B: Repair every warning automatically before recording what caused it.
-    C: Confirm the intended state and also prove that broader, anonymous, or unintended access was not introduced.
-    D: Ignore denied queries and record them as passing checks.
-  correctOption: C
+    A: Confirm the intended state and also prove that broader, anonymous, or unintended access was not introduced.
+    B: Ignore denied queries and record them as passing checks.
+    C: Check only that at least one resource exists in the subscription.
+    D: Repair every warning automatically before recording what caused it.
+  correctOption: A
   explanation: A bounded negative assertion detects accidental privilege or exposure beyond the intended state.
   distractorExplanations:
-    A: This choice changes or trusts a broader scope than the recorded lab boundary.
-    B: This choice skips independent evidence or relies on ambiguous resource identity.
-    C: Correct. A bounded negative assertion detects accidental privilege or exposure beyond the intended state.
-    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    A: Correct. A bounded negative assertion detects accidental privilege or exposure beyond the intended state.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/backup/backup-azure-restore-files-from-vm
   lastVerified: '2026-08-30'
-- id: LAB24-Q11
+- id: LAB24-Q22
   objectiveIds:
   - MR-RECOVERY-01
   difficulty: applied
   stem: Why should the run manifest record the exact ID of protected test VM?
   options:
-    A: It lets setup store access tokens and passwords for later reuse.
-    B: It allows cleanup to delete every object with the same prefix.
-    C: It removes the need to confirm the tenant or subscription context.
-    D: It lets validation and cleanup target the immutable object created by this run rather than a name match.
-  correctOption: D
+    A: It removes the need to confirm the tenant or subscription context.
+    B: It lets validation and cleanup target the immutable object created by this run rather than a name match.
+    C: It lets setup store access tokens and passwords for later reuse.
+    D: It allows cleanup to delete every object with the same prefix.
+  correctOption: B
   explanation: Immutable recorded IDs create a deterministic validation and cleanup boundary.
   distractorExplanations:
-    A: This choice changes or trusts a broader scope than the recorded lab boundary.
-    B: This choice skips independent evidence or relies on ambiguous resource identity.
-    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-    D: Correct. Immutable recorded IDs create a deterministic validation and cleanup boundary.
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: Correct. Immutable recorded IDs create a deterministic validation and cleanup boundary.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/backup/configure-reports
   lastVerified: '2026-08-30'
-- id: LAB24-Q12
+- id: LAB24-Q23
   objectiveIds:
   - MR-RECOVERY-02
   difficulty: applied
   stem: Several similarly named resources exist when cleaning up 'Create an Azure Backup vault'. What is correct?
   options:
-    A: Verify the recorded IDs and ownership tags, preview the targets, and delete only this run's boundary.
-    B: Delete all resources containing az104 in their names.
-    C: Delete the active subscription to guarantee that no lab state remains.
-    D: Choose targets only by creation time and remove the oldest objects.
-  correctOption: A
+    A: Delete the active subscription to guarantee that no lab state remains.
+    B: Choose targets only by creation time and remove the oldest objects.
+    C: Verify the recorded IDs and ownership tags, preview the targets, and delete only this run's boundary.
+    D: Delete all resources containing az104 in their names.
+  correctOption: C
   explanation: Cleanup must use the exact recorded boundary and a separate execution confirmation.
   distractorExplanations:
-    A: Correct. Cleanup must use the exact recorded boundary and a separate execution confirmation.
-    B: This choice changes or trusts a broader scope than the recorded lab boundary.
-    C: This choice skips independent evidence or relies on ambiguous resource identity.
-    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: Correct. Cleanup must use the exact recorded boundary and a separate execution confirmation.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/backup/backup-azure-monitoring-built-in-monitor
   lastVerified: '2026-08-30'
-- id: LAB24-Q13
+- id: LAB24-Q24
+  objectiveIds:
+  - MR-RECOVERY-07
+  difficulty: applied
+  stem: 'A deployment pipeline reaches this decision point: A learner previews the implementation for ''Configure and interpret
+    reports and alerts for backups''. What behavior is required?'
+  options:
+    A: Select the first accessible subscription and hide the resulting context.
+    B: Delete any older resource whose name resembles the new run ID.
+    C: Create the baseline immediately and request approval only before cleanup.
+    D: Display the context, intended changes, cost and gated branches without mutating Azure.
+  correctOption: D
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/backup/configure-reports
+  lastVerified: '2026-08-30'
+- id: LAB24-Q25
+  objectiveIds:
+  - MR-RECOVERY-01
+  difficulty: applied
+  stem: 'While applying least-privilege controls, the administrator reviews this scenario: Which implementation step should
+    the learner perform for ''Create a Recovery Services vault''?'
+  options:
+    A: Create a bounded-retention VM backup policy and enable protection for the test VM.
+    B: Skip the operation and edit validation.json to show a passing result.
+    C: Replace the lab action with a tenant-wide change that is easier to discover.
+    D: Copy resource identifiers from another run instead of recording returned IDs.
+  correctOption: A
+  explanation: 'The lab''s reviewed command path performs this bounded action: Create a bounded-retention VM backup policy
+    and enable protection for the test VM.'
+  distractorExplanations:
+    A: 'Correct. The lab''s reviewed command path performs this bounded action: Create a bounded-retention VM backup policy
+      and enable protection for the test VM.'
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/backup/backup-azure-monitoring-built-in-monitor
+  lastVerified: '2026-08-30'
+- id: LAB24-Q26
+  objectiveIds:
+  - MR-RECOVERY-02
+  difficulty: applied
+  stem: 'A repeatable Azure CLI workflow must address this requirement: Which evidence most directly validates ''Create an
+    Azure Backup vault'' for resource group?'
+  options:
+    A: Record a credential so another learner can replay the authenticated session.
+    B: Query the exact recorded scope and independently verify Microsoft.RecoveryServices/vaults.
+    C: Treat the setup exit code as proof of every configuration and relationship.
+    D: List the entire subscription and assume similarly named resources belong to this run.
+  correctOption: B
+  explanation: The independent validation path must prove Microsoft.RecoveryServices/vaults for the exact recorded object.
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: Correct. The independent validation path must prove Microsoft.RecoveryServices/vaults for the exact recorded object.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/backup/backup-create-recovery-services-vault
+  lastVerified: '2026-08-30'
+- id: LAB24-Q27
+  objectiveIds:
+  - MR-RECOVERY-03
+  difficulty: applied
+  stem: 'During an environment handoff, the receiving team asks this question: The ''Create and configure a backup policy''
+    checkpoint reaches an external prerequisite. What should happen?'
+  options:
+    A: Broaden permissions until the prerequisite can no longer block the operation.
+    B: Mark the branch passed because its command syntax was checked offline.
+    C: 'Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.'
+    D: Invent a domain, notification target, license, quota, or tenant value and continue.
+  correctOption: C
+  explanation: 'Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared
+    role and a disposable subscription.'
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: 'Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared
+      role and a disposable subscription.'
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/backup/create-manage-backup-vault
+  lastVerified: '2026-08-30'
+- id: LAB24-Q28
+  objectiveIds:
+  - MR-RECOVERY-04
+  difficulty: applied
+  stem: 'A configuration change produces the following operational choice: What is the safest command-evidence practice after
+    completing ''Perform backup and restore operations by using Azure Backup''?'
+  options:
+    A: Save tokens, keys, passwords, or SAS values beside the validation result.
+    B: Reuse successful output from an earlier run with a similar resource name.
+    C: Commit the complete account object so reviewers can identify the tenant.
+    D: Retain only redacted structured output from an independent query of the recorded run.
+  correctOption: D
+  explanation: Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: Correct. Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/backup/quick-backup-vm-powershell
+  lastVerified: '2026-08-30'
+- id: LAB24-Q29
+  objectiveIds:
+  - MR-RECOVERY-07
+  difficulty: applied
+  stem: 'While preparing independent validation, an engineer considers this scenario: Which negative check strengthens validation
+    of ''Configure and interpret reports and alerts for backups''?'
+  options:
+    A: Confirm the intended state and also prove that broader, anonymous, or unintended access was not introduced.
+    B: Ignore denied queries and record them as passing checks.
+    C: Check only that at least one resource exists in the subscription.
+    D: Repair every warning automatically before recording what caused it.
+  correctOption: A
+  explanation: A bounded negative assertion detects accidental privilege or exposure beyond the intended state.
+  distractorExplanations:
+    A: Correct. A bounded negative assertion detects accidental privilege or exposure beyond the intended state.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/backup/backup-azure-restore-files-from-vm
+  lastVerified: '2026-08-30'
+- id: LAB24-Q30
+  objectiveIds:
+  - MR-RECOVERY-01
+  difficulty: applied
+  stem: 'A service owner asks the administrator to resolve this requirement: Why should the run manifest record the exact
+    ID of protected test VM?'
+  options:
+    A: It removes the need to confirm the tenant or subscription context.
+    B: It lets validation and cleanup target the immutable object created by this run rather than a name match.
+    C: It lets setup store access tokens and passwords for later reuse.
+    D: It allows cleanup to delete every object with the same prefix.
+  correctOption: B
+  explanation: Immutable recorded IDs create a deterministic validation and cleanup boundary.
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: Correct. Immutable recorded IDs create a deterministic validation and cleanup boundary.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/backup/configure-reports
+  lastVerified: '2026-08-30'
+- id: LAB24-Q31
+  objectiveIds:
+  - MR-RECOVERY-02
+  difficulty: applied
+  stem: 'During a scoped cleanup review, the team evaluates this situation: Several similarly named resources exist when cleaning
+    up ''Create an Azure Backup vault''. What is correct?'
+  options:
+    A: Delete the active subscription to guarantee that no lab state remains.
+    B: Choose targets only by creation time and remove the oldest objects.
+    C: Verify the recorded IDs and ownership tags, preview the targets, and delete only this run's boundary.
+    D: Delete all resources containing az104 in their names.
+  correctOption: C
+  explanation: Cleanup must use the exact recorded boundary and a separate execution confirmation.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: Correct. Cleanup must use the exact recorded boundary and a separate execution confirmation.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/backup/backup-azure-monitoring-built-in-monitor
+  lastVerified: '2026-08-30'
+- id: LAB24-Q32
+  objectiveIds:
+  - MR-RECOVERY-07
+  difficulty: applied
+  stem: 'An automation author must choose the correct response to this scenario: A learner previews the implementation for
+    ''Configure and interpret reports and alerts for backups''. What behavior is required?'
+  options:
+    A: Select the first accessible subscription and hide the resulting context.
+    B: Delete any older resource whose name resembles the new run ID.
+    C: Create the baseline immediately and request approval only before cleanup.
+    D: Display the context, intended changes, cost and gated branches without mutating Azure.
+  correctOption: D
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/backup/configure-reports
+  lastVerified: '2026-08-30'
+- id: LAB24-Q33
+  objectiveIds:
+  - MR-RECOVERY-01
+  difficulty: applied
+  stem: 'A lab run with a unique run ID reaches this decision: Which implementation step should the learner perform for ''Create
+    a Recovery Services vault''?'
+  options:
+    A: Create a bounded-retention VM backup policy and enable protection for the test VM.
+    B: Skip the operation and edit validation.json to show a passing result.
+    C: Replace the lab action with a tenant-wide change that is easier to discover.
+    D: Copy resource identifiers from another run instead of recording returned IDs.
+  correctOption: A
+  explanation: 'The lab''s reviewed command path performs this bounded action: Create a bounded-retention VM backup policy
+    and enable protection for the test VM.'
+  distractorExplanations:
+    A: 'Correct. The lab''s reviewed command path performs this bounded action: Create a bounded-retention VM backup policy
+      and enable protection for the test VM.'
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/backup/backup-azure-monitoring-built-in-monitor
+  lastVerified: '2026-08-30'
+- id: LAB24-Q34
+  objectiveIds:
+  - MR-RECOVERY-02
+  difficulty: applied
+  stem: 'While comparing the intended and actual states, the operator asks this question: Which evidence most directly validates
+    ''Create an Azure Backup vault'' for resource group?'
+  options:
+    A: Record a credential so another learner can replay the authenticated session.
+    B: Query the exact recorded scope and independently verify Microsoft.RecoveryServices/vaults.
+    C: Treat the setup exit code as proof of every configuration and relationship.
+    D: List the entire subscription and assume similarly named resources belong to this run.
+  correctOption: B
+  explanation: The independent validation path must prove Microsoft.RecoveryServices/vaults for the exact recorded object.
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: Correct. The independent validation path must prove Microsoft.RecoveryServices/vaults for the exact recorded object.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/backup/backup-create-recovery-services-vault
+  lastVerified: '2026-08-30'
+- id: LAB24-Q35
+  objectiveIds:
+  - MR-RECOVERY-03
+  difficulty: applied
+  stem: 'A peer reviewer examines the proposed implementation for this scenario: The ''Create and configure a backup policy''
+    checkpoint reaches an external prerequisite. What should happen?'
+  options:
+    A: Broaden permissions until the prerequisite can no longer block the operation.
+    B: Mark the branch passed because its command syntax was checked offline.
+    C: 'Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.'
+    D: Invent a domain, notification target, license, quota, or tenant value and continue.
+  correctOption: C
+  explanation: 'Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared
+    role and a disposable subscription.'
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: 'Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared
+      role and a disposable subscription.'
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/backup/create-manage-backup-vault
+  lastVerified: '2026-08-30'
+- id: LAB24-Q36
+  objectiveIds:
+  - MR-RECOVERY-04
+  difficulty: applied
+  stem: 'During a controlled rollout, the change team encounters this requirement: What is the safest command-evidence practice
+    after completing ''Perform backup and restore operations by using Azure Backup''?'
+  options:
+    A: Save tokens, keys, passwords, or SAS values beside the validation result.
+    B: Reuse successful output from an earlier run with a similar resource name.
+    C: Commit the complete account object so reviewers can identify the tenant.
+    D: Retain only redacted structured output from an independent query of the recorded run.
+  correctOption: D
+  explanation: Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: Correct. Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/backup/quick-backup-vm-powershell
+  lastVerified: '2026-08-30'
+- id: LAB24-Q37
+  objectiveIds:
+  - MR-RECOVERY-07
+  difficulty: applied
+  stem: 'A support engineer reproduces the following situation in a test environment: Which negative check strengthens validation
+    of ''Configure and interpret reports and alerts for backups''?'
+  options:
+    A: Confirm the intended state and also prove that broader, anonymous, or unintended access was not introduced.
+    B: Ignore denied queries and record them as passing checks.
+    C: Check only that at least one resource exists in the subscription.
+    D: Repair every warning automatically before recording what caused it.
+  correctOption: A
+  explanation: A bounded negative assertion detects accidental privilege or exposure beyond the intended state.
+  distractorExplanations:
+    A: Correct. A bounded negative assertion detects accidental privilege or exposure beyond the intended state.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/backup/backup-azure-restore-files-from-vm
+  lastVerified: '2026-08-30'
+- id: LAB24-Q38
+  objectiveIds:
+  - MR-RECOVERY-01
+  difficulty: applied
+  stem: 'While recording validation evidence, the administrator evaluates this question: Why should the run manifest record
+    the exact ID of protected test VM?'
+  options:
+    A: It removes the need to confirm the tenant or subscription context.
+    B: It lets validation and cleanup target the immutable object created by this run rather than a name match.
+    C: It lets setup store access tokens and passwords for later reuse.
+    D: It allows cleanup to delete every object with the same prefix.
+  correctOption: B
+  explanation: Immutable recorded IDs create a deterministic validation and cleanup boundary.
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: Correct. Immutable recorded IDs create a deterministic validation and cleanup boundary.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/backup/configure-reports
+  lastVerified: '2026-08-30'
+- id: LAB24-Q39
+  objectiveIds:
+  - MR-RECOVERY-02
+  difficulty: applied
+  stem: 'A configuration owner must approve one response to this scenario: Several similarly named resources exist when cleaning
+    up ''Create an Azure Backup vault''. What is correct?'
+  options:
+    A: Delete the active subscription to guarantee that no lab state remains.
+    B: Choose targets only by creation time and remove the oldest objects.
+    C: Verify the recorded IDs and ownership tags, preview the targets, and delete only this run's boundary.
+    D: Delete all resources containing az104 in their names.
+  correctOption: C
+  explanation: Cleanup must use the exact recorded boundary and a separate execution confirmation.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: Correct. Cleanup must use the exact recorded boundary and a separate execution confirmation.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/backup/backup-azure-monitoring-built-in-monitor
+  lastVerified: '2026-08-30'
+- id: LAB24-Q40
+  objectiveIds:
+  - MR-RECOVERY-07
+  difficulty: applied
+  stem: 'During post-deployment verification, the team reviews this situation: A learner previews the implementation for ''Configure
+    and interpret reports and alerts for backups''. What behavior is required?'
+  options:
+    A: Select the first accessible subscription and hide the resulting context.
+    B: Delete any older resource whose name resembles the new run ID.
+    C: Create the baseline immediately and request approval only before cleanup.
+    D: Display the context, intended changes, cost and gated branches without mutating Azure.
+  correctOption: D
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/backup/configure-reports
+  lastVerified: '2026-08-30'
+- id: LAB24-Q41
   objectiveIds:
   - MR-RECOVERY-03
   - MR-RECOVERY-04
   difficulty: advanced
   stem: Validation for 'Create and configure a backup policy' fails after setup. What is the best break/fix method?
+  options:
+    A: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+    B: Change validation.json directly so the failed result reads pass.
+    C: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+    D: Rerun setup repeatedly with new names until one attempt appears successful.
+  correctOption: A
+  explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
+  distractorExplanations:
+    A: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/backup/backup-create-recovery-services-vault
+  lastVerified: '2026-08-30'
+- id: LAB24-Q42
+  objectiveIds:
+  - MR-RECOVERY-04
+  - MR-RECOVERY-07
+  difficulty: advanced
+  stem: The operation for 'Perform backup and restore operations by using Azure Backup' is asynchronous or gated. How should
+    completion be recorded?
+  options:
+    A: Fabricate expected output so the assessment and documentation appear complete.
+    B: Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
+    C: Remove the check from validation whenever the service takes longer than expected.
+    D: Record pass as soon as the request is accepted, regardless of its final state.
+  correctOption: B
+  explanation: Accepted requests and offline checks do not prove the final live state.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: Correct. Accepted requests and offline checks do not prove the final live state.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/backup/create-manage-backup-vault
+  lastVerified: '2026-08-30'
+- id: LAB24-Q43
+  objectiveIds:
+  - MR-RECOVERY-07
+  - MR-RECOVERY-01
+  difficulty: advanced
+  stem: An administrator discovers drift while validating 'Configure and interpret reports and alerts for backups'. Which
+    response preserves least privilege?
+  options:
+    A: Replace every resource in the subscription instead of identifying the mismatch.
+    B: Accept the drift when the resource name still matches the lab prefix.
+    C: Compare the live query with the recorded expectation, change only the mismatched setting, and validate again.
+    D: Grant subscription Owner and tenant administrator roles to avoid further authorization errors.
+  correctOption: C
+  explanation: The narrowest evidence-supported correction avoids unrelated changes and excess privilege.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: Correct. The narrowest evidence-supported correction avoids unrelated changes and excess privilege.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/backup/quick-backup-vm-powershell
+  lastVerified: '2026-08-30'
+- id: LAB24-Q44
+  objectiveIds:
+  - MR-RECOVERY-03
+  - MR-RECOVERY-04
+  difficulty: advanced
+  stem: 'While diagnosing unexpected Azure behavior, the engineer considers this situation: Validation for ''Create and configure
+    a backup policy'' fails after setup. What is the best break/fix method?'
+  options:
+    A: Change validation.json directly so the failed result reads pass.
+    B: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+    C: Rerun setup repeatedly with new names until one attempt appears successful.
+    D: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+  correctOption: D
+  explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/backup/backup-create-recovery-services-vault
+  lastVerified: '2026-08-30'
+- id: LAB24-Q45
+  objectiveIds:
+  - MR-RECOVERY-04
+  - MR-RECOVERY-07
+  difficulty: advanced
+  stem: 'An architecture review requires the strongest response to this scenario: The operation for ''Perform backup and restore
+    operations by using Azure Backup'' is asynchronous or gated. How should completion be recorded?'
+  options:
+    A: Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
+    B: Remove the check from validation whenever the service takes longer than expected.
+    C: Record pass as soon as the request is accepted, regardless of its final state.
+    D: Fabricate expected output so the assessment and documentation appear complete.
+  correctOption: A
+  explanation: Accepted requests and offline checks do not prove the final live state.
+  distractorExplanations:
+    A: Correct. Accepted requests and offline checks do not prove the final live state.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/backup/create-manage-backup-vault
+  lastVerified: '2026-08-30'
+- id: LAB24-Q46
+  objectiveIds:
+  - MR-RECOVERY-07
+  - MR-RECOVERY-01
+  difficulty: advanced
+  stem: 'During break/fix validation, the operator encounters this question: An administrator discovers drift while validating
+    ''Configure and interpret reports and alerts for backups''. Which response preserves least privilege?'
+  options:
+    A: Accept the drift when the resource name still matches the lab prefix.
+    B: Compare the live query with the recorded expectation, change only the mismatched setting, and validate again.
+    C: Grant subscription Owner and tenant administrator roles to avoid further authorization errors.
+    D: Replace every resource in the subscription instead of identifying the mismatch.
+  correctOption: B
+  explanation: The narrowest evidence-supported correction avoids unrelated changes and excess privilege.
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: Correct. The narrowest evidence-supported correction avoids unrelated changes and excess privilege.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/backup/quick-backup-vm-powershell
+  lastVerified: '2026-08-30'
+- id: LAB24-Q47
+  objectiveIds:
+  - MR-RECOVERY-03
+  - MR-RECOVERY-04
+  difficulty: advanced
+  stem: 'A complex support case depends on correctly interpreting this requirement: Validation for ''Create and configure
+    a backup policy'' fails after setup. What is the best break/fix method?'
+  options:
+    A: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+    B: Rerun setup repeatedly with new names until one attempt appears successful.
+    C: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+    D: Change validation.json directly so the failed result reads pass.
+  correctOption: C
+  explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/backup/backup-create-recovery-services-vault
+  lastVerified: '2026-08-30'
+- id: LAB24-Q48
+  objectiveIds:
+  - MR-RECOVERY-04
+  - MR-RECOVERY-07
+  difficulty: advanced
+  stem: 'While correcting configuration drift, the team evaluates this scenario: The operation for ''Perform backup and restore
+    operations by using Azure Backup'' is asynchronous or gated. How should completion be recorded?'
+  options:
+    A: Remove the check from validation whenever the service takes longer than expected.
+    B: Record pass as soon as the request is accepted, regardless of its final state.
+    C: Fabricate expected output so the assessment and documentation appear complete.
+    D: Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
+  correctOption: D
+  explanation: Accepted requests and offline checks do not prove the final live state.
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: Correct. Accepted requests and offline checks do not prove the final live state.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/backup/create-manage-backup-vault
+  lastVerified: '2026-08-30'
+- id: LAB24-Q49
+  objectiveIds:
+  - MR-RECOVERY-07
+  - MR-RECOVERY-01
+  difficulty: advanced
+  stem: 'A recovery exercise exposes the following technical decision: An administrator discovers drift while validating ''Configure
+    and interpret reports and alerts for backups''. Which response preserves least privilege?'
+  options:
+    A: Compare the live query with the recorded expectation, change only the mismatched setting, and validate again.
+    B: Grant subscription Owner and tenant administrator roles to avoid further authorization errors.
+    C: Replace every resource in the subscription instead of identifying the mismatch.
+    D: Accept the drift when the resource name still matches the lab prefix.
+  correctOption: A
+  explanation: The narrowest evidence-supported correction avoids unrelated changes and excess privilege.
+  distractorExplanations:
+    A: Correct. The narrowest evidence-supported correction avoids unrelated changes and excess privilege.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/backup/quick-backup-vm-powershell
+  lastVerified: '2026-08-30'
+- id: LAB24-Q50
+  objectiveIds:
+  - MR-RECOVERY-03
+  - MR-RECOVERY-04
+  difficulty: advanced
+  stem: 'During final design assurance, the reviewer must resolve this situation: Validation for ''Create and configure a
+    backup policy'' fails after setup. What is the best break/fix method?'
   options:
     A: Rerun setup repeatedly with new names until one attempt appears successful.
     B: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
@@ -278,49 +1091,4 @@
     D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/backup/backup-create-recovery-services-vault
-  lastVerified: '2026-08-30'
-- id: LAB24-Q14
-  objectiveIds:
-  - MR-RECOVERY-04
-  - MR-RECOVERY-07
-  difficulty: advanced
-  stem: The operation for 'Perform backup and restore operations by using Azure Backup' is asynchronous or gated.
-    How should completion be recorded?
-  options:
-    A: Record pass as soon as the request is accepted, regardless of its final state.
-    B: Fabricate expected output so the assessment and documentation appear complete.
-    C: Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence
-      exists.
-    D: Remove the check from validation whenever the service takes longer than expected.
-  correctOption: C
-  explanation: Accepted requests and offline checks do not prove the final live state.
-  distractorExplanations:
-    A: This choice changes or trusts a broader scope than the recorded lab boundary.
-    B: This choice skips independent evidence or relies on ambiguous resource identity.
-    C: Correct. Accepted requests and offline checks do not prove the final live state.
-    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-  sourceUrls:
-  - https://learn.microsoft.com/en-us/azure/backup/create-manage-backup-vault
-  lastVerified: '2026-08-30'
-- id: LAB24-Q15
-  objectiveIds:
-  - MR-RECOVERY-07
-  - MR-RECOVERY-01
-  difficulty: advanced
-  stem: An administrator discovers drift while validating 'Configure and interpret reports and alerts for backups'.
-    Which response preserves least privilege?
-  options:
-    A: Grant subscription Owner and tenant administrator roles to avoid further authorization errors.
-    B: Replace every resource in the subscription instead of identifying the mismatch.
-    C: Accept the drift when the resource name still matches the lab prefix.
-    D: Compare the live query with the recorded expectation, change only the mismatched setting, and validate again.
-  correctOption: D
-  explanation: The narrowest evidence-supported correction avoids unrelated changes and excess privilege.
-  distractorExplanations:
-    A: This choice changes or trusts a broader scope than the recorded lab boundary.
-    B: This choice skips independent evidence or relies on ambiguous resource identity.
-    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-    D: Correct. The narrowest evidence-supported correction avoids unrelated changes and excess privilege.
-  sourceUrls:
-  - https://learn.microsoft.com/en-us/azure/backup/quick-backup-vm-powershell
   lastVerified: '2026-08-30'

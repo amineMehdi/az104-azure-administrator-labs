@@ -2,32 +2,367 @@
   objectiveIds:
   - CP-CONTAINERS-03
   difficulty: foundational
-  stem: Which principle is most important when working on 'Provision a container by using Azure Container Apps'
-    in Lab 14?
+  stem: Which principle is most important when working on 'Provision a container by using Azure Container Apps' in Lab 14?
   options:
-    A: Container Apps revisions are immutable deployment snapshots, while replicas scale within an active revision
-      according to minimum, maximum, and event rules.
+    A: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+    B: A recognizable resource name removes the need for validation and scoped cleanup.
+    C: Container Apps revisions are immutable deployment snapshots, while replicas scale within an active revision according
+      to minimum, maximum, and event rules.
+    D: The shortest command is always correct even when it changes a broader scope.
+  correctOption: C
+  explanation: 'The lab establishes this design principle: Container Apps revisions are immutable deployment snapshots, while
+    replicas scale within an active revision according to minimum, maximum, and event rules.'
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: 'Correct. The lab establishes this design principle: Container Apps revisions are immutable deployment snapshots, while
+      replicas scale within an active revision according to minimum, maximum, and event rules.'
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-apps/get-started
+  lastVerified: '2026-08-30'
+- id: LAB14-Q02
+  objectiveIds:
+  - CP-CONTAINERS-03
+  difficulty: foundational
+  stem: 'While documenting the service baseline, an engineer considers this question: Which principle is most important when
+    working on ''Provision a container by using Azure Container Apps'' in Lab 14?'
+  options:
+    A: The shortest command is always correct even when it changes a broader scope.
+    B: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+    C: A recognizable resource name removes the need for validation and scoped cleanup.
+    D: Container Apps revisions are immutable deployment snapshots, while replicas scale within an active revision according
+      to minimum, maximum, and event rules.
+  correctOption: D
+  explanation: 'The lab establishes this design principle: Container Apps revisions are immutable deployment snapshots, while
+    replicas scale within an active revision according to minimum, maximum, and event rules.'
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: 'Correct. The lab establishes this design principle: Container Apps revisions are immutable deployment snapshots, while
+      replicas scale within an active revision according to minimum, maximum, and event rules.'
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-apps/get-started
+  lastVerified: '2026-08-30'
+- id: LAB14-Q03
+  objectiveIds:
+  - CP-CONTAINERS-03
+  difficulty: foundational
+  stem: 'In a fundamentals workshop, the instructor presents this requirement: Which principle is most important when working
+    on ''Provision a container by using Azure Container Apps'' in Lab 14?'
+  options:
+    A: Container Apps revisions are immutable deployment snapshots, while replicas scale within an active revision according
+      to minimum, maximum, and event rules.
     B: The shortest command is always correct even when it changes a broader scope.
     C: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
     D: A recognizable resource name removes the need for validation and scoped cleanup.
   correctOption: A
-  explanation: 'The lab establishes this design principle: Container Apps revisions are immutable deployment snapshots,
-    while replicas scale within an active revision according to minimum, maximum, and event rules.'
+  explanation: 'The lab establishes this design principle: Container Apps revisions are immutable deployment snapshots, while
+    replicas scale within an active revision according to minimum, maximum, and event rules.'
   distractorExplanations:
-    A: 'Correct. The lab establishes this design principle: Container Apps revisions are immutable deployment snapshots,
-      while replicas scale within an active revision according to minimum, maximum, and event rules.'
+    A: 'Correct. The lab establishes this design principle: Container Apps revisions are immutable deployment snapshots, while
+      replicas scale within an active revision according to minimum, maximum, and event rules.'
     B: This choice changes or trusts a broader scope than the recorded lab boundary.
     C: This choice skips independent evidence or relies on ambiguous resource identity.
     D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/container-apps/get-started
   lastVerified: '2026-08-30'
-- id: LAB14-Q02
+- id: LAB14-Q04
+  objectiveIds:
+  - CP-CONTAINERS-03
+  difficulty: foundational
+  stem: 'Before making a change, a learner checks this core behavior: Which principle is most important when working on ''Provision
+    a container by using Azure Container Apps'' in Lab 14?'
+  options:
+    A: A recognizable resource name removes the need for validation and scoped cleanup.
+    B: Container Apps revisions are immutable deployment snapshots, while replicas scale within an active revision according
+      to minimum, maximum, and event rules.
+    C: The shortest command is always correct even when it changes a broader scope.
+    D: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+  correctOption: B
+  explanation: 'The lab establishes this design principle: Container Apps revisions are immutable deployment snapshots, while
+    replicas scale within an active revision according to minimum, maximum, and event rules.'
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: 'Correct. The lab establishes this design principle: Container Apps revisions are immutable deployment snapshots, while
+      replicas scale within an active revision according to minimum, maximum, and event rules.'
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-apps/get-started
+  lastVerified: '2026-08-30'
+- id: LAB14-Q05
+  objectiveIds:
+  - CP-CONTAINERS-03
+  difficulty: foundational
+  stem: 'During a design vocabulary review, the team evaluates this situation: Which principle is most important when working
+    on ''Provision a container by using Azure Container Apps'' in Lab 14?'
+  options:
+    A: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+    B: A recognizable resource name removes the need for validation and scoped cleanup.
+    C: Container Apps revisions are immutable deployment snapshots, while replicas scale within an active revision according
+      to minimum, maximum, and event rules.
+    D: The shortest command is always correct even when it changes a broader scope.
+  correctOption: C
+  explanation: 'The lab establishes this design principle: Container Apps revisions are immutable deployment snapshots, while
+    replicas scale within an active revision according to minimum, maximum, and event rules.'
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: 'Correct. The lab establishes this design principle: Container Apps revisions are immutable deployment snapshots, while
+      replicas scale within an active revision according to minimum, maximum, and event rules.'
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-apps/get-started
+  lastVerified: '2026-08-30'
+- id: LAB14-Q06
+  objectiveIds:
+  - CP-CONTAINERS-03
+  difficulty: foundational
+  stem: 'In a command-planning session, an administrator asks this question: Which principle is most important when working
+    on ''Provision a container by using Azure Container Apps'' in Lab 14?'
+  options:
+    A: The shortest command is always correct even when it changes a broader scope.
+    B: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+    C: A recognizable resource name removes the need for validation and scoped cleanup.
+    D: Container Apps revisions are immutable deployment snapshots, while replicas scale within an active revision according
+      to minimum, maximum, and event rules.
+  correctOption: D
+  explanation: 'The lab establishes this design principle: Container Apps revisions are immutable deployment snapshots, while
+    replicas scale within an active revision according to minimum, maximum, and event rules.'
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: 'Correct. The lab establishes this design principle: Container Apps revisions are immutable deployment snapshots, while
+      replicas scale within an active revision according to minimum, maximum, and event rules.'
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-apps/get-started
+  lastVerified: '2026-08-30'
+- id: LAB14-Q07
+  objectiveIds:
+  - CP-CONTAINERS-03
+  difficulty: foundational
+  stem: 'While preparing the lab, a learner verifies this platform rule: Which principle is most important when working on
+    ''Provision a container by using Azure Container Apps'' in Lab 14?'
+  options:
+    A: Container Apps revisions are immutable deployment snapshots, while replicas scale within an active revision according
+      to minimum, maximum, and event rules.
+    B: The shortest command is always correct even when it changes a broader scope.
+    C: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+    D: A recognizable resource name removes the need for validation and scoped cleanup.
+  correctOption: A
+  explanation: 'The lab establishes this design principle: Container Apps revisions are immutable deployment snapshots, while
+    replicas scale within an active revision according to minimum, maximum, and event rules.'
+  distractorExplanations:
+    A: 'Correct. The lab establishes this design principle: Container Apps revisions are immutable deployment snapshots, while
+      replicas scale within an active revision according to minimum, maximum, and event rules.'
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-apps/get-started
+  lastVerified: '2026-08-30'
+- id: LAB14-Q08
+  objectiveIds:
+  - CP-CONTAINERS-03
+  difficulty: foundational
+  stem: 'During peer review, the team must identify the accurate response to this scenario: Which principle is most important
+    when working on ''Provision a container by using Azure Container Apps'' in Lab 14?'
+  options:
+    A: A recognizable resource name removes the need for validation and scoped cleanup.
+    B: Container Apps revisions are immutable deployment snapshots, while replicas scale within an active revision according
+      to minimum, maximum, and event rules.
+    C: The shortest command is always correct even when it changes a broader scope.
+    D: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+  correctOption: B
+  explanation: 'The lab establishes this design principle: Container Apps revisions are immutable deployment snapshots, while
+    replicas scale within an active revision according to minimum, maximum, and event rules.'
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: 'Correct. The lab establishes this design principle: Container Apps revisions are immutable deployment snapshots, while
+      replicas scale within an active revision according to minimum, maximum, and event rules.'
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-apps/get-started
+  lastVerified: '2026-08-30'
+- id: LAB14-Q09
+  objectiveIds:
+  - CP-CONTAINERS-03
+  difficulty: foundational
+  stem: 'In an operations briefing, a new team member receives this question: Which principle is most important when working
+    on ''Provision a container by using Azure Container Apps'' in Lab 14?'
+  options:
+    A: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+    B: A recognizable resource name removes the need for validation and scoped cleanup.
+    C: Container Apps revisions are immutable deployment snapshots, while replicas scale within an active revision according
+      to minimum, maximum, and event rules.
+    D: The shortest command is always correct even when it changes a broader scope.
+  correctOption: C
+  explanation: 'The lab establishes this design principle: Container Apps revisions are immutable deployment snapshots, while
+    replicas scale within an active revision according to minimum, maximum, and event rules.'
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: 'Correct. The lab establishes this design principle: Container Apps revisions are immutable deployment snapshots, while
+      replicas scale within an active revision according to minimum, maximum, and event rules.'
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-apps/get-started
+  lastVerified: '2026-08-30'
+- id: LAB14-Q10
+  objectiveIds:
+  - CP-CONTAINERS-03
+  difficulty: foundational
+  stem: 'While building a support checklist, an engineer reviews this requirement: Which principle is most important when
+    working on ''Provision a container by using Azure Container Apps'' in Lab 14?'
+  options:
+    A: The shortest command is always correct even when it changes a broader scope.
+    B: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+    C: A recognizable resource name removes the need for validation and scoped cleanup.
+    D: Container Apps revisions are immutable deployment snapshots, while replicas scale within an active revision according
+      to minimum, maximum, and event rules.
+  correctOption: D
+  explanation: 'The lab establishes this design principle: Container Apps revisions are immutable deployment snapshots, while
+    replicas scale within an active revision according to minimum, maximum, and event rules.'
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: 'Correct. The lab establishes this design principle: Container Apps revisions are immutable deployment snapshots, while
+      replicas scale within an active revision according to minimum, maximum, and event rules.'
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-apps/get-started
+  lastVerified: '2026-08-30'
+- id: LAB14-Q11
+  objectiveIds:
+  - CP-CONTAINERS-03
+  difficulty: foundational
+  stem: 'During a readiness check, the administrator considers this behavior: Which principle is most important when working
+    on ''Provision a container by using Azure Container Apps'' in Lab 14?'
+  options:
+    A: Container Apps revisions are immutable deployment snapshots, while replicas scale within an active revision according
+      to minimum, maximum, and event rules.
+    B: The shortest command is always correct even when it changes a broader scope.
+    C: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+    D: A recognizable resource name removes the need for validation and scoped cleanup.
+  correctOption: A
+  explanation: 'The lab establishes this design principle: Container Apps revisions are immutable deployment snapshots, while
+    replicas scale within an active revision according to minimum, maximum, and event rules.'
+  distractorExplanations:
+    A: 'Correct. The lab establishes this design principle: Container Apps revisions are immutable deployment snapshots, while
+      replicas scale within an active revision according to minimum, maximum, and event rules.'
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-apps/get-started
+  lastVerified: '2026-08-30'
+- id: LAB14-Q12
+  objectiveIds:
+  - CP-CONTAINERS-03
+  difficulty: foundational
+  stem: 'In a service overview, the team discusses this scenario: Which principle is most important when working on ''Provision
+    a container by using Azure Container Apps'' in Lab 14?'
+  options:
+    A: A recognizable resource name removes the need for validation and scoped cleanup.
+    B: Container Apps revisions are immutable deployment snapshots, while replicas scale within an active revision according
+      to minimum, maximum, and event rules.
+    C: The shortest command is always correct even when it changes a broader scope.
+    D: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+  correctOption: B
+  explanation: 'The lab establishes this design principle: Container Apps revisions are immutable deployment snapshots, while
+    replicas scale within an active revision according to minimum, maximum, and event rules.'
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: 'Correct. The lab establishes this design principle: Container Apps revisions are immutable deployment snapshots, while
+      replicas scale within an active revision according to minimum, maximum, and event rules.'
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-apps/get-started
+  lastVerified: '2026-08-30'
+- id: LAB14-Q13
+  objectiveIds:
+  - CP-CONTAINERS-03
+  difficulty: foundational
+  stem: 'While reviewing official guidance, a learner must resolve this question: Which principle is most important when working
+    on ''Provision a container by using Azure Container Apps'' in Lab 14?'
+  options:
+    A: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+    B: A recognizable resource name removes the need for validation and scoped cleanup.
+    C: Container Apps revisions are immutable deployment snapshots, while replicas scale within an active revision according
+      to minimum, maximum, and event rules.
+    D: The shortest command is always correct even when it changes a broader scope.
+  correctOption: C
+  explanation: 'The lab establishes this design principle: Container Apps revisions are immutable deployment snapshots, while
+    replicas scale within an active revision according to minimum, maximum, and event rules.'
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: 'Correct. The lab establishes this design principle: Container Apps revisions are immutable deployment snapshots, while
+      replicas scale within an active revision according to minimum, maximum, and event rules.'
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-apps/get-started
+  lastVerified: '2026-08-30'
+- id: LAB14-Q14
+  objectiveIds:
+  - CP-CONTAINERS-03
+  difficulty: foundational
+  stem: 'During a configuration walkthrough, the instructor asks about this situation: Which principle is most important when
+    working on ''Provision a container by using Azure Container Apps'' in Lab 14?'
+  options:
+    A: The shortest command is always correct even when it changes a broader scope.
+    B: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+    C: A recognizable resource name removes the need for validation and scoped cleanup.
+    D: Container Apps revisions are immutable deployment snapshots, while replicas scale within an active revision according
+      to minimum, maximum, and event rules.
+  correctOption: D
+  explanation: 'The lab establishes this design principle: Container Apps revisions are immutable deployment snapshots, while
+    replicas scale within an active revision according to minimum, maximum, and event rules.'
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: 'Correct. The lab establishes this design principle: Container Apps revisions are immutable deployment snapshots, while
+      replicas scale within an active revision according to minimum, maximum, and event rules.'
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-apps/get-started
+  lastVerified: '2026-08-30'
+- id: LAB14-Q15
+  objectiveIds:
+  - CP-CONTAINERS-03
+  difficulty: foundational
+  stem: 'In a preflight knowledge check, the operator evaluates this requirement: Which principle is most important when working
+    on ''Provision a container by using Azure Container Apps'' in Lab 14?'
+  options:
+    A: Container Apps revisions are immutable deployment snapshots, while replicas scale within an active revision according
+      to minimum, maximum, and event rules.
+    B: The shortest command is always correct even when it changes a broader scope.
+    C: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+    D: A recognizable resource name removes the need for validation and scoped cleanup.
+  correctOption: A
+  explanation: 'The lab establishes this design principle: Container Apps revisions are immutable deployment snapshots, while
+    replicas scale within an active revision according to minimum, maximum, and event rules.'
+  distractorExplanations:
+    A: 'Correct. The lab establishes this design principle: Container Apps revisions are immutable deployment snapshots, while
+      replicas scale within an active revision according to minimum, maximum, and event rules.'
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-apps/get-started
+  lastVerified: '2026-08-30'
+- id: LAB14-Q16
   objectiveIds:
   - CP-CONTAINERS-04
   difficulty: applied
-  stem: A learner previews the implementation for 'Manage sizing and scaling for containers, including Azure Container
-    Instances and Azure Container Apps'. What behavior is required?
+  stem: 'Within Lab 14, the team evaluates this scenario: A learner previews the implementation for ''Manage sizing and scaling
+    for containers, including Azure Container Instances and Azure Container Apps''. What behavior is required?'
   options:
     A: Create the baseline immediately and request approval only before cleanup.
     B: Display the context, intended changes, cost and gated branches without mutating Azure.
@@ -43,36 +378,754 @@
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/container-apps/revisions
   lastVerified: '2026-08-30'
-- id: LAB14-Q03
+- id: LAB14-Q17
   objectiveIds:
   - CP-CONTAINERS-03
   difficulty: applied
-  stem: Which implementation step should the learner perform for 'Provision a container by using Azure Container
-    Apps'?
+  stem: Which implementation step should the learner perform for 'Provision a container by using Azure Container Apps'?
   options:
     A: Replace the lab action with a tenant-wide change that is easier to discover.
     B: Copy resource identifiers from another run instead of recording returned IDs.
     C: Create a new revision by changing an environment variable and split traffic deliberately.
     D: Skip the operation and edit validation.json to show a passing result.
   correctOption: C
-  explanation: 'The lab''s reviewed command path performs this bounded action: Create a new revision by changing
-    an environment variable and split traffic deliberately.'
+  explanation: 'The lab''s reviewed command path performs this bounded action: Create a new revision by changing an environment
+    variable and split traffic deliberately.'
   distractorExplanations:
     A: This choice changes or trusts a broader scope than the recorded lab boundary.
     B: This choice skips independent evidence or relies on ambiguous resource identity.
-    C: 'Correct. The lab''s reviewed command path performs this bounded action: Create a new revision by changing
-      an environment variable and split traffic deliberately.'
+    C: 'Correct. The lab''s reviewed command path performs this bounded action: Create a new revision by changing an environment
+      variable and split traffic deliberately.'
     D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/container-apps/scale-app
   lastVerified: '2026-08-30'
-- id: LAB14-Q04
+- id: LAB14-Q18
+  objectiveIds:
+  - CP-CONTAINERS-04
+  difficulty: applied
+  stem: 'While automating the lab, an engineer must answer this question: A learner previews the implementation for ''Manage
+    sizing and scaling for containers, including Azure Container Instances and Azure Container Apps''. What behavior is required?'
+  options:
+    A: Select the first accessible subscription and hide the resulting context.
+    B: Delete any older resource whose name resembles the new run ID.
+    C: Create the baseline immediately and request approval only before cleanup.
+    D: Display the context, intended changes, cost and gated branches without mutating Azure.
+  correctOption: D
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-apps/revisions
+  lastVerified: '2026-08-30'
+- id: LAB14-Q19
+  objectiveIds:
+  - CP-CONTAINERS-03
+  difficulty: applied
+  stem: 'During an implementation review, the operator considers this requirement: Which implementation step should the learner
+    perform for ''Provision a container by using Azure Container Apps''?'
+  options:
+    A: Create a new revision by changing an environment variable and split traffic deliberately.
+    B: Skip the operation and edit validation.json to show a passing result.
+    C: Replace the lab action with a tenant-wide change that is easier to discover.
+    D: Copy resource identifiers from another run instead of recording returned IDs.
+  correctOption: A
+  explanation: 'The lab''s reviewed command path performs this bounded action: Create a new revision by changing an environment
+    variable and split traffic deliberately.'
+  distractorExplanations:
+    A: 'Correct. The lab''s reviewed command path performs this bounded action: Create a new revision by changing an environment
+      variable and split traffic deliberately.'
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-apps/scale-app
+  lastVerified: '2026-08-30'
+- id: LAB14-Q20
+  objectiveIds:
+  - CP-CONTAINERS-04
+  difficulty: applied
+  stem: 'A production runbook must correctly handle this scenario: A learner previews the implementation for ''Manage sizing
+    and scaling for containers, including Azure Container Instances and Azure Container Apps''. What behavior is required?'
+  options:
+    A: Create the baseline immediately and request approval only before cleanup.
+    B: Display the context, intended changes, cost and gated branches without mutating Azure.
+    C: Select the first accessible subscription and hide the resulting context.
+    D: Delete any older resource whose name resembles the new run ID.
+  correctOption: B
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-apps/revisions
+  lastVerified: '2026-08-30'
+- id: LAB14-Q21
+  objectiveIds:
+  - CP-CONTAINERS-03
+  difficulty: applied
+  stem: 'While validating a configuration, the team evaluates this situation: Which implementation step should the learner
+    perform for ''Provision a container by using Azure Container Apps''?'
+  options:
+    A: Replace the lab action with a tenant-wide change that is easier to discover.
+    B: Copy resource identifiers from another run instead of recording returned IDs.
+    C: Create a new revision by changing an environment variable and split traffic deliberately.
+    D: Skip the operation and edit validation.json to show a passing result.
+  correctOption: C
+  explanation: 'The lab''s reviewed command path performs this bounded action: Create a new revision by changing an environment
+    variable and split traffic deliberately.'
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: 'Correct. The lab''s reviewed command path performs this bounded action: Create a new revision by changing an environment
+      variable and split traffic deliberately.'
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-apps/scale-app
+  lastVerified: '2026-08-30'
+- id: LAB14-Q22
+  objectiveIds:
+  - CP-CONTAINERS-04
+  difficulty: applied
+  stem: 'Within Lab 14, the team evaluates this scenario: A delegated administrator receives the following support request:
+    A learner previews the implementation for ''Manage sizing and scaling for containers, including Azure Container Instances
+    and Azure Container Apps''. What behavior is required?'
+  options:
+    A: Select the first accessible subscription and hide the resulting context.
+    B: Delete any older resource whose name resembles the new run ID.
+    C: Create the baseline immediately and request approval only before cleanup.
+    D: Display the context, intended changes, cost and gated branches without mutating Azure.
+  correctOption: D
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-apps/revisions
+  lastVerified: '2026-08-30'
+- id: LAB14-Q23
+  objectiveIds:
+  - CP-CONTAINERS-03
+  difficulty: applied
+  stem: 'During a maintenance window, an engineer must decide how to respond: Which implementation step should the learner
+    perform for ''Provision a container by using Azure Container Apps''?'
+  options:
+    A: Create a new revision by changing an environment variable and split traffic deliberately.
+    B: Skip the operation and edit validation.json to show a passing result.
+    C: Replace the lab action with a tenant-wide change that is easier to discover.
+    D: Copy resource identifiers from another run instead of recording returned IDs.
+  correctOption: A
+  explanation: 'The lab''s reviewed command path performs this bounded action: Create a new revision by changing an environment
+    variable and split traffic deliberately.'
+  distractorExplanations:
+    A: 'Correct. The lab''s reviewed command path performs this bounded action: Create a new revision by changing an environment
+      variable and split traffic deliberately.'
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-apps/scale-app
+  lastVerified: '2026-08-30'
+- id: LAB14-Q24
+  objectiveIds:
+  - CP-CONTAINERS-04
+  difficulty: applied
+  stem: 'A deployment pipeline reaches this decision point: A learner previews the implementation for ''Manage sizing and
+    scaling for containers, including Azure Container Instances and Azure Container Apps''. What behavior is required?'
+  options:
+    A: Create the baseline immediately and request approval only before cleanup.
+    B: Display the context, intended changes, cost and gated branches without mutating Azure.
+    C: Select the first accessible subscription and hide the resulting context.
+    D: Delete any older resource whose name resembles the new run ID.
+  correctOption: B
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-apps/revisions
+  lastVerified: '2026-08-30'
+- id: LAB14-Q25
+  objectiveIds:
+  - CP-CONTAINERS-03
+  difficulty: applied
+  stem: 'While applying least-privilege controls, the administrator reviews this scenario: Which implementation step should
+    the learner perform for ''Provision a container by using Azure Container Apps''?'
+  options:
+    A: Replace the lab action with a tenant-wide change that is easier to discover.
+    B: Copy resource identifiers from another run instead of recording returned IDs.
+    C: Create a new revision by changing an environment variable and split traffic deliberately.
+    D: Skip the operation and edit validation.json to show a passing result.
+  correctOption: C
+  explanation: 'The lab''s reviewed command path performs this bounded action: Create a new revision by changing an environment
+    variable and split traffic deliberately.'
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: 'Correct. The lab''s reviewed command path performs this bounded action: Create a new revision by changing an environment
+      variable and split traffic deliberately.'
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-apps/scale-app
+  lastVerified: '2026-08-30'
+- id: LAB14-Q26
+  objectiveIds:
+  - CP-CONTAINERS-04
+  difficulty: applied
+  stem: 'A repeatable Azure CLI workflow must address this requirement: A learner previews the implementation for ''Manage
+    sizing and scaling for containers, including Azure Container Instances and Azure Container Apps''. What behavior is required?'
+  options:
+    A: Select the first accessible subscription and hide the resulting context.
+    B: Delete any older resource whose name resembles the new run ID.
+    C: Create the baseline immediately and request approval only before cleanup.
+    D: Display the context, intended changes, cost and gated branches without mutating Azure.
+  correctOption: D
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-apps/revisions
+  lastVerified: '2026-08-30'
+- id: LAB14-Q27
+  objectiveIds:
+  - CP-CONTAINERS-03
+  difficulty: applied
+  stem: 'During an environment handoff, the receiving team asks this question: Which implementation step should the learner
+    perform for ''Provision a container by using Azure Container Apps''?'
+  options:
+    A: Create a new revision by changing an environment variable and split traffic deliberately.
+    B: Skip the operation and edit validation.json to show a passing result.
+    C: Replace the lab action with a tenant-wide change that is easier to discover.
+    D: Copy resource identifiers from another run instead of recording returned IDs.
+  correctOption: A
+  explanation: 'The lab''s reviewed command path performs this bounded action: Create a new revision by changing an environment
+    variable and split traffic deliberately.'
+  distractorExplanations:
+    A: 'Correct. The lab''s reviewed command path performs this bounded action: Create a new revision by changing an environment
+      variable and split traffic deliberately.'
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-apps/scale-app
+  lastVerified: '2026-08-30'
+- id: LAB14-Q28
+  objectiveIds:
+  - CP-CONTAINERS-04
+  difficulty: applied
+  stem: 'Within Lab 14, the team evaluates this scenario: A configuration change produces the following operational choice:
+    A learner previews the implementation for ''Manage sizing and scaling for containers, including Azure Container Instances
+    and Azure Container Apps''. What behavior is required?'
+  options:
+    A: Create the baseline immediately and request approval only before cleanup.
+    B: Display the context, intended changes, cost and gated branches without mutating Azure.
+    C: Select the first accessible subscription and hide the resulting context.
+    D: Delete any older resource whose name resembles the new run ID.
+  correctOption: B
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-apps/revisions
+  lastVerified: '2026-08-30'
+- id: LAB14-Q29
+  objectiveIds:
+  - CP-CONTAINERS-03
+  difficulty: applied
+  stem: 'While preparing independent validation, an engineer considers this scenario: Which implementation step should the
+    learner perform for ''Provision a container by using Azure Container Apps''?'
+  options:
+    A: Replace the lab action with a tenant-wide change that is easier to discover.
+    B: Copy resource identifiers from another run instead of recording returned IDs.
+    C: Create a new revision by changing an environment variable and split traffic deliberately.
+    D: Skip the operation and edit validation.json to show a passing result.
+  correctOption: C
+  explanation: 'The lab''s reviewed command path performs this bounded action: Create a new revision by changing an environment
+    variable and split traffic deliberately.'
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: 'Correct. The lab''s reviewed command path performs this bounded action: Create a new revision by changing an environment
+      variable and split traffic deliberately.'
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-apps/scale-app
+  lastVerified: '2026-08-30'
+- id: LAB14-Q30
+  objectiveIds:
+  - CP-CONTAINERS-04
+  difficulty: applied
+  stem: 'A service owner asks the administrator to resolve this requirement: A learner previews the implementation for ''Manage
+    sizing and scaling for containers, including Azure Container Instances and Azure Container Apps''. What behavior is required?'
+  options:
+    A: Select the first accessible subscription and hide the resulting context.
+    B: Delete any older resource whose name resembles the new run ID.
+    C: Create the baseline immediately and request approval only before cleanup.
+    D: Display the context, intended changes, cost and gated branches without mutating Azure.
+  correctOption: D
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-apps/revisions
+  lastVerified: '2026-08-30'
+- id: LAB14-Q31
+  objectiveIds:
+  - CP-CONTAINERS-03
+  difficulty: applied
+  stem: 'During a scoped cleanup review, the team evaluates this situation: Which implementation step should the learner perform
+    for ''Provision a container by using Azure Container Apps''?'
+  options:
+    A: Create a new revision by changing an environment variable and split traffic deliberately.
+    B: Skip the operation and edit validation.json to show a passing result.
+    C: Replace the lab action with a tenant-wide change that is easier to discover.
+    D: Copy resource identifiers from another run instead of recording returned IDs.
+  correctOption: A
+  explanation: 'The lab''s reviewed command path performs this bounded action: Create a new revision by changing an environment
+    variable and split traffic deliberately.'
+  distractorExplanations:
+    A: 'Correct. The lab''s reviewed command path performs this bounded action: Create a new revision by changing an environment
+      variable and split traffic deliberately.'
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-apps/scale-app
+  lastVerified: '2026-08-30'
+- id: LAB14-Q32
+  objectiveIds:
+  - CP-CONTAINERS-04
+  difficulty: applied
+  stem: 'An automation author must choose the correct response to this scenario: A learner previews the implementation for
+    ''Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps''. What behavior
+    is required?'
+  options:
+    A: Create the baseline immediately and request approval only before cleanup.
+    B: Display the context, intended changes, cost and gated branches without mutating Azure.
+    C: Select the first accessible subscription and hide the resulting context.
+    D: Delete any older resource whose name resembles the new run ID.
+  correctOption: B
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-apps/revisions
+  lastVerified: '2026-08-30'
+- id: LAB14-Q33
+  objectiveIds:
+  - CP-CONTAINERS-03
+  difficulty: applied
+  stem: 'A lab run with a unique run ID reaches this decision: Which implementation step should the learner perform for ''Provision
+    a container by using Azure Container Apps''?'
+  options:
+    A: Replace the lab action with a tenant-wide change that is easier to discover.
+    B: Copy resource identifiers from another run instead of recording returned IDs.
+    C: Create a new revision by changing an environment variable and split traffic deliberately.
+    D: Skip the operation and edit validation.json to show a passing result.
+  correctOption: C
+  explanation: 'The lab''s reviewed command path performs this bounded action: Create a new revision by changing an environment
+    variable and split traffic deliberately.'
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: 'Correct. The lab''s reviewed command path performs this bounded action: Create a new revision by changing an environment
+      variable and split traffic deliberately.'
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-apps/scale-app
+  lastVerified: '2026-08-30'
+- id: LAB14-Q34
+  objectiveIds:
+  - CP-CONTAINERS-04
+  difficulty: applied
+  stem: 'Within Lab 14, the team evaluates this scenario: While comparing the intended and actual states, the operator asks
+    this question: A learner previews the implementation for ''Manage sizing and scaling for containers, including Azure Container
+    Instances and Azure Container Apps''. What behavior is required?'
+  options:
+    A: Select the first accessible subscription and hide the resulting context.
+    B: Delete any older resource whose name resembles the new run ID.
+    C: Create the baseline immediately and request approval only before cleanup.
+    D: Display the context, intended changes, cost and gated branches without mutating Azure.
+  correctOption: D
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-apps/revisions
+  lastVerified: '2026-08-30'
+- id: LAB14-Q35
+  objectiveIds:
+  - CP-CONTAINERS-03
+  difficulty: applied
+  stem: 'A peer reviewer examines the proposed implementation for this scenario: Which implementation step should the learner
+    perform for ''Provision a container by using Azure Container Apps''?'
+  options:
+    A: Create a new revision by changing an environment variable and split traffic deliberately.
+    B: Skip the operation and edit validation.json to show a passing result.
+    C: Replace the lab action with a tenant-wide change that is easier to discover.
+    D: Copy resource identifiers from another run instead of recording returned IDs.
+  correctOption: A
+  explanation: 'The lab''s reviewed command path performs this bounded action: Create a new revision by changing an environment
+    variable and split traffic deliberately.'
+  distractorExplanations:
+    A: 'Correct. The lab''s reviewed command path performs this bounded action: Create a new revision by changing an environment
+      variable and split traffic deliberately.'
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-apps/scale-app
+  lastVerified: '2026-08-30'
+- id: LAB14-Q36
+  objectiveIds:
+  - CP-CONTAINERS-04
+  difficulty: applied
+  stem: 'During a controlled rollout, the change team encounters this requirement: A learner previews the implementation for
+    ''Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps''. What behavior
+    is required?'
+  options:
+    A: Create the baseline immediately and request approval only before cleanup.
+    B: Display the context, intended changes, cost and gated branches without mutating Azure.
+    C: Select the first accessible subscription and hide the resulting context.
+    D: Delete any older resource whose name resembles the new run ID.
+  correctOption: B
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-apps/revisions
+  lastVerified: '2026-08-30'
+- id: LAB14-Q37
+  objectiveIds:
+  - CP-CONTAINERS-03
+  difficulty: applied
+  stem: 'A support engineer reproduces the following situation in a test environment: Which implementation step should the
+    learner perform for ''Provision a container by using Azure Container Apps''?'
+  options:
+    A: Replace the lab action with a tenant-wide change that is easier to discover.
+    B: Copy resource identifiers from another run instead of recording returned IDs.
+    C: Create a new revision by changing an environment variable and split traffic deliberately.
+    D: Skip the operation and edit validation.json to show a passing result.
+  correctOption: C
+  explanation: 'The lab''s reviewed command path performs this bounded action: Create a new revision by changing an environment
+    variable and split traffic deliberately.'
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: 'Correct. The lab''s reviewed command path performs this bounded action: Create a new revision by changing an environment
+      variable and split traffic deliberately.'
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-apps/scale-app
+  lastVerified: '2026-08-30'
+- id: LAB14-Q38
+  objectiveIds:
+  - CP-CONTAINERS-04
+  difficulty: applied
+  stem: 'While recording validation evidence, the administrator evaluates this question: A learner previews the implementation
+    for ''Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps''. What behavior
+    is required?'
+  options:
+    A: Select the first accessible subscription and hide the resulting context.
+    B: Delete any older resource whose name resembles the new run ID.
+    C: Create the baseline immediately and request approval only before cleanup.
+    D: Display the context, intended changes, cost and gated branches without mutating Azure.
+  correctOption: D
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-apps/revisions
+  lastVerified: '2026-08-30'
+- id: LAB14-Q39
+  objectiveIds:
+  - CP-CONTAINERS-03
+  difficulty: applied
+  stem: 'A configuration owner must approve one response to this scenario: Which implementation step should the learner perform
+    for ''Provision a container by using Azure Container Apps''?'
+  options:
+    A: Create a new revision by changing an environment variable and split traffic deliberately.
+    B: Skip the operation and edit validation.json to show a passing result.
+    C: Replace the lab action with a tenant-wide change that is easier to discover.
+    D: Copy resource identifiers from another run instead of recording returned IDs.
+  correctOption: A
+  explanation: 'The lab''s reviewed command path performs this bounded action: Create a new revision by changing an environment
+    variable and split traffic deliberately.'
+  distractorExplanations:
+    A: 'Correct. The lab''s reviewed command path performs this bounded action: Create a new revision by changing an environment
+      variable and split traffic deliberately.'
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-apps/scale-app
+  lastVerified: '2026-08-30'
+- id: LAB14-Q40
+  objectiveIds:
+  - CP-CONTAINERS-04
+  difficulty: applied
+  stem: 'Within Lab 14, the team evaluates this scenario: During post-deployment verification, the team reviews this situation:
+    A learner previews the implementation for ''Manage sizing and scaling for containers, including Azure Container Instances
+    and Azure Container Apps''. What behavior is required?'
+  options:
+    A: Create the baseline immediately and request approval only before cleanup.
+    B: Display the context, intended changes, cost and gated branches without mutating Azure.
+    C: Select the first accessible subscription and hide the resulting context.
+    D: Delete any older resource whose name resembles the new run ID.
+  correctOption: B
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-apps/revisions
+  lastVerified: '2026-08-30'
+- id: LAB14-Q41
   objectiveIds:
   - CP-CONTAINERS-04
   - CP-CONTAINERS-03
   difficulty: advanced
-  stem: Validation for 'Manage sizing and scaling for containers, including Azure Container Instances and Azure
-    Container Apps' fails after setup. What is the best break/fix method?
+  stem: 'Within Lab 14, the team evaluates this scenario: Validation for ''Manage sizing and scaling for containers, including
+    Azure Container Instances and Azure Container Apps'' fails after setup. What is the best break/fix method?'
+  options:
+    A: Change validation.json directly so the failed result reads pass.
+    B: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+    C: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+    D: Rerun setup repeatedly with new names until one attempt appears successful.
+  correctOption: C
+  explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-apps/ingress-overview
+  lastVerified: '2026-08-30'
+- id: LAB14-Q42
+  objectiveIds:
+  - CP-CONTAINERS-04
+  - CP-CONTAINERS-03
+  difficulty: advanced
+  stem: 'Within Lab 14, the team evaluates this scenario: During root-cause analysis, the team must resolve this question:
+    Validation for ''Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps''
+    fails after setup. What is the best break/fix method?'
+  options:
+    A: Rerun setup repeatedly with new names until one attempt appears successful.
+    B: Change validation.json directly so the failed result reads pass.
+    C: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+    D: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+  correctOption: D
+  explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-apps/ingress-overview
+  lastVerified: '2026-08-30'
+- id: LAB14-Q43
+  objectiveIds:
+  - CP-CONTAINERS-04
+  - CP-CONTAINERS-03
+  difficulty: advanced
+  stem: 'Within Lab 14, the team evaluates this scenario: A security and reliability review identifies this design decision:
+    Validation for ''Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps''
+    fails after setup. What is the best break/fix method?'
+  options:
+    A: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+    B: Rerun setup repeatedly with new names until one attempt appears successful.
+    C: Change validation.json directly so the failed result reads pass.
+    D: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+  correctOption: A
+  explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
+  distractorExplanations:
+    A: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-apps/ingress-overview
+  lastVerified: '2026-08-30'
+- id: LAB14-Q44
+  objectiveIds:
+  - CP-CONTAINERS-04
+  - CP-CONTAINERS-03
+  difficulty: advanced
+  stem: 'Within Lab 14, the team evaluates this scenario: While diagnosing unexpected Azure behavior, the engineer considers
+    this situation: Validation for ''Manage sizing and scaling for containers, including Azure Container Instances and Azure
+    Container Apps'' fails after setup. What is the best break/fix method?'
+  options:
+    A: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+    B: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+    C: Rerun setup repeatedly with new names until one attempt appears successful.
+    D: Change validation.json directly so the failed result reads pass.
+  correctOption: B
+  explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-apps/ingress-overview
+  lastVerified: '2026-08-30'
+- id: LAB14-Q45
+  objectiveIds:
+  - CP-CONTAINERS-04
+  - CP-CONTAINERS-03
+  difficulty: advanced
+  stem: 'Within Lab 14, the team evaluates this scenario: An architecture review requires the strongest response to this scenario:
+    Validation for ''Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps''
+    fails after setup. What is the best break/fix method?'
+  options:
+    A: Change validation.json directly so the failed result reads pass.
+    B: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+    C: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+    D: Rerun setup repeatedly with new names until one attempt appears successful.
+  correctOption: C
+  explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-apps/ingress-overview
+  lastVerified: '2026-08-30'
+- id: LAB14-Q46
+  objectiveIds:
+  - CP-CONTAINERS-04
+  - CP-CONTAINERS-03
+  difficulty: advanced
+  stem: 'Within Lab 14, the team evaluates this scenario: During break/fix validation, the operator encounters this question:
+    Validation for ''Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps''
+    fails after setup. What is the best break/fix method?'
+  options:
+    A: Rerun setup repeatedly with new names until one attempt appears successful.
+    B: Change validation.json directly so the failed result reads pass.
+    C: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+    D: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+  correctOption: D
+  explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-apps/ingress-overview
+  lastVerified: '2026-08-30'
+- id: LAB14-Q47
+  objectiveIds:
+  - CP-CONTAINERS-04
+  - CP-CONTAINERS-03
+  difficulty: advanced
+  stem: 'Within Lab 14, the team evaluates this scenario: A complex support case depends on correctly interpreting this requirement:
+    Validation for ''Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps''
+    fails after setup. What is the best break/fix method?'
+  options:
+    A: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+    B: Rerun setup repeatedly with new names until one attempt appears successful.
+    C: Change validation.json directly so the failed result reads pass.
+    D: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+  correctOption: A
+  explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
+  distractorExplanations:
+    A: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-apps/ingress-overview
+  lastVerified: '2026-08-30'
+- id: LAB14-Q48
+  objectiveIds:
+  - CP-CONTAINERS-04
+  - CP-CONTAINERS-03
+  difficulty: advanced
+  stem: 'Within Lab 14, the team evaluates this scenario: While correcting configuration drift, the team evaluates this scenario:
+    Validation for ''Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps''
+    fails after setup. What is the best break/fix method?'
+  options:
+    A: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+    B: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+    C: Rerun setup repeatedly with new names until one attempt appears successful.
+    D: Change validation.json directly so the failed result reads pass.
+  correctOption: B
+  explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-apps/ingress-overview
+  lastVerified: '2026-08-30'
+- id: LAB14-Q49
+  objectiveIds:
+  - CP-CONTAINERS-04
+  - CP-CONTAINERS-03
+  difficulty: advanced
+  stem: 'Within Lab 14, the team evaluates this scenario: A recovery exercise exposes the following technical decision: Validation
+    for ''Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps'' fails after
+    setup. What is the best break/fix method?'
+  options:
+    A: Change validation.json directly so the failed result reads pass.
+    B: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+    C: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+    D: Rerun setup repeatedly with new names until one attempt appears successful.
+  correctOption: C
+  explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-apps/ingress-overview
+  lastVerified: '2026-08-30'
+- id: LAB14-Q50
+  objectiveIds:
+  - CP-CONTAINERS-04
+  - CP-CONTAINERS-03
+  difficulty: advanced
+  stem: 'Within Lab 14, the team evaluates this scenario: During final design assurance, the reviewer must resolve this situation:
+    Validation for ''Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps''
+    fails after setup. What is the best break/fix method?'
   options:
     A: Rerun setup repeatedly with new names until one attempt appears successful.
     B: Change validation.json directly so the failed result reads pass.

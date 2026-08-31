@@ -17,8 +17,8 @@ difficulty: foundational
 cost:
   class: none
   billableResources: []
-  notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator
-    before execution and clean up immediately.
+  notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator before
+    execution and clean up immediately.
 permissions:
   azureRbacRoles:
   - Resource Policy Contributor at the lab scope; Cost Management Contributor for the optional budget path
@@ -27,10 +27,10 @@ permissions:
 prerequisites:
 - A disposable non-production Azure environment
 - An active context that matches the explicitly supplied tenant and subscription
-- 'Authorization boundary: Resource Policy Contributor at the lab scope; Cost Management Contributor for the optional
-  budget path'
-- 'External gate review: Budget creation requires AZ104_BUDGET_EMAIL and Cost Management authorization; otherwise
-  the lab inventories cost controls without creating one.'
+- 'Authorization boundary: Resource Policy Contributor at the lab scope; Cost Management Contributor for the optional budget
+  path'
+- 'External gate review: Budget creation requires AZ104_BUDGET_EMAIL and Cost Management authorization; otherwise the lab
+  inventories cost controls without creating one.'
 - Azure CLI hosted in PowerShell 7.4 or later
 providers:
   observed:
@@ -54,8 +54,8 @@ creates:
   - .state/<run-id>/validation.json
 tenantScopedChanges: []
 externalRequirements:
-- Budget creation requires AZ104_BUDGET_EMAIL and Cost Management authorization; otherwise the lab inventories cost
-  controls without creating one.
+- Budget creation requires AZ104_BUDGET_EMAIL and Cost Management authorization; otherwise the lab inventories cost controls
+  without creating one.
 validation:
   commandLanes:
   - scripts/cli/Validate.ps1
@@ -74,7 +74,7 @@ cleanup:
   residualAuditRequired: true
 assessment:
   enabled: true
-  questionCount: 10
+  questionCount: 50
   primaryDomain: identity-governance
 lastOfflineValidated: '2026-08-30'
 lastLiveVerified: null

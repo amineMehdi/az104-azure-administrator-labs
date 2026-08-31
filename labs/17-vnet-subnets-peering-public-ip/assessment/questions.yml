@@ -2,25 +2,22 @@
   objectiveIds:
   - NW-VNET-01
   difficulty: foundational
-  stem: Which principle is most important when working on 'Create and configure virtual networks and subnets' in
-    Lab 17?
+  stem: Which principle is most important when working on 'Create and configure virtual networks and subnets' in Lab 17?
   options:
-    A: VNet peering is non-transitive and requires compatible address spaces and two directional peering objects,
-      while Standard public IPs are secure by default until an NSG permits traffic.
-    B: The shortest command is always correct even when it changes a broader scope.
-    C: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-    D: A recognizable resource name removes the need for validation and scoped cleanup.
-  correctOption: A
-  explanation: 'The lab establishes this design principle: VNet peering is non-transitive and requires compatible
-    address spaces and two directional peering objects, while Standard public IPs are secure by default until an
-    NSG permits traffic.'
+    A: A recognizable resource name removes the need for validation and scoped cleanup.
+    B: VNet peering is non-transitive and requires compatible address spaces and two directional peering objects, while Standard
+      public IPs are secure by default until an NSG permits traffic.
+    C: The shortest command is always correct even when it changes a broader scope.
+    D: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+  correctOption: B
+  explanation: 'The lab establishes this design principle: VNet peering is non-transitive and requires compatible address
+    spaces and two directional peering objects, while Standard public IPs are secure by default until an NSG permits traffic.'
   distractorExplanations:
-    A: 'Correct. The lab establishes this design principle: VNet peering is non-transitive and requires compatible
-      address spaces and two directional peering objects, while Standard public IPs are secure by default until
-      an NSG permits traffic.'
-    B: This choice changes or trusts a broader scope than the recorded lab boundary.
-    C: This choice skips independent evidence or relies on ambiguous resource identity.
-    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: 'Correct. The lab establishes this design principle: VNet peering is non-transitive and requires compatible address
+      spaces and two directional peering objects, while Standard public IPs are secure by default until an NSG permits traffic.'
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/virtual-network/quick-create-powershell
   lastVerified: '2026-08-30'
@@ -30,19 +27,19 @@
   difficulty: foundational
   stem: Which lab action directly supports the objective 'Create and configure virtual network peering'?
   options:
-    A: Change the active tenant without displaying or confirming the resulting context.
-    B: Create both sides of VNet peering and interpret Connected, Initiated, and Disconnected states.
-    C: Search the whole tenant for a similar display name and modify the first match.
-    D: Mark the objective complete after reading documentation without checking any state.
-  correctOption: B
-  explanation: 'The reviewed hands-on action for this objective is: Create both sides of VNet peering and interpret
-    Connected, Initiated, and Disconnected states.'
+    A: Mark the objective complete after reading documentation without checking any state.
+    B: Change the active tenant without displaying or confirming the resulting context.
+    C: Create both sides of VNet peering and interpret Connected, Initiated, and Disconnected states.
+    D: Search the whole tenant for a similar display name and modify the first match.
+  correctOption: C
+  explanation: 'The reviewed hands-on action for this objective is: Create both sides of VNet peering and interpret Connected,
+    Initiated, and Disconnected states.'
   distractorExplanations:
-    A: This choice changes or trusts a broader scope than the recorded lab boundary.
-    B: 'Correct. The reviewed hands-on action for this objective is: Create both sides of VNet peering and interpret
-      Connected, Initiated, and Disconnected states.'
-    C: This choice skips independent evidence or relies on ambiguous resource identity.
-    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: 'Correct. The reviewed hands-on action for this objective is: Create both sides of VNet peering and interpret Connected,
+      Initiated, and Disconnected states.'
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-manage-peering
   lastVerified: '2026-08-30'
@@ -52,10 +49,77 @@
   difficulty: foundational
   stem: Which authorization approach is appropriate before practicing 'Configure public IP addresses'?
   options:
+    A: Skip role checks when the run ID contains the lab number.
+    B: Use a production subscription because its resources already exist.
+    C: Assign Global Administrator and subscription Owner for every lab regardless of the operation.
+    D: 'Confirm the active context and use only the declared role boundary: Network Contributor on the lab resource group'
+  correctOption: D
+  explanation: 'Least privilege requires the documented boundary: Network Contributor on the lab resource group'
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: 'Correct. Least privilege requires the documented boundary: Network Contributor on the lab resource group'
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/public-ip-addresses
+  lastVerified: '2026-08-30'
+- id: LAB17-Q04
+  objectiveIds:
+  - NW-VNET-01
+  difficulty: foundational
+  stem: 'Before making a change, a learner checks this core behavior: Which principle is most important when working on ''Create
+    and configure virtual networks and subnets'' in Lab 17?'
+  options:
+    A: VNet peering is non-transitive and requires compatible address spaces and two directional peering objects, while Standard
+      public IPs are secure by default until an NSG permits traffic.
+    B: The shortest command is always correct even when it changes a broader scope.
+    C: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+    D: A recognizable resource name removes the need for validation and scoped cleanup.
+  correctOption: A
+  explanation: 'The lab establishes this design principle: VNet peering is non-transitive and requires compatible address
+    spaces and two directional peering objects, while Standard public IPs are secure by default until an NSG permits traffic.'
+  distractorExplanations:
+    A: 'Correct. The lab establishes this design principle: VNet peering is non-transitive and requires compatible address
+      spaces and two directional peering objects, while Standard public IPs are secure by default until an NSG permits traffic.'
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-network/quick-create-powershell
+  lastVerified: '2026-08-30'
+- id: LAB17-Q05
+  objectiveIds:
+  - NW-VNET-02
+  difficulty: foundational
+  stem: 'During a design vocabulary review, the team evaluates this situation: Which lab action directly supports the objective
+    ''Create and configure virtual network peering''?'
+  options:
+    A: Change the active tenant without displaying or confirming the resulting context.
+    B: Create both sides of VNet peering and interpret Connected, Initiated, and Disconnected states.
+    C: Search the whole tenant for a similar display name and modify the first match.
+    D: Mark the objective complete after reading documentation without checking any state.
+  correctOption: B
+  explanation: 'The reviewed hands-on action for this objective is: Create both sides of VNet peering and interpret Connected,
+    Initiated, and Disconnected states.'
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: 'Correct. The reviewed hands-on action for this objective is: Create both sides of VNet peering and interpret Connected,
+      Initiated, and Disconnected states.'
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-manage-peering
+  lastVerified: '2026-08-30'
+- id: LAB17-Q06
+  objectiveIds:
+  - NW-VNET-03
+  difficulty: foundational
+  stem: 'In a command-planning session, an administrator asks this question: Which authorization approach is appropriate before
+    practicing ''Configure public IP addresses''?'
+  options:
     A: Use a production subscription because its resources already exist.
     B: Assign Global Administrator and subscription Owner for every lab regardless of the operation.
-    C: 'Confirm the active context and use only the declared role boundary: Network Contributor on the lab resource
-      group'
+    C: 'Confirm the active context and use only the declared role boundary: Network Contributor on the lab resource group'
     D: Skip role checks when the run ID contains the lab number.
   correctOption: C
   explanation: 'Least privilege requires the documented boundary: Network Contributor on the lab resource group'
@@ -67,12 +131,538 @@
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/public-ip-addresses
   lastVerified: '2026-08-30'
-- id: LAB17-Q04
+- id: LAB17-Q07
+  objectiveIds:
+  - NW-VNET-01
+  difficulty: foundational
+  stem: 'While preparing the lab, a learner verifies this platform rule: Which principle is most important when working on
+    ''Create and configure virtual networks and subnets'' in Lab 17?'
+  options:
+    A: The shortest command is always correct even when it changes a broader scope.
+    B: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+    C: A recognizable resource name removes the need for validation and scoped cleanup.
+    D: VNet peering is non-transitive and requires compatible address spaces and two directional peering objects, while Standard
+      public IPs are secure by default until an NSG permits traffic.
+  correctOption: D
+  explanation: 'The lab establishes this design principle: VNet peering is non-transitive and requires compatible address
+    spaces and two directional peering objects, while Standard public IPs are secure by default until an NSG permits traffic.'
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: 'Correct. The lab establishes this design principle: VNet peering is non-transitive and requires compatible address
+      spaces and two directional peering objects, while Standard public IPs are secure by default until an NSG permits traffic.'
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-network/quick-create-powershell
+  lastVerified: '2026-08-30'
+- id: LAB17-Q08
+  objectiveIds:
+  - NW-VNET-02
+  difficulty: foundational
+  stem: 'During peer review, the team must identify the accurate response to this scenario: Which lab action directly supports
+    the objective ''Create and configure virtual network peering''?'
+  options:
+    A: Create both sides of VNet peering and interpret Connected, Initiated, and Disconnected states.
+    B: Search the whole tenant for a similar display name and modify the first match.
+    C: Mark the objective complete after reading documentation without checking any state.
+    D: Change the active tenant without displaying or confirming the resulting context.
+  correctOption: A
+  explanation: 'The reviewed hands-on action for this objective is: Create both sides of VNet peering and interpret Connected,
+    Initiated, and Disconnected states.'
+  distractorExplanations:
+    A: 'Correct. The reviewed hands-on action for this objective is: Create both sides of VNet peering and interpret Connected,
+      Initiated, and Disconnected states.'
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-manage-peering
+  lastVerified: '2026-08-30'
+- id: LAB17-Q09
+  objectiveIds:
+  - NW-VNET-03
+  difficulty: foundational
+  stem: 'In an operations briefing, a new team member receives this question: Which authorization approach is appropriate
+    before practicing ''Configure public IP addresses''?'
+  options:
+    A: Assign Global Administrator and subscription Owner for every lab regardless of the operation.
+    B: 'Confirm the active context and use only the declared role boundary: Network Contributor on the lab resource group'
+    C: Skip role checks when the run ID contains the lab number.
+    D: Use a production subscription because its resources already exist.
+  correctOption: B
+  explanation: 'Least privilege requires the documented boundary: Network Contributor on the lab resource group'
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: 'Correct. Least privilege requires the documented boundary: Network Contributor on the lab resource group'
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/public-ip-addresses
+  lastVerified: '2026-08-30'
+- id: LAB17-Q10
+  objectiveIds:
+  - NW-VNET-01
+  difficulty: foundational
+  stem: 'While building a support checklist, an engineer reviews this requirement: Which principle is most important when
+    working on ''Create and configure virtual networks and subnets'' in Lab 17?'
+  options:
+    A: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+    B: A recognizable resource name removes the need for validation and scoped cleanup.
+    C: VNet peering is non-transitive and requires compatible address spaces and two directional peering objects, while Standard
+      public IPs are secure by default until an NSG permits traffic.
+    D: The shortest command is always correct even when it changes a broader scope.
+  correctOption: C
+  explanation: 'The lab establishes this design principle: VNet peering is non-transitive and requires compatible address
+    spaces and two directional peering objects, while Standard public IPs are secure by default until an NSG permits traffic.'
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: 'Correct. The lab establishes this design principle: VNet peering is non-transitive and requires compatible address
+      spaces and two directional peering objects, while Standard public IPs are secure by default until an NSG permits traffic.'
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-network/quick-create-powershell
+  lastVerified: '2026-08-30'
+- id: LAB17-Q11
+  objectiveIds:
+  - NW-VNET-02
+  difficulty: foundational
+  stem: 'During a readiness check, the administrator considers this behavior: Which lab action directly supports the objective
+    ''Create and configure virtual network peering''?'
+  options:
+    A: Search the whole tenant for a similar display name and modify the first match.
+    B: Mark the objective complete after reading documentation without checking any state.
+    C: Change the active tenant without displaying or confirming the resulting context.
+    D: Create both sides of VNet peering and interpret Connected, Initiated, and Disconnected states.
+  correctOption: D
+  explanation: 'The reviewed hands-on action for this objective is: Create both sides of VNet peering and interpret Connected,
+    Initiated, and Disconnected states.'
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: 'Correct. The reviewed hands-on action for this objective is: Create both sides of VNet peering and interpret Connected,
+      Initiated, and Disconnected states.'
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-manage-peering
+  lastVerified: '2026-08-30'
+- id: LAB17-Q12
+  objectiveIds:
+  - NW-VNET-03
+  difficulty: foundational
+  stem: 'In a service overview, the team discusses this scenario: Which authorization approach is appropriate before practicing
+    ''Configure public IP addresses''?'
+  options:
+    A: 'Confirm the active context and use only the declared role boundary: Network Contributor on the lab resource group'
+    B: Skip role checks when the run ID contains the lab number.
+    C: Use a production subscription because its resources already exist.
+    D: Assign Global Administrator and subscription Owner for every lab regardless of the operation.
+  correctOption: A
+  explanation: 'Least privilege requires the documented boundary: Network Contributor on the lab resource group'
+  distractorExplanations:
+    A: 'Correct. Least privilege requires the documented boundary: Network Contributor on the lab resource group'
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/public-ip-addresses
+  lastVerified: '2026-08-30'
+- id: LAB17-Q13
+  objectiveIds:
+  - NW-VNET-01
+  difficulty: foundational
+  stem: 'While reviewing official guidance, a learner must resolve this question: Which principle is most important when working
+    on ''Create and configure virtual networks and subnets'' in Lab 17?'
+  options:
+    A: A recognizable resource name removes the need for validation and scoped cleanup.
+    B: VNet peering is non-transitive and requires compatible address spaces and two directional peering objects, while Standard
+      public IPs are secure by default until an NSG permits traffic.
+    C: The shortest command is always correct even when it changes a broader scope.
+    D: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+  correctOption: B
+  explanation: 'The lab establishes this design principle: VNet peering is non-transitive and requires compatible address
+    spaces and two directional peering objects, while Standard public IPs are secure by default until an NSG permits traffic.'
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: 'Correct. The lab establishes this design principle: VNet peering is non-transitive and requires compatible address
+      spaces and two directional peering objects, while Standard public IPs are secure by default until an NSG permits traffic.'
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-network/quick-create-powershell
+  lastVerified: '2026-08-30'
+- id: LAB17-Q14
+  objectiveIds:
+  - NW-VNET-02
+  difficulty: foundational
+  stem: 'During a configuration walkthrough, the instructor asks about this situation: Which lab action directly supports
+    the objective ''Create and configure virtual network peering''?'
+  options:
+    A: Mark the objective complete after reading documentation without checking any state.
+    B: Change the active tenant without displaying or confirming the resulting context.
+    C: Create both sides of VNet peering and interpret Connected, Initiated, and Disconnected states.
+    D: Search the whole tenant for a similar display name and modify the first match.
+  correctOption: C
+  explanation: 'The reviewed hands-on action for this objective is: Create both sides of VNet peering and interpret Connected,
+    Initiated, and Disconnected states.'
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: 'Correct. The reviewed hands-on action for this objective is: Create both sides of VNet peering and interpret Connected,
+      Initiated, and Disconnected states.'
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-manage-peering
+  lastVerified: '2026-08-30'
+- id: LAB17-Q15
+  objectiveIds:
+  - NW-VNET-03
+  difficulty: foundational
+  stem: 'In a preflight knowledge check, the operator evaluates this requirement: Which authorization approach is appropriate
+    before practicing ''Configure public IP addresses''?'
+  options:
+    A: Skip role checks when the run ID contains the lab number.
+    B: Use a production subscription because its resources already exist.
+    C: Assign Global Administrator and subscription Owner for every lab regardless of the operation.
+    D: 'Confirm the active context and use only the declared role boundary: Network Contributor on the lab resource group'
+  correctOption: D
+  explanation: 'Least privilege requires the documented boundary: Network Contributor on the lab resource group'
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: 'Correct. Least privilege requires the documented boundary: Network Contributor on the lab resource group'
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/public-ip-addresses
+  lastVerified: '2026-08-30'
+- id: LAB17-Q16
   objectiveIds:
   - NW-VNET-01
   difficulty: applied
-  stem: A learner previews the implementation for 'Create and configure virtual networks and subnets'. What behavior
-    is required?
+  stem: A learner previews the implementation for 'Create and configure virtual networks and subnets'. What behavior is required?
+  options:
+    A: Display the context, intended changes, cost and gated branches without mutating Azure.
+    B: Create the baseline immediately and request approval only before cleanup.
+    C: Select the first accessible subscription and hide the resulting context.
+    D: Delete any older resource whose name resembles the new run ID.
+  correctOption: A
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  distractorExplanations:
+    A: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-network/quick-create-powershell
+  lastVerified: '2026-08-30'
+- id: LAB17-Q17
+  objectiveIds:
+  - NW-VNET-02
+  difficulty: applied
+  stem: Which implementation step should the learner perform for 'Create and configure virtual network peering'?
+  options:
+    A: Skip the operation and edit validation.json to show a passing result.
+    B: Create hub and spoke address spaces that do not overlap and subdivide them into purpose-specific subnets.
+    C: Replace the lab action with a tenant-wide change that is easier to discover.
+    D: Copy resource identifiers from another run instead of recording returned IDs.
+  correctOption: B
+  explanation: 'The lab''s reviewed command path performs this bounded action: Create hub and spoke address spaces that do
+    not overlap and subdivide them into purpose-specific subnets.'
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: 'Correct. The lab''s reviewed command path performs this bounded action: Create hub and spoke address spaces that do
+      not overlap and subdivide them into purpose-specific subnets.'
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-manage-peering
+  lastVerified: '2026-08-30'
+- id: LAB17-Q18
+  objectiveIds:
+  - NW-VNET-03
+  difficulty: applied
+  stem: Which evidence most directly validates 'Configure public IP addresses' for resource group?
+  options:
+    A: Record a credential so another learner can replay the authenticated session.
+    B: Treat the setup exit code as proof of every configuration and relationship.
+    C: Query the exact recorded scope and independently verify Microsoft.Network/publicIPAddresses.
+    D: List the entire subscription and assume similarly named resources belong to this run.
+  correctOption: C
+  explanation: The independent validation path must prove Microsoft.Network/publicIPAddresses for the exact recorded object.
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: Correct. The independent validation path must prove Microsoft.Network/publicIPAddresses for the exact recorded object.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/public-ip-addresses
+  lastVerified: '2026-08-30'
+- id: LAB17-Q19
+  objectiveIds:
+  - NW-VNET-01
+  difficulty: applied
+  stem: The 'Create and configure virtual networks and subnets' checkpoint reaches an external prerequisite. What should happen?
+  options:
+    A: Mark the branch passed because its command syntax was checked offline.
+    B: Invent a domain, notification target, license, quota, or tenant value and continue.
+    C: Broaden permissions until the prerequisite can no longer block the operation.
+    D: 'Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.'
+  correctOption: D
+  explanation: 'Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared
+    role and a disposable subscription.'
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: 'Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared
+      role and a disposable subscription.'
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-network/quick-create-powershell
+  lastVerified: '2026-08-30'
+- id: LAB17-Q20
+  objectiveIds:
+  - NW-VNET-02
+  difficulty: applied
+  stem: What is the safest command-evidence practice after completing 'Create and configure virtual network peering'?
+  options:
+    A: Retain only redacted structured output from an independent query of the recorded run.
+    B: Commit the complete account object so reviewers can identify the tenant.
+    C: Save tokens, keys, passwords, or SAS values beside the validation result.
+    D: Reuse successful output from an earlier run with a similar resource name.
+  correctOption: A
+  explanation: Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
+  distractorExplanations:
+    A: Correct. Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-manage-peering
+  lastVerified: '2026-08-30'
+- id: LAB17-Q21
+  objectiveIds:
+  - NW-VNET-01
+  difficulty: applied
+  stem: 'While validating a configuration, the team evaluates this situation: A learner previews the implementation for ''Create
+    and configure virtual networks and subnets''. What behavior is required?'
+  options:
+    A: Delete any older resource whose name resembles the new run ID.
+    B: Display the context, intended changes, cost and gated branches without mutating Azure.
+    C: Create the baseline immediately and request approval only before cleanup.
+    D: Select the first accessible subscription and hide the resulting context.
+  correctOption: B
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-network/quick-create-powershell
+  lastVerified: '2026-08-30'
+- id: LAB17-Q22
+  objectiveIds:
+  - NW-VNET-02
+  difficulty: applied
+  stem: 'A delegated administrator receives the following support request: Which implementation step should the learner perform
+    for ''Create and configure virtual network peering''?'
+  options:
+    A: Copy resource identifiers from another run instead of recording returned IDs.
+    B: Skip the operation and edit validation.json to show a passing result.
+    C: Create hub and spoke address spaces that do not overlap and subdivide them into purpose-specific subnets.
+    D: Replace the lab action with a tenant-wide change that is easier to discover.
+  correctOption: C
+  explanation: 'The lab''s reviewed command path performs this bounded action: Create hub and spoke address spaces that do
+    not overlap and subdivide them into purpose-specific subnets.'
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: 'Correct. The lab''s reviewed command path performs this bounded action: Create hub and spoke address spaces that do
+      not overlap and subdivide them into purpose-specific subnets.'
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-manage-peering
+  lastVerified: '2026-08-30'
+- id: LAB17-Q23
+  objectiveIds:
+  - NW-VNET-03
+  difficulty: applied
+  stem: 'During a maintenance window, an engineer must decide how to respond: Which evidence most directly validates ''Configure
+    public IP addresses'' for resource group?'
+  options:
+    A: List the entire subscription and assume similarly named resources belong to this run.
+    B: Record a credential so another learner can replay the authenticated session.
+    C: Treat the setup exit code as proof of every configuration and relationship.
+    D: Query the exact recorded scope and independently verify Microsoft.Network/publicIPAddresses.
+  correctOption: D
+  explanation: The independent validation path must prove Microsoft.Network/publicIPAddresses for the exact recorded object.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: Correct. The independent validation path must prove Microsoft.Network/publicIPAddresses for the exact recorded object.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/public-ip-addresses
+  lastVerified: '2026-08-30'
+- id: LAB17-Q24
+  objectiveIds:
+  - NW-VNET-01
+  difficulty: applied
+  stem: 'A deployment pipeline reaches this decision point: The ''Create and configure virtual networks and subnets'' checkpoint
+    reaches an external prerequisite. What should happen?'
+  options:
+    A: 'Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.'
+    B: Mark the branch passed because its command syntax was checked offline.
+    C: Invent a domain, notification target, license, quota, or tenant value and continue.
+    D: Broaden permissions until the prerequisite can no longer block the operation.
+  correctOption: A
+  explanation: 'Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared
+    role and a disposable subscription.'
+  distractorExplanations:
+    A: 'Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared
+      role and a disposable subscription.'
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-network/quick-create-powershell
+  lastVerified: '2026-08-30'
+- id: LAB17-Q25
+  objectiveIds:
+  - NW-VNET-02
+  difficulty: applied
+  stem: 'While applying least-privilege controls, the administrator reviews this scenario: What is the safest command-evidence
+    practice after completing ''Create and configure virtual network peering''?'
+  options:
+    A: Reuse successful output from an earlier run with a similar resource name.
+    B: Retain only redacted structured output from an independent query of the recorded run.
+    C: Commit the complete account object so reviewers can identify the tenant.
+    D: Save tokens, keys, passwords, or SAS values beside the validation result.
+  correctOption: B
+  explanation: Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: Correct. Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-manage-peering
+  lastVerified: '2026-08-30'
+- id: LAB17-Q26
+  objectiveIds:
+  - NW-VNET-01
+  difficulty: applied
+  stem: 'A repeatable Azure CLI workflow must address this requirement: A learner previews the implementation for ''Create
+    and configure virtual networks and subnets''. What behavior is required?'
+  options:
+    A: Select the first accessible subscription and hide the resulting context.
+    B: Delete any older resource whose name resembles the new run ID.
+    C: Display the context, intended changes, cost and gated branches without mutating Azure.
+    D: Create the baseline immediately and request approval only before cleanup.
+  correctOption: C
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-network/quick-create-powershell
+  lastVerified: '2026-08-30'
+- id: LAB17-Q27
+  objectiveIds:
+  - NW-VNET-02
+  difficulty: applied
+  stem: 'During an environment handoff, the receiving team asks this question: Which implementation step should the learner
+    perform for ''Create and configure virtual network peering''?'
+  options:
+    A: Replace the lab action with a tenant-wide change that is easier to discover.
+    B: Copy resource identifiers from another run instead of recording returned IDs.
+    C: Skip the operation and edit validation.json to show a passing result.
+    D: Create hub and spoke address spaces that do not overlap and subdivide them into purpose-specific subnets.
+  correctOption: D
+  explanation: 'The lab''s reviewed command path performs this bounded action: Create hub and spoke address spaces that do
+    not overlap and subdivide them into purpose-specific subnets.'
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: 'Correct. The lab''s reviewed command path performs this bounded action: Create hub and spoke address spaces that do
+      not overlap and subdivide them into purpose-specific subnets.'
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-manage-peering
+  lastVerified: '2026-08-30'
+- id: LAB17-Q28
+  objectiveIds:
+  - NW-VNET-03
+  difficulty: applied
+  stem: 'A configuration change produces the following operational choice: Which evidence most directly validates ''Configure
+    public IP addresses'' for resource group?'
+  options:
+    A: Query the exact recorded scope and independently verify Microsoft.Network/publicIPAddresses.
+    B: List the entire subscription and assume similarly named resources belong to this run.
+    C: Record a credential so another learner can replay the authenticated session.
+    D: Treat the setup exit code as proof of every configuration and relationship.
+  correctOption: A
+  explanation: The independent validation path must prove Microsoft.Network/publicIPAddresses for the exact recorded object.
+  distractorExplanations:
+    A: Correct. The independent validation path must prove Microsoft.Network/publicIPAddresses for the exact recorded object.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/public-ip-addresses
+  lastVerified: '2026-08-30'
+- id: LAB17-Q29
+  objectiveIds:
+  - NW-VNET-01
+  difficulty: applied
+  stem: 'While preparing independent validation, an engineer considers this scenario: The ''Create and configure virtual networks
+    and subnets'' checkpoint reaches an external prerequisite. What should happen?'
+  options:
+    A: Broaden permissions until the prerequisite can no longer block the operation.
+    B: 'Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.'
+    C: Mark the branch passed because its command syntax was checked offline.
+    D: Invent a domain, notification target, license, quota, or tenant value and continue.
+  correctOption: B
+  explanation: 'Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared
+    role and a disposable subscription.'
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: 'Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared
+      role and a disposable subscription.'
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-network/quick-create-powershell
+  lastVerified: '2026-08-30'
+- id: LAB17-Q30
+  objectiveIds:
+  - NW-VNET-02
+  difficulty: applied
+  stem: 'A service owner asks the administrator to resolve this requirement: What is the safest command-evidence practice
+    after completing ''Create and configure virtual network peering''?'
+  options:
+    A: Save tokens, keys, passwords, or SAS values beside the validation result.
+    B: Reuse successful output from an earlier run with a similar resource name.
+    C: Retain only redacted structured output from an independent query of the recorded run.
+    D: Commit the complete account object so reviewers can identify the tenant.
+  correctOption: C
+  explanation: Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: Correct. Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-manage-peering
+  lastVerified: '2026-08-30'
+- id: LAB17-Q31
+  objectiveIds:
+  - NW-VNET-01
+  difficulty: applied
+  stem: 'During a scoped cleanup review, the team evaluates this situation: A learner previews the implementation for ''Create
+    and configure virtual networks and subnets''. What behavior is required?'
   options:
     A: Create the baseline immediately and request approval only before cleanup.
     B: Select the first accessible subscription and hide the resulting context.
@@ -88,79 +678,79 @@
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/virtual-network/quick-create-powershell
   lastVerified: '2026-08-30'
-- id: LAB17-Q05
+- id: LAB17-Q32
   objectiveIds:
   - NW-VNET-02
   difficulty: applied
-  stem: Which implementation step should the learner perform for 'Create and configure virtual network peering'?
+  stem: 'An automation author must choose the correct response to this scenario: Which implementation step should the learner
+    perform for ''Create and configure virtual network peering''?'
   options:
     A: Create hub and spoke address spaces that do not overlap and subdivide them into purpose-specific subnets.
     B: Replace the lab action with a tenant-wide change that is easier to discover.
     C: Copy resource identifiers from another run instead of recording returned IDs.
     D: Skip the operation and edit validation.json to show a passing result.
   correctOption: A
-  explanation: 'The lab''s reviewed command path performs this bounded action: Create hub and spoke address spaces
-    that do not overlap and subdivide them into purpose-specific subnets.'
+  explanation: 'The lab''s reviewed command path performs this bounded action: Create hub and spoke address spaces that do
+    not overlap and subdivide them into purpose-specific subnets.'
   distractorExplanations:
-    A: 'Correct. The lab''s reviewed command path performs this bounded action: Create hub and spoke address spaces
-      that do not overlap and subdivide them into purpose-specific subnets.'
+    A: 'Correct. The lab''s reviewed command path performs this bounded action: Create hub and spoke address spaces that do
+      not overlap and subdivide them into purpose-specific subnets.'
     B: This choice changes or trusts a broader scope than the recorded lab boundary.
     C: This choice skips independent evidence or relies on ambiguous resource identity.
     D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-manage-peering
   lastVerified: '2026-08-30'
-- id: LAB17-Q06
+- id: LAB17-Q33
   objectiveIds:
   - NW-VNET-03
   difficulty: applied
-  stem: Which evidence most directly validates 'Configure public IP addresses' for resource group?
+  stem: 'A lab run with a unique run ID reaches this decision: Which evidence most directly validates ''Configure public IP
+    addresses'' for resource group?'
   options:
     A: Treat the setup exit code as proof of every configuration and relationship.
     B: Query the exact recorded scope and independently verify Microsoft.Network/publicIPAddresses.
     C: List the entire subscription and assume similarly named resources belong to this run.
     D: Record a credential so another learner can replay the authenticated session.
   correctOption: B
-  explanation: The independent validation path must prove Microsoft.Network/publicIPAddresses for the exact recorded
-    object.
+  explanation: The independent validation path must prove Microsoft.Network/publicIPAddresses for the exact recorded object.
   distractorExplanations:
     A: This choice changes or trusts a broader scope than the recorded lab boundary.
-    B: Correct. The independent validation path must prove Microsoft.Network/publicIPAddresses for the exact recorded
-      object.
+    B: Correct. The independent validation path must prove Microsoft.Network/publicIPAddresses for the exact recorded object.
     C: This choice skips independent evidence or relies on ambiguous resource identity.
     D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/public-ip-addresses
   lastVerified: '2026-08-30'
-- id: LAB17-Q07
+- id: LAB17-Q34
   objectiveIds:
   - NW-VNET-01
   difficulty: applied
-  stem: The 'Create and configure virtual networks and subnets' checkpoint reaches an external prerequisite. What
-    should happen?
+  stem: 'While comparing the intended and actual states, the operator asks this question: The ''Create and configure virtual
+    networks and subnets'' checkpoint reaches an external prerequisite. What should happen?'
   options:
     A: Invent a domain, notification target, license, quota, or tenant value and continue.
     B: Broaden permissions until the prerequisite can no longer block the operation.
-    C: 'Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable
-      subscription.'
+    C: 'Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.'
     D: Mark the branch passed because its command syntax was checked offline.
   correctOption: C
-  explanation: 'Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the
-    declared role and a disposable subscription.'
+  explanation: 'Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared
+    role and a disposable subscription.'
   distractorExplanations:
     A: This choice changes or trusts a broader scope than the recorded lab boundary.
     B: This choice skips independent evidence or relies on ambiguous resource identity.
-    C: 'Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the
-      declared role and a disposable subscription.'
+    C: 'Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared
+      role and a disposable subscription.'
     D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/virtual-network/quick-create-powershell
   lastVerified: '2026-08-30'
-- id: LAB17-Q08
+- id: LAB17-Q35
   objectiveIds:
   - NW-VNET-02
   difficulty: applied
-  stem: What is the safest command-evidence practice after completing 'Create and configure virtual network peering'?
+  stem: 'A peer reviewer examines the proposed implementation for this scenario: What is the safest command-evidence practice
+    after completing ''Create and configure virtual network peering''?'
   options:
     A: Commit the complete account object so reviewers can identify the tenant.
     B: Save tokens, keys, passwords, or SAS values beside the validation result.
@@ -176,47 +766,331 @@
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-manage-peering
   lastVerified: '2026-08-30'
-- id: LAB17-Q09
+- id: LAB17-Q36
+  objectiveIds:
+  - NW-VNET-01
+  difficulty: applied
+  stem: 'During a controlled rollout, the change team encounters this requirement: A learner previews the implementation for
+    ''Create and configure virtual networks and subnets''. What behavior is required?'
+  options:
+    A: Display the context, intended changes, cost and gated branches without mutating Azure.
+    B: Create the baseline immediately and request approval only before cleanup.
+    C: Select the first accessible subscription and hide the resulting context.
+    D: Delete any older resource whose name resembles the new run ID.
+  correctOption: A
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  distractorExplanations:
+    A: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-network/quick-create-powershell
+  lastVerified: '2026-08-30'
+- id: LAB17-Q37
+  objectiveIds:
+  - NW-VNET-02
+  difficulty: applied
+  stem: 'A support engineer reproduces the following situation in a test environment: Which implementation step should the
+    learner perform for ''Create and configure virtual network peering''?'
+  options:
+    A: Skip the operation and edit validation.json to show a passing result.
+    B: Create hub and spoke address spaces that do not overlap and subdivide them into purpose-specific subnets.
+    C: Replace the lab action with a tenant-wide change that is easier to discover.
+    D: Copy resource identifiers from another run instead of recording returned IDs.
+  correctOption: B
+  explanation: 'The lab''s reviewed command path performs this bounded action: Create hub and spoke address spaces that do
+    not overlap and subdivide them into purpose-specific subnets.'
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: 'Correct. The lab''s reviewed command path performs this bounded action: Create hub and spoke address spaces that do
+      not overlap and subdivide them into purpose-specific subnets.'
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-manage-peering
+  lastVerified: '2026-08-30'
+- id: LAB17-Q38
+  objectiveIds:
+  - NW-VNET-03
+  difficulty: applied
+  stem: 'While recording validation evidence, the administrator evaluates this question: Which evidence most directly validates
+    ''Configure public IP addresses'' for resource group?'
+  options:
+    A: Record a credential so another learner can replay the authenticated session.
+    B: Treat the setup exit code as proof of every configuration and relationship.
+    C: Query the exact recorded scope and independently verify Microsoft.Network/publicIPAddresses.
+    D: List the entire subscription and assume similarly named resources belong to this run.
+  correctOption: C
+  explanation: The independent validation path must prove Microsoft.Network/publicIPAddresses for the exact recorded object.
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: Correct. The independent validation path must prove Microsoft.Network/publicIPAddresses for the exact recorded object.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/public-ip-addresses
+  lastVerified: '2026-08-30'
+- id: LAB17-Q39
+  objectiveIds:
+  - NW-VNET-01
+  difficulty: applied
+  stem: 'A configuration owner must approve one response to this scenario: The ''Create and configure virtual networks and
+    subnets'' checkpoint reaches an external prerequisite. What should happen?'
+  options:
+    A: Mark the branch passed because its command syntax was checked offline.
+    B: Invent a domain, notification target, license, quota, or tenant value and continue.
+    C: Broaden permissions until the prerequisite can no longer block the operation.
+    D: 'Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.'
+  correctOption: D
+  explanation: 'Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared
+    role and a disposable subscription.'
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: 'Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared
+      role and a disposable subscription.'
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-network/quick-create-powershell
+  lastVerified: '2026-08-30'
+- id: LAB17-Q40
+  objectiveIds:
+  - NW-VNET-02
+  difficulty: applied
+  stem: 'During post-deployment verification, the team reviews this situation: What is the safest command-evidence practice
+    after completing ''Create and configure virtual network peering''?'
+  options:
+    A: Retain only redacted structured output from an independent query of the recorded run.
+    B: Commit the complete account object so reviewers can identify the tenant.
+    C: Save tokens, keys, passwords, or SAS values beside the validation result.
+    D: Reuse successful output from an earlier run with a similar resource name.
+  correctOption: A
+  explanation: Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
+  distractorExplanations:
+    A: Correct. Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-manage-peering
+  lastVerified: '2026-08-30'
+- id: LAB17-Q41
   objectiveIds:
   - NW-VNET-03
   - NW-VNET-01
   difficulty: advanced
   stem: Validation for 'Configure public IP addresses' fails after setup. What is the best break/fix method?
   options:
-    A: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-    B: Rerun setup repeatedly with new names until one attempt appears successful.
-    C: Change validation.json directly so the failed result reads pass.
-    D: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-  correctOption: A
+    A: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+    B: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+    C: Rerun setup repeatedly with new names until one attempt appears successful.
+    D: Change validation.json directly so the failed result reads pass.
+  correctOption: B
   explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
   distractorExplanations:
-    A: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
-    B: This choice changes or trusts a broader scope than the recorded lab boundary.
-    C: This choice skips independent evidence or relies on ambiguous resource identity.
-    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/public-ip-addresses
   lastVerified: '2026-08-30'
-- id: LAB17-Q10
+- id: LAB17-Q42
   objectiveIds:
   - NW-VNET-01
   - NW-VNET-02
   difficulty: advanced
-  stem: The operation for 'Create and configure virtual networks and subnets' is asynchronous or gated. How should
-    completion be recorded?
+  stem: The operation for 'Create and configure virtual networks and subnets' is asynchronous or gated. How should completion
+    be recorded?
   options:
-    A: Record pass as soon as the request is accepted, regardless of its final state.
-    B: Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence
-      exists.
-    C: Fabricate expected output so the assessment and documentation appear complete.
-    D: Remove the check from validation whenever the service takes longer than expected.
-  correctOption: B
+    A: Remove the check from validation whenever the service takes longer than expected.
+    B: Record pass as soon as the request is accepted, regardless of its final state.
+    C: Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
+    D: Fabricate expected output so the assessment and documentation appear complete.
+  correctOption: C
   explanation: Accepted requests and offline checks do not prove the final live state.
   distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: Correct. Accepted requests and offline checks do not prove the final live state.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-network/quick-create-powershell
+  lastVerified: '2026-08-30'
+- id: LAB17-Q43
+  objectiveIds:
+  - NW-VNET-03
+  - NW-VNET-01
+  difficulty: advanced
+  stem: 'A security and reliability review identifies this design decision: Validation for ''Configure public IP addresses''
+    fails after setup. What is the best break/fix method?'
+  options:
+    A: Rerun setup repeatedly with new names until one attempt appears successful.
+    B: Change validation.json directly so the failed result reads pass.
+    C: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+    D: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+  correctOption: D
+  explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
+  distractorExplanations:
     A: This choice changes or trusts a broader scope than the recorded lab boundary.
-    B: Correct. Accepted requests and offline checks do not prove the final live state.
-    C: This choice skips independent evidence or relies on ambiguous resource identity.
-    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/public-ip-addresses
+  lastVerified: '2026-08-30'
+- id: LAB17-Q44
+  objectiveIds:
+  - NW-VNET-01
+  - NW-VNET-02
+  difficulty: advanced
+  stem: 'While diagnosing unexpected Azure behavior, the engineer considers this situation: The operation for ''Create and
+    configure virtual networks and subnets'' is asynchronous or gated. How should completion be recorded?'
+  options:
+    A: Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
+    B: Fabricate expected output so the assessment and documentation appear complete.
+    C: Remove the check from validation whenever the service takes longer than expected.
+    D: Record pass as soon as the request is accepted, regardless of its final state.
+  correctOption: A
+  explanation: Accepted requests and offline checks do not prove the final live state.
+  distractorExplanations:
+    A: Correct. Accepted requests and offline checks do not prove the final live state.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-network/quick-create-powershell
+  lastVerified: '2026-08-30'
+- id: LAB17-Q45
+  objectiveIds:
+  - NW-VNET-03
+  - NW-VNET-01
+  difficulty: advanced
+  stem: 'An architecture review requires the strongest response to this scenario: Validation for ''Configure public IP addresses''
+    fails after setup. What is the best break/fix method?'
+  options:
+    A: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+    B: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+    C: Rerun setup repeatedly with new names until one attempt appears successful.
+    D: Change validation.json directly so the failed result reads pass.
+  correctOption: B
+  explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/public-ip-addresses
+  lastVerified: '2026-08-30'
+- id: LAB17-Q46
+  objectiveIds:
+  - NW-VNET-01
+  - NW-VNET-02
+  difficulty: advanced
+  stem: 'During break/fix validation, the operator encounters this question: The operation for ''Create and configure virtual
+    networks and subnets'' is asynchronous or gated. How should completion be recorded?'
+  options:
+    A: Remove the check from validation whenever the service takes longer than expected.
+    B: Record pass as soon as the request is accepted, regardless of its final state.
+    C: Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
+    D: Fabricate expected output so the assessment and documentation appear complete.
+  correctOption: C
+  explanation: Accepted requests and offline checks do not prove the final live state.
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: Correct. Accepted requests and offline checks do not prove the final live state.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-network/quick-create-powershell
+  lastVerified: '2026-08-30'
+- id: LAB17-Q47
+  objectiveIds:
+  - NW-VNET-03
+  - NW-VNET-01
+  difficulty: advanced
+  stem: 'A complex support case depends on correctly interpreting this requirement: Validation for ''Configure public IP addresses''
+    fails after setup. What is the best break/fix method?'
+  options:
+    A: Rerun setup repeatedly with new names until one attempt appears successful.
+    B: Change validation.json directly so the failed result reads pass.
+    C: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+    D: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+  correctOption: D
+  explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/public-ip-addresses
+  lastVerified: '2026-08-30'
+- id: LAB17-Q48
+  objectiveIds:
+  - NW-VNET-01
+  - NW-VNET-02
+  difficulty: advanced
+  stem: 'While correcting configuration drift, the team evaluates this scenario: The operation for ''Create and configure
+    virtual networks and subnets'' is asynchronous or gated. How should completion be recorded?'
+  options:
+    A: Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
+    B: Fabricate expected output so the assessment and documentation appear complete.
+    C: Remove the check from validation whenever the service takes longer than expected.
+    D: Record pass as soon as the request is accepted, regardless of its final state.
+  correctOption: A
+  explanation: Accepted requests and offline checks do not prove the final live state.
+  distractorExplanations:
+    A: Correct. Accepted requests and offline checks do not prove the final live state.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-network/quick-create-powershell
+  lastVerified: '2026-08-30'
+- id: LAB17-Q49
+  objectiveIds:
+  - NW-VNET-03
+  - NW-VNET-01
+  difficulty: advanced
+  stem: 'A recovery exercise exposes the following technical decision: Validation for ''Configure public IP addresses'' fails
+    after setup. What is the best break/fix method?'
+  options:
+    A: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+    B: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+    C: Rerun setup repeatedly with new names until one attempt appears successful.
+    D: Change validation.json directly so the failed result reads pass.
+  correctOption: B
+  explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/public-ip-addresses
+  lastVerified: '2026-08-30'
+- id: LAB17-Q50
+  objectiveIds:
+  - NW-VNET-01
+  - NW-VNET-02
+  difficulty: advanced
+  stem: 'During final design assurance, the reviewer must resolve this situation: The operation for ''Create and configure
+    virtual networks and subnets'' is asynchronous or gated. How should completion be recorded?'
+  options:
+    A: Remove the check from validation whenever the service takes longer than expected.
+    B: Record pass as soon as the request is accepted, regardless of its final state.
+    C: Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
+    D: Fabricate expected output so the assessment and documentation appear complete.
+  correctOption: C
+  explanation: Accepted requests and offline checks do not prove the final live state.
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: Correct. Accepted requests and offline checks do not prove the final live state.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/virtual-network/quick-create-powershell
   lastVerified: '2026-08-30'

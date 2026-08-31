@@ -66,7 +66,7 @@ cleanup:
   softDeleteNote: User deletion is recoverable until deleted-item retention expires unless explicitly purged.
 assessment:
   enabled: true
+  questionCount: 50
   primaryDomain: identity-governance
-  questionCount: 10
 lastOfflineValidated: '2026-08-30'
 lastLiveVerified: null

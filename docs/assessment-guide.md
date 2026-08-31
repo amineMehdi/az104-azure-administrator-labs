@@ -1,24 +1,24 @@
 # Assessment authoring guide
 
-The curriculum contains exactly 250 original four-option, single-answer questions: 50 for each official AZ-104 domain.
+The curriculum contains exactly 1,250 original four-option, single-answer questions: 50 in each assessment-enabled lab from Lab 01 through Lab 25.
 
-## Domain difficulty mix
+## Per-lab difficulty mix
 
-Every domain contains:
+Every assessment-enabled lab contains:
 
 - 15 foundational questions
 - 25 applied scenario questions
 - 10 advanced troubleshooting or design questions
 
-Correct-answer positions A–D must each occur 12 or 13 times in a domain.
+Correct-answer positions A–D must each occur 12 or 13 times in a lab.
 
 ## Lab allocation
 
-- Identity and governance: Labs 01–05, 10 questions each.
-- Storage: Labs 06–09 with 12, 12, 14, and 12 questions.
-- Compute: Labs 10–16 with 10, 8, 8, 6, 4, 7, and 7 questions.
-- Networking: Labs 17–21, 10 questions each.
-- Monitoring and recovery: Labs 22–25 with 15, 10, 15, and 10 questions.
+- Identity and governance: Labs 01–05, 50 questions each (250 domain total).
+- Storage: Labs 06–09, 50 questions each (200 domain total).
+- Compute: Labs 10–16, 50 questions each (350 domain total).
+- Networking: Labs 17–21, 50 questions each (250 domain total).
+- Monitoring and recovery: Labs 22–25, 50 questions each (200 domain total).
 - Lab 00 and Capstones 26–27 have no separate assessment directories.
 
 ## Files and rules

@@ -2,23 +2,22 @@
   objectiveIds:
   - CP-CONTAINERS-01
   difficulty: foundational
-  stem: Which principle is most important when working on 'Create and manage an Azure Container Registry' in Lab
-    13?
+  stem: Which principle is most important when working on 'Create and manage an Azure Container Registry' in Lab 13?
   options:
-    A: The shortest command is always correct even when it changes a broader scope.
-    B: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-    C: ACR stores image artifacts and ACI runs container groups; registry admin credentials are not required when
-      managed identities or scoped tokens are available.
-    D: A recognizable resource name removes the need for validation and scoped cleanup.
-  correctOption: C
-  explanation: 'The lab establishes this design principle: ACR stores image artifacts and ACI runs container groups;
-    registry admin credentials are not required when managed identities or scoped tokens are available.'
+    A: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+    B: ACR stores image artifacts and ACI runs container groups; registry admin credentials are not required when managed
+      identities or scoped tokens are available.
+    C: A recognizable resource name removes the need for validation and scoped cleanup.
+    D: The shortest command is always correct even when it changes a broader scope.
+  correctOption: B
+  explanation: 'The lab establishes this design principle: ACR stores image artifacts and ACI runs container groups; registry
+    admin credentials are not required when managed identities or scoped tokens are available.'
   distractorExplanations:
-    A: This choice changes or trusts a broader scope than the recorded lab boundary.
-    B: This choice skips independent evidence or relies on ambiguous resource identity.
-    C: 'Correct. The lab establishes this design principle: ACR stores image artifacts and ACI runs container groups;
-      registry admin credentials are not required when managed identities or scoped tokens are available.'
-    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: 'Correct. The lab establishes this design principle: ACR stores image artifacts and ACI runs container groups; registry
+      admin credentials are not required when managed identities or scoped tokens are available.'
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/container-registry/container-registry-get-started-azure-cli
   lastVerified: '2026-08-30'
@@ -28,28 +27,334 @@
   difficulty: foundational
   stem: Which lab action directly supports the objective 'Provision a container by using Azure Container Instances'?
   options:
-    A: Change the active tenant without displaying or confirming the resulting context.
-    B: Search the whole tenant for a similar display name and modify the first match.
-    C: Mark the objective complete after reading documentation without checking any state.
-    D: Import a public Microsoft sample image and inspect repository and tag metadata.
-  correctOption: D
-  explanation: 'The reviewed hands-on action for this objective is: Import a public Microsoft sample image and inspect
-    repository and tag metadata.'
+    A: Search the whole tenant for a similar display name and modify the first match.
+    B: Mark the objective complete after reading documentation without checking any state.
+    C: Import a public Microsoft sample image and inspect repository and tag metadata.
+    D: Change the active tenant without displaying or confirming the resulting context.
+  correctOption: C
+  explanation: 'The reviewed hands-on action for this objective is: Import a public Microsoft sample image and inspect repository
+    and tag metadata.'
   distractorExplanations:
-    A: This choice changes or trusts a broader scope than the recorded lab boundary.
-    B: This choice skips independent evidence or relies on ambiguous resource identity.
-    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-    D: 'Correct. The reviewed hands-on action for this objective is: Import a public Microsoft sample image and
-      inspect repository and tag metadata.'
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: 'Correct. The reviewed hands-on action for this objective is: Import a public Microsoft sample image and inspect repository
+      and tag metadata.'
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/container-registry/container-registry-import-images
   lastVerified: '2026-08-30'
 - id: LAB13-Q03
   objectiveIds:
+  - CP-CONTAINERS-01
+  difficulty: foundational
+  stem: 'In a fundamentals workshop, the instructor presents this requirement: Which principle is most important when working
+    on ''Create and manage an Azure Container Registry'' in Lab 13?'
+  options:
+    A: A recognizable resource name removes the need for validation and scoped cleanup.
+    B: The shortest command is always correct even when it changes a broader scope.
+    C: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+    D: ACR stores image artifacts and ACI runs container groups; registry admin credentials are not required when managed
+      identities or scoped tokens are available.
+  correctOption: D
+  explanation: 'The lab establishes this design principle: ACR stores image artifacts and ACI runs container groups; registry
+    admin credentials are not required when managed identities or scoped tokens are available.'
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: 'Correct. The lab establishes this design principle: ACR stores image artifacts and ACI runs container groups; registry
+      admin credentials are not required when managed identities or scoped tokens are available.'
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-registry/container-registry-get-started-azure-cli
+  lastVerified: '2026-08-30'
+- id: LAB13-Q04
+  objectiveIds:
+  - CP-CONTAINERS-02
+  difficulty: foundational
+  stem: 'Before making a change, a learner checks this core behavior: Which lab action directly supports the objective ''Provision
+    a container by using Azure Container Instances''?'
+  options:
+    A: Import a public Microsoft sample image and inspect repository and tag metadata.
+    B: Change the active tenant without displaying or confirming the resulting context.
+    C: Search the whole tenant for a similar display name and modify the first match.
+    D: Mark the objective complete after reading documentation without checking any state.
+  correctOption: A
+  explanation: 'The reviewed hands-on action for this objective is: Import a public Microsoft sample image and inspect repository
+    and tag metadata.'
+  distractorExplanations:
+    A: 'Correct. The reviewed hands-on action for this objective is: Import a public Microsoft sample image and inspect repository
+      and tag metadata.'
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-registry/container-registry-import-images
+  lastVerified: '2026-08-30'
+- id: LAB13-Q05
+  objectiveIds:
+  - CP-CONTAINERS-01
+  difficulty: foundational
+  stem: 'During a design vocabulary review, the team evaluates this situation: Which principle is most important when working
+    on ''Create and manage an Azure Container Registry'' in Lab 13?'
+  options:
+    A: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+    B: ACR stores image artifacts and ACI runs container groups; registry admin credentials are not required when managed
+      identities or scoped tokens are available.
+    C: A recognizable resource name removes the need for validation and scoped cleanup.
+    D: The shortest command is always correct even when it changes a broader scope.
+  correctOption: B
+  explanation: 'The lab establishes this design principle: ACR stores image artifacts and ACI runs container groups; registry
+    admin credentials are not required when managed identities or scoped tokens are available.'
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: 'Correct. The lab establishes this design principle: ACR stores image artifacts and ACI runs container groups; registry
+      admin credentials are not required when managed identities or scoped tokens are available.'
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-registry/container-registry-get-started-azure-cli
+  lastVerified: '2026-08-30'
+- id: LAB13-Q06
+  objectiveIds:
+  - CP-CONTAINERS-02
+  difficulty: foundational
+  stem: 'In a command-planning session, an administrator asks this question: Which lab action directly supports the objective
+    ''Provision a container by using Azure Container Instances''?'
+  options:
+    A: Search the whole tenant for a similar display name and modify the first match.
+    B: Mark the objective complete after reading documentation without checking any state.
+    C: Import a public Microsoft sample image and inspect repository and tag metadata.
+    D: Change the active tenant without displaying or confirming the resulting context.
+  correctOption: C
+  explanation: 'The reviewed hands-on action for this objective is: Import a public Microsoft sample image and inspect repository
+    and tag metadata.'
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: 'Correct. The reviewed hands-on action for this objective is: Import a public Microsoft sample image and inspect repository
+      and tag metadata.'
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-registry/container-registry-import-images
+  lastVerified: '2026-08-30'
+- id: LAB13-Q07
+  objectiveIds:
+  - CP-CONTAINERS-01
+  difficulty: foundational
+  stem: 'While preparing the lab, a learner verifies this platform rule: Which principle is most important when working on
+    ''Create and manage an Azure Container Registry'' in Lab 13?'
+  options:
+    A: A recognizable resource name removes the need for validation and scoped cleanup.
+    B: The shortest command is always correct even when it changes a broader scope.
+    C: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+    D: ACR stores image artifacts and ACI runs container groups; registry admin credentials are not required when managed
+      identities or scoped tokens are available.
+  correctOption: D
+  explanation: 'The lab establishes this design principle: ACR stores image artifacts and ACI runs container groups; registry
+    admin credentials are not required when managed identities or scoped tokens are available.'
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: 'Correct. The lab establishes this design principle: ACR stores image artifacts and ACI runs container groups; registry
+      admin credentials are not required when managed identities or scoped tokens are available.'
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-registry/container-registry-get-started-azure-cli
+  lastVerified: '2026-08-30'
+- id: LAB13-Q08
+  objectiveIds:
+  - CP-CONTAINERS-02
+  difficulty: foundational
+  stem: 'During peer review, the team must identify the accurate response to this scenario: Which lab action directly supports
+    the objective ''Provision a container by using Azure Container Instances''?'
+  options:
+    A: Import a public Microsoft sample image and inspect repository and tag metadata.
+    B: Change the active tenant without displaying or confirming the resulting context.
+    C: Search the whole tenant for a similar display name and modify the first match.
+    D: Mark the objective complete after reading documentation without checking any state.
+  correctOption: A
+  explanation: 'The reviewed hands-on action for this objective is: Import a public Microsoft sample image and inspect repository
+    and tag metadata.'
+  distractorExplanations:
+    A: 'Correct. The reviewed hands-on action for this objective is: Import a public Microsoft sample image and inspect repository
+      and tag metadata.'
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-registry/container-registry-import-images
+  lastVerified: '2026-08-30'
+- id: LAB13-Q09
+  objectiveIds:
+  - CP-CONTAINERS-01
+  difficulty: foundational
+  stem: 'In an operations briefing, a new team member receives this question: Which principle is most important when working
+    on ''Create and manage an Azure Container Registry'' in Lab 13?'
+  options:
+    A: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+    B: ACR stores image artifacts and ACI runs container groups; registry admin credentials are not required when managed
+      identities or scoped tokens are available.
+    C: A recognizable resource name removes the need for validation and scoped cleanup.
+    D: The shortest command is always correct even when it changes a broader scope.
+  correctOption: B
+  explanation: 'The lab establishes this design principle: ACR stores image artifacts and ACI runs container groups; registry
+    admin credentials are not required when managed identities or scoped tokens are available.'
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: 'Correct. The lab establishes this design principle: ACR stores image artifacts and ACI runs container groups; registry
+      admin credentials are not required when managed identities or scoped tokens are available.'
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-registry/container-registry-get-started-azure-cli
+  lastVerified: '2026-08-30'
+- id: LAB13-Q10
+  objectiveIds:
+  - CP-CONTAINERS-02
+  difficulty: foundational
+  stem: 'While building a support checklist, an engineer reviews this requirement: Which lab action directly supports the
+    objective ''Provision a container by using Azure Container Instances''?'
+  options:
+    A: Search the whole tenant for a similar display name and modify the first match.
+    B: Mark the objective complete after reading documentation without checking any state.
+    C: Import a public Microsoft sample image and inspect repository and tag metadata.
+    D: Change the active tenant without displaying or confirming the resulting context.
+  correctOption: C
+  explanation: 'The reviewed hands-on action for this objective is: Import a public Microsoft sample image and inspect repository
+    and tag metadata.'
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: 'Correct. The reviewed hands-on action for this objective is: Import a public Microsoft sample image and inspect repository
+      and tag metadata.'
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-registry/container-registry-import-images
+  lastVerified: '2026-08-30'
+- id: LAB13-Q11
+  objectiveIds:
+  - CP-CONTAINERS-01
+  difficulty: foundational
+  stem: 'During a readiness check, the administrator considers this behavior: Which principle is most important when working
+    on ''Create and manage an Azure Container Registry'' in Lab 13?'
+  options:
+    A: A recognizable resource name removes the need for validation and scoped cleanup.
+    B: The shortest command is always correct even when it changes a broader scope.
+    C: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+    D: ACR stores image artifacts and ACI runs container groups; registry admin credentials are not required when managed
+      identities or scoped tokens are available.
+  correctOption: D
+  explanation: 'The lab establishes this design principle: ACR stores image artifacts and ACI runs container groups; registry
+    admin credentials are not required when managed identities or scoped tokens are available.'
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: 'Correct. The lab establishes this design principle: ACR stores image artifacts and ACI runs container groups; registry
+      admin credentials are not required when managed identities or scoped tokens are available.'
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-registry/container-registry-get-started-azure-cli
+  lastVerified: '2026-08-30'
+- id: LAB13-Q12
+  objectiveIds:
+  - CP-CONTAINERS-02
+  difficulty: foundational
+  stem: 'In a service overview, the team discusses this scenario: Which lab action directly supports the objective ''Provision
+    a container by using Azure Container Instances''?'
+  options:
+    A: Import a public Microsoft sample image and inspect repository and tag metadata.
+    B: Change the active tenant without displaying or confirming the resulting context.
+    C: Search the whole tenant for a similar display name and modify the first match.
+    D: Mark the objective complete after reading documentation without checking any state.
+  correctOption: A
+  explanation: 'The reviewed hands-on action for this objective is: Import a public Microsoft sample image and inspect repository
+    and tag metadata.'
+  distractorExplanations:
+    A: 'Correct. The reviewed hands-on action for this objective is: Import a public Microsoft sample image and inspect repository
+      and tag metadata.'
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-registry/container-registry-import-images
+  lastVerified: '2026-08-30'
+- id: LAB13-Q13
+  objectiveIds:
+  - CP-CONTAINERS-01
+  difficulty: foundational
+  stem: 'While reviewing official guidance, a learner must resolve this question: Which principle is most important when working
+    on ''Create and manage an Azure Container Registry'' in Lab 13?'
+  options:
+    A: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+    B: ACR stores image artifacts and ACI runs container groups; registry admin credentials are not required when managed
+      identities or scoped tokens are available.
+    C: A recognizable resource name removes the need for validation and scoped cleanup.
+    D: The shortest command is always correct even when it changes a broader scope.
+  correctOption: B
+  explanation: 'The lab establishes this design principle: ACR stores image artifacts and ACI runs container groups; registry
+    admin credentials are not required when managed identities or scoped tokens are available.'
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: 'Correct. The lab establishes this design principle: ACR stores image artifacts and ACI runs container groups; registry
+      admin credentials are not required when managed identities or scoped tokens are available.'
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-registry/container-registry-get-started-azure-cli
+  lastVerified: '2026-08-30'
+- id: LAB13-Q14
+  objectiveIds:
+  - CP-CONTAINERS-02
+  difficulty: foundational
+  stem: 'During a configuration walkthrough, the instructor asks about this situation: Which lab action directly supports
+    the objective ''Provision a container by using Azure Container Instances''?'
+  options:
+    A: Search the whole tenant for a similar display name and modify the first match.
+    B: Mark the objective complete after reading documentation without checking any state.
+    C: Import a public Microsoft sample image and inspect repository and tag metadata.
+    D: Change the active tenant without displaying or confirming the resulting context.
+  correctOption: C
+  explanation: 'The reviewed hands-on action for this objective is: Import a public Microsoft sample image and inspect repository
+    and tag metadata.'
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: 'Correct. The reviewed hands-on action for this objective is: Import a public Microsoft sample image and inspect repository
+      and tag metadata.'
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-registry/container-registry-import-images
+  lastVerified: '2026-08-30'
+- id: LAB13-Q15
+  objectiveIds:
+  - CP-CONTAINERS-01
+  difficulty: foundational
+  stem: 'In a preflight knowledge check, the operator evaluates this requirement: Which principle is most important when working
+    on ''Create and manage an Azure Container Registry'' in Lab 13?'
+  options:
+    A: A recognizable resource name removes the need for validation and scoped cleanup.
+    B: The shortest command is always correct even when it changes a broader scope.
+    C: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+    D: ACR stores image artifacts and ACI runs container groups; registry admin credentials are not required when managed
+      identities or scoped tokens are available.
+  correctOption: D
+  explanation: 'The lab establishes this design principle: ACR stores image artifacts and ACI runs container groups; registry
+    admin credentials are not required when managed identities or scoped tokens are available.'
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: 'Correct. The lab establishes this design principle: ACR stores image artifacts and ACI runs container groups; registry
+      admin credentials are not required when managed identities or scoped tokens are available.'
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-registry/container-registry-get-started-azure-cli
+  lastVerified: '2026-08-30'
+- id: LAB13-Q16
+  objectiveIds:
   - CP-CONTAINERS-04
   difficulty: applied
-  stem: A learner previews the implementation for 'Manage sizing and scaling for containers, including Azure Container
-    Instances and Azure Container Apps'. What behavior is required?
+  stem: A learner previews the implementation for 'Manage sizing and scaling for containers, including Azure Container Instances
+    and Azure Container Apps'. What behavior is required?
   options:
     A: Display the context, intended changes, cost and gated branches without mutating Azure.
     B: Create the baseline immediately and request approval only before cleanup.
@@ -65,7 +370,7 @@
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/container-instances/container-instances-quickstart
   lastVerified: '2026-08-30'
-- id: LAB13-Q04
+- id: LAB13-Q17
   objectiveIds:
   - CP-CONTAINERS-01
   difficulty: applied
@@ -76,47 +381,570 @@
     C: Copy resource identifiers from another run instead of recording returned IDs.
     D: Skip the operation and edit validation.json to show a passing result.
   correctOption: B
-  explanation: 'The lab''s reviewed command path performs this bounded action: Inspect CPU, memory, restart policy,
-    events, logs, and current container state.'
+  explanation: 'The lab''s reviewed command path performs this bounded action: Inspect CPU, memory, restart policy, events,
+    logs, and current container state.'
   distractorExplanations:
     A: This choice changes or trusts a broader scope than the recorded lab boundary.
-    B: 'Correct. The lab''s reviewed command path performs this bounded action: Inspect CPU, memory, restart policy,
-      events, logs, and current container state.'
+    B: 'Correct. The lab''s reviewed command path performs this bounded action: Inspect CPU, memory, restart policy, events,
+      logs, and current container state.'
     C: This choice skips independent evidence or relies on ambiguous resource identity.
     D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/container-instances/container-instances-container-groups
   lastVerified: '2026-08-30'
-- id: LAB13-Q05
+- id: LAB13-Q18
   objectiveIds:
   - CP-CONTAINERS-02
   difficulty: applied
-  stem: Which evidence most directly validates 'Provision a container by using Azure Container Instances' for Basic
-    container registry?
+  stem: Which evidence most directly validates 'Provision a container by using Azure Container Instances' for Basic container
+    registry?
   options:
     A: Treat the setup exit code as proof of every configuration and relationship.
     B: List the entire subscription and assume similarly named resources belong to this run.
     C: Query the exact recorded scope and independently verify Microsoft.ContainerRegistry/registries.
     D: Record a credential so another learner can replay the authenticated session.
   correctOption: C
-  explanation: The independent validation path must prove Microsoft.ContainerRegistry/registries for the exact recorded
-    object.
+  explanation: The independent validation path must prove Microsoft.ContainerRegistry/registries for the exact recorded object.
   distractorExplanations:
     A: This choice changes or trusts a broader scope than the recorded lab boundary.
     B: This choice skips independent evidence or relies on ambiguous resource identity.
-    C: Correct. The independent validation path must prove Microsoft.ContainerRegistry/registries for the exact
-      recorded object.
+    C: Correct. The independent validation path must prove Microsoft.ContainerRegistry/registries for the exact recorded object.
     D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/container-registry/container-registry-get-started-azure-cli
   lastVerified: '2026-08-30'
-- id: LAB13-Q06
+- id: LAB13-Q19
+  objectiveIds:
+  - CP-CONTAINERS-04
+  difficulty: applied
+  stem: 'During an implementation review, the operator considers this requirement: A learner previews the implementation for
+    ''Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps''. What behavior
+    is required?'
+  options:
+    A: Create the baseline immediately and request approval only before cleanup.
+    B: Select the first accessible subscription and hide the resulting context.
+    C: Delete any older resource whose name resembles the new run ID.
+    D: Display the context, intended changes, cost and gated branches without mutating Azure.
+  correctOption: D
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-instances/container-instances-quickstart
+  lastVerified: '2026-08-30'
+- id: LAB13-Q20
+  objectiveIds:
+  - CP-CONTAINERS-01
+  difficulty: applied
+  stem: 'A production runbook must correctly handle this scenario: Which implementation step should the learner perform for
+    ''Create and manage an Azure Container Registry''?'
+  options:
+    A: Inspect CPU, memory, restart policy, events, logs, and current container state.
+    B: Copy resource identifiers from another run instead of recording returned IDs.
+    C: Skip the operation and edit validation.json to show a passing result.
+    D: Replace the lab action with a tenant-wide change that is easier to discover.
+  correctOption: A
+  explanation: 'The lab''s reviewed command path performs this bounded action: Inspect CPU, memory, restart policy, events,
+    logs, and current container state.'
+  distractorExplanations:
+    A: 'Correct. The lab''s reviewed command path performs this bounded action: Inspect CPU, memory, restart policy, events,
+      logs, and current container state.'
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-instances/container-instances-container-groups
+  lastVerified: '2026-08-30'
+- id: LAB13-Q21
+  objectiveIds:
+  - CP-CONTAINERS-02
+  difficulty: applied
+  stem: 'While validating a configuration, the team evaluates this situation: Which evidence most directly validates ''Provision
+    a container by using Azure Container Instances'' for Basic container registry?'
+  options:
+    A: List the entire subscription and assume similarly named resources belong to this run.
+    B: Query the exact recorded scope and independently verify Microsoft.ContainerRegistry/registries.
+    C: Record a credential so another learner can replay the authenticated session.
+    D: Treat the setup exit code as proof of every configuration and relationship.
+  correctOption: B
+  explanation: The independent validation path must prove Microsoft.ContainerRegistry/registries for the exact recorded object.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: Correct. The independent validation path must prove Microsoft.ContainerRegistry/registries for the exact recorded object.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-registry/container-registry-get-started-azure-cli
+  lastVerified: '2026-08-30'
+- id: LAB13-Q22
+  objectiveIds:
+  - CP-CONTAINERS-04
+  difficulty: applied
+  stem: 'A delegated administrator receives the following support request: A learner previews the implementation for ''Manage
+    sizing and scaling for containers, including Azure Container Instances and Azure Container Apps''. What behavior is required?'
+  options:
+    A: Select the first accessible subscription and hide the resulting context.
+    B: Delete any older resource whose name resembles the new run ID.
+    C: Display the context, intended changes, cost and gated branches without mutating Azure.
+    D: Create the baseline immediately and request approval only before cleanup.
+  correctOption: C
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-instances/container-instances-quickstart
+  lastVerified: '2026-08-30'
+- id: LAB13-Q23
+  objectiveIds:
+  - CP-CONTAINERS-01
+  difficulty: applied
+  stem: 'During a maintenance window, an engineer must decide how to respond: Which implementation step should the learner
+    perform for ''Create and manage an Azure Container Registry''?'
+  options:
+    A: Copy resource identifiers from another run instead of recording returned IDs.
+    B: Skip the operation and edit validation.json to show a passing result.
+    C: Replace the lab action with a tenant-wide change that is easier to discover.
+    D: Inspect CPU, memory, restart policy, events, logs, and current container state.
+  correctOption: D
+  explanation: 'The lab''s reviewed command path performs this bounded action: Inspect CPU, memory, restart policy, events,
+    logs, and current container state.'
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: 'Correct. The lab''s reviewed command path performs this bounded action: Inspect CPU, memory, restart policy, events,
+      logs, and current container state.'
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-instances/container-instances-container-groups
+  lastVerified: '2026-08-30'
+- id: LAB13-Q24
+  objectiveIds:
+  - CP-CONTAINERS-02
+  difficulty: applied
+  stem: 'A deployment pipeline reaches this decision point: Which evidence most directly validates ''Provision a container
+    by using Azure Container Instances'' for Basic container registry?'
+  options:
+    A: Query the exact recorded scope and independently verify Microsoft.ContainerRegistry/registries.
+    B: Record a credential so another learner can replay the authenticated session.
+    C: Treat the setup exit code as proof of every configuration and relationship.
+    D: List the entire subscription and assume similarly named resources belong to this run.
+  correctOption: A
+  explanation: The independent validation path must prove Microsoft.ContainerRegistry/registries for the exact recorded object.
+  distractorExplanations:
+    A: Correct. The independent validation path must prove Microsoft.ContainerRegistry/registries for the exact recorded object.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-registry/container-registry-get-started-azure-cli
+  lastVerified: '2026-08-30'
+- id: LAB13-Q25
+  objectiveIds:
+  - CP-CONTAINERS-04
+  difficulty: applied
+  stem: 'While applying least-privilege controls, the administrator reviews this scenario: A learner previews the implementation
+    for ''Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps''. What behavior
+    is required?'
+  options:
+    A: Delete any older resource whose name resembles the new run ID.
+    B: Display the context, intended changes, cost and gated branches without mutating Azure.
+    C: Create the baseline immediately and request approval only before cleanup.
+    D: Select the first accessible subscription and hide the resulting context.
+  correctOption: B
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-instances/container-instances-quickstart
+  lastVerified: '2026-08-30'
+- id: LAB13-Q26
+  objectiveIds:
+  - CP-CONTAINERS-01
+  difficulty: applied
+  stem: 'A repeatable Azure CLI workflow must address this requirement: Which implementation step should the learner perform
+    for ''Create and manage an Azure Container Registry''?'
+  options:
+    A: Skip the operation and edit validation.json to show a passing result.
+    B: Replace the lab action with a tenant-wide change that is easier to discover.
+    C: Inspect CPU, memory, restart policy, events, logs, and current container state.
+    D: Copy resource identifiers from another run instead of recording returned IDs.
+  correctOption: C
+  explanation: 'The lab''s reviewed command path performs this bounded action: Inspect CPU, memory, restart policy, events,
+    logs, and current container state.'
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: 'Correct. The lab''s reviewed command path performs this bounded action: Inspect CPU, memory, restart policy, events,
+      logs, and current container state.'
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-instances/container-instances-container-groups
+  lastVerified: '2026-08-30'
+- id: LAB13-Q27
+  objectiveIds:
+  - CP-CONTAINERS-02
+  difficulty: applied
+  stem: 'During an environment handoff, the receiving team asks this question: Which evidence most directly validates ''Provision
+    a container by using Azure Container Instances'' for Basic container registry?'
+  options:
+    A: Record a credential so another learner can replay the authenticated session.
+    B: Treat the setup exit code as proof of every configuration and relationship.
+    C: List the entire subscription and assume similarly named resources belong to this run.
+    D: Query the exact recorded scope and independently verify Microsoft.ContainerRegistry/registries.
+  correctOption: D
+  explanation: The independent validation path must prove Microsoft.ContainerRegistry/registries for the exact recorded object.
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: Correct. The independent validation path must prove Microsoft.ContainerRegistry/registries for the exact recorded object.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-registry/container-registry-get-started-azure-cli
+  lastVerified: '2026-08-30'
+- id: LAB13-Q28
+  objectiveIds:
+  - CP-CONTAINERS-04
+  difficulty: applied
+  stem: 'A configuration change produces the following operational choice: A learner previews the implementation for ''Manage
+    sizing and scaling for containers, including Azure Container Instances and Azure Container Apps''. What behavior is required?'
+  options:
+    A: Display the context, intended changes, cost and gated branches without mutating Azure.
+    B: Create the baseline immediately and request approval only before cleanup.
+    C: Select the first accessible subscription and hide the resulting context.
+    D: Delete any older resource whose name resembles the new run ID.
+  correctOption: A
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  distractorExplanations:
+    A: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-instances/container-instances-quickstart
+  lastVerified: '2026-08-30'
+- id: LAB13-Q29
+  objectiveIds:
+  - CP-CONTAINERS-01
+  difficulty: applied
+  stem: 'While preparing independent validation, an engineer considers this scenario: Which implementation step should the
+    learner perform for ''Create and manage an Azure Container Registry''?'
+  options:
+    A: Replace the lab action with a tenant-wide change that is easier to discover.
+    B: Inspect CPU, memory, restart policy, events, logs, and current container state.
+    C: Copy resource identifiers from another run instead of recording returned IDs.
+    D: Skip the operation and edit validation.json to show a passing result.
+  correctOption: B
+  explanation: 'The lab''s reviewed command path performs this bounded action: Inspect CPU, memory, restart policy, events,
+    logs, and current container state.'
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: 'Correct. The lab''s reviewed command path performs this bounded action: Inspect CPU, memory, restart policy, events,
+      logs, and current container state.'
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-instances/container-instances-container-groups
+  lastVerified: '2026-08-30'
+- id: LAB13-Q30
+  objectiveIds:
+  - CP-CONTAINERS-02
+  difficulty: applied
+  stem: 'A service owner asks the administrator to resolve this requirement: Which evidence most directly validates ''Provision
+    a container by using Azure Container Instances'' for Basic container registry?'
+  options:
+    A: Treat the setup exit code as proof of every configuration and relationship.
+    B: List the entire subscription and assume similarly named resources belong to this run.
+    C: Query the exact recorded scope and independently verify Microsoft.ContainerRegistry/registries.
+    D: Record a credential so another learner can replay the authenticated session.
+  correctOption: C
+  explanation: The independent validation path must prove Microsoft.ContainerRegistry/registries for the exact recorded object.
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: Correct. The independent validation path must prove Microsoft.ContainerRegistry/registries for the exact recorded object.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-registry/container-registry-get-started-azure-cli
+  lastVerified: '2026-08-30'
+- id: LAB13-Q31
+  objectiveIds:
+  - CP-CONTAINERS-04
+  difficulty: applied
+  stem: 'During a scoped cleanup review, the team evaluates this situation: A learner previews the implementation for ''Manage
+    sizing and scaling for containers, including Azure Container Instances and Azure Container Apps''. What behavior is required?'
+  options:
+    A: Create the baseline immediately and request approval only before cleanup.
+    B: Select the first accessible subscription and hide the resulting context.
+    C: Delete any older resource whose name resembles the new run ID.
+    D: Display the context, intended changes, cost and gated branches without mutating Azure.
+  correctOption: D
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-instances/container-instances-quickstart
+  lastVerified: '2026-08-30'
+- id: LAB13-Q32
+  objectiveIds:
+  - CP-CONTAINERS-01
+  difficulty: applied
+  stem: 'An automation author must choose the correct response to this scenario: Which implementation step should the learner
+    perform for ''Create and manage an Azure Container Registry''?'
+  options:
+    A: Inspect CPU, memory, restart policy, events, logs, and current container state.
+    B: Copy resource identifiers from another run instead of recording returned IDs.
+    C: Skip the operation and edit validation.json to show a passing result.
+    D: Replace the lab action with a tenant-wide change that is easier to discover.
+  correctOption: A
+  explanation: 'The lab''s reviewed command path performs this bounded action: Inspect CPU, memory, restart policy, events,
+    logs, and current container state.'
+  distractorExplanations:
+    A: 'Correct. The lab''s reviewed command path performs this bounded action: Inspect CPU, memory, restart policy, events,
+      logs, and current container state.'
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-instances/container-instances-container-groups
+  lastVerified: '2026-08-30'
+- id: LAB13-Q33
+  objectiveIds:
+  - CP-CONTAINERS-02
+  difficulty: applied
+  stem: 'A lab run with a unique run ID reaches this decision: Which evidence most directly validates ''Provision a container
+    by using Azure Container Instances'' for Basic container registry?'
+  options:
+    A: List the entire subscription and assume similarly named resources belong to this run.
+    B: Query the exact recorded scope and independently verify Microsoft.ContainerRegistry/registries.
+    C: Record a credential so another learner can replay the authenticated session.
+    D: Treat the setup exit code as proof of every configuration and relationship.
+  correctOption: B
+  explanation: The independent validation path must prove Microsoft.ContainerRegistry/registries for the exact recorded object.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: Correct. The independent validation path must prove Microsoft.ContainerRegistry/registries for the exact recorded object.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-registry/container-registry-get-started-azure-cli
+  lastVerified: '2026-08-30'
+- id: LAB13-Q34
+  objectiveIds:
+  - CP-CONTAINERS-04
+  difficulty: applied
+  stem: 'While comparing the intended and actual states, the operator asks this question: A learner previews the implementation
+    for ''Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps''. What behavior
+    is required?'
+  options:
+    A: Select the first accessible subscription and hide the resulting context.
+    B: Delete any older resource whose name resembles the new run ID.
+    C: Display the context, intended changes, cost and gated branches without mutating Azure.
+    D: Create the baseline immediately and request approval only before cleanup.
+  correctOption: C
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-instances/container-instances-quickstart
+  lastVerified: '2026-08-30'
+- id: LAB13-Q35
+  objectiveIds:
+  - CP-CONTAINERS-01
+  difficulty: applied
+  stem: 'A peer reviewer examines the proposed implementation for this scenario: Which implementation step should the learner
+    perform for ''Create and manage an Azure Container Registry''?'
+  options:
+    A: Copy resource identifiers from another run instead of recording returned IDs.
+    B: Skip the operation and edit validation.json to show a passing result.
+    C: Replace the lab action with a tenant-wide change that is easier to discover.
+    D: Inspect CPU, memory, restart policy, events, logs, and current container state.
+  correctOption: D
+  explanation: 'The lab''s reviewed command path performs this bounded action: Inspect CPU, memory, restart policy, events,
+    logs, and current container state.'
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: 'Correct. The lab''s reviewed command path performs this bounded action: Inspect CPU, memory, restart policy, events,
+      logs, and current container state.'
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-instances/container-instances-container-groups
+  lastVerified: '2026-08-30'
+- id: LAB13-Q36
+  objectiveIds:
+  - CP-CONTAINERS-02
+  difficulty: applied
+  stem: 'During a controlled rollout, the change team encounters this requirement: Which evidence most directly validates
+    ''Provision a container by using Azure Container Instances'' for Basic container registry?'
+  options:
+    A: Query the exact recorded scope and independently verify Microsoft.ContainerRegistry/registries.
+    B: Record a credential so another learner can replay the authenticated session.
+    C: Treat the setup exit code as proof of every configuration and relationship.
+    D: List the entire subscription and assume similarly named resources belong to this run.
+  correctOption: A
+  explanation: The independent validation path must prove Microsoft.ContainerRegistry/registries for the exact recorded object.
+  distractorExplanations:
+    A: Correct. The independent validation path must prove Microsoft.ContainerRegistry/registries for the exact recorded object.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-registry/container-registry-get-started-azure-cli
+  lastVerified: '2026-08-30'
+- id: LAB13-Q37
+  objectiveIds:
+  - CP-CONTAINERS-04
+  difficulty: applied
+  stem: 'A support engineer reproduces the following situation in a test environment: A learner previews the implementation
+    for ''Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps''. What behavior
+    is required?'
+  options:
+    A: Delete any older resource whose name resembles the new run ID.
+    B: Display the context, intended changes, cost and gated branches without mutating Azure.
+    C: Create the baseline immediately and request approval only before cleanup.
+    D: Select the first accessible subscription and hide the resulting context.
+  correctOption: B
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-instances/container-instances-quickstart
+  lastVerified: '2026-08-30'
+- id: LAB13-Q38
+  objectiveIds:
+  - CP-CONTAINERS-01
+  difficulty: applied
+  stem: 'While recording validation evidence, the administrator evaluates this question: Which implementation step should
+    the learner perform for ''Create and manage an Azure Container Registry''?'
+  options:
+    A: Skip the operation and edit validation.json to show a passing result.
+    B: Replace the lab action with a tenant-wide change that is easier to discover.
+    C: Inspect CPU, memory, restart policy, events, logs, and current container state.
+    D: Copy resource identifiers from another run instead of recording returned IDs.
+  correctOption: C
+  explanation: 'The lab''s reviewed command path performs this bounded action: Inspect CPU, memory, restart policy, events,
+    logs, and current container state.'
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: 'Correct. The lab''s reviewed command path performs this bounded action: Inspect CPU, memory, restart policy, events,
+      logs, and current container state.'
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-instances/container-instances-container-groups
+  lastVerified: '2026-08-30'
+- id: LAB13-Q39
+  objectiveIds:
+  - CP-CONTAINERS-02
+  difficulty: applied
+  stem: 'A configuration owner must approve one response to this scenario: Which evidence most directly validates ''Provision
+    a container by using Azure Container Instances'' for Basic container registry?'
+  options:
+    A: Record a credential so another learner can replay the authenticated session.
+    B: Treat the setup exit code as proof of every configuration and relationship.
+    C: List the entire subscription and assume similarly named resources belong to this run.
+    D: Query the exact recorded scope and independently verify Microsoft.ContainerRegistry/registries.
+  correctOption: D
+  explanation: The independent validation path must prove Microsoft.ContainerRegistry/registries for the exact recorded object.
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: Correct. The independent validation path must prove Microsoft.ContainerRegistry/registries for the exact recorded object.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-registry/container-registry-get-started-azure-cli
+  lastVerified: '2026-08-30'
+- id: LAB13-Q40
+  objectiveIds:
+  - CP-CONTAINERS-04
+  difficulty: applied
+  stem: 'During post-deployment verification, the team reviews this situation: A learner previews the implementation for ''Manage
+    sizing and scaling for containers, including Azure Container Instances and Azure Container Apps''. What behavior is required?'
+  options:
+    A: Display the context, intended changes, cost and gated branches without mutating Azure.
+    B: Create the baseline immediately and request approval only before cleanup.
+    C: Select the first accessible subscription and hide the resulting context.
+    D: Delete any older resource whose name resembles the new run ID.
+  correctOption: A
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  distractorExplanations:
+    A: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-instances/container-instances-quickstart
+  lastVerified: '2026-08-30'
+- id: LAB13-Q41
   objectiveIds:
   - CP-CONTAINERS-04
   - CP-CONTAINERS-01
   difficulty: advanced
-  stem: Validation for 'Manage sizing and scaling for containers, including Azure Container Instances and Azure
-    Container Apps' fails after setup. What is the best break/fix method?
+  stem: Validation for 'Manage sizing and scaling for containers, including Azure Container Instances and Azure Container
+    Apps' fails after setup. What is the best break/fix method?
+  options:
+    A: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+    B: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+    C: Rerun setup repeatedly with new names until one attempt appears successful.
+    D: Change validation.json directly so the failed result reads pass.
+  correctOption: B
+  explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-registry/container-registry-import-images
+  lastVerified: '2026-08-30'
+- id: LAB13-Q42
+  objectiveIds:
+  - CP-CONTAINERS-04
+  - CP-CONTAINERS-01
+  difficulty: advanced
+  stem: 'During root-cause analysis, the team must resolve this question: Validation for ''Manage sizing and scaling for containers,
+    including Azure Container Instances and Azure Container Apps'' fails after setup. What is the best break/fix method?'
+  options:
+    A: Change validation.json directly so the failed result reads pass.
+    B: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+    C: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+    D: Rerun setup repeatedly with new names until one attempt appears successful.
+  correctOption: C
+  explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-registry/container-registry-import-images
+  lastVerified: '2026-08-30'
+- id: LAB13-Q43
+  objectiveIds:
+  - CP-CONTAINERS-04
+  - CP-CONTAINERS-01
+  difficulty: advanced
+  stem: 'A security and reliability review identifies this design decision: Validation for ''Manage sizing and scaling for
+    containers, including Azure Container Instances and Azure Container Apps'' fails after setup. What is the best break/fix
+    method?'
   options:
     A: Rerun setup repeatedly with new names until one attempt appears successful.
     B: Change validation.json directly so the failed result reads pass.
@@ -129,6 +957,166 @@
     B: This choice skips independent evidence or relies on ambiguous resource identity.
     C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
     D: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-registry/container-registry-import-images
+  lastVerified: '2026-08-30'
+- id: LAB13-Q44
+  objectiveIds:
+  - CP-CONTAINERS-04
+  - CP-CONTAINERS-01
+  difficulty: advanced
+  stem: 'While diagnosing unexpected Azure behavior, the engineer considers this situation: Validation for ''Manage sizing
+    and scaling for containers, including Azure Container Instances and Azure Container Apps'' fails after setup. What is
+    the best break/fix method?'
+  options:
+    A: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+    B: Rerun setup repeatedly with new names until one attempt appears successful.
+    C: Change validation.json directly so the failed result reads pass.
+    D: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+  correctOption: A
+  explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
+  distractorExplanations:
+    A: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-registry/container-registry-import-images
+  lastVerified: '2026-08-30'
+- id: LAB13-Q45
+  objectiveIds:
+  - CP-CONTAINERS-04
+  - CP-CONTAINERS-01
+  difficulty: advanced
+  stem: 'An architecture review requires the strongest response to this scenario: Validation for ''Manage sizing and scaling
+    for containers, including Azure Container Instances and Azure Container Apps'' fails after setup. What is the best break/fix
+    method?'
+  options:
+    A: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+    B: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+    C: Rerun setup repeatedly with new names until one attempt appears successful.
+    D: Change validation.json directly so the failed result reads pass.
+  correctOption: B
+  explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-registry/container-registry-import-images
+  lastVerified: '2026-08-30'
+- id: LAB13-Q46
+  objectiveIds:
+  - CP-CONTAINERS-04
+  - CP-CONTAINERS-01
+  difficulty: advanced
+  stem: 'During break/fix validation, the operator encounters this question: Validation for ''Manage sizing and scaling for
+    containers, including Azure Container Instances and Azure Container Apps'' fails after setup. What is the best break/fix
+    method?'
+  options:
+    A: Change validation.json directly so the failed result reads pass.
+    B: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+    C: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+    D: Rerun setup repeatedly with new names until one attempt appears successful.
+  correctOption: C
+  explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-registry/container-registry-import-images
+  lastVerified: '2026-08-30'
+- id: LAB13-Q47
+  objectiveIds:
+  - CP-CONTAINERS-04
+  - CP-CONTAINERS-01
+  difficulty: advanced
+  stem: 'A complex support case depends on correctly interpreting this requirement: Validation for ''Manage sizing and scaling
+    for containers, including Azure Container Instances and Azure Container Apps'' fails after setup. What is the best break/fix
+    method?'
+  options:
+    A: Rerun setup repeatedly with new names until one attempt appears successful.
+    B: Change validation.json directly so the failed result reads pass.
+    C: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+    D: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+  correctOption: D
+  explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-registry/container-registry-import-images
+  lastVerified: '2026-08-30'
+- id: LAB13-Q48
+  objectiveIds:
+  - CP-CONTAINERS-04
+  - CP-CONTAINERS-01
+  difficulty: advanced
+  stem: 'While correcting configuration drift, the team evaluates this scenario: Validation for ''Manage sizing and scaling
+    for containers, including Azure Container Instances and Azure Container Apps'' fails after setup. What is the best break/fix
+    method?'
+  options:
+    A: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+    B: Rerun setup repeatedly with new names until one attempt appears successful.
+    C: Change validation.json directly so the failed result reads pass.
+    D: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+  correctOption: A
+  explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
+  distractorExplanations:
+    A: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-registry/container-registry-import-images
+  lastVerified: '2026-08-30'
+- id: LAB13-Q49
+  objectiveIds:
+  - CP-CONTAINERS-04
+  - CP-CONTAINERS-01
+  difficulty: advanced
+  stem: 'A recovery exercise exposes the following technical decision: Validation for ''Manage sizing and scaling for containers,
+    including Azure Container Instances and Azure Container Apps'' fails after setup. What is the best break/fix method?'
+  options:
+    A: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+    B: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+    C: Rerun setup repeatedly with new names until one attempt appears successful.
+    D: Change validation.json directly so the failed result reads pass.
+  correctOption: B
+  explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/container-registry/container-registry-import-images
+  lastVerified: '2026-08-30'
+- id: LAB13-Q50
+  objectiveIds:
+  - CP-CONTAINERS-04
+  - CP-CONTAINERS-01
+  difficulty: advanced
+  stem: 'During final design assurance, the reviewer must resolve this situation: Validation for ''Manage sizing and scaling
+    for containers, including Azure Container Instances and Azure Container Apps'' fails after setup. What is the best break/fix
+    method?'
+  options:
+    A: Change validation.json directly so the failed result reads pass.
+    B: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+    C: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+    D: Rerun setup repeatedly with new names until one attempt appears successful.
+  correctOption: C
+  explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/container-registry/container-registry-import-images
   lastVerified: '2026-08-30'

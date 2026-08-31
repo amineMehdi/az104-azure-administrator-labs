@@ -25,21 +25,21 @@ cost:
   - storage account
   - virtual network integration subnet
   - optional custom hostname and TLS binding
-  notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator
-    before execution and clean up immediately.
+  notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator before
+    execution and clean up immediately.
 permissions:
   azureRbacRoles:
-  - Website Contributor, Network Contributor, and Storage Account Contributor; control of the DNS zone and certificate
-    for gated paths
+  - Website Contributor, Network Contributor, and Storage Account Contributor; control of the DNS zone and certificate for
+    gated paths
   entraRoles: []
   graphScopes: []
 prerequisites:
 - A disposable non-production Azure environment
 - An active context that matches the explicitly supplied tenant and subscription
-- 'Authorization boundary: Website Contributor, Network Contributor, and Storage Account Contributor; control of
-  the DNS zone and certificate for gated paths'
-- 'External gate review: Custom DNS and certificate steps require AZ104_CUSTOM_HOSTNAME plus an owned DNS zone and
-  an authorized certificate; they remain gated otherwise.'
+- 'Authorization boundary: Website Contributor, Network Contributor, and Storage Account Contributor; control of the DNS zone
+  and certificate for gated paths'
+- 'External gate review: Custom DNS and certificate steps require AZ104_CUSTOM_HOSTNAME plus an owned DNS zone and an authorized
+  certificate; they remain gated otherwise.'
 - Azure CLI hosted in PowerShell 7.4 or later
 providers:
   observed:
@@ -59,8 +59,8 @@ creates:
   - .state/<run-id>/validation.json
 tenantScopedChanges: []
 externalRequirements:
-- Custom DNS and certificate steps require AZ104_CUSTOM_HOSTNAME plus an owned DNS zone and an authorized certificate;
-  they remain gated otherwise.
+- Custom DNS and certificate steps require AZ104_CUSTOM_HOSTNAME plus an owned DNS zone and an authorized certificate; they
+  remain gated otherwise.
 validation:
   commandLanes:
   - scripts/cli/Validate.ps1
@@ -79,7 +79,7 @@ cleanup:
   residualAuditRequired: true
 assessment:
   enabled: true
-  questionCount: 7
+  questionCount: 50
   primaryDomain: compute
 lastOfflineValidated: '2026-08-30'
 lastLiveVerified: null

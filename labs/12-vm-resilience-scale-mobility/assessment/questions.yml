@@ -5,20 +5,20 @@
   stem: Which principle is most important when working on 'Move a virtual machine to another resource group, subscription,
     or region' in Lab 12?
   options:
-    A: The shortest command is always correct even when it changes a broader scope.
-    B: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-    C: Availability sets, zones, scale sets, and regional moves solve different resilience or mobility problems
-      and have distinct dependency and cost models.
-    D: A recognizable resource name removes the need for validation and scoped cleanup.
-  correctOption: C
-  explanation: 'The lab establishes this design principle: Availability sets, zones, scale sets, and regional moves
-    solve different resilience or mobility problems and have distinct dependency and cost models.'
+    A: Availability sets, zones, scale sets, and regional moves solve different resilience or mobility problems and have distinct
+      dependency and cost models.
+    B: A recognizable resource name removes the need for validation and scoped cleanup.
+    C: The shortest command is always correct even when it changes a broader scope.
+    D: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+  correctOption: A
+  explanation: 'The lab establishes this design principle: Availability sets, zones, scale sets, and regional moves solve
+    different resilience or mobility problems and have distinct dependency and cost models.'
   distractorExplanations:
-    A: This choice changes or trusts a broader scope than the recorded lab boundary.
-    B: This choice skips independent evidence or relies on ambiguous resource identity.
-    C: 'Correct. The lab establishes this design principle: Availability sets, zones, scale sets, and regional moves
-      solve different resilience or mobility problems and have distinct dependency and cost models.'
-    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    A: 'Correct. The lab establishes this design principle: Availability sets, zones, scale sets, and regional moves solve
+      different resilience or mobility problems and have distinct dependency and cost models.'
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/flexible-virtual-machine-scale-sets
   lastVerified: '2026-08-30'
@@ -28,120 +28,900 @@
   difficulty: foundational
   stem: Which lab action directly supports the objective 'Manage virtual machine sizes'?
   options:
-    A: Change the active tenant without displaying or confirming the resulting context.
-    B: Search the whole tenant for a similar display name and modify the first match.
-    C: Mark the objective complete after reading documentation without checking any state.
-    D: Deploy a small flexible orchestration VM scale set with an explicit instance count and upgrade policy.
-  correctOption: D
-  explanation: 'The reviewed hands-on action for this objective is: Deploy a small flexible orchestration VM scale
-    set with an explicit instance count and upgrade policy.'
+    A: Mark the objective complete after reading documentation without checking any state.
+    B: Deploy a small flexible orchestration VM scale set with an explicit instance count and upgrade policy.
+    C: Change the active tenant without displaying or confirming the resulting context.
+    D: Search the whole tenant for a similar display name and modify the first match.
+  correctOption: B
+  explanation: 'The reviewed hands-on action for this objective is: Deploy a small flexible orchestration VM scale set with
+    an explicit instance count and upgrade policy.'
   distractorExplanations:
-    A: This choice changes or trusts a broader scope than the recorded lab boundary.
-    B: This choice skips independent evidence or relies on ambiguous resource identity.
-    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-    D: 'Correct. The reviewed hands-on action for this objective is: Deploy a small flexible orchestration VM scale
-      set with an explicit instance count and upgrade policy.'
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: 'Correct. The reviewed hands-on action for this objective is: Deploy a small flexible orchestration VM scale set with
+      an explicit instance count and upgrade policy.'
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/virtual-machines/availability-set-overview
   lastVerified: '2026-08-30'
 - id: LAB12-Q03
   objectiveIds:
-  - CP-VM-06
-  difficulty: applied
-  stem: A learner previews the implementation for 'Deploy virtual machines to availability zones and availability
-    sets'. What behavior is required?
+  - CP-VM-03
+  difficulty: foundational
+  stem: 'In a fundamentals workshop, the instructor presents this requirement: Which principle is most important when working
+    on ''Move a virtual machine to another resource group, subscription, or region'' in Lab 12?'
   options:
-    A: Display the context, intended changes, cost and gated branches without mutating Azure.
-    B: Create the baseline immediately and request approval only before cleanup.
-    C: Select the first accessible subscription and hide the resulting context.
-    D: Delete any older resource whose name resembles the new run ID.
-  correctOption: A
-  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+    A: The shortest command is always correct even when it changes a broader scope.
+    B: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+    C: Availability sets, zones, scale sets, and regional moves solve different resilience or mobility problems and have distinct
+      dependency and cost models.
+    D: A recognizable resource name removes the need for validation and scoped cleanup.
+  correctOption: C
+  explanation: 'The lab establishes this design principle: Availability sets, zones, scale sets, and regional moves solve
+    different resilience or mobility problems and have distinct dependency and cost models.'
   distractorExplanations:
-    A: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
-    B: This choice changes or trusts a broader scope than the recorded lab boundary.
-    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: 'Correct. The lab establishes this design principle: Availability sets, zones, scale sets, and regional moves solve
+      different resilience or mobility problems and have distinct dependency and cost models.'
     D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
   sourceUrls:
-  - https://learn.microsoft.com/en-us/azure/reliability/availability-zones-overview
+  - https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/flexible-virtual-machine-scale-sets
   lastVerified: '2026-08-30'
 - id: LAB12-Q04
   objectiveIds:
-  - CP-VM-07
-  difficulty: applied
-  stem: Which implementation step should the learner perform for 'Deploy and configure an Azure Virtual Machine
-    Scale Sets'?
+  - CP-VM-04
+  difficulty: foundational
+  stem: 'Before making a change, a learner checks this core behavior: Which lab action directly supports the objective ''Manage
+    virtual machine sizes''?'
   options:
-    A: Replace the lab action with a tenant-wide change that is easier to discover.
-    B: Use move validation for a destination resource group and document the different process required for another
-      region or subscription.
-    C: Copy resource identifiers from another run instead of recording returned IDs.
-    D: Skip the operation and edit validation.json to show a passing result.
-  correctOption: B
-  explanation: 'The lab''s reviewed command path performs this bounded action: Use move validation for a destination
-    resource group and document the different process required for another region or subscription.'
+    A: Change the active tenant without displaying or confirming the resulting context.
+    B: Search the whole tenant for a similar display name and modify the first match.
+    C: Mark the objective complete after reading documentation without checking any state.
+    D: Deploy a small flexible orchestration VM scale set with an explicit instance count and upgrade policy.
+  correctOption: D
+  explanation: 'The reviewed hands-on action for this objective is: Deploy a small flexible orchestration VM scale set with
+    an explicit instance count and upgrade policy.'
   distractorExplanations:
     A: This choice changes or trusts a broader scope than the recorded lab boundary.
-    B: 'Correct. The lab''s reviewed command path performs this bounded action: Use move validation for a destination
-      resource group and document the different process required for another region or subscription.'
-    C: This choice skips independent evidence or relies on ambiguous resource identity.
-    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: 'Correct. The reviewed hands-on action for this objective is: Deploy a small flexible orchestration VM scale set with
+      an explicit instance count and upgrade policy.'
   sourceUrls:
-  - https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/move-resource-group-and-subscription
+  - https://learn.microsoft.com/en-us/azure/virtual-machines/availability-set-overview
   lastVerified: '2026-08-30'
 - id: LAB12-Q05
   objectiveIds:
   - CP-VM-03
-  difficulty: applied
-  stem: Which evidence most directly validates 'Move a virtual machine to another resource group, subscription,
-    or region' for autoscale setting?
+  difficulty: foundational
+  stem: 'During a design vocabulary review, the team evaluates this situation: Which principle is most important when working
+    on ''Move a virtual machine to another resource group, subscription, or region'' in Lab 12?'
   options:
-    A: Treat the setup exit code as proof of every configuration and relationship.
-    B: List the entire subscription and assume similarly named resources belong to this run.
-    C: Query the exact recorded scope and independently verify Microsoft.Compute/virtualMachineScaleSets.
-    D: Record a credential so another learner can replay the authenticated session.
+    A: Availability sets, zones, scale sets, and regional moves solve different resilience or mobility problems and have distinct
+      dependency and cost models.
+    B: A recognizable resource name removes the need for validation and scoped cleanup.
+    C: The shortest command is always correct even when it changes a broader scope.
+    D: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+  correctOption: A
+  explanation: 'The lab establishes this design principle: Availability sets, zones, scale sets, and regional moves solve
+    different resilience or mobility problems and have distinct dependency and cost models.'
+  distractorExplanations:
+    A: 'Correct. The lab establishes this design principle: Availability sets, zones, scale sets, and regional moves solve
+      different resilience or mobility problems and have distinct dependency and cost models.'
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/flexible-virtual-machine-scale-sets
+  lastVerified: '2026-08-30'
+- id: LAB12-Q06
+  objectiveIds:
+  - CP-VM-04
+  difficulty: foundational
+  stem: 'In a command-planning session, an administrator asks this question: Which lab action directly supports the objective
+    ''Manage virtual machine sizes''?'
+  options:
+    A: Mark the objective complete after reading documentation without checking any state.
+    B: Deploy a small flexible orchestration VM scale set with an explicit instance count and upgrade policy.
+    C: Change the active tenant without displaying or confirming the resulting context.
+    D: Search the whole tenant for a similar display name and modify the first match.
+  correctOption: B
+  explanation: 'The reviewed hands-on action for this objective is: Deploy a small flexible orchestration VM scale set with
+    an explicit instance count and upgrade policy.'
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: 'Correct. The reviewed hands-on action for this objective is: Deploy a small flexible orchestration VM scale set with
+      an explicit instance count and upgrade policy.'
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-machines/availability-set-overview
+  lastVerified: '2026-08-30'
+- id: LAB12-Q07
+  objectiveIds:
+  - CP-VM-03
+  difficulty: foundational
+  stem: 'While preparing the lab, a learner verifies this platform rule: Which principle is most important when working on
+    ''Move a virtual machine to another resource group, subscription, or region'' in Lab 12?'
+  options:
+    A: The shortest command is always correct even when it changes a broader scope.
+    B: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+    C: Availability sets, zones, scale sets, and regional moves solve different resilience or mobility problems and have distinct
+      dependency and cost models.
+    D: A recognizable resource name removes the need for validation and scoped cleanup.
   correctOption: C
-  explanation: The independent validation path must prove Microsoft.Compute/virtualMachineScaleSets for the exact
-    recorded object.
+  explanation: 'The lab establishes this design principle: Availability sets, zones, scale sets, and regional moves solve
+    different resilience or mobility problems and have distinct dependency and cost models.'
   distractorExplanations:
     A: This choice changes or trusts a broader scope than the recorded lab boundary.
     B: This choice skips independent evidence or relies on ambiguous resource identity.
-    C: Correct. The independent validation path must prove Microsoft.Compute/virtualMachineScaleSets for the exact
-      recorded object.
+    C: 'Correct. The lab establishes this design principle: Availability sets, zones, scale sets, and regional moves solve
+      different resilience or mobility problems and have distinct dependency and cost models.'
     D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/flexible-virtual-machine-scale-sets
+  lastVerified: '2026-08-30'
+- id: LAB12-Q08
+  objectiveIds:
+  - CP-VM-04
+  difficulty: foundational
+  stem: 'During peer review, the team must identify the accurate response to this scenario: Which lab action directly supports
+    the objective ''Manage virtual machine sizes''?'
+  options:
+    A: Change the active tenant without displaying or confirming the resulting context.
+    B: Search the whole tenant for a similar display name and modify the first match.
+    C: Mark the objective complete after reading documentation without checking any state.
+    D: Deploy a small flexible orchestration VM scale set with an explicit instance count and upgrade policy.
+  correctOption: D
+  explanation: 'The reviewed hands-on action for this objective is: Deploy a small flexible orchestration VM scale set with
+    an explicit instance count and upgrade policy.'
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: 'Correct. The reviewed hands-on action for this objective is: Deploy a small flexible orchestration VM scale set with
+      an explicit instance count and upgrade policy.'
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-machines/availability-set-overview
+  lastVerified: '2026-08-30'
+- id: LAB12-Q09
+  objectiveIds:
+  - CP-VM-03
+  difficulty: foundational
+  stem: 'In an operations briefing, a new team member receives this question: Which principle is most important when working
+    on ''Move a virtual machine to another resource group, subscription, or region'' in Lab 12?'
+  options:
+    A: Availability sets, zones, scale sets, and regional moves solve different resilience or mobility problems and have distinct
+      dependency and cost models.
+    B: A recognizable resource name removes the need for validation and scoped cleanup.
+    C: The shortest command is always correct even when it changes a broader scope.
+    D: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+  correctOption: A
+  explanation: 'The lab establishes this design principle: Availability sets, zones, scale sets, and regional moves solve
+    different resilience or mobility problems and have distinct dependency and cost models.'
+  distractorExplanations:
+    A: 'Correct. The lab establishes this design principle: Availability sets, zones, scale sets, and regional moves solve
+      different resilience or mobility problems and have distinct dependency and cost models.'
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/flexible-virtual-machine-scale-sets
+  lastVerified: '2026-08-30'
+- id: LAB12-Q10
+  objectiveIds:
+  - CP-VM-04
+  difficulty: foundational
+  stem: 'While building a support checklist, an engineer reviews this requirement: Which lab action directly supports the
+    objective ''Manage virtual machine sizes''?'
+  options:
+    A: Mark the objective complete after reading documentation without checking any state.
+    B: Deploy a small flexible orchestration VM scale set with an explicit instance count and upgrade policy.
+    C: Change the active tenant without displaying or confirming the resulting context.
+    D: Search the whole tenant for a similar display name and modify the first match.
+  correctOption: B
+  explanation: 'The reviewed hands-on action for this objective is: Deploy a small flexible orchestration VM scale set with
+    an explicit instance count and upgrade policy.'
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: 'Correct. The reviewed hands-on action for this objective is: Deploy a small flexible orchestration VM scale set with
+      an explicit instance count and upgrade policy.'
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-machines/availability-set-overview
+  lastVerified: '2026-08-30'
+- id: LAB12-Q11
+  objectiveIds:
+  - CP-VM-03
+  difficulty: foundational
+  stem: 'During a readiness check, the administrator considers this behavior: Which principle is most important when working
+    on ''Move a virtual machine to another resource group, subscription, or region'' in Lab 12?'
+  options:
+    A: The shortest command is always correct even when it changes a broader scope.
+    B: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+    C: Availability sets, zones, scale sets, and regional moves solve different resilience or mobility problems and have distinct
+      dependency and cost models.
+    D: A recognizable resource name removes the need for validation and scoped cleanup.
+  correctOption: C
+  explanation: 'The lab establishes this design principle: Availability sets, zones, scale sets, and regional moves solve
+    different resilience or mobility problems and have distinct dependency and cost models.'
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: 'Correct. The lab establishes this design principle: Availability sets, zones, scale sets, and regional moves solve
+      different resilience or mobility problems and have distinct dependency and cost models.'
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/flexible-virtual-machine-scale-sets
+  lastVerified: '2026-08-30'
+- id: LAB12-Q12
+  objectiveIds:
+  - CP-VM-04
+  difficulty: foundational
+  stem: 'In a service overview, the team discusses this scenario: Which lab action directly supports the objective ''Manage
+    virtual machine sizes''?'
+  options:
+    A: Change the active tenant without displaying or confirming the resulting context.
+    B: Search the whole tenant for a similar display name and modify the first match.
+    C: Mark the objective complete after reading documentation without checking any state.
+    D: Deploy a small flexible orchestration VM scale set with an explicit instance count and upgrade policy.
+  correctOption: D
+  explanation: 'The reviewed hands-on action for this objective is: Deploy a small flexible orchestration VM scale set with
+    an explicit instance count and upgrade policy.'
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: 'Correct. The reviewed hands-on action for this objective is: Deploy a small flexible orchestration VM scale set with
+      an explicit instance count and upgrade policy.'
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-machines/availability-set-overview
+  lastVerified: '2026-08-30'
+- id: LAB12-Q13
+  objectiveIds:
+  - CP-VM-03
+  difficulty: foundational
+  stem: 'While reviewing official guidance, a learner must resolve this question: Which principle is most important when working
+    on ''Move a virtual machine to another resource group, subscription, or region'' in Lab 12?'
+  options:
+    A: Availability sets, zones, scale sets, and regional moves solve different resilience or mobility problems and have distinct
+      dependency and cost models.
+    B: A recognizable resource name removes the need for validation and scoped cleanup.
+    C: The shortest command is always correct even when it changes a broader scope.
+    D: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+  correctOption: A
+  explanation: 'The lab establishes this design principle: Availability sets, zones, scale sets, and regional moves solve
+    different resilience or mobility problems and have distinct dependency and cost models.'
+  distractorExplanations:
+    A: 'Correct. The lab establishes this design principle: Availability sets, zones, scale sets, and regional moves solve
+      different resilience or mobility problems and have distinct dependency and cost models.'
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/flexible-virtual-machine-scale-sets
+  lastVerified: '2026-08-30'
+- id: LAB12-Q14
+  objectiveIds:
+  - CP-VM-04
+  difficulty: foundational
+  stem: 'During a configuration walkthrough, the instructor asks about this situation: Which lab action directly supports
+    the objective ''Manage virtual machine sizes''?'
+  options:
+    A: Mark the objective complete after reading documentation without checking any state.
+    B: Deploy a small flexible orchestration VM scale set with an explicit instance count and upgrade policy.
+    C: Change the active tenant without displaying or confirming the resulting context.
+    D: Search the whole tenant for a similar display name and modify the first match.
+  correctOption: B
+  explanation: 'The reviewed hands-on action for this objective is: Deploy a small flexible orchestration VM scale set with
+    an explicit instance count and upgrade policy.'
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: 'Correct. The reviewed hands-on action for this objective is: Deploy a small flexible orchestration VM scale set with
+      an explicit instance count and upgrade policy.'
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-machines/availability-set-overview
+  lastVerified: '2026-08-30'
+- id: LAB12-Q15
+  objectiveIds:
+  - CP-VM-03
+  difficulty: foundational
+  stem: 'In a preflight knowledge check, the operator evaluates this requirement: Which principle is most important when working
+    on ''Move a virtual machine to another resource group, subscription, or region'' in Lab 12?'
+  options:
+    A: The shortest command is always correct even when it changes a broader scope.
+    B: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+    C: Availability sets, zones, scale sets, and regional moves solve different resilience or mobility problems and have distinct
+      dependency and cost models.
+    D: A recognizable resource name removes the need for validation and scoped cleanup.
+  correctOption: C
+  explanation: 'The lab establishes this design principle: Availability sets, zones, scale sets, and regional moves solve
+    different resilience or mobility problems and have distinct dependency and cost models.'
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: 'Correct. The lab establishes this design principle: Availability sets, zones, scale sets, and regional moves solve
+      different resilience or mobility problems and have distinct dependency and cost models.'
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/flexible-virtual-machine-scale-sets
+  lastVerified: '2026-08-30'
+- id: LAB12-Q16
+  objectiveIds:
+  - CP-VM-06
+  difficulty: applied
+  stem: A learner previews the implementation for 'Deploy virtual machines to availability zones and availability sets'. What
+    behavior is required?
+  options:
+    A: Create the baseline immediately and request approval only before cleanup.
+    B: Select the first accessible subscription and hide the resulting context.
+    C: Delete any older resource whose name resembles the new run ID.
+    D: Display the context, intended changes, cost and gated branches without mutating Azure.
+  correctOption: D
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/reliability/availability-zones-overview
+  lastVerified: '2026-08-30'
+- id: LAB12-Q17
+  objectiveIds:
+  - CP-VM-07
+  difficulty: applied
+  stem: Which implementation step should the learner perform for 'Deploy and configure an Azure Virtual Machine Scale Sets'?
+  options:
+    A: Use move validation for a destination resource group and document the different process required for another region
+      or subscription.
+    B: Copy resource identifiers from another run instead of recording returned IDs.
+    C: Skip the operation and edit validation.json to show a passing result.
+    D: Replace the lab action with a tenant-wide change that is easier to discover.
+  correctOption: A
+  explanation: 'The lab''s reviewed command path performs this bounded action: Use move validation for a destination resource
+    group and document the different process required for another region or subscription.'
+  distractorExplanations:
+    A: 'Correct. The lab''s reviewed command path performs this bounded action: Use move validation for a destination resource
+      group and document the different process required for another region or subscription.'
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/move-resource-group-and-subscription
+  lastVerified: '2026-08-30'
+- id: LAB12-Q18
+  objectiveIds:
+  - CP-VM-03
+  difficulty: applied
+  stem: Which evidence most directly validates 'Move a virtual machine to another resource group, subscription, or region'
+    for autoscale setting?
+  options:
+    A: List the entire subscription and assume similarly named resources belong to this run.
+    B: Query the exact recorded scope and independently verify Microsoft.Compute/virtualMachineScaleSets.
+    C: Record a credential so another learner can replay the authenticated session.
+    D: Treat the setup exit code as proof of every configuration and relationship.
+  correctOption: B
+  explanation: The independent validation path must prove Microsoft.Compute/virtualMachineScaleSets for the exact recorded
+    object.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: Correct. The independent validation path must prove Microsoft.Compute/virtualMachineScaleSets for the exact recorded
+      object.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/resource-mover/tutorial-move-region-virtual-machines
   lastVerified: '2026-08-30'
-- id: LAB12-Q06
+- id: LAB12-Q19
   objectiveIds:
   - CP-VM-04
   difficulty: applied
   stem: The 'Manage virtual machine sizes' checkpoint reaches an external prerequisite. What should happen?
   options:
-    A: Invent a domain, notification target, license, quota, or tenant value and continue.
-    B: Broaden permissions until the prerequisite can no longer block the operation.
-    C: Mark the branch passed because its command syntax was checked offline.
-    D: 'Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable
-      subscription.'
+    A: Broaden permissions until the prerequisite can no longer block the operation.
+    B: Mark the branch passed because its command syntax was checked offline.
+    C: 'Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.'
+    D: Invent a domain, notification target, license, quota, or tenant value and continue.
+  correctOption: C
+  explanation: 'Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared
+    role and a disposable subscription.'
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: 'Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared
+      role and a disposable subscription.'
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/flexible-virtual-machine-scale-sets
+  lastVerified: '2026-08-30'
+- id: LAB12-Q20
+  objectiveIds:
+  - CP-VM-06
+  difficulty: applied
+  stem: 'A production runbook must correctly handle this scenario: A learner previews the implementation for ''Deploy virtual
+    machines to availability zones and availability sets''. What behavior is required?'
+  options:
+    A: Create the baseline immediately and request approval only before cleanup.
+    B: Select the first accessible subscription and hide the resulting context.
+    C: Delete any older resource whose name resembles the new run ID.
+    D: Display the context, intended changes, cost and gated branches without mutating Azure.
   correctOption: D
-  explanation: 'Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the
-    declared role and a disposable subscription.'
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
   distractorExplanations:
     A: This choice changes or trusts a broader scope than the recorded lab boundary.
     B: This choice skips independent evidence or relies on ambiguous resource identity.
     C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-    D: 'Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the
-      declared role and a disposable subscription.'
+    D: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/reliability/availability-zones-overview
+  lastVerified: '2026-08-30'
+- id: LAB12-Q21
+  objectiveIds:
+  - CP-VM-07
+  difficulty: applied
+  stem: 'While validating a configuration, the team evaluates this situation: Which implementation step should the learner
+    perform for ''Deploy and configure an Azure Virtual Machine Scale Sets''?'
+  options:
+    A: Use move validation for a destination resource group and document the different process required for another region
+      or subscription.
+    B: Copy resource identifiers from another run instead of recording returned IDs.
+    C: Skip the operation and edit validation.json to show a passing result.
+    D: Replace the lab action with a tenant-wide change that is easier to discover.
+  correctOption: A
+  explanation: 'The lab''s reviewed command path performs this bounded action: Use move validation for a destination resource
+    group and document the different process required for another region or subscription.'
+  distractorExplanations:
+    A: 'Correct. The lab''s reviewed command path performs this bounded action: Use move validation for a destination resource
+      group and document the different process required for another region or subscription.'
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/move-resource-group-and-subscription
+  lastVerified: '2026-08-30'
+- id: LAB12-Q22
+  objectiveIds:
+  - CP-VM-03
+  difficulty: applied
+  stem: 'A delegated administrator receives the following support request: Which evidence most directly validates ''Move a
+    virtual machine to another resource group, subscription, or region'' for autoscale setting?'
+  options:
+    A: List the entire subscription and assume similarly named resources belong to this run.
+    B: Query the exact recorded scope and independently verify Microsoft.Compute/virtualMachineScaleSets.
+    C: Record a credential so another learner can replay the authenticated session.
+    D: Treat the setup exit code as proof of every configuration and relationship.
+  correctOption: B
+  explanation: The independent validation path must prove Microsoft.Compute/virtualMachineScaleSets for the exact recorded
+    object.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: Correct. The independent validation path must prove Microsoft.Compute/virtualMachineScaleSets for the exact recorded
+      object.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/resource-mover/tutorial-move-region-virtual-machines
+  lastVerified: '2026-08-30'
+- id: LAB12-Q23
+  objectiveIds:
+  - CP-VM-04
+  difficulty: applied
+  stem: 'During a maintenance window, an engineer must decide how to respond: The ''Manage virtual machine sizes'' checkpoint
+    reaches an external prerequisite. What should happen?'
+  options:
+    A: Broaden permissions until the prerequisite can no longer block the operation.
+    B: Mark the branch passed because its command syntax was checked offline.
+    C: 'Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.'
+    D: Invent a domain, notification target, license, quota, or tenant value and continue.
+  correctOption: C
+  explanation: 'Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared
+    role and a disposable subscription.'
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: 'Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared
+      role and a disposable subscription.'
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/flexible-virtual-machine-scale-sets
   lastVerified: '2026-08-30'
-- id: LAB12-Q07
+- id: LAB12-Q24
+  objectiveIds:
+  - CP-VM-06
+  difficulty: applied
+  stem: 'A deployment pipeline reaches this decision point: A learner previews the implementation for ''Deploy virtual machines
+    to availability zones and availability sets''. What behavior is required?'
+  options:
+    A: Create the baseline immediately and request approval only before cleanup.
+    B: Select the first accessible subscription and hide the resulting context.
+    C: Delete any older resource whose name resembles the new run ID.
+    D: Display the context, intended changes, cost and gated branches without mutating Azure.
+  correctOption: D
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/reliability/availability-zones-overview
+  lastVerified: '2026-08-30'
+- id: LAB12-Q25
+  objectiveIds:
+  - CP-VM-07
+  difficulty: applied
+  stem: 'While applying least-privilege controls, the administrator reviews this scenario: Which implementation step should
+    the learner perform for ''Deploy and configure an Azure Virtual Machine Scale Sets''?'
+  options:
+    A: Use move validation for a destination resource group and document the different process required for another region
+      or subscription.
+    B: Copy resource identifiers from another run instead of recording returned IDs.
+    C: Skip the operation and edit validation.json to show a passing result.
+    D: Replace the lab action with a tenant-wide change that is easier to discover.
+  correctOption: A
+  explanation: 'The lab''s reviewed command path performs this bounded action: Use move validation for a destination resource
+    group and document the different process required for another region or subscription.'
+  distractorExplanations:
+    A: 'Correct. The lab''s reviewed command path performs this bounded action: Use move validation for a destination resource
+      group and document the different process required for another region or subscription.'
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/move-resource-group-and-subscription
+  lastVerified: '2026-08-30'
+- id: LAB12-Q26
+  objectiveIds:
+  - CP-VM-03
+  difficulty: applied
+  stem: 'A repeatable Azure CLI workflow must address this requirement: Which evidence most directly validates ''Move a virtual
+    machine to another resource group, subscription, or region'' for autoscale setting?'
+  options:
+    A: List the entire subscription and assume similarly named resources belong to this run.
+    B: Query the exact recorded scope and independently verify Microsoft.Compute/virtualMachineScaleSets.
+    C: Record a credential so another learner can replay the authenticated session.
+    D: Treat the setup exit code as proof of every configuration and relationship.
+  correctOption: B
+  explanation: The independent validation path must prove Microsoft.Compute/virtualMachineScaleSets for the exact recorded
+    object.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: Correct. The independent validation path must prove Microsoft.Compute/virtualMachineScaleSets for the exact recorded
+      object.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/resource-mover/tutorial-move-region-virtual-machines
+  lastVerified: '2026-08-30'
+- id: LAB12-Q27
+  objectiveIds:
+  - CP-VM-04
+  difficulty: applied
+  stem: 'During an environment handoff, the receiving team asks this question: The ''Manage virtual machine sizes'' checkpoint
+    reaches an external prerequisite. What should happen?'
+  options:
+    A: Broaden permissions until the prerequisite can no longer block the operation.
+    B: Mark the branch passed because its command syntax was checked offline.
+    C: 'Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.'
+    D: Invent a domain, notification target, license, quota, or tenant value and continue.
+  correctOption: C
+  explanation: 'Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared
+    role and a disposable subscription.'
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: 'Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared
+      role and a disposable subscription.'
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/flexible-virtual-machine-scale-sets
+  lastVerified: '2026-08-30'
+- id: LAB12-Q28
+  objectiveIds:
+  - CP-VM-06
+  difficulty: applied
+  stem: 'A configuration change produces the following operational choice: A learner previews the implementation for ''Deploy
+    virtual machines to availability zones and availability sets''. What behavior is required?'
+  options:
+    A: Create the baseline immediately and request approval only before cleanup.
+    B: Select the first accessible subscription and hide the resulting context.
+    C: Delete any older resource whose name resembles the new run ID.
+    D: Display the context, intended changes, cost and gated branches without mutating Azure.
+  correctOption: D
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/reliability/availability-zones-overview
+  lastVerified: '2026-08-30'
+- id: LAB12-Q29
+  objectiveIds:
+  - CP-VM-07
+  difficulty: applied
+  stem: 'While preparing independent validation, an engineer considers this scenario: Which implementation step should the
+    learner perform for ''Deploy and configure an Azure Virtual Machine Scale Sets''?'
+  options:
+    A: Use move validation for a destination resource group and document the different process required for another region
+      or subscription.
+    B: Copy resource identifiers from another run instead of recording returned IDs.
+    C: Skip the operation and edit validation.json to show a passing result.
+    D: Replace the lab action with a tenant-wide change that is easier to discover.
+  correctOption: A
+  explanation: 'The lab''s reviewed command path performs this bounded action: Use move validation for a destination resource
+    group and document the different process required for another region or subscription.'
+  distractorExplanations:
+    A: 'Correct. The lab''s reviewed command path performs this bounded action: Use move validation for a destination resource
+      group and document the different process required for another region or subscription.'
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/move-resource-group-and-subscription
+  lastVerified: '2026-08-30'
+- id: LAB12-Q30
+  objectiveIds:
+  - CP-VM-03
+  difficulty: applied
+  stem: 'A service owner asks the administrator to resolve this requirement: Which evidence most directly validates ''Move
+    a virtual machine to another resource group, subscription, or region'' for autoscale setting?'
+  options:
+    A: List the entire subscription and assume similarly named resources belong to this run.
+    B: Query the exact recorded scope and independently verify Microsoft.Compute/virtualMachineScaleSets.
+    C: Record a credential so another learner can replay the authenticated session.
+    D: Treat the setup exit code as proof of every configuration and relationship.
+  correctOption: B
+  explanation: The independent validation path must prove Microsoft.Compute/virtualMachineScaleSets for the exact recorded
+    object.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: Correct. The independent validation path must prove Microsoft.Compute/virtualMachineScaleSets for the exact recorded
+      object.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/resource-mover/tutorial-move-region-virtual-machines
+  lastVerified: '2026-08-30'
+- id: LAB12-Q31
+  objectiveIds:
+  - CP-VM-04
+  difficulty: applied
+  stem: 'During a scoped cleanup review, the team evaluates this situation: The ''Manage virtual machine sizes'' checkpoint
+    reaches an external prerequisite. What should happen?'
+  options:
+    A: Broaden permissions until the prerequisite can no longer block the operation.
+    B: Mark the branch passed because its command syntax was checked offline.
+    C: 'Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.'
+    D: Invent a domain, notification target, license, quota, or tenant value and continue.
+  correctOption: C
+  explanation: 'Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared
+    role and a disposable subscription.'
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: 'Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared
+      role and a disposable subscription.'
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/flexible-virtual-machine-scale-sets
+  lastVerified: '2026-08-30'
+- id: LAB12-Q32
+  objectiveIds:
+  - CP-VM-06
+  difficulty: applied
+  stem: 'An automation author must choose the correct response to this scenario: A learner previews the implementation for
+    ''Deploy virtual machines to availability zones and availability sets''. What behavior is required?'
+  options:
+    A: Create the baseline immediately and request approval only before cleanup.
+    B: Select the first accessible subscription and hide the resulting context.
+    C: Delete any older resource whose name resembles the new run ID.
+    D: Display the context, intended changes, cost and gated branches without mutating Azure.
+  correctOption: D
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/reliability/availability-zones-overview
+  lastVerified: '2026-08-30'
+- id: LAB12-Q33
+  objectiveIds:
+  - CP-VM-07
+  difficulty: applied
+  stem: 'A lab run with a unique run ID reaches this decision: Which implementation step should the learner perform for ''Deploy
+    and configure an Azure Virtual Machine Scale Sets''?'
+  options:
+    A: Use move validation for a destination resource group and document the different process required for another region
+      or subscription.
+    B: Copy resource identifiers from another run instead of recording returned IDs.
+    C: Skip the operation and edit validation.json to show a passing result.
+    D: Replace the lab action with a tenant-wide change that is easier to discover.
+  correctOption: A
+  explanation: 'The lab''s reviewed command path performs this bounded action: Use move validation for a destination resource
+    group and document the different process required for another region or subscription.'
+  distractorExplanations:
+    A: 'Correct. The lab''s reviewed command path performs this bounded action: Use move validation for a destination resource
+      group and document the different process required for another region or subscription.'
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/move-resource-group-and-subscription
+  lastVerified: '2026-08-30'
+- id: LAB12-Q34
+  objectiveIds:
+  - CP-VM-03
+  difficulty: applied
+  stem: 'While comparing the intended and actual states, the operator asks this question: Which evidence most directly validates
+    ''Move a virtual machine to another resource group, subscription, or region'' for autoscale setting?'
+  options:
+    A: List the entire subscription and assume similarly named resources belong to this run.
+    B: Query the exact recorded scope and independently verify Microsoft.Compute/virtualMachineScaleSets.
+    C: Record a credential so another learner can replay the authenticated session.
+    D: Treat the setup exit code as proof of every configuration and relationship.
+  correctOption: B
+  explanation: The independent validation path must prove Microsoft.Compute/virtualMachineScaleSets for the exact recorded
+    object.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: Correct. The independent validation path must prove Microsoft.Compute/virtualMachineScaleSets for the exact recorded
+      object.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/resource-mover/tutorial-move-region-virtual-machines
+  lastVerified: '2026-08-30'
+- id: LAB12-Q35
+  objectiveIds:
+  - CP-VM-04
+  difficulty: applied
+  stem: 'A peer reviewer examines the proposed implementation for this scenario: The ''Manage virtual machine sizes'' checkpoint
+    reaches an external prerequisite. What should happen?'
+  options:
+    A: Broaden permissions until the prerequisite can no longer block the operation.
+    B: Mark the branch passed because its command syntax was checked offline.
+    C: 'Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.'
+    D: Invent a domain, notification target, license, quota, or tenant value and continue.
+  correctOption: C
+  explanation: 'Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared
+    role and a disposable subscription.'
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: 'Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared
+      role and a disposable subscription.'
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/flexible-virtual-machine-scale-sets
+  lastVerified: '2026-08-30'
+- id: LAB12-Q36
+  objectiveIds:
+  - CP-VM-06
+  difficulty: applied
+  stem: 'During a controlled rollout, the change team encounters this requirement: A learner previews the implementation for
+    ''Deploy virtual machines to availability zones and availability sets''. What behavior is required?'
+  options:
+    A: Create the baseline immediately and request approval only before cleanup.
+    B: Select the first accessible subscription and hide the resulting context.
+    C: Delete any older resource whose name resembles the new run ID.
+    D: Display the context, intended changes, cost and gated branches without mutating Azure.
+  correctOption: D
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/reliability/availability-zones-overview
+  lastVerified: '2026-08-30'
+- id: LAB12-Q37
+  objectiveIds:
+  - CP-VM-07
+  difficulty: applied
+  stem: 'A support engineer reproduces the following situation in a test environment: Which implementation step should the
+    learner perform for ''Deploy and configure an Azure Virtual Machine Scale Sets''?'
+  options:
+    A: Use move validation for a destination resource group and document the different process required for another region
+      or subscription.
+    B: Copy resource identifiers from another run instead of recording returned IDs.
+    C: Skip the operation and edit validation.json to show a passing result.
+    D: Replace the lab action with a tenant-wide change that is easier to discover.
+  correctOption: A
+  explanation: 'The lab''s reviewed command path performs this bounded action: Use move validation for a destination resource
+    group and document the different process required for another region or subscription.'
+  distractorExplanations:
+    A: 'Correct. The lab''s reviewed command path performs this bounded action: Use move validation for a destination resource
+      group and document the different process required for another region or subscription.'
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/move-resource-group-and-subscription
+  lastVerified: '2026-08-30'
+- id: LAB12-Q38
+  objectiveIds:
+  - CP-VM-03
+  difficulty: applied
+  stem: 'While recording validation evidence, the administrator evaluates this question: Which evidence most directly validates
+    ''Move a virtual machine to another resource group, subscription, or region'' for autoscale setting?'
+  options:
+    A: List the entire subscription and assume similarly named resources belong to this run.
+    B: Query the exact recorded scope and independently verify Microsoft.Compute/virtualMachineScaleSets.
+    C: Record a credential so another learner can replay the authenticated session.
+    D: Treat the setup exit code as proof of every configuration and relationship.
+  correctOption: B
+  explanation: The independent validation path must prove Microsoft.Compute/virtualMachineScaleSets for the exact recorded
+    object.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: Correct. The independent validation path must prove Microsoft.Compute/virtualMachineScaleSets for the exact recorded
+      object.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/resource-mover/tutorial-move-region-virtual-machines
+  lastVerified: '2026-08-30'
+- id: LAB12-Q39
+  objectiveIds:
+  - CP-VM-04
+  difficulty: applied
+  stem: 'A configuration owner must approve one response to this scenario: The ''Manage virtual machine sizes'' checkpoint
+    reaches an external prerequisite. What should happen?'
+  options:
+    A: Broaden permissions until the prerequisite can no longer block the operation.
+    B: Mark the branch passed because its command syntax was checked offline.
+    C: 'Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.'
+    D: Invent a domain, notification target, license, quota, or tenant value and continue.
+  correctOption: C
+  explanation: 'Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared
+    role and a disposable subscription.'
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: 'Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared
+      role and a disposable subscription.'
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/flexible-virtual-machine-scale-sets
+  lastVerified: '2026-08-30'
+- id: LAB12-Q40
+  objectiveIds:
+  - CP-VM-06
+  difficulty: applied
+  stem: 'During post-deployment verification, the team reviews this situation: A learner previews the implementation for ''Deploy
+    virtual machines to availability zones and availability sets''. What behavior is required?'
+  options:
+    A: Create the baseline immediately and request approval only before cleanup.
+    B: Select the first accessible subscription and hide the resulting context.
+    C: Delete any older resource whose name resembles the new run ID.
+    D: Display the context, intended changes, cost and gated branches without mutating Azure.
+  correctOption: D
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/reliability/availability-zones-overview
+  lastVerified: '2026-08-30'
+- id: LAB12-Q41
   objectiveIds:
   - CP-VM-06
   - CP-VM-07
   difficulty: advanced
-  stem: Validation for 'Deploy virtual machines to availability zones and availability sets' fails after setup.
-    What is the best break/fix method?
+  stem: Validation for 'Deploy virtual machines to availability zones and availability sets' fails after setup. What is the
+    best break/fix method?
   options:
     A: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
     B: Rerun setup repeatedly with new names until one attempt appears successful.
@@ -157,17 +937,192 @@
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/virtual-machines/availability-set-overview
   lastVerified: '2026-08-30'
-- id: LAB12-Q08
+- id: LAB12-Q42
   objectiveIds:
   - CP-VM-07
   - CP-VM-03
   difficulty: advanced
-  stem: The operation for 'Deploy and configure an Azure Virtual Machine Scale Sets' is asynchronous or gated. How
-    should completion be recorded?
+  stem: The operation for 'Deploy and configure an Azure Virtual Machine Scale Sets' is asynchronous or gated. How should
+    completion be recorded?
   options:
     A: Record pass as soon as the request is accepted, regardless of its final state.
-    B: Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence
-      exists.
+    B: Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
+    C: Fabricate expected output so the assessment and documentation appear complete.
+    D: Remove the check from validation whenever the service takes longer than expected.
+  correctOption: B
+  explanation: Accepted requests and offline checks do not prove the final live state.
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: Correct. Accepted requests and offline checks do not prove the final live state.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/reliability/availability-zones-overview
+  lastVerified: '2026-08-30'
+- id: LAB12-Q43
+  objectiveIds:
+  - CP-VM-06
+  - CP-VM-07
+  difficulty: advanced
+  stem: 'A security and reliability review identifies this design decision: Validation for ''Deploy virtual machines to availability
+    zones and availability sets'' fails after setup. What is the best break/fix method?'
+  options:
+    A: Change validation.json directly so the failed result reads pass.
+    B: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+    C: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+    D: Rerun setup repeatedly with new names until one attempt appears successful.
+  correctOption: C
+  explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-machines/availability-set-overview
+  lastVerified: '2026-08-30'
+- id: LAB12-Q44
+  objectiveIds:
+  - CP-VM-07
+  - CP-VM-03
+  difficulty: advanced
+  stem: 'While diagnosing unexpected Azure behavior, the engineer considers this situation: The operation for ''Deploy and
+    configure an Azure Virtual Machine Scale Sets'' is asynchronous or gated. How should completion be recorded?'
+  options:
+    A: Fabricate expected output so the assessment and documentation appear complete.
+    B: Remove the check from validation whenever the service takes longer than expected.
+    C: Record pass as soon as the request is accepted, regardless of its final state.
+    D: Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
+  correctOption: D
+  explanation: Accepted requests and offline checks do not prove the final live state.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: Correct. Accepted requests and offline checks do not prove the final live state.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/reliability/availability-zones-overview
+  lastVerified: '2026-08-30'
+- id: LAB12-Q45
+  objectiveIds:
+  - CP-VM-06
+  - CP-VM-07
+  difficulty: advanced
+  stem: 'An architecture review requires the strongest response to this scenario: Validation for ''Deploy virtual machines
+    to availability zones and availability sets'' fails after setup. What is the best break/fix method?'
+  options:
+    A: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+    B: Rerun setup repeatedly with new names until one attempt appears successful.
+    C: Change validation.json directly so the failed result reads pass.
+    D: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+  correctOption: A
+  explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
+  distractorExplanations:
+    A: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-machines/availability-set-overview
+  lastVerified: '2026-08-30'
+- id: LAB12-Q46
+  objectiveIds:
+  - CP-VM-07
+  - CP-VM-03
+  difficulty: advanced
+  stem: 'During break/fix validation, the operator encounters this question: The operation for ''Deploy and configure an Azure
+    Virtual Machine Scale Sets'' is asynchronous or gated. How should completion be recorded?'
+  options:
+    A: Record pass as soon as the request is accepted, regardless of its final state.
+    B: Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
+    C: Fabricate expected output so the assessment and documentation appear complete.
+    D: Remove the check from validation whenever the service takes longer than expected.
+  correctOption: B
+  explanation: Accepted requests and offline checks do not prove the final live state.
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: Correct. Accepted requests and offline checks do not prove the final live state.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/reliability/availability-zones-overview
+  lastVerified: '2026-08-30'
+- id: LAB12-Q47
+  objectiveIds:
+  - CP-VM-06
+  - CP-VM-07
+  difficulty: advanced
+  stem: 'A complex support case depends on correctly interpreting this requirement: Validation for ''Deploy virtual machines
+    to availability zones and availability sets'' fails after setup. What is the best break/fix method?'
+  options:
+    A: Change validation.json directly so the failed result reads pass.
+    B: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+    C: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+    D: Rerun setup repeatedly with new names until one attempt appears successful.
+  correctOption: C
+  explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-machines/availability-set-overview
+  lastVerified: '2026-08-30'
+- id: LAB12-Q48
+  objectiveIds:
+  - CP-VM-07
+  - CP-VM-03
+  difficulty: advanced
+  stem: 'While correcting configuration drift, the team evaluates this scenario: The operation for ''Deploy and configure
+    an Azure Virtual Machine Scale Sets'' is asynchronous or gated. How should completion be recorded?'
+  options:
+    A: Fabricate expected output so the assessment and documentation appear complete.
+    B: Remove the check from validation whenever the service takes longer than expected.
+    C: Record pass as soon as the request is accepted, regardless of its final state.
+    D: Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
+  correctOption: D
+  explanation: Accepted requests and offline checks do not prove the final live state.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: Correct. Accepted requests and offline checks do not prove the final live state.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/reliability/availability-zones-overview
+  lastVerified: '2026-08-30'
+- id: LAB12-Q49
+  objectiveIds:
+  - CP-VM-06
+  - CP-VM-07
+  difficulty: advanced
+  stem: 'A recovery exercise exposes the following technical decision: Validation for ''Deploy virtual machines to availability
+    zones and availability sets'' fails after setup. What is the best break/fix method?'
+  options:
+    A: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+    B: Rerun setup repeatedly with new names until one attempt appears successful.
+    C: Change validation.json directly so the failed result reads pass.
+    D: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+  correctOption: A
+  explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
+  distractorExplanations:
+    A: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-machines/availability-set-overview
+  lastVerified: '2026-08-30'
+- id: LAB12-Q50
+  objectiveIds:
+  - CP-VM-07
+  - CP-VM-03
+  difficulty: advanced
+  stem: 'During final design assurance, the reviewer must resolve this situation: The operation for ''Deploy and configure
+    an Azure Virtual Machine Scale Sets'' is asynchronous or gated. How should completion be recorded?'
+  options:
+    A: Record pass as soon as the request is accepted, regardless of its final state.
+    B: Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
     C: Fabricate expected output so the assessment and documentation appear complete.
     D: Remove the check from validation whenever the service takes longer than expected.
   correctOption: B

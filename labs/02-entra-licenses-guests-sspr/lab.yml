@@ -31,10 +31,10 @@ permissions:
 prerequisites:
 - A disposable non-production Azure environment
 - An active context that matches the explicitly supplied tenant and subscription
-- 'Authorization boundary: User Administrator and License Administrator; Authentication Policy Administrator for
-  the SSPR policy path'
-- 'External gate review: Requires a real disposable guest email for invitation, an available SKU for license assignment,
-  and an authorized tenant policy change for SSPR.'
+- 'Authorization boundary: User Administrator and License Administrator; Authentication Policy Administrator for the SSPR
+  policy path'
+- 'External gate review: Requires a real disposable guest email for invitation, an available SKU for license assignment, and
+  an authorized tenant policy change for SSPR.'
 - Azure CLI hosted in PowerShell 7.4 or later
 providers:
   observed: []
@@ -55,8 +55,8 @@ creates:
   - .state/<run-id>/validation.json
 tenantScopedChanges: *id001
 externalRequirements:
-- Requires a real disposable guest email for invitation, an available SKU for license assignment, and an authorized
-  tenant policy change for SSPR.
+- Requires a real disposable guest email for invitation, an available SKU for license assignment, and an authorized tenant
+  policy change for SSPR.
 validation:
   commandLanes:
   - scripts/cli/Validate.ps1
@@ -75,7 +75,7 @@ cleanup:
   residualAuditRequired: true
 assessment:
   enabled: true
-  questionCount: 10
+  questionCount: 50
   primaryDomain: identity-governance
 lastOfflineValidated: '2026-08-30'
 lastLiveVerified: null

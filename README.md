@@ -114,7 +114,7 @@ Labs can be run locally, in GitHub Codespaces, or in Azure Cloud Shell. Tool ver
 - Pull-request CI never authenticates to Azure.
 - Live verification is based on redacted Azure CLI or PowerShell validation output and cleanup evidence.
 - Mermaid and SVG architecture diagrams are the repository's only instructional visuals.
-- The assessment bank contains exactly 50 questions for each of the five official domains.
+- Every assessment-enabled lab (Labs 01–25) contains exactly 50 questions, for 1,250 questions total.
 
 ## License
 

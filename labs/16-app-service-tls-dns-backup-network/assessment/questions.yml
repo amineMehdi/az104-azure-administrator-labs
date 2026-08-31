@@ -2,24 +2,23 @@
   objectiveIds:
   - CP-APP-04
   difficulty: foundational
-  stem: Which principle is most important when working on 'Configure certificates and Transport Layer Security (TLS)
-    for an App Service' in Lab 16?
+  stem: Which principle is most important when working on 'Configure certificates and Transport Layer Security (TLS) for an
+    App Service' in Lab 16?
   options:
-    A: The shortest command is always correct even when it changes a broader scope.
-    B: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-    C: A recognizable resource name removes the need for validation and scoped cleanup.
-    D: Custom hostnames prove DNS control, certificate bindings prove TLS identity, VNet integration governs outbound
-      connectivity, and backups require protected storage access.
-  correctOption: D
-  explanation: 'The lab establishes this design principle: Custom hostnames prove DNS control, certificate bindings
-    prove TLS identity, VNet integration governs outbound connectivity, and backups require protected storage access.'
+    A: Custom hostnames prove DNS control, certificate bindings prove TLS identity, VNet integration governs outbound connectivity,
+      and backups require protected storage access.
+    B: The shortest command is always correct even when it changes a broader scope.
+    C: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+    D: A recognizable resource name removes the need for validation and scoped cleanup.
+  correctOption: A
+  explanation: 'The lab establishes this design principle: Custom hostnames prove DNS control, certificate bindings prove
+    TLS identity, VNet integration governs outbound connectivity, and backups require protected storage access.'
   distractorExplanations:
-    A: This choice changes or trusts a broader scope than the recorded lab boundary.
-    B: This choice skips independent evidence or relies on ambiguous resource identity.
-    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-    D: 'Correct. The lab establishes this design principle: Custom hostnames prove DNS control, certificate bindings
-      prove TLS identity, VNet integration governs outbound connectivity, and backups require protected storage
-      access.'
+    A: 'Correct. The lab establishes this design principle: Custom hostnames prove DNS control, certificate bindings prove
+      TLS identity, VNet integration governs outbound connectivity, and backups require protected storage access.'
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/app-service/configure-ssl-bindings
   lastVerified: '2026-08-30'
@@ -29,19 +28,19 @@
   difficulty: foundational
   stem: Which lab action directly supports the objective 'Map an existing custom DNS name to an App Service'?
   options:
-    A: Create a delegated integration subnet and configure regional VNet integration.
-    B: Change the active tenant without displaying or confirming the resulting context.
-    C: Search the whole tenant for a similar display name and modify the first match.
-    D: Mark the objective complete after reading documentation without checking any state.
-  correctOption: A
-  explanation: 'The reviewed hands-on action for this objective is: Create a delegated integration subnet and configure
-    regional VNet integration.'
+    A: Mark the objective complete after reading documentation without checking any state.
+    B: Create a delegated integration subnet and configure regional VNet integration.
+    C: Change the active tenant without displaying or confirming the resulting context.
+    D: Search the whole tenant for a similar display name and modify the first match.
+  correctOption: B
+  explanation: 'The reviewed hands-on action for this objective is: Create a delegated integration subnet and configure regional
+    VNet integration.'
   distractorExplanations:
-    A: 'Correct. The reviewed hands-on action for this objective is: Create a delegated integration subnet and configure
-      regional VNet integration.'
-    B: This choice changes or trusts a broader scope than the recorded lab boundary.
-    C: This choice skips independent evidence or relies on ambiguous resource identity.
-    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: 'Correct. The reviewed hands-on action for this objective is: Create a delegated integration subnet and configure regional
+      VNet integration.'
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/app-service/app-service-web-tutorial-custom-domain
   lastVerified: '2026-08-30'
@@ -51,29 +50,377 @@
   difficulty: foundational
   stem: Which authorization approach is appropriate before practicing 'Configure backup for an App Service'?
   options:
-    A: Use a production subscription because its resources already exist.
-    B: 'Confirm the active context and use only the declared role boundary: Website Contributor, Network Contributor,
-      and Storage Account Contributor; control of the DNS zone and certificate for gated paths'
-    C: Assign Global Administrator and subscription Owner for every lab regardless of the operation.
-    D: Skip role checks when the run ID contains the lab number.
-  correctOption: B
-  explanation: 'Least privilege requires the documented boundary: Website Contributor, Network Contributor, and
-    Storage Account Contributor; control of the DNS zone and certificate for gated paths'
-  distractorExplanations:
-    A: This choice changes or trusts a broader scope than the recorded lab boundary.
-    B: 'Correct. Least privilege requires the documented boundary: Website Contributor, Network Contributor, and
+    A: Skip role checks when the run ID contains the lab number.
+    B: Use a production subscription because its resources already exist.
+    C: 'Confirm the active context and use only the declared role boundary: Website Contributor, Network Contributor, and
       Storage Account Contributor; control of the DNS zone and certificate for gated paths'
-    C: This choice skips independent evidence or relies on ambiguous resource identity.
-    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: Assign Global Administrator and subscription Owner for every lab regardless of the operation.
+  correctOption: C
+  explanation: 'Least privilege requires the documented boundary: Website Contributor, Network Contributor, and Storage Account
+    Contributor; control of the DNS zone and certificate for gated paths'
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: 'Correct. Least privilege requires the documented boundary: Website Contributor, Network Contributor, and Storage Account
+      Contributor; control of the DNS zone and certificate for gated paths'
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/app-service/manage-backup
   lastVerified: '2026-08-30'
 - id: LAB16-Q04
   objectiveIds:
+  - CP-APP-04
+  difficulty: foundational
+  stem: 'Before making a change, a learner checks this core behavior: Which principle is most important when working on ''Configure
+    certificates and Transport Layer Security (TLS) for an App Service'' in Lab 16?'
+  options:
+    A: The shortest command is always correct even when it changes a broader scope.
+    B: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+    C: A recognizable resource name removes the need for validation and scoped cleanup.
+    D: Custom hostnames prove DNS control, certificate bindings prove TLS identity, VNet integration governs outbound connectivity,
+      and backups require protected storage access.
+  correctOption: D
+  explanation: 'The lab establishes this design principle: Custom hostnames prove DNS control, certificate bindings prove
+    TLS identity, VNet integration governs outbound connectivity, and backups require protected storage access.'
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: 'Correct. The lab establishes this design principle: Custom hostnames prove DNS control, certificate bindings prove
+      TLS identity, VNet integration governs outbound connectivity, and backups require protected storage access.'
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/configure-ssl-bindings
+  lastVerified: '2026-08-30'
+- id: LAB16-Q05
+  objectiveIds:
+  - CP-APP-05
+  difficulty: foundational
+  stem: 'During a design vocabulary review, the team evaluates this situation: Which lab action directly supports the objective
+    ''Map an existing custom DNS name to an App Service''?'
+  options:
+    A: Create a delegated integration subnet and configure regional VNet integration.
+    B: Change the active tenant without displaying or confirming the resulting context.
+    C: Search the whole tenant for a similar display name and modify the first match.
+    D: Mark the objective complete after reading documentation without checking any state.
+  correctOption: A
+  explanation: 'The reviewed hands-on action for this objective is: Create a delegated integration subnet and configure regional
+    VNet integration.'
+  distractorExplanations:
+    A: 'Correct. The reviewed hands-on action for this objective is: Create a delegated integration subnet and configure regional
+      VNet integration.'
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/app-service-web-tutorial-custom-domain
+  lastVerified: '2026-08-30'
+- id: LAB16-Q06
+  objectiveIds:
+  - CP-APP-06
+  difficulty: foundational
+  stem: 'In a command-planning session, an administrator asks this question: Which authorization approach is appropriate before
+    practicing ''Configure backup for an App Service''?'
+  options:
+    A: Use a production subscription because its resources already exist.
+    B: 'Confirm the active context and use only the declared role boundary: Website Contributor, Network Contributor, and
+      Storage Account Contributor; control of the DNS zone and certificate for gated paths'
+    C: Assign Global Administrator and subscription Owner for every lab regardless of the operation.
+    D: Skip role checks when the run ID contains the lab number.
+  correctOption: B
+  explanation: 'Least privilege requires the documented boundary: Website Contributor, Network Contributor, and Storage Account
+    Contributor; control of the DNS zone and certificate for gated paths'
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: 'Correct. Least privilege requires the documented boundary: Website Contributor, Network Contributor, and Storage Account
+      Contributor; control of the DNS zone and certificate for gated paths'
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/manage-backup
+  lastVerified: '2026-08-30'
+- id: LAB16-Q07
+  objectiveIds:
+  - CP-APP-04
+  difficulty: foundational
+  stem: 'While preparing the lab, a learner verifies this platform rule: Which principle is most important when working on
+    ''Configure certificates and Transport Layer Security (TLS) for an App Service'' in Lab 16?'
+  options:
+    A: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+    B: A recognizable resource name removes the need for validation and scoped cleanup.
+    C: Custom hostnames prove DNS control, certificate bindings prove TLS identity, VNet integration governs outbound connectivity,
+      and backups require protected storage access.
+    D: The shortest command is always correct even when it changes a broader scope.
+  correctOption: C
+  explanation: 'The lab establishes this design principle: Custom hostnames prove DNS control, certificate bindings prove
+    TLS identity, VNet integration governs outbound connectivity, and backups require protected storage access.'
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: 'Correct. The lab establishes this design principle: Custom hostnames prove DNS control, certificate bindings prove
+      TLS identity, VNet integration governs outbound connectivity, and backups require protected storage access.'
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/configure-ssl-bindings
+  lastVerified: '2026-08-30'
+- id: LAB16-Q08
+  objectiveIds:
+  - CP-APP-05
+  difficulty: foundational
+  stem: 'During peer review, the team must identify the accurate response to this scenario: Which lab action directly supports
+    the objective ''Map an existing custom DNS name to an App Service''?'
+  options:
+    A: Change the active tenant without displaying or confirming the resulting context.
+    B: Search the whole tenant for a similar display name and modify the first match.
+    C: Mark the objective complete after reading documentation without checking any state.
+    D: Create a delegated integration subnet and configure regional VNet integration.
+  correctOption: D
+  explanation: 'The reviewed hands-on action for this objective is: Create a delegated integration subnet and configure regional
+    VNet integration.'
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: 'Correct. The reviewed hands-on action for this objective is: Create a delegated integration subnet and configure regional
+      VNet integration.'
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/app-service-web-tutorial-custom-domain
+  lastVerified: '2026-08-30'
+- id: LAB16-Q09
+  objectiveIds:
+  - CP-APP-06
+  difficulty: foundational
+  stem: 'In an operations briefing, a new team member receives this question: Which authorization approach is appropriate
+    before practicing ''Configure backup for an App Service''?'
+  options:
+    A: 'Confirm the active context and use only the declared role boundary: Website Contributor, Network Contributor, and
+      Storage Account Contributor; control of the DNS zone and certificate for gated paths'
+    B: Assign Global Administrator and subscription Owner for every lab regardless of the operation.
+    C: Skip role checks when the run ID contains the lab number.
+    D: Use a production subscription because its resources already exist.
+  correctOption: A
+  explanation: 'Least privilege requires the documented boundary: Website Contributor, Network Contributor, and Storage Account
+    Contributor; control of the DNS zone and certificate for gated paths'
+  distractorExplanations:
+    A: 'Correct. Least privilege requires the documented boundary: Website Contributor, Network Contributor, and Storage Account
+      Contributor; control of the DNS zone and certificate for gated paths'
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/manage-backup
+  lastVerified: '2026-08-30'
+- id: LAB16-Q10
+  objectiveIds:
+  - CP-APP-04
+  difficulty: foundational
+  stem: 'While building a support checklist, an engineer reviews this requirement: Which principle is most important when
+    working on ''Configure certificates and Transport Layer Security (TLS) for an App Service'' in Lab 16?'
+  options:
+    A: A recognizable resource name removes the need for validation and scoped cleanup.
+    B: Custom hostnames prove DNS control, certificate bindings prove TLS identity, VNet integration governs outbound connectivity,
+      and backups require protected storage access.
+    C: The shortest command is always correct even when it changes a broader scope.
+    D: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+  correctOption: B
+  explanation: 'The lab establishes this design principle: Custom hostnames prove DNS control, certificate bindings prove
+    TLS identity, VNet integration governs outbound connectivity, and backups require protected storage access.'
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: 'Correct. The lab establishes this design principle: Custom hostnames prove DNS control, certificate bindings prove
+      TLS identity, VNet integration governs outbound connectivity, and backups require protected storage access.'
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/configure-ssl-bindings
+  lastVerified: '2026-08-30'
+- id: LAB16-Q11
+  objectiveIds:
+  - CP-APP-05
+  difficulty: foundational
+  stem: 'During a readiness check, the administrator considers this behavior: Which lab action directly supports the objective
+    ''Map an existing custom DNS name to an App Service''?'
+  options:
+    A: Search the whole tenant for a similar display name and modify the first match.
+    B: Mark the objective complete after reading documentation without checking any state.
+    C: Create a delegated integration subnet and configure regional VNet integration.
+    D: Change the active tenant without displaying or confirming the resulting context.
+  correctOption: C
+  explanation: 'The reviewed hands-on action for this objective is: Create a delegated integration subnet and configure regional
+    VNet integration.'
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: 'Correct. The reviewed hands-on action for this objective is: Create a delegated integration subnet and configure regional
+      VNet integration.'
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/app-service-web-tutorial-custom-domain
+  lastVerified: '2026-08-30'
+- id: LAB16-Q12
+  objectiveIds:
+  - CP-APP-06
+  difficulty: foundational
+  stem: 'In a service overview, the team discusses this scenario: Which authorization approach is appropriate before practicing
+    ''Configure backup for an App Service''?'
+  options:
+    A: Assign Global Administrator and subscription Owner for every lab regardless of the operation.
+    B: Skip role checks when the run ID contains the lab number.
+    C: Use a production subscription because its resources already exist.
+    D: 'Confirm the active context and use only the declared role boundary: Website Contributor, Network Contributor, and
+      Storage Account Contributor; control of the DNS zone and certificate for gated paths'
+  correctOption: D
+  explanation: 'Least privilege requires the documented boundary: Website Contributor, Network Contributor, and Storage Account
+    Contributor; control of the DNS zone and certificate for gated paths'
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: 'Correct. Least privilege requires the documented boundary: Website Contributor, Network Contributor, and Storage Account
+      Contributor; control of the DNS zone and certificate for gated paths'
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/manage-backup
+  lastVerified: '2026-08-30'
+- id: LAB16-Q13
+  objectiveIds:
+  - CP-APP-04
+  difficulty: foundational
+  stem: 'While reviewing official guidance, a learner must resolve this question: Which principle is most important when working
+    on ''Configure certificates and Transport Layer Security (TLS) for an App Service'' in Lab 16?'
+  options:
+    A: Custom hostnames prove DNS control, certificate bindings prove TLS identity, VNet integration governs outbound connectivity,
+      and backups require protected storage access.
+    B: The shortest command is always correct even when it changes a broader scope.
+    C: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+    D: A recognizable resource name removes the need for validation and scoped cleanup.
+  correctOption: A
+  explanation: 'The lab establishes this design principle: Custom hostnames prove DNS control, certificate bindings prove
+    TLS identity, VNet integration governs outbound connectivity, and backups require protected storage access.'
+  distractorExplanations:
+    A: 'Correct. The lab establishes this design principle: Custom hostnames prove DNS control, certificate bindings prove
+      TLS identity, VNet integration governs outbound connectivity, and backups require protected storage access.'
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/configure-ssl-bindings
+  lastVerified: '2026-08-30'
+- id: LAB16-Q14
+  objectiveIds:
+  - CP-APP-05
+  difficulty: foundational
+  stem: 'During a configuration walkthrough, the instructor asks about this situation: Which lab action directly supports
+    the objective ''Map an existing custom DNS name to an App Service''?'
+  options:
+    A: Mark the objective complete after reading documentation without checking any state.
+    B: Create a delegated integration subnet and configure regional VNet integration.
+    C: Change the active tenant without displaying or confirming the resulting context.
+    D: Search the whole tenant for a similar display name and modify the first match.
+  correctOption: B
+  explanation: 'The reviewed hands-on action for this objective is: Create a delegated integration subnet and configure regional
+    VNet integration.'
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: 'Correct. The reviewed hands-on action for this objective is: Create a delegated integration subnet and configure regional
+      VNet integration.'
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/app-service-web-tutorial-custom-domain
+  lastVerified: '2026-08-30'
+- id: LAB16-Q15
+  objectiveIds:
+  - CP-APP-06
+  difficulty: foundational
+  stem: 'In a preflight knowledge check, the operator evaluates this requirement: Which authorization approach is appropriate
+    before practicing ''Configure backup for an App Service''?'
+  options:
+    A: Skip role checks when the run ID contains the lab number.
+    B: Use a production subscription because its resources already exist.
+    C: 'Confirm the active context and use only the declared role boundary: Website Contributor, Network Contributor, and
+      Storage Account Contributor; control of the DNS zone and certificate for gated paths'
+    D: Assign Global Administrator and subscription Owner for every lab regardless of the operation.
+  correctOption: C
+  explanation: 'Least privilege requires the documented boundary: Website Contributor, Network Contributor, and Storage Account
+    Contributor; control of the DNS zone and certificate for gated paths'
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: 'Correct. Least privilege requires the documented boundary: Website Contributor, Network Contributor, and Storage Account
+      Contributor; control of the DNS zone and certificate for gated paths'
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/manage-backup
+  lastVerified: '2026-08-30'
+- id: LAB16-Q16
+  objectiveIds:
   - CP-APP-07
   difficulty: applied
-  stem: A learner previews the implementation for 'Configure networking settings for an App Service'. What behavior
-    is required?
+  stem: A learner previews the implementation for 'Configure networking settings for an App Service'. What behavior is required?
+  options:
+    A: Delete any older resource whose name resembles the new run ID.
+    B: Create the baseline immediately and request approval only before cleanup.
+    C: Select the first accessible subscription and hide the resulting context.
+    D: Display the context, intended changes, cost and gated branches without mutating Azure.
+  correctOption: D
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/overview-vnet-integration
+  lastVerified: '2026-08-30'
+- id: LAB16-Q17
+  objectiveIds:
+  - CP-APP-04
+  difficulty: applied
+  stem: Which implementation step should the learner perform for 'Configure certificates and Transport Layer Security (TLS)
+    for an App Service'?
+  options:
+    A: Create an App Service plan and web app with HTTPS-only and minimum TLS 1.2.
+    B: Replace the lab action with a tenant-wide change that is easier to discover.
+    C: Copy resource identifiers from another run instead of recording returned IDs.
+    D: Skip the operation and edit validation.json to show a passing result.
+  correctOption: A
+  explanation: 'The lab''s reviewed command path performs this bounded action: Create an App Service plan and web app with
+    HTTPS-only and minimum TLS 1.2.'
+  distractorExplanations:
+    A: 'Correct. The lab''s reviewed command path performs this bounded action: Create an App Service plan and web app with
+      HTTPS-only and minimum TLS 1.2.'
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/configure-ssl-bindings
+  lastVerified: '2026-08-30'
+- id: LAB16-Q18
+  objectiveIds:
+  - CP-APP-05
+  difficulty: applied
+  stem: Which evidence most directly validates 'Map an existing custom DNS name to an App Service' for optional custom hostname
+    and TLS binding?
+  options:
+    A: Record a credential so another learner can replay the authenticated session.
+    B: Query the exact recorded scope and independently verify Microsoft.Web/sites.
+    C: Treat the setup exit code as proof of every configuration and relationship.
+    D: List the entire subscription and assume similarly named resources belong to this run.
+  correctOption: B
+  explanation: The independent validation path must prove Microsoft.Web/sites for the exact recorded object.
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: Correct. The independent validation path must prove Microsoft.Web/sites for the exact recorded object.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/app-service-web-tutorial-custom-domain
+  lastVerified: '2026-08-30'
+- id: LAB16-Q19
+  objectiveIds:
+  - CP-APP-07
+  difficulty: applied
+  stem: 'During an implementation review, the operator considers this requirement: A learner previews the implementation for
+    ''Configure networking settings for an App Service''. What behavior is required?'
   options:
     A: Create the baseline immediately and request approval only before cleanup.
     B: Select the first accessible subscription and hide the resulting context.
@@ -89,35 +436,35 @@
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/app-service/overview-vnet-integration
   lastVerified: '2026-08-30'
-- id: LAB16-Q05
+- id: LAB16-Q20
   objectiveIds:
   - CP-APP-04
   difficulty: applied
-  stem: Which implementation step should the learner perform for 'Configure certificates and Transport Layer Security
-    (TLS) for an App Service'?
+  stem: 'A production runbook must correctly handle this scenario: Which implementation step should the learner perform for
+    ''Configure certificates and Transport Layer Security (TLS) for an App Service''?'
   options:
     A: Replace the lab action with a tenant-wide change that is easier to discover.
     B: Copy resource identifiers from another run instead of recording returned IDs.
     C: Skip the operation and edit validation.json to show a passing result.
     D: Create an App Service plan and web app with HTTPS-only and minimum TLS 1.2.
   correctOption: D
-  explanation: 'The lab''s reviewed command path performs this bounded action: Create an App Service plan and web
-    app with HTTPS-only and minimum TLS 1.2.'
+  explanation: 'The lab''s reviewed command path performs this bounded action: Create an App Service plan and web app with
+    HTTPS-only and minimum TLS 1.2.'
   distractorExplanations:
     A: This choice changes or trusts a broader scope than the recorded lab boundary.
     B: This choice skips independent evidence or relies on ambiguous resource identity.
     C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-    D: 'Correct. The lab''s reviewed command path performs this bounded action: Create an App Service plan and web
-      app with HTTPS-only and minimum TLS 1.2.'
+    D: 'Correct. The lab''s reviewed command path performs this bounded action: Create an App Service plan and web app with
+      HTTPS-only and minimum TLS 1.2.'
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/app-service/configure-ssl-bindings
   lastVerified: '2026-08-30'
-- id: LAB16-Q06
+- id: LAB16-Q21
   objectiveIds:
   - CP-APP-05
   difficulty: applied
-  stem: Which evidence most directly validates 'Map an existing custom DNS name to an App Service' for optional
-    custom hostname and TLS binding?
+  stem: 'While validating a configuration, the team evaluates this situation: Which evidence most directly validates ''Map
+    an existing custom DNS name to an App Service'' for optional custom hostname and TLS binding?'
   options:
     A: Query the exact recorded scope and independently verify Microsoft.Web/sites.
     B: Treat the setup exit code as proof of every configuration and relationship.
@@ -133,12 +480,621 @@
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/app-service/app-service-web-tutorial-custom-domain
   lastVerified: '2026-08-30'
-- id: LAB16-Q07
+- id: LAB16-Q22
+  objectiveIds:
+  - CP-APP-07
+  difficulty: applied
+  stem: 'A delegated administrator receives the following support request: A learner previews the implementation for ''Configure
+    networking settings for an App Service''. What behavior is required?'
+  options:
+    A: Select the first accessible subscription and hide the resulting context.
+    B: Display the context, intended changes, cost and gated branches without mutating Azure.
+    C: Delete any older resource whose name resembles the new run ID.
+    D: Create the baseline immediately and request approval only before cleanup.
+  correctOption: B
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/overview-vnet-integration
+  lastVerified: '2026-08-30'
+- id: LAB16-Q23
+  objectiveIds:
+  - CP-APP-04
+  difficulty: applied
+  stem: 'During a maintenance window, an engineer must decide how to respond: Which implementation step should the learner
+    perform for ''Configure certificates and Transport Layer Security (TLS) for an App Service''?'
+  options:
+    A: Copy resource identifiers from another run instead of recording returned IDs.
+    B: Skip the operation and edit validation.json to show a passing result.
+    C: Create an App Service plan and web app with HTTPS-only and minimum TLS 1.2.
+    D: Replace the lab action with a tenant-wide change that is easier to discover.
+  correctOption: C
+  explanation: 'The lab''s reviewed command path performs this bounded action: Create an App Service plan and web app with
+    HTTPS-only and minimum TLS 1.2.'
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: 'Correct. The lab''s reviewed command path performs this bounded action: Create an App Service plan and web app with
+      HTTPS-only and minimum TLS 1.2.'
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/configure-ssl-bindings
+  lastVerified: '2026-08-30'
+- id: LAB16-Q24
+  objectiveIds:
+  - CP-APP-05
+  difficulty: applied
+  stem: 'A deployment pipeline reaches this decision point: Which evidence most directly validates ''Map an existing custom
+    DNS name to an App Service'' for optional custom hostname and TLS binding?'
+  options:
+    A: Treat the setup exit code as proof of every configuration and relationship.
+    B: List the entire subscription and assume similarly named resources belong to this run.
+    C: Record a credential so another learner can replay the authenticated session.
+    D: Query the exact recorded scope and independently verify Microsoft.Web/sites.
+  correctOption: D
+  explanation: The independent validation path must prove Microsoft.Web/sites for the exact recorded object.
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: Correct. The independent validation path must prove Microsoft.Web/sites for the exact recorded object.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/app-service-web-tutorial-custom-domain
+  lastVerified: '2026-08-30'
+- id: LAB16-Q25
+  objectiveIds:
+  - CP-APP-07
+  difficulty: applied
+  stem: 'While applying least-privilege controls, the administrator reviews this scenario: A learner previews the implementation
+    for ''Configure networking settings for an App Service''. What behavior is required?'
+  options:
+    A: Display the context, intended changes, cost and gated branches without mutating Azure.
+    B: Delete any older resource whose name resembles the new run ID.
+    C: Create the baseline immediately and request approval only before cleanup.
+    D: Select the first accessible subscription and hide the resulting context.
+  correctOption: A
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  distractorExplanations:
+    A: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/overview-vnet-integration
+  lastVerified: '2026-08-30'
+- id: LAB16-Q26
+  objectiveIds:
+  - CP-APP-04
+  difficulty: applied
+  stem: 'A repeatable Azure CLI workflow must address this requirement: Which implementation step should the learner perform
+    for ''Configure certificates and Transport Layer Security (TLS) for an App Service''?'
+  options:
+    A: Skip the operation and edit validation.json to show a passing result.
+    B: Create an App Service plan and web app with HTTPS-only and minimum TLS 1.2.
+    C: Replace the lab action with a tenant-wide change that is easier to discover.
+    D: Copy resource identifiers from another run instead of recording returned IDs.
+  correctOption: B
+  explanation: 'The lab''s reviewed command path performs this bounded action: Create an App Service plan and web app with
+    HTTPS-only and minimum TLS 1.2.'
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: 'Correct. The lab''s reviewed command path performs this bounded action: Create an App Service plan and web app with
+      HTTPS-only and minimum TLS 1.2.'
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/configure-ssl-bindings
+  lastVerified: '2026-08-30'
+- id: LAB16-Q27
+  objectiveIds:
+  - CP-APP-05
+  difficulty: applied
+  stem: 'During an environment handoff, the receiving team asks this question: Which evidence most directly validates ''Map
+    an existing custom DNS name to an App Service'' for optional custom hostname and TLS binding?'
+  options:
+    A: List the entire subscription and assume similarly named resources belong to this run.
+    B: Record a credential so another learner can replay the authenticated session.
+    C: Query the exact recorded scope and independently verify Microsoft.Web/sites.
+    D: Treat the setup exit code as proof of every configuration and relationship.
+  correctOption: C
+  explanation: The independent validation path must prove Microsoft.Web/sites for the exact recorded object.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: Correct. The independent validation path must prove Microsoft.Web/sites for the exact recorded object.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/app-service-web-tutorial-custom-domain
+  lastVerified: '2026-08-30'
+- id: LAB16-Q28
+  objectiveIds:
+  - CP-APP-07
+  difficulty: applied
+  stem: 'A configuration change produces the following operational choice: A learner previews the implementation for ''Configure
+    networking settings for an App Service''. What behavior is required?'
+  options:
+    A: Delete any older resource whose name resembles the new run ID.
+    B: Create the baseline immediately and request approval only before cleanup.
+    C: Select the first accessible subscription and hide the resulting context.
+    D: Display the context, intended changes, cost and gated branches without mutating Azure.
+  correctOption: D
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/overview-vnet-integration
+  lastVerified: '2026-08-30'
+- id: LAB16-Q29
+  objectiveIds:
+  - CP-APP-04
+  difficulty: applied
+  stem: 'While preparing independent validation, an engineer considers this scenario: Which implementation step should the
+    learner perform for ''Configure certificates and Transport Layer Security (TLS) for an App Service''?'
+  options:
+    A: Create an App Service plan and web app with HTTPS-only and minimum TLS 1.2.
+    B: Replace the lab action with a tenant-wide change that is easier to discover.
+    C: Copy resource identifiers from another run instead of recording returned IDs.
+    D: Skip the operation and edit validation.json to show a passing result.
+  correctOption: A
+  explanation: 'The lab''s reviewed command path performs this bounded action: Create an App Service plan and web app with
+    HTTPS-only and minimum TLS 1.2.'
+  distractorExplanations:
+    A: 'Correct. The lab''s reviewed command path performs this bounded action: Create an App Service plan and web app with
+      HTTPS-only and minimum TLS 1.2.'
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/configure-ssl-bindings
+  lastVerified: '2026-08-30'
+- id: LAB16-Q30
+  objectiveIds:
+  - CP-APP-05
+  difficulty: applied
+  stem: 'A service owner asks the administrator to resolve this requirement: Which evidence most directly validates ''Map
+    an existing custom DNS name to an App Service'' for optional custom hostname and TLS binding?'
+  options:
+    A: Record a credential so another learner can replay the authenticated session.
+    B: Query the exact recorded scope and independently verify Microsoft.Web/sites.
+    C: Treat the setup exit code as proof of every configuration and relationship.
+    D: List the entire subscription and assume similarly named resources belong to this run.
+  correctOption: B
+  explanation: The independent validation path must prove Microsoft.Web/sites for the exact recorded object.
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: Correct. The independent validation path must prove Microsoft.Web/sites for the exact recorded object.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/app-service-web-tutorial-custom-domain
+  lastVerified: '2026-08-30'
+- id: LAB16-Q31
+  objectiveIds:
+  - CP-APP-07
+  difficulty: applied
+  stem: 'During a scoped cleanup review, the team evaluates this situation: A learner previews the implementation for ''Configure
+    networking settings for an App Service''. What behavior is required?'
+  options:
+    A: Create the baseline immediately and request approval only before cleanup.
+    B: Select the first accessible subscription and hide the resulting context.
+    C: Display the context, intended changes, cost and gated branches without mutating Azure.
+    D: Delete any older resource whose name resembles the new run ID.
+  correctOption: C
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/overview-vnet-integration
+  lastVerified: '2026-08-30'
+- id: LAB16-Q32
+  objectiveIds:
+  - CP-APP-04
+  difficulty: applied
+  stem: 'An automation author must choose the correct response to this scenario: Which implementation step should the learner
+    perform for ''Configure certificates and Transport Layer Security (TLS) for an App Service''?'
+  options:
+    A: Replace the lab action with a tenant-wide change that is easier to discover.
+    B: Copy resource identifiers from another run instead of recording returned IDs.
+    C: Skip the operation and edit validation.json to show a passing result.
+    D: Create an App Service plan and web app with HTTPS-only and minimum TLS 1.2.
+  correctOption: D
+  explanation: 'The lab''s reviewed command path performs this bounded action: Create an App Service plan and web app with
+    HTTPS-only and minimum TLS 1.2.'
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: 'Correct. The lab''s reviewed command path performs this bounded action: Create an App Service plan and web app with
+      HTTPS-only and minimum TLS 1.2.'
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/configure-ssl-bindings
+  lastVerified: '2026-08-30'
+- id: LAB16-Q33
+  objectiveIds:
+  - CP-APP-05
+  difficulty: applied
+  stem: 'A lab run with a unique run ID reaches this decision: Which evidence most directly validates ''Map an existing custom
+    DNS name to an App Service'' for optional custom hostname and TLS binding?'
+  options:
+    A: Query the exact recorded scope and independently verify Microsoft.Web/sites.
+    B: Treat the setup exit code as proof of every configuration and relationship.
+    C: List the entire subscription and assume similarly named resources belong to this run.
+    D: Record a credential so another learner can replay the authenticated session.
+  correctOption: A
+  explanation: The independent validation path must prove Microsoft.Web/sites for the exact recorded object.
+  distractorExplanations:
+    A: Correct. The independent validation path must prove Microsoft.Web/sites for the exact recorded object.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/app-service-web-tutorial-custom-domain
+  lastVerified: '2026-08-30'
+- id: LAB16-Q34
+  objectiveIds:
+  - CP-APP-07
+  difficulty: applied
+  stem: 'While comparing the intended and actual states, the operator asks this question: A learner previews the implementation
+    for ''Configure networking settings for an App Service''. What behavior is required?'
+  options:
+    A: Select the first accessible subscription and hide the resulting context.
+    B: Display the context, intended changes, cost and gated branches without mutating Azure.
+    C: Delete any older resource whose name resembles the new run ID.
+    D: Create the baseline immediately and request approval only before cleanup.
+  correctOption: B
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/overview-vnet-integration
+  lastVerified: '2026-08-30'
+- id: LAB16-Q35
+  objectiveIds:
+  - CP-APP-04
+  difficulty: applied
+  stem: 'A peer reviewer examines the proposed implementation for this scenario: Which implementation step should the learner
+    perform for ''Configure certificates and Transport Layer Security (TLS) for an App Service''?'
+  options:
+    A: Copy resource identifiers from another run instead of recording returned IDs.
+    B: Skip the operation and edit validation.json to show a passing result.
+    C: Create an App Service plan and web app with HTTPS-only and minimum TLS 1.2.
+    D: Replace the lab action with a tenant-wide change that is easier to discover.
+  correctOption: C
+  explanation: 'The lab''s reviewed command path performs this bounded action: Create an App Service plan and web app with
+    HTTPS-only and minimum TLS 1.2.'
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: 'Correct. The lab''s reviewed command path performs this bounded action: Create an App Service plan and web app with
+      HTTPS-only and minimum TLS 1.2.'
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/configure-ssl-bindings
+  lastVerified: '2026-08-30'
+- id: LAB16-Q36
+  objectiveIds:
+  - CP-APP-05
+  difficulty: applied
+  stem: 'During a controlled rollout, the change team encounters this requirement: Which evidence most directly validates
+    ''Map an existing custom DNS name to an App Service'' for optional custom hostname and TLS binding?'
+  options:
+    A: Treat the setup exit code as proof of every configuration and relationship.
+    B: List the entire subscription and assume similarly named resources belong to this run.
+    C: Record a credential so another learner can replay the authenticated session.
+    D: Query the exact recorded scope and independently verify Microsoft.Web/sites.
+  correctOption: D
+  explanation: The independent validation path must prove Microsoft.Web/sites for the exact recorded object.
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: Correct. The independent validation path must prove Microsoft.Web/sites for the exact recorded object.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/app-service-web-tutorial-custom-domain
+  lastVerified: '2026-08-30'
+- id: LAB16-Q37
+  objectiveIds:
+  - CP-APP-07
+  difficulty: applied
+  stem: 'A support engineer reproduces the following situation in a test environment: A learner previews the implementation
+    for ''Configure networking settings for an App Service''. What behavior is required?'
+  options:
+    A: Display the context, intended changes, cost and gated branches without mutating Azure.
+    B: Delete any older resource whose name resembles the new run ID.
+    C: Create the baseline immediately and request approval only before cleanup.
+    D: Select the first accessible subscription and hide the resulting context.
+  correctOption: A
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  distractorExplanations:
+    A: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/overview-vnet-integration
+  lastVerified: '2026-08-30'
+- id: LAB16-Q38
+  objectiveIds:
+  - CP-APP-04
+  difficulty: applied
+  stem: 'While recording validation evidence, the administrator evaluates this question: Which implementation step should
+    the learner perform for ''Configure certificates and Transport Layer Security (TLS) for an App Service''?'
+  options:
+    A: Skip the operation and edit validation.json to show a passing result.
+    B: Create an App Service plan and web app with HTTPS-only and minimum TLS 1.2.
+    C: Replace the lab action with a tenant-wide change that is easier to discover.
+    D: Copy resource identifiers from another run instead of recording returned IDs.
+  correctOption: B
+  explanation: 'The lab''s reviewed command path performs this bounded action: Create an App Service plan and web app with
+    HTTPS-only and minimum TLS 1.2.'
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: 'Correct. The lab''s reviewed command path performs this bounded action: Create an App Service plan and web app with
+      HTTPS-only and minimum TLS 1.2.'
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/configure-ssl-bindings
+  lastVerified: '2026-08-30'
+- id: LAB16-Q39
+  objectiveIds:
+  - CP-APP-05
+  difficulty: applied
+  stem: 'A configuration owner must approve one response to this scenario: Which evidence most directly validates ''Map an
+    existing custom DNS name to an App Service'' for optional custom hostname and TLS binding?'
+  options:
+    A: List the entire subscription and assume similarly named resources belong to this run.
+    B: Record a credential so another learner can replay the authenticated session.
+    C: Query the exact recorded scope and independently verify Microsoft.Web/sites.
+    D: Treat the setup exit code as proof of every configuration and relationship.
+  correctOption: C
+  explanation: The independent validation path must prove Microsoft.Web/sites for the exact recorded object.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: Correct. The independent validation path must prove Microsoft.Web/sites for the exact recorded object.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/app-service-web-tutorial-custom-domain
+  lastVerified: '2026-08-30'
+- id: LAB16-Q40
+  objectiveIds:
+  - CP-APP-07
+  difficulty: applied
+  stem: 'During post-deployment verification, the team reviews this situation: A learner previews the implementation for ''Configure
+    networking settings for an App Service''. What behavior is required?'
+  options:
+    A: Delete any older resource whose name resembles the new run ID.
+    B: Create the baseline immediately and request approval only before cleanup.
+    C: Select the first accessible subscription and hide the resulting context.
+    D: Display the context, intended changes, cost and gated branches without mutating Azure.
+  correctOption: D
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/overview-vnet-integration
+  lastVerified: '2026-08-30'
+- id: LAB16-Q41
   objectiveIds:
   - CP-APP-06
   - CP-APP-07
   difficulty: advanced
   stem: Validation for 'Configure backup for an App Service' fails after setup. What is the best break/fix method?
+  options:
+    A: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+    B: Change validation.json directly so the failed result reads pass.
+    C: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+    D: Rerun setup repeatedly with new names until one attempt appears successful.
+  correctOption: A
+  explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
+  distractorExplanations:
+    A: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/manage-backup
+  lastVerified: '2026-08-30'
+- id: LAB16-Q42
+  objectiveIds:
+  - CP-APP-06
+  - CP-APP-07
+  difficulty: advanced
+  stem: 'During root-cause analysis, the team must resolve this question: Validation for ''Configure backup for an App Service''
+    fails after setup. What is the best break/fix method?'
+  options:
+    A: Rerun setup repeatedly with new names until one attempt appears successful.
+    B: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+    C: Change validation.json directly so the failed result reads pass.
+    D: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+  correctOption: B
+  explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/manage-backup
+  lastVerified: '2026-08-30'
+- id: LAB16-Q43
+  objectiveIds:
+  - CP-APP-06
+  - CP-APP-07
+  difficulty: advanced
+  stem: 'A security and reliability review identifies this design decision: Validation for ''Configure backup for an App Service''
+    fails after setup. What is the best break/fix method?'
+  options:
+    A: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+    B: Rerun setup repeatedly with new names until one attempt appears successful.
+    C: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+    D: Change validation.json directly so the failed result reads pass.
+  correctOption: C
+  explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/manage-backup
+  lastVerified: '2026-08-30'
+- id: LAB16-Q44
+  objectiveIds:
+  - CP-APP-06
+  - CP-APP-07
+  difficulty: advanced
+  stem: 'While diagnosing unexpected Azure behavior, the engineer considers this situation: Validation for ''Configure backup
+    for an App Service'' fails after setup. What is the best break/fix method?'
+  options:
+    A: Change validation.json directly so the failed result reads pass.
+    B: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+    C: Rerun setup repeatedly with new names until one attempt appears successful.
+    D: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+  correctOption: D
+  explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/manage-backup
+  lastVerified: '2026-08-30'
+- id: LAB16-Q45
+  objectiveIds:
+  - CP-APP-06
+  - CP-APP-07
+  difficulty: advanced
+  stem: 'An architecture review requires the strongest response to this scenario: Validation for ''Configure backup for an
+    App Service'' fails after setup. What is the best break/fix method?'
+  options:
+    A: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+    B: Change validation.json directly so the failed result reads pass.
+    C: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+    D: Rerun setup repeatedly with new names until one attempt appears successful.
+  correctOption: A
+  explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
+  distractorExplanations:
+    A: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/manage-backup
+  lastVerified: '2026-08-30'
+- id: LAB16-Q46
+  objectiveIds:
+  - CP-APP-06
+  - CP-APP-07
+  difficulty: advanced
+  stem: 'During break/fix validation, the operator encounters this question: Validation for ''Configure backup for an App
+    Service'' fails after setup. What is the best break/fix method?'
+  options:
+    A: Rerun setup repeatedly with new names until one attempt appears successful.
+    B: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+    C: Change validation.json directly so the failed result reads pass.
+    D: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+  correctOption: B
+  explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/manage-backup
+  lastVerified: '2026-08-30'
+- id: LAB16-Q47
+  objectiveIds:
+  - CP-APP-06
+  - CP-APP-07
+  difficulty: advanced
+  stem: 'A complex support case depends on correctly interpreting this requirement: Validation for ''Configure backup for
+    an App Service'' fails after setup. What is the best break/fix method?'
+  options:
+    A: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+    B: Rerun setup repeatedly with new names until one attempt appears successful.
+    C: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+    D: Change validation.json directly so the failed result reads pass.
+  correctOption: C
+  explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/manage-backup
+  lastVerified: '2026-08-30'
+- id: LAB16-Q48
+  objectiveIds:
+  - CP-APP-06
+  - CP-APP-07
+  difficulty: advanced
+  stem: 'While correcting configuration drift, the team evaluates this scenario: Validation for ''Configure backup for an
+    App Service'' fails after setup. What is the best break/fix method?'
+  options:
+    A: Change validation.json directly so the failed result reads pass.
+    B: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+    C: Rerun setup repeatedly with new names until one attempt appears successful.
+    D: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+  correctOption: D
+  explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/manage-backup
+  lastVerified: '2026-08-30'
+- id: LAB16-Q49
+  objectiveIds:
+  - CP-APP-06
+  - CP-APP-07
+  difficulty: advanced
+  stem: 'A recovery exercise exposes the following technical decision: Validation for ''Configure backup for an App Service''
+    fails after setup. What is the best break/fix method?'
+  options:
+    A: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+    B: Change validation.json directly so the failed result reads pass.
+    C: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+    D: Rerun setup repeatedly with new names until one attempt appears successful.
+  correctOption: A
+  explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
+  distractorExplanations:
+    A: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/manage-backup
+  lastVerified: '2026-08-30'
+- id: LAB16-Q50
+  objectiveIds:
+  - CP-APP-06
+  - CP-APP-07
+  difficulty: advanced
+  stem: 'During final design assurance, the reviewer must resolve this situation: Validation for ''Configure backup for an
+    App Service'' fails after setup. What is the best break/fix method?'
   options:
     A: Rerun setup repeatedly with new names until one attempt appears successful.
     B: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.

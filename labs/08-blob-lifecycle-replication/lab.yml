@@ -26,8 +26,8 @@ cost:
   - blob containers
   - lifecycle policy
   - object replication policy
-  notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator
-    before execution and clean up immediately.
+  notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator before
+    execution and clean up immediately.
 permissions:
   azureRbacRoles:
   - Contributor and Storage Blob Data Contributor on the lab resource group
@@ -73,7 +73,7 @@ cleanup:
   residualAuditRequired: true
 assessment:
   enabled: true
-  questionCount: 14
+  questionCount: 50
   primaryDomain: storage
 lastOfflineValidated: '2026-08-30'
 lastLiveVerified: null

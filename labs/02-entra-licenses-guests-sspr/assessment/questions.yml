@@ -6,17 +6,17 @@
   options:
     A: The shortest command is always correct even when it changes a broader scope.
     B: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-    C: SSPR and group-based licensing are tenant capabilities with role and license gates; inventory and scoped
-      pilots are safer than tenant-wide changes.
+    C: SSPR and group-based licensing are tenant capabilities with role and license gates; inventory and scoped pilots are
+      safer than tenant-wide changes.
     D: A recognizable resource name removes the need for validation and scoped cleanup.
   correctOption: C
-  explanation: 'The lab establishes this design principle: SSPR and group-based licensing are tenant capabilities
-    with role and license gates; inventory and scoped pilots are safer than tenant-wide changes.'
+  explanation: 'The lab establishes this design principle: SSPR and group-based licensing are tenant capabilities with role
+    and license gates; inventory and scoped pilots are safer than tenant-wide changes.'
   distractorExplanations:
     A: This choice changes or trusts a broader scope than the recorded lab boundary.
     B: This choice skips independent evidence or relies on ambiguous resource identity.
-    C: 'Correct. The lab establishes this design principle: SSPR and group-based licensing are tenant capabilities
-      with role and license gates; inventory and scoped pilots are safer than tenant-wide changes.'
+    C: 'Correct. The lab establishes this design principle: SSPR and group-based licensing are tenant capabilities with role
+      and license gates; inventory and scoped pilots are safer than tenant-wide changes.'
     D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
   sourceUrls:
   - https://learn.microsoft.com/en-us/entra/fundamentals/how-to-manage-user-profile-info
@@ -32,14 +32,14 @@
     C: Mark the objective complete after reading documentation without checking any state.
     D: Invite a disposable external account only when AZ104_GUEST_EMAIL is supplied.
   correctOption: D
-  explanation: 'The reviewed hands-on action for this objective is: Invite a disposable external account only when
-    AZ104_GUEST_EMAIL is supplied.'
+  explanation: 'The reviewed hands-on action for this objective is: Invite a disposable external account only when AZ104_GUEST_EMAIL
+    is supplied.'
   distractorExplanations:
     A: This choice changes or trusts a broader scope than the recorded lab boundary.
     B: This choice skips independent evidence or relies on ambiguous resource identity.
     C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-    D: 'Correct. The reviewed hands-on action for this objective is: Invite a disposable external account only when
-      AZ104_GUEST_EMAIL is supplied.'
+    D: 'Correct. The reviewed hands-on action for this objective is: Invite a disposable external account only when AZ104_GUEST_EMAIL
+      is supplied.'
   sourceUrls:
   - https://learn.microsoft.com/en-us/entra/external-id/b2b-quickstart-invite-powershell
   lastVerified: '2026-08-30'
@@ -55,11 +55,11 @@
     C: Assign Global Administrator and subscription Owner for every lab regardless of the operation.
     D: Skip role checks when the run ID contains the lab number.
   correctOption: A
-  explanation: 'Least privilege requires the documented boundary: User Administrator and License Administrator;
-    Authentication Policy Administrator for the SSPR policy path'
+  explanation: 'Least privilege requires the documented boundary: User Administrator and License Administrator; Authentication
+    Policy Administrator for the SSPR policy path'
   distractorExplanations:
-    A: 'Correct. Least privilege requires the documented boundary: User Administrator and License Administrator;
-      Authentication Policy Administrator for the SSPR policy path'
+    A: 'Correct. Least privilege requires the documented boundary: User Administrator and License Administrator; Authentication
+      Policy Administrator for the SSPR policy path'
     B: This choice changes or trusts a broader scope than the recorded lab boundary.
     C: This choice skips independent evidence or relies on ambiguous resource identity.
     D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
@@ -67,6 +67,290 @@
   - https://learn.microsoft.com/en-us/entra/identity/users/licensing-powershell-graph-examples
   lastVerified: '2026-08-30'
 - id: LAB02-Q04
+  objectiveIds:
+  - IG-USERS-03
+  difficulty: foundational
+  stem: 'Before making a change, a learner checks this core behavior: Which principle is most important when working on ''Manage
+    licenses in Microsoft Entra ID'' in Lab 02?'
+  options:
+    A: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+    B: SSPR and group-based licensing are tenant capabilities with role and license gates; inventory and scoped pilots are
+      safer than tenant-wide changes.
+    C: A recognizable resource name removes the need for validation and scoped cleanup.
+    D: The shortest command is always correct even when it changes a broader scope.
+  correctOption: B
+  explanation: 'The lab establishes this design principle: SSPR and group-based licensing are tenant capabilities with role
+    and license gates; inventory and scoped pilots are safer than tenant-wide changes.'
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: 'Correct. The lab establishes this design principle: SSPR and group-based licensing are tenant capabilities with role
+      and license gates; inventory and scoped pilots are safer than tenant-wide changes.'
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/entra/fundamentals/how-to-manage-user-profile-info
+  lastVerified: '2026-08-30'
+- id: LAB02-Q05
+  objectiveIds:
+  - IG-USERS-04
+  difficulty: foundational
+  stem: 'During a design vocabulary review, the team evaluates this situation: Which lab action directly supports the objective
+    ''Manage external users''?'
+  options:
+    A: Search the whole tenant for a similar display name and modify the first match.
+    B: Mark the objective complete after reading documentation without checking any state.
+    C: Invite a disposable external account only when AZ104_GUEST_EMAIL is supplied.
+    D: Change the active tenant without displaying or confirming the resulting context.
+  correctOption: C
+  explanation: 'The reviewed hands-on action for this objective is: Invite a disposable external account only when AZ104_GUEST_EMAIL
+    is supplied.'
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: 'Correct. The reviewed hands-on action for this objective is: Invite a disposable external account only when AZ104_GUEST_EMAIL
+      is supplied.'
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/entra/external-id/b2b-quickstart-invite-powershell
+  lastVerified: '2026-08-30'
+- id: LAB02-Q06
+  objectiveIds:
+  - IG-USERS-05
+  difficulty: foundational
+  stem: 'In a command-planning session, an administrator asks this question: Which authorization approach is appropriate before
+    practicing ''Configure self-service password reset (SSPR)''?'
+  options:
+    A: Use a production subscription because its resources already exist.
+    B: Assign Global Administrator and subscription Owner for every lab regardless of the operation.
+    C: Skip role checks when the run ID contains the lab number.
+    D: 'Confirm the active context and use only the declared role boundary: User Administrator and License Administrator;
+      Authentication Policy Administrator for the SSPR policy path'
+  correctOption: D
+  explanation: 'Least privilege requires the documented boundary: User Administrator and License Administrator; Authentication
+    Policy Administrator for the SSPR policy path'
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: 'Correct. Least privilege requires the documented boundary: User Administrator and License Administrator; Authentication
+      Policy Administrator for the SSPR policy path'
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/entra/identity/users/licensing-powershell-graph-examples
+  lastVerified: '2026-08-30'
+- id: LAB02-Q07
+  objectiveIds:
+  - IG-USERS-03
+  difficulty: foundational
+  stem: 'While preparing the lab, a learner verifies this platform rule: Which principle is most important when working on
+    ''Manage licenses in Microsoft Entra ID'' in Lab 02?'
+  options:
+    A: SSPR and group-based licensing are tenant capabilities with role and license gates; inventory and scoped pilots are
+      safer than tenant-wide changes.
+    B: A recognizable resource name removes the need for validation and scoped cleanup.
+    C: The shortest command is always correct even when it changes a broader scope.
+    D: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+  correctOption: A
+  explanation: 'The lab establishes this design principle: SSPR and group-based licensing are tenant capabilities with role
+    and license gates; inventory and scoped pilots are safer than tenant-wide changes.'
+  distractorExplanations:
+    A: 'Correct. The lab establishes this design principle: SSPR and group-based licensing are tenant capabilities with role
+      and license gates; inventory and scoped pilots are safer than tenant-wide changes.'
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/entra/fundamentals/how-to-manage-user-profile-info
+  lastVerified: '2026-08-30'
+- id: LAB02-Q08
+  objectiveIds:
+  - IG-USERS-04
+  difficulty: foundational
+  stem: 'During peer review, the team must identify the accurate response to this scenario: Which lab action directly supports
+    the objective ''Manage external users''?'
+  options:
+    A: Mark the objective complete after reading documentation without checking any state.
+    B: Invite a disposable external account only when AZ104_GUEST_EMAIL is supplied.
+    C: Change the active tenant without displaying or confirming the resulting context.
+    D: Search the whole tenant for a similar display name and modify the first match.
+  correctOption: B
+  explanation: 'The reviewed hands-on action for this objective is: Invite a disposable external account only when AZ104_GUEST_EMAIL
+    is supplied.'
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: 'Correct. The reviewed hands-on action for this objective is: Invite a disposable external account only when AZ104_GUEST_EMAIL
+      is supplied.'
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/entra/external-id/b2b-quickstart-invite-powershell
+  lastVerified: '2026-08-30'
+- id: LAB02-Q09
+  objectiveIds:
+  - IG-USERS-05
+  difficulty: foundational
+  stem: 'In an operations briefing, a new team member receives this question: Which authorization approach is appropriate
+    before practicing ''Configure self-service password reset (SSPR)''?'
+  options:
+    A: Assign Global Administrator and subscription Owner for every lab regardless of the operation.
+    B: Skip role checks when the run ID contains the lab number.
+    C: 'Confirm the active context and use only the declared role boundary: User Administrator and License Administrator;
+      Authentication Policy Administrator for the SSPR policy path'
+    D: Use a production subscription because its resources already exist.
+  correctOption: C
+  explanation: 'Least privilege requires the documented boundary: User Administrator and License Administrator; Authentication
+    Policy Administrator for the SSPR policy path'
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: 'Correct. Least privilege requires the documented boundary: User Administrator and License Administrator; Authentication
+      Policy Administrator for the SSPR policy path'
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/entra/identity/users/licensing-powershell-graph-examples
+  lastVerified: '2026-08-30'
+- id: LAB02-Q10
+  objectiveIds:
+  - IG-USERS-03
+  difficulty: foundational
+  stem: 'While building a support checklist, an engineer reviews this requirement: Which principle is most important when
+    working on ''Manage licenses in Microsoft Entra ID'' in Lab 02?'
+  options:
+    A: A recognizable resource name removes the need for validation and scoped cleanup.
+    B: The shortest command is always correct even when it changes a broader scope.
+    C: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+    D: SSPR and group-based licensing are tenant capabilities with role and license gates; inventory and scoped pilots are
+      safer than tenant-wide changes.
+  correctOption: D
+  explanation: 'The lab establishes this design principle: SSPR and group-based licensing are tenant capabilities with role
+    and license gates; inventory and scoped pilots are safer than tenant-wide changes.'
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: 'Correct. The lab establishes this design principle: SSPR and group-based licensing are tenant capabilities with role
+      and license gates; inventory and scoped pilots are safer than tenant-wide changes.'
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/entra/fundamentals/how-to-manage-user-profile-info
+  lastVerified: '2026-08-30'
+- id: LAB02-Q11
+  objectiveIds:
+  - IG-USERS-04
+  difficulty: foundational
+  stem: 'During a readiness check, the administrator considers this behavior: Which lab action directly supports the objective
+    ''Manage external users''?'
+  options:
+    A: Invite a disposable external account only when AZ104_GUEST_EMAIL is supplied.
+    B: Change the active tenant without displaying or confirming the resulting context.
+    C: Search the whole tenant for a similar display name and modify the first match.
+    D: Mark the objective complete after reading documentation without checking any state.
+  correctOption: A
+  explanation: 'The reviewed hands-on action for this objective is: Invite a disposable external account only when AZ104_GUEST_EMAIL
+    is supplied.'
+  distractorExplanations:
+    A: 'Correct. The reviewed hands-on action for this objective is: Invite a disposable external account only when AZ104_GUEST_EMAIL
+      is supplied.'
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/entra/external-id/b2b-quickstart-invite-powershell
+  lastVerified: '2026-08-30'
+- id: LAB02-Q12
+  objectiveIds:
+  - IG-USERS-05
+  difficulty: foundational
+  stem: 'In a service overview, the team discusses this scenario: Which authorization approach is appropriate before practicing
+    ''Configure self-service password reset (SSPR)''?'
+  options:
+    A: Skip role checks when the run ID contains the lab number.
+    B: 'Confirm the active context and use only the declared role boundary: User Administrator and License Administrator;
+      Authentication Policy Administrator for the SSPR policy path'
+    C: Use a production subscription because its resources already exist.
+    D: Assign Global Administrator and subscription Owner for every lab regardless of the operation.
+  correctOption: B
+  explanation: 'Least privilege requires the documented boundary: User Administrator and License Administrator; Authentication
+    Policy Administrator for the SSPR policy path'
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: 'Correct. Least privilege requires the documented boundary: User Administrator and License Administrator; Authentication
+      Policy Administrator for the SSPR policy path'
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/entra/identity/users/licensing-powershell-graph-examples
+  lastVerified: '2026-08-30'
+- id: LAB02-Q13
+  objectiveIds:
+  - IG-USERS-03
+  difficulty: foundational
+  stem: 'While reviewing official guidance, a learner must resolve this question: Which principle is most important when working
+    on ''Manage licenses in Microsoft Entra ID'' in Lab 02?'
+  options:
+    A: The shortest command is always correct even when it changes a broader scope.
+    B: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+    C: SSPR and group-based licensing are tenant capabilities with role and license gates; inventory and scoped pilots are
+      safer than tenant-wide changes.
+    D: A recognizable resource name removes the need for validation and scoped cleanup.
+  correctOption: C
+  explanation: 'The lab establishes this design principle: SSPR and group-based licensing are tenant capabilities with role
+    and license gates; inventory and scoped pilots are safer than tenant-wide changes.'
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: 'Correct. The lab establishes this design principle: SSPR and group-based licensing are tenant capabilities with role
+      and license gates; inventory and scoped pilots are safer than tenant-wide changes.'
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/entra/fundamentals/how-to-manage-user-profile-info
+  lastVerified: '2026-08-30'
+- id: LAB02-Q14
+  objectiveIds:
+  - IG-USERS-04
+  difficulty: foundational
+  stem: 'During a configuration walkthrough, the instructor asks about this situation: Which lab action directly supports
+    the objective ''Manage external users''?'
+  options:
+    A: Change the active tenant without displaying or confirming the resulting context.
+    B: Search the whole tenant for a similar display name and modify the first match.
+    C: Mark the objective complete after reading documentation without checking any state.
+    D: Invite a disposable external account only when AZ104_GUEST_EMAIL is supplied.
+  correctOption: D
+  explanation: 'The reviewed hands-on action for this objective is: Invite a disposable external account only when AZ104_GUEST_EMAIL
+    is supplied.'
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: 'Correct. The reviewed hands-on action for this objective is: Invite a disposable external account only when AZ104_GUEST_EMAIL
+      is supplied.'
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/entra/external-id/b2b-quickstart-invite-powershell
+  lastVerified: '2026-08-30'
+- id: LAB02-Q15
+  objectiveIds:
+  - IG-USERS-05
+  difficulty: foundational
+  stem: 'In a preflight knowledge check, the operator evaluates this requirement: Which authorization approach is appropriate
+    before practicing ''Configure self-service password reset (SSPR)''?'
+  options:
+    A: 'Confirm the active context and use only the declared role boundary: User Administrator and License Administrator;
+      Authentication Policy Administrator for the SSPR policy path'
+    B: Use a production subscription because its resources already exist.
+    C: Assign Global Administrator and subscription Owner for every lab regardless of the operation.
+    D: Skip role checks when the run ID contains the lab number.
+  correctOption: A
+  explanation: 'Least privilege requires the documented boundary: User Administrator and License Administrator; Authentication
+    Policy Administrator for the SSPR policy path'
+  distractorExplanations:
+    A: 'Correct. Least privilege requires the documented boundary: User Administrator and License Administrator; Authentication
+      Policy Administrator for the SSPR policy path'
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/entra/identity/users/licensing-powershell-graph-examples
+  lastVerified: '2026-08-30'
+- id: LAB02-Q16
   objectiveIds:
   - IG-USERS-03
   difficulty: applied
@@ -86,7 +370,7 @@
   sourceUrls:
   - https://learn.microsoft.com/en-us/entra/identity/authentication/tutorial-enable-sspr
   lastVerified: '2026-08-30'
-- id: LAB02-Q05
+- id: LAB02-Q17
   objectiveIds:
   - IG-USERS-04
   difficulty: applied
@@ -97,23 +381,22 @@
     C: Create a security group that represents the SSPR pilot cohort.
     D: Skip the operation and edit validation.json to show a passing result.
   correctOption: C
-  explanation: 'The lab''s reviewed command path performs this bounded action: Create a security group that represents
-    the SSPR pilot cohort.'
+  explanation: 'The lab''s reviewed command path performs this bounded action: Create a security group that represents the
+    SSPR pilot cohort.'
   distractorExplanations:
     A: This choice changes or trusts a broader scope than the recorded lab boundary.
     B: This choice skips independent evidence or relies on ambiguous resource identity.
-    C: 'Correct. The lab''s reviewed command path performs this bounded action: Create a security group that represents
-      the SSPR pilot cohort.'
+    C: 'Correct. The lab''s reviewed command path performs this bounded action: Create a security group that represents the
+      SSPR pilot cohort.'
     D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
   sourceUrls:
   - https://learn.microsoft.com/en-us/entra/fundamentals/how-to-manage-user-profile-info
   lastVerified: '2026-08-30'
-- id: LAB02-Q06
+- id: LAB02-Q18
   objectiveIds:
   - IG-USERS-05
   difficulty: applied
-  stem: Which evidence most directly validates 'Configure self-service password reset (SSPR)' for invited guest
-    user?
+  stem: Which evidence most directly validates 'Configure self-service password reset (SSPR)' for invited guest user?
   options:
     A: Treat the setup exit code as proof of every configuration and relationship.
     B: List the entire subscription and assume similarly named resources belong to this run.
@@ -129,7 +412,7 @@
   sourceUrls:
   - https://learn.microsoft.com/en-us/entra/external-id/b2b-quickstart-invite-powershell
   lastVerified: '2026-08-30'
-- id: LAB02-Q07
+- id: LAB02-Q19
   objectiveIds:
   - IG-USERS-03
   difficulty: applied
@@ -141,20 +424,18 @@
     C: Broaden permissions until the prerequisite can no longer block the operation.
     D: Mark the branch passed because its command syntax was checked offline.
   correctOption: A
-  explanation: 'Unavailable live prerequisites remain skipped or partial; the documented gate is: Requires a real
-    disposable guest email for invitation, an available SKU for license assignment, and an authorized tenant policy
-    change for SSPR.'
+  explanation: 'Unavailable live prerequisites remain skipped or partial; the documented gate is: Requires a real disposable
+    guest email for invitation, an available SKU for license assignment, and an authorized tenant policy change for SSPR.'
   distractorExplanations:
-    A: 'Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: Requires a real
-      disposable guest email for invitation, an available SKU for license assignment, and an authorized tenant policy
-      change for SSPR.'
+    A: 'Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: Requires a real disposable
+      guest email for invitation, an available SKU for license assignment, and an authorized tenant policy change for SSPR.'
     B: This choice changes or trusts a broader scope than the recorded lab boundary.
     C: This choice skips independent evidence or relies on ambiguous resource identity.
     D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
   sourceUrls:
   - https://learn.microsoft.com/en-us/entra/identity/users/licensing-powershell-graph-examples
   lastVerified: '2026-08-30'
-- id: LAB02-Q08
+- id: LAB02-Q20
   objectiveIds:
   - IG-USERS-04
   difficulty: applied
@@ -174,13 +455,452 @@
   sourceUrls:
   - https://learn.microsoft.com/en-us/entra/identity/authentication/tutorial-enable-sspr
   lastVerified: '2026-08-30'
-- id: LAB02-Q09
+- id: LAB02-Q21
+  objectiveIds:
+  - IG-USERS-03
+  difficulty: applied
+  stem: 'While validating a configuration, the team evaluates this situation: A learner previews the implementation for ''Manage
+    licenses in Microsoft Entra ID''. What behavior is required?'
+  options:
+    A: Delete any older resource whose name resembles the new run ID.
+    B: Create the baseline immediately and request approval only before cleanup.
+    C: Display the context, intended changes, cost and gated branches without mutating Azure.
+    D: Select the first accessible subscription and hide the resulting context.
+  correctOption: C
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/entra/identity/authentication/tutorial-enable-sspr
+  lastVerified: '2026-08-30'
+- id: LAB02-Q22
+  objectiveIds:
+  - IG-USERS-04
+  difficulty: applied
+  stem: 'A delegated administrator receives the following support request: Which implementation step should the learner perform
+    for ''Manage external users''?'
+  options:
+    A: Skip the operation and edit validation.json to show a passing result.
+    B: Replace the lab action with a tenant-wide change that is easier to discover.
+    C: Copy resource identifiers from another run instead of recording returned IDs.
+    D: Create a security group that represents the SSPR pilot cohort.
+  correctOption: D
+  explanation: 'The lab''s reviewed command path performs this bounded action: Create a security group that represents the
+    SSPR pilot cohort.'
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: 'Correct. The lab''s reviewed command path performs this bounded action: Create a security group that represents the
+      SSPR pilot cohort.'
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/entra/fundamentals/how-to-manage-user-profile-info
+  lastVerified: '2026-08-30'
+- id: LAB02-Q23
+  objectiveIds:
+  - IG-USERS-05
+  difficulty: applied
+  stem: 'During a maintenance window, an engineer must decide how to respond: Which evidence most directly validates ''Configure
+    self-service password reset (SSPR)'' for invited guest user?'
+  options:
+    A: Query the exact recorded scope and independently verify the intended recorded state.
+    B: Treat the setup exit code as proof of every configuration and relationship.
+    C: List the entire subscription and assume similarly named resources belong to this run.
+    D: Record a credential so another learner can replay the authenticated session.
+  correctOption: A
+  explanation: The independent validation path must prove the intended recorded state for the exact recorded object.
+  distractorExplanations:
+    A: Correct. The independent validation path must prove the intended recorded state for the exact recorded object.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/entra/external-id/b2b-quickstart-invite-powershell
+  lastVerified: '2026-08-30'
+- id: LAB02-Q24
+  objectiveIds:
+  - IG-USERS-03
+  difficulty: applied
+  stem: 'A deployment pipeline reaches this decision point: The ''Manage licenses in Microsoft Entra ID'' checkpoint reaches
+    an external prerequisite. What should happen?'
+  options:
+    A: Mark the branch passed because its command syntax was checked offline.
+    B: 'Run the branch only when this documented gate is satisfied: Requires a real disposable guest email for invitation,
+      an available SKU for license assignment, and an authorized tenant policy change for SSPR.'
+    C: Invent a domain, notification target, license, quota, or tenant value and continue.
+    D: Broaden permissions until the prerequisite can no longer block the operation.
+  correctOption: B
+  explanation: 'Unavailable live prerequisites remain skipped or partial; the documented gate is: Requires a real disposable
+    guest email for invitation, an available SKU for license assignment, and an authorized tenant policy change for SSPR.'
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: 'Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: Requires a real disposable
+      guest email for invitation, an available SKU for license assignment, and an authorized tenant policy change for SSPR.'
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/entra/identity/users/licensing-powershell-graph-examples
+  lastVerified: '2026-08-30'
+- id: LAB02-Q25
+  objectiveIds:
+  - IG-USERS-04
+  difficulty: applied
+  stem: 'While applying least-privilege controls, the administrator reviews this scenario: What is the safest command-evidence
+    practice after completing ''Manage external users''?'
+  options:
+    A: Reuse successful output from an earlier run with a similar resource name.
+    B: Commit the complete account object so reviewers can identify the tenant.
+    C: Retain only redacted structured output from an independent query of the recorded run.
+    D: Save tokens, keys, passwords, or SAS values beside the validation result.
+  correctOption: C
+  explanation: Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: Correct. Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/entra/identity/authentication/tutorial-enable-sspr
+  lastVerified: '2026-08-30'
+- id: LAB02-Q26
+  objectiveIds:
+  - IG-USERS-03
+  difficulty: applied
+  stem: 'A repeatable Azure CLI workflow must address this requirement: A learner previews the implementation for ''Manage
+    licenses in Microsoft Entra ID''. What behavior is required?'
+  options:
+    A: Select the first accessible subscription and hide the resulting context.
+    B: Delete any older resource whose name resembles the new run ID.
+    C: Create the baseline immediately and request approval only before cleanup.
+    D: Display the context, intended changes, cost and gated branches without mutating Azure.
+  correctOption: D
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/entra/identity/authentication/tutorial-enable-sspr
+  lastVerified: '2026-08-30'
+- id: LAB02-Q27
+  objectiveIds:
+  - IG-USERS-04
+  difficulty: applied
+  stem: 'During an environment handoff, the receiving team asks this question: Which implementation step should the learner
+    perform for ''Manage external users''?'
+  options:
+    A: Create a security group that represents the SSPR pilot cohort.
+    B: Skip the operation and edit validation.json to show a passing result.
+    C: Replace the lab action with a tenant-wide change that is easier to discover.
+    D: Copy resource identifiers from another run instead of recording returned IDs.
+  correctOption: A
+  explanation: 'The lab''s reviewed command path performs this bounded action: Create a security group that represents the
+    SSPR pilot cohort.'
+  distractorExplanations:
+    A: 'Correct. The lab''s reviewed command path performs this bounded action: Create a security group that represents the
+      SSPR pilot cohort.'
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/entra/fundamentals/how-to-manage-user-profile-info
+  lastVerified: '2026-08-30'
+- id: LAB02-Q28
+  objectiveIds:
+  - IG-USERS-05
+  difficulty: applied
+  stem: 'A configuration change produces the following operational choice: Which evidence most directly validates ''Configure
+    self-service password reset (SSPR)'' for invited guest user?'
+  options:
+    A: Record a credential so another learner can replay the authenticated session.
+    B: Query the exact recorded scope and independently verify the intended recorded state.
+    C: Treat the setup exit code as proof of every configuration and relationship.
+    D: List the entire subscription and assume similarly named resources belong to this run.
+  correctOption: B
+  explanation: The independent validation path must prove the intended recorded state for the exact recorded object.
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: Correct. The independent validation path must prove the intended recorded state for the exact recorded object.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/entra/external-id/b2b-quickstart-invite-powershell
+  lastVerified: '2026-08-30'
+- id: LAB02-Q29
+  objectiveIds:
+  - IG-USERS-03
+  difficulty: applied
+  stem: 'While preparing independent validation, an engineer considers this scenario: The ''Manage licenses in Microsoft Entra
+    ID'' checkpoint reaches an external prerequisite. What should happen?'
+  options:
+    A: Broaden permissions until the prerequisite can no longer block the operation.
+    B: Mark the branch passed because its command syntax was checked offline.
+    C: 'Run the branch only when this documented gate is satisfied: Requires a real disposable guest email for invitation,
+      an available SKU for license assignment, and an authorized tenant policy change for SSPR.'
+    D: Invent a domain, notification target, license, quota, or tenant value and continue.
+  correctOption: C
+  explanation: 'Unavailable live prerequisites remain skipped or partial; the documented gate is: Requires a real disposable
+    guest email for invitation, an available SKU for license assignment, and an authorized tenant policy change for SSPR.'
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: 'Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: Requires a real disposable
+      guest email for invitation, an available SKU for license assignment, and an authorized tenant policy change for SSPR.'
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/entra/identity/users/licensing-powershell-graph-examples
+  lastVerified: '2026-08-30'
+- id: LAB02-Q30
+  objectiveIds:
+  - IG-USERS-04
+  difficulty: applied
+  stem: 'A service owner asks the administrator to resolve this requirement: What is the safest command-evidence practice
+    after completing ''Manage external users''?'
+  options:
+    A: Save tokens, keys, passwords, or SAS values beside the validation result.
+    B: Reuse successful output from an earlier run with a similar resource name.
+    C: Commit the complete account object so reviewers can identify the tenant.
+    D: Retain only redacted structured output from an independent query of the recorded run.
+  correctOption: D
+  explanation: Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: Correct. Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/entra/identity/authentication/tutorial-enable-sspr
+  lastVerified: '2026-08-30'
+- id: LAB02-Q31
+  objectiveIds:
+  - IG-USERS-03
+  difficulty: applied
+  stem: 'During a scoped cleanup review, the team evaluates this situation: A learner previews the implementation for ''Manage
+    licenses in Microsoft Entra ID''. What behavior is required?'
+  options:
+    A: Display the context, intended changes, cost and gated branches without mutating Azure.
+    B: Select the first accessible subscription and hide the resulting context.
+    C: Delete any older resource whose name resembles the new run ID.
+    D: Create the baseline immediately and request approval only before cleanup.
+  correctOption: A
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  distractorExplanations:
+    A: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/entra/identity/authentication/tutorial-enable-sspr
+  lastVerified: '2026-08-30'
+- id: LAB02-Q32
+  objectiveIds:
+  - IG-USERS-04
+  difficulty: applied
+  stem: 'An automation author must choose the correct response to this scenario: Which implementation step should the learner
+    perform for ''Manage external users''?'
+  options:
+    A: Copy resource identifiers from another run instead of recording returned IDs.
+    B: Create a security group that represents the SSPR pilot cohort.
+    C: Skip the operation and edit validation.json to show a passing result.
+    D: Replace the lab action with a tenant-wide change that is easier to discover.
+  correctOption: B
+  explanation: 'The lab''s reviewed command path performs this bounded action: Create a security group that represents the
+    SSPR pilot cohort.'
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: 'Correct. The lab''s reviewed command path performs this bounded action: Create a security group that represents the
+      SSPR pilot cohort.'
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/entra/fundamentals/how-to-manage-user-profile-info
+  lastVerified: '2026-08-30'
+- id: LAB02-Q33
+  objectiveIds:
+  - IG-USERS-05
+  difficulty: applied
+  stem: 'A lab run with a unique run ID reaches this decision: Which evidence most directly validates ''Configure self-service
+    password reset (SSPR)'' for invited guest user?'
+  options:
+    A: List the entire subscription and assume similarly named resources belong to this run.
+    B: Record a credential so another learner can replay the authenticated session.
+    C: Query the exact recorded scope and independently verify the intended recorded state.
+    D: Treat the setup exit code as proof of every configuration and relationship.
+  correctOption: C
+  explanation: The independent validation path must prove the intended recorded state for the exact recorded object.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: Correct. The independent validation path must prove the intended recorded state for the exact recorded object.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/entra/external-id/b2b-quickstart-invite-powershell
+  lastVerified: '2026-08-30'
+- id: LAB02-Q34
+  objectiveIds:
+  - IG-USERS-03
+  difficulty: applied
+  stem: 'While comparing the intended and actual states, the operator asks this question: The ''Manage licenses in Microsoft
+    Entra ID'' checkpoint reaches an external prerequisite. What should happen?'
+  options:
+    A: Invent a domain, notification target, license, quota, or tenant value and continue.
+    B: Broaden permissions until the prerequisite can no longer block the operation.
+    C: Mark the branch passed because its command syntax was checked offline.
+    D: 'Run the branch only when this documented gate is satisfied: Requires a real disposable guest email for invitation,
+      an available SKU for license assignment, and an authorized tenant policy change for SSPR.'
+  correctOption: D
+  explanation: 'Unavailable live prerequisites remain skipped or partial; the documented gate is: Requires a real disposable
+    guest email for invitation, an available SKU for license assignment, and an authorized tenant policy change for SSPR.'
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: 'Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: Requires a real disposable
+      guest email for invitation, an available SKU for license assignment, and an authorized tenant policy change for SSPR.'
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/entra/identity/users/licensing-powershell-graph-examples
+  lastVerified: '2026-08-30'
+- id: LAB02-Q35
+  objectiveIds:
+  - IG-USERS-04
+  difficulty: applied
+  stem: 'A peer reviewer examines the proposed implementation for this scenario: What is the safest command-evidence practice
+    after completing ''Manage external users''?'
+  options:
+    A: Retain only redacted structured output from an independent query of the recorded run.
+    B: Save tokens, keys, passwords, or SAS values beside the validation result.
+    C: Reuse successful output from an earlier run with a similar resource name.
+    D: Commit the complete account object so reviewers can identify the tenant.
+  correctOption: A
+  explanation: Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
+  distractorExplanations:
+    A: Correct. Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/entra/identity/authentication/tutorial-enable-sspr
+  lastVerified: '2026-08-30'
+- id: LAB02-Q36
+  objectiveIds:
+  - IG-USERS-03
+  difficulty: applied
+  stem: 'During a controlled rollout, the change team encounters this requirement: A learner previews the implementation for
+    ''Manage licenses in Microsoft Entra ID''. What behavior is required?'
+  options:
+    A: Create the baseline immediately and request approval only before cleanup.
+    B: Display the context, intended changes, cost and gated branches without mutating Azure.
+    C: Select the first accessible subscription and hide the resulting context.
+    D: Delete any older resource whose name resembles the new run ID.
+  correctOption: B
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/entra/identity/authentication/tutorial-enable-sspr
+  lastVerified: '2026-08-30'
+- id: LAB02-Q37
+  objectiveIds:
+  - IG-USERS-04
+  difficulty: applied
+  stem: 'A support engineer reproduces the following situation in a test environment: Which implementation step should the
+    learner perform for ''Manage external users''?'
+  options:
+    A: Replace the lab action with a tenant-wide change that is easier to discover.
+    B: Copy resource identifiers from another run instead of recording returned IDs.
+    C: Create a security group that represents the SSPR pilot cohort.
+    D: Skip the operation and edit validation.json to show a passing result.
+  correctOption: C
+  explanation: 'The lab''s reviewed command path performs this bounded action: Create a security group that represents the
+    SSPR pilot cohort.'
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: 'Correct. The lab''s reviewed command path performs this bounded action: Create a security group that represents the
+      SSPR pilot cohort.'
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/entra/fundamentals/how-to-manage-user-profile-info
+  lastVerified: '2026-08-30'
+- id: LAB02-Q38
+  objectiveIds:
+  - IG-USERS-05
+  difficulty: applied
+  stem: 'While recording validation evidence, the administrator evaluates this question: Which evidence most directly validates
+    ''Configure self-service password reset (SSPR)'' for invited guest user?'
+  options:
+    A: Treat the setup exit code as proof of every configuration and relationship.
+    B: List the entire subscription and assume similarly named resources belong to this run.
+    C: Record a credential so another learner can replay the authenticated session.
+    D: Query the exact recorded scope and independently verify the intended recorded state.
+  correctOption: D
+  explanation: The independent validation path must prove the intended recorded state for the exact recorded object.
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: Correct. The independent validation path must prove the intended recorded state for the exact recorded object.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/entra/external-id/b2b-quickstart-invite-powershell
+  lastVerified: '2026-08-30'
+- id: LAB02-Q39
+  objectiveIds:
+  - IG-USERS-03
+  difficulty: applied
+  stem: 'A configuration owner must approve one response to this scenario: The ''Manage licenses in Microsoft Entra ID'' checkpoint
+    reaches an external prerequisite. What should happen?'
+  options:
+    A: 'Run the branch only when this documented gate is satisfied: Requires a real disposable guest email for invitation,
+      an available SKU for license assignment, and an authorized tenant policy change for SSPR.'
+    B: Invent a domain, notification target, license, quota, or tenant value and continue.
+    C: Broaden permissions until the prerequisite can no longer block the operation.
+    D: Mark the branch passed because its command syntax was checked offline.
+  correctOption: A
+  explanation: 'Unavailable live prerequisites remain skipped or partial; the documented gate is: Requires a real disposable
+    guest email for invitation, an available SKU for license assignment, and an authorized tenant policy change for SSPR.'
+  distractorExplanations:
+    A: 'Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: Requires a real disposable
+      guest email for invitation, an available SKU for license assignment, and an authorized tenant policy change for SSPR.'
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/entra/identity/users/licensing-powershell-graph-examples
+  lastVerified: '2026-08-30'
+- id: LAB02-Q40
+  objectiveIds:
+  - IG-USERS-04
+  difficulty: applied
+  stem: 'During post-deployment verification, the team reviews this situation: What is the safest command-evidence practice
+    after completing ''Manage external users''?'
+  options:
+    A: Commit the complete account object so reviewers can identify the tenant.
+    B: Retain only redacted structured output from an independent query of the recorded run.
+    C: Save tokens, keys, passwords, or SAS values beside the validation result.
+    D: Reuse successful output from an earlier run with a similar resource name.
+  correctOption: B
+  explanation: Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: Correct. Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/entra/identity/authentication/tutorial-enable-sspr
+  lastVerified: '2026-08-30'
+- id: LAB02-Q41
   objectiveIds:
   - IG-USERS-05
   - IG-USERS-03
   difficulty: advanced
-  stem: Validation for 'Configure self-service password reset (SSPR)' fails after setup. What is the best break/fix
-    method?
+  stem: Validation for 'Configure self-service password reset (SSPR)' fails after setup. What is the best break/fix method?
   options:
     A: Rerun setup repeatedly with new names until one attempt appears successful.
     B: Change validation.json directly so the failed result reads pass.
@@ -196,19 +916,193 @@
   sourceUrls:
   - https://learn.microsoft.com/en-us/entra/fundamentals/how-to-manage-user-profile-info
   lastVerified: '2026-08-30'
-- id: LAB02-Q10
+- id: LAB02-Q42
   objectiveIds:
   - IG-USERS-03
   - IG-USERS-04
   difficulty: advanced
-  stem: The operation for 'Manage licenses in Microsoft Entra ID' is asynchronous or gated. How should completion
-    be recorded?
+  stem: The operation for 'Manage licenses in Microsoft Entra ID' is asynchronous or gated. How should completion be recorded?
   options:
     A: Record pass as soon as the request is accepted, regardless of its final state.
     B: Fabricate expected output so the assessment and documentation appear complete.
     C: Remove the check from validation whenever the service takes longer than expected.
-    D: Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence
-      exists.
+    D: Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
+  correctOption: D
+  explanation: Accepted requests and offline checks do not prove the final live state.
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: Correct. Accepted requests and offline checks do not prove the final live state.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/entra/external-id/b2b-quickstart-invite-powershell
+  lastVerified: '2026-08-30'
+- id: LAB02-Q43
+  objectiveIds:
+  - IG-USERS-05
+  - IG-USERS-03
+  difficulty: advanced
+  stem: 'A security and reliability review identifies this design decision: Validation for ''Configure self-service password
+    reset (SSPR)'' fails after setup. What is the best break/fix method?'
+  options:
+    A: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+    B: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+    C: Rerun setup repeatedly with new names until one attempt appears successful.
+    D: Change validation.json directly so the failed result reads pass.
+  correctOption: A
+  explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
+  distractorExplanations:
+    A: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/entra/fundamentals/how-to-manage-user-profile-info
+  lastVerified: '2026-08-30'
+- id: LAB02-Q44
+  objectiveIds:
+  - IG-USERS-03
+  - IG-USERS-04
+  difficulty: advanced
+  stem: 'While diagnosing unexpected Azure behavior, the engineer considers this situation: The operation for ''Manage licenses
+    in Microsoft Entra ID'' is asynchronous or gated. How should completion be recorded?'
+  options:
+    A: Remove the check from validation whenever the service takes longer than expected.
+    B: Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
+    C: Record pass as soon as the request is accepted, regardless of its final state.
+    D: Fabricate expected output so the assessment and documentation appear complete.
+  correctOption: B
+  explanation: Accepted requests and offline checks do not prove the final live state.
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: Correct. Accepted requests and offline checks do not prove the final live state.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/entra/external-id/b2b-quickstart-invite-powershell
+  lastVerified: '2026-08-30'
+- id: LAB02-Q45
+  objectiveIds:
+  - IG-USERS-05
+  - IG-USERS-03
+  difficulty: advanced
+  stem: 'An architecture review requires the strongest response to this scenario: Validation for ''Configure self-service
+    password reset (SSPR)'' fails after setup. What is the best break/fix method?'
+  options:
+    A: Rerun setup repeatedly with new names until one attempt appears successful.
+    B: Change validation.json directly so the failed result reads pass.
+    C: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+    D: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+  correctOption: C
+  explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/entra/fundamentals/how-to-manage-user-profile-info
+  lastVerified: '2026-08-30'
+- id: LAB02-Q46
+  objectiveIds:
+  - IG-USERS-03
+  - IG-USERS-04
+  difficulty: advanced
+  stem: 'During break/fix validation, the operator encounters this question: The operation for ''Manage licenses in Microsoft
+    Entra ID'' is asynchronous or gated. How should completion be recorded?'
+  options:
+    A: Record pass as soon as the request is accepted, regardless of its final state.
+    B: Fabricate expected output so the assessment and documentation appear complete.
+    C: Remove the check from validation whenever the service takes longer than expected.
+    D: Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
+  correctOption: D
+  explanation: Accepted requests and offline checks do not prove the final live state.
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: Correct. Accepted requests and offline checks do not prove the final live state.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/entra/external-id/b2b-quickstart-invite-powershell
+  lastVerified: '2026-08-30'
+- id: LAB02-Q47
+  objectiveIds:
+  - IG-USERS-05
+  - IG-USERS-03
+  difficulty: advanced
+  stem: 'A complex support case depends on correctly interpreting this requirement: Validation for ''Configure self-service
+    password reset (SSPR)'' fails after setup. What is the best break/fix method?'
+  options:
+    A: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+    B: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+    C: Rerun setup repeatedly with new names until one attempt appears successful.
+    D: Change validation.json directly so the failed result reads pass.
+  correctOption: A
+  explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
+  distractorExplanations:
+    A: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/entra/fundamentals/how-to-manage-user-profile-info
+  lastVerified: '2026-08-30'
+- id: LAB02-Q48
+  objectiveIds:
+  - IG-USERS-03
+  - IG-USERS-04
+  difficulty: advanced
+  stem: 'While correcting configuration drift, the team evaluates this scenario: The operation for ''Manage licenses in Microsoft
+    Entra ID'' is asynchronous or gated. How should completion be recorded?'
+  options:
+    A: Remove the check from validation whenever the service takes longer than expected.
+    B: Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
+    C: Record pass as soon as the request is accepted, regardless of its final state.
+    D: Fabricate expected output so the assessment and documentation appear complete.
+  correctOption: B
+  explanation: Accepted requests and offline checks do not prove the final live state.
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: Correct. Accepted requests and offline checks do not prove the final live state.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/entra/external-id/b2b-quickstart-invite-powershell
+  lastVerified: '2026-08-30'
+- id: LAB02-Q49
+  objectiveIds:
+  - IG-USERS-05
+  - IG-USERS-03
+  difficulty: advanced
+  stem: 'A recovery exercise exposes the following technical decision: Validation for ''Configure self-service password reset
+    (SSPR)'' fails after setup. What is the best break/fix method?'
+  options:
+    A: Rerun setup repeatedly with new names until one attempt appears successful.
+    B: Change validation.json directly so the failed result reads pass.
+    C: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+    D: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+  correctOption: C
+  explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/entra/fundamentals/how-to-manage-user-profile-info
+  lastVerified: '2026-08-30'
+- id: LAB02-Q50
+  objectiveIds:
+  - IG-USERS-03
+  - IG-USERS-04
+  difficulty: advanced
+  stem: 'During final design assurance, the reviewer must resolve this situation: The operation for ''Manage licenses in Microsoft
+    Entra ID'' is asynchronous or gated. How should completion be recorded?'
+  options:
+    A: Record pass as soon as the request is accepted, regardless of its final state.
+    B: Fabricate expected output so the assessment and documentation appear complete.
+    C: Remove the check from validation whenever the service takes longer than expected.
+    D: Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
   correctOption: D
   explanation: Accepted requests and offline checks do not prove the final live state.
   distractorExplanations:

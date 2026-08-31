@@ -1,143 +1,653 @@
 # Lab 04 answer key
 
-Return to [the questions](QUESTIONS.md).
+Review these explanations only after answering all 50 questions.
 
-## 1. C (`LAB04-Q01`)
+## LAB04-Q01 — A
 
 The lab establishes this design principle: Tags are metadata rather than access controls, and resource locks protect the control plane without replacing RBAC or data-plane protection.
 
-Objectives: IG-GOVERN-02
+- A: Correct. The lab establishes this design principle: Tags are metadata rather than access controls, and resource locks protect the control plane without replacing RBAC or data-plane protection.
+- B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- C: This choice changes or trusts a broader scope than the recorded lab boundary.
+- D: This choice skips independent evidence or relies on ambiguous resource identity.
 
-Why the other choices do not fit:
+Objectives: `IG-GOVERN-02`.
 
-- **A:** This choice changes or trusts a broader scope than the recorded lab boundary.
-- **B:** This choice skips independent evidence or relies on ambiguous resource identity.
-- **D:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-cli).
 
-Source: <https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-cli>
-
-## 2. D (`LAB04-Q02`)
+## LAB04-Q02 — B
 
 The reviewed hands-on action for this objective is: Update tags using merge semantics and verify which values do not inherit automatically.
 
-Objectives: IG-GOVERN-03
+- A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- B: Correct. The reviewed hands-on action for this objective is: Update tags using merge semantics and verify which values do not inherit automatically.
+- C: This choice changes or trusts a broader scope than the recorded lab boundary.
+- D: This choice skips independent evidence or relies on ambiguous resource identity.
 
-Why the other choices do not fit:
+Objectives: `IG-GOVERN-03`.
 
-- **A:** This choice changes or trusts a broader scope than the recorded lab boundary.
-- **B:** This choice skips independent evidence or relies on ambiguous resource identity.
-- **C:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources-cli).
 
-Source: <https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources-cli>
-
-## 3. A (`LAB04-Q03`)
+## LAB04-Q03 — C
 
 Least privilege requires the documented boundary: Contributor plus User Access Administrator for lock management; Management Group Contributor for the optional hierarchy path
 
-Objectives: IG-GOVERN-04
+- A: This choice skips independent evidence or relies on ambiguous resource identity.
+- B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- C: Correct. Least privilege requires the documented boundary: Contributor plus User Access Administrator for lock management; Management Group Contributor for the optional hierarchy path
+- D: This choice changes or trusts a broader scope than the recorded lab boundary.
 
-Why the other choices do not fit:
+Objectives: `IG-GOVERN-04`.
 
-- **B:** This choice changes or trusts a broader scope than the recorded lab boundary.
-- **C:** This choice skips independent evidence or relies on ambiguous resource identity.
-- **D:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources).
 
-Source: <https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources>
+## LAB04-Q04 — D
 
-## 4. B (`LAB04-Q04`)
+The lab establishes this design principle: Tags are metadata rather than access controls, and resource locks protect the control plane without replacing RBAC or data-plane protection.
+
+- A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- B: This choice changes or trusts a broader scope than the recorded lab boundary.
+- C: This choice skips independent evidence or relies on ambiguous resource identity.
+- D: Correct. The lab establishes this design principle: Tags are metadata rather than access controls, and resource locks protect the control plane without replacing RBAC or data-plane protection.
+
+Objectives: `IG-GOVERN-02`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-cli).
+
+## LAB04-Q05 — A
+
+The reviewed hands-on action for this objective is: Update tags using merge semantics and verify which values do not inherit automatically.
+
+- A: Correct. The reviewed hands-on action for this objective is: Update tags using merge semantics and verify which values do not inherit automatically.
+- B: This choice changes or trusts a broader scope than the recorded lab boundary.
+- C: This choice skips independent evidence or relies on ambiguous resource identity.
+- D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+
+Objectives: `IG-GOVERN-03`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources-cli).
+
+## LAB04-Q06 — B
+
+Least privilege requires the documented boundary: Contributor plus User Access Administrator for lock management; Management Group Contributor for the optional hierarchy path
+
+- A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- B: Correct. Least privilege requires the documented boundary: Contributor plus User Access Administrator for lock management; Management Group Contributor for the optional hierarchy path
+- C: This choice changes or trusts a broader scope than the recorded lab boundary.
+- D: This choice skips independent evidence or relies on ambiguous resource identity.
+
+Objectives: `IG-GOVERN-04`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources).
+
+## LAB04-Q07 — C
+
+The lab establishes this design principle: Tags are metadata rather than access controls, and resource locks protect the control plane without replacing RBAC or data-plane protection.
+
+- A: This choice changes or trusts a broader scope than the recorded lab boundary.
+- B: This choice skips independent evidence or relies on ambiguous resource identity.
+- C: Correct. The lab establishes this design principle: Tags are metadata rather than access controls, and resource locks protect the control plane without replacing RBAC or data-plane protection.
+- D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+
+Objectives: `IG-GOVERN-02`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-cli).
+
+## LAB04-Q08 — D
+
+The reviewed hands-on action for this objective is: Update tags using merge semantics and verify which values do not inherit automatically.
+
+- A: This choice changes or trusts a broader scope than the recorded lab boundary.
+- B: This choice skips independent evidence or relies on ambiguous resource identity.
+- C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- D: Correct. The reviewed hands-on action for this objective is: Update tags using merge semantics and verify which values do not inherit automatically.
+
+Objectives: `IG-GOVERN-03`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources-cli).
+
+## LAB04-Q09 — A
+
+Least privilege requires the documented boundary: Contributor plus User Access Administrator for lock management; Management Group Contributor for the optional hierarchy path
+
+- A: Correct. Least privilege requires the documented boundary: Contributor plus User Access Administrator for lock management; Management Group Contributor for the optional hierarchy path
+- B: This choice changes or trusts a broader scope than the recorded lab boundary.
+- C: This choice skips independent evidence or relies on ambiguous resource identity.
+- D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+
+Objectives: `IG-GOVERN-04`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources).
+
+## LAB04-Q10 — B
+
+The lab establishes this design principle: Tags are metadata rather than access controls, and resource locks protect the control plane without replacing RBAC or data-plane protection.
+
+- A: This choice skips independent evidence or relies on ambiguous resource identity.
+- B: Correct. The lab establishes this design principle: Tags are metadata rather than access controls, and resource locks protect the control plane without replacing RBAC or data-plane protection.
+- C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- D: This choice changes or trusts a broader scope than the recorded lab boundary.
+
+Objectives: `IG-GOVERN-02`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-cli).
+
+## LAB04-Q11 — C
+
+The reviewed hands-on action for this objective is: Update tags using merge semantics and verify which values do not inherit automatically.
+
+- A: This choice skips independent evidence or relies on ambiguous resource identity.
+- B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- C: Correct. The reviewed hands-on action for this objective is: Update tags using merge semantics and verify which values do not inherit automatically.
+- D: This choice changes or trusts a broader scope than the recorded lab boundary.
+
+Objectives: `IG-GOVERN-03`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources-cli).
+
+## LAB04-Q12 — D
+
+Least privilege requires the documented boundary: Contributor plus User Access Administrator for lock management; Management Group Contributor for the optional hierarchy path
+
+- A: This choice changes or trusts a broader scope than the recorded lab boundary.
+- B: This choice skips independent evidence or relies on ambiguous resource identity.
+- C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- D: Correct. Least privilege requires the documented boundary: Contributor plus User Access Administrator for lock management; Management Group Contributor for the optional hierarchy path
+
+Objectives: `IG-GOVERN-04`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources).
+
+## LAB04-Q13 — A
+
+The lab establishes this design principle: Tags are metadata rather than access controls, and resource locks protect the control plane without replacing RBAC or data-plane protection.
+
+- A: Correct. The lab establishes this design principle: Tags are metadata rather than access controls, and resource locks protect the control plane without replacing RBAC or data-plane protection.
+- B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- C: This choice changes or trusts a broader scope than the recorded lab boundary.
+- D: This choice skips independent evidence or relies on ambiguous resource identity.
+
+Objectives: `IG-GOVERN-02`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-cli).
+
+## LAB04-Q14 — B
+
+The reviewed hands-on action for this objective is: Update tags using merge semantics and verify which values do not inherit automatically.
+
+- A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- B: Correct. The reviewed hands-on action for this objective is: Update tags using merge semantics and verify which values do not inherit automatically.
+- C: This choice changes or trusts a broader scope than the recorded lab boundary.
+- D: This choice skips independent evidence or relies on ambiguous resource identity.
+
+Objectives: `IG-GOVERN-03`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources-cli).
+
+## LAB04-Q15 — C
+
+Least privilege requires the documented boundary: Contributor plus User Access Administrator for lock management; Management Group Contributor for the optional hierarchy path
+
+- A: This choice skips independent evidence or relies on ambiguous resource identity.
+- B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- C: Correct. Least privilege requires the documented boundary: Contributor plus User Access Administrator for lock management; Management Group Contributor for the optional hierarchy path
+- D: This choice changes or trusts a broader scope than the recorded lab boundary.
+
+Objectives: `IG-GOVERN-04`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources).
+
+## LAB04-Q16 — D
 
 Preview mode is deliberately non-mutating and exposes the complete intended boundary.
 
-Objectives: IG-GOVERN-05
+- A: This choice skips independent evidence or relies on ambiguous resource identity.
+- B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- C: This choice changes or trusts a broader scope than the recorded lab boundary.
+- D: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
 
-Why the other choices do not fit:
+Objectives: `IG-GOVERN-05`.
 
-- **A:** This choice changes or trusts a broader scope than the recorded lab boundary.
-- **C:** This choice skips independent evidence or relies on ambiguous resource identity.
-- **D:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/governance/management-groups/create-management-group-portal).
 
-Source: <https://learn.microsoft.com/en-us/azure/governance/management-groups/create-management-group-portal>
-
-## 5. C (`LAB04-Q05`)
+## LAB04-Q17 — A
 
 The lab's reviewed command path performs this bounded action: Create a resource group with purpose, labId, runId, owner, and expiresOn tags.
 
-Objectives: IG-GOVERN-07
+- A: Correct. The lab's reviewed command path performs this bounded action: Create a resource group with purpose, labId, runId, owner, and expiresOn tags.
+- B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- C: This choice changes or trusts a broader scope than the recorded lab boundary.
+- D: This choice skips independent evidence or relies on ambiguous resource identity.
 
-Why the other choices do not fit:
+Objectives: `IG-GOVERN-07`.
 
-- **A:** This choice changes or trusts a broader scope than the recorded lab boundary.
-- **B:** This choice skips independent evidence or relies on ambiguous resource identity.
-- **D:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-cli).
 
-Source: <https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-cli>
-
-## 6. D (`LAB04-Q06`)
+## LAB04-Q18 — B
 
 The independent validation path must prove Microsoft.Authorization/locks for the exact recorded object.
 
-Objectives: IG-GOVERN-02
+- A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- B: Correct. The independent validation path must prove Microsoft.Authorization/locks for the exact recorded object.
+- C: This choice changes or trusts a broader scope than the recorded lab boundary.
+- D: This choice skips independent evidence or relies on ambiguous resource identity.
 
-Why the other choices do not fit:
+Objectives: `IG-GOVERN-02`.
 
-- **A:** This choice changes or trusts a broader scope than the recorded lab boundary.
-- **B:** This choice skips independent evidence or relies on ambiguous resource identity.
-- **C:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources-cli).
 
-Source: <https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources-cli>
-
-## 7. A (`LAB04-Q07`)
+## LAB04-Q19 — C
 
 Unavailable live prerequisites remain skipped or partial; the documented gate is: Management-group creation is optional and requires explicit tenant hierarchy authorization.
 
-Objectives: IG-GOVERN-03
+- A: This choice skips independent evidence or relies on ambiguous resource identity.
+- B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- C: Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: Management-group creation is optional and requires explicit tenant hierarchy authorization.
+- D: This choice changes or trusts a broader scope than the recorded lab boundary.
 
-Why the other choices do not fit:
+Objectives: `IG-GOVERN-03`.
 
-- **B:** This choice changes or trusts a broader scope than the recorded lab boundary.
-- **C:** This choice skips independent evidence or relies on ambiguous resource identity.
-- **D:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources).
 
-Source: <https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources>
-
-## 8. B (`LAB04-Q08`)
+## LAB04-Q20 — D
 
 Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
 
-Objectives: IG-GOVERN-04
+- A: This choice skips independent evidence or relies on ambiguous resource identity.
+- B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- C: This choice changes or trusts a broader scope than the recorded lab boundary.
+- D: Correct. Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
 
-Why the other choices do not fit:
+Objectives: `IG-GOVERN-04`.
 
-- **A:** This choice changes or trusts a broader scope than the recorded lab boundary.
-- **C:** This choice skips independent evidence or relies on ambiguous resource identity.
-- **D:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/governance/management-groups/create-management-group-portal).
 
-Source: <https://learn.microsoft.com/en-us/azure/governance/management-groups/create-management-group-portal>
+## LAB04-Q21 — A
 
-## 9. C (`LAB04-Q09`)
+Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+
+- A: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+- B: This choice skips independent evidence or relies on ambiguous resource identity.
+- C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- D: This choice changes or trusts a broader scope than the recorded lab boundary.
+
+Objectives: `IG-GOVERN-05`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/governance/management-groups/create-management-group-portal).
+
+## LAB04-Q22 — B
+
+The lab's reviewed command path performs this bounded action: Create a resource group with purpose, labId, runId, owner, and expiresOn tags.
+
+- A: This choice skips independent evidence or relies on ambiguous resource identity.
+- B: Correct. The lab's reviewed command path performs this bounded action: Create a resource group with purpose, labId, runId, owner, and expiresOn tags.
+- C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- D: This choice changes or trusts a broader scope than the recorded lab boundary.
+
+Objectives: `IG-GOVERN-07`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-cli).
+
+## LAB04-Q23 — C
+
+The independent validation path must prove Microsoft.Authorization/locks for the exact recorded object.
+
+- A: This choice skips independent evidence or relies on ambiguous resource identity.
+- B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- C: Correct. The independent validation path must prove Microsoft.Authorization/locks for the exact recorded object.
+- D: This choice changes or trusts a broader scope than the recorded lab boundary.
+
+Objectives: `IG-GOVERN-02`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources-cli).
+
+## LAB04-Q24 — D
+
+Unavailable live prerequisites remain skipped or partial; the documented gate is: Management-group creation is optional and requires explicit tenant hierarchy authorization.
+
+- A: This choice changes or trusts a broader scope than the recorded lab boundary.
+- B: This choice skips independent evidence or relies on ambiguous resource identity.
+- C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- D: Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: Management-group creation is optional and requires explicit tenant hierarchy authorization.
+
+Objectives: `IG-GOVERN-03`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources).
+
+## LAB04-Q25 — A
+
+Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
+
+- A: Correct. Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
+- B: This choice skips independent evidence or relies on ambiguous resource identity.
+- C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- D: This choice changes or trusts a broader scope than the recorded lab boundary.
+
+Objectives: `IG-GOVERN-04`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/governance/management-groups/create-management-group-portal).
+
+## LAB04-Q26 — B
+
+Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+
+- A: This choice changes or trusts a broader scope than the recorded lab boundary.
+- B: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+- C: This choice skips independent evidence or relies on ambiguous resource identity.
+- D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+
+Objectives: `IG-GOVERN-05`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/governance/management-groups/create-management-group-portal).
+
+## LAB04-Q27 — C
+
+The lab's reviewed command path performs this bounded action: Create a resource group with purpose, labId, runId, owner, and expiresOn tags.
+
+- A: This choice changes or trusts a broader scope than the recorded lab boundary.
+- B: This choice skips independent evidence or relies on ambiguous resource identity.
+- C: Correct. The lab's reviewed command path performs this bounded action: Create a resource group with purpose, labId, runId, owner, and expiresOn tags.
+- D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+
+Objectives: `IG-GOVERN-07`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-cli).
+
+## LAB04-Q28 — D
+
+The independent validation path must prove Microsoft.Authorization/locks for the exact recorded object.
+
+- A: This choice changes or trusts a broader scope than the recorded lab boundary.
+- B: This choice skips independent evidence or relies on ambiguous resource identity.
+- C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- D: Correct. The independent validation path must prove Microsoft.Authorization/locks for the exact recorded object.
+
+Objectives: `IG-GOVERN-02`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources-cli).
+
+## LAB04-Q29 — A
+
+Unavailable live prerequisites remain skipped or partial; the documented gate is: Management-group creation is optional and requires explicit tenant hierarchy authorization.
+
+- A: Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: Management-group creation is optional and requires explicit tenant hierarchy authorization.
+- B: This choice changes or trusts a broader scope than the recorded lab boundary.
+- C: This choice skips independent evidence or relies on ambiguous resource identity.
+- D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+
+Objectives: `IG-GOVERN-03`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources).
+
+## LAB04-Q30 — B
+
+Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
+
+- A: This choice changes or trusts a broader scope than the recorded lab boundary.
+- B: Correct. Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
+- C: This choice skips independent evidence or relies on ambiguous resource identity.
+- D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+
+Objectives: `IG-GOVERN-04`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/governance/management-groups/create-management-group-portal).
+
+## LAB04-Q31 — C
+
+Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+
+- A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- B: This choice changes or trusts a broader scope than the recorded lab boundary.
+- C: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+- D: This choice skips independent evidence or relies on ambiguous resource identity.
+
+Objectives: `IG-GOVERN-05`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/governance/management-groups/create-management-group-portal).
+
+## LAB04-Q32 — D
+
+The lab's reviewed command path performs this bounded action: Create a resource group with purpose, labId, runId, owner, and expiresOn tags.
+
+- A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- B: This choice changes or trusts a broader scope than the recorded lab boundary.
+- C: This choice skips independent evidence or relies on ambiguous resource identity.
+- D: Correct. The lab's reviewed command path performs this bounded action: Create a resource group with purpose, labId, runId, owner, and expiresOn tags.
+
+Objectives: `IG-GOVERN-07`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-cli).
+
+## LAB04-Q33 — A
+
+The independent validation path must prove Microsoft.Authorization/locks for the exact recorded object.
+
+- A: Correct. The independent validation path must prove Microsoft.Authorization/locks for the exact recorded object.
+- B: This choice changes or trusts a broader scope than the recorded lab boundary.
+- C: This choice skips independent evidence or relies on ambiguous resource identity.
+- D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+
+Objectives: `IG-GOVERN-02`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources-cli).
+
+## LAB04-Q34 — B
+
+Unavailable live prerequisites remain skipped or partial; the documented gate is: Management-group creation is optional and requires explicit tenant hierarchy authorization.
+
+- A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- B: Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: Management-group creation is optional and requires explicit tenant hierarchy authorization.
+- C: This choice changes or trusts a broader scope than the recorded lab boundary.
+- D: This choice skips independent evidence or relies on ambiguous resource identity.
+
+Objectives: `IG-GOVERN-03`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources).
+
+## LAB04-Q35 — C
+
+Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
+
+- A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- B: This choice changes or trusts a broader scope than the recorded lab boundary.
+- C: Correct. Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
+- D: This choice skips independent evidence or relies on ambiguous resource identity.
+
+Objectives: `IG-GOVERN-04`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/governance/management-groups/create-management-group-portal).
+
+## LAB04-Q36 — D
+
+Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+
+- A: This choice skips independent evidence or relies on ambiguous resource identity.
+- B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- C: This choice changes or trusts a broader scope than the recorded lab boundary.
+- D: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+
+Objectives: `IG-GOVERN-05`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/governance/management-groups/create-management-group-portal).
+
+## LAB04-Q37 — A
+
+The lab's reviewed command path performs this bounded action: Create a resource group with purpose, labId, runId, owner, and expiresOn tags.
+
+- A: Correct. The lab's reviewed command path performs this bounded action: Create a resource group with purpose, labId, runId, owner, and expiresOn tags.
+- B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- C: This choice changes or trusts a broader scope than the recorded lab boundary.
+- D: This choice skips independent evidence or relies on ambiguous resource identity.
+
+Objectives: `IG-GOVERN-07`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-cli).
+
+## LAB04-Q38 — B
+
+The independent validation path must prove Microsoft.Authorization/locks for the exact recorded object.
+
+- A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- B: Correct. The independent validation path must prove Microsoft.Authorization/locks for the exact recorded object.
+- C: This choice changes or trusts a broader scope than the recorded lab boundary.
+- D: This choice skips independent evidence or relies on ambiguous resource identity.
+
+Objectives: `IG-GOVERN-02`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources-cli).
+
+## LAB04-Q39 — C
+
+Unavailable live prerequisites remain skipped or partial; the documented gate is: Management-group creation is optional and requires explicit tenant hierarchy authorization.
+
+- A: This choice skips independent evidence or relies on ambiguous resource identity.
+- B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- C: Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: Management-group creation is optional and requires explicit tenant hierarchy authorization.
+- D: This choice changes or trusts a broader scope than the recorded lab boundary.
+
+Objectives: `IG-GOVERN-03`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources).
+
+## LAB04-Q40 — D
+
+Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
+
+- A: This choice skips independent evidence or relies on ambiguous resource identity.
+- B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- C: This choice changes or trusts a broader scope than the recorded lab boundary.
+- D: Correct. Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
+
+Objectives: `IG-GOVERN-04`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/governance/management-groups/create-management-group-portal).
+
+## LAB04-Q41 — A
 
 Evidence-led repair preserves scope and makes the cause and correction auditable.
 
-Objectives: IG-GOVERN-05, IG-GOVERN-07
+- A: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+- B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- C: This choice changes or trusts a broader scope than the recorded lab boundary.
+- D: This choice skips independent evidence or relies on ambiguous resource identity.
 
-Why the other choices do not fit:
+Objectives: `IG-GOVERN-05`, `IG-GOVERN-07`.
 
-- **A:** This choice changes or trusts a broader scope than the recorded lab boundary.
-- **B:** This choice skips independent evidence or relies on ambiguous resource identity.
-- **D:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-cli).
 
-Source: <https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-cli>
-
-## 10. D (`LAB04-Q10`)
+## LAB04-Q42 — B
 
 Accepted requests and offline checks do not prove the final live state.
 
-Objectives: IG-GOVERN-07, IG-GOVERN-02
+- A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- B: Correct. Accepted requests and offline checks do not prove the final live state.
+- C: This choice changes or trusts a broader scope than the recorded lab boundary.
+- D: This choice skips independent evidence or relies on ambiguous resource identity.
 
-Why the other choices do not fit:
+Objectives: `IG-GOVERN-07`, `IG-GOVERN-02`.
 
-- **A:** This choice changes or trusts a broader scope than the recorded lab boundary.
-- **B:** This choice skips independent evidence or relies on ambiguous resource identity.
-- **C:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources-cli).
 
-Source: <https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources-cli>
+## LAB04-Q43 — C
+
+Evidence-led repair preserves scope and makes the cause and correction auditable.
+
+- A: This choice changes or trusts a broader scope than the recorded lab boundary.
+- B: This choice skips independent evidence or relies on ambiguous resource identity.
+- C: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+- D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+
+Objectives: `IG-GOVERN-05`, `IG-GOVERN-07`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-cli).
+
+## LAB04-Q44 — D
+
+Accepted requests and offline checks do not prove the final live state.
+
+- A: This choice changes or trusts a broader scope than the recorded lab boundary.
+- B: This choice skips independent evidence or relies on ambiguous resource identity.
+- C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- D: Correct. Accepted requests and offline checks do not prove the final live state.
+
+Objectives: `IG-GOVERN-07`, `IG-GOVERN-02`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources-cli).
+
+## LAB04-Q45 — A
+
+Evidence-led repair preserves scope and makes the cause and correction auditable.
+
+- A: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+- B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- C: This choice changes or trusts a broader scope than the recorded lab boundary.
+- D: This choice skips independent evidence or relies on ambiguous resource identity.
+
+Objectives: `IG-GOVERN-05`, `IG-GOVERN-07`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-cli).
+
+## LAB04-Q46 — B
+
+Accepted requests and offline checks do not prove the final live state.
+
+- A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- B: Correct. Accepted requests and offline checks do not prove the final live state.
+- C: This choice changes or trusts a broader scope than the recorded lab boundary.
+- D: This choice skips independent evidence or relies on ambiguous resource identity.
+
+Objectives: `IG-GOVERN-07`, `IG-GOVERN-02`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources-cli).
+
+## LAB04-Q47 — C
+
+Evidence-led repair preserves scope and makes the cause and correction auditable.
+
+- A: This choice changes or trusts a broader scope than the recorded lab boundary.
+- B: This choice skips independent evidence or relies on ambiguous resource identity.
+- C: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+- D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+
+Objectives: `IG-GOVERN-05`, `IG-GOVERN-07`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-cli).
+
+## LAB04-Q48 — D
+
+Accepted requests and offline checks do not prove the final live state.
+
+- A: This choice changes or trusts a broader scope than the recorded lab boundary.
+- B: This choice skips independent evidence or relies on ambiguous resource identity.
+- C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- D: Correct. Accepted requests and offline checks do not prove the final live state.
+
+Objectives: `IG-GOVERN-07`, `IG-GOVERN-02`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources-cli).
+
+## LAB04-Q49 — A
+
+Evidence-led repair preserves scope and makes the cause and correction auditable.
+
+- A: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+- B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- C: This choice changes or trusts a broader scope than the recorded lab boundary.
+- D: This choice skips independent evidence or relies on ambiguous resource identity.
+
+Objectives: `IG-GOVERN-05`, `IG-GOVERN-07`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-cli).
+
+## LAB04-Q50 — B
+
+Accepted requests and offline checks do not prove the final live state.
+
+- A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- B: Correct. Accepted requests and offline checks do not prove the final live state.
+- C: This choice changes or trusts a broader scope than the recorded lab boundary.
+- D: This choice skips independent evidence or relies on ambiguous resource identity.
+
+Objectives: `IG-GOVERN-07`, `IG-GOVERN-02`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources-cli).

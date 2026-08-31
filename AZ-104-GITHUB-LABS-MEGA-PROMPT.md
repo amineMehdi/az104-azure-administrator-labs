@@ -695,12 +695,12 @@ The CLI/PowerShell-first rule is compatible with the exam's administration topic
 
 The project owner subsequently approved the following requirements, which extend the mega prompt and take precedence where it is silent:
 
-- Create exactly 250 original multiple-choice questions: 50 for each of the five official AZ-104 domains.
+- Create exactly 1,250 original multiple-choice questions: 50 in each assessment-enabled lab from Lab 01 through Lab 25.
 - Give every question four options (A–D) and exactly one correct answer.
 - Store the source in `assessment/questions.yml`, learner questions in `assessment/QUESTIONS.md`, and explanations in `assessment/ANSWERS.md` inside Labs 01–25 according to the locked allocation.
 - Keep Lab 00 and Capstones 26–27 hands-on only, without separate assessment directories.
 - Map every question only to official objective IDs in its lab's declared primary assessment domain.
 - Assess every one of the 82 official objective bullets at least once.
-- Use a 15 foundational / 25 applied / 10 advanced difficulty mix in each domain.
+- Use a 15 foundational / 25 applied / 10 advanced difficulty mix in each assessment-enabled lab.
 - Explain why the correct option is right and why each distractor is wrong, citing current official Microsoft documentation.
-- Use each correct-answer position 12 or 13 times per domain and prohibit exam dumps, copied practice questions, ambiguous trick wording, and synthetic claims that questions came from the real exam.
+- Use each correct-answer position 12 or 13 times per assessment-enabled lab and prohibit exam dumps, copied practice questions, ambiguous trick wording, and synthetic claims that questions came from the real exam.

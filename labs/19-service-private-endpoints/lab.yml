@@ -2,8 +2,7 @@ id: LAB-19
 slug: 19-service-private-endpoints
 title: Compare service endpoints and private endpoints
 blueprintVersion: '2026-04-17'
-domain: Implement and manage storage / Deploy and manage Azure compute resources / Implement and manage virtual
-  networking
+domain: Implement and manage storage / Deploy and manage Azure compute resources / Implement and manage virtual networking
 objectives:
 - ST-ACCESS-01
 - CP-APP-07
@@ -26,8 +25,8 @@ cost:
   - storage account
   - private endpoint
   - private DNS zone
-  notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator
-    before execution and clean up immediately.
+  notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator before
+    execution and clean up immediately.
 permissions:
   azureRbacRoles:
   - Network Contributor and Storage Account Contributor on the lab resource group
@@ -74,7 +73,7 @@ cleanup:
   residualAuditRequired: true
 assessment:
   enabled: true
-  questionCount: 10
+  questionCount: 50
   primaryDomain: networking
 lastOfflineValidated: '2026-08-30'
 lastLiveVerified: null

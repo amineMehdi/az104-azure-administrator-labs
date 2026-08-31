@@ -35,6 +35,9 @@ jobs:
       - name: Confirm generated indexes are current
         run: python tools/generate_indexes.py --check
 
+      - name: Confirm 50-question lab assessments are current
+        run: python tools/expand_assessments.py --check
+
       - name: Install PowerShell quality modules
         shell: pwsh
         run: |

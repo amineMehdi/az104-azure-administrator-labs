@@ -4,20 +4,20 @@
   difficulty: foundational
   stem: Which principle is most important when working on 'Provision an App Service plan' in Lab 15?
   options:
-    A: App Service plan scale affects workers shared by apps, while deployment slots isolate deployable content
-      and selected sticky configuration before a controlled swap.
-    B: The shortest command is always correct even when it changes a broader scope.
-    C: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-    D: A recognizable resource name removes the need for validation and scoped cleanup.
-  correctOption: A
-  explanation: 'The lab establishes this design principle: App Service plan scale affects workers shared by apps,
-    while deployment slots isolate deployable content and selected sticky configuration before a controlled swap.'
+    A: The shortest command is always correct even when it changes a broader scope.
+    B: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+    C: A recognizable resource name removes the need for validation and scoped cleanup.
+    D: App Service plan scale affects workers shared by apps, while deployment slots isolate deployable content and selected
+      sticky configuration before a controlled swap.
+  correctOption: D
+  explanation: 'The lab establishes this design principle: App Service plan scale affects workers shared by apps, while deployment
+    slots isolate deployable content and selected sticky configuration before a controlled swap.'
   distractorExplanations:
-    A: 'Correct. The lab establishes this design principle: App Service plan scale affects workers shared by apps,
-      while deployment slots isolate deployable content and selected sticky configuration before a controlled swap.'
-    B: This choice changes or trusts a broader scope than the recorded lab boundary.
-    C: This choice skips independent evidence or relies on ambiguous resource identity.
-    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: 'Correct. The lab establishes this design principle: App Service plan scale affects workers shared by apps, while deployment
+      slots isolate deployable content and selected sticky configuration before a controlled swap.'
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/app-service/quickstart-powershell
   lastVerified: '2026-08-30'
@@ -27,23 +27,329 @@
   difficulty: foundational
   stem: Which lab action directly supports the objective 'Configure scaling for an App Service plan'?
   options:
-    A: Change the active tenant without displaying or confirming the resulting context.
-    B: Scale the plan manually and configure bounded CPU-based autoscale where the SKU supports it.
-    C: Search the whole tenant for a similar display name and modify the first match.
-    D: Mark the objective complete after reading documentation without checking any state.
-  correctOption: B
-  explanation: 'The reviewed hands-on action for this objective is: Scale the plan manually and configure bounded
-    CPU-based autoscale where the SKU supports it.'
+    A: Scale the plan manually and configure bounded CPU-based autoscale where the SKU supports it.
+    B: Search the whole tenant for a similar display name and modify the first match.
+    C: Mark the objective complete after reading documentation without checking any state.
+    D: Change the active tenant without displaying or confirming the resulting context.
+  correctOption: A
+  explanation: 'The reviewed hands-on action for this objective is: Scale the plan manually and configure bounded CPU-based
+    autoscale where the SKU supports it.'
   distractorExplanations:
-    A: This choice changes or trusts a broader scope than the recorded lab boundary.
-    B: 'Correct. The reviewed hands-on action for this objective is: Scale the plan manually and configure bounded
-      CPU-based autoscale where the SKU supports it.'
-    C: This choice skips independent evidence or relies on ambiguous resource identity.
-    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    A: 'Correct. The reviewed hands-on action for this objective is: Scale the plan manually and configure bounded CPU-based
+      autoscale where the SKU supports it.'
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/app-service/manage-scale-up
   lastVerified: '2026-08-30'
 - id: LAB15-Q03
+  objectiveIds:
+  - CP-APP-01
+  difficulty: foundational
+  stem: 'In a fundamentals workshop, the instructor presents this requirement: Which principle is most important when working
+    on ''Provision an App Service plan'' in Lab 15?'
+  options:
+    A: A recognizable resource name removes the need for validation and scoped cleanup.
+    B: App Service plan scale affects workers shared by apps, while deployment slots isolate deployable content and selected
+      sticky configuration before a controlled swap.
+    C: The shortest command is always correct even when it changes a broader scope.
+    D: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+  correctOption: B
+  explanation: 'The lab establishes this design principle: App Service plan scale affects workers shared by apps, while deployment
+    slots isolate deployable content and selected sticky configuration before a controlled swap.'
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: 'Correct. The lab establishes this design principle: App Service plan scale affects workers shared by apps, while deployment
+      slots isolate deployable content and selected sticky configuration before a controlled swap.'
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/quickstart-powershell
+  lastVerified: '2026-08-30'
+- id: LAB15-Q04
+  objectiveIds:
+  - CP-APP-02
+  difficulty: foundational
+  stem: 'Before making a change, a learner checks this core behavior: Which lab action directly supports the objective ''Configure
+    scaling for an App Service plan''?'
+  options:
+    A: Mark the objective complete after reading documentation without checking any state.
+    B: Change the active tenant without displaying or confirming the resulting context.
+    C: Scale the plan manually and configure bounded CPU-based autoscale where the SKU supports it.
+    D: Search the whole tenant for a similar display name and modify the first match.
+  correctOption: C
+  explanation: 'The reviewed hands-on action for this objective is: Scale the plan manually and configure bounded CPU-based
+    autoscale where the SKU supports it.'
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: 'Correct. The reviewed hands-on action for this objective is: Scale the plan manually and configure bounded CPU-based
+      autoscale where the SKU supports it.'
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/manage-scale-up
+  lastVerified: '2026-08-30'
+- id: LAB15-Q05
+  objectiveIds:
+  - CP-APP-01
+  difficulty: foundational
+  stem: 'During a design vocabulary review, the team evaluates this situation: Which principle is most important when working
+    on ''Provision an App Service plan'' in Lab 15?'
+  options:
+    A: The shortest command is always correct even when it changes a broader scope.
+    B: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+    C: A recognizable resource name removes the need for validation and scoped cleanup.
+    D: App Service plan scale affects workers shared by apps, while deployment slots isolate deployable content and selected
+      sticky configuration before a controlled swap.
+  correctOption: D
+  explanation: 'The lab establishes this design principle: App Service plan scale affects workers shared by apps, while deployment
+    slots isolate deployable content and selected sticky configuration before a controlled swap.'
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: 'Correct. The lab establishes this design principle: App Service plan scale affects workers shared by apps, while deployment
+      slots isolate deployable content and selected sticky configuration before a controlled swap.'
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/quickstart-powershell
+  lastVerified: '2026-08-30'
+- id: LAB15-Q06
+  objectiveIds:
+  - CP-APP-02
+  difficulty: foundational
+  stem: 'In a command-planning session, an administrator asks this question: Which lab action directly supports the objective
+    ''Configure scaling for an App Service plan''?'
+  options:
+    A: Scale the plan manually and configure bounded CPU-based autoscale where the SKU supports it.
+    B: Search the whole tenant for a similar display name and modify the first match.
+    C: Mark the objective complete after reading documentation without checking any state.
+    D: Change the active tenant without displaying or confirming the resulting context.
+  correctOption: A
+  explanation: 'The reviewed hands-on action for this objective is: Scale the plan manually and configure bounded CPU-based
+    autoscale where the SKU supports it.'
+  distractorExplanations:
+    A: 'Correct. The reviewed hands-on action for this objective is: Scale the plan manually and configure bounded CPU-based
+      autoscale where the SKU supports it.'
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/manage-scale-up
+  lastVerified: '2026-08-30'
+- id: LAB15-Q07
+  objectiveIds:
+  - CP-APP-01
+  difficulty: foundational
+  stem: 'While preparing the lab, a learner verifies this platform rule: Which principle is most important when working on
+    ''Provision an App Service plan'' in Lab 15?'
+  options:
+    A: A recognizable resource name removes the need for validation and scoped cleanup.
+    B: App Service plan scale affects workers shared by apps, while deployment slots isolate deployable content and selected
+      sticky configuration before a controlled swap.
+    C: The shortest command is always correct even when it changes a broader scope.
+    D: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+  correctOption: B
+  explanation: 'The lab establishes this design principle: App Service plan scale affects workers shared by apps, while deployment
+    slots isolate deployable content and selected sticky configuration before a controlled swap.'
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: 'Correct. The lab establishes this design principle: App Service plan scale affects workers shared by apps, while deployment
+      slots isolate deployable content and selected sticky configuration before a controlled swap.'
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/quickstart-powershell
+  lastVerified: '2026-08-30'
+- id: LAB15-Q08
+  objectiveIds:
+  - CP-APP-02
+  difficulty: foundational
+  stem: 'During peer review, the team must identify the accurate response to this scenario: Which lab action directly supports
+    the objective ''Configure scaling for an App Service plan''?'
+  options:
+    A: Mark the objective complete after reading documentation without checking any state.
+    B: Change the active tenant without displaying or confirming the resulting context.
+    C: Scale the plan manually and configure bounded CPU-based autoscale where the SKU supports it.
+    D: Search the whole tenant for a similar display name and modify the first match.
+  correctOption: C
+  explanation: 'The reviewed hands-on action for this objective is: Scale the plan manually and configure bounded CPU-based
+    autoscale where the SKU supports it.'
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: 'Correct. The reviewed hands-on action for this objective is: Scale the plan manually and configure bounded CPU-based
+      autoscale where the SKU supports it.'
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/manage-scale-up
+  lastVerified: '2026-08-30'
+- id: LAB15-Q09
+  objectiveIds:
+  - CP-APP-01
+  difficulty: foundational
+  stem: 'In an operations briefing, a new team member receives this question: Which principle is most important when working
+    on ''Provision an App Service plan'' in Lab 15?'
+  options:
+    A: The shortest command is always correct even when it changes a broader scope.
+    B: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+    C: A recognizable resource name removes the need for validation and scoped cleanup.
+    D: App Service plan scale affects workers shared by apps, while deployment slots isolate deployable content and selected
+      sticky configuration before a controlled swap.
+  correctOption: D
+  explanation: 'The lab establishes this design principle: App Service plan scale affects workers shared by apps, while deployment
+    slots isolate deployable content and selected sticky configuration before a controlled swap.'
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: 'Correct. The lab establishes this design principle: App Service plan scale affects workers shared by apps, while deployment
+      slots isolate deployable content and selected sticky configuration before a controlled swap.'
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/quickstart-powershell
+  lastVerified: '2026-08-30'
+- id: LAB15-Q10
+  objectiveIds:
+  - CP-APP-02
+  difficulty: foundational
+  stem: 'While building a support checklist, an engineer reviews this requirement: Which lab action directly supports the
+    objective ''Configure scaling for an App Service plan''?'
+  options:
+    A: Scale the plan manually and configure bounded CPU-based autoscale where the SKU supports it.
+    B: Search the whole tenant for a similar display name and modify the first match.
+    C: Mark the objective complete after reading documentation without checking any state.
+    D: Change the active tenant without displaying or confirming the resulting context.
+  correctOption: A
+  explanation: 'The reviewed hands-on action for this objective is: Scale the plan manually and configure bounded CPU-based
+    autoscale where the SKU supports it.'
+  distractorExplanations:
+    A: 'Correct. The reviewed hands-on action for this objective is: Scale the plan manually and configure bounded CPU-based
+      autoscale where the SKU supports it.'
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/manage-scale-up
+  lastVerified: '2026-08-30'
+- id: LAB15-Q11
+  objectiveIds:
+  - CP-APP-01
+  difficulty: foundational
+  stem: 'During a readiness check, the administrator considers this behavior: Which principle is most important when working
+    on ''Provision an App Service plan'' in Lab 15?'
+  options:
+    A: A recognizable resource name removes the need for validation and scoped cleanup.
+    B: App Service plan scale affects workers shared by apps, while deployment slots isolate deployable content and selected
+      sticky configuration before a controlled swap.
+    C: The shortest command is always correct even when it changes a broader scope.
+    D: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+  correctOption: B
+  explanation: 'The lab establishes this design principle: App Service plan scale affects workers shared by apps, while deployment
+    slots isolate deployable content and selected sticky configuration before a controlled swap.'
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: 'Correct. The lab establishes this design principle: App Service plan scale affects workers shared by apps, while deployment
+      slots isolate deployable content and selected sticky configuration before a controlled swap.'
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/quickstart-powershell
+  lastVerified: '2026-08-30'
+- id: LAB15-Q12
+  objectiveIds:
+  - CP-APP-02
+  difficulty: foundational
+  stem: 'In a service overview, the team discusses this scenario: Which lab action directly supports the objective ''Configure
+    scaling for an App Service plan''?'
+  options:
+    A: Mark the objective complete after reading documentation without checking any state.
+    B: Change the active tenant without displaying or confirming the resulting context.
+    C: Scale the plan manually and configure bounded CPU-based autoscale where the SKU supports it.
+    D: Search the whole tenant for a similar display name and modify the first match.
+  correctOption: C
+  explanation: 'The reviewed hands-on action for this objective is: Scale the plan manually and configure bounded CPU-based
+    autoscale where the SKU supports it.'
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: 'Correct. The reviewed hands-on action for this objective is: Scale the plan manually and configure bounded CPU-based
+      autoscale where the SKU supports it.'
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/manage-scale-up
+  lastVerified: '2026-08-30'
+- id: LAB15-Q13
+  objectiveIds:
+  - CP-APP-01
+  difficulty: foundational
+  stem: 'While reviewing official guidance, a learner must resolve this question: Which principle is most important when working
+    on ''Provision an App Service plan'' in Lab 15?'
+  options:
+    A: The shortest command is always correct even when it changes a broader scope.
+    B: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+    C: A recognizable resource name removes the need for validation and scoped cleanup.
+    D: App Service plan scale affects workers shared by apps, while deployment slots isolate deployable content and selected
+      sticky configuration before a controlled swap.
+  correctOption: D
+  explanation: 'The lab establishes this design principle: App Service plan scale affects workers shared by apps, while deployment
+    slots isolate deployable content and selected sticky configuration before a controlled swap.'
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: 'Correct. The lab establishes this design principle: App Service plan scale affects workers shared by apps, while deployment
+      slots isolate deployable content and selected sticky configuration before a controlled swap.'
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/quickstart-powershell
+  lastVerified: '2026-08-30'
+- id: LAB15-Q14
+  objectiveIds:
+  - CP-APP-02
+  difficulty: foundational
+  stem: 'During a configuration walkthrough, the instructor asks about this situation: Which lab action directly supports
+    the objective ''Configure scaling for an App Service plan''?'
+  options:
+    A: Scale the plan manually and configure bounded CPU-based autoscale where the SKU supports it.
+    B: Search the whole tenant for a similar display name and modify the first match.
+    C: Mark the objective complete after reading documentation without checking any state.
+    D: Change the active tenant without displaying or confirming the resulting context.
+  correctOption: A
+  explanation: 'The reviewed hands-on action for this objective is: Scale the plan manually and configure bounded CPU-based
+    autoscale where the SKU supports it.'
+  distractorExplanations:
+    A: 'Correct. The reviewed hands-on action for this objective is: Scale the plan manually and configure bounded CPU-based
+      autoscale where the SKU supports it.'
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/manage-scale-up
+  lastVerified: '2026-08-30'
+- id: LAB15-Q15
+  objectiveIds:
+  - CP-APP-01
+  difficulty: foundational
+  stem: 'In a preflight knowledge check, the operator evaluates this requirement: Which principle is most important when working
+    on ''Provision an App Service plan'' in Lab 15?'
+  options:
+    A: A recognizable resource name removes the need for validation and scoped cleanup.
+    B: App Service plan scale affects workers shared by apps, while deployment slots isolate deployable content and selected
+      sticky configuration before a controlled swap.
+    C: The shortest command is always correct even when it changes a broader scope.
+    D: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+  correctOption: B
+  explanation: 'The lab establishes this design principle: App Service plan scale affects workers shared by apps, while deployment
+    slots isolate deployable content and selected sticky configuration before a controlled swap.'
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: 'Correct. The lab establishes this design principle: App Service plan scale affects workers shared by apps, while deployment
+      slots isolate deployable content and selected sticky configuration before a controlled swap.'
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/quickstart-powershell
+  lastVerified: '2026-08-30'
+- id: LAB15-Q16
   objectiveIds:
   - CP-APP-03
   difficulty: applied
@@ -63,7 +369,7 @@
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/app-service/manage-scale-per-app
   lastVerified: '2026-08-30'
-- id: LAB15-Q04
+- id: LAB15-Q17
   objectiveIds:
   - CP-APP-08
   difficulty: applied
@@ -74,18 +380,18 @@
     C: Skip the operation and edit validation.json to show a passing result.
     D: Warm and swap staging into production, then verify which settings followed content and which remained sticky.
   correctOption: D
-  explanation: 'The lab''s reviewed command path performs this bounded action: Warm and swap staging into production,
-    then verify which settings followed content and which remained sticky.'
+  explanation: 'The lab''s reviewed command path performs this bounded action: Warm and swap staging into production, then
+    verify which settings followed content and which remained sticky.'
   distractorExplanations:
     A: This choice changes or trusts a broader scope than the recorded lab boundary.
     B: This choice skips independent evidence or relies on ambiguous resource identity.
     C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-    D: 'Correct. The lab''s reviewed command path performs this bounded action: Warm and swap staging into production,
-      then verify which settings followed content and which remained sticky.'
+    D: 'Correct. The lab''s reviewed command path performs this bounded action: Warm and swap staging into production, then
+      verify which settings followed content and which remained sticky.'
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/app-service/deploy-staging-slots
   lastVerified: '2026-08-30'
-- id: LAB15-Q05
+- id: LAB15-Q18
   objectiveIds:
   - CP-APP-01
   difficulty: applied
@@ -105,36 +411,561 @@
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/app-service/quickstart-powershell
   lastVerified: '2026-08-30'
-- id: LAB15-Q06
+- id: LAB15-Q19
   objectiveIds:
   - CP-APP-02
   difficulty: applied
-  stem: The 'Configure scaling for an App Service plan' checkpoint reaches an external prerequisite. What should
-    happen?
+  stem: The 'Configure scaling for an App Service plan' checkpoint reaches an external prerequisite. What should happen?
   options:
     A: Invent a domain, notification target, license, quota, or tenant value and continue.
-    B: 'Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable
-      subscription.'
+    B: 'Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.'
     C: Broaden permissions until the prerequisite can no longer block the operation.
     D: Mark the branch passed because its command syntax was checked offline.
   correctOption: B
-  explanation: 'Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the
-    declared role and a disposable subscription.'
+  explanation: 'Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared
+    role and a disposable subscription.'
   distractorExplanations:
     A: This choice changes or trusts a broader scope than the recorded lab boundary.
-    B: 'Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the
-      declared role and a disposable subscription.'
+    B: 'Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared
+      role and a disposable subscription.'
     C: This choice skips independent evidence or relies on ambiguous resource identity.
     D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/app-service/manage-scale-up
   lastVerified: '2026-08-30'
-- id: LAB15-Q07
+- id: LAB15-Q20
+  objectiveIds:
+  - CP-APP-03
+  difficulty: applied
+  stem: 'A production runbook must correctly handle this scenario: A learner previews the implementation for ''Create an App
+    Service''. What behavior is required?'
+  options:
+    A: Create the baseline immediately and request approval only before cleanup.
+    B: Select the first accessible subscription and hide the resulting context.
+    C: Display the context, intended changes, cost and gated branches without mutating Azure.
+    D: Delete any older resource whose name resembles the new run ID.
+  correctOption: C
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/manage-scale-per-app
+  lastVerified: '2026-08-30'
+- id: LAB15-Q21
+  objectiveIds:
+  - CP-APP-08
+  difficulty: applied
+  stem: 'While validating a configuration, the team evaluates this situation: Which implementation step should the learner
+    perform for ''Configure deployment slots for an App Service''?'
+  options:
+    A: Replace the lab action with a tenant-wide change that is easier to discover.
+    B: Copy resource identifiers from another run instead of recording returned IDs.
+    C: Skip the operation and edit validation.json to show a passing result.
+    D: Warm and swap staging into production, then verify which settings followed content and which remained sticky.
+  correctOption: D
+  explanation: 'The lab''s reviewed command path performs this bounded action: Warm and swap staging into production, then
+    verify which settings followed content and which remained sticky.'
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: 'Correct. The lab''s reviewed command path performs this bounded action: Warm and swap staging into production, then
+      verify which settings followed content and which remained sticky.'
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/deploy-staging-slots
+  lastVerified: '2026-08-30'
+- id: LAB15-Q22
+  objectiveIds:
+  - CP-APP-01
+  difficulty: applied
+  stem: 'A delegated administrator receives the following support request: Which evidence most directly validates ''Provision
+    an App Service plan'' for autoscale setting?'
+  options:
+    A: Query the exact recorded scope and independently verify Microsoft.Web/sites.
+    B: Treat the setup exit code as proof of every configuration and relationship.
+    C: List the entire subscription and assume similarly named resources belong to this run.
+    D: Record a credential so another learner can replay the authenticated session.
+  correctOption: A
+  explanation: The independent validation path must prove Microsoft.Web/sites for the exact recorded object.
+  distractorExplanations:
+    A: Correct. The independent validation path must prove Microsoft.Web/sites for the exact recorded object.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/quickstart-powershell
+  lastVerified: '2026-08-30'
+- id: LAB15-Q23
+  objectiveIds:
+  - CP-APP-02
+  difficulty: applied
+  stem: 'During a maintenance window, an engineer must decide how to respond: The ''Configure scaling for an App Service plan''
+    checkpoint reaches an external prerequisite. What should happen?'
+  options:
+    A: Invent a domain, notification target, license, quota, or tenant value and continue.
+    B: 'Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.'
+    C: Broaden permissions until the prerequisite can no longer block the operation.
+    D: Mark the branch passed because its command syntax was checked offline.
+  correctOption: B
+  explanation: 'Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared
+    role and a disposable subscription.'
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: 'Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared
+      role and a disposable subscription.'
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/manage-scale-up
+  lastVerified: '2026-08-30'
+- id: LAB15-Q24
+  objectiveIds:
+  - CP-APP-03
+  difficulty: applied
+  stem: 'A deployment pipeline reaches this decision point: A learner previews the implementation for ''Create an App Service''.
+    What behavior is required?'
+  options:
+    A: Create the baseline immediately and request approval only before cleanup.
+    B: Select the first accessible subscription and hide the resulting context.
+    C: Display the context, intended changes, cost and gated branches without mutating Azure.
+    D: Delete any older resource whose name resembles the new run ID.
+  correctOption: C
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/manage-scale-per-app
+  lastVerified: '2026-08-30'
+- id: LAB15-Q25
+  objectiveIds:
+  - CP-APP-08
+  difficulty: applied
+  stem: 'While applying least-privilege controls, the administrator reviews this scenario: Which implementation step should
+    the learner perform for ''Configure deployment slots for an App Service''?'
+  options:
+    A: Replace the lab action with a tenant-wide change that is easier to discover.
+    B: Copy resource identifiers from another run instead of recording returned IDs.
+    C: Skip the operation and edit validation.json to show a passing result.
+    D: Warm and swap staging into production, then verify which settings followed content and which remained sticky.
+  correctOption: D
+  explanation: 'The lab''s reviewed command path performs this bounded action: Warm and swap staging into production, then
+    verify which settings followed content and which remained sticky.'
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: 'Correct. The lab''s reviewed command path performs this bounded action: Warm and swap staging into production, then
+      verify which settings followed content and which remained sticky.'
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/deploy-staging-slots
+  lastVerified: '2026-08-30'
+- id: LAB15-Q26
+  objectiveIds:
+  - CP-APP-01
+  difficulty: applied
+  stem: 'A repeatable Azure CLI workflow must address this requirement: Which evidence most directly validates ''Provision
+    an App Service plan'' for autoscale setting?'
+  options:
+    A: Query the exact recorded scope and independently verify Microsoft.Web/sites.
+    B: Treat the setup exit code as proof of every configuration and relationship.
+    C: List the entire subscription and assume similarly named resources belong to this run.
+    D: Record a credential so another learner can replay the authenticated session.
+  correctOption: A
+  explanation: The independent validation path must prove Microsoft.Web/sites for the exact recorded object.
+  distractorExplanations:
+    A: Correct. The independent validation path must prove Microsoft.Web/sites for the exact recorded object.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/quickstart-powershell
+  lastVerified: '2026-08-30'
+- id: LAB15-Q27
+  objectiveIds:
+  - CP-APP-02
+  difficulty: applied
+  stem: 'During an environment handoff, the receiving team asks this question: The ''Configure scaling for an App Service
+    plan'' checkpoint reaches an external prerequisite. What should happen?'
+  options:
+    A: Invent a domain, notification target, license, quota, or tenant value and continue.
+    B: 'Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.'
+    C: Broaden permissions until the prerequisite can no longer block the operation.
+    D: Mark the branch passed because its command syntax was checked offline.
+  correctOption: B
+  explanation: 'Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared
+    role and a disposable subscription.'
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: 'Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared
+      role and a disposable subscription.'
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/manage-scale-up
+  lastVerified: '2026-08-30'
+- id: LAB15-Q28
+  objectiveIds:
+  - CP-APP-03
+  difficulty: applied
+  stem: 'A configuration change produces the following operational choice: A learner previews the implementation for ''Create
+    an App Service''. What behavior is required?'
+  options:
+    A: Create the baseline immediately and request approval only before cleanup.
+    B: Select the first accessible subscription and hide the resulting context.
+    C: Display the context, intended changes, cost and gated branches without mutating Azure.
+    D: Delete any older resource whose name resembles the new run ID.
+  correctOption: C
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/manage-scale-per-app
+  lastVerified: '2026-08-30'
+- id: LAB15-Q29
+  objectiveIds:
+  - CP-APP-08
+  difficulty: applied
+  stem: 'While preparing independent validation, an engineer considers this scenario: Which implementation step should the
+    learner perform for ''Configure deployment slots for an App Service''?'
+  options:
+    A: Replace the lab action with a tenant-wide change that is easier to discover.
+    B: Copy resource identifiers from another run instead of recording returned IDs.
+    C: Skip the operation and edit validation.json to show a passing result.
+    D: Warm and swap staging into production, then verify which settings followed content and which remained sticky.
+  correctOption: D
+  explanation: 'The lab''s reviewed command path performs this bounded action: Warm and swap staging into production, then
+    verify which settings followed content and which remained sticky.'
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: 'Correct. The lab''s reviewed command path performs this bounded action: Warm and swap staging into production, then
+      verify which settings followed content and which remained sticky.'
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/deploy-staging-slots
+  lastVerified: '2026-08-30'
+- id: LAB15-Q30
+  objectiveIds:
+  - CP-APP-01
+  difficulty: applied
+  stem: 'A service owner asks the administrator to resolve this requirement: Which evidence most directly validates ''Provision
+    an App Service plan'' for autoscale setting?'
+  options:
+    A: Query the exact recorded scope and independently verify Microsoft.Web/sites.
+    B: Treat the setup exit code as proof of every configuration and relationship.
+    C: List the entire subscription and assume similarly named resources belong to this run.
+    D: Record a credential so another learner can replay the authenticated session.
+  correctOption: A
+  explanation: The independent validation path must prove Microsoft.Web/sites for the exact recorded object.
+  distractorExplanations:
+    A: Correct. The independent validation path must prove Microsoft.Web/sites for the exact recorded object.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/quickstart-powershell
+  lastVerified: '2026-08-30'
+- id: LAB15-Q31
+  objectiveIds:
+  - CP-APP-02
+  difficulty: applied
+  stem: 'During a scoped cleanup review, the team evaluates this situation: The ''Configure scaling for an App Service plan''
+    checkpoint reaches an external prerequisite. What should happen?'
+  options:
+    A: Invent a domain, notification target, license, quota, or tenant value and continue.
+    B: 'Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.'
+    C: Broaden permissions until the prerequisite can no longer block the operation.
+    D: Mark the branch passed because its command syntax was checked offline.
+  correctOption: B
+  explanation: 'Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared
+    role and a disposable subscription.'
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: 'Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared
+      role and a disposable subscription.'
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/manage-scale-up
+  lastVerified: '2026-08-30'
+- id: LAB15-Q32
+  objectiveIds:
+  - CP-APP-03
+  difficulty: applied
+  stem: 'An automation author must choose the correct response to this scenario: A learner previews the implementation for
+    ''Create an App Service''. What behavior is required?'
+  options:
+    A: Create the baseline immediately and request approval only before cleanup.
+    B: Select the first accessible subscription and hide the resulting context.
+    C: Display the context, intended changes, cost and gated branches without mutating Azure.
+    D: Delete any older resource whose name resembles the new run ID.
+  correctOption: C
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/manage-scale-per-app
+  lastVerified: '2026-08-30'
+- id: LAB15-Q33
+  objectiveIds:
+  - CP-APP-08
+  difficulty: applied
+  stem: 'A lab run with a unique run ID reaches this decision: Which implementation step should the learner perform for ''Configure
+    deployment slots for an App Service''?'
+  options:
+    A: Replace the lab action with a tenant-wide change that is easier to discover.
+    B: Copy resource identifiers from another run instead of recording returned IDs.
+    C: Skip the operation and edit validation.json to show a passing result.
+    D: Warm and swap staging into production, then verify which settings followed content and which remained sticky.
+  correctOption: D
+  explanation: 'The lab''s reviewed command path performs this bounded action: Warm and swap staging into production, then
+    verify which settings followed content and which remained sticky.'
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: 'Correct. The lab''s reviewed command path performs this bounded action: Warm and swap staging into production, then
+      verify which settings followed content and which remained sticky.'
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/deploy-staging-slots
+  lastVerified: '2026-08-30'
+- id: LAB15-Q34
+  objectiveIds:
+  - CP-APP-01
+  difficulty: applied
+  stem: 'While comparing the intended and actual states, the operator asks this question: Which evidence most directly validates
+    ''Provision an App Service plan'' for autoscale setting?'
+  options:
+    A: Query the exact recorded scope and independently verify Microsoft.Web/sites.
+    B: Treat the setup exit code as proof of every configuration and relationship.
+    C: List the entire subscription and assume similarly named resources belong to this run.
+    D: Record a credential so another learner can replay the authenticated session.
+  correctOption: A
+  explanation: The independent validation path must prove Microsoft.Web/sites for the exact recorded object.
+  distractorExplanations:
+    A: Correct. The independent validation path must prove Microsoft.Web/sites for the exact recorded object.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/quickstart-powershell
+  lastVerified: '2026-08-30'
+- id: LAB15-Q35
+  objectiveIds:
+  - CP-APP-02
+  difficulty: applied
+  stem: 'A peer reviewer examines the proposed implementation for this scenario: The ''Configure scaling for an App Service
+    plan'' checkpoint reaches an external prerequisite. What should happen?'
+  options:
+    A: Invent a domain, notification target, license, quota, or tenant value and continue.
+    B: 'Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.'
+    C: Broaden permissions until the prerequisite can no longer block the operation.
+    D: Mark the branch passed because its command syntax was checked offline.
+  correctOption: B
+  explanation: 'Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared
+    role and a disposable subscription.'
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: 'Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared
+      role and a disposable subscription.'
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/manage-scale-up
+  lastVerified: '2026-08-30'
+- id: LAB15-Q36
+  objectiveIds:
+  - CP-APP-03
+  difficulty: applied
+  stem: 'During a controlled rollout, the change team encounters this requirement: A learner previews the implementation for
+    ''Create an App Service''. What behavior is required?'
+  options:
+    A: Create the baseline immediately and request approval only before cleanup.
+    B: Select the first accessible subscription and hide the resulting context.
+    C: Display the context, intended changes, cost and gated branches without mutating Azure.
+    D: Delete any older resource whose name resembles the new run ID.
+  correctOption: C
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/manage-scale-per-app
+  lastVerified: '2026-08-30'
+- id: LAB15-Q37
+  objectiveIds:
+  - CP-APP-08
+  difficulty: applied
+  stem: 'A support engineer reproduces the following situation in a test environment: Which implementation step should the
+    learner perform for ''Configure deployment slots for an App Service''?'
+  options:
+    A: Replace the lab action with a tenant-wide change that is easier to discover.
+    B: Copy resource identifiers from another run instead of recording returned IDs.
+    C: Skip the operation and edit validation.json to show a passing result.
+    D: Warm and swap staging into production, then verify which settings followed content and which remained sticky.
+  correctOption: D
+  explanation: 'The lab''s reviewed command path performs this bounded action: Warm and swap staging into production, then
+    verify which settings followed content and which remained sticky.'
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: 'Correct. The lab''s reviewed command path performs this bounded action: Warm and swap staging into production, then
+      verify which settings followed content and which remained sticky.'
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/deploy-staging-slots
+  lastVerified: '2026-08-30'
+- id: LAB15-Q38
+  objectiveIds:
+  - CP-APP-01
+  difficulty: applied
+  stem: 'While recording validation evidence, the administrator evaluates this question: Which evidence most directly validates
+    ''Provision an App Service plan'' for autoscale setting?'
+  options:
+    A: Query the exact recorded scope and independently verify Microsoft.Web/sites.
+    B: Treat the setup exit code as proof of every configuration and relationship.
+    C: List the entire subscription and assume similarly named resources belong to this run.
+    D: Record a credential so another learner can replay the authenticated session.
+  correctOption: A
+  explanation: The independent validation path must prove Microsoft.Web/sites for the exact recorded object.
+  distractorExplanations:
+    A: Correct. The independent validation path must prove Microsoft.Web/sites for the exact recorded object.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/quickstart-powershell
+  lastVerified: '2026-08-30'
+- id: LAB15-Q39
+  objectiveIds:
+  - CP-APP-02
+  difficulty: applied
+  stem: 'A configuration owner must approve one response to this scenario: The ''Configure scaling for an App Service plan''
+    checkpoint reaches an external prerequisite. What should happen?'
+  options:
+    A: Invent a domain, notification target, license, quota, or tenant value and continue.
+    B: 'Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.'
+    C: Broaden permissions until the prerequisite can no longer block the operation.
+    D: Mark the branch passed because its command syntax was checked offline.
+  correctOption: B
+  explanation: 'Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared
+    role and a disposable subscription.'
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: 'Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared
+      role and a disposable subscription.'
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/manage-scale-up
+  lastVerified: '2026-08-30'
+- id: LAB15-Q40
+  objectiveIds:
+  - CP-APP-03
+  difficulty: applied
+  stem: 'During post-deployment verification, the team reviews this situation: A learner previews the implementation for ''Create
+    an App Service''. What behavior is required?'
+  options:
+    A: Create the baseline immediately and request approval only before cleanup.
+    B: Select the first accessible subscription and hide the resulting context.
+    C: Display the context, intended changes, cost and gated branches without mutating Azure.
+    D: Delete any older resource whose name resembles the new run ID.
+  correctOption: C
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/manage-scale-per-app
+  lastVerified: '2026-08-30'
+- id: LAB15-Q41
   objectiveIds:
   - CP-APP-03
   - CP-APP-08
   difficulty: advanced
   stem: Validation for 'Create an App Service' fails after setup. What is the best break/fix method?
+  options:
+    A: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+    B: Rerun setup repeatedly with new names until one attempt appears successful.
+    C: Change validation.json directly so the failed result reads pass.
+    D: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+  correctOption: D
+  explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/manage-scale-per-app
+  lastVerified: '2026-08-30'
+- id: LAB15-Q42
+  objectiveIds:
+  - CP-APP-03
+  - CP-APP-08
+  difficulty: advanced
+  stem: 'During root-cause analysis, the team must resolve this question: Validation for ''Create an App Service'' fails after
+    setup. What is the best break/fix method?'
+  options:
+    A: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+    B: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+    C: Rerun setup repeatedly with new names until one attempt appears successful.
+    D: Change validation.json directly so the failed result reads pass.
+  correctOption: A
+  explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
+  distractorExplanations:
+    A: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/manage-scale-per-app
+  lastVerified: '2026-08-30'
+- id: LAB15-Q43
+  objectiveIds:
+  - CP-APP-03
+  - CP-APP-08
+  difficulty: advanced
+  stem: 'A security and reliability review identifies this design decision: Validation for ''Create an App Service'' fails
+    after setup. What is the best break/fix method?'
+  options:
+    A: Change validation.json directly so the failed result reads pass.
+    B: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+    C: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+    D: Rerun setup repeatedly with new names until one attempt appears successful.
+  correctOption: B
+  explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/manage-scale-per-app
+  lastVerified: '2026-08-30'
+- id: LAB15-Q44
+  objectiveIds:
+  - CP-APP-03
+  - CP-APP-08
+  difficulty: advanced
+  stem: 'While diagnosing unexpected Azure behavior, the engineer considers this situation: Validation for ''Create an App
+    Service'' fails after setup. What is the best break/fix method?'
   options:
     A: Rerun setup repeatedly with new names until one attempt appears successful.
     B: Change validation.json directly so the failed result reads pass.
@@ -147,6 +978,138 @@
     B: This choice skips independent evidence or relies on ambiguous resource identity.
     C: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
     D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/manage-scale-per-app
+  lastVerified: '2026-08-30'
+- id: LAB15-Q45
+  objectiveIds:
+  - CP-APP-03
+  - CP-APP-08
+  difficulty: advanced
+  stem: 'An architecture review requires the strongest response to this scenario: Validation for ''Create an App Service''
+    fails after setup. What is the best break/fix method?'
+  options:
+    A: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+    B: Rerun setup repeatedly with new names until one attempt appears successful.
+    C: Change validation.json directly so the failed result reads pass.
+    D: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+  correctOption: D
+  explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/manage-scale-per-app
+  lastVerified: '2026-08-30'
+- id: LAB15-Q46
+  objectiveIds:
+  - CP-APP-03
+  - CP-APP-08
+  difficulty: advanced
+  stem: 'During break/fix validation, the operator encounters this question: Validation for ''Create an App Service'' fails
+    after setup. What is the best break/fix method?'
+  options:
+    A: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+    B: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+    C: Rerun setup repeatedly with new names until one attempt appears successful.
+    D: Change validation.json directly so the failed result reads pass.
+  correctOption: A
+  explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
+  distractorExplanations:
+    A: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/manage-scale-per-app
+  lastVerified: '2026-08-30'
+- id: LAB15-Q47
+  objectiveIds:
+  - CP-APP-03
+  - CP-APP-08
+  difficulty: advanced
+  stem: 'A complex support case depends on correctly interpreting this requirement: Validation for ''Create an App Service''
+    fails after setup. What is the best break/fix method?'
+  options:
+    A: Change validation.json directly so the failed result reads pass.
+    B: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+    C: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+    D: Rerun setup repeatedly with new names until one attempt appears successful.
+  correctOption: B
+  explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/manage-scale-per-app
+  lastVerified: '2026-08-30'
+- id: LAB15-Q48
+  objectiveIds:
+  - CP-APP-03
+  - CP-APP-08
+  difficulty: advanced
+  stem: 'While correcting configuration drift, the team evaluates this scenario: Validation for ''Create an App Service''
+    fails after setup. What is the best break/fix method?'
+  options:
+    A: Rerun setup repeatedly with new names until one attempt appears successful.
+    B: Change validation.json directly so the failed result reads pass.
+    C: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+    D: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+  correctOption: C
+  explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/manage-scale-per-app
+  lastVerified: '2026-08-30'
+- id: LAB15-Q49
+  objectiveIds:
+  - CP-APP-03
+  - CP-APP-08
+  difficulty: advanced
+  stem: 'A recovery exercise exposes the following technical decision: Validation for ''Create an App Service'' fails after
+    setup. What is the best break/fix method?'
+  options:
+    A: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+    B: Rerun setup repeatedly with new names until one attempt appears successful.
+    C: Change validation.json directly so the failed result reads pass.
+    D: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+  correctOption: D
+  explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/app-service/manage-scale-per-app
+  lastVerified: '2026-08-30'
+- id: LAB15-Q50
+  objectiveIds:
+  - CP-APP-03
+  - CP-APP-08
+  difficulty: advanced
+  stem: 'During final design assurance, the reviewer must resolve this situation: Validation for ''Create an App Service''
+    fails after setup. What is the best break/fix method?'
+  options:
+    A: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+    B: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+    C: Rerun setup repeatedly with new names until one attempt appears successful.
+    D: Change validation.json directly so the failed result reads pass.
+  correctOption: A
+  explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
+  distractorExplanations:
+    A: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/app-service/manage-scale-per-app
   lastVerified: '2026-08-30'

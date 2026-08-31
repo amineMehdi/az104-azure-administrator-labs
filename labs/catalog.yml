@@ -16,175 +16,175 @@ labs:
   track: azure-cli
   status: offline-validated
   estimatedMinutes: 75
-  assessmentQuestionCount: 10
+  assessmentQuestionCount: 50
 - id: '02'
   slug: entra-licenses-guests-sspr
   domain: identity-governance
   track: azure-cli
   status: offline-validated
   estimatedMinutes: 105
-  assessmentQuestionCount: 10
+  assessmentQuestionCount: 50
 - id: '03'
   slug: azure-rbac-scopes
   domain: identity-governance
   track: azure-cli
   status: offline-validated
   estimatedMinutes: 90
-  assessmentQuestionCount: 10
+  assessmentQuestionCount: 50
 - id: '04'
   slug: resource-hierarchy-tags-locks
   domain: identity-governance
   track: azure-cli
   status: offline-validated
   estimatedMinutes: 90
-  assessmentQuestionCount: 10
+  assessmentQuestionCount: 50
 - id: '05'
   slug: policy-costs-advisor
   domain: identity-governance
   track: azure-cli
   status: offline-validated
   estimatedMinutes: 120
-  assessmentQuestionCount: 10
+  assessmentQuestionCount: 50
 - id: '06'
   slug: storage-accounts-security
   domain: storage
   track: azure-cli
   status: offline-validated
   estimatedMinutes: 90
-  assessmentQuestionCount: 12
+  assessmentQuestionCount: 50
 - id: '07'
   slug: storage-network-sas
   domain: storage
   track: azure-cli
   status: offline-validated
   estimatedMinutes: 105
-  assessmentQuestionCount: 12
+  assessmentQuestionCount: 50
 - id: 08
   slug: blob-lifecycle-replication
   domain: storage
   track: azure-cli
   status: offline-validated
   estimatedMinutes: 120
-  assessmentQuestionCount: 14
+  assessmentQuestionCount: 50
 - id: 09
   slug: azure-files-identity
   domain: storage
   track: azure-cli
   status: offline-validated
   estimatedMinutes: 135
-  assessmentQuestionCount: 12
+  assessmentQuestionCount: 50
 - id: '10'
   slug: arm-bicep-lifecycle
   domain: compute
   track: azure-cli-bicep
   status: offline-validated
   estimatedMinutes: 120
-  assessmentQuestionCount: 10
+  assessmentQuestionCount: 50
 - id: '11'
   slug: vm-lifecycle-disks-encryption
   domain: compute
   track: azure-cli
   status: offline-validated
   estimatedMinutes: 120
-  assessmentQuestionCount: 8
+  assessmentQuestionCount: 50
 - id: '12'
   slug: vm-resilience-scale-mobility
   domain: compute
   track: azure-cli
   status: offline-validated
   estimatedMinutes: 150
-  assessmentQuestionCount: 8
+  assessmentQuestionCount: 50
 - id: '13'
   slug: acr-aci
   domain: compute
   track: azure-cli
   status: offline-validated
   estimatedMinutes: 105
-  assessmentQuestionCount: 6
+  assessmentQuestionCount: 50
 - id: '14'
   slug: container-apps
   domain: compute
   track: azure-cli
   status: offline-validated
   estimatedMinutes: 120
-  assessmentQuestionCount: 4
+  assessmentQuestionCount: 50
 - id: '15'
   slug: app-service-scale-slots
   domain: compute
   track: azure-cli
   status: offline-validated
   estimatedMinutes: 120
-  assessmentQuestionCount: 7
+  assessmentQuestionCount: 50
 - id: '16'
   slug: app-service-tls-dns-backup-network
   domain: compute
   track: azure-cli
   status: offline-validated
   estimatedMinutes: 150
-  assessmentQuestionCount: 7
+  assessmentQuestionCount: 50
 - id: '17'
   slug: vnet-subnets-peering-public-ip
   domain: networking
   track: azure-cli
   status: offline-validated
   estimatedMinutes: 105
-  assessmentQuestionCount: 10
+  assessmentQuestionCount: 50
 - id: '18'
   slug: routing-nsg-asg
   domain: networking
   track: azure-cli
   status: offline-validated
   estimatedMinutes: 120
-  assessmentQuestionCount: 10
+  assessmentQuestionCount: 50
 - id: '19'
   slug: service-private-endpoints
   domain: networking
   track: azure-cli
   status: offline-validated
   estimatedMinutes: 120
-  assessmentQuestionCount: 10
+  assessmentQuestionCount: 50
 - id: '20'
   slug: azure-dns-bastion
   domain: networking
   track: azure-cli
   status: offline-validated
   estimatedMinutes: 120
-  assessmentQuestionCount: 10
+  assessmentQuestionCount: 50
 - id: '21'
   slug: load-balancer-network-watcher
   domain: networking
   track: azure-cli
   status: offline-validated
   estimatedMinutes: 150
-  assessmentQuestionCount: 10
+  assessmentQuestionCount: 50
 - id: '22'
   slug: azure-monitor-logs-insights
   domain: monitor-recovery
   track: azure-cli
   status: offline-validated
   estimatedMinutes: 135
-  assessmentQuestionCount: 15
+  assessmentQuestionCount: 50
 - id: '23'
   slug: monitor-alerts-actions
   domain: monitor-recovery
   track: azure-cli
   status: offline-validated
   estimatedMinutes: 105
-  assessmentQuestionCount: 10
+  assessmentQuestionCount: 50
 - id: '24'
   slug: azure-backup-restore
   domain: monitor-recovery
   track: azure-cli
   status: offline-validated
   estimatedMinutes: 150
-  assessmentQuestionCount: 15
+  assessmentQuestionCount: 50
 - id: '25'
   slug: site-recovery-failover
   domain: monitor-recovery
   track: azure-cli
   status: offline-validated
   estimatedMinutes: 180
-  assessmentQuestionCount: 10
+  assessmentQuestionCount: 50
 - id: '26'
   slug: capstone-build
   domain: capstone

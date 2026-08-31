@@ -4,20 +4,20 @@
   difficulty: foundational
   stem: Which principle is most important when working on 'Create a virtual machine' in Lab 11?
   options:
-    A: The shortest command is always correct even when it changes a broader scope.
-    B: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-    C: VM resize can require deallocation, managed disks have independent lifecycles, and encryption at host depends
-      on subscription registration, region, and VM size support.
-    D: A recognizable resource name removes the need for validation and scoped cleanup.
-  correctOption: C
-  explanation: 'The lab establishes this design principle: VM resize can require deallocation, managed disks have
-    independent lifecycles, and encryption at host depends on subscription registration, region, and VM size support.'
+    A: A recognizable resource name removes the need for validation and scoped cleanup.
+    B: The shortest command is always correct even when it changes a broader scope.
+    C: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+    D: VM resize can require deallocation, managed disks have independent lifecycles, and encryption at host depends on subscription
+      registration, region, and VM size support.
+  correctOption: D
+  explanation: 'The lab establishes this design principle: VM resize can require deallocation, managed disks have independent
+    lifecycles, and encryption at host depends on subscription registration, region, and VM size support.'
   distractorExplanations:
-    A: This choice changes or trusts a broader scope than the recorded lab boundary.
-    B: This choice skips independent evidence or relies on ambiguous resource identity.
-    C: 'Correct. The lab establishes this design principle: VM resize can require deallocation, managed disks have
-      independent lifecycles, and encryption at host depends on subscription registration, region, and VM size support.'
-    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: 'Correct. The lab establishes this design principle: VM resize can require deallocation, managed disks have independent
+      lifecycles, and encryption at host depends on subscription registration, region, and VM size support.'
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/virtual-machines/linux/quick-create-cli
   lastVerified: '2026-08-30'
@@ -27,148 +27,1089 @@
   difficulty: foundational
   stem: Which lab action directly supports the objective 'Configure encryption at host for Azure virtual machines'?
   options:
-    A: Change the active tenant without displaying or confirming the resulting context.
-    B: Search the whole tenant for a similar display name and modify the first match.
-    C: Mark the objective complete after reading documentation without checking any state.
-    D: Enable encryption at host only after the subscription feature and selected VM size are confirmed.
-  correctOption: D
+    A: Enable encryption at host only after the subscription feature and selected VM size are confirmed.
+    B: Change the active tenant without displaying or confirming the resulting context.
+    C: Search the whole tenant for a similar display name and modify the first match.
+    D: Mark the objective complete after reading documentation without checking any state.
+  correctOption: A
   explanation: 'The reviewed hands-on action for this objective is: Enable encryption at host only after the subscription
     feature and selected VM size are confirmed.'
   distractorExplanations:
-    A: This choice changes or trusts a broader scope than the recorded lab boundary.
-    B: This choice skips independent evidence or relies on ambiguous resource identity.
-    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-    D: 'Correct. The reviewed hands-on action for this objective is: Enable encryption at host only after the subscription
+    A: 'Correct. The reviewed hands-on action for this objective is: Enable encryption at host only after the subscription
       feature and selected VM size are confirmed.'
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/virtual-machines/resize-vm
   lastVerified: '2026-08-30'
 - id: LAB11-Q03
   objectiveIds:
-  - CP-VM-04
-  difficulty: applied
-  stem: A learner previews the implementation for 'Manage virtual machine sizes'. What behavior is required?
+  - CP-VM-01
+  difficulty: foundational
+  stem: 'In a fundamentals workshop, the instructor presents this requirement: Which principle is most important when working
+    on ''Create a virtual machine'' in Lab 11?'
   options:
-    A: Display the context, intended changes, cost and gated branches without mutating Azure.
-    B: Create the baseline immediately and request approval only before cleanup.
-    C: Select the first accessible subscription and hide the resulting context.
-    D: Delete any older resource whose name resembles the new run ID.
-  correctOption: A
-  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+    A: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+    B: VM resize can require deallocation, managed disks have independent lifecycles, and encryption at host depends on subscription
+      registration, region, and VM size support.
+    C: A recognizable resource name removes the need for validation and scoped cleanup.
+    D: The shortest command is always correct even when it changes a broader scope.
+  correctOption: B
+  explanation: 'The lab establishes this design principle: VM resize can require deallocation, managed disks have independent
+    lifecycles, and encryption at host depends on subscription registration, region, and VM size support.'
   distractorExplanations:
-    A: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
-    B: This choice changes or trusts a broader scope than the recorded lab boundary.
-    C: This choice skips independent evidence or relies on ambiguous resource identity.
-    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: 'Correct. The lab establishes this design principle: VM resize can require deallocation, managed disks have independent
+      lifecycles, and encryption at host depends on subscription registration, region, and VM size support.'
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
   sourceUrls:
-  - https://learn.microsoft.com/en-us/azure/virtual-machines/linux/attach-disk-portal
+  - https://learn.microsoft.com/en-us/azure/virtual-machines/linux/quick-create-cli
   lastVerified: '2026-08-30'
 - id: LAB11-Q04
   objectiveIds:
-  - CP-VM-05
-  difficulty: applied
-  stem: Which implementation step should the learner perform for 'Manage virtual machine disks'?
+  - CP-VM-02
+  difficulty: foundational
+  stem: 'Before making a change, a learner checks this core behavior: Which lab action directly supports the objective ''Configure
+    encryption at host for Azure virtual machines''?'
   options:
-    A: Replace the lab action with a tenant-wide change that is easier to discover.
-    B: Deallocate and resize the VM to a validated alternative SKU, then return it to the intended state.
-    C: Copy resource identifiers from another run instead of recording returned IDs.
-    D: Skip the operation and edit validation.json to show a passing result.
-  correctOption: B
-  explanation: 'The lab''s reviewed command path performs this bounded action: Deallocate and resize the VM to a
-    validated alternative SKU, then return it to the intended state.'
+    A: Search the whole tenant for a similar display name and modify the first match.
+    B: Mark the objective complete after reading documentation without checking any state.
+    C: Enable encryption at host only after the subscription feature and selected VM size are confirmed.
+    D: Change the active tenant without displaying or confirming the resulting context.
+  correctOption: C
+  explanation: 'The reviewed hands-on action for this objective is: Enable encryption at host only after the subscription
+    feature and selected VM size are confirmed.'
   distractorExplanations:
-    A: This choice changes or trusts a broader scope than the recorded lab boundary.
-    B: 'Correct. The lab''s reviewed command path performs this bounded action: Deallocate and resize the VM to
-      a validated alternative SKU, then return it to the intended state.'
-    C: This choice skips independent evidence or relies on ambiguous resource identity.
-    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: 'Correct. The reviewed hands-on action for this objective is: Enable encryption at host only after the subscription
+      feature and selected VM size are confirmed.'
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
   sourceUrls:
-  - https://learn.microsoft.com/en-us/azure/virtual-machines/disks-enable-host-based-encryption-cli
+  - https://learn.microsoft.com/en-us/azure/virtual-machines/resize-vm
   lastVerified: '2026-08-30'
 - id: LAB11-Q05
   objectiveIds:
   - CP-VM-01
-  difficulty: applied
-  stem: Which evidence most directly validates 'Create a virtual machine' for Linux virtual machine?
+  difficulty: foundational
+  stem: 'During a design vocabulary review, the team evaluates this situation: Which principle is most important when working
+    on ''Create a virtual machine'' in Lab 11?'
   options:
-    A: Treat the setup exit code as proof of every configuration and relationship.
-    B: List the entire subscription and assume similarly named resources belong to this run.
-    C: Query the exact recorded scope and independently verify Microsoft.Compute/disks.
-    D: Record a credential so another learner can replay the authenticated session.
-  correctOption: C
-  explanation: The independent validation path must prove Microsoft.Compute/disks for the exact recorded object.
+    A: A recognizable resource name removes the need for validation and scoped cleanup.
+    B: The shortest command is always correct even when it changes a broader scope.
+    C: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+    D: VM resize can require deallocation, managed disks have independent lifecycles, and encryption at host depends on subscription
+      registration, region, and VM size support.
+  correctOption: D
+  explanation: 'The lab establishes this design principle: VM resize can require deallocation, managed disks have independent
+    lifecycles, and encryption at host depends on subscription registration, region, and VM size support.'
   distractorExplanations:
-    A: This choice changes or trusts a broader scope than the recorded lab boundary.
-    B: This choice skips independent evidence or relies on ambiguous resource identity.
-    C: Correct. The independent validation path must prove Microsoft.Compute/disks for the exact recorded object.
-    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: 'Correct. The lab establishes this design principle: VM resize can require deallocation, managed disks have independent
+      lifecycles, and encryption at host depends on subscription registration, region, and VM size support.'
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/virtual-machines/linux/quick-create-cli
   lastVerified: '2026-08-30'
 - id: LAB11-Q06
   objectiveIds:
   - CP-VM-02
-  difficulty: applied
-  stem: The 'Configure encryption at host for Azure virtual machines' checkpoint reaches an external prerequisite.
-    What should happen?
+  difficulty: foundational
+  stem: 'In a command-planning session, an administrator asks this question: Which lab action directly supports the objective
+    ''Configure encryption at host for Azure virtual machines''?'
   options:
-    A: Invent a domain, notification target, license, quota, or tenant value and continue.
-    B: Broaden permissions until the prerequisite can no longer block the operation.
-    C: Mark the branch passed because its command syntax was checked offline.
-    D: 'Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable
-      subscription.'
-  correctOption: D
-  explanation: 'Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the
-    declared role and a disposable subscription.'
+    A: Enable encryption at host only after the subscription feature and selected VM size are confirmed.
+    B: Change the active tenant without displaying or confirming the resulting context.
+    C: Search the whole tenant for a similar display name and modify the first match.
+    D: Mark the objective complete after reading documentation without checking any state.
+  correctOption: A
+  explanation: 'The reviewed hands-on action for this objective is: Enable encryption at host only after the subscription
+    feature and selected VM size are confirmed.'
   distractorExplanations:
-    A: This choice changes or trusts a broader scope than the recorded lab boundary.
-    B: This choice skips independent evidence or relies on ambiguous resource identity.
-    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-    D: 'Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the
-      declared role and a disposable subscription.'
+    A: 'Correct. The reviewed hands-on action for this objective is: Enable encryption at host only after the subscription
+      feature and selected VM size are confirmed.'
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/virtual-machines/resize-vm
   lastVerified: '2026-08-30'
 - id: LAB11-Q07
+  objectiveIds:
+  - CP-VM-01
+  difficulty: foundational
+  stem: 'While preparing the lab, a learner verifies this platform rule: Which principle is most important when working on
+    ''Create a virtual machine'' in Lab 11?'
+  options:
+    A: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+    B: VM resize can require deallocation, managed disks have independent lifecycles, and encryption at host depends on subscription
+      registration, region, and VM size support.
+    C: A recognizable resource name removes the need for validation and scoped cleanup.
+    D: The shortest command is always correct even when it changes a broader scope.
+  correctOption: B
+  explanation: 'The lab establishes this design principle: VM resize can require deallocation, managed disks have independent
+    lifecycles, and encryption at host depends on subscription registration, region, and VM size support.'
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: 'Correct. The lab establishes this design principle: VM resize can require deallocation, managed disks have independent
+      lifecycles, and encryption at host depends on subscription registration, region, and VM size support.'
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-machines/linux/quick-create-cli
+  lastVerified: '2026-08-30'
+- id: LAB11-Q08
+  objectiveIds:
+  - CP-VM-02
+  difficulty: foundational
+  stem: 'During peer review, the team must identify the accurate response to this scenario: Which lab action directly supports
+    the objective ''Configure encryption at host for Azure virtual machines''?'
+  options:
+    A: Search the whole tenant for a similar display name and modify the first match.
+    B: Mark the objective complete after reading documentation without checking any state.
+    C: Enable encryption at host only after the subscription feature and selected VM size are confirmed.
+    D: Change the active tenant without displaying or confirming the resulting context.
+  correctOption: C
+  explanation: 'The reviewed hands-on action for this objective is: Enable encryption at host only after the subscription
+    feature and selected VM size are confirmed.'
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: 'Correct. The reviewed hands-on action for this objective is: Enable encryption at host only after the subscription
+      feature and selected VM size are confirmed.'
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-machines/resize-vm
+  lastVerified: '2026-08-30'
+- id: LAB11-Q09
+  objectiveIds:
+  - CP-VM-01
+  difficulty: foundational
+  stem: 'In an operations briefing, a new team member receives this question: Which principle is most important when working
+    on ''Create a virtual machine'' in Lab 11?'
+  options:
+    A: A recognizable resource name removes the need for validation and scoped cleanup.
+    B: The shortest command is always correct even when it changes a broader scope.
+    C: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+    D: VM resize can require deallocation, managed disks have independent lifecycles, and encryption at host depends on subscription
+      registration, region, and VM size support.
+  correctOption: D
+  explanation: 'The lab establishes this design principle: VM resize can require deallocation, managed disks have independent
+    lifecycles, and encryption at host depends on subscription registration, region, and VM size support.'
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: 'Correct. The lab establishes this design principle: VM resize can require deallocation, managed disks have independent
+      lifecycles, and encryption at host depends on subscription registration, region, and VM size support.'
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-machines/linux/quick-create-cli
+  lastVerified: '2026-08-30'
+- id: LAB11-Q10
+  objectiveIds:
+  - CP-VM-02
+  difficulty: foundational
+  stem: 'While building a support checklist, an engineer reviews this requirement: Which lab action directly supports the
+    objective ''Configure encryption at host for Azure virtual machines''?'
+  options:
+    A: Enable encryption at host only after the subscription feature and selected VM size are confirmed.
+    B: Change the active tenant without displaying or confirming the resulting context.
+    C: Search the whole tenant for a similar display name and modify the first match.
+    D: Mark the objective complete after reading documentation without checking any state.
+  correctOption: A
+  explanation: 'The reviewed hands-on action for this objective is: Enable encryption at host only after the subscription
+    feature and selected VM size are confirmed.'
+  distractorExplanations:
+    A: 'Correct. The reviewed hands-on action for this objective is: Enable encryption at host only after the subscription
+      feature and selected VM size are confirmed.'
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-machines/resize-vm
+  lastVerified: '2026-08-30'
+- id: LAB11-Q11
+  objectiveIds:
+  - CP-VM-01
+  difficulty: foundational
+  stem: 'During a readiness check, the administrator considers this behavior: Which principle is most important when working
+    on ''Create a virtual machine'' in Lab 11?'
+  options:
+    A: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+    B: VM resize can require deallocation, managed disks have independent lifecycles, and encryption at host depends on subscription
+      registration, region, and VM size support.
+    C: A recognizable resource name removes the need for validation and scoped cleanup.
+    D: The shortest command is always correct even when it changes a broader scope.
+  correctOption: B
+  explanation: 'The lab establishes this design principle: VM resize can require deallocation, managed disks have independent
+    lifecycles, and encryption at host depends on subscription registration, region, and VM size support.'
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: 'Correct. The lab establishes this design principle: VM resize can require deallocation, managed disks have independent
+      lifecycles, and encryption at host depends on subscription registration, region, and VM size support.'
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-machines/linux/quick-create-cli
+  lastVerified: '2026-08-30'
+- id: LAB11-Q12
+  objectiveIds:
+  - CP-VM-02
+  difficulty: foundational
+  stem: 'In a service overview, the team discusses this scenario: Which lab action directly supports the objective ''Configure
+    encryption at host for Azure virtual machines''?'
+  options:
+    A: Search the whole tenant for a similar display name and modify the first match.
+    B: Mark the objective complete after reading documentation without checking any state.
+    C: Enable encryption at host only after the subscription feature and selected VM size are confirmed.
+    D: Change the active tenant without displaying or confirming the resulting context.
+  correctOption: C
+  explanation: 'The reviewed hands-on action for this objective is: Enable encryption at host only after the subscription
+    feature and selected VM size are confirmed.'
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: 'Correct. The reviewed hands-on action for this objective is: Enable encryption at host only after the subscription
+      feature and selected VM size are confirmed.'
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-machines/resize-vm
+  lastVerified: '2026-08-30'
+- id: LAB11-Q13
+  objectiveIds:
+  - CP-VM-01
+  difficulty: foundational
+  stem: 'While reviewing official guidance, a learner must resolve this question: Which principle is most important when working
+    on ''Create a virtual machine'' in Lab 11?'
+  options:
+    A: A recognizable resource name removes the need for validation and scoped cleanup.
+    B: The shortest command is always correct even when it changes a broader scope.
+    C: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+    D: VM resize can require deallocation, managed disks have independent lifecycles, and encryption at host depends on subscription
+      registration, region, and VM size support.
+  correctOption: D
+  explanation: 'The lab establishes this design principle: VM resize can require deallocation, managed disks have independent
+    lifecycles, and encryption at host depends on subscription registration, region, and VM size support.'
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: 'Correct. The lab establishes this design principle: VM resize can require deallocation, managed disks have independent
+      lifecycles, and encryption at host depends on subscription registration, region, and VM size support.'
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-machines/linux/quick-create-cli
+  lastVerified: '2026-08-30'
+- id: LAB11-Q14
+  objectiveIds:
+  - CP-VM-02
+  difficulty: foundational
+  stem: 'During a configuration walkthrough, the instructor asks about this situation: Which lab action directly supports
+    the objective ''Configure encryption at host for Azure virtual machines''?'
+  options:
+    A: Enable encryption at host only after the subscription feature and selected VM size are confirmed.
+    B: Change the active tenant without displaying or confirming the resulting context.
+    C: Search the whole tenant for a similar display name and modify the first match.
+    D: Mark the objective complete after reading documentation without checking any state.
+  correctOption: A
+  explanation: 'The reviewed hands-on action for this objective is: Enable encryption at host only after the subscription
+    feature and selected VM size are confirmed.'
+  distractorExplanations:
+    A: 'Correct. The reviewed hands-on action for this objective is: Enable encryption at host only after the subscription
+      feature and selected VM size are confirmed.'
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-machines/resize-vm
+  lastVerified: '2026-08-30'
+- id: LAB11-Q15
+  objectiveIds:
+  - CP-VM-01
+  difficulty: foundational
+  stem: 'In a preflight knowledge check, the operator evaluates this requirement: Which principle is most important when working
+    on ''Create a virtual machine'' in Lab 11?'
+  options:
+    A: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+    B: VM resize can require deallocation, managed disks have independent lifecycles, and encryption at host depends on subscription
+      registration, region, and VM size support.
+    C: A recognizable resource name removes the need for validation and scoped cleanup.
+    D: The shortest command is always correct even when it changes a broader scope.
+  correctOption: B
+  explanation: 'The lab establishes this design principle: VM resize can require deallocation, managed disks have independent
+    lifecycles, and encryption at host depends on subscription registration, region, and VM size support.'
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: 'Correct. The lab establishes this design principle: VM resize can require deallocation, managed disks have independent
+      lifecycles, and encryption at host depends on subscription registration, region, and VM size support.'
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-machines/linux/quick-create-cli
+  lastVerified: '2026-08-30'
+- id: LAB11-Q16
+  objectiveIds:
+  - CP-VM-04
+  difficulty: applied
+  stem: A learner previews the implementation for 'Manage virtual machine sizes'. What behavior is required?
+  options:
+    A: Select the first accessible subscription and hide the resulting context.
+    B: Delete any older resource whose name resembles the new run ID.
+    C: Display the context, intended changes, cost and gated branches without mutating Azure.
+    D: Create the baseline immediately and request approval only before cleanup.
+  correctOption: C
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-machines/linux/attach-disk-portal
+  lastVerified: '2026-08-30'
+- id: LAB11-Q17
+  objectiveIds:
+  - CP-VM-05
+  difficulty: applied
+  stem: Which implementation step should the learner perform for 'Manage virtual machine disks'?
+  options:
+    A: Copy resource identifiers from another run instead of recording returned IDs.
+    B: Skip the operation and edit validation.json to show a passing result.
+    C: Replace the lab action with a tenant-wide change that is easier to discover.
+    D: Deallocate and resize the VM to a validated alternative SKU, then return it to the intended state.
+  correctOption: D
+  explanation: 'The lab''s reviewed command path performs this bounded action: Deallocate and resize the VM to a validated
+    alternative SKU, then return it to the intended state.'
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: 'Correct. The lab''s reviewed command path performs this bounded action: Deallocate and resize the VM to a validated
+      alternative SKU, then return it to the intended state.'
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-machines/disks-enable-host-based-encryption-cli
+  lastVerified: '2026-08-30'
+- id: LAB11-Q18
+  objectiveIds:
+  - CP-VM-01
+  difficulty: applied
+  stem: Which evidence most directly validates 'Create a virtual machine' for Linux virtual machine?
+  options:
+    A: Query the exact recorded scope and independently verify Microsoft.Compute/disks.
+    B: Record a credential so another learner can replay the authenticated session.
+    C: Treat the setup exit code as proof of every configuration and relationship.
+    D: List the entire subscription and assume similarly named resources belong to this run.
+  correctOption: A
+  explanation: The independent validation path must prove Microsoft.Compute/disks for the exact recorded object.
+  distractorExplanations:
+    A: Correct. The independent validation path must prove Microsoft.Compute/disks for the exact recorded object.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-machines/linux/quick-create-cli
+  lastVerified: '2026-08-30'
+- id: LAB11-Q19
+  objectiveIds:
+  - CP-VM-02
+  difficulty: applied
+  stem: The 'Configure encryption at host for Azure virtual machines' checkpoint reaches an external prerequisite. What should
+    happen?
+  options:
+    A: Mark the branch passed because its command syntax was checked offline.
+    B: 'Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.'
+    C: Invent a domain, notification target, license, quota, or tenant value and continue.
+    D: Broaden permissions until the prerequisite can no longer block the operation.
+  correctOption: B
+  explanation: 'Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared
+    role and a disposable subscription.'
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: 'Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared
+      role and a disposable subscription.'
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-machines/resize-vm
+  lastVerified: '2026-08-30'
+- id: LAB11-Q20
+  objectiveIds:
+  - CP-VM-04
+  difficulty: applied
+  stem: 'A production runbook must correctly handle this scenario: A learner previews the implementation for ''Manage virtual
+    machine sizes''. What behavior is required?'
+  options:
+    A: Select the first accessible subscription and hide the resulting context.
+    B: Delete any older resource whose name resembles the new run ID.
+    C: Display the context, intended changes, cost and gated branches without mutating Azure.
+    D: Create the baseline immediately and request approval only before cleanup.
+  correctOption: C
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-machines/linux/attach-disk-portal
+  lastVerified: '2026-08-30'
+- id: LAB11-Q21
+  objectiveIds:
+  - CP-VM-05
+  difficulty: applied
+  stem: 'While validating a configuration, the team evaluates this situation: Which implementation step should the learner
+    perform for ''Manage virtual machine disks''?'
+  options:
+    A: Copy resource identifiers from another run instead of recording returned IDs.
+    B: Skip the operation and edit validation.json to show a passing result.
+    C: Replace the lab action with a tenant-wide change that is easier to discover.
+    D: Deallocate and resize the VM to a validated alternative SKU, then return it to the intended state.
+  correctOption: D
+  explanation: 'The lab''s reviewed command path performs this bounded action: Deallocate and resize the VM to a validated
+    alternative SKU, then return it to the intended state.'
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: 'Correct. The lab''s reviewed command path performs this bounded action: Deallocate and resize the VM to a validated
+      alternative SKU, then return it to the intended state.'
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-machines/disks-enable-host-based-encryption-cli
+  lastVerified: '2026-08-30'
+- id: LAB11-Q22
+  objectiveIds:
+  - CP-VM-01
+  difficulty: applied
+  stem: 'A delegated administrator receives the following support request: Which evidence most directly validates ''Create
+    a virtual machine'' for Linux virtual machine?'
+  options:
+    A: Query the exact recorded scope and independently verify Microsoft.Compute/disks.
+    B: Record a credential so another learner can replay the authenticated session.
+    C: Treat the setup exit code as proof of every configuration and relationship.
+    D: List the entire subscription and assume similarly named resources belong to this run.
+  correctOption: A
+  explanation: The independent validation path must prove Microsoft.Compute/disks for the exact recorded object.
+  distractorExplanations:
+    A: Correct. The independent validation path must prove Microsoft.Compute/disks for the exact recorded object.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-machines/linux/quick-create-cli
+  lastVerified: '2026-08-30'
+- id: LAB11-Q23
+  objectiveIds:
+  - CP-VM-02
+  difficulty: applied
+  stem: 'During a maintenance window, an engineer must decide how to respond: The ''Configure encryption at host for Azure
+    virtual machines'' checkpoint reaches an external prerequisite. What should happen?'
+  options:
+    A: Mark the branch passed because its command syntax was checked offline.
+    B: 'Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.'
+    C: Invent a domain, notification target, license, quota, or tenant value and continue.
+    D: Broaden permissions until the prerequisite can no longer block the operation.
+  correctOption: B
+  explanation: 'Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared
+    role and a disposable subscription.'
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: 'Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared
+      role and a disposable subscription.'
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-machines/resize-vm
+  lastVerified: '2026-08-30'
+- id: LAB11-Q24
+  objectiveIds:
+  - CP-VM-04
+  difficulty: applied
+  stem: 'A deployment pipeline reaches this decision point: A learner previews the implementation for ''Manage virtual machine
+    sizes''. What behavior is required?'
+  options:
+    A: Select the first accessible subscription and hide the resulting context.
+    B: Delete any older resource whose name resembles the new run ID.
+    C: Display the context, intended changes, cost and gated branches without mutating Azure.
+    D: Create the baseline immediately and request approval only before cleanup.
+  correctOption: C
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-machines/linux/attach-disk-portal
+  lastVerified: '2026-08-30'
+- id: LAB11-Q25
+  objectiveIds:
+  - CP-VM-05
+  difficulty: applied
+  stem: 'While applying least-privilege controls, the administrator reviews this scenario: Which implementation step should
+    the learner perform for ''Manage virtual machine disks''?'
+  options:
+    A: Copy resource identifiers from another run instead of recording returned IDs.
+    B: Skip the operation and edit validation.json to show a passing result.
+    C: Replace the lab action with a tenant-wide change that is easier to discover.
+    D: Deallocate and resize the VM to a validated alternative SKU, then return it to the intended state.
+  correctOption: D
+  explanation: 'The lab''s reviewed command path performs this bounded action: Deallocate and resize the VM to a validated
+    alternative SKU, then return it to the intended state.'
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: 'Correct. The lab''s reviewed command path performs this bounded action: Deallocate and resize the VM to a validated
+      alternative SKU, then return it to the intended state.'
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-machines/disks-enable-host-based-encryption-cli
+  lastVerified: '2026-08-30'
+- id: LAB11-Q26
+  objectiveIds:
+  - CP-VM-01
+  difficulty: applied
+  stem: 'A repeatable Azure CLI workflow must address this requirement: Which evidence most directly validates ''Create a
+    virtual machine'' for Linux virtual machine?'
+  options:
+    A: Query the exact recorded scope and independently verify Microsoft.Compute/disks.
+    B: Record a credential so another learner can replay the authenticated session.
+    C: Treat the setup exit code as proof of every configuration and relationship.
+    D: List the entire subscription and assume similarly named resources belong to this run.
+  correctOption: A
+  explanation: The independent validation path must prove Microsoft.Compute/disks for the exact recorded object.
+  distractorExplanations:
+    A: Correct. The independent validation path must prove Microsoft.Compute/disks for the exact recorded object.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-machines/linux/quick-create-cli
+  lastVerified: '2026-08-30'
+- id: LAB11-Q27
+  objectiveIds:
+  - CP-VM-02
+  difficulty: applied
+  stem: 'During an environment handoff, the receiving team asks this question: The ''Configure encryption at host for Azure
+    virtual machines'' checkpoint reaches an external prerequisite. What should happen?'
+  options:
+    A: Mark the branch passed because its command syntax was checked offline.
+    B: 'Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.'
+    C: Invent a domain, notification target, license, quota, or tenant value and continue.
+    D: Broaden permissions until the prerequisite can no longer block the operation.
+  correctOption: B
+  explanation: 'Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared
+    role and a disposable subscription.'
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: 'Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared
+      role and a disposable subscription.'
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-machines/resize-vm
+  lastVerified: '2026-08-30'
+- id: LAB11-Q28
+  objectiveIds:
+  - CP-VM-04
+  difficulty: applied
+  stem: 'A configuration change produces the following operational choice: A learner previews the implementation for ''Manage
+    virtual machine sizes''. What behavior is required?'
+  options:
+    A: Select the first accessible subscription and hide the resulting context.
+    B: Delete any older resource whose name resembles the new run ID.
+    C: Display the context, intended changes, cost and gated branches without mutating Azure.
+    D: Create the baseline immediately and request approval only before cleanup.
+  correctOption: C
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-machines/linux/attach-disk-portal
+  lastVerified: '2026-08-30'
+- id: LAB11-Q29
+  objectiveIds:
+  - CP-VM-05
+  difficulty: applied
+  stem: 'While preparing independent validation, an engineer considers this scenario: Which implementation step should the
+    learner perform for ''Manage virtual machine disks''?'
+  options:
+    A: Copy resource identifiers from another run instead of recording returned IDs.
+    B: Skip the operation and edit validation.json to show a passing result.
+    C: Replace the lab action with a tenant-wide change that is easier to discover.
+    D: Deallocate and resize the VM to a validated alternative SKU, then return it to the intended state.
+  correctOption: D
+  explanation: 'The lab''s reviewed command path performs this bounded action: Deallocate and resize the VM to a validated
+    alternative SKU, then return it to the intended state.'
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: 'Correct. The lab''s reviewed command path performs this bounded action: Deallocate and resize the VM to a validated
+      alternative SKU, then return it to the intended state.'
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-machines/disks-enable-host-based-encryption-cli
+  lastVerified: '2026-08-30'
+- id: LAB11-Q30
+  objectiveIds:
+  - CP-VM-01
+  difficulty: applied
+  stem: 'A service owner asks the administrator to resolve this requirement: Which evidence most directly validates ''Create
+    a virtual machine'' for Linux virtual machine?'
+  options:
+    A: Query the exact recorded scope and independently verify Microsoft.Compute/disks.
+    B: Record a credential so another learner can replay the authenticated session.
+    C: Treat the setup exit code as proof of every configuration and relationship.
+    D: List the entire subscription and assume similarly named resources belong to this run.
+  correctOption: A
+  explanation: The independent validation path must prove Microsoft.Compute/disks for the exact recorded object.
+  distractorExplanations:
+    A: Correct. The independent validation path must prove Microsoft.Compute/disks for the exact recorded object.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-machines/linux/quick-create-cli
+  lastVerified: '2026-08-30'
+- id: LAB11-Q31
+  objectiveIds:
+  - CP-VM-02
+  difficulty: applied
+  stem: 'During a scoped cleanup review, the team evaluates this situation: The ''Configure encryption at host for Azure virtual
+    machines'' checkpoint reaches an external prerequisite. What should happen?'
+  options:
+    A: Mark the branch passed because its command syntax was checked offline.
+    B: 'Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.'
+    C: Invent a domain, notification target, license, quota, or tenant value and continue.
+    D: Broaden permissions until the prerequisite can no longer block the operation.
+  correctOption: B
+  explanation: 'Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared
+    role and a disposable subscription.'
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: 'Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared
+      role and a disposable subscription.'
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-machines/resize-vm
+  lastVerified: '2026-08-30'
+- id: LAB11-Q32
+  objectiveIds:
+  - CP-VM-04
+  difficulty: applied
+  stem: 'An automation author must choose the correct response to this scenario: A learner previews the implementation for
+    ''Manage virtual machine sizes''. What behavior is required?'
+  options:
+    A: Select the first accessible subscription and hide the resulting context.
+    B: Delete any older resource whose name resembles the new run ID.
+    C: Display the context, intended changes, cost and gated branches without mutating Azure.
+    D: Create the baseline immediately and request approval only before cleanup.
+  correctOption: C
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-machines/linux/attach-disk-portal
+  lastVerified: '2026-08-30'
+- id: LAB11-Q33
+  objectiveIds:
+  - CP-VM-05
+  difficulty: applied
+  stem: 'A lab run with a unique run ID reaches this decision: Which implementation step should the learner perform for ''Manage
+    virtual machine disks''?'
+  options:
+    A: Copy resource identifiers from another run instead of recording returned IDs.
+    B: Skip the operation and edit validation.json to show a passing result.
+    C: Replace the lab action with a tenant-wide change that is easier to discover.
+    D: Deallocate and resize the VM to a validated alternative SKU, then return it to the intended state.
+  correctOption: D
+  explanation: 'The lab''s reviewed command path performs this bounded action: Deallocate and resize the VM to a validated
+    alternative SKU, then return it to the intended state.'
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: 'Correct. The lab''s reviewed command path performs this bounded action: Deallocate and resize the VM to a validated
+      alternative SKU, then return it to the intended state.'
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-machines/disks-enable-host-based-encryption-cli
+  lastVerified: '2026-08-30'
+- id: LAB11-Q34
+  objectiveIds:
+  - CP-VM-01
+  difficulty: applied
+  stem: 'While comparing the intended and actual states, the operator asks this question: Which evidence most directly validates
+    ''Create a virtual machine'' for Linux virtual machine?'
+  options:
+    A: Query the exact recorded scope and independently verify Microsoft.Compute/disks.
+    B: Record a credential so another learner can replay the authenticated session.
+    C: Treat the setup exit code as proof of every configuration and relationship.
+    D: List the entire subscription and assume similarly named resources belong to this run.
+  correctOption: A
+  explanation: The independent validation path must prove Microsoft.Compute/disks for the exact recorded object.
+  distractorExplanations:
+    A: Correct. The independent validation path must prove Microsoft.Compute/disks for the exact recorded object.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-machines/linux/quick-create-cli
+  lastVerified: '2026-08-30'
+- id: LAB11-Q35
+  objectiveIds:
+  - CP-VM-02
+  difficulty: applied
+  stem: 'A peer reviewer examines the proposed implementation for this scenario: The ''Configure encryption at host for Azure
+    virtual machines'' checkpoint reaches an external prerequisite. What should happen?'
+  options:
+    A: Mark the branch passed because its command syntax was checked offline.
+    B: 'Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.'
+    C: Invent a domain, notification target, license, quota, or tenant value and continue.
+    D: Broaden permissions until the prerequisite can no longer block the operation.
+  correctOption: B
+  explanation: 'Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared
+    role and a disposable subscription.'
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: 'Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared
+      role and a disposable subscription.'
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-machines/resize-vm
+  lastVerified: '2026-08-30'
+- id: LAB11-Q36
+  objectiveIds:
+  - CP-VM-04
+  difficulty: applied
+  stem: 'During a controlled rollout, the change team encounters this requirement: A learner previews the implementation for
+    ''Manage virtual machine sizes''. What behavior is required?'
+  options:
+    A: Select the first accessible subscription and hide the resulting context.
+    B: Delete any older resource whose name resembles the new run ID.
+    C: Display the context, intended changes, cost and gated branches without mutating Azure.
+    D: Create the baseline immediately and request approval only before cleanup.
+  correctOption: C
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-machines/linux/attach-disk-portal
+  lastVerified: '2026-08-30'
+- id: LAB11-Q37
+  objectiveIds:
+  - CP-VM-05
+  difficulty: applied
+  stem: 'A support engineer reproduces the following situation in a test environment: Which implementation step should the
+    learner perform for ''Manage virtual machine disks''?'
+  options:
+    A: Copy resource identifiers from another run instead of recording returned IDs.
+    B: Skip the operation and edit validation.json to show a passing result.
+    C: Replace the lab action with a tenant-wide change that is easier to discover.
+    D: Deallocate and resize the VM to a validated alternative SKU, then return it to the intended state.
+  correctOption: D
+  explanation: 'The lab''s reviewed command path performs this bounded action: Deallocate and resize the VM to a validated
+    alternative SKU, then return it to the intended state.'
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: 'Correct. The lab''s reviewed command path performs this bounded action: Deallocate and resize the VM to a validated
+      alternative SKU, then return it to the intended state.'
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-machines/disks-enable-host-based-encryption-cli
+  lastVerified: '2026-08-30'
+- id: LAB11-Q38
+  objectiveIds:
+  - CP-VM-01
+  difficulty: applied
+  stem: 'While recording validation evidence, the administrator evaluates this question: Which evidence most directly validates
+    ''Create a virtual machine'' for Linux virtual machine?'
+  options:
+    A: Query the exact recorded scope and independently verify Microsoft.Compute/disks.
+    B: Record a credential so another learner can replay the authenticated session.
+    C: Treat the setup exit code as proof of every configuration and relationship.
+    D: List the entire subscription and assume similarly named resources belong to this run.
+  correctOption: A
+  explanation: The independent validation path must prove Microsoft.Compute/disks for the exact recorded object.
+  distractorExplanations:
+    A: Correct. The independent validation path must prove Microsoft.Compute/disks for the exact recorded object.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-machines/linux/quick-create-cli
+  lastVerified: '2026-08-30'
+- id: LAB11-Q39
+  objectiveIds:
+  - CP-VM-02
+  difficulty: applied
+  stem: 'A configuration owner must approve one response to this scenario: The ''Configure encryption at host for Azure virtual
+    machines'' checkpoint reaches an external prerequisite. What should happen?'
+  options:
+    A: Mark the branch passed because its command syntax was checked offline.
+    B: 'Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.'
+    C: Invent a domain, notification target, license, quota, or tenant value and continue.
+    D: Broaden permissions until the prerequisite can no longer block the operation.
+  correctOption: B
+  explanation: 'Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared
+    role and a disposable subscription.'
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: 'Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared
+      role and a disposable subscription.'
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-machines/resize-vm
+  lastVerified: '2026-08-30'
+- id: LAB11-Q40
+  objectiveIds:
+  - CP-VM-04
+  difficulty: applied
+  stem: 'During post-deployment verification, the team reviews this situation: A learner previews the implementation for ''Manage
+    virtual machine sizes''. What behavior is required?'
+  options:
+    A: Select the first accessible subscription and hide the resulting context.
+    B: Delete any older resource whose name resembles the new run ID.
+    C: Display the context, intended changes, cost and gated branches without mutating Azure.
+    D: Create the baseline immediately and request approval only before cleanup.
+  correctOption: C
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+  distractorExplanations:
+    A: This choice skips independent evidence or relies on ambiguous resource identity.
+    B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    C: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-machines/linux/attach-disk-portal
+  lastVerified: '2026-08-30'
+- id: LAB11-Q41
   objectiveIds:
   - CP-VM-04
   - CP-VM-05
   difficulty: advanced
   stem: Validation for 'Manage virtual machine sizes' fails after setup. What is the best break/fix method?
   options:
-    A: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-    B: Rerun setup repeatedly with new names until one attempt appears successful.
-    C: Change validation.json directly so the failed result reads pass.
-    D: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-  correctOption: A
+    A: Rerun setup repeatedly with new names until one attempt appears successful.
+    B: Change validation.json directly so the failed result reads pass.
+    C: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+    D: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+  correctOption: D
   explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
   distractorExplanations:
-    A: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
-    B: This choice changes or trusts a broader scope than the recorded lab boundary.
-    C: This choice skips independent evidence or relies on ambiguous resource identity.
-    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/virtual-machines/linux/attach-disk-portal
   lastVerified: '2026-08-30'
-- id: LAB11-Q08
+- id: LAB11-Q42
   objectiveIds:
   - CP-VM-05
   - CP-VM-01
   difficulty: advanced
   stem: The operation for 'Manage virtual machine disks' is asynchronous or gated. How should completion be recorded?
   options:
-    A: Record pass as soon as the request is accepted, regardless of its final state.
-    B: Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence
-      exists.
-    C: Fabricate expected output so the assessment and documentation appear complete.
-    D: Remove the check from validation whenever the service takes longer than expected.
-  correctOption: B
+    A: Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
+    B: Fabricate expected output so the assessment and documentation appear complete.
+    C: Remove the check from validation whenever the service takes longer than expected.
+    D: Record pass as soon as the request is accepted, regardless of its final state.
+  correctOption: A
   explanation: Accepted requests and offline checks do not prove the final live state.
   distractorExplanations:
+    A: Correct. Accepted requests and offline checks do not prove the final live state.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-machines/disks-enable-host-based-encryption-cli
+  lastVerified: '2026-08-30'
+- id: LAB11-Q43
+  objectiveIds:
+  - CP-VM-04
+  - CP-VM-05
+  difficulty: advanced
+  stem: 'A security and reliability review identifies this design decision: Validation for ''Manage virtual machine sizes''
+    fails after setup. What is the best break/fix method?'
+  options:
+    A: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+    B: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+    C: Rerun setup repeatedly with new names until one attempt appears successful.
+    D: Change validation.json directly so the failed result reads pass.
+  correctOption: B
+  explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-machines/linux/attach-disk-portal
+  lastVerified: '2026-08-30'
+- id: LAB11-Q44
+  objectiveIds:
+  - CP-VM-05
+  - CP-VM-01
+  difficulty: advanced
+  stem: 'While diagnosing unexpected Azure behavior, the engineer considers this situation: The operation for ''Manage virtual
+    machine disks'' is asynchronous or gated. How should completion be recorded?'
+  options:
+    A: Remove the check from validation whenever the service takes longer than expected.
+    B: Record pass as soon as the request is accepted, regardless of its final state.
+    C: Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
+    D: Fabricate expected output so the assessment and documentation appear complete.
+  correctOption: C
+  explanation: Accepted requests and offline checks do not prove the final live state.
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: Correct. Accepted requests and offline checks do not prove the final live state.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-machines/disks-enable-host-based-encryption-cli
+  lastVerified: '2026-08-30'
+- id: LAB11-Q45
+  objectiveIds:
+  - CP-VM-04
+  - CP-VM-05
+  difficulty: advanced
+  stem: 'An architecture review requires the strongest response to this scenario: Validation for ''Manage virtual machine
+    sizes'' fails after setup. What is the best break/fix method?'
+  options:
+    A: Rerun setup repeatedly with new names until one attempt appears successful.
+    B: Change validation.json directly so the failed result reads pass.
+    C: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+    D: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+  correctOption: D
+  explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
+  distractorExplanations:
     A: This choice changes or trusts a broader scope than the recorded lab boundary.
-    B: Correct. Accepted requests and offline checks do not prove the final live state.
-    C: This choice skips independent evidence or relies on ambiguous resource identity.
-    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-machines/linux/attach-disk-portal
+  lastVerified: '2026-08-30'
+- id: LAB11-Q46
+  objectiveIds:
+  - CP-VM-05
+  - CP-VM-01
+  difficulty: advanced
+  stem: 'During break/fix validation, the operator encounters this question: The operation for ''Manage virtual machine disks''
+    is asynchronous or gated. How should completion be recorded?'
+  options:
+    A: Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
+    B: Fabricate expected output so the assessment and documentation appear complete.
+    C: Remove the check from validation whenever the service takes longer than expected.
+    D: Record pass as soon as the request is accepted, regardless of its final state.
+  correctOption: A
+  explanation: Accepted requests and offline checks do not prove the final live state.
+  distractorExplanations:
+    A: Correct. Accepted requests and offline checks do not prove the final live state.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-machines/disks-enable-host-based-encryption-cli
+  lastVerified: '2026-08-30'
+- id: LAB11-Q47
+  objectiveIds:
+  - CP-VM-04
+  - CP-VM-05
+  difficulty: advanced
+  stem: 'A complex support case depends on correctly interpreting this requirement: Validation for ''Manage virtual machine
+    sizes'' fails after setup. What is the best break/fix method?'
+  options:
+    A: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+    B: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+    C: Rerun setup repeatedly with new names until one attempt appears successful.
+    D: Change validation.json directly so the failed result reads pass.
+  correctOption: B
+  explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+    C: This choice changes or trusts a broader scope than the recorded lab boundary.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-machines/linux/attach-disk-portal
+  lastVerified: '2026-08-30'
+- id: LAB11-Q48
+  objectiveIds:
+  - CP-VM-05
+  - CP-VM-01
+  difficulty: advanced
+  stem: 'While correcting configuration drift, the team evaluates this scenario: The operation for ''Manage virtual machine
+    disks'' is asynchronous or gated. How should completion be recorded?'
+  options:
+    A: Remove the check from validation whenever the service takes longer than expected.
+    B: Record pass as soon as the request is accepted, regardless of its final state.
+    C: Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
+    D: Fabricate expected output so the assessment and documentation appear complete.
+  correctOption: C
+  explanation: Accepted requests and offline checks do not prove the final live state.
+  distractorExplanations:
+    A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: Correct. Accepted requests and offline checks do not prove the final live state.
+    D: This choice skips independent evidence or relies on ambiguous resource identity.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-machines/disks-enable-host-based-encryption-cli
+  lastVerified: '2026-08-30'
+- id: LAB11-Q49
+  objectiveIds:
+  - CP-VM-04
+  - CP-VM-05
+  difficulty: advanced
+  stem: 'A recovery exercise exposes the following technical decision: Validation for ''Manage virtual machine sizes'' fails
+    after setup. What is the best break/fix method?'
+  options:
+    A: Rerun setup repeatedly with new names until one attempt appears successful.
+    B: Change validation.json directly so the failed result reads pass.
+    C: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+    D: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+  correctOption: D
+  explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/virtual-machines/linux/attach-disk-portal
+  lastVerified: '2026-08-30'
+- id: LAB11-Q50
+  objectiveIds:
+  - CP-VM-05
+  - CP-VM-01
+  difficulty: advanced
+  stem: 'During final design assurance, the reviewer must resolve this situation: The operation for ''Manage virtual machine
+    disks'' is asynchronous or gated. How should completion be recorded?'
+  options:
+    A: Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
+    B: Fabricate expected output so the assessment and documentation appear complete.
+    C: Remove the check from validation whenever the service takes longer than expected.
+    D: Record pass as soon as the request is accepted, regardless of its final state.
+  correctOption: A
+  explanation: Accepted requests and offline checks do not prove the final live state.
+  distractorExplanations:
+    A: Correct. Accepted requests and offline checks do not prove the final live state.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: This choice changes or trusts a broader scope than the recorded lab boundary.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/virtual-machines/disks-enable-host-based-encryption-cli
   lastVerified: '2026-08-30'

@@ -22,8 +22,8 @@ cost:
   - Recovery Services vault
   - ASR fabric/container mappings
   - replicated item
-  notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator
-    before execution and clean up immediately.
+  notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator before
+    execution and clean up immediately.
 permissions:
   azureRbacRoles:
   - Site Recovery Contributor, Virtual Machine Contributor, and Network Contributor on both region scopes
@@ -32,10 +32,10 @@ permissions:
 prerequisites:
 - A disposable non-production Azure environment
 - An active context that matches the explicitly supplied tenant and subscription
-- 'Authorization boundary: Site Recovery Contributor, Virtual Machine Contributor, and Network Contributor on both
-  region scopes'
-- 'External gate review: This elevated lab requires two approved regions and explicit cost review before live execution;
-  test failover must use an isolated network.'
+- 'Authorization boundary: Site Recovery Contributor, Virtual Machine Contributor, and Network Contributor on both region
+  scopes'
+- 'External gate review: This elevated lab requires two approved regions and explicit cost review before live execution; test
+  failover must use an isolated network.'
 - Azure CLI hosted in PowerShell 7.4 or later
 providers:
   observed:
@@ -55,8 +55,8 @@ creates:
   - .state/<run-id>/validation.json
 tenantScopedChanges: []
 externalRequirements:
-- This elevated lab requires two approved regions and explicit cost review before live execution; test failover
-  must use an isolated network.
+- This elevated lab requires two approved regions and explicit cost review before live execution; test failover must use an
+  isolated network.
 validation:
   commandLanes:
   - scripts/cli/Validate.ps1
@@ -75,7 +75,7 @@ cleanup:
   residualAuditRequired: true
 assessment:
   enabled: true
-  questionCount: 10
+  questionCount: 50
   primaryDomain: monitor-recovery
 lastOfflineValidated: '2026-08-30'
 lastLiveVerified: null

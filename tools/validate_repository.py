@@ -208,6 +208,18 @@ def validate_assessment(
     else:
         results.ok(f"{lab_dir.name}: question difficulty mix matches its allocation")
 
+    answers = Counter(question.get("correctOption") for question in questions)
+    if set(answers) != {"A", "B", "C", "D"} or any(count not in {12, 13} for count in answers.values()):
+        results.error(f"{lab_dir.name}: answer positions must each occur 12 or 13 times; found {dict(answers)}")
+    else:
+        results.ok(f"{lab_dir.name}: answer positions are balanced 12–13 times each")
+
+    stems = [question.get("stem", "").strip().casefold() for question in questions]
+    if len(stems) != len(set(stems)):
+        results.error(f"{lab_dir.name}: question stems must be unique within the lab")
+    else:
+        results.ok(f"{lab_dir.name}: question stems are unique within the lab")
+
     mapped: set[str] = set()
     domain = metadata.get("primaryDomain")
     objective_prefix = DOMAIN_OBJECTIVE_PREFIXES.get(domain, "")
@@ -349,18 +361,30 @@ def validate_lab_dirs(
 
 
 def validate_domain_question_contract(question_records: list[dict], results: Results) -> None:
-    if len(question_records) != 250:
-        results.error(f"Assessment contract requires 250 questions; found {len(question_records)}")
+    expected_total = sum(int(plan["questionCount"]) for plan in ASSESSMENT_PLAN.values())
+    if len(question_records) != expected_total:
+        results.error(f"Assessment contract requires {expected_total} questions; found {len(question_records)}")
     else:
-        results.ok("Assessment bank contains exactly 250 questions")
+        results.ok(f"Assessment bank contains exactly {expected_total} questions")
+
+    stems = [question.get("stem", "").strip().casefold() for question in question_records]
+    if len(stems) != len(set(stems)):
+        results.error("Assessment bank contains duplicate question stems across labs")
+    else:
+        results.ok("All assessment question stems are unique across the repository")
 
     expected_difficulties = expected_domain_difficulties()
     for domain, display_name in DOMAIN_DISPLAY_NAMES.items():
         records = [question for question in question_records if question.get("domain") == domain]
-        if len(records) != 50:
-            results.error(f"{display_name}: expected 50 questions; found {len(records)}")
+        expected_count = sum(
+            int(plan["questionCount"])
+            for plan in ASSESSMENT_PLAN.values()
+            if plan.get("enabled") and plan.get("primaryDomain") == domain
+        )
+        if len(records) != expected_count:
+            results.error(f"{display_name}: expected {expected_count} questions; found {len(records)}")
             continue
-        results.ok(f"{display_name}: contains exactly 50 questions")
+        results.ok(f"{display_name}: contains exactly {expected_count} questions")
 
         difficulties = Counter(question.get("difficulty") for question in records)
         if difficulties != expected_difficulties[domain]:
@@ -369,13 +393,19 @@ def validate_domain_question_contract(question_records: list[dict], results: Res
                 f"found {dict(difficulties)}"
             )
         else:
-            results.ok(f"{display_name}: difficulty mix is 15 foundational / 25 applied / 10 advanced")
+            results.ok(f"{display_name}: difficulty mix matches the per-lab 15/25/10 allocation")
 
         answers = Counter(question.get("correctOption") for question in records)
-        if set(answers) != {"A", "B", "C", "D"} or any(count not in {12, 13} for count in answers.values()):
-            results.error(f"{display_name}: answer positions must each occur 12 or 13 times; found {dict(answers)}")
+        minimum = expected_count // 4
+        maximum = minimum + (1 if expected_count % 4 else 0)
+        if set(answers) != {"A", "B", "C", "D"} or any(
+            count not in {minimum, maximum} for count in answers.values()
+        ):
+            results.error(
+                f"{display_name}: answer positions must each occur {minimum}–{maximum} times; found {dict(answers)}"
+            )
         else:
-            results.ok(f"{display_name}: answer positions are balanced 12–13 times each")
+            results.ok(f"{display_name}: answer positions are balanced across the domain")
 
 
 def validate_no_screenshot_contract(results: Results) -> None:

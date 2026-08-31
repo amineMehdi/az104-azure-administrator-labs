@@ -1,143 +1,653 @@
 # Lab 02 answer key
 
-Return to [the questions](QUESTIONS.md).
+Review these explanations only after answering all 50 questions.
 
-## 1. C (`LAB02-Q01`)
+## LAB02-Q01 — C
 
 The lab establishes this design principle: SSPR and group-based licensing are tenant capabilities with role and license gates; inventory and scoped pilots are safer than tenant-wide changes.
 
-Objectives: IG-USERS-03
+- A: This choice changes or trusts a broader scope than the recorded lab boundary.
+- B: This choice skips independent evidence or relies on ambiguous resource identity.
+- C: Correct. The lab establishes this design principle: SSPR and group-based licensing are tenant capabilities with role and license gates; inventory and scoped pilots are safer than tenant-wide changes.
+- D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
 
-Why the other choices do not fit:
+Objectives: `IG-USERS-03`.
 
-- **A:** This choice changes or trusts a broader scope than the recorded lab boundary.
-- **B:** This choice skips independent evidence or relies on ambiguous resource identity.
-- **D:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/entra/fundamentals/how-to-manage-user-profile-info).
 
-Source: <https://learn.microsoft.com/en-us/entra/fundamentals/how-to-manage-user-profile-info>
-
-## 2. D (`LAB02-Q02`)
+## LAB02-Q02 — D
 
 The reviewed hands-on action for this objective is: Invite a disposable external account only when AZ104_GUEST_EMAIL is supplied.
 
-Objectives: IG-USERS-04
+- A: This choice changes or trusts a broader scope than the recorded lab boundary.
+- B: This choice skips independent evidence or relies on ambiguous resource identity.
+- C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- D: Correct. The reviewed hands-on action for this objective is: Invite a disposable external account only when AZ104_GUEST_EMAIL is supplied.
 
-Why the other choices do not fit:
+Objectives: `IG-USERS-04`.
 
-- **A:** This choice changes or trusts a broader scope than the recorded lab boundary.
-- **B:** This choice skips independent evidence or relies on ambiguous resource identity.
-- **C:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/entra/external-id/b2b-quickstart-invite-powershell).
 
-Source: <https://learn.microsoft.com/en-us/entra/external-id/b2b-quickstart-invite-powershell>
-
-## 3. A (`LAB02-Q03`)
+## LAB02-Q03 — A
 
 Least privilege requires the documented boundary: User Administrator and License Administrator; Authentication Policy Administrator for the SSPR policy path
 
-Objectives: IG-USERS-05
+- A: Correct. Least privilege requires the documented boundary: User Administrator and License Administrator; Authentication Policy Administrator for the SSPR policy path
+- B: This choice changes or trusts a broader scope than the recorded lab boundary.
+- C: This choice skips independent evidence or relies on ambiguous resource identity.
+- D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
 
-Why the other choices do not fit:
+Objectives: `IG-USERS-05`.
 
-- **B:** This choice changes or trusts a broader scope than the recorded lab boundary.
-- **C:** This choice skips independent evidence or relies on ambiguous resource identity.
-- **D:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/entra/identity/users/licensing-powershell-graph-examples).
 
-Source: <https://learn.microsoft.com/en-us/entra/identity/users/licensing-powershell-graph-examples>
+## LAB02-Q04 — B
 
-## 4. B (`LAB02-Q04`)
+The lab establishes this design principle: SSPR and group-based licensing are tenant capabilities with role and license gates; inventory and scoped pilots are safer than tenant-wide changes.
+
+- A: This choice skips independent evidence or relies on ambiguous resource identity.
+- B: Correct. The lab establishes this design principle: SSPR and group-based licensing are tenant capabilities with role and license gates; inventory and scoped pilots are safer than tenant-wide changes.
+- C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- D: This choice changes or trusts a broader scope than the recorded lab boundary.
+
+Objectives: `IG-USERS-03`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/entra/fundamentals/how-to-manage-user-profile-info).
+
+## LAB02-Q05 — C
+
+The reviewed hands-on action for this objective is: Invite a disposable external account only when AZ104_GUEST_EMAIL is supplied.
+
+- A: This choice skips independent evidence or relies on ambiguous resource identity.
+- B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- C: Correct. The reviewed hands-on action for this objective is: Invite a disposable external account only when AZ104_GUEST_EMAIL is supplied.
+- D: This choice changes or trusts a broader scope than the recorded lab boundary.
+
+Objectives: `IG-USERS-04`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/entra/external-id/b2b-quickstart-invite-powershell).
+
+## LAB02-Q06 — D
+
+Least privilege requires the documented boundary: User Administrator and License Administrator; Authentication Policy Administrator for the SSPR policy path
+
+- A: This choice changes or trusts a broader scope than the recorded lab boundary.
+- B: This choice skips independent evidence or relies on ambiguous resource identity.
+- C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- D: Correct. Least privilege requires the documented boundary: User Administrator and License Administrator; Authentication Policy Administrator for the SSPR policy path
+
+Objectives: `IG-USERS-05`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/entra/identity/users/licensing-powershell-graph-examples).
+
+## LAB02-Q07 — A
+
+The lab establishes this design principle: SSPR and group-based licensing are tenant capabilities with role and license gates; inventory and scoped pilots are safer than tenant-wide changes.
+
+- A: Correct. The lab establishes this design principle: SSPR and group-based licensing are tenant capabilities with role and license gates; inventory and scoped pilots are safer than tenant-wide changes.
+- B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- C: This choice changes or trusts a broader scope than the recorded lab boundary.
+- D: This choice skips independent evidence or relies on ambiguous resource identity.
+
+Objectives: `IG-USERS-03`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/entra/fundamentals/how-to-manage-user-profile-info).
+
+## LAB02-Q08 — B
+
+The reviewed hands-on action for this objective is: Invite a disposable external account only when AZ104_GUEST_EMAIL is supplied.
+
+- A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- B: Correct. The reviewed hands-on action for this objective is: Invite a disposable external account only when AZ104_GUEST_EMAIL is supplied.
+- C: This choice changes or trusts a broader scope than the recorded lab boundary.
+- D: This choice skips independent evidence or relies on ambiguous resource identity.
+
+Objectives: `IG-USERS-04`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/entra/external-id/b2b-quickstart-invite-powershell).
+
+## LAB02-Q09 — C
+
+Least privilege requires the documented boundary: User Administrator and License Administrator; Authentication Policy Administrator for the SSPR policy path
+
+- A: This choice skips independent evidence or relies on ambiguous resource identity.
+- B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- C: Correct. Least privilege requires the documented boundary: User Administrator and License Administrator; Authentication Policy Administrator for the SSPR policy path
+- D: This choice changes or trusts a broader scope than the recorded lab boundary.
+
+Objectives: `IG-USERS-05`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/entra/identity/users/licensing-powershell-graph-examples).
+
+## LAB02-Q10 — D
+
+The lab establishes this design principle: SSPR and group-based licensing are tenant capabilities with role and license gates; inventory and scoped pilots are safer than tenant-wide changes.
+
+- A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- B: This choice changes or trusts a broader scope than the recorded lab boundary.
+- C: This choice skips independent evidence or relies on ambiguous resource identity.
+- D: Correct. The lab establishes this design principle: SSPR and group-based licensing are tenant capabilities with role and license gates; inventory and scoped pilots are safer than tenant-wide changes.
+
+Objectives: `IG-USERS-03`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/entra/fundamentals/how-to-manage-user-profile-info).
+
+## LAB02-Q11 — A
+
+The reviewed hands-on action for this objective is: Invite a disposable external account only when AZ104_GUEST_EMAIL is supplied.
+
+- A: Correct. The reviewed hands-on action for this objective is: Invite a disposable external account only when AZ104_GUEST_EMAIL is supplied.
+- B: This choice changes or trusts a broader scope than the recorded lab boundary.
+- C: This choice skips independent evidence or relies on ambiguous resource identity.
+- D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+
+Objectives: `IG-USERS-04`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/entra/external-id/b2b-quickstart-invite-powershell).
+
+## LAB02-Q12 — B
+
+Least privilege requires the documented boundary: User Administrator and License Administrator; Authentication Policy Administrator for the SSPR policy path
+
+- A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- B: Correct. Least privilege requires the documented boundary: User Administrator and License Administrator; Authentication Policy Administrator for the SSPR policy path
+- C: This choice changes or trusts a broader scope than the recorded lab boundary.
+- D: This choice skips independent evidence or relies on ambiguous resource identity.
+
+Objectives: `IG-USERS-05`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/entra/identity/users/licensing-powershell-graph-examples).
+
+## LAB02-Q13 — C
+
+The lab establishes this design principle: SSPR and group-based licensing are tenant capabilities with role and license gates; inventory and scoped pilots are safer than tenant-wide changes.
+
+- A: This choice changes or trusts a broader scope than the recorded lab boundary.
+- B: This choice skips independent evidence or relies on ambiguous resource identity.
+- C: Correct. The lab establishes this design principle: SSPR and group-based licensing are tenant capabilities with role and license gates; inventory and scoped pilots are safer than tenant-wide changes.
+- D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+
+Objectives: `IG-USERS-03`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/entra/fundamentals/how-to-manage-user-profile-info).
+
+## LAB02-Q14 — D
+
+The reviewed hands-on action for this objective is: Invite a disposable external account only when AZ104_GUEST_EMAIL is supplied.
+
+- A: This choice changes or trusts a broader scope than the recorded lab boundary.
+- B: This choice skips independent evidence or relies on ambiguous resource identity.
+- C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- D: Correct. The reviewed hands-on action for this objective is: Invite a disposable external account only when AZ104_GUEST_EMAIL is supplied.
+
+Objectives: `IG-USERS-04`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/entra/external-id/b2b-quickstart-invite-powershell).
+
+## LAB02-Q15 — A
+
+Least privilege requires the documented boundary: User Administrator and License Administrator; Authentication Policy Administrator for the SSPR policy path
+
+- A: Correct. Least privilege requires the documented boundary: User Administrator and License Administrator; Authentication Policy Administrator for the SSPR policy path
+- B: This choice changes or trusts a broader scope than the recorded lab boundary.
+- C: This choice skips independent evidence or relies on ambiguous resource identity.
+- D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+
+Objectives: `IG-USERS-05`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/entra/identity/users/licensing-powershell-graph-examples).
+
+## LAB02-Q16 — B
 
 Preview mode is deliberately non-mutating and exposes the complete intended boundary.
 
-Objectives: IG-USERS-03
+- A: This choice changes or trusts a broader scope than the recorded lab boundary.
+- B: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+- C: This choice skips independent evidence or relies on ambiguous resource identity.
+- D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
 
-Why the other choices do not fit:
+Objectives: `IG-USERS-03`.
 
-- **A:** This choice changes or trusts a broader scope than the recorded lab boundary.
-- **C:** This choice skips independent evidence or relies on ambiguous resource identity.
-- **D:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/entra/identity/authentication/tutorial-enable-sspr).
 
-Source: <https://learn.microsoft.com/en-us/entra/identity/authentication/tutorial-enable-sspr>
-
-## 5. C (`LAB02-Q05`)
+## LAB02-Q17 — C
 
 The lab's reviewed command path performs this bounded action: Create a security group that represents the SSPR pilot cohort.
 
-Objectives: IG-USERS-04
+- A: This choice changes or trusts a broader scope than the recorded lab boundary.
+- B: This choice skips independent evidence or relies on ambiguous resource identity.
+- C: Correct. The lab's reviewed command path performs this bounded action: Create a security group that represents the SSPR pilot cohort.
+- D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
 
-Why the other choices do not fit:
+Objectives: `IG-USERS-04`.
 
-- **A:** This choice changes or trusts a broader scope than the recorded lab boundary.
-- **B:** This choice skips independent evidence or relies on ambiguous resource identity.
-- **D:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/entra/fundamentals/how-to-manage-user-profile-info).
 
-Source: <https://learn.microsoft.com/en-us/entra/fundamentals/how-to-manage-user-profile-info>
-
-## 6. D (`LAB02-Q06`)
+## LAB02-Q18 — D
 
 The independent validation path must prove the intended recorded state for the exact recorded object.
 
-Objectives: IG-USERS-05
+- A: This choice changes or trusts a broader scope than the recorded lab boundary.
+- B: This choice skips independent evidence or relies on ambiguous resource identity.
+- C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- D: Correct. The independent validation path must prove the intended recorded state for the exact recorded object.
 
-Why the other choices do not fit:
+Objectives: `IG-USERS-05`.
 
-- **A:** This choice changes or trusts a broader scope than the recorded lab boundary.
-- **B:** This choice skips independent evidence or relies on ambiguous resource identity.
-- **C:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/entra/external-id/b2b-quickstart-invite-powershell).
 
-Source: <https://learn.microsoft.com/en-us/entra/external-id/b2b-quickstart-invite-powershell>
-
-## 7. A (`LAB02-Q07`)
+## LAB02-Q19 — A
 
 Unavailable live prerequisites remain skipped or partial; the documented gate is: Requires a real disposable guest email for invitation, an available SKU for license assignment, and an authorized tenant policy change for SSPR.
 
-Objectives: IG-USERS-03
+- A: Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: Requires a real disposable guest email for invitation, an available SKU for license assignment, and an authorized tenant policy change for SSPR.
+- B: This choice changes or trusts a broader scope than the recorded lab boundary.
+- C: This choice skips independent evidence or relies on ambiguous resource identity.
+- D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
 
-Why the other choices do not fit:
+Objectives: `IG-USERS-03`.
 
-- **B:** This choice changes or trusts a broader scope than the recorded lab boundary.
-- **C:** This choice skips independent evidence or relies on ambiguous resource identity.
-- **D:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/entra/identity/users/licensing-powershell-graph-examples).
 
-Source: <https://learn.microsoft.com/en-us/entra/identity/users/licensing-powershell-graph-examples>
-
-## 8. B (`LAB02-Q08`)
+## LAB02-Q20 — B
 
 Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
 
-Objectives: IG-USERS-04
+- A: This choice changes or trusts a broader scope than the recorded lab boundary.
+- B: Correct. Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
+- C: This choice skips independent evidence or relies on ambiguous resource identity.
+- D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
 
-Why the other choices do not fit:
+Objectives: `IG-USERS-04`.
 
-- **A:** This choice changes or trusts a broader scope than the recorded lab boundary.
-- **C:** This choice skips independent evidence or relies on ambiguous resource identity.
-- **D:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/entra/identity/authentication/tutorial-enable-sspr).
 
-Source: <https://learn.microsoft.com/en-us/entra/identity/authentication/tutorial-enable-sspr>
+## LAB02-Q21 — C
 
-## 9. C (`LAB02-Q09`)
+Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+
+- A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- B: This choice changes or trusts a broader scope than the recorded lab boundary.
+- C: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+- D: This choice skips independent evidence or relies on ambiguous resource identity.
+
+Objectives: `IG-USERS-03`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/entra/identity/authentication/tutorial-enable-sspr).
+
+## LAB02-Q22 — D
+
+The lab's reviewed command path performs this bounded action: Create a security group that represents the SSPR pilot cohort.
+
+- A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- B: This choice changes or trusts a broader scope than the recorded lab boundary.
+- C: This choice skips independent evidence or relies on ambiguous resource identity.
+- D: Correct. The lab's reviewed command path performs this bounded action: Create a security group that represents the SSPR pilot cohort.
+
+Objectives: `IG-USERS-04`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/entra/fundamentals/how-to-manage-user-profile-info).
+
+## LAB02-Q23 — A
+
+The independent validation path must prove the intended recorded state for the exact recorded object.
+
+- A: Correct. The independent validation path must prove the intended recorded state for the exact recorded object.
+- B: This choice changes or trusts a broader scope than the recorded lab boundary.
+- C: This choice skips independent evidence or relies on ambiguous resource identity.
+- D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+
+Objectives: `IG-USERS-05`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/entra/external-id/b2b-quickstart-invite-powershell).
+
+## LAB02-Q24 — B
+
+Unavailable live prerequisites remain skipped or partial; the documented gate is: Requires a real disposable guest email for invitation, an available SKU for license assignment, and an authorized tenant policy change for SSPR.
+
+- A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- B: Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: Requires a real disposable guest email for invitation, an available SKU for license assignment, and an authorized tenant policy change for SSPR.
+- C: This choice changes or trusts a broader scope than the recorded lab boundary.
+- D: This choice skips independent evidence or relies on ambiguous resource identity.
+
+Objectives: `IG-USERS-03`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/entra/identity/users/licensing-powershell-graph-examples).
+
+## LAB02-Q25 — C
+
+Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
+
+- A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- B: This choice changes or trusts a broader scope than the recorded lab boundary.
+- C: Correct. Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
+- D: This choice skips independent evidence or relies on ambiguous resource identity.
+
+Objectives: `IG-USERS-04`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/entra/identity/authentication/tutorial-enable-sspr).
+
+## LAB02-Q26 — D
+
+Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+
+- A: This choice skips independent evidence or relies on ambiguous resource identity.
+- B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- C: This choice changes or trusts a broader scope than the recorded lab boundary.
+- D: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+
+Objectives: `IG-USERS-03`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/entra/identity/authentication/tutorial-enable-sspr).
+
+## LAB02-Q27 — A
+
+The lab's reviewed command path performs this bounded action: Create a security group that represents the SSPR pilot cohort.
+
+- A: Correct. The lab's reviewed command path performs this bounded action: Create a security group that represents the SSPR pilot cohort.
+- B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- C: This choice changes or trusts a broader scope than the recorded lab boundary.
+- D: This choice skips independent evidence or relies on ambiguous resource identity.
+
+Objectives: `IG-USERS-04`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/entra/fundamentals/how-to-manage-user-profile-info).
+
+## LAB02-Q28 — B
+
+The independent validation path must prove the intended recorded state for the exact recorded object.
+
+- A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- B: Correct. The independent validation path must prove the intended recorded state for the exact recorded object.
+- C: This choice changes or trusts a broader scope than the recorded lab boundary.
+- D: This choice skips independent evidence or relies on ambiguous resource identity.
+
+Objectives: `IG-USERS-05`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/entra/external-id/b2b-quickstart-invite-powershell).
+
+## LAB02-Q29 — C
+
+Unavailable live prerequisites remain skipped or partial; the documented gate is: Requires a real disposable guest email for invitation, an available SKU for license assignment, and an authorized tenant policy change for SSPR.
+
+- A: This choice skips independent evidence or relies on ambiguous resource identity.
+- B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- C: Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: Requires a real disposable guest email for invitation, an available SKU for license assignment, and an authorized tenant policy change for SSPR.
+- D: This choice changes or trusts a broader scope than the recorded lab boundary.
+
+Objectives: `IG-USERS-03`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/entra/identity/users/licensing-powershell-graph-examples).
+
+## LAB02-Q30 — D
+
+Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
+
+- A: This choice skips independent evidence or relies on ambiguous resource identity.
+- B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- C: This choice changes or trusts a broader scope than the recorded lab boundary.
+- D: Correct. Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
+
+Objectives: `IG-USERS-04`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/entra/identity/authentication/tutorial-enable-sspr).
+
+## LAB02-Q31 — A
+
+Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+
+- A: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+- B: This choice skips independent evidence or relies on ambiguous resource identity.
+- C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- D: This choice changes or trusts a broader scope than the recorded lab boundary.
+
+Objectives: `IG-USERS-03`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/entra/identity/authentication/tutorial-enable-sspr).
+
+## LAB02-Q32 — B
+
+The lab's reviewed command path performs this bounded action: Create a security group that represents the SSPR pilot cohort.
+
+- A: This choice skips independent evidence or relies on ambiguous resource identity.
+- B: Correct. The lab's reviewed command path performs this bounded action: Create a security group that represents the SSPR pilot cohort.
+- C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- D: This choice changes or trusts a broader scope than the recorded lab boundary.
+
+Objectives: `IG-USERS-04`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/entra/fundamentals/how-to-manage-user-profile-info).
+
+## LAB02-Q33 — C
+
+The independent validation path must prove the intended recorded state for the exact recorded object.
+
+- A: This choice skips independent evidence or relies on ambiguous resource identity.
+- B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- C: Correct. The independent validation path must prove the intended recorded state for the exact recorded object.
+- D: This choice changes or trusts a broader scope than the recorded lab boundary.
+
+Objectives: `IG-USERS-05`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/entra/external-id/b2b-quickstart-invite-powershell).
+
+## LAB02-Q34 — D
+
+Unavailable live prerequisites remain skipped or partial; the documented gate is: Requires a real disposable guest email for invitation, an available SKU for license assignment, and an authorized tenant policy change for SSPR.
+
+- A: This choice changes or trusts a broader scope than the recorded lab boundary.
+- B: This choice skips independent evidence or relies on ambiguous resource identity.
+- C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- D: Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: Requires a real disposable guest email for invitation, an available SKU for license assignment, and an authorized tenant policy change for SSPR.
+
+Objectives: `IG-USERS-03`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/entra/identity/users/licensing-powershell-graph-examples).
+
+## LAB02-Q35 — A
+
+Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
+
+- A: Correct. Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
+- B: This choice skips independent evidence or relies on ambiguous resource identity.
+- C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- D: This choice changes or trusts a broader scope than the recorded lab boundary.
+
+Objectives: `IG-USERS-04`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/entra/identity/authentication/tutorial-enable-sspr).
+
+## LAB02-Q36 — B
+
+Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+
+- A: This choice changes or trusts a broader scope than the recorded lab boundary.
+- B: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+- C: This choice skips independent evidence or relies on ambiguous resource identity.
+- D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+
+Objectives: `IG-USERS-03`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/entra/identity/authentication/tutorial-enable-sspr).
+
+## LAB02-Q37 — C
+
+The lab's reviewed command path performs this bounded action: Create a security group that represents the SSPR pilot cohort.
+
+- A: This choice changes or trusts a broader scope than the recorded lab boundary.
+- B: This choice skips independent evidence or relies on ambiguous resource identity.
+- C: Correct. The lab's reviewed command path performs this bounded action: Create a security group that represents the SSPR pilot cohort.
+- D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+
+Objectives: `IG-USERS-04`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/entra/fundamentals/how-to-manage-user-profile-info).
+
+## LAB02-Q38 — D
+
+The independent validation path must prove the intended recorded state for the exact recorded object.
+
+- A: This choice changes or trusts a broader scope than the recorded lab boundary.
+- B: This choice skips independent evidence or relies on ambiguous resource identity.
+- C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- D: Correct. The independent validation path must prove the intended recorded state for the exact recorded object.
+
+Objectives: `IG-USERS-05`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/entra/external-id/b2b-quickstart-invite-powershell).
+
+## LAB02-Q39 — A
+
+Unavailable live prerequisites remain skipped or partial; the documented gate is: Requires a real disposable guest email for invitation, an available SKU for license assignment, and an authorized tenant policy change for SSPR.
+
+- A: Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: Requires a real disposable guest email for invitation, an available SKU for license assignment, and an authorized tenant policy change for SSPR.
+- B: This choice changes or trusts a broader scope than the recorded lab boundary.
+- C: This choice skips independent evidence or relies on ambiguous resource identity.
+- D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+
+Objectives: `IG-USERS-03`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/entra/identity/users/licensing-powershell-graph-examples).
+
+## LAB02-Q40 — B
+
+Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
+
+- A: This choice changes or trusts a broader scope than the recorded lab boundary.
+- B: Correct. Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
+- C: This choice skips independent evidence or relies on ambiguous resource identity.
+- D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+
+Objectives: `IG-USERS-04`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/entra/identity/authentication/tutorial-enable-sspr).
+
+## LAB02-Q41 — C
 
 Evidence-led repair preserves scope and makes the cause and correction auditable.
 
-Objectives: IG-USERS-05, IG-USERS-03
+- A: This choice changes or trusts a broader scope than the recorded lab boundary.
+- B: This choice skips independent evidence or relies on ambiguous resource identity.
+- C: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+- D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
 
-Why the other choices do not fit:
+Objectives: `IG-USERS-05`, `IG-USERS-03`.
 
-- **A:** This choice changes or trusts a broader scope than the recorded lab boundary.
-- **B:** This choice skips independent evidence or relies on ambiguous resource identity.
-- **D:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/entra/fundamentals/how-to-manage-user-profile-info).
 
-Source: <https://learn.microsoft.com/en-us/entra/fundamentals/how-to-manage-user-profile-info>
-
-## 10. D (`LAB02-Q10`)
+## LAB02-Q42 — D
 
 Accepted requests and offline checks do not prove the final live state.
 
-Objectives: IG-USERS-03, IG-USERS-04
+- A: This choice changes or trusts a broader scope than the recorded lab boundary.
+- B: This choice skips independent evidence or relies on ambiguous resource identity.
+- C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- D: Correct. Accepted requests and offline checks do not prove the final live state.
 
-Why the other choices do not fit:
+Objectives: `IG-USERS-03`, `IG-USERS-04`.
 
-- **A:** This choice changes or trusts a broader scope than the recorded lab boundary.
-- **B:** This choice skips independent evidence or relies on ambiguous resource identity.
-- **C:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/entra/external-id/b2b-quickstart-invite-powershell).
 
-Source: <https://learn.microsoft.com/en-us/entra/external-id/b2b-quickstart-invite-powershell>
+## LAB02-Q43 — A
+
+Evidence-led repair preserves scope and makes the cause and correction auditable.
+
+- A: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+- B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- C: This choice changes or trusts a broader scope than the recorded lab boundary.
+- D: This choice skips independent evidence or relies on ambiguous resource identity.
+
+Objectives: `IG-USERS-05`, `IG-USERS-03`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/entra/fundamentals/how-to-manage-user-profile-info).
+
+## LAB02-Q44 — B
+
+Accepted requests and offline checks do not prove the final live state.
+
+- A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- B: Correct. Accepted requests and offline checks do not prove the final live state.
+- C: This choice changes or trusts a broader scope than the recorded lab boundary.
+- D: This choice skips independent evidence or relies on ambiguous resource identity.
+
+Objectives: `IG-USERS-03`, `IG-USERS-04`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/entra/external-id/b2b-quickstart-invite-powershell).
+
+## LAB02-Q45 — C
+
+Evidence-led repair preserves scope and makes the cause and correction auditable.
+
+- A: This choice changes or trusts a broader scope than the recorded lab boundary.
+- B: This choice skips independent evidence or relies on ambiguous resource identity.
+- C: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+- D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+
+Objectives: `IG-USERS-05`, `IG-USERS-03`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/entra/fundamentals/how-to-manage-user-profile-info).
+
+## LAB02-Q46 — D
+
+Accepted requests and offline checks do not prove the final live state.
+
+- A: This choice changes or trusts a broader scope than the recorded lab boundary.
+- B: This choice skips independent evidence or relies on ambiguous resource identity.
+- C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- D: Correct. Accepted requests and offline checks do not prove the final live state.
+
+Objectives: `IG-USERS-03`, `IG-USERS-04`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/entra/external-id/b2b-quickstart-invite-powershell).
+
+## LAB02-Q47 — A
+
+Evidence-led repair preserves scope and makes the cause and correction auditable.
+
+- A: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+- B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- C: This choice changes or trusts a broader scope than the recorded lab boundary.
+- D: This choice skips independent evidence or relies on ambiguous resource identity.
+
+Objectives: `IG-USERS-05`, `IG-USERS-03`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/entra/fundamentals/how-to-manage-user-profile-info).
+
+## LAB02-Q48 — B
+
+Accepted requests and offline checks do not prove the final live state.
+
+- A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- B: Correct. Accepted requests and offline checks do not prove the final live state.
+- C: This choice changes or trusts a broader scope than the recorded lab boundary.
+- D: This choice skips independent evidence or relies on ambiguous resource identity.
+
+Objectives: `IG-USERS-03`, `IG-USERS-04`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/entra/external-id/b2b-quickstart-invite-powershell).
+
+## LAB02-Q49 — C
+
+Evidence-led repair preserves scope and makes the cause and correction auditable.
+
+- A: This choice changes or trusts a broader scope than the recorded lab boundary.
+- B: This choice skips independent evidence or relies on ambiguous resource identity.
+- C: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+- D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+
+Objectives: `IG-USERS-05`, `IG-USERS-03`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/entra/fundamentals/how-to-manage-user-profile-info).
+
+## LAB02-Q50 — D
+
+Accepted requests and offline checks do not prove the final live state.
+
+- A: This choice changes or trusts a broader scope than the recorded lab boundary.
+- B: This choice skips independent evidence or relies on ambiguous resource identity.
+- C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- D: Correct. Accepted requests and offline checks do not prove the final live state.
+
+Objectives: `IG-USERS-03`, `IG-USERS-04`.
+
+Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/entra/external-id/b2b-quickstart-invite-powershell).
