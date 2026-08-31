@@ -1,5 +1,7 @@
 # AZ-104 Complete Learning Environment
 
+![AZ-104 Complete Learning Environment cover showing Azure administration services](docs/visuals/az104-complete-learning-environment-cover.png)
+
 A command-first path from Azure fundamentals to job-ready administration, aligned with the Microsoft AZ-104 skills measured as of **April 17, 2026**.
 
 All learner Azure operations use Azure CLI (`az` and `az rest`), Bicep, AzCopy, or KQL from PowerShell 7. There are no browser-based lab steps, screenshots, or screenshot-evidence requirements. Architecture diagrams are the only instructional visuals.
