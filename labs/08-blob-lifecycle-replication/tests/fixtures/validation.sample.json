@@ -1,13 +1,166 @@
 {
+  "schemaVersion": "1.0.0",
   "labId": "LAB-08",
-  "runId": "az104l08-sample",
-  "generatedAt": "2026-08-30T12:00:00Z",
+  "runId": "fixture-08",
+  "mode": "Deployment",
+  "generatedAt": "2026-08-31T10:00:00Z",
   "result": "pass",
+  "summary": {
+    "required": 10,
+    "passed": 10,
+    "failed": 0,
+    "skipped": 0
+  },
   "checks": [
     {
-      "id": "contract.recorded-boundary",
+      "id": "lab08-cp01.positive",
+      "checkpointId": "LAB08-CP01",
+      "kind": "positive",
+      "required": true,
       "status": "pass",
-      "message": "The sample demonstrates the required validation document shape; it is not live evidence."
+      "message": "Fixture expected state observed.",
+      "evidence": {
+        "command": "fixture positive read-only query",
+        "expected": "expected fixture state",
+        "actual": "observed fixture state",
+        "capturedAt": "2026-08-31T10:00:00Z",
+        "redacted": true
+      }
+    },
+    {
+      "id": "lab08-cp01.negative",
+      "checkpointId": "LAB08-CP01",
+      "kind": "negative",
+      "required": true,
+      "status": "pass",
+      "message": "Fixture expected state observed.",
+      "evidence": {
+        "command": "fixture negative read-only query",
+        "expected": "expected fixture state",
+        "actual": "observed fixture state",
+        "capturedAt": "2026-08-31T10:00:00Z",
+        "redacted": true
+      }
+    },
+    {
+      "id": "lab08-cp02.positive",
+      "checkpointId": "LAB08-CP02",
+      "kind": "positive",
+      "required": true,
+      "status": "pass",
+      "message": "Fixture expected state observed.",
+      "evidence": {
+        "command": "fixture positive read-only query",
+        "expected": "expected fixture state",
+        "actual": "observed fixture state",
+        "capturedAt": "2026-08-31T10:00:00Z",
+        "redacted": true
+      }
+    },
+    {
+      "id": "lab08-cp02.negative",
+      "checkpointId": "LAB08-CP02",
+      "kind": "negative",
+      "required": true,
+      "status": "pass",
+      "message": "Fixture expected state observed.",
+      "evidence": {
+        "command": "fixture negative read-only query",
+        "expected": "expected fixture state",
+        "actual": "observed fixture state",
+        "capturedAt": "2026-08-31T10:00:00Z",
+        "redacted": true
+      }
+    },
+    {
+      "id": "lab08-cp03.positive",
+      "checkpointId": "LAB08-CP03",
+      "kind": "positive",
+      "required": true,
+      "status": "pass",
+      "message": "Fixture expected state observed.",
+      "evidence": {
+        "command": "fixture positive read-only query",
+        "expected": "expected fixture state",
+        "actual": "observed fixture state",
+        "capturedAt": "2026-08-31T10:00:00Z",
+        "redacted": true
+      }
+    },
+    {
+      "id": "lab08-cp03.negative",
+      "checkpointId": "LAB08-CP03",
+      "kind": "negative",
+      "required": true,
+      "status": "pass",
+      "message": "Fixture expected state observed.",
+      "evidence": {
+        "command": "fixture negative read-only query",
+        "expected": "expected fixture state",
+        "actual": "observed fixture state",
+        "capturedAt": "2026-08-31T10:00:00Z",
+        "redacted": true
+      }
+    },
+    {
+      "id": "lab08-cp04.positive",
+      "checkpointId": "LAB08-CP04",
+      "kind": "positive",
+      "required": true,
+      "status": "pass",
+      "message": "Fixture expected state observed.",
+      "evidence": {
+        "command": "fixture positive read-only query",
+        "expected": "expected fixture state",
+        "actual": "observed fixture state",
+        "capturedAt": "2026-08-31T10:00:00Z",
+        "redacted": true
+      }
+    },
+    {
+      "id": "lab08-cp04.negative",
+      "checkpointId": "LAB08-CP04",
+      "kind": "negative",
+      "required": true,
+      "status": "pass",
+      "message": "Fixture expected state observed.",
+      "evidence": {
+        "command": "fixture negative read-only query",
+        "expected": "expected fixture state",
+        "actual": "observed fixture state",
+        "capturedAt": "2026-08-31T10:00:00Z",
+        "redacted": true
+      }
+    },
+    {
+      "id": "lab08-cp05.positive",
+      "checkpointId": "LAB08-CP05",
+      "kind": "positive",
+      "required": true,
+      "status": "pass",
+      "message": "Fixture expected state observed.",
+      "evidence": {
+        "command": "fixture positive read-only query",
+        "expected": "expected fixture state",
+        "actual": "observed fixture state",
+        "capturedAt": "2026-08-31T10:00:00Z",
+        "redacted": true
+      }
+    },
+    {
+      "id": "lab08-cp05.negative",
+      "checkpointId": "LAB08-CP05",
+      "kind": "negative",
+      "required": true,
+      "status": "pass",
+      "message": "Fixture expected state observed.",
+      "evidence": {
+        "command": "fixture negative read-only query",
+        "expected": "expected fixture state",
+        "actual": "observed fixture state",
+        "capturedAt": "2026-08-31T10:00:00Z",
+        "redacted": true
+      }
     }
   ]
 }

@@ -1,9 +1,11 @@
+
+# BEGIN GENERATED AZ104 V2
+schemaVersion: 2.0.0
 id: LAB-26
 slug: 26-capstone-build
 title: Capstone — Build a governed, secure, observable Azure workload
 blueprintVersion: '2026-04-17'
-domain: Manage Azure identities and governance / Implement and manage storage / Deploy and manage Azure compute
-  resources / Implement and manage virtual networking / Monitor and maintain Azure resources
+domain: capstone
 objectives:
 - IG-ACCESS-01
 - IG-ACCESS-02
@@ -28,25 +30,36 @@ testedToolVersions:
   powershell: '>=7.4'
 estimatedMinutes: 180
 difficulty: advanced
+experience:
+  scenario: 'You are a platform engineer building a governed, secure, observable workload. Build and prove this disposable
+    service path: Bicep creates the governed network, data, and telemetry foundation; two private VMs join the load-balancer
+    pool, Blob access follows private endpoint/DNS, and Policy, diagnostics, and optional RBAC remain bounded to recorded
+    IDs.'
+  role: A platform engineer building a governed, secure, observable workload.
+  outcome: Use Azure CLI in PowerShell to deploy the governed network, compute, and data foundation, build the private load-balanced
+    application path, and reconcile the end-to-end governed workload, with recoverable state and deterministic cleanup.
+  completionCriteria:
+  - All required checkpoints report pass.
+  - The deterministic break/fix is injected, diagnosed, and repaired.
+  - cleanup.json reports no active run-owned resources, with any retained item explicitly documented.
 cost:
-  class: moderate
-  billableResources: &id001
-  - resource group
-  - Bicep deployment
-  - segmented VNet
-  - NSG
-  - private storage
-  - resilient compute
-  - load balancer
-  - Log Analytics workspace
-  - diagnostic settings
-  - alerts
-  notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator
-    before execution and clean up immediately.
+  class: elevated
+  billableResources:
+  - two Standard_B1s VMs
+  - Standard Load Balancer
+  - public IP
+  - Log Analytics ingestion
+  - private endpoint
+  notes: The capstone deploys a small but complete workload. Review pricing and clean up both compute instances, networking,
+    monitoring, and Private Link in the same session.
+  pricingLinks:
+  - title: Azure pricing calculator
+    url: https://azure.microsoft.com/pricing/calculator/
+  acknowledgementRequired: true
 permissions:
   azureRbacRoles:
-  - Contributor, User Access Administrator, Resource Policy Contributor, and Monitoring Contributor on the capstone
-    resource group
+  - Contributor, User Access Administrator, Resource Policy Contributor, and Monitoring Contributor on the capstone resource
+    group
   entraRoles: []
   graphScopes: []
 prerequisites:
@@ -58,46 +71,476 @@ prerequisites:
   without assigning a role when the value is absent.'
 - Azure CLI hosted in PowerShell 7.4 or later
 providers:
-  observed:
+  required:
   - Microsoft.Authorization
   - Microsoft.Compute
   - Microsoft.Insights
   - Microsoft.Network
   - Microsoft.OperationalInsights
   - Microsoft.Storage
+  optional: []
   registeredByLab: []
-regions:
-  applicable: true
-  primary: supplied at execution time
-  secondary: null
+inputs:
+- id: run-id
+  parameter: RunId
+  description: Unique lowercase run ownership identifier
+  required: true
+  secret: false
+  source: parameter
+  safeExample: az104l26-01
+  gateBehavior: block
+  checkpointIds:
+  - LAB26-CP01
+  - LAB26-CP02
+  - LAB26-CP03
+  - LAB26-CP04
+  - LAB26-CP05
+- id: subscription-id
+  parameter: SubscriptionId
+  environmentVariable: AZ104_SUBSCRIPTION_ID
+  description: Expected disposable subscription ID
+  required: true
+  secret: false
+  source: parameter-or-environment
+  safeExample: 00000000-0000-0000-0000-000000000000
+  gateBehavior: block
+  checkpointIds:
+  - LAB26-CP01
+  - LAB26-CP02
+  - LAB26-CP03
+  - LAB26-CP04
+  - LAB26-CP05
+- id: location
+  parameter: Location
+  environmentVariable: AZ104_LOCATION
+  description: Approved primary Azure region
+  required: true
+  secret: false
+  source: parameter-or-environment
+  safeExample: westeurope
+  gateBehavior: block
+  checkpointIds:
+  - LAB26-CP01
+  - LAB26-CP02
+  - LAB26-CP03
+  - LAB26-CP04
+  - LAB26-CP05
+- id: principal-object-id
+  environmentVariable: AZ104_PRINCIPAL_OBJECT_ID
+  description: Optional disposable principal for capstone RBAC
+  required: false
+  secret: false
+  gateBehavior: skip-checkpoint
+  safeExample: 00000000-0000-0000-0000-000000000000
+  checkpointIds:
+  - LAB26-CP04
+  parameter: PrincipalObjectId
+  source: environment
+acknowledgements:
+  cost:
+    required: true
+    parameter: AcknowledgeCost
+    message: I reviewed current pricing, quota, and the same-session cleanup plan.
+  tenantChange:
+    required: false
+    parameter: AcknowledgeTenantChange
+    message: I am authorized to create or change the declared tenant-scoped objects and will restore recorded settings.
 creates:
-  azureResources: *id001
+  azureResources:
+  - resource group
+  - Bicep deployment
+  - segmented VNet
+  - NSG
+  - private storage
+  - resilient compute
+  - load balancer
+  - Log Analytics workspace
+  - diagnostic settings
+  - alerts
   entraObjects: []
   localArtifacts:
   - .state/<run-id>/run.json
   - .state/<run-id>/validation.json
+  - .state/<run-id>/cleanup.json
 tenantScopedChanges: []
 externalRequirements:
-- Requires AZ104_PRINCIPAL_OBJECT_ID for the RBAC checkpoint; the workload path remains deployable without assigning
-  a role when the value is absent.
+- Requires AZ104_PRINCIPAL_OBJECT_ID for the RBAC checkpoint; the workload path remains deployable without assigning a role
+  when the value is absent.
+preflightChecks:
+- id: preflight.context
+  type: context
+  required: true
+  description: Confirm active cloud, tenant, and subscription without changing them.
+  command: az account show --output json
+  expected: Active context matches the supplied subscription and disposable environment.
+- id: preflight.tools
+  type: tool
+  required: true
+  description: Confirm PowerShell, Azure CLI, and az bicep are available.
+  command: az version; az bicep version
+  expected: All required tools meet the versions declared by this lab.
+- id: preflight.inputs
+  type: input
+  required: true
+  description: Check required parameters and environment gates without printing secrets.
+  command: $PSBoundParameters.Keys; Get-ChildItem Env:AZ104_* | Select-Object Name
+  expected: Every required input is present and optional gates are explicitly reported.
+- id: preflight.providers
+  type: provider
+  required: true
+  description: Read registration state for required resource providers.
+  command: az provider show --namespace <provider> --query registrationState --output tsv
+  expected: Every required provider is Registered; preflight performs no registration.
+- id: preflight.region
+  type: region
+  required: true
+  description: Confirm the requested region is available to the subscription.
+  command: az account list-locations --query "[?name=='<location>'].name" --output tsv
+  expected: The supplied region appears in the subscription location inventory.
+- id: preflight.quota
+  type: quota
+  required: true
+  description: Read regional compute usage before deployment.
+  command: az vm list-usage --location <location> --output table
+  expected: Required regional vCPU quota has safe headroom.
+- id: preflight.sku
+  type: sku
+  required: true
+  description: Read available VM or service SKUs in the selected region.
+  command: az vm list-skus --location <location> --all --output table
+  expected: The documented lab SKU has no blocking regional restriction.
+- id: preflight.authored.service
+  type: sku
+  required: true
+  description: Prove verify governed workload deployment prerequisites with LAB-26's authored read-only provider, feature,
+    tool, region, and SKU queries.
+  command: '$compute = az provider show --namespace Microsoft.Compute --query registrationState --output tsv
+
+    if ($compute -ne ''Registered'') { throw ''Microsoft.Compute is not registered.'' }
+
+    $sku = az vm list-skus --location $Location --size Standard_B1s --all --query ''[?name==`Standard_B1s` && (restrictions==null
+    || length(restrictions)==`0`)] | length(@)'' --output tsv
+
+    if ([int]$sku -lt 1) { throw ''Standard_B1s is restricted in this region.'' }'
+  expected: Bicep, VM SKU, private-link, load-balancer, Policy, RBAC, and diagnostic APIs are available before the capstone
+    mutates Azure.
+checkpoints:
+- id: LAB26-CP01
+  title: Verify governed workload deployment prerequisites
+  purpose: Read the provider, region, SKU, feature, quota, and companion-tool signals needed for verify governed workload
+    deployment prerequisites, without changing Azure state.
+  objectiveIds:
+  - IG-ACCESS-01
+  required: true
+  expectedState: Bicep, VM SKU, private-link, load-balancer, Policy, RBAC, and diagnostic APIs are available before the capstone
+    mutates Azure.
+  scriptMarkers:
+    setup: LAB26-CP01
+    validate: LAB26-CP01
+    cleanup: LAB26-CP01
+  validation:
+    positive:
+      id: cp01.positive
+      description: Read the service properties for verify governed workload deployment prerequisites by using exact run-owned
+        identifiers.
+      command: '$validationId=''LAB26-CP01-positive''; $compute = az provider show --namespace Microsoft.Compute --query registrationState
+        --output tsv
+
+        if ($compute -ne ''Registered'') { throw ''Microsoft.Compute is not registered.'' }'
+      expected: Bicep, VM SKU, private-link, load-balancer, Policy, RBAC, and diagnostic APIs are available before the capstone
+        mutates Azure.
+    negative:
+      id: cp01.negative
+      description: Search for conflicting, unowned, or excessive state after verify governed workload deployment prerequisites.
+      command: '$validationId=''LAB26-CP01-negative''; $sku = az vm list-skus --location $Location --size Standard_B1s --all
+        --query ''[?name==`Standard_B1s` && (restrictions==null || length(restrictions)==`0`)] | length(@)'' --output tsv
+
+        if ([int]$sku -lt 1) { throw ''Standard_B1s is restricted in this region.'' }'
+      expected: 'LAB26-CP01 negative boundary: The undesired state is absent; the negative assertion must not report: Standard_B1s
+        is restricted in this region.'
+  cleanup:
+    dependsOn:
+    - LAB26-CP02
+    - LAB26-CP03
+    - LAB26-CP04
+    - LAB26-CP05
+    action: Remove only manifest-recorded objects owned by LAB26-CP01, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp01.residual
+      description: Prove no active managed object remains for LAB26-CP01.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-1
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Deploy Bicep files with Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/deploy-cli
+- id: LAB26-CP02
+  title: Deploy the governed network, compute, and data foundation
+  purpose: Provision and immediately inventory the exact run-owned resources needed to deploy the governed network, compute,
+    and data foundation, so partial completion remains recoverable.
+  objectiveIds:
+  - IG-ACCESS-02
+  required: true
+  expectedState: The Bicep deployment creates tagged network, storage, workspace, and security boundaries whose returned IDs
+    are recorded.
+  scriptMarkers:
+    setup: LAB26-CP02
+    validate: LAB26-CP02
+    cleanup: LAB26-CP02
+  validation:
+    positive:
+      id: cp02.positive
+      description: Read the service properties for deploy the governed network, compute, and data foundation by using exact
+        run-owned identifiers.
+      command: '$validationId=''LAB26-CP02-positive''; $deployment = az deployment group show --resource-group $ResourceGroupName
+        --name "capstone-$RunId" --query properties.provisioningState --output tsv
+
+        if ($deployment -ne ''Succeeded'') { throw "Capstone Bicep deployment state is $deployment." }'
+      expected: The Bicep deployment creates tagged network, storage, workspace, and security boundaries whose returned IDs
+        are recorded.
+    negative:
+      id: cp02.negative
+      description: Search for conflicting, unowned, or excessive state after deploy the governed network, compute, and data
+        foundation.
+      command: '$validationId=''LAB26-CP02-negative''; $publicAccess = az storage account show --resource-group $ResourceGroupName
+        --name $storage --query publicNetworkAccess --output tsv
+
+        if ($publicAccess -ne ''Disabled'') { throw ''Capstone storage public network access is enabled.'' }'
+      expected: 'LAB26-CP02 negative boundary: The undesired state is absent; the negative assertion must not report: Capstone
+        storage public network access is enabled.'
+  cleanup:
+    dependsOn:
+    - LAB26-CP03
+    - LAB26-CP04
+    - LAB26-CP05
+    action: Remove only manifest-recorded objects owned by LAB26-CP02, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp02.residual
+      description: Prove no active managed object remains for LAB26-CP02.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-2
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Deploy Bicep files with Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/deploy-cli
+- id: LAB26-CP03
+  title: Build the private load-balanced application path
+  purpose: Configure and independently inspect the control-plane and data-path properties needed to build the private load-balanced
+    application path.
+  objectiveIds:
+  - IG-GOVERN-01
+  required: true
+  expectedState: Two private VM NICs join the backend pool, the health probe/rule are consistent, and storage uses a private
+    endpoint plus linked DNS.
+  scriptMarkers:
+    setup: LAB26-CP03
+    validate: LAB26-CP03
+    cleanup: LAB26-CP03
+  validation:
+    positive:
+      id: cp03.positive
+      description: Read the service properties for build the private load-balanced application path by using exact run-owned
+        identifiers.
+      command: '$validationId=''LAB26-CP03-positive''; $poolMembers = az network lb address-pool show --resource-group $ResourceGroupName
+        --lb-name $loadBalancer --name backends --query "backendIPConfigurations | length(@)" --output tsv
+
+        if ([int]$poolMembers -ne 2) { throw "Load Balancer backend count is $poolMembers." }'
+      expected: Two private VM NICs join the backend pool, the health probe/rule are consistent, and storage uses a private
+        endpoint plus linked DNS.
+    negative:
+      id: cp03.negative
+      description: Search for conflicting, unowned, or excessive state after build the private load-balanced application path.
+      command: '$validationId=''LAB26-CP03-negative''; $connection = az network private-endpoint show --resource-group $ResourceGroupName
+        --name $privateEndpoint --query "privateLinkServiceConnections[0].privateLinkServiceConnectionState.status" --output
+        tsv
+
+        if ($connection -ne ''Approved'') { throw "Private endpoint state is $connection." }'
+      expected: 'LAB26-CP03 negative boundary: The undesired state is absent; the negative assertion must not report: Private
+        endpoint state is reported connection.'
+  cleanup:
+    dependsOn:
+    - LAB26-CP04
+    - LAB26-CP05
+    action: Remove only manifest-recorded objects owned by LAB26-CP03, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp03.residual
+      description: Prove no active managed object remains for LAB26-CP03.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-3
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Deploy Bicep files with Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/deploy-cli
+- id: LAB26-CP04
+  title: Apply governance, observability, and least-privilege access
+  purpose: Exercise the deterministic operational or denied path needed to apply governance, observability, and least-privilege
+    access, then retain comparable before-and-after results.
+  objectiveIds:
+  - IG-GOVERN-03
+  required: false
+  expectedState: Diagnostic settings target the run-owned workspace, Policy scope is bounded, and optional RBAC targets only
+    the supplied principal and resource scope.
+  scriptMarkers:
+    setup: LAB26-CP04
+    validate: LAB26-CP04
+    cleanup: LAB26-CP04
+  validation:
+    positive:
+      id: cp04.positive
+      description: Read the service properties for apply governance, observability, and least-privilege access by using exact
+        run-owned identifiers.
+      command: '$validationId=''LAB26-CP04-positive''; $assignments = az role assignment list --assignee $env:AZ104_PRINCIPAL_OBJECT_ID
+        --scope "/subscriptions/$SubscriptionId/resourceGroups/$ResourceGroupName" --query "[?roleDefinitionName==''Reader'']
+        | length(@)" --output tsv
+
+        if ([int]$assignments -ne 1) { throw ''The optional capstone Reader assignment is absent or duplicated.'' }'
+      expected: Diagnostic settings target the run-owned workspace, Policy scope is bounded, and optional RBAC targets only
+        the supplied principal and resource scope.
+    negative:
+      id: cp04.negative
+      description: Search for conflicting, unowned, or excessive state after apply governance, observability, and least-privilege
+        access.
+      command: '$validationId=''LAB26-CP04-negative''; $owner = az role assignment list --assignee $env:AZ104_PRINCIPAL_OBJECT_ID
+        --scope "/subscriptions/$SubscriptionId/resourceGroups/$ResourceGroupName" --query "[?roleDefinitionName==''Owner'']
+        | length(@)" --output tsv
+
+        if ([int]$owner -ne 0) { throw ''The optional principal has an overbroad Owner assignment.'' }'
+      expected: 'LAB26-CP04 negative boundary: The undesired state is absent; the negative assertion must not report: The
+        optional principal has an overbroad Owner assignment.'
+  cleanup:
+    dependsOn:
+    - LAB26-CP05
+    action: Remove only manifest-recorded objects owned by LAB26-CP04, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp04.residual
+      description: Prove no active managed object remains for LAB26-CP04.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-4
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Deploy Bicep files with Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/deploy-cli
+- id: LAB26-CP05
+  title: Reconcile the end-to-end governed workload
+  purpose: Reconcile live service properties, returned IDs, and dependency-aware removal needed to reconcile the end-to-end
+    governed workload before handoff.
+  objectiveIds:
+  - IG-ACCESS-01
+  - IG-ACCESS-02
+  - IG-GOVERN-01
+  - IG-GOVERN-03
+  - IG-GOVERN-04
+  - ST-ACCOUNTS-01
+  - CP-IAC-04
+  - CP-VM-01
+  - CP-VM-06
+  - CP-VM-07
+  - NW-VNET-01
+  - NW-SECURE-01
+  - NW-SECURE-05
+  - NW-DNSLB-02
+  - MR-MONITOR-02
+  - MR-MONITOR-04
+  required: true
+  expectedState: Traffic, private data access, diagnostics, Policy, tags, optional RBAC, and cleanup dependencies all resolve
+    to one manifest-owned environment.
+  scriptMarkers:
+    setup: LAB26-CP05
+    validate: LAB26-CP05
+    cleanup: LAB26-CP05
+  validation:
+    positive:
+      id: cp05.positive
+      description: Read the service properties for reconcile the end-to-end governed workload by using exact run-owned identifiers.
+      command: '$validationId=''LAB26-CP05-positive''; $running = az vm list --resource-group $ResourceGroupName --show-details
+        --query "[?powerState==''VM running''] | length(@)" --output tsv
+
+        if ([int]$running -ne 2) { throw "Expected two running capstone backends; found $running." }'
+      expected: Traffic, private data access, diagnostics, Policy, tags, optional RBAC, and cleanup dependencies all resolve
+        to one manifest-owned environment.
+    negative:
+      id: cp05.negative
+      description: Search for conflicting, unowned, or excessive state after reconcile the end-to-end governed workload.
+      command: '$validationId=''LAB26-CP05-negative''; $publicBackends = az vm list --resource-group $ResourceGroupName --show-details
+        --query "[?publicIps!=null && publicIps!=''''] | length(@)" --output tsv
+
+        if ([int]$publicBackends -ne 0) { throw ''A backend VM has a public IP.'' }'
+      expected: 'LAB26-CP05 negative boundary: The undesired state is absent; the negative assertion must not report: A backend
+        VM has a public IP.'
+  cleanup:
+    dependsOn: []
+    action: Remove only manifest-recorded objects owned by LAB26-CP05, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp05.residual
+      description: Prove no active managed object remains for LAB26-CP05.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-5
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Deploy Bicep files with Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/deploy-cli
 validation:
-  commandLanes:
-  - scripts/cli/Validate.ps1
-  output: .state/<run-id>/validation.json
-  statuses:
-  - pass
-  - fail
-  - warning
-  - skipped
-  liveExecutionRequiredForLiveVerified: true
+  script: scripts/cli/Validate.ps1
+  artifact: .state/<run-id>/validation.json
+  modes:
+  - Deployment
+  - PostCleanup
+  resultPolicy:
+    requiredFailureResult: fail
+    optionalSkipResult: partial
+    allRequiredPassResult: pass
 cleanup:
-  azureDeletion: exact recorded resource-group ID after tag verification
-  entraDeletion: none
-  reportOnlyByDefault: true
+  script: scripts/cli/Cleanup.ps1
+  artifact: .state/<run-id>/cleanup.json
+  previewByDefault: true
   requiresExecuteFlag: true
-  residualAuditRequired: true
+  ownershipVerification:
+    manifestIdMatch: true
+    requiredTags:
+    - purpose
+    - labId
+    - runId
+  residualChecks:
+  - id: cp01.residual
+    description: Prove no active managed object remains for LAB26-CP01.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp02.residual
+    description: Prove no active managed object remains for LAB26-CP02.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp03.residual
+    description: Prove no active managed object remains for LAB26-CP03.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp04.residual
+    description: Prove no active managed object remains for LAB26-CP04.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp05.residual
+    description: Prove no active managed object remains for LAB26-CP05.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  retainedItemsAllowed: true
+  irreversiblePurge: never
 assessment:
   enabled: false
   questionCount: 0
-lastOfflineValidated: '2026-08-30'
+lastOfflineValidated: '2026-08-31'
 lastLiveVerified: null
+# END GENERATED AZ104 V2

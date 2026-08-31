@@ -1,8 +1,11 @@
+
+# BEGIN GENERATED AZ104 V2
+schemaVersion: 2.0.0
 id: LAB-22
 slug: 22-azure-monitor-logs-insights
 title: Collect and analyze Azure Monitor metrics, logs, and Insights
 blueprintVersion: '2026-04-17'
-domain: Monitor and maintain Azure resources
+domain: monitor-recovery
 objectives:
 - MR-MONITOR-01
 - MR-MONITOR-02
@@ -15,10 +18,22 @@ testedToolVersions:
   azureCli: '>=2.88.0'
   powershell: '>=7.4'
 estimatedMinutes: 135
-difficulty: intermediate
+difficulty: applied
+experience:
+  scenario: 'You are a monitoring administrator building an evidence-based service view. Build and prove this disposable service
+    path: A storage transaction enters Azure Monitor through the account diagnostic setting, routes to the run-owned Log Analytics
+    workspace, and is located by a bounded KQL assertion against the exact storage resource ID.'
+  role: A monitoring administrator building an evidence-based service view.
+  outcome: Use Azure CLI in PowerShell to create the monitored storage account and workspace, route resource metrics into
+    log analytics, and reconcile diagnostic configuration and ingested telemetry, with recoverable state and deterministic
+    cleanup.
+  completionCriteria:
+  - All required checkpoints report pass.
+  - The deterministic break/fix is injected, diagnosed, and repaired.
+  - cleanup.json reports no active run-owned resources, with any retained item explicitly documented.
 cost:
   class: moderate
-  billableResources: &id001
+  billableResources:
   - resource group
   - Log Analytics workspace
   - storage account
@@ -26,6 +41,10 @@ cost:
   - optional data collection rule
   notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator before
     execution and clean up immediately.
+  pricingLinks:
+  - title: Azure Monitor pricing
+    url: https://azure.microsoft.com/pricing/details/monitor/
+  acknowledgementRequired: true
 permissions:
   azureRbacRoles:
   - Monitoring Contributor and Log Analytics Contributor on the lab resource group
@@ -38,42 +57,441 @@ prerequisites:
 - 'External gate review: None beyond the declared role and a disposable subscription.'
 - Azure CLI hosted in PowerShell 7.4 or later
 providers:
-  observed:
+  required:
   - Microsoft.Insights
   - Microsoft.OperationalInsights
   - Microsoft.Storage
+  optional: []
   registeredByLab: []
-regions:
-  applicable: true
-  primary: supplied at execution time
-  secondary: null
+inputs:
+- id: run-id
+  parameter: RunId
+  description: Unique lowercase run ownership identifier
+  required: true
+  secret: false
+  source: parameter
+  safeExample: az104l22-01
+  gateBehavior: block
+  checkpointIds:
+  - LAB22-CP01
+  - LAB22-CP02
+  - LAB22-CP03
+  - LAB22-CP04
+  - LAB22-CP05
+- id: subscription-id
+  parameter: SubscriptionId
+  environmentVariable: AZ104_SUBSCRIPTION_ID
+  description: Expected disposable subscription ID
+  required: true
+  secret: false
+  source: parameter-or-environment
+  safeExample: 00000000-0000-0000-0000-000000000000
+  gateBehavior: block
+  checkpointIds:
+  - LAB22-CP01
+  - LAB22-CP02
+  - LAB22-CP03
+  - LAB22-CP04
+  - LAB22-CP05
+- id: location
+  parameter: Location
+  environmentVariable: AZ104_LOCATION
+  description: Approved primary Azure region
+  required: true
+  secret: false
+  source: parameter-or-environment
+  safeExample: westeurope
+  gateBehavior: block
+  checkpointIds:
+  - LAB22-CP01
+  - LAB22-CP02
+  - LAB22-CP03
+  - LAB22-CP04
+  - LAB22-CP05
+acknowledgements:
+  cost:
+    required: true
+    parameter: AcknowledgeCost
+    message: I reviewed current pricing, quota, and the same-session cleanup plan.
+  tenantChange:
+    required: false
+    parameter: AcknowledgeTenantChange
+    message: I am authorized to create or change the declared tenant-scoped objects and will restore recorded settings.
 creates:
-  azureResources: *id001
+  azureResources:
+  - resource group
+  - Log Analytics workspace
+  - storage account
+  - diagnostic setting
+  - optional data collection rule
   entraObjects: []
   localArtifacts:
   - .state/<run-id>/run.json
   - .state/<run-id>/validation.json
+  - .state/<run-id>/cleanup.json
 tenantScopedChanges: []
 externalRequirements: []
+preflightChecks:
+- id: preflight.context
+  type: context
+  required: true
+  description: Confirm active cloud, tenant, and subscription without changing them.
+  command: az account show --output json
+  expected: Active context matches the supplied subscription and disposable environment.
+- id: preflight.tools
+  type: tool
+  required: true
+  description: Confirm PowerShell, Azure CLI, and az bicep are available.
+  command: az version; az bicep version
+  expected: All required tools meet the versions declared by this lab.
+- id: preflight.inputs
+  type: input
+  required: true
+  description: Check required parameters and environment gates without printing secrets.
+  command: $PSBoundParameters.Keys; Get-ChildItem Env:AZ104_* | Select-Object Name
+  expected: Every required input is present and optional gates are explicitly reported.
+- id: preflight.providers
+  type: provider
+  required: true
+  description: Read registration state for required resource providers.
+  command: az provider show --namespace <provider> --query registrationState --output tsv
+  expected: Every required provider is Registered; preflight performs no registration.
+- id: preflight.region
+  type: region
+  required: true
+  description: Confirm the requested region is available to the subscription.
+  command: az account list-locations --query "[?name=='<location>'].name" --output tsv
+  expected: The supplied region appears in the subscription location inventory.
+- id: preflight.quota
+  type: quota
+  required: true
+  description: Read regional compute usage before deployment.
+  command: az vm list-usage --location <location> --output table
+  expected: Required regional vCPU quota has safe headroom.
+- id: preflight.sku
+  type: sku
+  required: true
+  description: Read available VM or service SKUs in the selected region.
+  command: az vm list-skus --location <location> --all --output table
+  expected: The documented lab SKU has no blocking regional restriction.
+- id: preflight.authored.service
+  type: sku
+  required: true
+  description: Prove verify log analytics, diagnostic, and kql prerequisites with LAB-22's authored read-only provider, feature,
+    tool, region, and SKU queries.
+  command: '$insights = az provider show --namespace Microsoft.Insights --query registrationState --output tsv
+
+    if ($insights -ne ''Registered'') { throw ''Microsoft.Insights is not registered.'' }
+
+    $logs = az provider show --namespace Microsoft.OperationalInsights --query registrationState --output tsv
+
+    if ($logs -ne ''Registered'') { throw ''Microsoft.OperationalInsights is not registered.'' }'
+  expected: The workspace and diagnostic-setting APIs are available and the planned resource exposes a metric category that
+    can be collected.
+checkpoints:
+- id: LAB22-CP01
+  title: Verify Log Analytics, diagnostic, and KQL prerequisites
+  purpose: Read the provider, region, SKU, feature, quota, and companion-tool signals needed for verify log analytics, diagnostic,
+    and kql prerequisites, without changing Azure state.
+  objectiveIds:
+  - MR-MONITOR-01
+  required: true
+  expectedState: The workspace and diagnostic-setting APIs are available and the planned resource exposes a metric category
+    that can be collected.
+  scriptMarkers:
+    setup: LAB22-CP01
+    validate: LAB22-CP01
+    cleanup: LAB22-CP01
+  validation:
+    positive:
+      id: cp01.positive
+      description: Read the service properties for verify Log Analytics, diagnostic, and KQL prerequisites by using exact
+        run-owned identifiers.
+      command: '$validationId=''LAB22-CP01-positive''; $insights = az provider show --namespace Microsoft.Insights --query
+        registrationState --output tsv
+
+        if ($insights -ne ''Registered'') { throw ''Microsoft.Insights is not registered.'' }'
+      expected: The workspace and diagnostic-setting APIs are available and the planned resource exposes a metric category
+        that can be collected.
+    negative:
+      id: cp01.negative
+      description: Search for conflicting, unowned, or excessive state after verify Log Analytics, diagnostic, and KQL prerequisites.
+      command: '$validationId=''LAB22-CP01-negative''; $logs = az provider show --namespace Microsoft.OperationalInsights
+        --query registrationState --output tsv
+
+        if ($logs -ne ''Registered'') { throw ''Microsoft.OperationalInsights is not registered.'' }'
+      expected: 'LAB22-CP01 negative boundary: The undesired state is absent; the negative assertion must not report: Microsoft.OperationalInsights
+        is not registered.'
+  cleanup:
+    dependsOn:
+    - LAB22-CP02
+    - LAB22-CP03
+    - LAB22-CP04
+    - LAB22-CP05
+    action: Remove only manifest-recorded objects owned by LAB22-CP01, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp01.residual
+      description: Prove no active managed object remains for LAB22-CP01.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-1
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Get started with Azure Monitor metrics
+      url: https://learn.microsoft.com/en-us/azure/azure-monitor/metrics/metrics-getting-started
+- id: LAB22-CP02
+  title: Create the monitored storage account and workspace
+  purpose: Provision and immediately inventory the exact run-owned resources needed to create the monitored storage account
+    and workspace, so partial completion remains recoverable.
+  objectiveIds:
+  - MR-MONITOR-02
+  required: true
+  expectedState: The storage account and Log Analytics workspace IDs are immediately recorded in the run manifest.
+  scriptMarkers:
+    setup: LAB22-CP02
+    validate: LAB22-CP02
+    cleanup: LAB22-CP02
+  validation:
+    positive:
+      id: cp02.positive
+      description: Read the service properties for create the monitored storage account and workspace by using exact run-owned
+        identifiers.
+      command: '$validationId=''LAB22-CP02-positive''; $destination = az monitor diagnostic-settings show --name "diag-$RunId"
+        --resource $storageId --query workspaceId --output tsv
+
+        if ($destination -ne $workspaceResourceId) { throw ''The diagnostic setting points to the wrong workspace.'' }'
+      expected: The storage account and Log Analytics workspace IDs are immediately recorded in the run manifest.
+    negative:
+      id: cp02.negative
+      description: Search for conflicting, unowned, or excessive state after create the monitored storage account and workspace.
+      command: '$validationId=''LAB22-CP02-negative''; $settingCount = az monitor diagnostic-settings list --resource $storageId
+        --query "value[?name==''diag-$RunId''] | length(@)" --output tsv
+
+        if ([int]$settingCount -ne 1) { throw "Expected one diagnostic setting; found $settingCount." }'
+      expected: 'LAB22-CP02 negative boundary: The undesired state is absent; the negative assertion must not report: Expected
+        one diagnostic setting; found reported settingCount.'
+  cleanup:
+    dependsOn:
+    - LAB22-CP03
+    - LAB22-CP04
+    - LAB22-CP05
+    action: Remove only manifest-recorded objects owned by LAB22-CP02, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp02.residual
+      description: Prove no active managed object remains for LAB22-CP02.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-2
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Get started with Azure Monitor metrics
+      url: https://learn.microsoft.com/en-us/azure/azure-monitor/metrics/metrics-getting-started
+- id: LAB22-CP03
+  title: Route resource metrics into Log Analytics
+  purpose: Configure and independently inspect the control-plane and data-path properties needed to route resource metrics
+    into log analytics.
+  objectiveIds:
+  - MR-MONITOR-03
+  required: true
+  expectedState: The diagnostic setting targets the run-owned workspace and enables the supported metrics category for the
+    storage resource.
+  scriptMarkers:
+    setup: LAB22-CP03
+    validate: LAB22-CP03
+    cleanup: LAB22-CP03
+  validation:
+    positive:
+      id: cp03.positive
+      description: Read the service properties for route resource metrics into Log Analytics by using exact run-owned identifiers.
+      command: '$validationId=''LAB22-CP03-positive''; $metricNames = az monitor metrics list-definitions --resource $storageId
+        --query "value[?name.value==''Transactions''] | length(@)" --output tsv
+
+        if ([int]$metricNames -ne 1) { throw ''The Transactions metric definition is unavailable.'' }'
+      expected: The diagnostic setting targets the run-owned workspace and enables the supported metrics category for the
+        storage resource.
+    negative:
+      id: cp03.negative
+      description: Search for conflicting, unowned, or excessive state after route resource metrics into Log Analytics.
+      command: '$validationId=''LAB22-CP03-negative''; $workspaceState = az monitor log-analytics workspace show --resource-group
+        $ResourceGroupName --workspace-name $workspace --query provisioningState --output tsv
+
+        if ($workspaceState -ne ''Succeeded'') { throw "Workspace state is $workspaceState." }'
+      expected: 'LAB22-CP03 negative boundary: The undesired state is absent; the negative assertion must not report: Workspace
+        state is reported workspaceState.'
+  cleanup:
+    dependsOn:
+    - LAB22-CP04
+    - LAB22-CP05
+    action: Remove only manifest-recorded objects owned by LAB22-CP03, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp03.residual
+      description: Prove no active managed object remains for LAB22-CP03.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-3
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Get started with Azure Monitor metrics
+      url: https://learn.microsoft.com/en-us/azure/azure-monitor/metrics/metrics-getting-started
+- id: LAB22-CP04
+  title: Generate a transaction and prove KQL ingestion
+  purpose: Exercise the deterministic operational or denied path needed to generate a transaction and prove kql ingestion,
+    then retain comparable before-and-after results.
+  objectiveIds:
+  - MR-MONITOR-05
+  required: true
+  expectedState: A harmless storage data-plane operation is followed by a bounded query that finds at least one matching AzureMetrics
+    row for the exact resource ID.
+  scriptMarkers:
+    setup: LAB22-CP04
+    validate: LAB22-CP04
+    cleanup: LAB22-CP04
+  validation:
+    positive:
+      id: cp04.positive
+      description: Read the service properties for generate a transaction and prove KQL ingestion by using exact run-owned
+        identifiers.
+      command: '$validationId=''LAB22-CP04-positive''; $metricRows = az monitor log-analytics query --workspace $workspaceId
+        --analytics-query "AzureMetrics | where TimeGenerated > ago(30m) | where ResourceId =~ ''$storageId'' | where MetricName
+        == ''Transactions'' | summarize Rows=count()" --query "tables[0].rows[0][0]" --output tsv
+
+        if (-not $metricRows -or [int]$metricRows -lt 1) { throw ''AzureMetrics contains no transaction row for the run-owned
+        storage account.'' }'
+      expected: A harmless storage data-plane operation is followed by a bounded query that finds at least one matching AzureMetrics
+        row for the exact resource ID.
+    negative:
+      id: cp04.negative
+      description: Search for conflicting, unowned, or excessive state after generate a transaction and prove KQL ingestion.
+      command: '$validationId=''LAB22-CP04-negative''; $disabledMetrics = az monitor diagnostic-settings show --name "diag-$RunId"
+        --resource $storageId --query ''metrics[?enabled==`false`] | length(@)'' --output tsv
+
+        if ([int]$disabledMetrics -ne 0) { throw ''A configured diagnostic metric category is disabled.'' }'
+      expected: 'LAB22-CP04 negative boundary: The undesired state is absent; the negative assertion must not report: A configured
+        diagnostic metric category is disabled.'
+  cleanup:
+    dependsOn:
+    - LAB22-CP05
+    action: Remove only manifest-recorded objects owned by LAB22-CP04, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp04.residual
+      description: Prove no active managed object remains for LAB22-CP04.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-4
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Get started with Azure Monitor metrics
+      url: https://learn.microsoft.com/en-us/azure/azure-monitor/metrics/metrics-getting-started
+- id: LAB22-CP05
+  title: Reconcile diagnostic configuration and ingested telemetry
+  purpose: Reconcile live service properties, returned IDs, and dependency-aware removal needed to reconcile diagnostic configuration
+    and ingested telemetry before handoff.
+  objectiveIds:
+  - MR-MONITOR-01
+  - MR-MONITOR-02
+  - MR-MONITOR-03
+  - MR-MONITOR-05
+  - MR-MONITOR-06
+  required: true
+  expectedState: The destination workspace ID, enabled category, deterministic transaction, and asserted KQL result form one
+    traceable monitoring path.
+  scriptMarkers:
+    setup: LAB22-CP05
+    validate: LAB22-CP05
+    cleanup: LAB22-CP05
+  validation:
+    positive:
+      id: cp05.positive
+      description: Read the service properties for reconcile diagnostic configuration and ingested telemetry by using exact
+        run-owned identifiers.
+      command: '$validationId=''LAB22-CP05-positive''; $metric = az monitor metrics list --resource $storageId --metric Transactions
+        --interval PT1H --query "value[0].name.value" --output tsv
+
+        if ($metric -ne ''Transactions'') { throw "Unexpected metric response: $metric" }'
+      expected: The destination workspace ID, enabled category, deterministic transaction, and asserted KQL result form one
+        traceable monitoring path.
+    negative:
+      id: cp05.negative
+      description: Search for conflicting, unowned, or excessive state after reconcile diagnostic configuration and ingested
+        telemetry.
+      command: '$validationId=''LAB22-CP05-negative''; $wrongDestination = az monitor diagnostic-settings show --name "diag-$RunId"
+        --resource $storageId --query workspaceId --output tsv
+
+        if ($wrongDestination -ne $workspaceResourceId) { throw ''Diagnostic data is routed to an unexpected workspace.''
+        }'
+      expected: 'LAB22-CP05 negative boundary: The undesired state is absent; the negative assertion must not report: Diagnostic
+        data is routed to an unexpected workspace.'
+  cleanup:
+    dependsOn: []
+    action: Remove only manifest-recorded objects owned by LAB22-CP05, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp05.residual
+      description: Prove no active managed object remains for LAB22-CP05.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-5
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Get started with Azure Monitor metrics
+      url: https://learn.microsoft.com/en-us/azure/azure-monitor/metrics/metrics-getting-started
 validation:
-  commandLanes:
-  - scripts/cli/Validate.ps1
-  output: .state/<run-id>/validation.json
-  statuses:
-  - pass
-  - fail
-  - warning
-  - skipped
-  liveExecutionRequiredForLiveVerified: true
+  script: scripts/cli/Validate.ps1
+  artifact: .state/<run-id>/validation.json
+  modes:
+  - Deployment
+  - PostCleanup
+  resultPolicy:
+    requiredFailureResult: fail
+    optionalSkipResult: partial
+    allRequiredPassResult: pass
 cleanup:
-  azureDeletion: exact recorded resource-group ID after tag verification
-  entraDeletion: none
-  reportOnlyByDefault: true
+  script: scripts/cli/Cleanup.ps1
+  artifact: .state/<run-id>/cleanup.json
+  previewByDefault: true
   requiresExecuteFlag: true
-  residualAuditRequired: true
+  ownershipVerification:
+    manifestIdMatch: true
+    requiredTags:
+    - purpose
+    - labId
+    - runId
+  residualChecks:
+  - id: cp01.residual
+    description: Prove no active managed object remains for LAB22-CP01.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp02.residual
+    description: Prove no active managed object remains for LAB22-CP02.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp03.residual
+    description: Prove no active managed object remains for LAB22-CP03.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp04.residual
+    description: Prove no active managed object remains for LAB22-CP04.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp05.residual
+    description: Prove no active managed object remains for LAB22-CP05.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  retainedItemsAllowed: true
+  irreversiblePurge: never
 assessment:
   enabled: true
   questionCount: 50
   primaryDomain: monitor-recovery
-lastOfflineValidated: '2026-08-30'
+lastOfflineValidated: '2026-08-31'
 lastLiveVerified: null
+# END GENERATED AZ104 V2

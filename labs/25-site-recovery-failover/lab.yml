@@ -1,8 +1,11 @@
+
+# BEGIN GENERATED AZ104 V2
+schemaVersion: 2.0.0
 id: LAB-25
 slug: 25-site-recovery-failover
 title: Replicate and fail over an Azure VM with Site Recovery
 blueprintVersion: '2026-04-17'
-domain: Monitor and maintain Azure resources
+domain: monitor-recovery
 objectives:
 - MR-RECOVERY-05
 - MR-RECOVERY-06
@@ -13,17 +16,33 @@ testedToolVersions:
   powershell: '>=7.4'
 estimatedMinutes: 180
 difficulty: advanced
+experience:
+  scenario: 'You are a disaster-recovery administrator piloting azure-to-azure replication. Build and prove this disposable
+    service path: The source VM and cache account feed Azure-to-Azure replication through paired fabrics, protection containers,
+    policy, and network mapping; an exactly gated test failover targets only the isolated recovery VNet and is cleaned up
+    asynchronously.'
+  role: A disaster-recovery administrator piloting Azure-to-Azure replication.
+  outcome: Use Azure CLI in PowerShell to create the source vm and isolated recovery network, configure azure-to-azure replication
+    behind explicit approval, and reconcile replication health, recovery mapping, and cleanup order, with recoverable state
+    and deterministic cleanup.
+  completionCriteria:
+  - All required checkpoints report pass.
+  - The deterministic break/fix is injected, diagnosed, and repaired.
+  - cleanup.json reports no active run-owned resources, with any retained item explicitly documented.
 cost:
   class: elevated
-  billableResources: &id001
-  - resource group
-  - source and recovery VNets
-  - source VM
-  - Recovery Services vault
-  - ASR fabric/container mappings
-  - replicated item
-  notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator before
-    execution and clean up immediately.
+  billableResources:
+  - source Standard_B1s VM
+  - Site Recovery protected instance
+  - replica managed disks
+  - cache storage
+  - test-failover VM
+  notes: Replication and the isolated test failover are optional exact-YES gates because they can run for an extended period
+    and create billable replicas.
+  pricingLinks:
+  - title: Azure Monitor pricing
+    url: https://azure.microsoft.com/pricing/details/monitor/
+  acknowledgementRequired: true
 permissions:
   azureRbacRoles:
   - Site Recovery Contributor, Virtual Machine Contributor, and Network Contributor on both region scopes
@@ -38,44 +57,480 @@ prerequisites:
   failover must use an isolated network.'
 - Azure CLI hosted in PowerShell 7.4 or later
 providers:
-  observed:
+  required:
   - Microsoft.Compute
   - Microsoft.Network
   - Microsoft.RecoveryServices
+  - Microsoft.Storage
+  optional: []
   registeredByLab: []
-regions:
-  applicable: true
-  primary: supplied at execution time
-  secondary: required only for multi-region checkpoints
+inputs:
+- id: run-id
+  parameter: RunId
+  description: Unique lowercase run ownership identifier
+  required: true
+  secret: false
+  source: parameter
+  safeExample: az104l25-01
+  gateBehavior: block
+  checkpointIds:
+  - LAB25-CP01
+  - LAB25-CP02
+  - LAB25-CP03
+  - LAB25-CP04
+  - LAB25-CP05
+- id: subscription-id
+  parameter: SubscriptionId
+  environmentVariable: AZ104_SUBSCRIPTION_ID
+  description: Expected disposable subscription ID
+  required: true
+  secret: false
+  source: parameter-or-environment
+  safeExample: 00000000-0000-0000-0000-000000000000
+  gateBehavior: block
+  checkpointIds:
+  - LAB25-CP01
+  - LAB25-CP02
+  - LAB25-CP03
+  - LAB25-CP04
+  - LAB25-CP05
+- id: location
+  parameter: Location
+  environmentVariable: AZ104_LOCATION
+  description: Approved primary Azure region
+  required: true
+  secret: false
+  source: parameter-or-environment
+  safeExample: westeurope
+  gateBehavior: block
+  checkpointIds:
+  - LAB25-CP01
+  - LAB25-CP02
+  - LAB25-CP03
+  - LAB25-CP04
+  - LAB25-CP05
+- id: secondary-location
+  parameter: SecondaryLocation
+  environmentVariable: AZ104_SECONDARY_LOCATION
+  description: Approved paired recovery region
+  required: true
+  secret: false
+  source: parameter-or-environment
+  gateBehavior: block
+  safeExample: northeurope
+  checkpointIds:
+  - LAB25-CP01
+  - LAB25-CP02
+  - LAB25-CP03
+  - LAB25-CP04
+- id: enable-asr
+  environmentVariable: AZ104_ENABLE_ASR
+  description: Exact YES authorization for billable Site Recovery replication
+  required: false
+  secret: false
+  gateBehavior: skip-checkpoint
+  safeExample: 'YES'
+  checkpointIds:
+  - LAB25-CP03
+  - LAB25-CP04
+  parameter: EnableAsr
+  source: environment
+- id: run-asr-test-failover
+  environmentVariable: AZ104_RUN_ASR_TEST_FAILOVER
+  description: Exact YES authorization for an isolated Site Recovery test failover
+  required: false
+  secret: false
+  gateBehavior: skip-checkpoint
+  safeExample: 'YES'
+  checkpointIds:
+  - LAB25-CP04
+  parameter: RunAsrTestFailover
+  source: environment
+acknowledgements:
+  cost:
+    required: true
+    parameter: AcknowledgeCost
+    message: I reviewed current pricing, quota, and the same-session cleanup plan.
+  tenantChange:
+    required: false
+    parameter: AcknowledgeTenantChange
+    message: I am authorized to create or change the declared tenant-scoped objects and will restore recorded settings.
 creates:
-  azureResources: *id001
+  azureResources:
+  - resource group
+  - source and recovery VNets
+  - source VM
+  - Recovery Services vault
+  - ASR fabric/container mappings
+  - replicated item
   entraObjects: []
   localArtifacts:
   - .state/<run-id>/run.json
   - .state/<run-id>/validation.json
+  - .state/<run-id>/cleanup.json
 tenantScopedChanges: []
 externalRequirements:
 - This elevated lab requires two approved regions and explicit cost review before live execution; test failover must use an
   isolated network.
+preflightChecks:
+- id: preflight.context
+  type: context
+  required: true
+  description: Confirm active cloud, tenant, and subscription without changing them.
+  command: az account show --output json
+  expected: Active context matches the supplied subscription and disposable environment.
+- id: preflight.tools
+  type: tool
+  required: true
+  description: Confirm PowerShell, Azure CLI, and az bicep are available.
+  command: az version; az bicep version
+  expected: All required tools meet the versions declared by this lab.
+- id: preflight.inputs
+  type: input
+  required: true
+  description: Check required parameters and environment gates without printing secrets.
+  command: $PSBoundParameters.Keys; Get-ChildItem Env:AZ104_* | Select-Object Name
+  expected: Every required input is present and optional gates are explicitly reported.
+- id: preflight.providers
+  type: provider
+  required: true
+  description: Read registration state for required resource providers.
+  command: az provider show --namespace <provider> --query registrationState --output tsv
+  expected: Every required provider is Registered; preflight performs no registration.
+- id: preflight.region
+  type: region
+  required: true
+  description: Confirm the requested region is available to the subscription.
+  command: az account list-locations --query "[?name=='<location>'].name" --output tsv
+  expected: The supplied region appears in the subscription location inventory.
+- id: preflight.quota
+  type: quota
+  required: true
+  description: Read regional compute usage before deployment.
+  command: az vm list-usage --location <location> --output table
+  expected: Required regional vCPU quota has safe headroom.
+- id: preflight.sku
+  type: sku
+  required: true
+  description: Read available VM or service SKUs in the selected region.
+  command: az vm list-skus --location <location> --all --output table
+  expected: The documented lab SKU has no blocking regional restriction.
+- id: preflight.authored.service
+  type: sku
+  required: true
+  description: Prove verify paired-region and site recovery prerequisites with LAB-25's authored read-only provider, feature,
+    tool, region, and SKU queries.
+  command: '$extension = az extension show --name site-recovery --query version --output tsv
+
+    if (-not $extension) { throw ''The site-recovery Azure CLI extension is not installed.'' }
+
+    if (-not $SecondaryLocation -or $SecondaryLocation -eq $Location) { throw ''Primary and recovery locations must be distinct.''
+    }'
+  expected: Source and recovery regions differ, the VM SKU is available, and the site-recovery extension/provider commands
+    are ready.
+checkpoints:
+- id: LAB25-CP01
+  title: Verify paired-region and Site Recovery prerequisites
+  purpose: Read the provider, region, SKU, feature, quota, and companion-tool signals needed for verify paired-region and
+    site recovery prerequisites, without changing Azure state.
+  objectiveIds:
+  - MR-RECOVERY-05
+  required: true
+  expectedState: Source and recovery regions differ, the VM SKU is available, and the site-recovery extension/provider commands
+    are ready.
+  scriptMarkers:
+    setup: LAB25-CP01
+    validate: LAB25-CP01
+    cleanup: LAB25-CP01
+  validation:
+    positive:
+      id: cp01.positive
+      description: Read the service properties for verify paired-region and Site Recovery prerequisites by using exact run-owned
+        identifiers.
+      command: '$validationId=''LAB25-CP01-positive''; $extension = az extension show --name site-recovery --query version
+        --output tsv
+
+        if (-not $extension) { throw ''The site-recovery Azure CLI extension is not installed.'' }'
+      expected: Source and recovery regions differ, the VM SKU is available, and the site-recovery extension/provider commands
+        are ready.
+    negative:
+      id: cp01.negative
+      description: Search for conflicting, unowned, or excessive state after verify paired-region and Site Recovery prerequisites.
+      command: "$validationId='LAB25-CP01-negative'; $recoveryRegion = az account list-locations --query \"[?name=='$SecondaryLocation'].name\
+        \ | [0]\" --output tsv\nif (-not $recoveryRegion -or $SecondaryLocation -eq $Location) {\n  throw 'Primary and recovery\
+        \ locations must be distinct, available Azure regions.'\n}\n$recoveryRegion\n"
+      expected: 'LAB25-CP01 negative boundary: The undesired state is absent; the negative assertion must not report: Primary
+        and recovery locations must be distinct.'
+  cleanup:
+    dependsOn:
+    - LAB25-CP02
+    - LAB25-CP03
+    - LAB25-CP04
+    - LAB25-CP05
+    action: Remove only manifest-recorded objects owned by LAB25-CP01, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp01.residual
+      description: Prove no active managed object remains for LAB25-CP01.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-1
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Azure CLI Site Recovery extension
+      url: https://learn.microsoft.com/en-us/cli/azure/site-recovery
+- id: LAB25-CP02
+  title: Create the source VM and isolated recovery network
+  purpose: Provision and immediately inventory the exact run-owned resources needed to create the source vm and isolated recovery
+    network, so partial completion remains recoverable.
+  objectiveIds:
+  - MR-RECOVERY-06
+  required: true
+  expectedState: The private source VM, cache storage, source/recovery VNets, and vault are recorded before replication is
+    gated.
+  scriptMarkers:
+    setup: LAB25-CP02
+    validate: LAB25-CP02
+    cleanup: LAB25-CP02
+  validation:
+    positive:
+      id: cp02.positive
+      description: Read the service properties for create the source VM and isolated recovery network by using exact run-owned
+        identifiers.
+      command: '$validationId=''LAB25-CP02-positive''; $vnetCount = az network vnet list --resource-group $ResourceGroupName
+        --query "[?name==''$sourceVnet'' || name==''$recoveryVnet'' || name==''$testVnet''] | length(@)" --output tsv
+
+        if ([int]$vnetCount -ne 3) { throw ''The source, recovery, and isolated test VNets are not all present.'' }'
+      expected: The private source VM, cache storage, source/recovery VNets, and vault are recorded before replication is
+        gated.
+    negative:
+      id: cp02.negative
+      description: Search for conflicting, unowned, or excessive state after create the source VM and isolated recovery network.
+      command: '$validationId=''LAB25-CP02-negative''; $peerings = az network vnet peering list --resource-group $ResourceGroupName
+        --vnet-name $testVnet --query "length(@)" --output tsv
+
+        if ([int]$peerings -ne 0) { throw ''The test-failover VNet is peered and is not isolated.'' }'
+      expected: 'LAB25-CP02 negative boundary: The undesired state is absent; the negative assertion must not report: The
+        test-failover VNet is peered and is not isolated.'
+  cleanup:
+    dependsOn:
+    - LAB25-CP03
+    - LAB25-CP04
+    - LAB25-CP05
+    action: Remove only manifest-recorded objects owned by LAB25-CP02, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp02.residual
+      description: Prove no active managed object remains for LAB25-CP02.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-2
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Azure CLI Site Recovery extension
+      url: https://learn.microsoft.com/en-us/cli/azure/site-recovery
+- id: LAB25-CP03
+  title: Configure Azure-to-Azure replication behind explicit approval
+  purpose: Configure and independently inspect the control-plane and data-path properties needed to configure azure-to-azure
+    replication behind explicit approval.
+  objectiveIds:
+  - MR-RECOVERY-05
+  required: false
+  expectedState: When AZ104_ENABLE_ASR=YES, fabric, containers, policy, mapping, and protected item converge to a protected
+    state; otherwise the optional checkpoint is skipped.
+  scriptMarkers:
+    setup: LAB25-CP03
+    validate: LAB25-CP03
+    cleanup: LAB25-CP03
+  validation:
+    positive:
+      id: cp03.positive
+      description: Read the service properties for configure Azure-to-Azure replication behind explicit approval by using
+        exact run-owned identifiers.
+      command: '$validationId=''LAB25-CP03-positive''; $stateValue = az site-recovery protected-item show --resource-group
+        $ResourceGroupName --vault-name $vault --fabric-name $sourceFabric --protection-container $sourceContainer --name
+        $protectedItem --query properties.protectionState --output tsv
+
+        if ($stateValue -ne ''Protected'') { throw "Replication protection state is $stateValue." }'
+      expected: When AZ104_ENABLE_ASR=YES, fabric, containers, policy, mapping, and protected item converge to a protected
+        state; otherwise the optional checkpoint is skipped.
+    negative:
+      id: cp03.negative
+      description: Search for conflicting, unowned, or excessive state after configure Azure-to-Azure replication behind explicit
+        approval.
+      command: '$validationId=''LAB25-CP03-negative''; $health = az site-recovery protected-item show --resource-group $ResourceGroupName
+        --vault-name $vault --fabric-name $sourceFabric --protection-container $sourceContainer --name $protectedItem --query
+        properties.replicationHealth --output tsv
+
+        if ($health -notin @(''Normal'',''Healthy'')) { throw "Replication health is $health." }'
+      expected: 'LAB25-CP03 negative boundary: The undesired state is absent; the negative assertion must not report: Replication
+        health is reported health.'
+  cleanup:
+    dependsOn:
+    - LAB25-CP04
+    - LAB25-CP05
+    action: Remove only manifest-recorded objects owned by LAB25-CP03, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp03.residual
+      description: Prove no active managed object remains for LAB25-CP03.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-3
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Azure CLI Site Recovery extension
+      url: https://learn.microsoft.com/en-us/cli/azure/site-recovery
+- id: LAB25-CP04
+  title: Run and clean up an isolated test failover
+  purpose: Exercise the deterministic operational or denied path needed to run and clean up an isolated test failover, then
+    retain comparable before-and-after results.
+  objectiveIds:
+  - MR-RECOVERY-06
+  required: false
+  expectedState: When AZ104_RUN_ASR_TEST_FAILOVER=YES, the test uses only the isolated recovery VNet and cleanup removes the
+    test VM before checkpoint completion.
+  scriptMarkers:
+    setup: LAB25-CP04
+    validate: LAB25-CP04
+    cleanup: LAB25-CP04
+  validation:
+    positive:
+      id: cp04.positive
+      description: Read the service properties for run and clean up an isolated test failover by using exact run-owned identifiers.
+      command: '$validationId=''LAB25-CP04-positive''; $lastTest = az site-recovery protected-item show --resource-group $ResourceGroupName
+        --vault-name $vault --fabric-name $sourceFabric --protection-container $sourceContainer --name $protectedItem --query
+        properties.lastSuccessfulTestFailoverTime --output tsv
+
+        if (-not $lastTest) { throw ''No successful test-failover timestamp is recorded.'' }'
+      expected: When AZ104_RUN_ASR_TEST_FAILOVER=YES, the test uses only the isolated recovery VNet and cleanup removes the
+        test VM before checkpoint completion.
+    negative:
+      id: cp04.negative
+      description: Search for conflicting, unowned, or excessive state after run and clean up an isolated test failover.
+      command: '$validationId=''LAB25-CP04-negative''; $peerings = az network vnet peering list --resource-group $ResourceGroupName
+        --vnet-name $testVnet --query "length(@)" --output tsv
+
+        if ([int]$peerings -ne 0) { throw ''The drill network is connected to another VNet.'' }'
+      expected: 'LAB25-CP04 negative boundary: The undesired state is absent; the negative assertion must not report: The
+        drill network is connected to another VNet.'
+  cleanup:
+    dependsOn:
+    - LAB25-CP05
+    action: Remove only manifest-recorded objects owned by LAB25-CP04, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp04.residual
+      description: Prove no active managed object remains for LAB25-CP04.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-4
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Azure CLI Site Recovery extension
+      url: https://learn.microsoft.com/en-us/cli/azure/site-recovery
+- id: LAB25-CP05
+  title: Reconcile replication health, recovery mapping, and cleanup order
+  purpose: Reconcile live service properties, returned IDs, and dependency-aware removal needed to reconcile replication health,
+    recovery mapping, and cleanup order before handoff.
+  objectiveIds:
+  - MR-RECOVERY-05
+  - MR-RECOVERY-06
+  required: true
+  expectedState: Optional gate status, protected-item health, network mapping, test-failover cleanup, and retained-vault expectations
+    are explicit.
+  scriptMarkers:
+    setup: LAB25-CP05
+    validate: LAB25-CP05
+    cleanup: LAB25-CP05
+  validation:
+    positive:
+      id: cp05.positive
+      description: Read the service properties for reconcile replication health, recovery mapping, and cleanup order by using
+        exact run-owned identifiers.
+      command: '$validationId=''LAB25-CP05-positive''; $vaultState = az backup vault show --resource-group $ResourceGroupName
+        --name $vault --query properties.provisioningState --output tsv
+
+        if ($vaultState -ne ''Succeeded'') { throw "Site Recovery vault state is $vaultState." }'
+      expected: Optional gate status, protected-item health, network mapping, test-failover cleanup, and retained-vault expectations
+        are explicit.
+    negative:
+      id: cp05.negative
+      description: Search for conflicting, unowned, or excessive state after reconcile replication health, recovery mapping,
+        and cleanup order.
+      command: '$validationId=''LAB25-CP05-negative''; $overlap = az network vnet show --resource-group $ResourceGroupName
+        --name $testVnet --query "addressSpace.addressPrefixes[0]" --output tsv
+
+        if ($overlap -ne ''10.126.0.0/16'') { throw ''The test-failover VNet is not the recorded isolated range.'' }'
+      expected: 'LAB25-CP05 negative boundary: The undesired state is absent; the negative assertion must not report: The
+        test-failover VNet is not the recorded isolated range.'
+  cleanup:
+    dependsOn: []
+    action: Remove only manifest-recorded objects owned by LAB25-CP05, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp05.residual
+      description: Prove no active managed object remains for LAB25-CP05.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-5
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Azure CLI Site Recovery extension
+      url: https://learn.microsoft.com/en-us/cli/azure/site-recovery
 validation:
-  commandLanes:
-  - scripts/cli/Validate.ps1
-  output: .state/<run-id>/validation.json
-  statuses:
-  - pass
-  - fail
-  - warning
-  - skipped
-  liveExecutionRequiredForLiveVerified: true
+  script: scripts/cli/Validate.ps1
+  artifact: .state/<run-id>/validation.json
+  modes:
+  - Deployment
+  - PostCleanup
+  resultPolicy:
+    requiredFailureResult: fail
+    optionalSkipResult: partial
+    allRequiredPassResult: pass
 cleanup:
-  azureDeletion: exact recorded resource-group ID after tag verification
-  entraDeletion: none
-  reportOnlyByDefault: true
+  script: scripts/cli/Cleanup.ps1
+  artifact: .state/<run-id>/cleanup.json
+  previewByDefault: true
   requiresExecuteFlag: true
-  residualAuditRequired: true
+  ownershipVerification:
+    manifestIdMatch: true
+    requiredTags:
+    - purpose
+    - labId
+    - runId
+  residualChecks:
+  - id: cp01.residual
+    description: Prove no active managed object remains for LAB25-CP01.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp02.residual
+    description: Prove no active managed object remains for LAB25-CP02.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp03.residual
+    description: Prove no active managed object remains for LAB25-CP03.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp04.residual
+    description: Prove no active managed object remains for LAB25-CP04.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp05.residual
+    description: Prove no active managed object remains for LAB25-CP05.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  retainedItemsAllowed: true
+  irreversiblePurge: never
 assessment:
   enabled: true
   questionCount: 50
   primaryDomain: monitor-recovery
-lastOfflineValidated: '2026-08-30'
+lastOfflineValidated: '2026-08-31'
 lastLiveVerified: null
+# END GENERATED AZ104 V2

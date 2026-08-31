@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jamonygr.github.io/az104-azure-administrator-labs/schemas/catalog-schema.json",
+  "title": "AZ-104 generated lab catalog",
+  "type": "object",
+  "required": ["schemaVersion", "blueprintVersion", "expectedLabCount", "generatedFrom", "labs"],
+  "properties": {
+    "schemaVersion": { "const": "2.0.0" },
+    "blueprintVersion": { "type": "string", "format": "date" },
+    "expectedLabCount": { "const": 28 },
+    "generatedFrom": { "const": "lab.yml" },
+    "labs": {
+      "type": "array",
+      "minItems": 28,
+      "maxItems": 28,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "labId",
+          "slug",
+          "folder",
+          "title",
+          "domain",
+          "track",
+          "status",
+          "difficulty",
+          "estimatedMinutes",
+          "costClass",
+          "questionCount",
+          "objectiveIds",
+          "path",
+          "previousLabId",
+          "nextLabId"
+        ],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[0-9]{2}$" },
+          "labId": { "type": "string", "pattern": "^LAB-[0-9]{2}$" },
+          "slug": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+          "folder": { "type": "string", "pattern": "^[0-9]{2}-[a-z0-9]+(?:-[a-z0-9]+)*$" },
+          "title": { "type": "string", "minLength": 10 },
+          "domain": {
+            "enum": ["foundation", "identity-governance", "storage", "compute", "networking", "monitor-recovery", "capstone"]
+          },
+          "track": { "enum": ["azure-cli", "azure-cli-bicep"] },
+          "status": { "enum": ["draft", "offline-validated", "live-verified", "partial", "blocked"] },
+          "difficulty": { "enum": ["foundational", "applied", "advanced"] },
+          "estimatedMinutes": { "type": "integer", "minimum": 30, "maximum": 480 },
+          "costClass": { "enum": ["none", "low", "moderate", "elevated"] },
+          "questionCount": { "enum": [0, 50] },
+          "objectiveIds": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": { "type": "string", "pattern": "^(?:FD|IG|ST|CP|NW|MR)-[A-Z]+-[0-9]{2}$" }
+          },
+          "path": { "type": "string", "pattern": "^labs/[0-9]{2}-[a-z0-9-]+/README\\.md$" },
+          "previousLabId": {
+            "oneOf": [{ "type": "string", "pattern": "^LAB-[0-9]{2}$" }, { "type": "null" }]
+          },
+          "nextLabId": {
+            "oneOf": [{ "type": "string", "pattern": "^LAB-[0-9]{2}$" }, { "type": "null" }]
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,8 +1,11 @@
+
+# BEGIN GENERATED AZ104 V2
+schemaVersion: 2.0.0
 id: LAB-14
 slug: 14-container-apps
 title: Deploy and scale Azure Container Apps
 blueprintVersion: '2026-04-17'
-domain: Deploy and manage Azure compute resources
+domain: compute
 objectives:
 - CP-CONTAINERS-03
 - CP-CONTAINERS-04
@@ -12,16 +15,32 @@ testedToolVersions:
   azureCli: '>=2.88.0'
   powershell: '>=7.4'
 estimatedMinutes: 120
-difficulty: intermediate
+difficulty: applied
+experience:
+  scenario: 'You are a platform administrator releasing a revisioned serverless container app. Build and prove this disposable
+    service path: A Log Analytics workspace feeds the Container Apps environment; the app with external ingress creates two
+    active revisions, and the ingress controller splits 90/10 traffic before revision and scaling validation.'
+  role: A platform administrator releasing a revisioned serverless container app.
+  outcome: Use Azure CLI in PowerShell to create the managed environment and ingress application, create a second revision
+    without replacing the first, and reconcile ingress, scaling, revisions, and traffic, with recoverable state and deterministic
+    cleanup.
+  completionCriteria:
+  - All required checkpoints report pass.
+  - The deterministic break/fix is injected, diagnosed, and repaired.
+  - cleanup.json reports no active run-owned resources, with any retained item explicitly documented.
 cost:
   class: low
-  billableResources: &id001
+  billableResources:
   - resource group
   - Log Analytics workspace
   - Container Apps environment
   - container app
   notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator before
     execution and clean up immediately.
+  pricingLinks:
+  - title: Azure compute pricing
+    url: https://azure.microsoft.com/pricing/details/virtual-machines/
+  acknowledgementRequired: false
 permissions:
   azureRbacRoles:
   - Contributor on the lab resource group
@@ -34,41 +53,432 @@ prerequisites:
 - 'External gate review: None beyond the declared role and a disposable subscription.'
 - Azure CLI hosted in PowerShell 7.4 or later
 providers:
-  observed:
+  required:
   - Microsoft.App
   - Microsoft.OperationalInsights
+  optional: []
   registeredByLab: []
-regions:
-  applicable: true
-  primary: supplied at execution time
-  secondary: null
+inputs:
+- id: run-id
+  parameter: RunId
+  description: Unique lowercase run ownership identifier
+  required: true
+  secret: false
+  source: parameter
+  safeExample: az104l14-01
+  gateBehavior: block
+  checkpointIds:
+  - LAB14-CP01
+  - LAB14-CP02
+  - LAB14-CP03
+  - LAB14-CP04
+  - LAB14-CP05
+- id: subscription-id
+  parameter: SubscriptionId
+  environmentVariable: AZ104_SUBSCRIPTION_ID
+  description: Expected disposable subscription ID
+  required: true
+  secret: false
+  source: parameter-or-environment
+  safeExample: 00000000-0000-0000-0000-000000000000
+  gateBehavior: block
+  checkpointIds:
+  - LAB14-CP01
+  - LAB14-CP02
+  - LAB14-CP03
+  - LAB14-CP04
+  - LAB14-CP05
+- id: location
+  parameter: Location
+  environmentVariable: AZ104_LOCATION
+  description: Approved primary Azure region
+  required: true
+  secret: false
+  source: parameter-or-environment
+  safeExample: westeurope
+  gateBehavior: block
+  checkpointIds:
+  - LAB14-CP01
+  - LAB14-CP02
+  - LAB14-CP03
+  - LAB14-CP04
+  - LAB14-CP05
+acknowledgements:
+  cost:
+    required: false
+    parameter: AcknowledgeCost
+    message: I reviewed current pricing, quota, and the same-session cleanup plan.
+  tenantChange:
+    required: false
+    parameter: AcknowledgeTenantChange
+    message: I am authorized to create or change the declared tenant-scoped objects and will restore recorded settings.
 creates:
-  azureResources: *id001
+  azureResources:
+  - resource group
+  - Log Analytics workspace
+  - Container Apps environment
+  - container app
   entraObjects: []
   localArtifacts:
   - .state/<run-id>/run.json
   - .state/<run-id>/validation.json
+  - .state/<run-id>/cleanup.json
 tenantScopedChanges: []
 externalRequirements: []
+preflightChecks:
+- id: preflight.context
+  type: context
+  required: true
+  description: Confirm active cloud, tenant, and subscription without changing them.
+  command: az account show --output json
+  expected: Active context matches the supplied subscription and disposable environment.
+- id: preflight.tools
+  type: tool
+  required: true
+  description: Confirm PowerShell, Azure CLI, and az bicep are available.
+  command: az version; az bicep version
+  expected: All required tools meet the versions declared by this lab.
+- id: preflight.inputs
+  type: input
+  required: true
+  description: Check required parameters and environment gates without printing secrets.
+  command: $PSBoundParameters.Keys; Get-ChildItem Env:AZ104_* | Select-Object Name
+  expected: Every required input is present and optional gates are explicitly reported.
+- id: preflight.providers
+  type: provider
+  required: true
+  description: Read registration state for required resource providers.
+  command: az provider show --namespace <provider> --query registrationState --output tsv
+  expected: Every required provider is Registered; preflight performs no registration.
+- id: preflight.region
+  type: region
+  required: true
+  description: Confirm the requested region is available to the subscription.
+  command: az account list-locations --query "[?name=='<location>'].name" --output tsv
+  expected: The supplied region appears in the subscription location inventory.
+- id: preflight.quota
+  type: quota
+  required: false
+  description: Read regional compute usage before deployment.
+  command: az vm list-usage --location <location> --output table
+  expected: Required regional vCPU quota has safe headroom.
+- id: preflight.sku
+  type: sku
+  required: false
+  description: Read available VM or service SKUs in the selected region.
+  command: az vm list-skus --location <location> --all --output table
+  expected: The documented lab SKU has no blocking regional restriction.
+- id: preflight.authored.service
+  type: sku
+  required: true
+  description: Prove verify container apps extension and regional environment support with LAB-14's authored read-only provider,
+    feature, tool, region, and SKU queries.
+  command: '$registration = az provider show --namespace Microsoft.App --query registrationState --output tsv
+
+    if ($registration -ne ''Registered'') { throw ''Microsoft.App is not registered.'' }
+
+    $extensionVersion = az extension show --name containerapp --query version --output tsv
+
+    if (-not $extensionVersion) { throw ''The containerapp extension is missing.'' }'
+  expected: The containerapp command group responds and the selected region offers a managed-environment location.
+checkpoints:
+- id: LAB14-CP01
+  title: Verify Container Apps extension and regional environment support
+  purpose: Read the provider, region, SKU, feature, quota, and companion-tool signals needed for verify container apps extension
+    and regional environment support, without changing Azure state.
+  objectiveIds:
+  - CP-CONTAINERS-03
+  required: true
+  expectedState: The containerapp command group responds and the selected region offers a managed-environment location.
+  scriptMarkers:
+    setup: LAB14-CP01
+    validate: LAB14-CP01
+    cleanup: LAB14-CP01
+  validation:
+    positive:
+      id: cp01.positive
+      description: Read the service properties for verify Container Apps extension and regional environment support by using
+        exact run-owned identifiers.
+      command: '$validationId=''LAB14-CP01-positive''; $registration = az provider show --namespace Microsoft.App --query
+        registrationState --output tsv
+
+        if ($registration -ne ''Registered'') { throw ''Microsoft.App is not registered.'' }'
+      expected: The containerapp command group responds and the selected region offers a managed-environment location.
+    negative:
+      id: cp01.negative
+      description: Search for conflicting, unowned, or excessive state after verify Container Apps extension and regional
+        environment support.
+      command: '$validationId=''LAB14-CP01-negative''; $extensionVersion = az extension show --name containerapp --query version
+        --output tsv
+
+        if (-not $extensionVersion) { throw ''The containerapp extension is missing.'' }'
+      expected: 'LAB14-CP01 negative boundary: The undesired state is absent; the negative assertion must not report: The
+        containerapp extension is missing.'
+  cleanup:
+    dependsOn:
+    - LAB14-CP02
+    - LAB14-CP03
+    - LAB14-CP04
+    - LAB14-CP05
+    action: Remove only manifest-recorded objects owned by LAB14-CP01, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp01.residual
+      description: Prove no active managed object remains for LAB14-CP01.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-1
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Deploy to Azure Container Apps with Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/container-apps/get-started
+- id: LAB14-CP02
+  title: Create the managed environment and ingress application
+  purpose: Provision and immediately inventory the exact run-owned resources needed to create the managed environment and
+    ingress application, so partial completion remains recoverable.
+  objectiveIds:
+  - CP-CONTAINERS-04
+  required: true
+  expectedState: The environment and app are provisioned, external ingress targets the declared port, and the first revision
+    is healthy.
+  scriptMarkers:
+    setup: LAB14-CP02
+    validate: LAB14-CP02
+    cleanup: LAB14-CP02
+  validation:
+    positive:
+      id: cp02.positive
+      description: Read the service properties for create the managed environment and ingress application by using exact run-owned
+        identifiers.
+      command: '$validationId=''LAB14-CP02-positive''; $stateValue = az containerapp show --resource-group $ResourceGroupName
+        --name $app --query properties.provisioningState --output tsv
+
+        if ($stateValue -ne ''Succeeded'') { throw "Container App state is $stateValue." }'
+      expected: The environment and app are provisioned, external ingress targets the declared port, and the first revision
+        is healthy.
+    negative:
+      id: cp02.negative
+      description: Search for conflicting, unowned, or excessive state after create the managed environment and ingress application.
+      command: '$validationId=''LAB14-CP02-negative''; $externalIngress = az containerapp show --resource-group $ResourceGroupName
+        --name $app --query properties.configuration.ingress.external --output tsv
+
+        if ($externalIngress -ne ''true'') { throw ''External ingress is not configured.'' }'
+      expected: 'LAB14-CP02 negative boundary: The undesired state is absent; the negative assertion must not report: External
+        ingress is not configured.'
+  cleanup:
+    dependsOn:
+    - LAB14-CP03
+    - LAB14-CP04
+    - LAB14-CP05
+    action: Remove only manifest-recorded objects owned by LAB14-CP02, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp02.residual
+      description: Prove no active managed object remains for LAB14-CP02.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-2
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Deploy to Azure Container Apps with Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/container-apps/get-started
+- id: LAB14-CP03
+  title: Create a second revision without replacing the first
+  purpose: Configure and independently inspect the control-plane and data-path properties needed to create a second revision
+    without replacing the first.
+  objectiveIds:
+  - CP-CONTAINERS-03
+  required: true
+  expectedState: Multiple-revision mode retains both revisions and the new image produces a separately addressable revision.
+  scriptMarkers:
+    setup: LAB14-CP03
+    validate: LAB14-CP03
+    cleanup: LAB14-CP03
+  validation:
+    positive:
+      id: cp03.positive
+      description: Read the service properties for create a second revision without replacing the first by using exact run-owned
+        identifiers.
+      command: '$validationId=''LAB14-CP03-positive''; $active = az containerapp revision list --resource-group $ResourceGroupName
+        --name $app --query "[?properties.active] | length(@)" --output tsv
+
+        if ([int]$active -lt 2) { throw "Only $active revision is active." }'
+      expected: Multiple-revision mode retains both revisions and the new image produces a separately addressable revision.
+    negative:
+      id: cp03.negative
+      description: Search for conflicting, unowned, or excessive state after create a second revision without replacing the
+        first.
+      command: '$validationId=''LAB14-CP03-negative''; $mode = az containerapp show --resource-group $ResourceGroupName --name
+        $app --query properties.configuration.activeRevisionsMode --output tsv
+
+        if ($mode -ne ''Multiple'') { throw "Revision mode is $mode." }'
+      expected: 'LAB14-CP03 negative boundary: The undesired state is absent; the negative assertion must not report: Revision
+        mode is reported mode.'
+  cleanup:
+    dependsOn:
+    - LAB14-CP04
+    - LAB14-CP05
+    action: Remove only manifest-recorded objects owned by LAB14-CP03, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp03.residual
+      description: Prove no active managed object remains for LAB14-CP03.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-3
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Deploy to Azure Container Apps with Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/container-apps/get-started
+- id: LAB14-CP04
+  title: Split traffic between healthy revisions
+  purpose: Exercise the deterministic operational or denied path needed to split traffic between healthy revisions, then retain
+    comparable before-and-after results.
+  objectiveIds:
+  - CP-CONTAINERS-04
+  required: true
+  expectedState: Traffic weights total 100 and are assigned only to the two run-owned active revisions.
+  scriptMarkers:
+    setup: LAB14-CP04
+    validate: LAB14-CP04
+    cleanup: LAB14-CP04
+  validation:
+    positive:
+      id: cp04.positive
+      description: Read the service properties for split traffic between healthy revisions by using exact run-owned identifiers.
+      command: '$validationId=''LAB14-CP04-positive''; $weight = az containerapp ingress traffic show --resource-group $ResourceGroupName
+        --name $app --query "[].weight | sum(@)" --output tsv
+
+        if ([int]$weight -ne 100) { throw "Traffic weights total $weight." }'
+      expected: Traffic weights total 100 and are assigned only to the two run-owned active revisions.
+    negative:
+      id: cp04.negative
+      description: Search for conflicting, unowned, or excessive state after split traffic between healthy revisions.
+      command: '$validationId=''LAB14-CP04-negative''; $inactiveWeighted = az containerapp ingress traffic show --resource-group
+        $ResourceGroupName --name $app --query ''[?weight>`0` && revisionName==null] | length(@)'' --output tsv
+
+        if ([int]$inactiveWeighted -ne 0) { throw ''Traffic points to an unresolved revision.'' }'
+      expected: 'LAB14-CP04 negative boundary: The undesired state is absent; the negative assertion must not report: Traffic
+        points to an unresolved revision.'
+  cleanup:
+    dependsOn:
+    - LAB14-CP05
+    action: Remove only manifest-recorded objects owned by LAB14-CP04, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp04.residual
+      description: Prove no active managed object remains for LAB14-CP04.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-4
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Deploy to Azure Container Apps with Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/container-apps/get-started
+- id: LAB14-CP05
+  title: Reconcile ingress, scaling, revisions, and traffic
+  purpose: Reconcile live service properties, returned IDs, and dependency-aware removal needed to reconcile ingress, scaling,
+    revisions, and traffic before handoff.
+  objectiveIds:
+  - CP-CONTAINERS-03
+  - CP-CONTAINERS-04
+  required: true
+  expectedState: Ingress FQDN, replica bounds, active revision health, and traffic percentages agree with the intended release
+    model.
+  scriptMarkers:
+    setup: LAB14-CP05
+    validate: LAB14-CP05
+    cleanup: LAB14-CP05
+  validation:
+    positive:
+      id: cp05.positive
+      description: Read the service properties for reconcile ingress, scaling, revisions, and traffic by using exact run-owned
+        identifiers.
+      command: '$validationId=''LAB14-CP05-positive''; $maximum = az containerapp show --resource-group $ResourceGroupName
+        --name $app --query properties.template.scale.maxReplicas --output tsv
+
+        if ([int]$maximum -ne 3) { throw "Maximum replicas is $maximum." }'
+      expected: Ingress FQDN, replica bounds, active revision health, and traffic percentages agree with the intended release
+        model.
+    negative:
+      id: cp05.negative
+      description: Search for conflicting, unowned, or excessive state after reconcile ingress, scaling, revisions, and traffic.
+      command: '$validationId=''LAB14-CP05-negative''; $minimum = az containerapp show --resource-group $ResourceGroupName
+        --name $app --query properties.template.scale.minReplicas --output tsv
+
+        $maximum = az containerapp show --resource-group $ResourceGroupName --name $app --query properties.template.scale.maxReplicas
+        --output tsv
+
+        if ([int]$minimum -gt [int]$maximum) { throw ''Minimum replicas exceeds maximum replicas.'' }'
+      expected: 'LAB14-CP05 negative boundary: The undesired state is absent; the negative assertion must not report: Minimum
+        replicas exceeds maximum replicas.'
+  cleanup:
+    dependsOn: []
+    action: Remove only manifest-recorded objects owned by LAB14-CP05, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp05.residual
+      description: Prove no active managed object remains for LAB14-CP05.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-5
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Deploy to Azure Container Apps with Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/container-apps/get-started
 validation:
-  commandLanes:
-  - scripts/cli/Validate.ps1
-  output: .state/<run-id>/validation.json
-  statuses:
-  - pass
-  - fail
-  - warning
-  - skipped
-  liveExecutionRequiredForLiveVerified: true
+  script: scripts/cli/Validate.ps1
+  artifact: .state/<run-id>/validation.json
+  modes:
+  - Deployment
+  - PostCleanup
+  resultPolicy:
+    requiredFailureResult: fail
+    optionalSkipResult: partial
+    allRequiredPassResult: pass
 cleanup:
-  azureDeletion: exact recorded resource-group ID after tag verification
-  entraDeletion: none
-  reportOnlyByDefault: true
+  script: scripts/cli/Cleanup.ps1
+  artifact: .state/<run-id>/cleanup.json
+  previewByDefault: true
   requiresExecuteFlag: true
-  residualAuditRequired: true
+  ownershipVerification:
+    manifestIdMatch: true
+    requiredTags:
+    - purpose
+    - labId
+    - runId
+  residualChecks:
+  - id: cp01.residual
+    description: Prove no active managed object remains for LAB14-CP01.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp02.residual
+    description: Prove no active managed object remains for LAB14-CP02.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp03.residual
+    description: Prove no active managed object remains for LAB14-CP03.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp04.residual
+    description: Prove no active managed object remains for LAB14-CP04.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp05.residual
+    description: Prove no active managed object remains for LAB14-CP05.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  retainedItemsAllowed: true
+  irreversiblePurge: never
 assessment:
   enabled: true
   questionCount: 50
   primaryDomain: compute
-lastOfflineValidated: '2026-08-30'
+lastOfflineValidated: '2026-08-31'
 lastLiveVerified: null
+# END GENERATED AZ104 V2

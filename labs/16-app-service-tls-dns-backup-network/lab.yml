@@ -1,8 +1,11 @@
+
+# BEGIN GENERATED AZ104 V2
+schemaVersion: 2.0.0
 id: LAB-16
 slug: 16-app-service-tls-dns-backup-network
 title: Configure App Service TLS, DNS, backup, and networking
 blueprintVersion: '2026-04-17'
-domain: Deploy and manage Azure compute resources / Implement and manage virtual networking
+domain: compute
 objectives:
 - CP-APP-04
 - CP-APP-05
@@ -15,10 +18,23 @@ testedToolVersions:
   azureCli: '>=2.88.0'
   powershell: '>=7.4'
 estimatedMinutes: 150
-difficulty: intermediate
+difficulty: applied
+experience:
+  scenario: 'You are an application-platform administrator hardening and protecting a web app. Build and prove this disposable
+    service path: The web app enforces HTTPS/TLS, sends outbound traffic through a delegated integration subnet, writes backups
+    to private Blob storage through a transient SAS, and binds a managed certificate only after the owned hostname resolves
+    to the app.'
+  role: An application-platform administrator hardening and protecting a web app.
+  outcome: Use Azure CLI in PowerShell to create the web app, integration subnet, and backup storage, enforce https and integrate
+    outbound traffic with the vnet, and reconcile tls, networking, backup, and dns gates, with recoverable state and deterministic
+    cleanup.
+  completionCriteria:
+  - All required checkpoints report pass.
+  - The deterministic break/fix is injected, diagnosed, and repaired.
+  - cleanup.json reports no active run-owned resources, with any retained item explicitly documented.
 cost:
   class: moderate
-  billableResources: &id001
+  billableResources:
   - resource group
   - App Service plan
   - web app
@@ -27,6 +43,10 @@ cost:
   - optional custom hostname and TLS binding
   notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator before
     execution and clean up immediately.
+  pricingLinks:
+  - title: Azure compute pricing
+    url: https://azure.microsoft.com/pricing/details/virtual-machines/
+  acknowledgementRequired: true
 permissions:
   azureRbacRoles:
   - Website Contributor, Network Contributor, and Storage Account Contributor; control of the DNS zone and certificate for
@@ -42,44 +62,472 @@ prerequisites:
   certificate; they remain gated otherwise.'
 - Azure CLI hosted in PowerShell 7.4 or later
 providers:
-  observed:
+  required:
   - Microsoft.Network
   - Microsoft.Storage
   - Microsoft.Web
+  optional: []
   registeredByLab: []
-regions:
-  applicable: true
-  primary: supplied at execution time
-  secondary: null
+inputs:
+- id: run-id
+  parameter: RunId
+  description: Unique lowercase run ownership identifier
+  required: true
+  secret: false
+  source: parameter
+  safeExample: az104l16-01
+  gateBehavior: block
+  checkpointIds:
+  - LAB16-CP01
+  - LAB16-CP02
+  - LAB16-CP03
+  - LAB16-CP04
+  - LAB16-CP05
+- id: subscription-id
+  parameter: SubscriptionId
+  environmentVariable: AZ104_SUBSCRIPTION_ID
+  description: Expected disposable subscription ID
+  required: true
+  secret: false
+  source: parameter-or-environment
+  safeExample: 00000000-0000-0000-0000-000000000000
+  gateBehavior: block
+  checkpointIds:
+  - LAB16-CP01
+  - LAB16-CP02
+  - LAB16-CP03
+  - LAB16-CP04
+  - LAB16-CP05
+- id: location
+  parameter: Location
+  environmentVariable: AZ104_LOCATION
+  description: Approved primary Azure region
+  required: true
+  secret: false
+  source: parameter-or-environment
+  safeExample: westeurope
+  gateBehavior: block
+  checkpointIds:
+  - LAB16-CP01
+  - LAB16-CP02
+  - LAB16-CP03
+  - LAB16-CP04
+  - LAB16-CP05
+- id: custom-hostname
+  environmentVariable: AZ104_CUSTOM_HOSTNAME
+  description: Hostname in an owned DNS zone
+  required: false
+  secret: false
+  gateBehavior: skip-checkpoint
+  safeExample: app.lab.example.com
+  checkpointIds:
+  - LAB16-CP04
+  parameter: CustomHostname
+  source: environment
+- id: authorize-custom-domain
+  environmentVariable: AZ104_AUTHORIZE_CUSTOM_DOMAIN
+  description: Exact YES authorization after the App Service domain-verification TXT record is published
+  required: false
+  secret: false
+  gateBehavior: skip-checkpoint
+  safeExample: 'YES'
+  checkpointIds:
+  - LAB16-CP04
+  parameter: AuthorizeCustomDomain
+  source: environment
+acknowledgements:
+  cost:
+    required: true
+    parameter: AcknowledgeCost
+    message: I reviewed current pricing, quota, and the same-session cleanup plan.
+  tenantChange:
+    required: false
+    parameter: AcknowledgeTenantChange
+    message: I am authorized to create or change the declared tenant-scoped objects and will restore recorded settings.
 creates:
-  azureResources: *id001
+  azureResources:
+  - resource group
+  - App Service plan
+  - web app
+  - storage account
+  - virtual network integration subnet
+  - optional custom hostname and TLS binding
   entraObjects: []
   localArtifacts:
   - .state/<run-id>/run.json
   - .state/<run-id>/validation.json
+  - .state/<run-id>/cleanup.json
 tenantScopedChanges: []
 externalRequirements:
 - Custom DNS and certificate steps require AZ104_CUSTOM_HOSTNAME plus an owned DNS zone and an authorized certificate; they
   remain gated otherwise.
+preflightChecks:
+- id: preflight.context
+  type: context
+  required: true
+  description: Confirm active cloud, tenant, and subscription without changing them.
+  command: az account show --output json
+  expected: Active context matches the supplied subscription and disposable environment.
+- id: preflight.tools
+  type: tool
+  required: true
+  description: Confirm PowerShell, Azure CLI, and az bicep are available.
+  command: az version; az bicep version
+  expected: All required tools meet the versions declared by this lab.
+- id: preflight.inputs
+  type: input
+  required: true
+  description: Check required parameters and environment gates without printing secrets.
+  command: $PSBoundParameters.Keys; Get-ChildItem Env:AZ104_* | Select-Object Name
+  expected: Every required input is present and optional gates are explicitly reported.
+- id: preflight.providers
+  type: provider
+  required: true
+  description: Read registration state for required resource providers.
+  command: az provider show --namespace <provider> --query registrationState --output tsv
+  expected: Every required provider is Registered; preflight performs no registration.
+- id: preflight.region
+  type: region
+  required: true
+  description: Confirm the requested region is available to the subscription.
+  command: az account list-locations --query "[?name=='<location>'].name" --output tsv
+  expected: The supplied region appears in the subscription location inventory.
+- id: preflight.quota
+  type: quota
+  required: true
+  description: Read regional compute usage before deployment.
+  command: az vm list-usage --location <location> --output table
+  expected: Required regional vCPU quota has safe headroom.
+- id: preflight.sku
+  type: sku
+  required: true
+  description: Read available VM or service SKUs in the selected region.
+  command: az vm list-skus --location <location> --all --output table
+  expected: The documented lab SKU has no blocking regional restriction.
+- id: preflight.authored.service
+  type: sku
+  required: true
+  description: Prove verify owned-domain, tls, backup, and vnet prerequisites with LAB-16's authored read-only provider, feature,
+    tool, region, and SKU queries.
+  command: '$registration = az provider show --namespace Microsoft.Web --query registrationState --output tsv
+
+    if ($registration -ne ''Registered'') { throw ''Microsoft.Web is not registered.'' }
+
+    $supported = az appservice list-locations --sku S1 --linux-workers-enabled --query "[?name==''$Location''] | length(@)"
+    --output tsv
+
+    if ([int]$supported -eq 0) { throw ''Linux S1 is unavailable in the selected region.'' }'
+  expected: The web-app tier supports backup and VNet integration, and any custom-domain lane is explicitly gated by an owned
+    DNS proof.
+checkpoints:
+- id: LAB16-CP01
+  title: Verify owned-domain, TLS, backup, and VNet prerequisites
+  purpose: Read the provider, region, SKU, feature, quota, and companion-tool signals needed for verify owned-domain, tls,
+    backup, and vnet prerequisites, without changing Azure state.
+  objectiveIds:
+  - CP-APP-04
+  required: true
+  expectedState: The web-app tier supports backup and VNet integration, and any custom-domain lane is explicitly gated by
+    an owned DNS proof.
+  scriptMarkers:
+    setup: LAB16-CP01
+    validate: LAB16-CP01
+    cleanup: LAB16-CP01
+  validation:
+    positive:
+      id: cp01.positive
+      description: Read the service properties for verify owned-domain, TLS, backup, and VNet prerequisites by using exact
+        run-owned identifiers.
+      command: '$validationId=''LAB16-CP01-positive''; $registration = az provider show --namespace Microsoft.Web --query
+        registrationState --output tsv
+
+        if ($registration -ne ''Registered'') { throw ''Microsoft.Web is not registered.'' }'
+      expected: The web-app tier supports backup and VNet integration, and any custom-domain lane is explicitly gated by an
+        owned DNS proof.
+    negative:
+      id: cp01.negative
+      description: Search for conflicting, unowned, or excessive state after verify owned-domain, TLS, backup, and VNet prerequisites.
+      command: '$validationId=''LAB16-CP01-negative''; $supported = az appservice list-locations --sku S1 --linux-workers-enabled
+        --query "[?name==''$Location''] | length(@)" --output tsv
+
+        if ([int]$supported -eq 0) { throw ''Linux S1 is unavailable in the selected region.'' }'
+      expected: 'LAB16-CP01 negative boundary: The undesired state is absent; the negative assertion must not report: Linux
+        S1 is unavailable in the selected region.'
+  cleanup:
+    dependsOn:
+    - LAB16-CP02
+    - LAB16-CP03
+    - LAB16-CP04
+    - LAB16-CP05
+    action: Remove only manifest-recorded objects owned by LAB16-CP01, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp01.residual
+      description: Prove no active managed object remains for LAB16-CP01.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-1
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Secure a custom DNS name with a TLS binding
+      url: https://learn.microsoft.com/en-us/azure/app-service/configure-ssl-bindings
+- id: LAB16-CP02
+  title: Create the web app, integration subnet, and backup storage
+  purpose: Provision and immediately inventory the exact run-owned resources needed to create the web app, integration subnet,
+    and backup storage, so partial completion remains recoverable.
+  objectiveIds:
+  - CP-APP-05
+  required: true
+  expectedState: The app, delegated subnet, and private backup container are run-owned and recorded before configuration begins.
+  scriptMarkers:
+    setup: LAB16-CP02
+    validate: LAB16-CP02
+    cleanup: LAB16-CP02
+  validation:
+    positive:
+      id: cp02.positive
+      description: Read the service properties for create the web app, integration subnet, and backup storage by using exact
+        run-owned identifiers.
+      command: '$validationId=''LAB16-CP02-positive''; $httpsOnly = az webapp show --resource-group $ResourceGroupName --name
+        $app --query httpsOnly --output tsv
+
+        if ($httpsOnly -ne ''true'') { throw ''HTTPS-only is disabled.'' }'
+      expected: The app, delegated subnet, and private backup container are run-owned and recorded before configuration begins.
+    negative:
+      id: cp02.negative
+      description: Search for conflicting, unowned, or excessive state after create the web app, integration subnet, and backup
+        storage.
+      command: '$validationId=''LAB16-CP02-negative''; $tls = az webapp config show --resource-group $ResourceGroupName --name
+        $app --query minTlsVersion --output tsv
+
+        if ($tls -ne ''1.2'') { throw "Minimum TLS is $tls." }'
+      expected: 'LAB16-CP02 negative boundary: The undesired state is absent; the negative assertion must not report: Minimum
+        TLS is reported tls.'
+  cleanup:
+    dependsOn:
+    - LAB16-CP03
+    - LAB16-CP04
+    - LAB16-CP05
+    action: Remove only manifest-recorded objects owned by LAB16-CP02, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp02.residual
+      description: Prove no active managed object remains for LAB16-CP02.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-2
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Secure a custom DNS name with a TLS binding
+      url: https://learn.microsoft.com/en-us/azure/app-service/configure-ssl-bindings
+- id: LAB16-CP03
+  title: Enforce HTTPS and integrate outbound traffic with the VNet
+  purpose: Configure and independently inspect the control-plane and data-path properties needed to enforce https and integrate
+    outbound traffic with the vnet.
+  objectiveIds:
+  - CP-APP-06
+  required: true
+  expectedState: httpsOnly is true, the minimum TLS version matches the target, and the app references the delegated integration
+    subnet.
+  scriptMarkers:
+    setup: LAB16-CP03
+    validate: LAB16-CP03
+    cleanup: LAB16-CP03
+  validation:
+    positive:
+      id: cp03.positive
+      description: Read the service properties for enforce HTTPS and integrate outbound traffic with the VNet by using exact
+        run-owned identifiers.
+      command: '$validationId=''LAB16-CP03-positive''; $backupCount = az webapp config backup list --resource-group $ResourceGroupName
+        --webapp-name $app --query "[?contains(name, ''baseline-$RunId'')] | length(@)" --output tsv
+
+        if ([int]$backupCount -lt 1) { throw ''The baseline backup is not listed.'' }'
+      expected: httpsOnly is true, the minimum TLS version matches the target, and the app references the delegated integration
+        subnet.
+    negative:
+      id: cp03.negative
+      description: Search for conflicting, unowned, or excessive state after enforce HTTPS and integrate outbound traffic
+        with the VNet.
+      command: '$validationId=''LAB16-CP03-negative''; $integrationCount = az webapp vnet-integration list --resource-group
+        $ResourceGroupName --name $app --query "[?contains(subnetResourceId, ''/subnets/integration'')] | length(@)" --output
+        tsv
+
+        if ([int]$integrationCount -ne 1) { throw ''VNet integration is missing or duplicated.'' }'
+      expected: 'LAB16-CP03 negative boundary: The undesired state is absent; the negative assertion must not report: VNet
+        integration is missing or duplicated.'
+  cleanup:
+    dependsOn:
+    - LAB16-CP04
+    - LAB16-CP05
+    action: Remove only manifest-recorded objects owned by LAB16-CP03, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp03.residual
+      description: Prove no active managed object remains for LAB16-CP03.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-3
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Secure a custom DNS name with a TLS binding
+      url: https://learn.microsoft.com/en-us/azure/app-service/configure-ssl-bindings
+- id: LAB16-CP04
+  title: Configure a redacted backup and optional custom hostname
+  purpose: Exercise the deterministic operational or denied path needed to configure a redacted backup and optional custom
+    hostname, then retain comparable before-and-after results.
+  objectiveIds:
+  - CP-APP-07
+  required: false
+  expectedState: A backup schedule targets a transient SAS URL without persisting the token; custom DNS/TLS changes occur
+    only behind the ownership gate.
+  scriptMarkers:
+    setup: LAB16-CP04
+    validate: LAB16-CP04
+    cleanup: LAB16-CP04
+  validation:
+    positive:
+      id: cp04.positive
+      description: Read the service properties for configure a redacted backup and optional custom hostname by using exact
+        run-owned identifiers.
+      command: '$validationId=''LAB16-CP04-positive''; $hostname = $env:AZ104_CUSTOM_HOSTNAME
+
+        $bound = az webapp show --resource-group $ResourceGroupName --name $app --query "hostNames[?@==''$hostname''] | length(@)"
+        --output tsv
+
+        if ([int]$bound -ne 1) { throw ''The custom hostname is not bound.'' }'
+      expected: A backup schedule targets a transient SAS URL without persisting the token; custom DNS/TLS changes occur only
+        behind the ownership gate.
+    negative:
+      id: cp04.negative
+      description: Search for conflicting, unowned, or excessive state after configure a redacted backup and optional custom
+        hostname.
+      command: '$validationId=''LAB16-CP04-negative''; $hostname = $env:AZ104_CUSTOM_HOSTNAME
+
+        $sslState = az webapp config hostname list --resource-group $ResourceGroupName --webapp-name $app --query "[?name==''$hostname''].sslState
+        | [0]" --output tsv
+
+        if ($sslState -notin @(''SniEnabled'',''IpBasedEnabled'')) { throw "TLS binding state is $sslState." }'
+      expected: 'LAB16-CP04 negative boundary: The undesired state is absent; the negative assertion must not report: TLS
+        binding state is reported sslState.'
+  cleanup:
+    dependsOn:
+    - LAB16-CP05
+    action: Remove only manifest-recorded objects owned by LAB16-CP04, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp04.residual
+      description: Prove no active managed object remains for LAB16-CP04.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-4
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Secure a custom DNS name with a TLS binding
+      url: https://learn.microsoft.com/en-us/azure/app-service/configure-ssl-bindings
+- id: LAB16-CP05
+  title: Reconcile TLS, networking, backup, and DNS gates
+  purpose: Reconcile live service properties, returned IDs, and dependency-aware removal needed to reconcile tls, networking,
+    backup, and dns gates before handoff.
+  objectiveIds:
+  - CP-APP-04
+  - CP-APP-05
+  - CP-APP-06
+  - CP-APP-07
+  - NW-DNSLB-01
+  required: true
+  expectedState: TLS policy, VNet integration, backup schedule, and optional hostname/certificate bindings each match their
+    declared gate state.
+  scriptMarkers:
+    setup: LAB16-CP05
+    validate: LAB16-CP05
+    cleanup: LAB16-CP05
+  validation:
+    positive:
+      id: cp05.positive
+      description: Read the service properties for reconcile TLS, networking, backup, and DNS gates by using exact run-owned
+        identifiers.
+      command: '$validationId=''LAB16-CP05-positive''; $stateValue = az webapp show --resource-group $ResourceGroupName --name
+        $app --query state --output tsv
+
+        if ($stateValue -ne ''Running'') { throw "Web app state is $stateValue." }'
+      expected: TLS policy, VNet integration, backup schedule, and optional hostname/certificate bindings each match their
+        declared gate state.
+    negative:
+      id: cp05.negative
+      description: Search for conflicting, unowned, or excessive state after reconcile TLS, networking, backup, and DNS gates.
+      command: '$validationId=''LAB16-CP05-negative''; $publicBlob = az storage account show --resource-group $ResourceGroupName
+        --name $storage --query allowBlobPublicAccess --output tsv
+
+        if ($publicBlob -ne ''false'') { throw ''Backup storage permits blob public access.'' }'
+      expected: 'LAB16-CP05 negative boundary: The undesired state is absent; the negative assertion must not report: Backup
+        storage permits blob public access.'
+  cleanup:
+    dependsOn: []
+    action: Remove only manifest-recorded objects owned by LAB16-CP05, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp05.residual
+      description: Prove no active managed object remains for LAB16-CP05.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-5
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Secure a custom DNS name with a TLS binding
+      url: https://learn.microsoft.com/en-us/azure/app-service/configure-ssl-bindings
 validation:
-  commandLanes:
-  - scripts/cli/Validate.ps1
-  output: .state/<run-id>/validation.json
-  statuses:
-  - pass
-  - fail
-  - warning
-  - skipped
-  liveExecutionRequiredForLiveVerified: true
+  script: scripts/cli/Validate.ps1
+  artifact: .state/<run-id>/validation.json
+  modes:
+  - Deployment
+  - PostCleanup
+  resultPolicy:
+    requiredFailureResult: fail
+    optionalSkipResult: partial
+    allRequiredPassResult: pass
 cleanup:
-  azureDeletion: exact recorded resource-group ID after tag verification
-  entraDeletion: none
-  reportOnlyByDefault: true
+  script: scripts/cli/Cleanup.ps1
+  artifact: .state/<run-id>/cleanup.json
+  previewByDefault: true
   requiresExecuteFlag: true
-  residualAuditRequired: true
+  ownershipVerification:
+    manifestIdMatch: true
+    requiredTags:
+    - purpose
+    - labId
+    - runId
+  residualChecks:
+  - id: cp01.residual
+    description: Prove no active managed object remains for LAB16-CP01.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp02.residual
+    description: Prove no active managed object remains for LAB16-CP02.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp03.residual
+    description: Prove no active managed object remains for LAB16-CP03.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp04.residual
+    description: Prove no active managed object remains for LAB16-CP04.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp05.residual
+    description: Prove no active managed object remains for LAB16-CP05.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  retainedItemsAllowed: true
+  irreversiblePurge: never
 assessment:
   enabled: true
   questionCount: 50
   primaryDomain: compute
-lastOfflineValidated: '2026-08-30'
+lastOfflineValidated: '2026-08-31'
 lastLiveVerified: null
+# END GENERATED AZ104 V2

@@ -1,8 +1,11 @@
+
+# BEGIN GENERATED AZ104 V2
+schemaVersion: 2.0.0
 id: LAB-09
 slug: 09-azure-files-identity
 title: Configure Azure Files, snapshots, soft delete, and identity access
 blueprintVersion: '2026-04-17'
-domain: Implement and manage storage
+domain: storage
 objectives:
 - ST-ACCESS-05
 - ST-ACCOUNTS-05
@@ -15,15 +18,30 @@ testedToolVersions:
   powershell: '>=7.4'
 estimatedMinutes: 135
 difficulty: foundational
+experience:
+  scenario: 'A file-services administrator publishing a recoverable team share is responding to an operational request: Publish
+    a bounded SMB share, protect real content with a snapshot and soft delete, and optionally configure a gated Microsoft
+    Entra Kerberos and share-RBAC path.'
+  role: A file-services administrator publishing a recoverable team share.
+  outcome: Publish a bounded SMB share, protect real content with a snapshot and soft delete, and optionally configure a gated
+    Microsoft Entra Kerberos and share-RBAC path.
+  completionCriteria:
+  - All required checkpoints report pass.
+  - The deterministic break/fix is injected, diagnosed, and repaired.
+  - cleanup.json reports no active run-owned resources, with any retained item explicitly documented.
 cost:
   class: low
-  billableResources: &id001
+  billableResources:
   - resource group
   - storage account
   - Azure file share
   - share snapshot
   notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator before
     execution and clean up immediately.
+  pricingLinks:
+  - title: Azure Storage pricing
+    url: https://azure.microsoft.com/pricing/details/storage/
+  acknowledgementRequired: false
 permissions:
   azureRbacRoles:
   - Contributor and Storage File Data SMB Share Contributor; directory permissions for the optional identity-source path
@@ -38,42 +56,514 @@ prerequisites:
   AD DS, and Entra Domain Services have different prerequisites.'
 - Azure CLI hosted in PowerShell 7.4 or later
 providers:
-  observed:
+  required:
   - Microsoft.Storage
+  optional: []
   registeredByLab: []
-regions:
-  applicable: true
-  primary: supplied at execution time
-  secondary: null
+inputs:
+- id: run-id
+  parameter: RunId
+  description: Unique lowercase run ownership identifier
+  required: true
+  secret: false
+  source: parameter
+  safeExample: az104l09-01
+  gateBehavior: block
+  checkpointIds:
+  - LAB09-CP01
+  - LAB09-CP02
+  - LAB09-CP03
+  - LAB09-CP04
+  - LAB09-CP05
+- id: subscription-id
+  parameter: SubscriptionId
+  environmentVariable: AZ104_SUBSCRIPTION_ID
+  description: Expected disposable subscription ID
+  required: true
+  secret: false
+  source: parameter-or-environment
+  safeExample: 00000000-0000-0000-0000-000000000000
+  gateBehavior: block
+  checkpointIds:
+  - LAB09-CP01
+  - LAB09-CP02
+  - LAB09-CP03
+  - LAB09-CP04
+  - LAB09-CP05
+- id: location
+  parameter: Location
+  environmentVariable: AZ104_LOCATION
+  description: Approved primary Azure region
+  required: true
+  secret: false
+  source: parameter-or-environment
+  safeExample: westeurope
+  gateBehavior: block
+  checkpointIds:
+  - LAB09-CP01
+  - LAB09-CP02
+  - LAB09-CP03
+  - LAB09-CP04
+  - LAB09-CP05
+- id: files-identity-source
+  environmentVariable: AZ104_FILES_IDENTITY_SOURCE
+  description: Authorized Entra Kerberos, AD DS, or managed-domain integration path
+  required: false
+  secret: false
+  gateBehavior: skip-checkpoint
+  safeExample: entra-kerberos
+  checkpointIds:
+  - LAB09-CP04
+  parameter: FilesIdentitySource
+  source: environment
+- id: files-principal-object-id
+  environmentVariable: AZ104_FILES_PRINCIPAL_OBJECT_ID
+  description: Disposable principal for Azure Files data-plane RBAC
+  required: false
+  secret: false
+  gateBehavior: skip-checkpoint
+  safeExample: 00000000-0000-0000-0000-000000000000
+  checkpointIds:
+  - LAB09-CP04
+  parameter: FilesPrincipalObjectId
+  source: environment
+acknowledgements:
+  cost:
+    required: false
+    parameter: AcknowledgeCost
+    message: I reviewed current pricing, quota, and the same-session cleanup plan.
+  tenantChange:
+    required: true
+    parameter: AcknowledgeTenantChange
+    message: I am authorized to create or change the declared tenant-scoped objects and will restore recorded settings.
 creates:
-  azureResources: *id001
+  azureResources:
+  - resource group
+  - storage account
+  - Azure file share
+  - share snapshot
   entraObjects: []
   localArtifacts:
   - .state/<run-id>/run.json
   - .state/<run-id>/validation.json
-tenantScopedChanges: []
+  - .state/<run-id>/cleanup.json
+tenantScopedChanges:
+- optional Microsoft Entra Kerberos application and storage-account identity-source integration
 externalRequirements:
 - Identity-based SMB configuration is gated by AZ104_FILES_IDENTITY_SOURCE because Entra Kerberos, AD DS, and Entra Domain
   Services have different prerequisites.
+preflightChecks:
+- id: preflight.context
+  type: context
+  required: true
+  description: Confirm active cloud, tenant, and subscription without changing them.
+  command: az account show --output json
+  expected: Active context matches the supplied subscription and disposable environment.
+- id: preflight.tools
+  type: tool
+  required: true
+  description: Confirm PowerShell, Azure CLI, and az bicep are available.
+  command: az version; az bicep version
+  expected: All required tools meet the versions declared by this lab.
+- id: preflight.inputs
+  type: input
+  required: true
+  description: Check required parameters and environment gates without printing secrets.
+  command: $PSBoundParameters.Keys; Get-ChildItem Env:AZ104_* | Select-Object Name
+  expected: Every required input is present and optional gates are explicitly reported.
+- id: preflight.providers
+  type: provider
+  required: true
+  description: Read registration state for required resource providers.
+  command: az provider show --namespace <provider> --query registrationState --output tsv
+  expected: Every required provider is Registered; preflight performs no registration.
+- id: preflight.region
+  type: region
+  required: true
+  description: Confirm the requested region is available to the subscription.
+  command: az account list-locations --query "[?name=='<location>'].name" --output tsv
+  expected: The supplied region appears in the subscription location inventory.
+- id: preflight.authored.lab09.storage-name
+  type: service
+  required: true
+  description: Confirm the deterministic storage-account name is globally available before mutation.
+  command: '$availability = az storage account check-name --name $storage --output json | ConvertFrom-Json
+
+    if (-not $availability.nameAvailable) { throw "Storage name unavailable: $($availability.reason)" }
+
+    '
+  expected: The deterministic storage-account name is available.
+- id: preflight.authored.lab09.identity-gate
+  type: permission
+  required: false
+  description: When the optional identity lane is requested, validate its exact source and resolve the approved principal
+    read-only.
+  command: "if ($requestedIdentitySource -or $requestedPrincipalId) {\n    if ($requestedIdentitySource -cne 'entra-kerberos')\
+    \ { throw 'AZ104_FILES_IDENTITY_SOURCE must be exactly entra-kerberos.' }\n    if ([string]::IsNullOrWhiteSpace($requestedPrincipalId))\
+    \ { throw 'AZ104_FILES_PRINCIPAL_OBJECT_ID is required with the identity source.' }\n    $principal = az rest --method\
+    \ GET --url \"https://graph.microsoft.com/v1.0/directoryObjects/$requestedPrincipalId?`$select=id\" --output json | ConvertFrom-Json\n\
+    \    if ($principal.id -ne $requestedPrincipalId) { throw 'The approved Azure Files principal did not resolve.' }\n}\n"
+  expected: The optional lane is absent, or exactly entra-kerberos and a resolvable disposable principal are supplied.
+checkpoints:
+- id: LAB09-CP01
+  title: Baseline name, provider, and optional identity prerequisites
+  purpose: Confirm global name availability and inventory the optional directory-source request before any storage mutation.
+  objectiveIds:
+  - ST-ACCESS-05
+  required: true
+  expectedState: The deterministic account name is available and any requested identity source exactly selects the documented
+    gated path.
+  scriptMarkers:
+    setup: LAB09-CP01
+    validate: LAB09-CP01
+    cleanup: LAB09-CP01
+  validation:
+    positive:
+      id: cp01.positive
+      description: Read the service properties for baseline name, provider, and optional identity prerequisites by using exact
+        run-owned identifiers.
+      command: '$validationId=''LAB09-CP01-positive''; $account = az storage account show --resource-group $ResourceGroupName
+        --name $storage --output json | ConvertFrom-Json
+
+        if ($account.tags.labId -ne ''09'' -or $account.tags.runId -ne $RunId) { throw ''Storage-account ownership tags mismatch.''
+        }
+
+        $account | Select-Object id,name,tags
+
+        '
+      expected: During deployment validation, the deterministic account resolves with exact lab and run ownership tags.
+    negative:
+      id: cp01.negative
+      description: Search for conflicting, unowned, or excessive state after baseline name, provider, and optional identity
+        prerequisites.
+      command: '$validationId=''LAB09-CP01-negative''; $duplicates = @(az storage account list --resource-group $ResourceGroupName
+        --output json | ConvertFrom-Json | Where-Object name -eq $storage)
+
+        if ($duplicates.Count -ne 1) { throw "Expected exactly one deterministic storage account; found $($duplicates.Count)."
+        }
+
+        ''Deterministic storage accounts in run scope: 1''
+
+        '
+      expected: No duplicate or conflicting endpoint exists in the run resource group.
+  cleanup:
+    dependsOn:
+    - LAB09-CP02
+    - LAB09-CP03
+    - LAB09-CP04
+    - LAB09-CP05
+    action: Remove only manifest-recorded objects owned by LAB09-CP01, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp01.residual
+      description: Prove no active managed object remains for LAB09-CP01.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-1
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Create an Azure file share with Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/storage/files/storage-how-to-create-file-share
+- id: LAB09-CP02
+  title: Create a bounded SMB share and enable share soft delete
+  purpose: Create and immediately record the storage account and ARM file-share IDs, then enable seven-day share recovery.
+  objectiveIds:
+  - ST-ACCOUNTS-05
+  required: true
+  expectedState: A tagged Standard_LRS account contains one 20-GiB transaction-optimized SMB share and seven-day share soft
+    delete is enabled.
+  scriptMarkers:
+    setup: LAB09-CP02
+    validate: LAB09-CP02
+    cleanup: LAB09-CP02
+  validation:
+    positive:
+      id: cp02.positive
+      description: Read the service properties for create a bounded SMB share and enable share soft delete by using exact
+        run-owned identifiers.
+      command: '$validationId=''LAB09-CP02-positive''; $shareState = az storage share-rm show --resource-group $ResourceGroupName
+        --storage-account $storage --name $share --output json | ConvertFrom-Json
+
+        $fileService = az storage account file-service-properties show --resource-group $ResourceGroupName --account-name
+        $storage --output json | ConvertFrom-Json
+
+        if ($shareState.shareQuota -ne 20 -or $shareState.accessTier -ne ''TransactionOptimized'') { throw ''Share quota or
+        access tier mismatch.'' }
+
+        if (-not $fileService.shareDeleteRetentionPolicy.enabled -or $fileService.shareDeleteRetentionPolicy.days -ne 7) {
+        throw ''Share soft-delete settings mismatch.'' }
+
+        [pscustomobject]@{ shareId = $shareState.id; quotaGiB = $shareState.shareQuota; tier = $shareState.accessTier; softDeleteDays
+        = $fileService.shareDeleteRetentionPolicy.days }
+
+        '
+      expected: The share reports the bounded quota and tier while file-service properties report seven-day retention.
+    negative:
+      id: cp02.negative
+      description: Search for conflicting, unowned, or excessive state after create a bounded SMB share and enable share soft
+        delete.
+      command: '$validationId=''LAB09-CP02-negative''; $account = az storage account show --resource-group $ResourceGroupName
+        --name $storage --output json | ConvertFrom-Json
+
+        if (-not $account.enableHttpsTrafficOnly -or $account.minimumTlsVersion -ne ''TLS1_2'' -or $account.allowBlobPublicAccess)
+        { throw ''Storage transport or public-access baseline mismatch.'' }
+
+        ''HTTPS-only=True; minimumTLS=TLS1_2; blobPublicAccess=False''
+
+        '
+      expected: No insecure transport or public blob access conflicts with the file-service baseline.
+  cleanup:
+    dependsOn:
+    - LAB09-CP03
+    - LAB09-CP04
+    - LAB09-CP05
+    action: Remove only manifest-recorded objects owned by LAB09-CP02, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp02.residual
+      description: Prove no active managed object remains for LAB09-CP02.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-2
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Create an Azure file share with Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/storage/files/storage-how-to-create-file-share
+- id: LAB09-CP03
+  title: Write sample content and capture a share snapshot
+  purpose: Bootstrap one real file using a key held only in memory, then persist the returned snapshot time immediately.
+  objectiveIds:
+  - ST-DATA-01
+  required: true
+  expectedState: The active share contains sample.txt and an ARM-visible snapshot time is recorded without an account key
+    in state.
+  scriptMarkers:
+    setup: LAB09-CP03
+    validate: LAB09-CP03
+    cleanup: LAB09-CP03
+  validation:
+    positive:
+      id: cp03.positive
+      description: Read the service properties for write sample content and capture a share snapshot by using exact run-owned
+        identifiers.
+      command: "$validationId='LAB09-CP03-positive'; $validationKey = az storage account keys list --resource-group $ResourceGroupName\
+        \ --account-name $storage --query '[0].value' --output tsv\ntry {\n    $fileExists = az storage file exists --account-name\
+        \ $storage --share-name $share --path sample.txt --account-key $validationKey --output json | ConvertFrom-Json\n \
+        \   if (-not $fileExists.exists) { throw 'The protected sample file is missing.' }\n} finally {\n    $validationKey\
+        \ = $null\n    Remove-Variable validationKey -ErrorAction SilentlyContinue\n}\n$snapshots = @(az storage share-rm\
+        \ list --resource-group $ResourceGroupName --storage-account $storage --include-snapshot true --output json | ConvertFrom-Json\
+        \ | Where-Object snapshotTime -eq $state.inputs['share-snapshot-time'])\nif ($snapshots.Count -ne 1) { throw 'The\
+        \ recorded snapshot is missing.' }\n[pscustomobject]@{ fileExists = $true; recordedSnapshotCount = $snapshots.Count\
+        \ }\n"
+      expected: The live file exists and exactly one snapshot matches the recorded snapshot time.
+    negative:
+      id: cp03.negative
+      description: Search for conflicting, unowned, or excessive state after write sample content and capture a share snapshot.
+      command: "$validationId='LAB09-CP03-negative'; $shareId = az storage share-rm show --resource-group $ResourceGroupName\
+        \ --storage-account $storage --name $share --query id --output tsv\nif (-not $shareId -or -not $state.inputs['share-snapshot-time'])\
+        \ {\n  throw 'The live share or recorded snapshot recovery target is missing.'\n}\nif (Select-String -Path (Join-Path\
+        \ $StateDir '*.json') -Pattern 'accountKey|connectionString|sasToken' -ErrorAction SilentlyContinue) {\n  throw 'A\
+        \ storage credential was persisted.'\n}\n'Live share=1; persisted storage credentials=0; snapshot recovery target\
+        \ recorded=True'\n"
+      expected: No account key, connection string, or SAS is persisted, while the non-secret snapshot time is retained.
+  cleanup:
+    dependsOn:
+    - LAB09-CP04
+    - LAB09-CP05
+    action: Remove only manifest-recorded objects owned by LAB09-CP03, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp03.residual
+      description: Prove no active managed object remains for LAB09-CP03.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-3
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Create an Azure file share with Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/storage/files/storage-how-to-create-file-share
+- id: LAB09-CP04
+  title: Configure the gated Entra Kerberos and share-RBAC path
+  purpose: With exact authorization inputs, enable the single supported identity source, inject a missing-role fault, and
+    restore the least-privileged share data role.
+  objectiveIds:
+  - ST-DATA-05
+  required: false
+  expectedState: AADKERB is the only identity source and the approved principal has exactly the intended share-scoped SMB
+    data role after the missing-role fault is repaired.
+  scriptMarkers:
+    setup: LAB09-CP04
+    validate: LAB09-CP04
+    cleanup: LAB09-CP04
+  validation:
+    positive:
+      id: cp04.positive
+      description: Read the service properties for configure the gated Entra Kerberos and share-RBAC path by using exact run-owned
+        identifiers.
+      command: '$validationId=''LAB09-CP04-positive''; $identity = az storage account show --resource-group $ResourceGroupName
+        --name $storage --query azureFilesIdentityBasedAuthentication --output json | ConvertFrom-Json
+
+        if ($identity.directoryServiceOptions -ne ''AADKERB'') { throw ''AADKERB is not the configured identity source.''
+        }
+
+        $shareId = az storage share-rm show --resource-group $ResourceGroupName --storage-account $storage --name $share --query
+        id --output tsv
+
+        $roles = @(az role assignment list --assignee-object-id $identityPrincipalId --scope $shareId --output json | ConvertFrom-Json
+        | Where-Object roleDefinitionName -eq ''Storage File Data SMB Share Contributor'')
+
+        if ($roles.Count -ne 1) { throw "Expected one repaired share role; found $($roles.Count)." }
+
+        [pscustomobject]@{ identitySource = $identity.directoryServiceOptions; shareRoleCount = $roles.Count }
+
+        '
+      expected: The account reports AADKERB and the approved principal has exactly one share-scoped SMB Share Contributor
+        assignment.
+    negative:
+      id: cp04.negative
+      description: Search for conflicting, unowned, or excessive state after configure the gated Entra Kerberos and share-RBAC
+        path.
+      command: '$validationId=''LAB09-CP04-negative''; $shareId = az storage share-rm show --resource-group $ResourceGroupName
+        --storage-account $storage --name $share --query id --output tsv
+
+        $excess = @(az role assignment list --assignee-object-id $identityPrincipalId --scope $shareId --output json | ConvertFrom-Json
+        | Where-Object { $_.roleDefinitionName -in @(''Owner'',''Contributor'',''Storage File Data SMB Share Elevated Contributor'')
+        })
+
+        if ($excess.Count -ne 0) { throw ''An excessive direct role remains at share scope.'' }
+
+        ''Excessive direct share roles: 0''
+
+        '
+      expected: Owner, Contributor, and elevated SMB ACL-management roles are absent at the exact share scope.
+  cleanup:
+    dependsOn:
+    - LAB09-CP05
+    action: Remove only manifest-recorded objects owned by LAB09-CP04, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp04.residual
+      description: Prove no active managed object remains for LAB09-CP04.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-4
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Create an Azure file share with Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/storage/files/storage-how-to-create-file-share
+- id: LAB09-CP05
+  title: Delete and restore the protected share, then reconcile readiness
+  purpose: Exercise share soft delete against the real sample, persist the deleted-version recovery target, restore it, and
+    prove content survived.
+  objectiveIds:
+  - ST-ACCESS-05
+  - ST-ACCOUNTS-05
+  - ST-DATA-01
+  - ST-DATA-05
+  required: true
+  expectedState: The original share generation is soft-deleted, identified by deletedVersion, restored under the same name,
+    and its sample content remains readable.
+  scriptMarkers:
+    setup: LAB09-CP05
+    validate: LAB09-CP05
+    cleanup: LAB09-CP05
+  validation:
+    positive:
+      id: cp05.positive
+      description: Read the service properties for delete and restore the protected share, then reconcile readiness by using
+        exact run-owned identifiers.
+      command: "$validationId='LAB09-CP05-positive'; $restoredShare = az storage share-rm show --resource-group $ResourceGroupName\
+        \ --storage-account $storage --name $share --output json | ConvertFrom-Json\nif (-not $restoredShare.id -or $restoredShare.shareQuota\
+        \ -ne 20) { throw 'Restored share state is incomplete.' }\n$validationKey = az storage account keys list --resource-group\
+        \ $ResourceGroupName --account-name $storage --query '[0].value' --output tsv\ntry {\n    $fileExists = az storage\
+        \ file exists --account-name $storage --share-name $share --path sample.txt --account-key $validationKey --output\
+        \ json | ConvertFrom-Json\n    if (-not $fileExists.exists) { throw 'Sample content did not survive share restore.'\
+        \ }\n} finally {\n    $validationKey = $null\n    Remove-Variable validationKey -ErrorAction SilentlyContinue\n}\n\
+        [pscustomobject]@{ restoredShareId = $restoredShare.id; sampleExists = $true }\n"
+      expected: The restored active share has its original quota and still contains sample.txt.
+    negative:
+      id: cp05.negative
+      description: Search for conflicting, unowned, or excessive state after delete and restore the protected share, then
+        reconcile readiness.
+      command: '$validationId=''LAB09-CP05-negative''; $deleted = @(az storage share-rm list --resource-group $ResourceGroupName
+        --storage-account $storage --include-deleted true --output json | ConvertFrom-Json | Where-Object { $_.name -eq $share
+        -and $_.deleted })
+
+        if ($deleted.Count -ne 0) { throw ''A deleted generation remains after the restore exercise.'' }
+
+        if (-not $state.inputs[''deleted-share-version'']) { throw ''The recovery target was not persisted.'' }
+
+        ''Unrestored deleted generations=0; recovery target recorded=True''
+
+        '
+      expected: No unrestored soft-deleted generation remains and the non-secret deletedVersion evidence is recorded.
+  cleanup:
+    dependsOn: []
+    action: Remove only manifest-recorded objects owned by LAB09-CP05, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp05.residual
+      description: Prove no active managed object remains for LAB09-CP05.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-5
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Create an Azure file share with Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/storage/files/storage-how-to-create-file-share
 validation:
-  commandLanes:
-  - scripts/cli/Validate.ps1
-  output: .state/<run-id>/validation.json
-  statuses:
-  - pass
-  - fail
-  - warning
-  - skipped
-  liveExecutionRequiredForLiveVerified: true
+  script: scripts/cli/Validate.ps1
+  artifact: .state/<run-id>/validation.json
+  modes:
+  - Deployment
+  - PostCleanup
+  resultPolicy:
+    requiredFailureResult: fail
+    optionalSkipResult: partial
+    allRequiredPassResult: pass
 cleanup:
-  azureDeletion: exact recorded resource-group ID after tag verification
-  entraDeletion: none
-  reportOnlyByDefault: true
+  script: scripts/cli/Cleanup.ps1
+  artifact: .state/<run-id>/cleanup.json
+  previewByDefault: true
   requiresExecuteFlag: true
-  residualAuditRequired: true
+  ownershipVerification:
+    manifestIdMatch: true
+    requiredTags:
+    - purpose
+    - labId
+    - runId
+  residualChecks:
+  - id: cp01.residual
+    description: Prove no active managed object remains for LAB09-CP01.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp02.residual
+    description: Prove no active managed object remains for LAB09-CP02.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp03.residual
+    description: Prove no active managed object remains for LAB09-CP03.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp04.residual
+    description: Prove no active managed object remains for LAB09-CP04.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp05.residual
+    description: Prove no active managed object remains for LAB09-CP05.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  retainedItemsAllowed: true
+  irreversiblePurge: never
 assessment:
   enabled: true
   questionCount: 50
   primaryDomain: storage
-lastOfflineValidated: '2026-08-30'
+lastOfflineValidated: '2026-08-31'
 lastLiveVerified: null
+# END GENERATED AZ104 V2

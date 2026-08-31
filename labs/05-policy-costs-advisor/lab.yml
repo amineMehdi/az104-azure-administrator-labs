@@ -1,8 +1,11 @@
+
+# BEGIN GENERATED AZ104 V2
+schemaVersion: 2.0.0
 id: LAB-05
 slug: 05-policy-costs-advisor
 title: Enforce policy and manage costs with budgets and Advisor
 blueprintVersion: '2026-04-17'
-domain: Manage Azure identities and governance
+domain: identity-governance
 objectives:
 - IG-GOVERN-01
 - IG-GOVERN-06
@@ -14,11 +17,26 @@ testedToolVersions:
   powershell: '>=7.4'
 estimatedMinutes: 120
 difficulty: foundational
+experience:
+  scenario: 'A cloud governance analyst enforcing standards and controlling spend is responding to an operational request:
+    Enforce a real deny Policy, prove compliant and denied requests, create a resource-group budget wired to an action group,
+    and review Advisor cost recommendations.'
+  role: A cloud governance analyst enforcing standards and controlling spend.
+  outcome: Enforce a real deny Policy, prove compliant and denied requests, create a resource-group budget wired to an action
+    group, and review Advisor cost recommendations.
+  completionCriteria:
+  - All required checkpoints report pass.
+  - The deterministic break/fix is injected, diagnosed, and repaired.
+  - cleanup.json reports no active run-owned resources, with any retained item explicitly documented.
 cost:
   class: none
   billableResources: []
   notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator before
     execution and clean up immediately.
+  pricingLinks:
+  - title: Microsoft Entra pricing
+    url: https://azure.microsoft.com/pricing/details/active-directory/
+  acknowledgementRequired: false
 permissions:
   azureRbacRoles:
   - Resource Policy Contributor at the lab scope; Cost Management Contributor for the optional budget path
@@ -33,16 +51,78 @@ prerequisites:
   inventories cost controls without creating one.'
 - Azure CLI hosted in PowerShell 7.4 or later
 providers:
-  observed:
+  required:
   - Microsoft.Authorization
   - Microsoft.Advisor
   - Microsoft.Consumption
   - Microsoft.CostManagement
+  optional: []
   registeredByLab: []
-regions:
-  applicable: true
-  primary: supplied at execution time
-  secondary: null
+inputs:
+- id: run-id
+  parameter: RunId
+  description: Unique lowercase run ownership identifier
+  required: true
+  secret: false
+  source: parameter
+  safeExample: az104l05-01
+  gateBehavior: block
+  checkpointIds:
+  - LAB05-CP01
+  - LAB05-CP02
+  - LAB05-CP03
+  - LAB05-CP04
+  - LAB05-CP05
+- id: subscription-id
+  parameter: SubscriptionId
+  environmentVariable: AZ104_SUBSCRIPTION_ID
+  description: Expected disposable subscription ID
+  required: true
+  secret: false
+  source: parameter-or-environment
+  safeExample: 00000000-0000-0000-0000-000000000000
+  gateBehavior: block
+  checkpointIds:
+  - LAB05-CP01
+  - LAB05-CP02
+  - LAB05-CP03
+  - LAB05-CP04
+  - LAB05-CP05
+- id: location
+  parameter: Location
+  environmentVariable: AZ104_LOCATION
+  description: Approved primary Azure region
+  required: true
+  secret: false
+  source: parameter-or-environment
+  safeExample: westeurope
+  gateBehavior: block
+  checkpointIds:
+  - LAB05-CP01
+  - LAB05-CP02
+  - LAB05-CP03
+  - LAB05-CP04
+  - LAB05-CP05
+- id: budget-email
+  environmentVariable: AZ104_BUDGET_EMAIL
+  description: Approved budget notification address
+  required: false
+  secret: false
+  gateBehavior: skip-checkpoint
+  safeExample: alerts@example.test
+  checkpointIds:
+  - LAB05-CP04
+  parameter: BudgetEmail
+  source: environment
+acknowledgements:
+  cost:
+    required: false
+    parameter: AcknowledgeCost
+    message: I reviewed current pricing, quota, and the same-session cleanup plan.
+  tenantChange:
+    required: false
+    parameter: AcknowledgeTenantChange
+    message: I am authorized to create or change the declared tenant-scoped objects and will restore recorded settings.
 creates:
   azureResources:
   - resource group
@@ -52,29 +132,415 @@ creates:
   localArtifacts:
   - .state/<run-id>/run.json
   - .state/<run-id>/validation.json
+  - .state/<run-id>/cleanup.json
 tenantScopedChanges: []
 externalRequirements:
 - Budget creation requires AZ104_BUDGET_EMAIL and Cost Management authorization; otherwise the lab inventories cost controls
   without creating one.
+preflightChecks:
+- id: preflight.context
+  type: context
+  required: true
+  description: Confirm active cloud, tenant, and subscription without changing them.
+  command: az account show --output json
+  expected: Active context matches the supplied subscription and disposable environment.
+- id: preflight.tools
+  type: tool
+  required: true
+  description: Confirm PowerShell, Azure CLI, and az bicep are available.
+  command: az version; az bicep version
+  expected: All required tools meet the versions declared by this lab.
+- id: preflight.inputs
+  type: input
+  required: true
+  description: Check required parameters and environment gates without printing secrets.
+  command: $PSBoundParameters.Keys; Get-ChildItem Env:AZ104_* | Select-Object Name
+  expected: Every required input is present and optional gates are explicitly reported.
+- id: preflight.providers
+  type: provider
+  required: true
+  description: Read registration state for required resource providers.
+  command: az provider show --namespace <provider> --query registrationState --output tsv
+  expected: Every required provider is Registered; preflight performs no registration.
+- id: preflight.region
+  type: region
+  required: true
+  description: Confirm the requested region is available to the subscription.
+  command: az account list-locations --query "[?name=='<location>'].name" --output tsv
+  expected: The supplied region appears in the subscription location inventory.
+- id: preflight.authored.lab05.policy-and-governance
+  type: permission
+  required: true
+  description: Resolve the built-in deny Policy and verify every governance provider is already registered.
+  command: "$definitionGuid = '1e30110a-5ceb-460c-a204-c1c3969c6d62'\n$definition = az policy definition show --name $definitionGuid\
+    \ --output json | ConvertFrom-Json\nif ($definition.name -ne $definitionGuid -or $definition.policyRule.then.effect -ne\
+    \ 'deny') { throw 'The immutable built-in deny Policy was not resolved.' }\nforeach ($provider in @('Microsoft.PolicyInsights','Microsoft.Consumption','Microsoft.Insights','Microsoft.Advisor'))\
+    \ {\n    if ((az provider show --namespace $provider --query registrationState --output tsv) -ne 'Registered') { throw\
+    \ \"Provider is not registered: $provider\" }\n}\n"
+  expected: One built-in deny definition and four Registered governance providers are observed.
+- id: preflight.authored.lab05.storage-name
+  type: service
+  required: true
+  description: Confirm the compliant storage-account name is globally available before Policy evaluation.
+  command: '$availability = az storage account check-name --name $storage --output json | ConvertFrom-Json
+
+    if (-not $availability.nameAvailable) { throw "Storage name unavailable: $($availability.reason)" }
+
+    '
+  expected: The deterministic compliant account name is available.
+checkpoints:
+- id: LAB05-CP01
+  title: Resolve the built-in Policy and governance service prerequisites
+  purpose: Identify the immutable built-in definition ID and confirm Policy, Cost Management, Monitor, and Advisor providers
+    before mutation.
+  objectiveIds:
+  - IG-GOVERN-01
+  required: true
+  expectedState: One built-in definition ID is resolved and every governance provider is already Registered without preflight
+    mutation.
+  scriptMarkers:
+    setup: LAB05-CP01
+    validate: LAB05-CP01
+    cleanup: LAB05-CP01
+  validation:
+    positive:
+      id: cp01.positive
+      description: Read the service properties for resolve the built-in Policy and governance service prerequisites by using
+        exact run-owned identifiers.
+      command: '$validationId=''LAB05-CP01-positive''; $definitionGuid = ''1e30110a-5ceb-460c-a204-c1c3969c6d62''
+
+        $definition = az policy definition show --name $definitionGuid --output json | ConvertFrom-Json
+
+        if ($definition.name -ne $definitionGuid -or $definition.policyRule.then.effect -ne ''deny'') { throw ''Expected the
+        immutable built-in deny definition.'' }
+
+        $definition | Select-Object id,displayName,policyType
+
+        '
+      expected: Exactly one built-in definition resolves and its effect is deny.
+    negative:
+      id: cp01.negative
+      description: Search for conflicting, unowned, or excessive state after resolve the built-in Policy and governance service
+        prerequisites.
+      command: '$validationId=''LAB05-CP01-negative''; $existing = @(az policy assignment list --scope $scope --output json
+        | ConvertFrom-Json | Where-Object name -eq $policyName)
+
+        if ($existing.Count -ne 1 -or $existing[0].scope -ne $scope) { throw ''Expected exactly one run-specific assignment
+        at the exact lab scope.'' }
+
+        ''Run-specific policy assignments at exact scope: 1''
+
+        '
+      expected: Exactly one manifest-recorded assignment uses the run-specific name and exact scope after deployment.
+  cleanup:
+    dependsOn:
+    - LAB05-CP02
+    - LAB05-CP03
+    - LAB05-CP04
+    - LAB05-CP05
+    action: Remove only manifest-recorded objects owned by LAB05-CP01, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp01.residual
+      description: Prove no active managed object remains for LAB05-CP01.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-1
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Create an Azure Policy assignment using Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/governance/policy/assign-policy-azurecli
+- id: LAB05-CP02
+  title: Assign the built-in tag Policy at resource-group scope
+  purpose: Create a manifest-recorded deny assignment requiring purpose=az104-lab on child resources.
+  objectiveIds:
+  - IG-GOVERN-06
+  required: true
+  expectedState: One Default-enforcement assignment targets the exact resource group with tagName purpose and tagValue az104-lab.
+  scriptMarkers:
+    setup: LAB05-CP02
+    validate: LAB05-CP02
+    cleanup: LAB05-CP02
+  validation:
+    positive:
+      id: cp02.positive
+      description: Read the service properties for assign the built-in tag Policy at resource-group scope by using exact run-owned
+        identifiers.
+      command: '$validationId=''LAB05-CP02-positive''; $assignment = az policy assignment show --name $policyName --scope
+        $scope --output json | ConvertFrom-Json
+
+        if ($assignment.enforcementMode -ne ''Default'' -or $assignment.parameters.tagValue.value -ne ''az104-lab'') { throw
+        ''Policy enforcement or parameter mismatch.'' }
+
+        $assignment | Select-Object id,name,enforcementMode,parameters
+
+        '
+      expected: The assignment uses Default enforcement and the expected tag parameters.
+    negative:
+      id: cp02.negative
+      description: Search for conflicting, unowned, or excessive state after assign the built-in tag Policy at resource-group
+        scope.
+      command: '$validationId=''LAB05-CP02-negative''; $duplicates = @(az policy assignment list --scope $scope --output json
+        | ConvertFrom-Json | Where-Object { $_.displayName -like "AZ104 require purpose $RunId*" })
+
+        if ($duplicates.Count -ne 1) { throw ''Expected exactly one run-specific Policy assignment.'' }
+
+        ''Run-specific assignments: 1''
+
+        '
+      expected: No duplicate assignment exists for the run.
+  cleanup:
+    dependsOn:
+    - LAB05-CP03
+    - LAB05-CP04
+    - LAB05-CP05
+    action: Remove only manifest-recorded objects owned by LAB05-CP02, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp02.residual
+      description: Prove no active managed object remains for LAB05-CP02.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-2
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Create an Azure Policy assignment using Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/governance/policy/assign-policy-azurecli
+- id: LAB05-CP03
+  title: Prove compliant creation and an intentionally denied request
+  purpose: Create one correctly tagged storage account and attempt a second untagged account under the deny assignment.
+  objectiveIds:
+  - IG-GOVERN-07
+  required: true
+  expectedState: The tagged account exists and the untagged account request returns a Policy denial without creating a resource.
+  scriptMarkers:
+    setup: LAB05-CP03
+    validate: LAB05-CP03
+    cleanup: LAB05-CP03
+  validation:
+    positive:
+      id: cp03.positive
+      description: Read the service properties for prove compliant creation and an intentionally denied request by using exact
+        run-owned identifiers.
+      command: '$validationId=''LAB05-CP03-positive''; $account = az storage account show --name $storage --resource-group
+        $ResourceGroupName --output json | ConvertFrom-Json
+
+        if ($account.tags.purpose -ne ''az104-lab'' -or $account.tags.runId -ne $RunId) { throw ''Compliant storage tags do
+        not match the Policy and run boundary.'' }
+
+        $account | Select-Object id,tags
+
+        '
+      expected: The compliant storage account exists with the exact required value and ownership tags.
+    negative:
+      id: cp03.negative
+      description: Search for conflicting, unowned, or excessive state after prove compliant creation and an intentionally
+        denied request.
+      command: '$validationId=''LAB05-CP03-negative''; $deniedName = "st05bad$suffix"
+
+        $unexpectedId = az storage account show --name $deniedName --resource-group $ResourceGroupName --query id --output
+        tsv 2>$null
+
+        if ($LASTEXITCODE -eq 0 -and $unexpectedId) { throw ''The intentionally untagged storage account exists.'' }
+
+        ''Untagged storage resources: 0''
+
+        '
+      expected: The denied account name does not resolve to an active storage resource.
+  cleanup:
+    dependsOn:
+    - LAB05-CP04
+    - LAB05-CP05
+    action: Remove only manifest-recorded objects owned by LAB05-CP03, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp03.residual
+      description: Prove no active managed object remains for LAB05-CP03.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-3
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Create an Azure Policy assignment using Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/governance/policy/assign-policy-azurecli
+- id: LAB05-CP04
+  title: Create an action group and resource-group budget notification
+  purpose: Wire an 80-percent monthly cost threshold to a manifest-owned action group, adding email only through the approved
+    input gate.
+  objectiveIds:
+  - IG-GOVERN-01
+  required: true
+  expectedState: The monthly 25-unit budget has an enabled actual-cost threshold at 80 percent and references the exact action-group
+    ID.
+  scriptMarkers:
+    setup: LAB05-CP04
+    validate: LAB05-CP04
+    cleanup: LAB05-CP04
+  validation:
+    positive:
+      id: cp04.positive
+      description: Read the service properties for create an action group and resource-group budget notification by using
+        exact run-owned identifiers.
+      command: '$validationId=''LAB05-CP04-positive''; $budgetUrl = "https://management.azure.com$scope/providers/Microsoft.Consumption/budgets/$budgetName?api-version=2023-05-01"
+
+        $budget = az rest --method get --url $budgetUrl --output json | ConvertFrom-Json
+
+        $notice = $budget.properties.notifications.Actual_GreaterThanOrEqualTo_80_Percent
+
+        if ($budget.properties.amount -ne 25 -or $notice.threshold -ne 80 -or $notice.contactGroups.Count -ne 1) { throw ''Budget
+        notification configuration mismatch.'' }
+
+        $budget.properties | Select-Object amount,timeGrain,notifications
+
+        '
+      expected: Budget amount, time grain, threshold, and action-group target match the design.
+    negative:
+      id: cp04.negative
+      description: Search for conflicting, unowned, or excessive state after create an action group and resource-group budget
+        notification.
+      command: '$validationId=''LAB05-CP04-negative''; $groups = @(az monitor action-group list --resource-group $ResourceGroupName
+        --output json | ConvertFrom-Json | Where-Object name -eq $actionGroupName)
+
+        if ($groups.Count -ne 1) { throw ''Expected exactly one run action group.'' }
+
+        if (-not $env:AZ104_BUDGET_EMAIL -and @($groups[0].emailReceivers).Count -gt 0) { throw ''An email receiver exists
+        without the approved input gate.'' }
+
+        $groups[0] | Select-Object id,name,emailReceivers
+
+        '
+      expected: There is one action group and no email receiver unless the approved address input was supplied.
+  cleanup:
+    dependsOn:
+    - LAB05-CP05
+    action: Remove only manifest-recorded objects owned by LAB05-CP04, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp04.residual
+      description: Prove no active managed object remains for LAB05-CP04.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-4
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Create an Azure Policy assignment using Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/governance/policy/assign-policy-azurecli
+- id: LAB05-CP05
+  title: Correlate Policy compliance, budget state, and Advisor recommendations
+  purpose: Trigger a Policy scan, read current compliance and budget configuration, and inventory Advisor cost recommendations
+    without auto-applying them.
+  objectiveIds:
+  - IG-GOVERN-01
+  - IG-GOVERN-06
+  - IG-GOVERN-07
+  required: true
+  expectedState: Governance evidence distinguishes current compliant/non-compliant Policy state, configured budget notification,
+    and zero or more contextual Advisor recommendations.
+  scriptMarkers:
+    setup: LAB05-CP05
+    validate: LAB05-CP05
+    cleanup: LAB05-CP05
+  validation:
+    positive:
+      id: cp05.positive
+      description: Read the service properties for correlate Policy compliance, budget state, and Advisor recommendations
+        by using exact run-owned identifiers.
+      command: '$validationId=''LAB05-CP05-positive''; $assignment = az policy assignment show --name $policyName --scope
+        $scope --output json | ConvertFrom-Json
+
+        $budgetUrl = "https://management.azure.com$scope/providers/Microsoft.Consumption/budgets/$budgetName?api-version=2023-05-01"
+
+        $budget = az rest --method get --url $budgetUrl --output json | ConvertFrom-Json
+
+        if (-not $assignment.id -or -not $budget.id) { throw ''Policy assignment or budget is missing.'' }
+
+        [pscustomobject]@{ policy = $assignment.id; budget = $budget.id }
+
+        '
+      expected: The exact Policy assignment and budget IDs both resolve.
+    negative:
+      id: cp05.negative
+      description: Search for conflicting, unowned, or excessive state after correlate Policy compliance, budget state, and
+        Advisor recommendations.
+      command: '$validationId=''LAB05-CP05-negative''; $deniedName = "st05bad$suffix"
+
+        $bad = az storage account show --name $deniedName --resource-group $ResourceGroupName --query id --output tsv 2>$null
+
+        if ($LASTEXITCODE -eq 0 -and $bad) { throw ''The non-compliant break/fix resource still exists.'' }
+
+        $advisor = @(az advisor recommendation list --category Cost --output json | ConvertFrom-Json)
+
+        [pscustomobject]@{ deniedResourceCount = 0; advisorRecommendationCount = $advisor.Count }
+
+        '
+      expected: The denied resource is absent; zero Advisor recommendations is a valid observed state, not a test failure.
+  cleanup:
+    dependsOn: []
+    action: Remove only manifest-recorded objects owned by LAB05-CP05, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp05.residual
+      description: Prove no active managed object remains for LAB05-CP05.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-5
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Create an Azure Policy assignment using Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/governance/policy/assign-policy-azurecli
 validation:
-  commandLanes:
-  - scripts/cli/Validate.ps1
-  output: .state/<run-id>/validation.json
-  statuses:
-  - pass
-  - fail
-  - warning
-  - skipped
-  liveExecutionRequiredForLiveVerified: true
+  script: scripts/cli/Validate.ps1
+  artifact: .state/<run-id>/validation.json
+  modes:
+  - Deployment
+  - PostCleanup
+  resultPolicy:
+    requiredFailureResult: fail
+    optionalSkipResult: partial
+    allRequiredPassResult: pass
 cleanup:
-  azureDeletion: exact recorded resource-group ID after tag verification
-  entraDeletion: none
-  reportOnlyByDefault: true
+  script: scripts/cli/Cleanup.ps1
+  artifact: .state/<run-id>/cleanup.json
+  previewByDefault: true
   requiresExecuteFlag: true
-  residualAuditRequired: true
+  ownershipVerification:
+    manifestIdMatch: true
+    requiredTags:
+    - purpose
+    - labId
+    - runId
+  residualChecks:
+  - id: cp01.residual
+    description: Prove no active managed object remains for LAB05-CP01.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp02.residual
+    description: Prove no active managed object remains for LAB05-CP02.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp03.residual
+    description: Prove no active managed object remains for LAB05-CP03.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp04.residual
+    description: Prove no active managed object remains for LAB05-CP04.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp05.residual
+    description: Prove no active managed object remains for LAB05-CP05.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  retainedItemsAllowed: true
+  irreversiblePurge: never
 assessment:
   enabled: true
   questionCount: 50
   primaryDomain: identity-governance
-lastOfflineValidated: '2026-08-30'
+lastOfflineValidated: '2026-08-31'
 lastLiveVerified: null
+# END GENERATED AZ104 V2

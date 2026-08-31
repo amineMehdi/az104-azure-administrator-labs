@@ -1,0 +1,13 @@
+{
+  "recommendations": [
+    "ms-vscode.azure-account",
+    "ms-vscode.azurecli",
+    "ms-vscode.powershell",
+    "ms-azuretools.vscode-bicep",
+    "ms-python.python",
+    "redhat.vscode-yaml",
+    "davidanson.vscode-markdownlint",
+    "streetsidesoftware.code-spell-checker",
+    "yzhang.markdown-all-in-one"
+  ]
+}

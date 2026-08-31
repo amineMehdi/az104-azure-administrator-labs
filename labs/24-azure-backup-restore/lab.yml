@@ -1,8 +1,11 @@
+
+# BEGIN GENERATED AZ104 V2
+schemaVersion: 2.0.0
 id: LAB-24
 slug: 24-azure-backup-restore
 title: Configure Azure Backup policies, protection, restore, reports, and alerts
 blueprintVersion: '2026-04-17'
-domain: Monitor and maintain Azure resources
+domain: monitor-recovery
 objectives:
 - MR-RECOVERY-01
 - MR-RECOVERY-02
@@ -16,17 +19,31 @@ testedToolVersions:
   powershell: '>=7.4'
 estimatedMinutes: 150
 difficulty: advanced
+experience:
+  scenario: 'You are a recovery administrator protecting and restoring a test vm. Build and prove this disposable service
+    path: The private VM is protected by the Recovery Services vault, an on-demand job creates a recovery point, and disk
+    restore writes recovery artifacts to the staging account before job, item, and retention validation.'
+  role: A recovery administrator protecting and restoring a test VM.
+  outcome: Use Azure CLI in PowerShell to create the private vm, staging storage, and vault, enable vm protection and complete
+    an on-demand backup, and reconcile protection, jobs, recovery points, and retained state, with recoverable state and deterministic
+    cleanup.
+  completionCriteria:
+  - All required checkpoints report pass.
+  - The deterministic break/fix is injected, diagnosed, and repaired.
+  - cleanup.json reports no active run-owned resources, with any retained item explicitly documented.
 cost:
-  class: moderate
-  billableResources: &id001
-  - resource group
-  - Recovery Services vault
-  - Backup vault
-  - backup policy
-  - protected test VM
-  - backup instance and restore job
-  notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator before
-    execution and clean up immediately.
+  class: elevated
+  billableResources:
+  - one Standard_B1s VM
+  - Recovery Services protected instance
+  - backup storage
+  - restore staging storage
+  notes: Backup protection, retained recovery points, restore jobs, VM runtime, and storage are billable. Run cleanup in the
+    same approved session.
+  pricingLinks:
+  - title: Azure Monitor pricing
+    url: https://azure.microsoft.com/pricing/details/monitor/
+  acknowledgementRequired: true
 permissions:
   azureRbacRoles:
   - Backup Contributor and Virtual Machine Contributor on the lab resource group
@@ -39,42 +56,446 @@ prerequisites:
 - 'External gate review: None beyond the declared role and a disposable subscription.'
 - Azure CLI hosted in PowerShell 7.4 or later
 providers:
-  observed:
+  required:
   - Microsoft.Compute
   - Microsoft.DataProtection
   - Microsoft.RecoveryServices
+  - Microsoft.Network
+  - Microsoft.Storage
+  optional: []
   registeredByLab: []
-regions:
-  applicable: true
-  primary: supplied at execution time
-  secondary: null
+inputs:
+- id: run-id
+  parameter: RunId
+  description: Unique lowercase run ownership identifier
+  required: true
+  secret: false
+  source: parameter
+  safeExample: az104l24-01
+  gateBehavior: block
+  checkpointIds:
+  - LAB24-CP01
+  - LAB24-CP02
+  - LAB24-CP03
+  - LAB24-CP04
+  - LAB24-CP05
+- id: subscription-id
+  parameter: SubscriptionId
+  environmentVariable: AZ104_SUBSCRIPTION_ID
+  description: Expected disposable subscription ID
+  required: true
+  secret: false
+  source: parameter-or-environment
+  safeExample: 00000000-0000-0000-0000-000000000000
+  gateBehavior: block
+  checkpointIds:
+  - LAB24-CP01
+  - LAB24-CP02
+  - LAB24-CP03
+  - LAB24-CP04
+  - LAB24-CP05
+- id: location
+  parameter: Location
+  environmentVariable: AZ104_LOCATION
+  description: Approved primary Azure region
+  required: true
+  secret: false
+  source: parameter-or-environment
+  safeExample: westeurope
+  gateBehavior: block
+  checkpointIds:
+  - LAB24-CP01
+  - LAB24-CP02
+  - LAB24-CP03
+  - LAB24-CP04
+  - LAB24-CP05
+acknowledgements:
+  cost:
+    required: true
+    parameter: AcknowledgeCost
+    message: I reviewed current pricing, quota, and the same-session cleanup plan.
+  tenantChange:
+    required: false
+    parameter: AcknowledgeTenantChange
+    message: I am authorized to create or change the declared tenant-scoped objects and will restore recorded settings.
 creates:
-  azureResources: *id001
+  azureResources:
+  - resource group
+  - Recovery Services vault
+  - Backup vault
+  - backup policy
+  - protected test VM
+  - backup instance and restore job
   entraObjects: []
   localArtifacts:
   - .state/<run-id>/run.json
   - .state/<run-id>/validation.json
+  - .state/<run-id>/cleanup.json
 tenantScopedChanges: []
 externalRequirements: []
+preflightChecks:
+- id: preflight.context
+  type: context
+  required: true
+  description: Confirm active cloud, tenant, and subscription without changing them.
+  command: az account show --output json
+  expected: Active context matches the supplied subscription and disposable environment.
+- id: preflight.tools
+  type: tool
+  required: true
+  description: Confirm PowerShell, Azure CLI, and az bicep are available.
+  command: az version; az bicep version
+  expected: All required tools meet the versions declared by this lab.
+- id: preflight.inputs
+  type: input
+  required: true
+  description: Check required parameters and environment gates without printing secrets.
+  command: $PSBoundParameters.Keys; Get-ChildItem Env:AZ104_* | Select-Object Name
+  expected: Every required input is present and optional gates are explicitly reported.
+- id: preflight.providers
+  type: provider
+  required: true
+  description: Read registration state for required resource providers.
+  command: az provider show --namespace <provider> --query registrationState --output tsv
+  expected: Every required provider is Registered; preflight performs no registration.
+- id: preflight.region
+  type: region
+  required: true
+  description: Confirm the requested region is available to the subscription.
+  command: az account list-locations --query "[?name=='<location>'].name" --output tsv
+  expected: The supplied region appears in the subscription location inventory.
+- id: preflight.quota
+  type: quota
+  required: true
+  description: Read regional compute usage before deployment.
+  command: az vm list-usage --location <location> --output table
+  expected: Required regional vCPU quota has safe headroom.
+- id: preflight.sku
+  type: sku
+  required: true
+  description: Read available VM or service SKUs in the selected region.
+  command: az vm list-skus --location <location> --all --output table
+  expected: The documented lab SKU has no blocking regional restriction.
+- id: preflight.authored.service
+  type: sku
+  required: true
+  description: Prove verify recovery services and protected-vm prerequisites with LAB-24's authored read-only provider, feature,
+    tool, region, and SKU queries.
+  command: '$provider = az provider show --namespace Microsoft.RecoveryServices --query registrationState --output tsv
+
+    if ($provider -ne ''Registered'') { throw ''Microsoft.RecoveryServices is not registered.'' }
+
+    $sku = az vm list-skus --location $Location --size Standard_B1s --all --query ''[?name==`Standard_B1s` && (restrictions==null
+    || length(restrictions)==`0`)] | length(@)'' --output tsv
+
+    if ([int]$sku -lt 1) { throw ''Standard_B1s is restricted in the selected region.'' }'
+  expected: The region supports the selected VM size and the Recovery Services provider is ready for vault and protection
+    operations.
+checkpoints:
+- id: LAB24-CP01
+  title: Verify Recovery Services and protected-VM prerequisites
+  purpose: Read the provider, region, SKU, feature, quota, and companion-tool signals needed for verify recovery services
+    and protected-vm prerequisites, without changing Azure state.
+  objectiveIds:
+  - MR-RECOVERY-01
+  required: true
+  expectedState: The region supports the selected VM size and the Recovery Services provider is ready for vault and protection
+    operations.
+  scriptMarkers:
+    setup: LAB24-CP01
+    validate: LAB24-CP01
+    cleanup: LAB24-CP01
+  validation:
+    positive:
+      id: cp01.positive
+      description: Read the service properties for verify Recovery Services and protected-VM prerequisites by using exact
+        run-owned identifiers.
+      command: '$validationId=''LAB24-CP01-positive''; $provider = az provider show --namespace Microsoft.RecoveryServices
+        --query registrationState --output tsv
+
+        if ($provider -ne ''Registered'') { throw ''Microsoft.RecoveryServices is not registered.'' }'
+      expected: The region supports the selected VM size and the Recovery Services provider is ready for vault and protection
+        operations.
+    negative:
+      id: cp01.negative
+      description: Search for conflicting, unowned, or excessive state after verify Recovery Services and protected-VM prerequisites.
+      command: '$validationId=''LAB24-CP01-negative''; $sku = az vm list-skus --location $Location --size Standard_B1s --all
+        --query ''[?name==`Standard_B1s` && (restrictions==null || length(restrictions)==`0`)] | length(@)'' --output tsv
+
+        if ([int]$sku -lt 1) { throw ''Standard_B1s is restricted in the selected region.'' }'
+      expected: 'LAB24-CP01 negative boundary: The undesired state is absent; the negative assertion must not report: Standard_B1s
+        is restricted in the selected region.'
+  cleanup:
+    dependsOn:
+    - LAB24-CP02
+    - LAB24-CP03
+    - LAB24-CP04
+    - LAB24-CP05
+    action: Remove only manifest-recorded objects owned by LAB24-CP01, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp01.residual
+      description: Prove no active managed object remains for LAB24-CP01.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-1
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Back up an Azure VM with Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/backup/quick-backup-vm-cli
+- id: LAB24-CP02
+  title: Create the private VM, staging storage, and vault
+  purpose: Provision and immediately inventory the exact run-owned resources needed to create the private vm, staging storage,
+    and vault, so partial completion remains recoverable.
+  objectiveIds:
+  - MR-RECOVERY-02
+  required: true
+  expectedState: The VM has no public IP and the vault, storage account, and VM IDs are persisted before protection is enabled.
+  scriptMarkers:
+    setup: LAB24-CP02
+    validate: LAB24-CP02
+    cleanup: LAB24-CP02
+  validation:
+    positive:
+      id: cp02.positive
+      description: Read the service properties for create the private VM, staging storage, and vault by using exact run-owned
+        identifiers.
+      command: '$validationId=''LAB24-CP02-positive''; $stateValue = az backup vault show --resource-group $ResourceGroupName
+        --name $vault --query properties.provisioningState --output tsv
+
+        if ($stateValue -ne ''Succeeded'') { throw "Recovery Services vault state is $stateValue." }'
+      expected: The VM has no public IP and the vault, storage account, and VM IDs are persisted before protection is enabled.
+    negative:
+      id: cp02.negative
+      description: Search for conflicting, unowned, or excessive state after create the private VM, staging storage, and vault.
+      command: '$validationId=''LAB24-CP02-negative''; $publicIp = az vm show --resource-group $ResourceGroupName --name $vm
+        --show-details --query publicIps --output tsv
+
+        if ($publicIp) { throw ''The protected VM unexpectedly has a public IP.'' }'
+      expected: 'LAB24-CP02 negative boundary: The undesired state is absent; the negative assertion must not report: The
+        protected VM unexpectedly has a public IP.'
+  cleanup:
+    dependsOn:
+    - LAB24-CP03
+    - LAB24-CP04
+    - LAB24-CP05
+    action: Remove only manifest-recorded objects owned by LAB24-CP02, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp02.residual
+      description: Prove no active managed object remains for LAB24-CP02.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-2
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Back up an Azure VM with Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/backup/quick-backup-vm-cli
+- id: LAB24-CP03
+  title: Enable VM protection and complete an on-demand backup
+  purpose: Configure and independently inspect the control-plane and data-path properties needed to enable vm protection and
+    complete an on-demand backup.
+  objectiveIds:
+  - MR-RECOVERY-03
+  required: true
+  expectedState: The protected item resolves in the vault and the bounded backup job reaches Completed with a recovery point.
+  scriptMarkers:
+    setup: LAB24-CP03
+    validate: LAB24-CP03
+    cleanup: LAB24-CP03
+  validation:
+    positive:
+      id: cp03.positive
+      description: Read the service properties for enable VM protection and complete an on-demand backup by using exact run-owned
+        identifiers.
+      command: '$validationId=''LAB24-CP03-positive''; $itemState = az backup item list --resource-group $ResourceGroupName
+        --vault-name $vault --backup-management-type AzureIaasVM --query "[?properties.friendlyName==''$vm''].properties.protectionState
+        | [0]" --output tsv
+
+        if ($itemState -ne ''Protected'') { throw "Backup protection state is $itemState." }'
+      expected: The protected item resolves in the vault and the bounded backup job reaches Completed with a recovery point.
+    negative:
+      id: cp03.negative
+      description: Search for conflicting, unowned, or excessive state after enable VM protection and complete an on-demand
+        backup.
+      command: '$validationId=''LAB24-CP03-negative''; $failedJobs = az backup job list --resource-group $ResourceGroupName
+        --vault-name $vault --status Failed --query "[?properties.entityFriendlyName==''$vm''] | length(@)" --output tsv
+
+        if ([int]$failedJobs -ne 0) { throw ''A VM backup job failed.'' }'
+      expected: 'LAB24-CP03 negative boundary: The undesired state is absent; the negative assertion must not report: A VM
+        backup job failed.'
+  cleanup:
+    dependsOn:
+    - LAB24-CP04
+    - LAB24-CP05
+    action: Remove only manifest-recorded objects owned by LAB24-CP03, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp03.residual
+      description: Prove no active managed object remains for LAB24-CP03.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-3
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Back up an Azure VM with Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/backup/quick-backup-vm-cli
+- id: LAB24-CP04
+  title: Restore disks from the recorded recovery point
+  purpose: Exercise the deterministic operational or denied path needed to restore disks from the recorded recovery point,
+    then retain comparable before-and-after results.
+  objectiveIds:
+  - MR-RECOVERY-04
+  required: true
+  expectedState: The restore job reaches Completed and produces a restore artifact in the designated staging account/resource
+    group.
+  scriptMarkers:
+    setup: LAB24-CP04
+    validate: LAB24-CP04
+    cleanup: LAB24-CP04
+  validation:
+    positive:
+      id: cp04.positive
+      description: Read the service properties for restore disks from the recorded recovery point by using exact run-owned
+        identifiers.
+      command: '$validationId=''LAB24-CP04-positive''; $completedRestore = az backup job list --resource-group $ResourceGroupName
+        --vault-name $vault --operation Restore --status Completed --query "[?properties.entityFriendlyName==''$vm''] | length(@)"
+        --output tsv
+
+        if ([int]$completedRestore -lt 1) { throw ''No completed restore job was found.'' }'
+      expected: The restore job reaches Completed and produces a restore artifact in the designated staging account/resource
+        group.
+    negative:
+      id: cp04.negative
+      description: Search for conflicting, unowned, or excessive state after restore disks from the recorded recovery point.
+      command: '$validationId=''LAB24-CP04-negative''; $failedRestore = az backup job list --resource-group $ResourceGroupName
+        --vault-name $vault --operation Restore --status Failed --query "[?properties.entityFriendlyName==''$vm''] | length(@)"
+        --output tsv
+
+        if ([int]$failedRestore -ne 0) { throw ''A restore job failed.'' }'
+      expected: 'LAB24-CP04 negative boundary: The undesired state is absent; the negative assertion must not report: A restore
+        job failed.'
+  cleanup:
+    dependsOn:
+    - LAB24-CP05
+    action: Remove only manifest-recorded objects owned by LAB24-CP04, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp04.residual
+      description: Prove no active managed object remains for LAB24-CP04.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-4
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Back up an Azure VM with Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/backup/quick-backup-vm-cli
+- id: LAB24-CP05
+  title: Reconcile protection, jobs, recovery points, and retained state
+  purpose: Reconcile live service properties, returned IDs, and dependency-aware removal needed to reconcile protection, jobs,
+    recovery points, and retained state before handoff.
+  objectiveIds:
+  - MR-RECOVERY-01
+  - MR-RECOVERY-02
+  - MR-RECOVERY-03
+  - MR-RECOVERY-04
+  - MR-RECOVERY-07
+  required: true
+  expectedState: Protected-item status, completed backup/restore jobs, recovery-point identity, and soft-delete expectations
+    are all explicit.
+  scriptMarkers:
+    setup: LAB24-CP05
+    validate: LAB24-CP05
+    cleanup: LAB24-CP05
+  validation:
+    positive:
+      id: cp05.positive
+      description: Read the service properties for reconcile protection, jobs, recovery points, and retained state by using
+        exact run-owned identifiers.
+      command: '$validationId=''LAB24-CP05-positive''; $recoveryPoints = az backup recoverypoint list --resource-group $ResourceGroupName
+        --vault-name $vault --container-name $vm --item-name $vm --backup-management-type AzureIaasVM --query "length(@)"
+        --output tsv
+
+        if ([int]$recoveryPoints -lt 1) { throw ''The protected VM has no recovery point.'' }'
+      expected: Protected-item status, completed backup/restore jobs, recovery-point identity, and soft-delete expectations
+        are all explicit.
+    negative:
+      id: cp05.negative
+      description: Search for conflicting, unowned, or excessive state after reconcile protection, jobs, recovery points,
+        and retained state.
+      command: '$validationId=''LAB24-CP05-negative''; $activeJobs = az backup job list --resource-group $ResourceGroupName
+        --vault-name $vault --status InProgress --query "length(@)" --output tsv
+
+        if ([int]$activeJobs -ne 0) { throw ''A backup or restore job is still in progress.'' }'
+      expected: 'LAB24-CP05 negative boundary: The undesired state is absent; the negative assertion must not report: A backup
+        or restore job is still in progress.'
+  cleanup:
+    dependsOn: []
+    action: Remove only manifest-recorded objects owned by LAB24-CP05, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp05.residual
+      description: Prove no active managed object remains for LAB24-CP05.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-5
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Back up an Azure VM with Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/backup/quick-backup-vm-cli
 validation:
-  commandLanes:
-  - scripts/cli/Validate.ps1
-  output: .state/<run-id>/validation.json
-  statuses:
-  - pass
-  - fail
-  - warning
-  - skipped
-  liveExecutionRequiredForLiveVerified: true
+  script: scripts/cli/Validate.ps1
+  artifact: .state/<run-id>/validation.json
+  modes:
+  - Deployment
+  - PostCleanup
+  resultPolicy:
+    requiredFailureResult: fail
+    optionalSkipResult: partial
+    allRequiredPassResult: pass
 cleanup:
-  azureDeletion: exact recorded resource-group ID after tag verification
-  entraDeletion: none
-  reportOnlyByDefault: true
+  script: scripts/cli/Cleanup.ps1
+  artifact: .state/<run-id>/cleanup.json
+  previewByDefault: true
   requiresExecuteFlag: true
-  residualAuditRequired: true
+  ownershipVerification:
+    manifestIdMatch: true
+    requiredTags:
+    - purpose
+    - labId
+    - runId
+  residualChecks:
+  - id: cp01.residual
+    description: Prove no active managed object remains for LAB24-CP01.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp02.residual
+    description: Prove no active managed object remains for LAB24-CP02.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp03.residual
+    description: Prove no active managed object remains for LAB24-CP03.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp04.residual
+    description: Prove no active managed object remains for LAB24-CP04.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp05.residual
+    description: Prove no active managed object remains for LAB24-CP05.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  retainedItemsAllowed: true
+  irreversiblePurge: never
 assessment:
   enabled: true
   questionCount: 50
   primaryDomain: monitor-recovery
-lastOfflineValidated: '2026-08-30'
+lastOfflineValidated: '2026-08-31'
 lastLiveVerified: null
+# END GENERATED AZ104 V2

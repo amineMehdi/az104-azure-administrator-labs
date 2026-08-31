@@ -1,653 +1,1159 @@
-# Lab 15 answer key
+# Lab 15 answer key and remediation
 
-Review these explanations only after answering all 50 questions.
+[Return to the questions](./QUESTIONS.md) · [Return to the guided lab](../README.md)
+
+Score one point per correct response:
+
+- **43–50 (85–100%): Mastery.** Continue to the next lab and revisit these tasks during final review.
+- **35–42 (70–84%): Targeted review.** Repeat the linked tasks for every missed question.
+- **0–34 (below 70%): Rebuild.** Repeat the complete lab, including validation and break/fix, before retrying.
 
 ## LAB15-Q01 — D
 
-The lab establishes this design principle: App Service plan scale affects workers shared by apps, while deployment slots isolate deployable content and selected sticky configuration before a controlled swap.
+**Question:** For the App Service capacity and slot release, the slot release plan must understand which web apps share workers and scale together. Which statement about slot release belongs in the App Service capacity and slot release record?
 
-- A: This choice changes or trusts a broader scope than the recorded lab boundary.
-- B: This choice skips independent evidence or relies on ambiguous resource identity.
-- C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- D: Correct. The lab establishes this design principle: App Service plan scale affects workers shared by apps, while deployment slots isolate deployable content and selected sticky configuration before a controlled swap.
+- **A — Incorrect.** The App Service plan tier controls worker capability and features such as deployment slots, autoscale, backups, and private endpoints.
+  The App Service plan tier controls worker capability and features such as deployment slots, autoscale, backups, and private endpoints. In the App Service capacity and slot release, this statement describes App Service pricing tiers. App Service capacity and slot release asks about App Service plan boundaries; this App Service pricing tiers choice leaves the App Service plan boundaries explanation missing.
+- **B — Incorrect.** Metric autoscale uses threshold, aggregation, duration, cooldown, and capacity settings to adjust plan instances.
+  Metric autoscale uses threshold, aggregation, duration, cooldown, and capacity settings to adjust plan instances. In the App Service capacity and slot release, this statement describes App Service autoscale rules. The App Service autoscale rules statement accurately describes App Service autoscale rules; however, App Service capacity and slot release needs App Service plan boundaries to understand which web apps share workers and scale together; App Service autoscale rules cannot replace App Service plan boundaries.
+- **C — Incorrect.** Swap with preview applies target-slot configuration to the source for validation before completing the swap.
+  Swap with preview applies target-slot configuration to the source for validation before completing the swap. In the App Service capacity and slot release, this statement describes swap with preview. Selecting swap with preview for App Service capacity and slot release leaves App Service plan boundaries unanswered in App Service capacity and slot release; the App Service capacity and slot release lacks a App Service plan boundaries basis to understand which web apps share workers and scale together.
+- **D — Correct.** Apps in one App Service plan share the plan's compute workers, region, operating-system type, and scaling boundary.
+  For the App Service capacity and slot release, the rule for App Service plan boundaries is defined by this statement: apps in one App Service plan share the plan's compute workers, region, operating-system type, and scaling boundary. It supports the required outcome to understand which web apps share workers and scale together.
 
-Objectives: `CP-APP-01`.
+**Objectives:** `CP-APP-01`
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/app-service/quickstart-powershell).
+**Remediation:** [Repeat the mapped guided task](../README.md#task-1) (`LAB15-CP01`).
 
-## LAB15-Q02 — A
+**Microsoft Learn sources:**
 
-The reviewed hands-on action for this objective is: Scale the plan manually and configure bounded CPU-based autoscale where the SKU supports it.
+- [Azure App Service plans overview](https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans)
 
-- A: Correct. The reviewed hands-on action for this objective is: Scale the plan manually and configure bounded CPU-based autoscale where the SKU supports it.
-- B: This choice skips independent evidence or relies on ambiguous resource identity.
-- C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- D: This choice changes or trusts a broader scope than the recorded lab boundary.
+**Source reviewed:** 2026-08-31
 
-Objectives: `CP-APP-02`.
+## LAB15-Q02 — B
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/app-service/manage-scale-up).
+**Question:** The slot release review compares four claims for the App Service capacity and slot release requirement to select a hosting tier that supplies the required production capabilities. Which claim is technically sound?
 
-## LAB15-Q03 — B
+- **A — Incorrect.** Scaling up changes the App Service plan worker size or pricing tier for all apps on that plan.
+  Scaling up changes the App Service plan worker size or pricing tier for all apps on that plan. In the App Service capacity and slot release, this statement describes vertical plan scaling. The vertical plan scaling statement accurately describes vertical plan scaling; however, App Service capacity and slot release needs App Service pricing tiers to select a hosting tier that supplies the required production capabilities; vertical plan scaling cannot replace App Service pricing tiers.
+- **B — Correct.** The App Service plan tier controls worker capability and features such as deployment slots, autoscale, backups, and private endpoints.
+  The App Service plan tier controls worker capability and features such as deployment slots, autoscale, backups, and private endpoints. The App Service capacity and slot release applies that App Service pricing tiers boundary when operators must select a hosting tier that supplies the required production capabilities.
+- **C — Incorrect.** A deployment slot is a live app with its own hostname and configurable settings that can be swapped with another slot.
+  A deployment slot is a live app with its own hostname and configurable settings that can be swapped with another slot. In the App Service capacity and slot release, this statement describes deployment slots. App Service pricing tiers governs App Service capacity and slot release; deployment slots cannot support App Service pricing tiers when operators must select a hosting tier that supplies the required production capabilities.
+- **D — Incorrect.** An App Service app must match its plan's region and operating-system type and has a globally unique default hostname.
+  An App Service app must match its plan's region and operating-system type and has a globally unique default hostname. In the App Service capacity and slot release, this statement describes web app creation. App Service capacity and slot release asks about App Service pricing tiers; this web app creation choice leaves the App Service pricing tiers explanation missing.
 
-The lab establishes this design principle: App Service plan scale affects workers shared by apps, while deployment slots isolate deployable content and selected sticky configuration before a controlled swap.
+**Objectives:** `CP-APP-01`
 
-- A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- B: Correct. The lab establishes this design principle: App Service plan scale affects workers shared by apps, while deployment slots isolate deployable content and selected sticky configuration before a controlled swap.
-- C: This choice changes or trusts a broader scope than the recorded lab boundary.
-- D: This choice skips independent evidence or relies on ambiguous resource identity.
+**Remediation:** [Repeat the mapped guided task](../README.md#task-2) (`LAB15-CP02`).
 
-Objectives: `CP-APP-01`.
+**Microsoft Learn sources:**
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/app-service/quickstart-powershell).
+- [Azure App Service plans overview](https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans)
 
-## LAB15-Q04 — C
+**Source reviewed:** 2026-08-31
 
-The reviewed hands-on action for this objective is: Scale the plan manually and configure bounded CPU-based autoscale where the SKU supports it.
+## LAB15-Q03 — A
 
-- A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- B: This choice changes or trusts a broader scope than the recorded lab boundary.
-- C: Correct. The reviewed hands-on action for this objective is: Scale the plan manually and configure bounded CPU-based autoscale where the SKU supports it.
-- D: This choice skips independent evidence or relies on ambiguous resource identity.
+**Question:** The slot release architecture note requires the App Service capacity and slot release environment to increase worker CPU or memory without adding worker instances. Which statement defines the relevant slot release boundary?
 
-Objectives: `CP-APP-02`.
+- **A — Correct.** Scaling up changes the App Service plan worker size or pricing tier for all apps on that plan.
+  The App Service capacity and slot release needs vertical plan scaling to increase worker CPU or memory without adding worker instances; this option states the applicable vertical plan scaling rule: scaling up changes the App Service plan worker size or pricing tier for all apps on that plan.
+- **B — Incorrect.** Scaling out changes the number of worker instances available to apps on an App Service plan.
+  Scaling out changes the number of worker instances available to apps on an App Service plan. In the App Service capacity and slot release, this statement describes horizontal plan scaling. Vertical plan scaling governs App Service capacity and slot release; horizontal plan scaling cannot support vertical plan scaling when operators must increase worker CPU or memory without adding worker instances.
+- **C — Incorrect.** A deployment-slot setting remains with its slot during a swap instead of moving with swappable configuration.
+  A deployment-slot setting remains with its slot during a swap instead of moving with swappable configuration. In the App Service capacity and slot release, this statement describes slot-specific settings. App Service capacity and slot release asks about vertical plan scaling; this slot-specific settings choice leaves the vertical plan scaling explanation missing.
+- **D — Incorrect.** Per-app scaling on supported plans controls how many plan workers a specific app can use but does not create a separate plan.
+  Per-app scaling on supported plans controls how many plan workers a specific app can use but does not create a separate plan. In the App Service capacity and slot release, this statement describes per-app scaling. The per-app scaling statement accurately describes per-app scaling; however, App Service capacity and slot release needs vertical plan scaling to increase worker CPU or memory without adding worker instances; per-app scaling cannot replace vertical plan scaling.
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/app-service/manage-scale-up).
+**Objectives:** `CP-APP-02`
 
-## LAB15-Q05 — D
+**Remediation:** [Repeat the mapped guided task](../README.md#task-3) (`LAB15-CP03`).
 
-The lab establishes this design principle: App Service plan scale affects workers shared by apps, while deployment slots isolate deployable content and selected sticky configuration before a controlled swap.
+**Microsoft Learn sources:**
 
-- A: This choice changes or trusts a broader scope than the recorded lab boundary.
-- B: This choice skips independent evidence or relies on ambiguous resource identity.
-- C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- D: Correct. The lab establishes this design principle: App Service plan scale affects workers shared by apps, while deployment slots isolate deployable content and selected sticky configuration before a controlled swap.
+- [Scale up an App Service plan](https://learn.microsoft.com/en-us/azure/app-service/manage-scale-up)
 
-Objectives: `CP-APP-01`.
+**Source reviewed:** 2026-08-31
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/app-service/quickstart-powershell).
+## LAB15-Q04 — D
 
-## LAB15-Q06 — A
+**Question:** A new slot release operator must explain why the App Service capacity and slot release can add worker instances without changing the worker size. Which explanation is accurate?
 
-The reviewed hands-on action for this objective is: Scale the plan manually and configure bounded CPU-based autoscale where the SKU supports it.
+- **A — Incorrect.** Metric autoscale uses threshold, aggregation, duration, cooldown, and capacity settings to adjust plan instances.
+  Metric autoscale uses threshold, aggregation, duration, cooldown, and capacity settings to adjust plan instances. In the App Service capacity and slot release, this statement describes App Service autoscale rules. Horizontal plan scaling governs App Service capacity and slot release; App Service autoscale rules cannot support horizontal plan scaling when operators must add worker instances without changing the worker size.
+- **B — Incorrect.** Swap with preview applies target-slot configuration to the source for validation before completing the swap.
+  Swap with preview applies target-slot configuration to the source for validation before completing the swap. In the App Service capacity and slot release, this statement describes swap with preview. App Service capacity and slot release asks about horizontal plan scaling; this swap with preview choice leaves the horizontal plan scaling explanation missing.
+- **C — Incorrect.** Apps in one App Service plan share the plan's compute workers, region, operating-system type, and scaling boundary.
+  Apps in one App Service plan share the plan's compute workers, region, operating-system type, and scaling boundary. In the App Service capacity and slot release, this statement describes App Service plan boundaries. The App Service plan boundaries statement accurately describes App Service plan boundaries; however, App Service capacity and slot release needs horizontal plan scaling to add worker instances without changing the worker size; App Service plan boundaries cannot replace horizontal plan scaling.
+- **D — Correct.** Scaling out changes the number of worker instances available to apps on an App Service plan.
+  Scaling out changes the number of worker instances available to apps on an App Service plan. This horizontal plan scaling fact resolves the App Service capacity and slot release design question about how to add worker instances without changing the worker size.
 
-- A: Correct. The reviewed hands-on action for this objective is: Scale the plan manually and configure bounded CPU-based autoscale where the SKU supports it.
-- B: This choice skips independent evidence or relies on ambiguous resource identity.
-- C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- D: This choice changes or trusts a broader scope than the recorded lab boundary.
+**Objectives:** `CP-APP-02`
 
-Objectives: `CP-APP-02`.
+**Remediation:** [Repeat the mapped guided task](../README.md#task-4) (`LAB15-CP04`).
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/app-service/manage-scale-up).
+**Microsoft Learn sources:**
+
+- [App Service automatic scaling](https://learn.microsoft.com/en-us/azure/app-service/manage-automatic-scaling)
+
+**Source reviewed:** 2026-08-31
+
+## LAB15-Q05 — C
+
+**Question:** The App Service capacity and slot release acceptance criteria require operators to change instance count automatically when the selected signal crosses a threshold. Which service fact supports that requirement?
+
+- **A — Incorrect.** A deployment slot is a live app with its own hostname and configurable settings that can be swapped with another slot.
+  A deployment slot is a live app with its own hostname and configurable settings that can be swapped with another slot. In the App Service capacity and slot release, this statement describes deployment slots. App Service capacity and slot release asks about App Service autoscale rules; this deployment slots choice leaves the App Service autoscale rules explanation missing.
+- **B — Incorrect.** An App Service app must match its plan's region and operating-system type and has a globally unique default hostname.
+  An App Service app must match its plan's region and operating-system type and has a globally unique default hostname. In the App Service capacity and slot release, this statement describes web app creation. The web app creation statement accurately describes web app creation; however, App Service capacity and slot release needs App Service autoscale rules to change instance count automatically when the selected signal crosses a threshold; web app creation cannot replace App Service autoscale rules.
+- **C — Correct.** Metric autoscale uses threshold, aggregation, duration, cooldown, and capacity settings to adjust plan instances.
+  Metric autoscale uses threshold, aggregation, duration, cooldown, and capacity settings to adjust plan instances. For App Service capacity and slot release, App Service autoscale rules supplies the service rule needed to change instance count automatically when the selected signal crosses a threshold.
+- **D — Incorrect.** The App Service plan tier controls worker capability and features such as deployment slots, autoscale, backups, and private endpoints.
+  The App Service plan tier controls worker capability and features such as deployment slots, autoscale, backups, and private endpoints. In the App Service capacity and slot release, this statement describes App Service pricing tiers. App Service autoscale rules governs App Service capacity and slot release; App Service pricing tiers cannot support App Service autoscale rules when operators must change instance count automatically when the selected signal crosses a threshold.
+
+**Objectives:** `CP-APP-02`
+
+**Remediation:** [Repeat the mapped guided task](../README.md#task-5) (`LAB15-CP05`).
+
+**Microsoft Learn sources:**
+
+- [App Service automatic scaling](https://learn.microsoft.com/en-us/azure/app-service/manage-automatic-scaling)
+
+**Source reviewed:** 2026-08-31
+
+## LAB15-Q06 — B
+
+**Question:** A slot release reviewer challenges whether the App Service capacity and slot release can deploy a candidate release to a live URL that is separate from production. Which response resolves the concern?
+
+- **A — Incorrect.** A deployment-slot setting remains with its slot during a swap instead of moving with swappable configuration.
+  A deployment-slot setting remains with its slot during a swap instead of moving with swappable configuration. In the App Service capacity and slot release, this statement describes slot-specific settings. The slot-specific settings statement accurately describes slot-specific settings; however, App Service capacity and slot release needs deployment slots to deploy a candidate release to a live URL that is separate from production; slot-specific settings cannot replace deployment slots.
+- **B — Correct.** A deployment slot is a live app with its own hostname and configurable settings that can be swapped with another slot.
+  A deployment slot is a live app with its own hostname and configurable settings that can be swapped with another slot. In the App Service capacity and slot release, this deployment slots rule supports the need to deploy a candidate release to a live URL that is separate from production.
+- **C — Incorrect.** Per-app scaling on supported plans controls how many plan workers a specific app can use but does not create a separate plan.
+  Per-app scaling on supported plans controls how many plan workers a specific app can use but does not create a separate plan. In the App Service capacity and slot release, this statement describes per-app scaling. Deployment slots governs App Service capacity and slot release; per-app scaling cannot support deployment slots when operators must deploy a candidate release to a live URL that is separate from production.
+- **D — Incorrect.** Scaling up changes the App Service plan worker size or pricing tier for all apps on that plan.
+  Scaling up changes the App Service plan worker size or pricing tier for all apps on that plan. In the App Service capacity and slot release, this statement describes vertical plan scaling. App Service capacity and slot release asks about deployment slots; this vertical plan scaling choice leaves the deployment slots explanation missing.
+
+**Objectives:** `CP-APP-08`
+
+**Remediation:** [Repeat the mapped guided task](../README.md#task-1) (`LAB15-CP01`).
+
+**Microsoft Learn sources:**
+
+- [Set up staging environments in App Service](https://learn.microsoft.com/en-us/azure/app-service/deploy-staging-slots)
+
+**Source reviewed:** 2026-08-31
 
 ## LAB15-Q07 — B
 
-The lab establishes this design principle: App Service plan scale affects workers shared by apps, while deployment slots isolate deployable content and selected sticky configuration before a controlled swap.
+**Question:** The App Service capacity and slot release handoff omits the slot release rule needed to prevent environment-only configuration from moving when slots exchange content. Which statement should the team add?
 
-- A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- B: Correct. The lab establishes this design principle: App Service plan scale affects workers shared by apps, while deployment slots isolate deployable content and selected sticky configuration before a controlled swap.
-- C: This choice changes or trusts a broader scope than the recorded lab boundary.
-- D: This choice skips independent evidence or relies on ambiguous resource identity.
+- **A — Incorrect.** Swap with preview applies target-slot configuration to the source for validation before completing the swap.
+  Swap with preview applies target-slot configuration to the source for validation before completing the swap. In the App Service capacity and slot release, this statement describes swap with preview. Selecting swap with preview for App Service capacity and slot release leaves slot-specific settings unanswered in App Service capacity and slot release; the App Service capacity and slot release lacks a slot-specific settings basis to prevent environment-only configuration from moving when slots exchange content.
+- **B — Correct.** A deployment-slot setting remains with its slot during a swap instead of moving with swappable configuration.
+  For the App Service capacity and slot release, the rule for slot-specific settings is defined by this statement: a deployment-slot setting remains with its slot during a swap instead of moving with swappable configuration. It supports the required outcome to prevent environment-only configuration from moving when slots exchange content.
+- **C — Incorrect.** Apps in one App Service plan share the plan's compute workers, region, operating-system type, and scaling boundary.
+  Apps in one App Service plan share the plan's compute workers, region, operating-system type, and scaling boundary. In the App Service capacity and slot release, this statement describes App Service plan boundaries. App Service capacity and slot release asks about slot-specific settings; this App Service plan boundaries choice leaves the slot-specific settings explanation missing.
+- **D — Incorrect.** Scaling out changes the number of worker instances available to apps on an App Service plan.
+  Scaling out changes the number of worker instances available to apps on an App Service plan. In the App Service capacity and slot release, this statement describes horizontal plan scaling. The horizontal plan scaling statement accurately describes horizontal plan scaling; however, App Service capacity and slot release needs slot-specific settings to prevent environment-only configuration from moving when slots exchange content; horizontal plan scaling cannot replace slot-specific settings.
 
-Objectives: `CP-APP-01`.
+**Objectives:** `CP-APP-08`
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/app-service/quickstart-powershell).
+**Remediation:** [Repeat the mapped guided task](../README.md#task-2) (`LAB15-CP02`).
+
+**Microsoft Learn sources:**
+
+- [Set up staging environments in App Service](https://learn.microsoft.com/en-us/azure/app-service/deploy-staging-slots)
+
+**Source reviewed:** 2026-08-31
 
 ## LAB15-Q08 — C
 
-The reviewed hands-on action for this objective is: Scale the plan manually and configure bounded CPU-based autoscale where the SKU supports it.
+**Question:** A slot release incident review of the App Service capacity and slot release depends on the ability to validate swap behavior before the candidate becomes production. Which platform description is reliable?
 
-- A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- B: This choice changes or trusts a broader scope than the recorded lab boundary.
-- C: Correct. The reviewed hands-on action for this objective is: Scale the plan manually and configure bounded CPU-based autoscale where the SKU supports it.
-- D: This choice skips independent evidence or relies on ambiguous resource identity.
+- **A — Incorrect.** An App Service app must match its plan's region and operating-system type and has a globally unique default hostname.
+  An App Service app must match its plan's region and operating-system type and has a globally unique default hostname. In the App Service capacity and slot release, this statement describes web app creation. Swap with preview governs App Service capacity and slot release; web app creation cannot support swap with preview when operators must validate swap behavior before the candidate becomes production.
+- **B — Incorrect.** The App Service plan tier controls worker capability and features such as deployment slots, autoscale, backups, and private endpoints.
+  The App Service plan tier controls worker capability and features such as deployment slots, autoscale, backups, and private endpoints. In the App Service capacity and slot release, this statement describes App Service pricing tiers. App Service capacity and slot release asks about swap with preview; this App Service pricing tiers choice leaves the swap with preview explanation missing.
+- **C — Correct.** Swap with preview applies target-slot configuration to the source for validation before completing the swap.
+  Swap with preview applies target-slot configuration to the source for validation before completing the swap. The App Service capacity and slot release applies that swap with preview boundary when operators must validate swap behavior before the candidate becomes production.
+- **D — Incorrect.** Metric autoscale uses threshold, aggregation, duration, cooldown, and capacity settings to adjust plan instances.
+  Metric autoscale uses threshold, aggregation, duration, cooldown, and capacity settings to adjust plan instances. In the App Service capacity and slot release, this statement describes App Service autoscale rules. Selecting App Service autoscale rules for App Service capacity and slot release leaves swap with preview unanswered in App Service capacity and slot release; the App Service capacity and slot release lacks a swap with preview basis to validate swap behavior before the candidate becomes production.
 
-Objectives: `CP-APP-02`.
+**Objectives:** `CP-APP-08`
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/app-service/manage-scale-up).
+**Remediation:** [Repeat the mapped guided task](../README.md#task-3) (`LAB15-CP03`).
 
-## LAB15-Q09 — D
+**Microsoft Learn sources:**
 
-The lab establishes this design principle: App Service plan scale affects workers shared by apps, while deployment slots isolate deployable content and selected sticky configuration before a controlled swap.
+- [Set up staging environments in App Service](https://learn.microsoft.com/en-us/azure/app-service/deploy-staging-slots)
 
-- A: This choice changes or trusts a broader scope than the recorded lab boundary.
-- B: This choice skips independent evidence or relies on ambiguous resource identity.
-- C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- D: Correct. The lab establishes this design principle: App Service plan scale affects workers shared by apps, while deployment slots isolate deployable content and selected sticky configuration before a controlled swap.
+**Source reviewed:** 2026-08-31
 
-Objectives: `CP-APP-01`.
+## LAB15-Q09 — B
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/app-service/quickstart-powershell).
+**Question:** An application-platform administrator operating App Service capacity and releases is updating the slot release runbook. The requirement is to create an application inside the intended existing hosting plan. Which statement describes Azure behavior correctly?
 
-## LAB15-Q10 — A
+- **A — Incorrect.** Per-app scaling on supported plans controls how many plan workers a specific app can use but does not create a separate plan.
+  Per-app scaling on supported plans controls how many plan workers a specific app can use but does not create a separate plan. In the App Service capacity and slot release, this statement describes per-app scaling. App Service capacity and slot release asks about web app creation; this per-app scaling choice leaves the web app creation explanation missing.
+- **B — Correct.** An App Service app must match its plan's region and operating-system type and has a globally unique default hostname.
+  The App Service capacity and slot release needs web app creation to create an application inside the intended existing hosting plan; this option states the applicable web app creation rule: an App Service app must match its plan's region and operating-system type and has a globally unique default hostname.
+- **C — Incorrect.** Scaling up changes the App Service plan worker size or pricing tier for all apps on that plan.
+  Scaling up changes the App Service plan worker size or pricing tier for all apps on that plan. In the App Service capacity and slot release, this statement describes vertical plan scaling. Selecting vertical plan scaling for App Service capacity and slot release leaves web app creation unanswered in App Service capacity and slot release; the App Service capacity and slot release lacks a web app creation basis to create an application inside the intended existing hosting plan.
+- **D — Incorrect.** A deployment slot is a live app with its own hostname and configurable settings that can be swapped with another slot.
+  A deployment slot is a live app with its own hostname and configurable settings that can be swapped with another slot. In the App Service capacity and slot release, this statement describes deployment slots. Web app creation governs App Service capacity and slot release; deployment slots cannot support web app creation when operators must create an application inside the intended existing hosting plan.
 
-The reviewed hands-on action for this objective is: Scale the plan manually and configure bounded CPU-based autoscale where the SKU supports it.
+**Objectives:** `CP-APP-03`
 
-- A: Correct. The reviewed hands-on action for this objective is: Scale the plan manually and configure bounded CPU-based autoscale where the SKU supports it.
-- B: This choice skips independent evidence or relies on ambiguous resource identity.
-- C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- D: This choice changes or trusts a broader scope than the recorded lab boundary.
+**Remediation:** [Repeat the mapped guided task](../README.md#task-4) (`LAB15-CP04`).
 
-Objectives: `CP-APP-02`.
+**Microsoft Learn sources:**
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/app-service/manage-scale-up).
+- [Azure CLI reference for App Service web apps](https://learn.microsoft.com/en-us/cli/azure/webapp?view=azure-cli-latest)
 
-## LAB15-Q11 — B
+**Source reviewed:** 2026-08-31
 
-The lab establishes this design principle: App Service plan scale affects workers shared by apps, while deployment slots isolate deployable content and selected sticky configuration before a controlled swap.
+## LAB15-Q10 — C
 
-- A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- B: Correct. The lab establishes this design principle: App Service plan scale affects workers shared by apps, while deployment slots isolate deployable content and selected sticky configuration before a controlled swap.
-- C: This choice changes or trusts a broader scope than the recorded lab boundary.
-- D: This choice skips independent evidence or relies on ambiguous resource identity.
+**Question:** A slot release peer review asks how the App Service capacity and slot release should handle this outcome: limit how many shared-plan workers one application may use. Which explanation is accurate?
 
-Objectives: `CP-APP-01`.
+- **A — Incorrect.** Apps in one App Service plan share the plan's compute workers, region, operating-system type, and scaling boundary.
+  Apps in one App Service plan share the plan's compute workers, region, operating-system type, and scaling boundary. In the App Service capacity and slot release, this statement describes App Service plan boundaries. The App Service plan boundaries statement accurately describes App Service plan boundaries; however, App Service capacity and slot release needs per-app scaling to limit how many shared-plan workers one application may use; App Service plan boundaries cannot replace per-app scaling.
+- **B — Incorrect.** Scaling out changes the number of worker instances available to apps on an App Service plan.
+  Scaling out changes the number of worker instances available to apps on an App Service plan. In the App Service capacity and slot release, this statement describes horizontal plan scaling. Selecting horizontal plan scaling for App Service capacity and slot release leaves per-app scaling unanswered in App Service capacity and slot release; the App Service capacity and slot release lacks a per-app scaling basis to limit how many shared-plan workers one application may use.
+- **C — Correct.** Per-app scaling on supported plans controls how many plan workers a specific app can use but does not create a separate plan.
+  Per-app scaling on supported plans controls how many plan workers a specific app can use but does not create a separate plan. This per-app scaling fact resolves the App Service capacity and slot release design question about how to limit how many shared-plan workers one application may use.
+- **D — Incorrect.** A deployment-slot setting remains with its slot during a swap instead of moving with swappable configuration.
+  A deployment-slot setting remains with its slot during a swap instead of moving with swappable configuration. In the App Service capacity and slot release, this statement describes slot-specific settings. App Service capacity and slot release asks about per-app scaling; this slot-specific settings choice leaves the per-app scaling explanation missing.
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/app-service/quickstart-powershell).
+**Objectives:** `CP-APP-02`
 
-## LAB15-Q12 — C
+**Remediation:** [Repeat the mapped guided task](../README.md#task-5) (`LAB15-CP05`).
 
-The reviewed hands-on action for this objective is: Scale the plan manually and configure bounded CPU-based autoscale where the SKU supports it.
+**Microsoft Learn sources:**
 
-- A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- B: This choice changes or trusts a broader scope than the recorded lab boundary.
-- C: Correct. The reviewed hands-on action for this objective is: Scale the plan manually and configure bounded CPU-based autoscale where the SKU supports it.
-- D: This choice skips independent evidence or relies on ambiguous resource identity.
+- [Per-app scaling for App Service](https://learn.microsoft.com/en-us/azure/app-service/manage-scale-per-app)
 
-Objectives: `CP-APP-02`.
+**Source reviewed:** 2026-08-31
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/app-service/manage-scale-up).
+## LAB15-Q11 — A
+
+**Question:** The application-platform administrator operating App Service capacity and releases may change the App Service capacity and slot release only to understand which web apps share workers and scale together. Which slot release action stays within that assignment?
+
+- **A — Correct.** Place apps together only when shared capacity, region, OS, cost, and scale behavior are acceptable.
+  Place apps together only when shared capacity, region, OS, cost, and scale behavior are acceptable. In App Service capacity and slot release, applying App Service plan boundaries is the scoped way to understand which web apps share workers and scale together.
+- **B — Incorrect.** Scale up when each worker needs more CPU, memory, or tier-specific capability.
+  Scale up when each worker needs more CPU, memory, or tier-specific capability. In the App Service capacity and slot release, this action changes vertical plan scaling. App Service capacity and slot release requires App Service plan boundaries; changing vertical plan scaling leaves App Service plan boundaries absent in App Service capacity and slot release; App Service capacity and slot release cannot understand which web apps share workers and scale together.
+- **C — Incorrect.** Deploy and validate a release in a staging slot before swapping it into production.
+  Deploy and validate a release in a staging slot before swapping it into production. In the App Service capacity and slot release, this action changes deployment slots. Deployment slots does not implement App Service plan boundaries for App Service capacity and slot release; the App Service capacity and slot release still cannot understand which web apps share workers and scale together.
+- **D — Incorrect.** Create the app in the intended plan with a supported runtime and unique name.
+  Create the app in the intended plan with a supported runtime and unique name. In the App Service capacity and slot release, this action changes web app creation. App Service capacity and slot release instead needs App Service plan boundaries: Place apps together only when shared capacity, region, OS, cost, and scale behavior are acceptable. The web app creation action omits that App Service plan boundaries work.
+
+**Objectives:** `CP-APP-01`
+
+**Remediation:** [Repeat the mapped guided task](../README.md#task-1) (`LAB15-CP01`).
+
+**Microsoft Learn sources:**
+
+- [Azure App Service plans overview](https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans)
+
+**Source reviewed:** 2026-08-31
+
+## LAB15-Q12 — B
+
+**Question:** A slot release dry run shows no App Service capacity and slot release command will select a hosting tier that supplies the required production capabilities. Which action belongs before execution?
+
+- **A — Incorrect.** Increase capacity or configure autoscale when concurrent demand requires more workers.
+  Increase capacity or configure autoscale when concurrent demand requires more workers. In the App Service capacity and slot release, this action changes horizontal plan scaling. App Service capacity and slot release requires App Service pricing tiers; changing horizontal plan scaling leaves App Service pricing tiers absent in App Service capacity and slot release; App Service capacity and slot release cannot select a hosting tier that supplies the required production capabilities.
+- **B — Correct.** Select a tier that supports every required feature before creating dependent configuration.
+  Select a tier that supports every required feature before creating dependent configuration. The App Service capacity and slot release uses this App Service pricing tiers operation to select a hosting tier that supplies the required production capabilities within the approved scope.
+- **C — Incorrect.** Mark environment-specific connection and app settings as slot settings before the swap.
+  Mark environment-specific connection and app settings as slot settings before the swap. In the App Service capacity and slot release, this action changes slot-specific settings. App Service capacity and slot release instead needs App Service pricing tiers: Select a tier that supports every required feature before creating dependent configuration. The slot-specific settings action omits that App Service pricing tiers work.
+- **D — Incorrect.** Enable and limit per-app scaling only when supported and justified by shared-plan capacity design.
+  Enable and limit per-app scaling only when supported and justified by shared-plan capacity design. In the App Service capacity and slot release, this action changes per-app scaling. App Service capacity and slot release approved App Service pricing tiers, not per-app scaling; only the App Service pricing tiers change can select a hosting tier that supplies the required production capabilities.
+
+**Objectives:** `CP-APP-01`
+
+**Remediation:** [Repeat the mapped guided task](../README.md#task-2) (`LAB15-CP02`).
+
+**Microsoft Learn sources:**
+
+- [Azure App Service plans overview](https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans)
+
+**Source reviewed:** 2026-08-31
 
 ## LAB15-Q13 — D
 
-The lab establishes this design principle: App Service plan scale affects workers shared by apps, while deployment slots isolate deployable content and selected sticky configuration before a controlled swap.
+**Question:** For the App Service capacity and slot release, operators need to increase worker CPU or memory without adding worker instances. Which change realizes that requirement?
 
-- A: This choice changes or trusts a broader scope than the recorded lab boundary.
-- B: This choice skips independent evidence or relies on ambiguous resource identity.
-- C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- D: Correct. The lab establishes this design principle: App Service plan scale affects workers shared by apps, while deployment slots isolate deployable content and selected sticky configuration before a controlled swap.
+- **A — Incorrect.** Create complementary scale-out and scale-in rules with nonoverlapping thresholds and safe cooldowns.
+  Create complementary scale-out and scale-in rules with nonoverlapping thresholds and safe cooldowns. In the App Service capacity and slot release, this action changes App Service autoscale rules. App Service autoscale rules does not implement vertical plan scaling for App Service capacity and slot release; the App Service capacity and slot release still cannot increase worker CPU or memory without adding worker instances.
+- **B — Incorrect.** Use preview when the release must be tested with production configuration before cutover.
+  Use preview when the release must be tested with production configuration before cutover. In the App Service capacity and slot release, this action changes swap with preview. App Service capacity and slot release instead needs vertical plan scaling: Scale up when each worker needs more CPU, memory, or tier-specific capability. The swap with preview action omits that vertical plan scaling work.
+- **C — Incorrect.** Place apps together only when shared capacity, region, OS, cost, and scale behavior are acceptable.
+  Place apps together only when shared capacity, region, OS, cost, and scale behavior are acceptable. In the App Service capacity and slot release, this action changes App Service plan boundaries. App Service capacity and slot release approved vertical plan scaling, not App Service plan boundaries; only the vertical plan scaling change can increase worker CPU or memory without adding worker instances.
+- **D — Correct.** Scale up when each worker needs more CPU, memory, or tier-specific capability.
+  For the App Service capacity and slot release, the required vertical plan scaling action is: scale up when each worker needs more CPU, memory, or tier-specific capability. It makes the environment able to increase worker CPU or memory without adding worker instances.
 
-Objectives: `CP-APP-01`.
+**Objectives:** `CP-APP-02`
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/app-service/quickstart-powershell).
+**Remediation:** [Repeat the mapped guided task](../README.md#task-3) (`LAB15-CP03`).
 
-## LAB15-Q14 — A
+**Microsoft Learn sources:**
 
-The reviewed hands-on action for this objective is: Scale the plan manually and configure bounded CPU-based autoscale where the SKU supports it.
+- [Scale up an App Service plan](https://learn.microsoft.com/en-us/azure/app-service/manage-scale-up)
 
-- A: Correct. The reviewed hands-on action for this objective is: Scale the plan manually and configure bounded CPU-based autoscale where the SKU supports it.
-- B: This choice skips independent evidence or relies on ambiguous resource identity.
-- C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- D: This choice changes or trusts a broader scope than the recorded lab boundary.
+**Source reviewed:** 2026-08-31
 
-Objectives: `CP-APP-02`.
+## LAB15-Q14 — D
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/app-service/manage-scale-up).
+**Question:** Operators must automate the App Service capacity and slot release change needed to add worker instances without changing the worker size. Which slot release operation belongs in the runbook?
 
-## LAB15-Q15 — B
+- **A — Incorrect.** Deploy and validate a release in a staging slot before swapping it into production.
+  Deploy and validate a release in a staging slot before swapping it into production. In the App Service capacity and slot release, this action changes deployment slots. App Service capacity and slot release instead needs horizontal plan scaling: Increase capacity or configure autoscale when concurrent demand requires more workers. The deployment slots action omits that horizontal plan scaling work.
+- **B — Incorrect.** Create the app in the intended plan with a supported runtime and unique name.
+  Create the app in the intended plan with a supported runtime and unique name. In the App Service capacity and slot release, this action changes web app creation. App Service capacity and slot release approved horizontal plan scaling, not web app creation; only the horizontal plan scaling change can add worker instances without changing the worker size.
+- **C — Incorrect.** Select a tier that supports every required feature before creating dependent configuration.
+  Select a tier that supports every required feature before creating dependent configuration. In the App Service capacity and slot release, this action changes App Service pricing tiers. App Service capacity and slot release requires horizontal plan scaling; changing App Service pricing tiers leaves horizontal plan scaling absent in App Service capacity and slot release; App Service capacity and slot release cannot add worker instances without changing the worker size.
+- **D — Correct.** Increase capacity or configure autoscale when concurrent demand requires more workers.
+  Increase capacity or configure autoscale when concurrent demand requires more workers. This changes horizontal plan scaling in the App Service capacity and slot release, supplying the missing state needed to add worker instances without changing the worker size.
 
-The lab establishes this design principle: App Service plan scale affects workers shared by apps, while deployment slots isolate deployable content and selected sticky configuration before a controlled swap.
+**Objectives:** `CP-APP-02`
 
-- A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- B: Correct. The lab establishes this design principle: App Service plan scale affects workers shared by apps, while deployment slots isolate deployable content and selected sticky configuration before a controlled swap.
-- C: This choice changes or trusts a broader scope than the recorded lab boundary.
-- D: This choice skips independent evidence or relies on ambiguous resource identity.
+**Remediation:** [Repeat the mapped guided task](../README.md#task-4) (`LAB15-CP04`).
 
-Objectives: `CP-APP-01`.
+**Microsoft Learn sources:**
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/app-service/quickstart-powershell).
+- [App Service automatic scaling](https://learn.microsoft.com/en-us/azure/app-service/manage-automatic-scaling)
 
-## LAB15-Q16 — C
+**Source reviewed:** 2026-08-31
 
-Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+## LAB15-Q15 — A
 
-- A: This choice changes or trusts a broader scope than the recorded lab boundary.
-- B: This choice skips independent evidence or relies on ambiguous resource identity.
-- C: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
-- D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+**Question:** An App Service capacity and slot release review finds slot release drift from the need to change instance count automatically when the selected signal crosses a threshold. Which correction addresses that drift?
 
-Objectives: `CP-APP-03`.
+- **A — Correct.** Create complementary scale-out and scale-in rules with nonoverlapping thresholds and safe cooldowns.
+  The App Service capacity and slot release must change instance count automatically when the selected signal crosses a threshold; this option performs its direct App Service autoscale rules change: create complementary scale-out and scale-in rules with nonoverlapping thresholds and safe cooldowns.
+- **B — Incorrect.** Mark environment-specific connection and app settings as slot settings before the swap.
+  Mark environment-specific connection and app settings as slot settings before the swap. In the App Service capacity and slot release, this action changes slot-specific settings. App Service capacity and slot release requires App Service autoscale rules; changing slot-specific settings leaves App Service autoscale rules absent in App Service capacity and slot release; App Service capacity and slot release cannot change instance count automatically when the selected signal crosses a threshold.
+- **C — Incorrect.** Enable and limit per-app scaling only when supported and justified by shared-plan capacity design.
+  Enable and limit per-app scaling only when supported and justified by shared-plan capacity design. In the App Service capacity and slot release, this action changes per-app scaling. Per-app scaling does not implement App Service autoscale rules for App Service capacity and slot release; the App Service capacity and slot release still cannot change instance count automatically when the selected signal crosses a threshold.
+- **D — Incorrect.** Scale up when each worker needs more CPU, memory, or tier-specific capability.
+  Scale up when each worker needs more CPU, memory, or tier-specific capability. In the App Service capacity and slot release, this action changes vertical plan scaling. App Service capacity and slot release instead needs App Service autoscale rules: Create complementary scale-out and scale-in rules with nonoverlapping thresholds and safe cooldowns. The vertical plan scaling action omits that App Service autoscale rules work.
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/app-service/manage-scale-per-app).
+**Objectives:** `CP-APP-02`
 
-## LAB15-Q17 — D
+**Remediation:** [Repeat the mapped guided task](../README.md#task-5) (`LAB15-CP05`).
 
-The lab's reviewed command path performs this bounded action: Warm and swap staging into production, then verify which settings followed content and which remained sticky.
+**Microsoft Learn sources:**
 
-- A: This choice changes or trusts a broader scope than the recorded lab boundary.
-- B: This choice skips independent evidence or relies on ambiguous resource identity.
-- C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- D: Correct. The lab's reviewed command path performs this bounded action: Warm and swap staging into production, then verify which settings followed content and which remained sticky.
+- [App Service automatic scaling](https://learn.microsoft.com/en-us/azure/app-service/manage-automatic-scaling)
 
-Objectives: `CP-APP-08`.
+**Source reviewed:** 2026-08-31
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/app-service/deploy-staging-slots).
+## LAB15-Q16 — A
+
+**Question:** The App Service capacity and slot release window permits only the slot release change needed to deploy a candidate release to a live URL that is separate from production. Which option respects the boundary?
+
+- **A — Correct.** Deploy and validate a release in a staging slot before swapping it into production.
+  Deploy and validate a release in a staging slot before swapping it into production. It is the least-change deployment slots path for the App Service capacity and slot release requirement to deploy a candidate release to a live URL that is separate from production.
+- **B — Incorrect.** Use preview when the release must be tested with production configuration before cutover.
+  Use preview when the release must be tested with production configuration before cutover. In the App Service capacity and slot release, this action changes swap with preview. Swap with preview does not implement deployment slots for App Service capacity and slot release; the App Service capacity and slot release still cannot deploy a candidate release to a live URL that is separate from production.
+- **C — Incorrect.** Place apps together only when shared capacity, region, OS, cost, and scale behavior are acceptable.
+  Place apps together only when shared capacity, region, OS, cost, and scale behavior are acceptable. In the App Service capacity and slot release, this action changes App Service plan boundaries. App Service capacity and slot release instead needs deployment slots: Deploy and validate a release in a staging slot before swapping it into production. The App Service plan boundaries action omits that deployment slots work.
+- **D — Incorrect.** Increase capacity or configure autoscale when concurrent demand requires more workers.
+  Increase capacity or configure autoscale when concurrent demand requires more workers. In the App Service capacity and slot release, this action changes horizontal plan scaling. App Service capacity and slot release approved deployment slots, not horizontal plan scaling; only the deployment slots change can deploy a candidate release to a live URL that is separate from production.
+
+**Objectives:** `CP-APP-08`
+
+**Remediation:** [Repeat the mapped guided task](../README.md#task-1) (`LAB15-CP01`).
+
+**Microsoft Learn sources:**
+
+- [Set up staging environments in App Service](https://learn.microsoft.com/en-us/azure/app-service/deploy-staging-slots)
+
+**Source reviewed:** 2026-08-31
+
+## LAB15-Q17 — C
+
+**Question:** The slot release preflight has passed; the App Service capacity and slot release must now prevent environment-only configuration from moving when slots exchange content. Which operation should run?
+
+- **A — Incorrect.** Create the app in the intended plan with a supported runtime and unique name.
+  Create the app in the intended plan with a supported runtime and unique name. In the App Service capacity and slot release, this action changes web app creation. Web app creation does not implement slot-specific settings for App Service capacity and slot release; the App Service capacity and slot release still cannot prevent environment-only configuration from moving when slots exchange content.
+- **B — Incorrect.** Select a tier that supports every required feature before creating dependent configuration.
+  Select a tier that supports every required feature before creating dependent configuration. In the App Service capacity and slot release, this action changes App Service pricing tiers. App Service capacity and slot release instead needs slot-specific settings: Mark environment-specific connection and app settings as slot settings before the swap. The App Service pricing tiers action omits that slot-specific settings work.
+- **C — Correct.** Mark environment-specific connection and app settings as slot settings before the swap.
+  Mark environment-specific connection and app settings as slot settings before the swap. In App Service capacity and slot release, applying slot-specific settings is the scoped way to prevent environment-only configuration from moving when slots exchange content.
+- **D — Incorrect.** Create complementary scale-out and scale-in rules with nonoverlapping thresholds and safe cooldowns.
+  Create complementary scale-out and scale-in rules with nonoverlapping thresholds and safe cooldowns. In the App Service capacity and slot release, this action changes App Service autoscale rules. App Service capacity and slot release requires slot-specific settings; changing App Service autoscale rules leaves slot-specific settings absent in App Service capacity and slot release; App Service capacity and slot release cannot prevent environment-only configuration from moving when slots exchange content.
+
+**Objectives:** `CP-APP-08`
+
+**Remediation:** [Repeat the mapped guided task](../README.md#task-2) (`LAB15-CP02`).
+
+**Microsoft Learn sources:**
+
+- [Set up staging environments in App Service](https://learn.microsoft.com/en-us/azure/app-service/deploy-staging-slots)
+
+**Source reviewed:** 2026-08-31
 
 ## LAB15-Q18 — A
 
-The independent validation path must prove Microsoft.Web/sites for the exact recorded object.
+**Question:** The App Service capacity and slot release plan must validate swap behavior before the candidate becomes production while limiting the mutation scope to slot release. Which action is appropriate?
 
-- A: Correct. The independent validation path must prove Microsoft.Web/sites for the exact recorded object.
-- B: This choice changes or trusts a broader scope than the recorded lab boundary.
-- C: This choice skips independent evidence or relies on ambiguous resource identity.
-- D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- **A — Correct.** Use preview when the release must be tested with production configuration before cutover.
+  Use preview when the release must be tested with production configuration before cutover. The App Service capacity and slot release uses this swap with preview operation to validate swap behavior before the candidate becomes production within the approved scope.
+- **B — Incorrect.** Enable and limit per-app scaling only when supported and justified by shared-plan capacity design.
+  Enable and limit per-app scaling only when supported and justified by shared-plan capacity design. In the App Service capacity and slot release, this action changes per-app scaling. App Service capacity and slot release approved swap with preview, not per-app scaling; only the swap with preview change can validate swap behavior before the candidate becomes production.
+- **C — Incorrect.** Scale up when each worker needs more CPU, memory, or tier-specific capability.
+  Scale up when each worker needs more CPU, memory, or tier-specific capability. In the App Service capacity and slot release, this action changes vertical plan scaling. App Service capacity and slot release requires swap with preview; changing vertical plan scaling leaves swap with preview absent in App Service capacity and slot release; App Service capacity and slot release cannot validate swap behavior before the candidate becomes production.
+- **D — Incorrect.** Deploy and validate a release in a staging slot before swapping it into production.
+  Deploy and validate a release in a staging slot before swapping it into production. In the App Service capacity and slot release, this action changes deployment slots. Deployment slots does not implement swap with preview for App Service capacity and slot release; the App Service capacity and slot release still cannot validate swap behavior before the candidate becomes production.
 
-Objectives: `CP-APP-01`.
+**Objectives:** `CP-APP-08`
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/app-service/quickstart-powershell).
+**Remediation:** [Repeat the mapped guided task](../README.md#task-3) (`LAB15-CP03`).
+
+**Microsoft Learn sources:**
+
+- [Set up staging environments in App Service](https://learn.microsoft.com/en-us/azure/app-service/deploy-staging-slots)
+
+**Source reviewed:** 2026-08-31
 
 ## LAB15-Q19 — B
 
-Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared role and a disposable subscription.
+**Question:** A slot release ticket in the App Service capacity and slot release says to create an application inside the intended existing hosting plan. Which slot release action completes the App Service capacity and slot release request with minimal change?
 
-- A: This choice changes or trusts a broader scope than the recorded lab boundary.
-- B: Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared role and a disposable subscription.
-- C: This choice skips independent evidence or relies on ambiguous resource identity.
-- D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- **A — Incorrect.** Place apps together only when shared capacity, region, OS, cost, and scale behavior are acceptable.
+  Place apps together only when shared capacity, region, OS, cost, and scale behavior are acceptable. In the App Service capacity and slot release, this action changes App Service plan boundaries. App Service capacity and slot release approved web app creation, not App Service plan boundaries; only the web app creation change can create an application inside the intended existing hosting plan.
+- **B — Correct.** Create the app in the intended plan with a supported runtime and unique name.
+  For the App Service capacity and slot release, the required web app creation action is: create the app in the intended plan with a supported runtime and unique name. It makes the environment able to create an application inside the intended existing hosting plan.
+- **C — Incorrect.** Increase capacity or configure autoscale when concurrent demand requires more workers.
+  Increase capacity or configure autoscale when concurrent demand requires more workers. In the App Service capacity and slot release, this action changes horizontal plan scaling. Horizontal plan scaling does not implement web app creation for App Service capacity and slot release; the App Service capacity and slot release still cannot create an application inside the intended existing hosting plan.
+- **D — Incorrect.** Mark environment-specific connection and app settings as slot settings before the swap.
+  Mark environment-specific connection and app settings as slot settings before the swap. In the App Service capacity and slot release, this action changes slot-specific settings. App Service capacity and slot release instead needs web app creation: Create the app in the intended plan with a supported runtime and unique name. The slot-specific settings action omits that web app creation work.
 
-Objectives: `CP-APP-02`.
+**Objectives:** `CP-APP-03`
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/app-service/manage-scale-up).
+**Remediation:** [Repeat the mapped guided task](../README.md#task-4) (`LAB15-CP04`).
 
-## LAB15-Q20 — C
+**Microsoft Learn sources:**
 
-Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+- [Azure CLI reference for App Service web apps](https://learn.microsoft.com/en-us/cli/azure/webapp?view=azure-cli-latest)
 
-- A: This choice changes or trusts a broader scope than the recorded lab boundary.
-- B: This choice skips independent evidence or relies on ambiguous resource identity.
-- C: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
-- D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+**Source reviewed:** 2026-08-31
 
-Objectives: `CP-APP-03`.
+## LAB15-Q20 — B
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/app-service/manage-scale-per-app).
+**Question:** The approach for the App Service capacity and slot release is approved, but the slot release environment still cannot limit how many shared-plan workers one application may use. Which implementation step closes the gap?
+
+- **A — Incorrect.** Select a tier that supports every required feature before creating dependent configuration.
+  Select a tier that supports every required feature before creating dependent configuration. In the App Service capacity and slot release, this action changes App Service pricing tiers. App Service capacity and slot release requires per-app scaling; changing App Service pricing tiers leaves per-app scaling absent in App Service capacity and slot release; App Service capacity and slot release cannot limit how many shared-plan workers one application may use.
+- **B — Correct.** Enable and limit per-app scaling only when supported and justified by shared-plan capacity design.
+  Enable and limit per-app scaling only when supported and justified by shared-plan capacity design. This changes per-app scaling in the App Service capacity and slot release, supplying the missing state needed to limit how many shared-plan workers one application may use.
+- **C — Incorrect.** Create complementary scale-out and scale-in rules with nonoverlapping thresholds and safe cooldowns.
+  Create complementary scale-out and scale-in rules with nonoverlapping thresholds and safe cooldowns. In the App Service capacity and slot release, this action changes App Service autoscale rules. App Service capacity and slot release instead needs per-app scaling: Enable and limit per-app scaling only when supported and justified by shared-plan capacity design. The App Service autoscale rules action omits that per-app scaling work.
+- **D — Incorrect.** Use preview when the release must be tested with production configuration before cutover.
+  Use preview when the release must be tested with production configuration before cutover. In the App Service capacity and slot release, this action changes swap with preview. App Service capacity and slot release approved per-app scaling, not swap with preview; only the per-app scaling change can limit how many shared-plan workers one application may use.
+
+**Objectives:** `CP-APP-02`
+
+**Remediation:** [Repeat the mapped guided task](../README.md#task-5) (`LAB15-CP05`).
+
+**Microsoft Learn sources:**
+
+- [Per-app scaling for App Service](https://learn.microsoft.com/en-us/azure/app-service/manage-scale-per-app)
+
+**Source reviewed:** 2026-08-31
 
 ## LAB15-Q21 — D
 
-The lab's reviewed command path performs this bounded action: Warm and swap staging into production, then verify which settings followed content and which remained sticky.
+**Question:** The App Service capacity and slot release rejects slot release exit status as proof it can understand which web apps share workers and scale together. Which App Service capacity and slot release result is valid evidence?
 
-- A: This choice changes or trusts a broader scope than the recorded lab boundary.
-- B: This choice skips independent evidence or relies on ambiguous resource identity.
-- C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- D: Correct. The lab's reviewed command path performs this bounded action: Warm and swap staging into production, then verify which settings followed content and which remained sticky.
+- **A — Incorrect.** Query sku.capacity and active worker metrics after the scale operation.
+  Query sku.capacity and active worker metrics after the scale operation. In the App Service capacity and slot release, this check observes horizontal plan scaling. App Service capacity and slot release output covers horizontal plan scaling, not App Service plan boundaries; the App Service plan boundaries requirement to understand which web apps share workers and scale together remains unverified.
+- **B — Incorrect.** Query slotConfigNames and compare each slot's effective setting after a test swap.
+  Query slotConfigNames and compare each slot's effective setting after a test swap. In the App Service capacity and slot release, this check observes slot-specific settings. Slot-specific settings success in App Service capacity and slot release cannot verify App Service plan boundaries; App Service capacity and slot release cannot understand which web apps share workers and scale together until App Service plan boundaries evidence exists.
+- **C — Incorrect.** Query perSiteScaling on the plan and the app's siteConfig.numberOfWorkers value.
+  Query perSiteScaling on the plan and the app's siteConfig.numberOfWorkers value. In the App Service capacity and slot release, this check observes per-app scaling. App Service capacity and slot release reads per-app scaling, leaving App Service plan boundaries unproved in App Service capacity and slot release; App Service capacity and slot release still has no App Service plan boundaries proof.
+- **D — Correct.** Query each app's serverFarmId and confirm the plan's region, reserved flag, SKU, and worker count.
+  The App Service capacity and slot release validator needs this App Service plan boundaries result: query each app's serverFarmId and confirm the plan's region, reserved flag, SKU, and worker count. It proves the outcome to understand which web apps share workers and scale together rather than an adjacent checkpoint.
 
-Objectives: `CP-APP-08`.
+**Objectives:** `CP-APP-01`
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/app-service/deploy-staging-slots).
+**Remediation:** [Repeat the mapped guided task](../README.md#task-1) (`LAB15-CP01`).
+
+**Microsoft Learn sources:**
+
+- [Azure App Service plans overview](https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans)
+
+**Source reviewed:** 2026-08-31
 
 ## LAB15-Q22 — A
 
-The independent validation path must prove Microsoft.Web/sites for the exact recorded object.
+**Question:** The slot release validator needs one App Service capacity and slot release query after the change to select a hosting tier that supplies the required production capabilities. Which slot release property should the App Service capacity and slot release validator inspect?
 
-- A: Correct. The independent validation path must prove Microsoft.Web/sites for the exact recorded object.
-- B: This choice changes or trusts a broader scope than the recorded lab boundary.
-- C: This choice skips independent evidence or relies on ambiguous resource identity.
-- D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- **A — Correct.** Query sku.name, sku.tier, capacity, and the availability of each required feature.
+  Query sku.name, sku.tier, capacity, and the availability of each required feature. This is independent App Service pricing tiers evidence for the App Service capacity and slot release, even if App Service capacity and slot release setup reports success before App Service pricing tiers becomes observable.
+- **B — Incorrect.** Query the autoscale profile, capacity bounds, metric resource ID, rules, and enabled state.
+  Query the autoscale profile, capacity bounds, metric resource ID, rules, and enabled state. In the App Service capacity and slot release, this check observes App Service autoscale rules. App Service capacity and slot release reads App Service autoscale rules, leaving App Service pricing tiers unproved in App Service capacity and slot release; App Service capacity and slot release still has no App Service pricing tiers proof.
+- **C — Incorrect.** Inspect the swap phase and validate the warmed source slot before completing or resetting.
+  Inspect the swap phase and validate the warmed source slot before completing or resetting. In the App Service capacity and slot release, this check observes swap with preview. App Service capacity and slot release could pass swap with preview while App Service pricing tiers is wrong; App Service capacity and slot release still lacks App Service pricing tiers proof.
+- **D — Incorrect.** Query each app's serverFarmId and confirm the plan's region, reserved flag, SKU, and worker count.
+  Query each app's serverFarmId and confirm the plan's region, reserved flag, SKU, and worker count. In the App Service capacity and slot release, this check observes App Service plan boundaries. App Service capacity and slot release output covers App Service plan boundaries, not App Service pricing tiers; the App Service pricing tiers requirement to select a hosting tier that supplies the required production capabilities remains unverified.
 
-Objectives: `CP-APP-01`.
+**Objectives:** `CP-APP-01`
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/app-service/quickstart-powershell).
+**Remediation:** [Repeat the mapped guided task](../README.md#task-2) (`LAB15-CP02`).
+
+**Microsoft Learn sources:**
+
+- [Azure App Service plans overview](https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans)
+
+**Source reviewed:** 2026-08-31
 
 ## LAB15-Q23 — B
 
-Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared role and a disposable subscription.
+**Question:** The application-platform administrator operating App Service capacity and releases must confirm the App Service capacity and slot release, without mutation, can increase worker CPU or memory without adding worker instances. Which slot release check qualifies?
 
-- A: This choice changes or trusts a broader scope than the recorded lab boundary.
-- B: Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared role and a disposable subscription.
-- C: This choice skips independent evidence or relies on ambiguous resource identity.
-- D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- **A — Incorrect.** List slots and query staging state, hostname, deployment content, and health independently.
+  List slots and query staging state, hostname, deployment content, and health independently. In the App Service capacity and slot release, this check observes deployment slots. App Service capacity and slot release reads deployment slots, leaving vertical plan scaling unproved in App Service capacity and slot release; App Service capacity and slot release still has no vertical plan scaling proof.
+- **B — Correct.** Query the plan SKU after the change and compare app health and cost impact.
+  Query the plan SKU after the change and compare app health and cost impact. For App Service capacity and slot release, this vertical plan scaling read confirms the service can increase worker CPU or memory without adding worker instances.
+- **C — Incorrect.** Query state, hostNames, serverFarmId, httpsOnly, and siteConfig runtime values.
+  Query state, hostNames, serverFarmId, httpsOnly, and siteConfig runtime values. In the App Service capacity and slot release, this check observes web app creation. App Service capacity and slot release output covers web app creation, not vertical plan scaling; the vertical plan scaling requirement to increase worker CPU or memory without adding worker instances remains unverified.
+- **D — Incorrect.** Query sku.name, sku.tier, capacity, and the availability of each required feature.
+  Query sku.name, sku.tier, capacity, and the availability of each required feature. In the App Service capacity and slot release, this check observes App Service pricing tiers. App Service pricing tiers success in App Service capacity and slot release cannot verify vertical plan scaling; App Service capacity and slot release cannot increase worker CPU or memory without adding worker instances until vertical plan scaling evidence exists.
 
-Objectives: `CP-APP-02`.
+**Objectives:** `CP-APP-02`
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/app-service/manage-scale-up).
+**Remediation:** [Repeat the mapped guided task](../README.md#task-3) (`LAB15-CP03`).
 
-## LAB15-Q24 — C
+**Microsoft Learn sources:**
 
-Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+- [Scale up an App Service plan](https://learn.microsoft.com/en-us/azure/app-service/manage-scale-up)
 
-- A: This choice changes or trusts a broader scope than the recorded lab boundary.
-- B: This choice skips independent evidence or relies on ambiguous resource identity.
-- C: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
-- D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+**Source reviewed:** 2026-08-31
 
-Objectives: `CP-APP-03`.
+## LAB15-Q24 — B
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/app-service/manage-scale-per-app).
+**Question:** The App Service capacity and slot release configuration is complete; the slot release reviewers need evidence it can add worker instances without changing the worker size. Which observation shows success?
 
-## LAB15-Q25 — D
+- **A — Incorrect.** Query slotConfigNames and compare each slot's effective setting after a test swap.
+  Query slotConfigNames and compare each slot's effective setting after a test swap. In the App Service capacity and slot release, this check observes slot-specific settings. App Service capacity and slot release could pass slot-specific settings while horizontal plan scaling is wrong; App Service capacity and slot release still lacks horizontal plan scaling proof.
+- **B — Correct.** Query sku.capacity and active worker metrics after the scale operation.
+  Query sku.capacity and active worker metrics after the scale operation. The App Service capacity and slot release reads horizontal plan scaling directly; that horizontal plan scaling result proves the App Service capacity and slot release can add worker instances without changing the worker size without another mutation.
+- **C — Incorrect.** Query perSiteScaling on the plan and the app's siteConfig.numberOfWorkers value.
+  Query perSiteScaling on the plan and the app's siteConfig.numberOfWorkers value. In the App Service capacity and slot release, this check observes per-app scaling. Per-app scaling success in App Service capacity and slot release cannot verify horizontal plan scaling; App Service capacity and slot release cannot add worker instances without changing the worker size until horizontal plan scaling evidence exists.
+- **D — Incorrect.** Query the plan SKU after the change and compare app health and cost impact.
+  Query the plan SKU after the change and compare app health and cost impact. In the App Service capacity and slot release, this check observes vertical plan scaling. App Service capacity and slot release reads vertical plan scaling, leaving horizontal plan scaling unproved in App Service capacity and slot release; App Service capacity and slot release still has no horizontal plan scaling proof.
 
-The lab's reviewed command path performs this bounded action: Warm and swap staging into production, then verify which settings followed content and which remained sticky.
+**Objectives:** `CP-APP-02`
 
-- A: This choice changes or trusts a broader scope than the recorded lab boundary.
-- B: This choice skips independent evidence or relies on ambiguous resource identity.
-- C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- D: Correct. The lab's reviewed command path performs this bounded action: Warm and swap staging into production, then verify which settings followed content and which remained sticky.
+**Remediation:** [Repeat the mapped guided task](../README.md#task-4) (`LAB15-CP04`).
 
-Objectives: `CP-APP-08`.
+**Microsoft Learn sources:**
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/app-service/deploy-staging-slots).
+- [App Service automatic scaling](https://learn.microsoft.com/en-us/azure/app-service/manage-automatic-scaling)
+
+**Source reviewed:** 2026-08-31
+
+## LAB15-Q25 — C
+
+**Question:** The slot release validation asks whether the App Service capacity and slot release can change instance count automatically when the selected signal crosses a threshold. Which observable state is strongest?
+
+- **A — Incorrect.** Inspect the swap phase and validate the warmed source slot before completing or resetting.
+  Inspect the swap phase and validate the warmed source slot before completing or resetting. In the App Service capacity and slot release, this check observes swap with preview. App Service capacity and slot release output covers swap with preview, not App Service autoscale rules; the App Service autoscale rules requirement to change instance count automatically when the selected signal crosses a threshold remains unverified.
+- **B — Incorrect.** Query each app's serverFarmId and confirm the plan's region, reserved flag, SKU, and worker count.
+  Query each app's serverFarmId and confirm the plan's region, reserved flag, SKU, and worker count. In the App Service capacity and slot release, this check observes App Service plan boundaries. App Service plan boundaries success in App Service capacity and slot release cannot verify App Service autoscale rules; App Service capacity and slot release cannot change instance count automatically when the selected signal crosses a threshold until App Service autoscale rules evidence exists.
+- **C — Correct.** Query the autoscale profile, capacity bounds, metric resource ID, rules, and enabled state.
+  For the App Service capacity and slot release, this App Service autoscale rules observation is decisive: query the autoscale profile, capacity bounds, metric resource ID, rules, and enabled state. It is App Service capacity and slot release evidence that operators can change instance count automatically when the selected signal crosses a threshold.
+- **D — Incorrect.** Query sku.capacity and active worker metrics after the scale operation.
+  Query sku.capacity and active worker metrics after the scale operation. In the App Service capacity and slot release, this check observes horizontal plan scaling. App Service capacity and slot release could pass horizontal plan scaling while App Service autoscale rules is wrong; App Service capacity and slot release still lacks App Service autoscale rules proof.
+
+**Objectives:** `CP-APP-02`
+
+**Remediation:** [Repeat the mapped guided task](../README.md#task-5) (`LAB15-CP05`).
+
+**Microsoft Learn sources:**
+
+- [App Service automatic scaling](https://learn.microsoft.com/en-us/azure/app-service/manage-automatic-scaling)
+
+**Source reviewed:** 2026-08-31
 
 ## LAB15-Q26 — A
 
-The independent validation path must prove Microsoft.Web/sites for the exact recorded object.
+**Question:** An App Service capacity and slot release review must prove the slot release ability to deploy a candidate release to a live URL that is separate from production. Which check avoids an adjacent feature?
 
-- A: Correct. The independent validation path must prove Microsoft.Web/sites for the exact recorded object.
-- B: This choice changes or trusts a broader scope than the recorded lab boundary.
-- C: This choice skips independent evidence or relies on ambiguous resource identity.
-- D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- **A — Correct.** List slots and query staging state, hostname, deployment content, and health independently.
+  List slots and query staging state, hostname, deployment content, and health independently. Because the App Service capacity and slot release check observes deployment slots, it independently verifies the requirement to deploy a candidate release to a live URL that is separate from production.
+- **B — Incorrect.** Query state, hostNames, serverFarmId, httpsOnly, and siteConfig runtime values.
+  Query state, hostNames, serverFarmId, httpsOnly, and siteConfig runtime values. In the App Service capacity and slot release, this check observes web app creation. App Service capacity and slot release reads web app creation, leaving deployment slots unproved in App Service capacity and slot release; App Service capacity and slot release still has no deployment slots proof.
+- **C — Incorrect.** Query sku.name, sku.tier, capacity, and the availability of each required feature.
+  Query sku.name, sku.tier, capacity, and the availability of each required feature. In the App Service capacity and slot release, this check observes App Service pricing tiers. App Service capacity and slot release could pass App Service pricing tiers while deployment slots is wrong; App Service capacity and slot release still lacks deployment slots proof.
+- **D — Incorrect.** Query the autoscale profile, capacity bounds, metric resource ID, rules, and enabled state.
+  Query the autoscale profile, capacity bounds, metric resource ID, rules, and enabled state. In the App Service capacity and slot release, this check observes App Service autoscale rules. App Service capacity and slot release output covers App Service autoscale rules, not deployment slots; the deployment slots requirement to deploy a candidate release to a live URL that is separate from production remains unverified.
 
-Objectives: `CP-APP-01`.
+**Objectives:** `CP-APP-08`
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/app-service/quickstart-powershell).
+**Remediation:** [Repeat the mapped guided task](../README.md#task-1) (`LAB15-CP01`).
+
+**Microsoft Learn sources:**
+
+- [Set up staging environments in App Service](https://learn.microsoft.com/en-us/azure/app-service/deploy-staging-slots)
+
+**Source reviewed:** 2026-08-31
 
 ## LAB15-Q27 — B
 
-Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared role and a disposable subscription.
+**Question:** The App Service capacity and slot release evidence bundle needs a slot release result showing it can prevent environment-only configuration from moving when slots exchange content. Which result belongs in the checkpoint?
 
-- A: This choice changes or trusts a broader scope than the recorded lab boundary.
-- B: Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared role and a disposable subscription.
-- C: This choice skips independent evidence or relies on ambiguous resource identity.
-- D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- **A — Incorrect.** Query perSiteScaling on the plan and the app's siteConfig.numberOfWorkers value.
+  Query perSiteScaling on the plan and the app's siteConfig.numberOfWorkers value. In the App Service capacity and slot release, this check observes per-app scaling. App Service capacity and slot release reads per-app scaling, leaving slot-specific settings unproved in App Service capacity and slot release; App Service capacity and slot release still has no slot-specific settings proof.
+- **B — Correct.** Query slotConfigNames and compare each slot's effective setting after a test swap.
+  The App Service capacity and slot release validator needs this slot-specific settings result: query slotConfigNames and compare each slot's effective setting after a test swap. It proves the outcome to prevent environment-only configuration from moving when slots exchange content rather than an adjacent checkpoint.
+- **C — Incorrect.** Query the plan SKU after the change and compare app health and cost impact.
+  Query the plan SKU after the change and compare app health and cost impact. In the App Service capacity and slot release, this check observes vertical plan scaling. App Service capacity and slot release output covers vertical plan scaling, not slot-specific settings; the slot-specific settings requirement to prevent environment-only configuration from moving when slots exchange content remains unverified.
+- **D — Incorrect.** List slots and query staging state, hostname, deployment content, and health independently.
+  List slots and query staging state, hostname, deployment content, and health independently. In the App Service capacity and slot release, this check observes deployment slots. Deployment slots success in App Service capacity and slot release cannot verify slot-specific settings; App Service capacity and slot release cannot prevent environment-only configuration from moving when slots exchange content until slot-specific settings evidence exists.
 
-Objectives: `CP-APP-02`.
+**Objectives:** `CP-APP-08`
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/app-service/manage-scale-up).
+**Remediation:** [Repeat the mapped guided task](../README.md#task-2) (`LAB15-CP02`).
 
-## LAB15-Q28 — C
+**Microsoft Learn sources:**
 
-Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+- [Set up staging environments in App Service](https://learn.microsoft.com/en-us/azure/app-service/deploy-staging-slots)
 
-- A: This choice changes or trusts a broader scope than the recorded lab boundary.
-- B: This choice skips independent evidence or relies on ambiguous resource identity.
-- C: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
-- D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+**Source reviewed:** 2026-08-31
 
-Objectives: `CP-APP-03`.
+## LAB15-Q28 — A
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/app-service/manage-scale-per-app).
+**Question:** Before App Service capacity and slot release cleanup, the slot release team must reconfirm it can validate swap behavior before the candidate becomes production. Which read-only inspection should run?
 
-## LAB15-Q29 — D
+- **A — Correct.** Inspect the swap phase and validate the warmed source slot before completing or resetting.
+  Inspect the swap phase and validate the warmed source slot before completing or resetting. This is independent swap with preview evidence for the App Service capacity and slot release, even if App Service capacity and slot release setup reports success before swap with preview becomes observable.
+- **B — Incorrect.** Query each app's serverFarmId and confirm the plan's region, reserved flag, SKU, and worker count.
+  Query each app's serverFarmId and confirm the plan's region, reserved flag, SKU, and worker count. In the App Service capacity and slot release, this check observes App Service plan boundaries. App Service capacity and slot release output covers App Service plan boundaries, not swap with preview; the swap with preview requirement to validate swap behavior before the candidate becomes production remains unverified.
+- **C — Incorrect.** Query sku.capacity and active worker metrics after the scale operation.
+  Query sku.capacity and active worker metrics after the scale operation. In the App Service capacity and slot release, this check observes horizontal plan scaling. Horizontal plan scaling success in App Service capacity and slot release cannot verify swap with preview; App Service capacity and slot release cannot validate swap behavior before the candidate becomes production until swap with preview evidence exists.
+- **D — Incorrect.** Query slotConfigNames and compare each slot's effective setting after a test swap.
+  Query slotConfigNames and compare each slot's effective setting after a test swap. In the App Service capacity and slot release, this check observes slot-specific settings. App Service capacity and slot release reads slot-specific settings, leaving swap with preview unproved in App Service capacity and slot release; App Service capacity and slot release still has no swap with preview proof.
 
-The lab's reviewed command path performs this bounded action: Warm and swap staging into production, then verify which settings followed content and which remained sticky.
+**Objectives:** `CP-APP-08`
 
-- A: This choice changes or trusts a broader scope than the recorded lab boundary.
-- B: This choice skips independent evidence or relies on ambiguous resource identity.
-- C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- D: Correct. The lab's reviewed command path performs this bounded action: Warm and swap staging into production, then verify which settings followed content and which remained sticky.
+**Remediation:** [Repeat the mapped guided task](../README.md#task-3) (`LAB15-CP03`).
 
-Objectives: `CP-APP-08`.
+**Microsoft Learn sources:**
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/app-service/deploy-staging-slots).
+- [Set up staging environments in App Service](https://learn.microsoft.com/en-us/azure/app-service/deploy-staging-slots)
 
-## LAB15-Q30 — A
+**Source reviewed:** 2026-08-31
 
-The independent validation path must prove Microsoft.Web/sites for the exact recorded object.
+## LAB15-Q29 — C
 
-- A: Correct. The independent validation path must prove Microsoft.Web/sites for the exact recorded object.
-- B: This choice changes or trusts a broader scope than the recorded lab boundary.
-- C: This choice skips independent evidence or relies on ambiguous resource identity.
-- D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+**Question:** The App Service capacity and slot release setup reports success after the slot release attempt to create an application inside the intended existing hosting plan. Which slot release read-only observation proves the App Service capacity and slot release outcome?
 
-Objectives: `CP-APP-01`.
+- **A — Incorrect.** Query sku.name, sku.tier, capacity, and the availability of each required feature.
+  Query sku.name, sku.tier, capacity, and the availability of each required feature. In the App Service capacity and slot release, this check observes App Service pricing tiers. App Service capacity and slot release output covers App Service pricing tiers, not web app creation; the web app creation requirement to create an application inside the intended existing hosting plan remains unverified.
+- **B — Incorrect.** Query the autoscale profile, capacity bounds, metric resource ID, rules, and enabled state.
+  Query the autoscale profile, capacity bounds, metric resource ID, rules, and enabled state. In the App Service capacity and slot release, this check observes App Service autoscale rules. App Service autoscale rules success in App Service capacity and slot release cannot verify web app creation; App Service capacity and slot release cannot create an application inside the intended existing hosting plan until web app creation evidence exists.
+- **C — Correct.** Query state, hostNames, serverFarmId, httpsOnly, and siteConfig runtime values.
+  Query state, hostNames, serverFarmId, httpsOnly, and siteConfig runtime values. For App Service capacity and slot release, this web app creation read confirms the service can create an application inside the intended existing hosting plan.
+- **D — Incorrect.** Inspect the swap phase and validate the warmed source slot before completing or resetting.
+  Inspect the swap phase and validate the warmed source slot before completing or resetting. In the App Service capacity and slot release, this check observes swap with preview. App Service capacity and slot release could pass swap with preview while web app creation is wrong; App Service capacity and slot release still lacks web app creation proof.
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/app-service/quickstart-powershell).
+**Objectives:** `CP-APP-03`
 
-## LAB15-Q31 — B
+**Remediation:** [Repeat the mapped guided task](../README.md#task-4) (`LAB15-CP04`).
 
-Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared role and a disposable subscription.
+**Microsoft Learn sources:**
 
-- A: This choice changes or trusts a broader scope than the recorded lab boundary.
-- B: Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared role and a disposable subscription.
-- C: This choice skips independent evidence or relies on ambiguous resource identity.
-- D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- [Azure CLI reference for App Service web apps](https://learn.microsoft.com/en-us/cli/azure/webapp?view=azure-cli-latest)
 
-Objectives: `CP-APP-02`.
+**Source reviewed:** 2026-08-31
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/app-service/manage-scale-up).
+## LAB15-Q30 — D
 
-## LAB15-Q32 — C
+**Question:** The slot release log says the App Service capacity and slot release can now limit how many shared-plan workers one application may use. Which slot release state should the App Service capacity and slot release acceptance test retain?
 
-Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+- **A — Incorrect.** Query the plan SKU after the change and compare app health and cost impact.
+  Query the plan SKU after the change and compare app health and cost impact. In the App Service capacity and slot release, this check observes vertical plan scaling. Vertical plan scaling success in App Service capacity and slot release cannot verify per-app scaling; App Service capacity and slot release cannot limit how many shared-plan workers one application may use until per-app scaling evidence exists.
+- **B — Incorrect.** List slots and query staging state, hostname, deployment content, and health independently.
+  List slots and query staging state, hostname, deployment content, and health independently. In the App Service capacity and slot release, this check observes deployment slots. App Service capacity and slot release reads deployment slots, leaving per-app scaling unproved in App Service capacity and slot release; App Service capacity and slot release still has no per-app scaling proof.
+- **C — Incorrect.** Query state, hostNames, serverFarmId, httpsOnly, and siteConfig runtime values.
+  Query state, hostNames, serverFarmId, httpsOnly, and siteConfig runtime values. In the App Service capacity and slot release, this check observes web app creation. App Service capacity and slot release could pass web app creation while per-app scaling is wrong; App Service capacity and slot release still lacks per-app scaling proof.
+- **D — Correct.** Query perSiteScaling on the plan and the app's siteConfig.numberOfWorkers value.
+  Query perSiteScaling on the plan and the app's siteConfig.numberOfWorkers value. The App Service capacity and slot release reads per-app scaling directly; that per-app scaling result proves the App Service capacity and slot release can limit how many shared-plan workers one application may use without another mutation.
 
-- A: This choice changes or trusts a broader scope than the recorded lab boundary.
-- B: This choice skips independent evidence or relies on ambiguous resource identity.
-- C: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
-- D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+**Objectives:** `CP-APP-02`
 
-Objectives: `CP-APP-03`.
+**Remediation:** [Repeat the mapped guided task](../README.md#task-5) (`LAB15-CP05`).
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/app-service/manage-scale-per-app).
+**Microsoft Learn sources:**
+
+- [Per-app scaling for App Service](https://learn.microsoft.com/en-us/azure/app-service/manage-scale-per-app)
+
+**Source reviewed:** 2026-08-31
+
+## LAB15-Q31 — D
+
+**Question:** A slot release break/fix in the App Service capacity and slot release fails when operators try to understand which web apps share workers and scale together. Which diagnosis fits?
+
+- **A — Incorrect.** The selected tier does not support the requested deployment slots.
+  The selected tier does not support the requested deployment slots. The App Service capacity and slot release fault concerns App Service pricing tiers. App Service capacity and slot release has App Service pricing tiers impact, but App Service plan boundaries is the App Service capacity and slot release failed path; the App Service pricing tiers state cannot produce App Service plan boundaries failure.
+- **B — Incorrect.** The release was deployed directly to production, leaving no isolated slot validation path.
+  The release was deployed directly to production, leaving no isolated slot validation path. The App Service capacity and slot release fault concerns deployment slots. App Service capacity and slot release could repair deployment slots while App Service plan boundaries stays broken in App Service capacity and slot release; the App Service capacity and slot release remains unable to understand which web apps share workers and scale together.
+- **C — Incorrect.** The app requests more workers than the shared plan currently provides.
+  The app requests more workers than the shared plan currently provides. The App Service capacity and slot release fault concerns per-app scaling. App Service capacity and slot release failed on App Service plan boundaries; this per-app scaling finding redirects App Service capacity and slot release remediation away from App Service plan boundaries.
+- **D — Correct.** A workload needing independent scaling shares a plan with an unrelated production app.
+  For the App Service capacity and slot release, the App Service plan boundaries failure is causal: a workload needing independent scaling shares a plan with an unrelated production app. Correcting it restores the ability to understand which web apps share workers and scale together.
+
+**Objectives:** `CP-APP-01`
+
+**Remediation:** [Repeat the mapped guided task](../README.md#task-1) (`LAB15-CP01`).
+
+**Microsoft Learn sources:**
+
+- [Azure App Service plans overview](https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans)
+
+**Source reviewed:** 2026-08-31
+
+## LAB15-Q32 — A
+
+**Question:** The App Service capacity and slot release troubleshooting scope is the slot release need to select a hosting tier that supplies the required production capabilities. Which condition should be corrected first?
+
+- **A — Correct.** The selected tier does not support the requested deployment slots.
+  The selected tier does not support the requested deployment slots. The finding is specific to App Service pricing tiers in the App Service capacity and slot release; repairing App Service pricing tiers restores the App Service capacity and slot release ability to select a hosting tier that supplies the required production capabilities.
+- **B — Incorrect.** The change request expects scale-up to add worker instances without changing worker size.
+  The change request expects scale-up to add worker instances without changing worker size. The App Service capacity and slot release fault concerns vertical plan scaling. App Service capacity and slot release failed on App Service pricing tiers; this vertical plan scaling finding redirects App Service capacity and slot release remediation away from App Service pricing tiers.
+- **C — Incorrect.** A production-only connection string is swappable and moves into the staging slot.
+  A production-only connection string is swappable and moves into the staging slot. The App Service capacity and slot release fault concerns slot-specific settings. App Service capacity and slot release may fix slot-specific settings, yet App Service pricing tiers still fails; this App Service capacity and slot release diagnosis of slot-specific settings is wrong for App Service pricing tiers.
+- **D — Incorrect.** A workload needing independent scaling shares a plan with an unrelated production app.
+  A workload needing independent scaling shares a plan with an unrelated production app. The App Service capacity and slot release fault concerns App Service plan boundaries. App Service capacity and slot release has App Service plan boundaries impact, but App Service pricing tiers is the App Service capacity and slot release failed path; the App Service plan boundaries state cannot produce App Service pricing tiers failure.
+
+**Objectives:** `CP-APP-01`
+
+**Remediation:** [Repeat the mapped guided task](../README.md#task-2) (`LAB15-CP02`).
+
+**Microsoft Learn sources:**
+
+- [Azure App Service plans overview](https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans)
+
+**Source reviewed:** 2026-08-31
 
 ## LAB15-Q33 — D
 
-The lab's reviewed command path performs this bounded action: Warm and swap staging into production, then verify which settings followed content and which remained sticky.
+**Question:** The App Service capacity and slot release result is partial because the slot release cannot increase worker CPU or memory without adding worker instances. Which condition accounts for that result?
 
-- A: This choice changes or trusts a broader scope than the recorded lab boundary.
-- B: This choice skips independent evidence or relies on ambiguous resource identity.
-- C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- D: Correct. The lab's reviewed command path performs this bounded action: Warm and swap staging into production, then verify which settings followed content and which remained sticky.
+- **A — Incorrect.** The plan was scaled to a larger worker size but instance count remained one.
+  The plan was scaled to a larger worker size but instance count remained one. The App Service capacity and slot release fault concerns horizontal plan scaling. App Service capacity and slot release failed on vertical plan scaling; this horizontal plan scaling finding redirects App Service capacity and slot release remediation away from vertical plan scaling.
+- **B — Incorrect.** The preview was completed without validating the source slot under target configuration.
+  The preview was completed without validating the source slot under target configuration. The App Service capacity and slot release fault concerns swap with preview. App Service capacity and slot release may fix swap with preview, yet vertical plan scaling still fails; this App Service capacity and slot release diagnosis of swap with preview is wrong for vertical plan scaling.
+- **C — Incorrect.** The selected tier does not support the requested deployment slots.
+  The selected tier does not support the requested deployment slots. The App Service capacity and slot release fault concerns App Service pricing tiers. App Service capacity and slot release has App Service pricing tiers impact, but vertical plan scaling is the App Service capacity and slot release failed path; the App Service pricing tiers state cannot produce vertical plan scaling failure.
+- **D — Correct.** The change request expects scale-up to add worker instances without changing worker size.
+  The App Service capacity and slot release cannot increase worker CPU or memory without adding worker instances because of this vertical plan scaling defect: the change request expects scale-up to add worker instances without changing worker size. The symptom and repair align.
 
-Objectives: `CP-APP-08`.
+**Objectives:** `CP-APP-02`
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/app-service/deploy-staging-slots).
+**Remediation:** [Repeat the mapped guided task](../README.md#task-3) (`LAB15-CP03`).
 
-## LAB15-Q34 — A
+**Microsoft Learn sources:**
 
-The independent validation path must prove Microsoft.Web/sites for the exact recorded object.
+- [Scale up an App Service plan](https://learn.microsoft.com/en-us/azure/app-service/manage-scale-up)
 
-- A: Correct. The independent validation path must prove Microsoft.Web/sites for the exact recorded object.
-- B: This choice changes or trusts a broader scope than the recorded lab boundary.
-- C: This choice skips independent evidence or relies on ambiguous resource identity.
-- D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+**Source reviewed:** 2026-08-31
 
-Objectives: `CP-APP-01`.
+## LAB15-Q34 — C
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/app-service/quickstart-powershell).
+**Question:** The slot release evidence shows the App Service capacity and slot release cannot add worker instances without changing the worker size. Which root cause fits that evidence?
 
-## LAB15-Q35 — B
+- **A — Incorrect.** The scale-out rule exists, but maximum capacity prevents adding another instance.
+  The scale-out rule exists, but maximum capacity prevents adding another instance. The App Service capacity and slot release fault concerns App Service autoscale rules. App Service capacity and slot release may fix App Service autoscale rules, yet horizontal plan scaling still fails; this App Service capacity and slot release diagnosis of App Service autoscale rules is wrong for horizontal plan scaling.
+- **B — Incorrect.** A Linux runtime was requested on a Windows App Service plan.
+  A Linux runtime was requested on a Windows App Service plan. The App Service capacity and slot release fault concerns web app creation. App Service capacity and slot release has web app creation impact, but horizontal plan scaling is the App Service capacity and slot release failed path; the web app creation state cannot produce horizontal plan scaling failure.
+- **C — Correct.** The plan was scaled to a larger worker size but instance count remained one.
+  The plan was scaled to a larger worker size but instance count remained one. Removing this horizontal plan scaling condition lets the App Service capacity and slot release add worker instances without changing the worker size while leaving healthy controls unchanged.
+- **D — Incorrect.** The change request expects scale-up to add worker instances without changing worker size.
+  The change request expects scale-up to add worker instances without changing worker size. The App Service capacity and slot release fault concerns vertical plan scaling. App Service capacity and slot release failed on horizontal plan scaling; this vertical plan scaling finding redirects App Service capacity and slot release remediation away from horizontal plan scaling.
 
-Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared role and a disposable subscription.
+**Objectives:** `CP-APP-02`
 
-- A: This choice changes or trusts a broader scope than the recorded lab boundary.
-- B: Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared role and a disposable subscription.
-- C: This choice skips independent evidence or relies on ambiguous resource identity.
-- D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+**Remediation:** [Repeat the mapped guided task](../README.md#task-4) (`LAB15-CP04`).
 
-Objectives: `CP-APP-02`.
+**Microsoft Learn sources:**
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/app-service/manage-scale-up).
+- [App Service automatic scaling](https://learn.microsoft.com/en-us/azure/app-service/manage-automatic-scaling)
 
-## LAB15-Q36 — C
+**Source reviewed:** 2026-08-31
 
-Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+## LAB15-Q35 — C
 
-- A: This choice changes or trusts a broader scope than the recorded lab boundary.
-- B: This choice skips independent evidence or relies on ambiguous resource identity.
-- C: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
-- D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+**Question:** Although the App Service capacity and slot release is meant to let the slot release change instance count automatically when the selected signal crosses a threshold, its checkpoint fails. Which slot release defect explains the failure?
 
-Objectives: `CP-APP-03`.
+- **A — Incorrect.** The release was deployed directly to production, leaving no isolated slot validation path.
+  The release was deployed directly to production, leaving no isolated slot validation path. The App Service capacity and slot release fault concerns deployment slots. App Service capacity and slot release has deployment slots impact, but App Service autoscale rules is the App Service capacity and slot release failed path; the deployment slots state cannot produce App Service autoscale rules failure.
+- **B — Incorrect.** The app requests more workers than the shared plan currently provides.
+  The app requests more workers than the shared plan currently provides. The App Service capacity and slot release fault concerns per-app scaling. App Service capacity and slot release could repair per-app scaling while App Service autoscale rules stays broken in App Service capacity and slot release; the App Service capacity and slot release remains unable to change instance count automatically when the selected signal crosses a threshold.
+- **C — Correct.** The scale-out rule exists, but maximum capacity prevents adding another instance.
+  The scale-out rule exists, but maximum capacity prevents adding another instance. In App Service capacity and slot release, this App Service autoscale rules cause matches the failure to change instance count automatically when the selected signal crosses a threshold.
+- **D — Incorrect.** The plan was scaled to a larger worker size but instance count remained one.
+  The plan was scaled to a larger worker size but instance count remained one. The App Service capacity and slot release fault concerns horizontal plan scaling. App Service capacity and slot release may fix horizontal plan scaling, yet App Service autoscale rules still fails; this App Service capacity and slot release diagnosis of horizontal plan scaling is wrong for App Service autoscale rules.
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/app-service/manage-scale-per-app).
+**Objectives:** `CP-APP-02`
 
-## LAB15-Q37 — D
+**Remediation:** [Repeat the mapped guided task](../README.md#task-5) (`LAB15-CP05`).
 
-The lab's reviewed command path performs this bounded action: Warm and swap staging into production, then verify which settings followed content and which remained sticky.
+**Microsoft Learn sources:**
 
-- A: This choice changes or trusts a broader scope than the recorded lab boundary.
-- B: This choice skips independent evidence or relies on ambiguous resource identity.
-- C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- D: Correct. The lab's reviewed command path performs this bounded action: Warm and swap staging into production, then verify which settings followed content and which remained sticky.
+- [App Service automatic scaling](https://learn.microsoft.com/en-us/azure/app-service/manage-automatic-scaling)
 
-Objectives: `CP-APP-08`.
+**Source reviewed:** 2026-08-31
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/app-service/deploy-staging-slots).
+## LAB15-Q36 — D
+
+**Question:** The slot release support team isolated the App Service capacity and slot release incident to the attempt to deploy a candidate release to a live URL that is separate from production. Which condition prevents success?
+
+- **A — Incorrect.** A production-only connection string is swappable and moves into the staging slot.
+  A production-only connection string is swappable and moves into the staging slot. The App Service capacity and slot release fault concerns slot-specific settings. App Service capacity and slot release could repair slot-specific settings while deployment slots stays broken in App Service capacity and slot release; the App Service capacity and slot release remains unable to deploy a candidate release to a live URL that is separate from production.
+- **B — Incorrect.** A workload needing independent scaling shares a plan with an unrelated production app.
+  A workload needing independent scaling shares a plan with an unrelated production app. The App Service capacity and slot release fault concerns App Service plan boundaries. App Service capacity and slot release failed on deployment slots; this App Service plan boundaries finding redirects App Service capacity and slot release remediation away from deployment slots.
+- **C — Incorrect.** The scale-out rule exists, but maximum capacity prevents adding another instance.
+  The scale-out rule exists, but maximum capacity prevents adding another instance. The App Service capacity and slot release fault concerns App Service autoscale rules. App Service capacity and slot release may fix App Service autoscale rules, yet deployment slots still fails; this App Service capacity and slot release diagnosis of App Service autoscale rules is wrong for deployment slots.
+- **D — Correct.** The release was deployed directly to production, leaving no isolated slot validation path.
+  The release was deployed directly to production, leaving no isolated slot validation path. This App Service capacity and slot release condition breaks deployment slots, explaining why operators cannot deploy a candidate release to a live URL that is separate from production.
+
+**Objectives:** `CP-APP-08`
+
+**Remediation:** [Repeat the mapped guided task](../README.md#task-1) (`LAB15-CP01`).
+
+**Microsoft Learn sources:**
+
+- [Set up staging environments in App Service](https://learn.microsoft.com/en-us/azure/app-service/deploy-staging-slots)
+
+**Source reviewed:** 2026-08-31
+
+## LAB15-Q37 — C
+
+**Question:** An App Service capacity and slot release query surprises the application-platform administrator operating App Service capacity and releases during the slot release attempt to prevent environment-only configuration from moving when slots exchange content. Which finding explains it?
+
+- **A — Incorrect.** The preview was completed without validating the source slot under target configuration.
+  The preview was completed without validating the source slot under target configuration. The App Service capacity and slot release fault concerns swap with preview. App Service capacity and slot release failed on slot-specific settings; this swap with preview finding redirects App Service capacity and slot release remediation away from slot-specific settings.
+- **B — Incorrect.** The selected tier does not support the requested deployment slots.
+  The selected tier does not support the requested deployment slots. The App Service capacity and slot release fault concerns App Service pricing tiers. App Service capacity and slot release may fix App Service pricing tiers, yet slot-specific settings still fails; this App Service capacity and slot release diagnosis of App Service pricing tiers is wrong for slot-specific settings.
+- **C — Correct.** A production-only connection string is swappable and moves into the staging slot.
+  For the App Service capacity and slot release, the slot-specific settings failure is causal: a production-only connection string is swappable and moves into the staging slot. Correcting it restores the ability to prevent environment-only configuration from moving when slots exchange content.
+- **D — Incorrect.** The release was deployed directly to production, leaving no isolated slot validation path.
+  The release was deployed directly to production, leaving no isolated slot validation path. The App Service capacity and slot release fault concerns deployment slots. App Service capacity and slot release could repair deployment slots while slot-specific settings stays broken in App Service capacity and slot release; the App Service capacity and slot release remains unable to prevent environment-only configuration from moving when slots exchange content.
+
+**Objectives:** `CP-APP-08`
+
+**Remediation:** [Repeat the mapped guided task](../README.md#task-2) (`LAB15-CP02`).
+
+**Microsoft Learn sources:**
+
+- [Set up staging environments in App Service](https://learn.microsoft.com/en-us/azure/app-service/deploy-staging-slots)
+
+**Source reviewed:** 2026-08-31
 
 ## LAB15-Q38 — A
 
-The independent validation path must prove Microsoft.Web/sites for the exact recorded object.
+**Question:** Other App Service capacity and slot release components are healthy, but the slot release still cannot validate swap behavior before the candidate becomes production. Which state causes the isolated failure?
 
-- A: Correct. The independent validation path must prove Microsoft.Web/sites for the exact recorded object.
-- B: This choice changes or trusts a broader scope than the recorded lab boundary.
-- C: This choice skips independent evidence or relies on ambiguous resource identity.
-- D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- **A — Correct.** The preview was completed without validating the source slot under target configuration.
+  The preview was completed without validating the source slot under target configuration. The finding is specific to swap with preview in the App Service capacity and slot release; repairing swap with preview restores the App Service capacity and slot release ability to validate swap behavior before the candidate becomes production.
+- **B — Incorrect.** A Linux runtime was requested on a Windows App Service plan.
+  A Linux runtime was requested on a Windows App Service plan. The App Service capacity and slot release fault concerns web app creation. App Service capacity and slot release has web app creation impact, but swap with preview is the App Service capacity and slot release failed path; the web app creation state cannot produce swap with preview failure.
+- **C — Incorrect.** The change request expects scale-up to add worker instances without changing worker size.
+  The change request expects scale-up to add worker instances without changing worker size. The App Service capacity and slot release fault concerns vertical plan scaling. App Service capacity and slot release could repair vertical plan scaling while swap with preview stays broken in App Service capacity and slot release; the App Service capacity and slot release remains unable to validate swap behavior before the candidate becomes production.
+- **D — Incorrect.** A production-only connection string is swappable and moves into the staging slot.
+  A production-only connection string is swappable and moves into the staging slot. The App Service capacity and slot release fault concerns slot-specific settings. App Service capacity and slot release failed on swap with preview; this slot-specific settings finding redirects App Service capacity and slot release remediation away from swap with preview.
 
-Objectives: `CP-APP-01`.
+**Objectives:** `CP-APP-08`
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/app-service/quickstart-powershell).
+**Remediation:** [Repeat the mapped guided task](../README.md#task-3) (`LAB15-CP03`).
 
-## LAB15-Q39 — B
+**Microsoft Learn sources:**
 
-Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared role and a disposable subscription.
+- [Set up staging environments in App Service](https://learn.microsoft.com/en-us/azure/app-service/deploy-staging-slots)
 
-- A: This choice changes or trusts a broader scope than the recorded lab boundary.
-- B: Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared role and a disposable subscription.
-- C: This choice skips independent evidence or relies on ambiguous resource identity.
-- D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+**Source reviewed:** 2026-08-31
 
-Objectives: `CP-APP-02`.
+## LAB15-Q39 — A
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/app-service/manage-scale-up).
+**Question:** During a slot release fault drill, the App Service capacity and slot release does not create an application inside the intended existing hosting plan. Which finding identifies the defect?
 
-## LAB15-Q40 — C
+- **A — Correct.** A Linux runtime was requested on a Windows App Service plan.
+  The App Service capacity and slot release cannot create an application inside the intended existing hosting plan because of this web app creation defect: a Linux runtime was requested on a Windows App Service plan. The symptom and repair align.
+- **B — Incorrect.** The app requests more workers than the shared plan currently provides.
+  The app requests more workers than the shared plan currently provides. The App Service capacity and slot release fault concerns per-app scaling. App Service capacity and slot release could repair per-app scaling while web app creation stays broken in App Service capacity and slot release; the App Service capacity and slot release remains unable to create an application inside the intended existing hosting plan.
+- **C — Incorrect.** The plan was scaled to a larger worker size but instance count remained one.
+  The plan was scaled to a larger worker size but instance count remained one. The App Service capacity and slot release fault concerns horizontal plan scaling. App Service capacity and slot release failed on web app creation; this horizontal plan scaling finding redirects App Service capacity and slot release remediation away from web app creation.
+- **D — Incorrect.** The preview was completed without validating the source slot under target configuration.
+  The preview was completed without validating the source slot under target configuration. The App Service capacity and slot release fault concerns swap with preview. App Service capacity and slot release may fix swap with preview, yet web app creation still fails; this App Service capacity and slot release diagnosis of swap with preview is wrong for web app creation.
 
-Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+**Objectives:** `CP-APP-03`
 
-- A: This choice changes or trusts a broader scope than the recorded lab boundary.
-- B: This choice skips independent evidence or relies on ambiguous resource identity.
-- C: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
-- D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+**Remediation:** [Repeat the mapped guided task](../README.md#task-4) (`LAB15-CP04`).
 
-Objectives: `CP-APP-03`.
+**Microsoft Learn sources:**
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/app-service/manage-scale-per-app).
+- [Azure CLI reference for App Service web apps](https://learn.microsoft.com/en-us/cli/azure/webapp?view=azure-cli-latest)
 
-## LAB15-Q41 — D
+**Source reviewed:** 2026-08-31
 
-Evidence-led repair preserves scope and makes the cause and correction auditable.
+## LAB15-Q40 — B
 
-- A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- B: This choice changes or trusts a broader scope than the recorded lab boundary.
-- C: This choice skips independent evidence or relies on ambiguous resource identity.
-- D: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+**Question:** The App Service capacity and slot release setup finishes, yet the slot release cannot limit how many shared-plan workers one application may use. Which misconfiguration explains the mismatch?
 
-Objectives: `CP-APP-03`, `CP-APP-08`.
+- **A — Incorrect.** A workload needing independent scaling shares a plan with an unrelated production app.
+  A workload needing independent scaling shares a plan with an unrelated production app. The App Service capacity and slot release fault concerns App Service plan boundaries. App Service capacity and slot release could repair App Service plan boundaries while per-app scaling stays broken in App Service capacity and slot release; the App Service capacity and slot release remains unable to limit how many shared-plan workers one application may use.
+- **B — Correct.** The app requests more workers than the shared plan currently provides.
+  The app requests more workers than the shared plan currently provides. Removing this per-app scaling condition lets the App Service capacity and slot release limit how many shared-plan workers one application may use while leaving healthy controls unchanged.
+- **C — Incorrect.** The scale-out rule exists, but maximum capacity prevents adding another instance.
+  The scale-out rule exists, but maximum capacity prevents adding another instance. The App Service capacity and slot release fault concerns App Service autoscale rules. App Service capacity and slot release may fix App Service autoscale rules, yet per-app scaling still fails; this App Service capacity and slot release diagnosis of App Service autoscale rules is wrong for per-app scaling.
+- **D — Incorrect.** A Linux runtime was requested on a Windows App Service plan.
+  A Linux runtime was requested on a Windows App Service plan. The App Service capacity and slot release fault concerns web app creation. App Service capacity and slot release has web app creation impact, but per-app scaling is the App Service capacity and slot release failed path; the web app creation state cannot produce per-app scaling failure.
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/app-service/manage-scale-per-app).
+**Objectives:** `CP-APP-02`
 
-## LAB15-Q42 — A
+**Remediation:** [Repeat the mapped guided task](../README.md#task-5) (`LAB15-CP05`).
 
-Evidence-led repair preserves scope and makes the cause and correction auditable.
+**Microsoft Learn sources:**
 
-- A: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
-- B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- C: This choice changes or trusts a broader scope than the recorded lab boundary.
-- D: This choice skips independent evidence or relies on ambiguous resource identity.
+- [Per-app scaling for App Service](https://learn.microsoft.com/en-us/azure/app-service/manage-scale-per-app)
 
-Objectives: `CP-APP-03`, `CP-APP-08`.
+**Source reviewed:** 2026-08-31
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/app-service/manage-scale-per-app).
+## LAB15-Q41 — B
 
-## LAB15-Q43 — B
+**Question:** The application-platform administrator operating App Service capacity and releases needs a safe App Service capacity and slot release change to understand which web apps share workers and scale together, followed by slot release evidence. Which pair merits approval?
 
-Evidence-led repair preserves scope and makes the cause and correction auditable.
+- **A — Incorrect.** First, Scale up when each worker needs more CPU, memory, or tier-specific capability. Then, Query the plan SKU after the change and compare app health and cost impact.
+  First, Scale up when each worker needs more CPU, memory, or tier-specific capability. Then, Query the plan SKU after the change and compare app health and cost impact. This App Service capacity and slot release pair serves vertical plan scaling. Vertical plan scaling cannot replace App Service plan boundaries in App Service capacity and slot release. Use this App Service plan boundaries pair instead: First, Place apps together only when shared capacity, region, OS, cost, and scale behavior are acceptable. Then, Query each app's serverFarmId and confirm the plan's region, reserved flag, SKU, and worker count.
+- **B — Correct.** First, Place apps together only when shared capacity, region, OS, cost, and scale behavior are acceptable. Then, Query each app's serverFarmId and confirm the plan's region, reserved flag, SKU, and worker count.
+  First, Place apps together only when shared capacity, region, OS, cost, and scale behavior are acceptable. Then, Query each app's serverFarmId and confirm the plan's region, reserved flag, SKU, and worker count. For App Service capacity and slot release, the App Service plan boundaries operation precedes its App Service plan boundaries read-back check, allowing it to understand which web apps share workers and scale together.
+- **C — Incorrect.** First, Mark environment-specific connection and app settings as slot settings before the swap. Then, Query slotConfigNames and compare each slot's effective setting after a test swap.
+  First, Mark environment-specific connection and app settings as slot settings before the swap. Then, Query slotConfigNames and compare each slot's effective setting after a test swap. This App Service capacity and slot release pair serves slot-specific settings. App Service capacity and slot release uses slot-specific settings for both steps; App Service plan boundaries remains untouched in App Service capacity and slot release, so its App Service plan boundaries gate to understand which web apps share workers and scale together fails.
+- **D — Incorrect.** First, Use preview when the release must be tested with production configuration before cutover. Then, Inspect the swap phase and validate the warmed source slot before completing or resetting.
+  First, Use preview when the release must be tested with production configuration before cutover. Then, Inspect the swap phase and validate the warmed source slot before completing or resetting. This App Service capacity and slot release pair serves swap with preview. App Service capacity and slot release closes swap with preview, not App Service plan boundaries; without the App Service plan boundaries workflow, it cannot understand which web apps share workers and scale together.
 
-- A: This choice skips independent evidence or relies on ambiguous resource identity.
-- B: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
-- C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- D: This choice changes or trusts a broader scope than the recorded lab boundary.
+**Objectives:** `CP-APP-01`
 
-Objectives: `CP-APP-03`, `CP-APP-08`.
+**Remediation:** [Repeat the mapped guided task](../README.md#task-1) (`LAB15-CP01`).
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/app-service/manage-scale-per-app).
+**Microsoft Learn sources:**
+
+- [Azure App Service plans overview](https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans)
+
+**Source reviewed:** 2026-08-31
+
+## LAB15-Q42 — C
+
+**Question:** The App Service capacity and slot release has two slot release gates: select a hosting tier that supplies the required production capabilities, then prove the App Service capacity and slot release state. Which slot release sequence works?
+
+- **A — Incorrect.** First, Increase capacity or configure autoscale when concurrent demand requires more workers. Then, Query sku.capacity and active worker metrics after the scale operation.
+  First, Increase capacity or configure autoscale when concurrent demand requires more workers. Then, Query sku.capacity and active worker metrics after the scale operation. This App Service capacity and slot release pair serves horizontal plan scaling. App Service capacity and slot release proves horizontal plan scaling, but App Service pricing tiers lacks implementation in App Service capacity and slot release and App Service pricing tiers proof; the App Service pricing tiers outcome to select a hosting tier that supplies the required production capabilities remains open.
+- **B — Incorrect.** First, Use preview when the release must be tested with production configuration before cutover. Then, Inspect the swap phase and validate the warmed source slot before completing or resetting.
+  First, Use preview when the release must be tested with production configuration before cutover. Then, Inspect the swap phase and validate the warmed source slot before completing or resetting. This App Service capacity and slot release pair serves swap with preview. App Service capacity and slot release uses swap with preview for both steps; App Service pricing tiers remains untouched in App Service capacity and slot release, so its App Service pricing tiers gate to select a hosting tier that supplies the required production capabilities fails.
+- **C — Correct.** First, Select a tier that supports every required feature before creating dependent configuration. Then, Query sku.name, sku.tier, capacity, and the availability of each required feature.
+  First, Select a tier that supports every required feature before creating dependent configuration. Then, Query sku.name, sku.tier, capacity, and the availability of each required feature. In the App Service capacity and slot release, the first App Service pricing tiers step runs; the App Service capacity and slot release then reads App Service pricing tiers state to prove it can select a hosting tier that supplies the required production capabilities.
+- **D — Incorrect.** First, Create the app in the intended plan with a supported runtime and unique name. Then, Query state, hostNames, serverFarmId, httpsOnly, and siteConfig runtime values.
+  First, Create the app in the intended plan with a supported runtime and unique name. Then, Query state, hostNames, serverFarmId, httpsOnly, and siteConfig runtime values. This App Service capacity and slot release pair serves web app creation. Web app creation cannot replace App Service pricing tiers in App Service capacity and slot release. Use this App Service pricing tiers pair instead: First, Select a tier that supports every required feature before creating dependent configuration. Then, Query sku.name, sku.tier, capacity, and the availability of each required feature.
+
+**Objectives:** `CP-APP-01`
+
+**Remediation:** [Repeat the mapped guided task](../README.md#task-2) (`LAB15-CP02`).
+
+**Microsoft Learn sources:**
+
+- [Azure App Service plans overview](https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans)
+
+**Source reviewed:** 2026-08-31
+
+## LAB15-Q43 — D
+
+**Question:** Which slot release path makes the App Service capacity and slot release able to increase worker CPU or memory without adding worker instances, then inspects the defining properties?
+
+- **A — Incorrect.** First, Create complementary scale-out and scale-in rules with nonoverlapping thresholds and safe cooldowns. Then, Query the autoscale profile, capacity bounds, metric resource ID, rules, and enabled state.
+  First, Create complementary scale-out and scale-in rules with nonoverlapping thresholds and safe cooldowns. Then, Query the autoscale profile, capacity bounds, metric resource ID, rules, and enabled state. This App Service capacity and slot release pair serves App Service autoscale rules. App Service capacity and slot release uses App Service autoscale rules for both steps; vertical plan scaling remains untouched in App Service capacity and slot release, so its vertical plan scaling gate to increase worker CPU or memory without adding worker instances fails.
+- **B — Incorrect.** First, Create the app in the intended plan with a supported runtime and unique name. Then, Query state, hostNames, serverFarmId, httpsOnly, and siteConfig runtime values.
+  First, Create the app in the intended plan with a supported runtime and unique name. Then, Query state, hostNames, serverFarmId, httpsOnly, and siteConfig runtime values. This App Service capacity and slot release pair serves web app creation. App Service capacity and slot release closes web app creation, not vertical plan scaling; without the vertical plan scaling workflow, it cannot increase worker CPU or memory without adding worker instances.
+- **C — Incorrect.** First, Enable and limit per-app scaling only when supported and justified by shared-plan capacity design. Then, Query perSiteScaling on the plan and the app's siteConfig.numberOfWorkers value.
+  First, Enable and limit per-app scaling only when supported and justified by shared-plan capacity design. Then, Query perSiteScaling on the plan and the app's siteConfig.numberOfWorkers value. This App Service capacity and slot release pair serves per-app scaling. Per-app scaling cannot replace vertical plan scaling in App Service capacity and slot release. Use this vertical plan scaling pair instead: First, Scale up when each worker needs more CPU, memory, or tier-specific capability. Then, Query the plan SKU after the change and compare app health and cost impact.
+- **D — Correct.** First, Scale up when each worker needs more CPU, memory, or tier-specific capability. Then, Query the plan SKU after the change and compare app health and cost impact.
+  For the App Service capacity and slot release, the safe vertical plan scaling order is: first, Scale up when each worker needs more CPU, memory, or tier-specific capability. Then, Query the plan SKU after the change and compare app health and cost impact. The App Service capacity and slot release records vertical plan scaling proof after configuration.
+
+**Objectives:** `CP-APP-02`
+
+**Remediation:** [Repeat the mapped guided task](../README.md#task-3) (`LAB15-CP03`).
+
+**Microsoft Learn sources:**
+
+- [Scale up an App Service plan](https://learn.microsoft.com/en-us/azure/app-service/manage-scale-up)
+
+**Source reviewed:** 2026-08-31
 
 ## LAB15-Q44 — C
 
-Evidence-led repair preserves scope and makes the cause and correction auditable.
+**Question:** At the App Service capacity and slot release approval gate, operators must show that the slot release can add worker instances without changing the worker size. Which slot release configure-and-check pair is defensible?
 
-- A: This choice changes or trusts a broader scope than the recorded lab boundary.
-- B: This choice skips independent evidence or relies on ambiguous resource identity.
-- C: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
-- D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- **A — Incorrect.** First, Deploy and validate a release in a staging slot before swapping it into production. Then, List slots and query staging state, hostname, deployment content, and health independently.
+  First, Deploy and validate a release in a staging slot before swapping it into production. Then, List slots and query staging state, hostname, deployment content, and health independently. This App Service capacity and slot release pair serves deployment slots. App Service capacity and slot release closes deployment slots, not horizontal plan scaling; without the horizontal plan scaling workflow, it cannot add worker instances without changing the worker size.
+- **B — Incorrect.** First, Enable and limit per-app scaling only when supported and justified by shared-plan capacity design. Then, Query perSiteScaling on the plan and the app's siteConfig.numberOfWorkers value.
+  First, Enable and limit per-app scaling only when supported and justified by shared-plan capacity design. Then, Query perSiteScaling on the plan and the app's siteConfig.numberOfWorkers value. This App Service capacity and slot release pair serves per-app scaling. Per-app scaling cannot replace horizontal plan scaling in App Service capacity and slot release. Use this horizontal plan scaling pair instead: First, Increase capacity or configure autoscale when concurrent demand requires more workers. Then, Query sku.capacity and active worker metrics after the scale operation.
+- **C — Correct.** First, Increase capacity or configure autoscale when concurrent demand requires more workers. Then, Query sku.capacity and active worker metrics after the scale operation.
+  First, Increase capacity or configure autoscale when concurrent demand requires more workers. Then, Query sku.capacity and active worker metrics after the scale operation. The App Service capacity and slot release uses its horizontal plan scaling mutation gate and horizontal plan scaling verification gate before it can add worker instances without changing the worker size.
+- **D — Incorrect.** First, Place apps together only when shared capacity, region, OS, cost, and scale behavior are acceptable. Then, Query each app's serverFarmId and confirm the plan's region, reserved flag, SKU, and worker count.
+  First, Place apps together only when shared capacity, region, OS, cost, and scale behavior are acceptable. Then, Query each app's serverFarmId and confirm the plan's region, reserved flag, SKU, and worker count. This App Service capacity and slot release pair serves App Service plan boundaries. App Service capacity and slot release uses App Service plan boundaries for both steps; horizontal plan scaling remains untouched in App Service capacity and slot release, so its horizontal plan scaling gate to add worker instances without changing the worker size fails.
 
-Objectives: `CP-APP-03`, `CP-APP-08`.
+**Objectives:** `CP-APP-02`
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/app-service/manage-scale-per-app).
+**Remediation:** [Repeat the mapped guided task](../README.md#task-4) (`LAB15-CP04`).
+
+**Microsoft Learn sources:**
+
+- [App Service automatic scaling](https://learn.microsoft.com/en-us/azure/app-service/manage-automatic-scaling)
+
+**Source reviewed:** 2026-08-31
 
 ## LAB15-Q45 — D
 
-Evidence-led repair preserves scope and makes the cause and correction auditable.
+**Question:** The App Service capacity and slot release forbids a partial slot release result. Operators must first change instance count automatically when the selected signal crosses a threshold and afterward confirm the App Service capacity and slot release outcome. Which slot release sequence is complete?
 
-- A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- B: This choice changes or trusts a broader scope than the recorded lab boundary.
-- C: This choice skips independent evidence or relies on ambiguous resource identity.
-- D: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+- **A — Incorrect.** First, Mark environment-specific connection and app settings as slot settings before the swap. Then, Query slotConfigNames and compare each slot's effective setting after a test swap.
+  First, Mark environment-specific connection and app settings as slot settings before the swap. Then, Query slotConfigNames and compare each slot's effective setting after a test swap. This App Service capacity and slot release pair serves slot-specific settings. Slot-specific settings cannot replace App Service autoscale rules in App Service capacity and slot release. Use this App Service autoscale rules pair instead: First, Create complementary scale-out and scale-in rules with nonoverlapping thresholds and safe cooldowns. Then, Query the autoscale profile, capacity bounds, metric resource ID, rules, and enabled state.
+- **B — Incorrect.** First, Place apps together only when shared capacity, region, OS, cost, and scale behavior are acceptable. Then, Query each app's serverFarmId and confirm the plan's region, reserved flag, SKU, and worker count.
+  First, Place apps together only when shared capacity, region, OS, cost, and scale behavior are acceptable. Then, Query each app's serverFarmId and confirm the plan's region, reserved flag, SKU, and worker count. This App Service capacity and slot release pair serves App Service plan boundaries. App Service capacity and slot release proves App Service plan boundaries, but App Service autoscale rules lacks implementation in App Service capacity and slot release and App Service autoscale rules proof; the App Service autoscale rules outcome to change instance count automatically when the selected signal crosses a threshold remains open.
+- **C — Incorrect.** First, Select a tier that supports every required feature before creating dependent configuration. Then, Query sku.name, sku.tier, capacity, and the availability of each required feature.
+  First, Select a tier that supports every required feature before creating dependent configuration. Then, Query sku.name, sku.tier, capacity, and the availability of each required feature. This App Service capacity and slot release pair serves App Service pricing tiers. App Service capacity and slot release uses App Service pricing tiers for both steps; App Service autoscale rules remains untouched in App Service capacity and slot release, so its App Service autoscale rules gate to change instance count automatically when the selected signal crosses a threshold fails.
+- **D — Correct.** First, Create complementary scale-out and scale-in rules with nonoverlapping thresholds and safe cooldowns. Then, Query the autoscale profile, capacity bounds, metric resource ID, rules, and enabled state.
+  The App Service capacity and slot release gets a complete App Service autoscale rules sequence here: first, Create complementary scale-out and scale-in rules with nonoverlapping thresholds and safe cooldowns. Then, Query the autoscale profile, capacity bounds, metric resource ID, rules, and enabled state. Read-back evidence follows the change.
 
-Objectives: `CP-APP-03`, `CP-APP-08`.
+**Objectives:** `CP-APP-02`
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/app-service/manage-scale-per-app).
+**Remediation:** [Repeat the mapped guided task](../README.md#task-5) (`LAB15-CP05`).
 
-## LAB15-Q46 — A
+**Microsoft Learn sources:**
 
-Evidence-led repair preserves scope and makes the cause and correction auditable.
+- [App Service automatic scaling](https://learn.microsoft.com/en-us/azure/app-service/manage-automatic-scaling)
 
-- A: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
-- B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- C: This choice changes or trusts a broader scope than the recorded lab boundary.
-- D: This choice skips independent evidence or relies on ambiguous resource identity.
+**Source reviewed:** 2026-08-31
 
-Objectives: `CP-APP-03`, `CP-APP-08`.
+## LAB15-Q46 — D
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/app-service/manage-scale-per-app).
+**Question:** Only the App Service capacity and slot release change needed to deploy a candidate release to a live URL that is separate from production is allowed, and slot release proof is mandatory. Which pair fits?
 
-## LAB15-Q47 — B
+- **A — Incorrect.** First, Use preview when the release must be tested with production configuration before cutover. Then, Inspect the swap phase and validate the warmed source slot before completing or resetting.
+  First, Use preview when the release must be tested with production configuration before cutover. Then, Inspect the swap phase and validate the warmed source slot before completing or resetting. This App Service capacity and slot release pair serves swap with preview. App Service capacity and slot release proves swap with preview, but deployment slots lacks implementation in App Service capacity and slot release and deployment slots proof; the deployment slots outcome to deploy a candidate release to a live URL that is separate from production remains open.
+- **B — Incorrect.** First, Select a tier that supports every required feature before creating dependent configuration. Then, Query sku.name, sku.tier, capacity, and the availability of each required feature.
+  First, Select a tier that supports every required feature before creating dependent configuration. Then, Query sku.name, sku.tier, capacity, and the availability of each required feature. This App Service capacity and slot release pair serves App Service pricing tiers. App Service capacity and slot release uses App Service pricing tiers for both steps; deployment slots remains untouched in App Service capacity and slot release, so its deployment slots gate to deploy a candidate release to a live URL that is separate from production fails.
+- **C — Incorrect.** First, Scale up when each worker needs more CPU, memory, or tier-specific capability. Then, Query the plan SKU after the change and compare app health and cost impact.
+  First, Scale up when each worker needs more CPU, memory, or tier-specific capability. Then, Query the plan SKU after the change and compare app health and cost impact. This App Service capacity and slot release pair serves vertical plan scaling. App Service capacity and slot release closes vertical plan scaling, not deployment slots; without the deployment slots workflow, it cannot deploy a candidate release to a live URL that is separate from production.
+- **D — Correct.** First, Deploy and validate a release in a staging slot before swapping it into production. Then, List slots and query staging state, hostname, deployment content, and health independently.
+  First, Deploy and validate a release in a staging slot before swapping it into production. Then, List slots and query staging state, hostname, deployment content, and health independently. This ordered deployment slots workflow lets the App Service capacity and slot release deploy a candidate release to a live URL that is separate from production and then verify the resulting state.
 
-Evidence-led repair preserves scope and makes the cause and correction auditable.
+**Objectives:** `CP-APP-08`
 
-- A: This choice skips independent evidence or relies on ambiguous resource identity.
-- B: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
-- C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- D: This choice changes or trusts a broader scope than the recorded lab boundary.
+**Remediation:** [Repeat the mapped guided task](../README.md#task-1) (`LAB15-CP01`).
 
-Objectives: `CP-APP-03`, `CP-APP-08`.
+**Microsoft Learn sources:**
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/app-service/manage-scale-per-app).
+- [Set up staging environments in App Service](https://learn.microsoft.com/en-us/azure/app-service/deploy-staging-slots)
 
-## LAB15-Q48 — C
+**Source reviewed:** 2026-08-31
 
-Evidence-led repair preserves scope and makes the cause and correction auditable.
+## LAB15-Q47 — A
 
-- A: This choice changes or trusts a broader scope than the recorded lab boundary.
-- B: This choice skips independent evidence or relies on ambiguous resource identity.
-- C: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
-- D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+**Question:** The App Service capacity and slot release runbook separates slot release mutation from validation while it must prevent environment-only configuration from moving when slots exchange content. Which sequence proves it cleanly?
 
-Objectives: `CP-APP-03`, `CP-APP-08`.
+- **A — Correct.** First, Mark environment-specific connection and app settings as slot settings before the swap. Then, Query slotConfigNames and compare each slot's effective setting after a test swap.
+  First, Mark environment-specific connection and app settings as slot settings before the swap. Then, Query slotConfigNames and compare each slot's effective setting after a test swap. For App Service capacity and slot release, the slot-specific settings operation precedes its slot-specific settings read-back check, allowing it to prevent environment-only configuration from moving when slots exchange content.
+- **B — Incorrect.** First, Create the app in the intended plan with a supported runtime and unique name. Then, Query state, hostNames, serverFarmId, httpsOnly, and siteConfig runtime values.
+  First, Create the app in the intended plan with a supported runtime and unique name. Then, Query state, hostNames, serverFarmId, httpsOnly, and siteConfig runtime values. This App Service capacity and slot release pair serves web app creation. App Service capacity and slot release closes web app creation, not slot-specific settings; without the slot-specific settings workflow, it cannot prevent environment-only configuration from moving when slots exchange content.
+- **C — Incorrect.** First, Scale up when each worker needs more CPU, memory, or tier-specific capability. Then, Query the plan SKU after the change and compare app health and cost impact.
+  First, Scale up when each worker needs more CPU, memory, or tier-specific capability. Then, Query the plan SKU after the change and compare app health and cost impact. This App Service capacity and slot release pair serves vertical plan scaling. Vertical plan scaling cannot replace slot-specific settings in App Service capacity and slot release. Use this slot-specific settings pair instead: First, Mark environment-specific connection and app settings as slot settings before the swap. Then, Query slotConfigNames and compare each slot's effective setting after a test swap.
+- **D — Incorrect.** First, Increase capacity or configure autoscale when concurrent demand requires more workers. Then, Query sku.capacity and active worker metrics after the scale operation.
+  First, Increase capacity or configure autoscale when concurrent demand requires more workers. Then, Query sku.capacity and active worker metrics after the scale operation. This App Service capacity and slot release pair serves horizontal plan scaling. App Service capacity and slot release proves horizontal plan scaling, but slot-specific settings lacks implementation in App Service capacity and slot release and slot-specific settings proof; the slot-specific settings outcome to prevent environment-only configuration from moving when slots exchange content remains open.
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/app-service/manage-scale-per-app).
+**Objectives:** `CP-APP-08`
 
-## LAB15-Q49 — D
+**Remediation:** [Repeat the mapped guided task](../README.md#task-2) (`LAB15-CP02`).
 
-Evidence-led repair preserves scope and makes the cause and correction auditable.
+**Microsoft Learn sources:**
 
-- A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- B: This choice changes or trusts a broader scope than the recorded lab boundary.
-- C: This choice skips independent evidence or relies on ambiguous resource identity.
-- D: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+- [Set up staging environments in App Service](https://learn.microsoft.com/en-us/azure/app-service/deploy-staging-slots)
 
-Objectives: `CP-APP-03`, `CP-APP-08`.
+**Source reviewed:** 2026-08-31
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/app-service/manage-scale-per-app).
+## LAB15-Q48 — A
 
-## LAB15-Q50 — A
+**Question:** The App Service capacity and slot release checkpoint requires both this slot release outcome—validate swap behavior before the candidate becomes production—and a read-only App Service capacity and slot release state check. Which slot release response is complete?
 
-Evidence-led repair preserves scope and makes the cause and correction auditable.
+- **A — Correct.** First, Use preview when the release must be tested with production configuration before cutover. Then, Inspect the swap phase and validate the warmed source slot before completing or resetting.
+  First, Use preview when the release must be tested with production configuration before cutover. Then, Inspect the swap phase and validate the warmed source slot before completing or resetting. In the App Service capacity and slot release, the first swap with preview step runs; the App Service capacity and slot release then reads swap with preview state to prove it can validate swap behavior before the candidate becomes production.
+- **B — Incorrect.** First, Enable and limit per-app scaling only when supported and justified by shared-plan capacity design. Then, Query perSiteScaling on the plan and the app's siteConfig.numberOfWorkers value.
+  First, Enable and limit per-app scaling only when supported and justified by shared-plan capacity design. Then, Query perSiteScaling on the plan and the app's siteConfig.numberOfWorkers value. This App Service capacity and slot release pair serves per-app scaling. Per-app scaling cannot replace swap with preview in App Service capacity and slot release. Use this swap with preview pair instead: First, Use preview when the release must be tested with production configuration before cutover. Then, Inspect the swap phase and validate the warmed source slot before completing or resetting.
+- **C — Incorrect.** First, Increase capacity or configure autoscale when concurrent demand requires more workers. Then, Query sku.capacity and active worker metrics after the scale operation.
+  First, Increase capacity or configure autoscale when concurrent demand requires more workers. Then, Query sku.capacity and active worker metrics after the scale operation. This App Service capacity and slot release pair serves horizontal plan scaling. App Service capacity and slot release proves horizontal plan scaling, but swap with preview lacks implementation in App Service capacity and slot release and swap with preview proof; the swap with preview outcome to validate swap behavior before the candidate becomes production remains open.
+- **D — Incorrect.** First, Create complementary scale-out and scale-in rules with nonoverlapping thresholds and safe cooldowns. Then, Query the autoscale profile, capacity bounds, metric resource ID, rules, and enabled state.
+  First, Create complementary scale-out and scale-in rules with nonoverlapping thresholds and safe cooldowns. Then, Query the autoscale profile, capacity bounds, metric resource ID, rules, and enabled state. This App Service capacity and slot release pair serves App Service autoscale rules. App Service capacity and slot release uses App Service autoscale rules for both steps; swap with preview remains untouched in App Service capacity and slot release, so its swap with preview gate to validate swap behavior before the candidate becomes production fails.
 
-- A: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
-- B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- C: This choice changes or trusts a broader scope than the recorded lab boundary.
-- D: This choice skips independent evidence or relies on ambiguous resource identity.
+**Objectives:** `CP-APP-08`
 
-Objectives: `CP-APP-03`, `CP-APP-08`.
+**Remediation:** [Repeat the mapped guided task](../README.md#task-3) (`LAB15-CP03`).
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/app-service/manage-scale-per-app).
+**Microsoft Learn sources:**
+
+- [Set up staging environments in App Service](https://learn.microsoft.com/en-us/azure/app-service/deploy-staging-slots)
+
+**Source reviewed:** 2026-08-31
+
+## LAB15-Q49 — C
+
+**Question:** The App Service capacity and slot release runbook must create an application inside the intended existing hosting plan, then retain slot release read-back evidence. Which App Service capacity and slot release pair completes both duties?
+
+- **A — Incorrect.** First, Place apps together only when shared capacity, region, OS, cost, and scale behavior are acceptable. Then, Query each app's serverFarmId and confirm the plan's region, reserved flag, SKU, and worker count.
+  First, Place apps together only when shared capacity, region, OS, cost, and scale behavior are acceptable. Then, Query each app's serverFarmId and confirm the plan's region, reserved flag, SKU, and worker count. This App Service capacity and slot release pair serves App Service plan boundaries. App Service plan boundaries cannot replace web app creation in App Service capacity and slot release. Use this web app creation pair instead: First, Create the app in the intended plan with a supported runtime and unique name. Then, Query state, hostNames, serverFarmId, httpsOnly, and siteConfig runtime values.
+- **B — Incorrect.** First, Create complementary scale-out and scale-in rules with nonoverlapping thresholds and safe cooldowns. Then, Query the autoscale profile, capacity bounds, metric resource ID, rules, and enabled state.
+  First, Create complementary scale-out and scale-in rules with nonoverlapping thresholds and safe cooldowns. Then, Query the autoscale profile, capacity bounds, metric resource ID, rules, and enabled state. This App Service capacity and slot release pair serves App Service autoscale rules. App Service capacity and slot release proves App Service autoscale rules, but web app creation lacks implementation in App Service capacity and slot release and web app creation proof; the web app creation outcome to create an application inside the intended existing hosting plan remains open.
+- **C — Correct.** First, Create the app in the intended plan with a supported runtime and unique name. Then, Query state, hostNames, serverFarmId, httpsOnly, and siteConfig runtime values.
+  For the App Service capacity and slot release, the safe web app creation order is: first, Create the app in the intended plan with a supported runtime and unique name. Then, Query state, hostNames, serverFarmId, httpsOnly, and siteConfig runtime values. The App Service capacity and slot release records web app creation proof after configuration.
+- **D — Incorrect.** First, Deploy and validate a release in a staging slot before swapping it into production. Then, List slots and query staging state, hostname, deployment content, and health independently.
+  First, Deploy and validate a release in a staging slot before swapping it into production. Then, List slots and query staging state, hostname, deployment content, and health independently. This App Service capacity and slot release pair serves deployment slots. App Service capacity and slot release closes deployment slots, not web app creation; without the web app creation workflow, it cannot create an application inside the intended existing hosting plan.
+
+**Objectives:** `CP-APP-03`
+
+**Remediation:** [Repeat the mapped guided task](../README.md#task-4) (`LAB15-CP04`).
+
+**Microsoft Learn sources:**
+
+- [Azure CLI reference for App Service web apps](https://learn.microsoft.com/en-us/cli/azure/webapp?view=azure-cli-latest)
+
+**Source reviewed:** 2026-08-31
+
+## LAB15-Q50 — C
+
+**Question:** To satisfy the slot release requirement, operators must change the App Service capacity and slot release configuration and prove it can limit how many shared-plan workers one application may use. Which sequence is coherent?
+
+- **A — Incorrect.** First, Select a tier that supports every required feature before creating dependent configuration. Then, Query sku.name, sku.tier, capacity, and the availability of each required feature.
+  First, Select a tier that supports every required feature before creating dependent configuration. Then, Query sku.name, sku.tier, capacity, and the availability of each required feature. This App Service capacity and slot release pair serves App Service pricing tiers. App Service capacity and slot release proves App Service pricing tiers, but per-app scaling lacks implementation in App Service capacity and slot release and per-app scaling proof; the per-app scaling outcome to limit how many shared-plan workers one application may use remains open.
+- **B — Incorrect.** First, Deploy and validate a release in a staging slot before swapping it into production. Then, List slots and query staging state, hostname, deployment content, and health independently.
+  First, Deploy and validate a release in a staging slot before swapping it into production. Then, List slots and query staging state, hostname, deployment content, and health independently. This App Service capacity and slot release pair serves deployment slots. App Service capacity and slot release uses deployment slots for both steps; per-app scaling remains untouched in App Service capacity and slot release, so its per-app scaling gate to limit how many shared-plan workers one application may use fails.
+- **C — Correct.** First, Enable and limit per-app scaling only when supported and justified by shared-plan capacity design. Then, Query perSiteScaling on the plan and the app's siteConfig.numberOfWorkers value.
+  First, Enable and limit per-app scaling only when supported and justified by shared-plan capacity design. Then, Query perSiteScaling on the plan and the app's siteConfig.numberOfWorkers value. The App Service capacity and slot release uses its per-app scaling mutation gate and per-app scaling verification gate before it can limit how many shared-plan workers one application may use.
+- **D — Incorrect.** First, Mark environment-specific connection and app settings as slot settings before the swap. Then, Query slotConfigNames and compare each slot's effective setting after a test swap.
+  First, Mark environment-specific connection and app settings as slot settings before the swap. Then, Query slotConfigNames and compare each slot's effective setting after a test swap. This App Service capacity and slot release pair serves slot-specific settings. Slot-specific settings cannot replace per-app scaling in App Service capacity and slot release. Use this per-app scaling pair instead: First, Enable and limit per-app scaling only when supported and justified by shared-plan capacity design. Then, Query perSiteScaling on the plan and the app's siteConfig.numberOfWorkers value.
+
+**Objectives:** `CP-APP-02`
+
+**Remediation:** [Repeat the mapped guided task](../README.md#task-5) (`LAB15-CP05`).
+
+**Microsoft Learn sources:**
+
+- [Per-app scaling for App Service](https://learn.microsoft.com/en-us/azure/app-service/manage-scale-per-app)
+
+**Source reviewed:** 2026-08-31

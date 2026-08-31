@@ -1,8 +1,11 @@
+
+# BEGIN GENERATED AZ104 V2
+schemaVersion: 2.0.0
 id: LAB-23
 slug: 23-monitor-alerts-actions
 title: Build Azure Monitor alerts, action groups, and processing rules
 blueprintVersion: '2026-04-17'
-domain: Monitor and maintain Azure resources
+domain: monitor-recovery
 objectives:
 - MR-MONITOR-04
 track: azure-cli
@@ -11,10 +14,21 @@ testedToolVersions:
   azureCli: '>=2.88.0'
   powershell: '>=7.4'
 estimatedMinutes: 105
-difficulty: intermediate
+difficulty: applied
+experience:
+  scenario: 'You are a monitoring administrator routing and suppressing actionable alerts. Build and prove this disposable
+    service path: Storage metrics and activity events feed scoped alert rules, the action group provides the notification
+    boundary, and a time-bounded processing rule suppresses actions only for the run-owned target.'
+  role: A monitoring administrator routing and suppressing actionable alerts.
+  outcome: Use Azure CLI in PowerShell to create the monitored target and action group, create a scoped metric alert, and
+    reconcile alert scope, criteria, actions, and suppression, with recoverable state and deterministic cleanup.
+  completionCriteria:
+  - All required checkpoints report pass.
+  - The deterministic break/fix is injected, diagnosed, and repaired.
+  - cleanup.json reports no active run-owned resources, with any retained item explicitly documented.
 cost:
   class: low
-  billableResources: &id001
+  billableResources:
   - resource group
   - storage account
   - action group
@@ -23,6 +37,10 @@ cost:
   - alert processing rule
   notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator before
     execution and clean up immediately.
+  pricingLinks:
+  - title: Azure Monitor pricing
+    url: https://azure.microsoft.com/pricing/details/monitor/
+  acknowledgementRequired: false
 permissions:
   azureRbacRoles:
   - Monitoring Contributor on the lab resource group
@@ -36,43 +54,448 @@ prerequisites:
   group is used for configuration practice.'
 - Azure CLI hosted in PowerShell 7.4 or later
 providers:
-  observed:
+  required:
   - Microsoft.Insights
   - Microsoft.Storage
+  optional: []
   registeredByLab: []
-regions:
-  applicable: true
-  primary: supplied at execution time
-  secondary: null
+inputs:
+- id: run-id
+  parameter: RunId
+  description: Unique lowercase run ownership identifier
+  required: true
+  secret: false
+  source: parameter
+  safeExample: az104l23-01
+  gateBehavior: block
+  checkpointIds:
+  - LAB23-CP01
+  - LAB23-CP02
+  - LAB23-CP03
+  - LAB23-CP04
+  - LAB23-CP05
+- id: subscription-id
+  parameter: SubscriptionId
+  environmentVariable: AZ104_SUBSCRIPTION_ID
+  description: Expected disposable subscription ID
+  required: true
+  secret: false
+  source: parameter-or-environment
+  safeExample: 00000000-0000-0000-0000-000000000000
+  gateBehavior: block
+  checkpointIds:
+  - LAB23-CP01
+  - LAB23-CP02
+  - LAB23-CP03
+  - LAB23-CP04
+  - LAB23-CP05
+- id: location
+  parameter: Location
+  environmentVariable: AZ104_LOCATION
+  description: Approved primary Azure region
+  required: true
+  secret: false
+  source: parameter-or-environment
+  safeExample: westeurope
+  gateBehavior: block
+  checkpointIds:
+  - LAB23-CP01
+  - LAB23-CP02
+  - LAB23-CP03
+  - LAB23-CP04
+  - LAB23-CP05
+- id: alert-email
+  environmentVariable: AZ104_ALERT_EMAIL
+  description: Approved action-group receiver
+  required: false
+  secret: false
+  gateBehavior: skip-checkpoint
+  safeExample: alerts@example.test
+  checkpointIds:
+  - LAB23-CP04
+  parameter: AlertEmail
+  source: environment
+acknowledgements:
+  cost:
+    required: false
+    parameter: AcknowledgeCost
+    message: I reviewed current pricing, quota, and the same-session cleanup plan.
+  tenantChange:
+    required: false
+    parameter: AcknowledgeTenantChange
+    message: I am authorized to create or change the declared tenant-scoped objects and will restore recorded settings.
 creates:
-  azureResources: *id001
+  azureResources:
+  - resource group
+  - storage account
+  - action group
+  - metric alert
+  - activity-log alert
+  - alert processing rule
   entraObjects: []
   localArtifacts:
   - .state/<run-id>/run.json
   - .state/<run-id>/validation.json
+  - .state/<run-id>/cleanup.json
 tenantScopedChanges: []
 externalRequirements:
 - Email delivery and action-group testing require AZ104_ALERT_EMAIL; otherwise a receiver-free action group is used for configuration
   practice.
+preflightChecks:
+- id: preflight.context
+  type: context
+  required: true
+  description: Confirm active cloud, tenant, and subscription without changing them.
+  command: az account show --output json
+  expected: Active context matches the supplied subscription and disposable environment.
+- id: preflight.tools
+  type: tool
+  required: true
+  description: Confirm PowerShell, Azure CLI, and az bicep are available.
+  command: az version; az bicep version
+  expected: All required tools meet the versions declared by this lab.
+- id: preflight.inputs
+  type: input
+  required: true
+  description: Check required parameters and environment gates without printing secrets.
+  command: $PSBoundParameters.Keys; Get-ChildItem Env:AZ104_* | Select-Object Name
+  expected: Every required input is present and optional gates are explicitly reported.
+- id: preflight.providers
+  type: provider
+  required: true
+  description: Read registration state for required resource providers.
+  command: az provider show --namespace <provider> --query registrationState --output tsv
+  expected: Every required provider is Registered; preflight performs no registration.
+- id: preflight.region
+  type: region
+  required: true
+  description: Confirm the requested region is available to the subscription.
+  command: az account list-locations --query "[?name=='<location>'].name" --output tsv
+  expected: The supplied region appears in the subscription location inventory.
+- id: preflight.quota
+  type: quota
+  required: false
+  description: Read regional compute usage before deployment.
+  command: az vm list-usage --location <location> --output table
+  expected: Required regional vCPU quota has safe headroom.
+- id: preflight.sku
+  type: sku
+  required: false
+  description: Read available VM or service SKUs in the selected region.
+  command: az vm list-skus --location <location> --all --output table
+  expected: The documented lab SKU has no blocking regional restriction.
+- id: preflight.authored.service
+  type: sku
+  required: true
+  description: Prove verify metric, action-group, and processing-rule support with LAB-23's authored read-only provider, feature,
+    tool, region, and SKU queries.
+  command: '$insights = az provider show --namespace Microsoft.Insights --query registrationState --output tsv
+
+    if ($insights -ne ''Registered'') { throw ''Microsoft.Insights is not registered.'' }
+
+    $storageProvider = az provider show --namespace Microsoft.Storage --query registrationState --output tsv
+
+    if ($storageProvider -ne ''Registered'') { throw ''Microsoft.Storage is not registered.'' }'
+  expected: The storage metric namespace exposes Transactions and the subscription can enumerate action groups and alert-processing
+    rules.
+checkpoints:
+- id: LAB23-CP01
+  title: Verify metric, action-group, and processing-rule support
+  purpose: Read the provider, region, SKU, feature, quota, and companion-tool signals needed for verify metric, action-group,
+    and processing-rule support, without changing Azure state.
+  objectiveIds:
+  - MR-MONITOR-04
+  required: true
+  expectedState: The storage metric namespace exposes Transactions and the subscription can enumerate action groups and alert-processing
+    rules.
+  scriptMarkers:
+    setup: LAB23-CP01
+    validate: LAB23-CP01
+    cleanup: LAB23-CP01
+  validation:
+    positive:
+      id: cp01.positive
+      description: Read the service properties for verify metric, action-group, and processing-rule support by using exact
+        run-owned identifiers.
+      command: '$validationId=''LAB23-CP01-positive''; $insights = az provider show --namespace Microsoft.Insights --query
+        registrationState --output tsv
+
+        if ($insights -ne ''Registered'') { throw ''Microsoft.Insights is not registered.'' }'
+      expected: The storage metric namespace exposes Transactions and the subscription can enumerate action groups and alert-processing
+        rules.
+    negative:
+      id: cp01.negative
+      description: Search for conflicting, unowned, or excessive state after verify metric, action-group, and processing-rule
+        support.
+      command: '$validationId=''LAB23-CP01-negative''; $storageProvider = az provider show --namespace Microsoft.Storage --query
+        registrationState --output tsv
+
+        if ($storageProvider -ne ''Registered'') { throw ''Microsoft.Storage is not registered.'' }'
+      expected: 'LAB23-CP01 negative boundary: The undesired state is absent; the negative assertion must not report: Microsoft.Storage
+        is not registered.'
+  cleanup:
+    dependsOn:
+    - LAB23-CP02
+    - LAB23-CP03
+    - LAB23-CP04
+    - LAB23-CP05
+    action: Remove only manifest-recorded objects owned by LAB23-CP01, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp01.residual
+      description: Prove no active managed object remains for LAB23-CP01.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-1
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Azure Monitor action groups
+      url: https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/action-groups
+- id: LAB23-CP02
+  title: Create the monitored target and action group
+  purpose: Provision and immediately inventory the exact run-owned resources needed to create the monitored target and action
+    group, so partial completion remains recoverable.
+  objectiveIds:
+  - MR-MONITOR-04
+  required: true
+  expectedState: The storage target and disabled test notification receiver are run-owned, with no unsolicited message sent
+    during setup.
+  scriptMarkers:
+    setup: LAB23-CP02
+    validate: LAB23-CP02
+    cleanup: LAB23-CP02
+  validation:
+    positive:
+      id: cp02.positive
+      description: Read the service properties for create the monitored target and action group by using exact run-owned identifiers.
+      command: '$validationId=''LAB23-CP02-positive''; $metricEnabled = az monitor metrics alert show --resource-group $ResourceGroupName
+        --name $alert --query enabled --output tsv
+
+        if ($metricEnabled -ne ''true'') { throw ''The metric alert is disabled.'' }'
+      expected: The storage target and disabled test notification receiver are run-owned, with no unsolicited message sent
+        during setup.
+    negative:
+      id: cp02.negative
+      description: Search for conflicting, unowned, or excessive state after create the monitored target and action group.
+      command: '$validationId=''LAB23-CP02-negative''; $activityEnabled = az monitor activity-log alert show --resource-group
+        $ResourceGroupName --name "activity-$suffix" --query enabled --output tsv
+
+        if ($activityEnabled -ne ''true'') { throw ''The activity log alert is disabled.'' }'
+      expected: 'LAB23-CP02 negative boundary: The undesired state is absent; the negative assertion must not report: The
+        activity log alert is disabled.'
+  cleanup:
+    dependsOn:
+    - LAB23-CP03
+    - LAB23-CP04
+    - LAB23-CP05
+    action: Remove only manifest-recorded objects owned by LAB23-CP02, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp02.residual
+      description: Prove no active managed object remains for LAB23-CP02.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-2
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Azure Monitor action groups
+      url: https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/action-groups
+- id: LAB23-CP03
+  title: Create a scoped metric alert
+  purpose: Configure and independently inspect the control-plane and data-path properties needed to create a scoped metric
+    alert.
+  objectiveIds:
+  - MR-MONITOR-04
+  required: true
+  expectedState: The alert rule targets only the run-owned storage account, uses the intended aggregation/threshold, and references
+    the exact action-group ID.
+  scriptMarkers:
+    setup: LAB23-CP03
+    validate: LAB23-CP03
+    cleanup: LAB23-CP03
+  validation:
+    positive:
+      id: cp03.positive
+      description: Read the service properties for create a scoped metric alert by using exact run-owned identifiers.
+      command: '$validationId=''LAB23-CP03-positive''; $ruleType = az monitor alert-processing-rule show --resource-group
+        $ResourceGroupName --name $processingRule --query properties.ruleType --output tsv
+
+        if ($ruleType -ne ''RemoveAllActionGroups'') { throw "Processing rule type is $ruleType." }'
+      expected: The alert rule targets only the run-owned storage account, uses the intended aggregation/threshold, and references
+        the exact action-group ID.
+    negative:
+      id: cp03.negative
+      description: Search for conflicting, unowned, or excessive state after create a scoped metric alert.
+      command: '$validationId=''LAB23-CP03-negative''; $scope = az monitor alert-processing-rule show --resource-group $ResourceGroupName
+        --name $processingRule --query "properties.scopes[0]" --output tsv
+
+        if ($scope -ne $storageId) { throw ''The processing rule scope is incorrect.'' }'
+      expected: 'LAB23-CP03 negative boundary: The undesired state is absent; the negative assertion must not report: The
+        processing rule scope is incorrect.'
+  cleanup:
+    dependsOn:
+    - LAB23-CP04
+    - LAB23-CP05
+    action: Remove only manifest-recorded objects owned by LAB23-CP03, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp03.residual
+      description: Prove no active managed object remains for LAB23-CP03.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-3
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Azure Monitor action groups
+      url: https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/action-groups
+- id: LAB23-CP04
+  title: Apply a bounded alert-processing suppression rule
+  purpose: Exercise the deterministic operational or denied path needed to apply a bounded alert-processing suppression rule,
+    then retain comparable before-and-after results.
+  objectiveIds:
+  - MR-MONITOR-04
+  required: false
+  expectedState: The processing rule is enabled only for the declared scope and schedule, without muting unrelated subscription
+    alerts.
+  scriptMarkers:
+    setup: LAB23-CP04
+    validate: LAB23-CP04
+    cleanup: LAB23-CP04
+  validation:
+    positive:
+      id: cp04.positive
+      description: Read the service properties for apply a bounded alert-processing suppression rule by using exact run-owned
+        identifiers.
+      command: '$validationId=''LAB23-CP04-positive''; $receivers = az monitor action-group show --resource-group $ResourceGroupName
+        --name $actionGroup --query "emailReceivers[?name==''learner''] | length(@)" --output tsv
+
+        if ([int]$receivers -ne 1) { throw ''The optional email receiver is absent.'' }'
+      expected: The processing rule is enabled only for the declared scope and schedule, without muting unrelated subscription
+        alerts.
+    negative:
+      id: cp04.negative
+      description: Search for conflicting, unowned, or excessive state after apply a bounded alert-processing suppression
+        rule.
+      command: '$validationId=''LAB23-CP04-negative''; $disabledReceivers = az monitor action-group show --resource-group
+        $ResourceGroupName --name $actionGroup --query "emailReceivers[?status==''Disabled''] | length(@)" --output tsv
+
+        if ([int]$disabledReceivers -ne 0) { throw ''An action-group email receiver is disabled.'' }'
+      expected: 'LAB23-CP04 negative boundary: The undesired state is absent; the negative assertion must not report: An action-group
+        email receiver is disabled.'
+  cleanup:
+    dependsOn:
+    - LAB23-CP05
+    action: Remove only manifest-recorded objects owned by LAB23-CP04, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp04.residual
+      description: Prove no active managed object remains for LAB23-CP04.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-4
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Azure Monitor action groups
+      url: https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/action-groups
+- id: LAB23-CP05
+  title: Reconcile alert scope, criteria, actions, and suppression
+  purpose: Reconcile live service properties, returned IDs, and dependency-aware removal needed to reconcile alert scope,
+    criteria, actions, and suppression before handoff.
+  objectiveIds:
+  - MR-MONITOR-04
+  required: true
+  expectedState: Alert criteria, target ID, action-group binding, and processing-rule scope all resolve to the run-owned resources.
+  scriptMarkers:
+    setup: LAB23-CP05
+    validate: LAB23-CP05
+    cleanup: LAB23-CP05
+  validation:
+    positive:
+      id: cp05.positive
+      description: Read the service properties for reconcile alert scope, criteria, actions, and suppression by using exact
+        run-owned identifiers.
+      command: '$validationId=''LAB23-CP05-positive''; $actionCount = az monitor metrics alert show --resource-group $ResourceGroupName
+        --name $alert --query "actions | length(@)" --output tsv
+
+        if ([int]$actionCount -ne 1) { throw "Metric alert action count is $actionCount." }'
+      expected: Alert criteria, target ID, action-group binding, and processing-rule scope all resolve to the run-owned resources.
+    negative:
+      id: cp05.negative
+      description: Search for conflicting, unowned, or excessive state after reconcile alert scope, criteria, actions, and
+        suppression.
+      command: '$validationId=''LAB23-CP05-negative''; $wrongScope = az monitor metrics alert show --resource-group $ResourceGroupName
+        --name $alert --query "scopes[?@!=''$storageId''] | length(@)" --output tsv
+
+        if ([int]$wrongScope -ne 0) { throw ''The metric alert has an unexpected scope.'' }'
+      expected: 'LAB23-CP05 negative boundary: The undesired state is absent; the negative assertion must not report: The
+        metric alert has an unexpected scope.'
+  cleanup:
+    dependsOn: []
+    action: Remove only manifest-recorded objects owned by LAB23-CP05, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp05.residual
+      description: Prove no active managed object remains for LAB23-CP05.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-5
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Azure Monitor action groups
+      url: https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/action-groups
 validation:
-  commandLanes:
-  - scripts/cli/Validate.ps1
-  output: .state/<run-id>/validation.json
-  statuses:
-  - pass
-  - fail
-  - warning
-  - skipped
-  liveExecutionRequiredForLiveVerified: true
+  script: scripts/cli/Validate.ps1
+  artifact: .state/<run-id>/validation.json
+  modes:
+  - Deployment
+  - PostCleanup
+  resultPolicy:
+    requiredFailureResult: fail
+    optionalSkipResult: partial
+    allRequiredPassResult: pass
 cleanup:
-  azureDeletion: exact recorded resource-group ID after tag verification
-  entraDeletion: none
-  reportOnlyByDefault: true
+  script: scripts/cli/Cleanup.ps1
+  artifact: .state/<run-id>/cleanup.json
+  previewByDefault: true
   requiresExecuteFlag: true
-  residualAuditRequired: true
+  ownershipVerification:
+    manifestIdMatch: true
+    requiredTags:
+    - purpose
+    - labId
+    - runId
+  residualChecks:
+  - id: cp01.residual
+    description: Prove no active managed object remains for LAB23-CP01.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp02.residual
+    description: Prove no active managed object remains for LAB23-CP02.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp03.residual
+    description: Prove no active managed object remains for LAB23-CP03.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp04.residual
+    description: Prove no active managed object remains for LAB23-CP04.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp05.residual
+    description: Prove no active managed object remains for LAB23-CP05.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  retainedItemsAllowed: true
+  irreversiblePurge: never
 assessment:
   enabled: true
   questionCount: 50
   primaryDomain: monitor-recovery
-lastOfflineValidated: '2026-08-30'
+lastOfflineValidated: '2026-08-31'
 lastLiveVerified: null
+# END GENERATED AZ104 V2

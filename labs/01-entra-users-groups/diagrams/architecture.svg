@@ -1,18 +1,67 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="520" viewBox="0 0 1120 520" role="img" aria-labelledby="title desc">
-  <title id="title">Lab 01 Microsoft Entra identity architecture</title>
-  <desc id="desc">An administrator uses Azure CLI and Microsoft Graph to create two users and a security group. One user is a member and the other is an owner. Exact object IDs are written to local state and used by read-only validation.</desc>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1528" height="614" viewBox="0 0 1528 614" role="img" aria-labelledby="lab01-title lab01-desc">
+  <title id="lab01-title">LAB-01 architecture: Create and manage Microsoft Entra users and groups</title>
+  <desc id="lab01-desc">Left-to-right service topology with 8 components and 9 directed relationships. Components: Identity administrator, Microsoft Graph v1.0, Alex cloud user, Blair cloud user, Operations security group, Local run.json users and group, Independent validation, Scoped cleanup. Relationships: Identity administrator to Microsoft Graph v1.0 (az rest); Microsoft Graph v1.0 to Alex cloud user (create); Microsoft Graph v1.0 to Blair cloud user (create); Microsoft Graph v1.0 to Operations security group (create); Alex cloud user to Operations security group (direct member); Blair cloud user to Operations security group (explicit owner); Microsoft Graph v1.0 to Local run.json users and group (returned immutable IDs); Local run.json users and group to Independent validation (exact-ID queries); Local run.json users and group to Scoped cleanup (group first, then users).</desc>
+  <metadata id="lab01-metadata">{&quot;renderer&quot;:&quot;az104-mermaid-flowchart-svg/1.0.0&quot;,&quot;source&quot;:&quot;architecture.mmd&quot;,&quot;sourceSha256&quot;:&quot;675b6f15f897abf9b9991a9d0bdabc76d26717c23f8aaabce001cba697fa2665&quot;}</metadata>
   <defs>
-    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#4d4d4d"/></marker>
-    <style>.box{rx:12;stroke-width:2}.id{fill:#eef6ff;stroke:#0078d4}.local{fill:#f4f4f4;stroke:#666}.actor{fill:#fff4ce;stroke:#986f0b}.t{font:600 18px 'Segoe UI',sans-serif;fill:#172b4d}.s{font:14px 'Segoe UI',sans-serif;fill:#333}.line{stroke:#4d4d4d;stroke-width:2;fill:none;marker-end:url(#arrow)}</style>
+    <marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M 0 0 L 10 4 L 0 8 z" fill="#57606a"/>
+    </marker>
+    <style>
+      .edge { fill: none; stroke: #57606a; stroke-width: 2; marker-end: url(#arrow); }
+      .edge-label-bg { fill: #ffffff; opacity: .94; }
+      .edge-label { fill: #57606a; font: 13px 'Segoe UI', Arial, sans-serif; text-anchor: middle; dominant-baseline: central; }
+      .node-label { font: 600 15px 'Segoe UI', Arial, sans-serif; text-anchor: middle; dominant-baseline: central; }
+    </style>
   </defs>
-  <rect x="35" y="205" width="170" height="82" class="box actor"/><text x="120" y="240" text-anchor="middle" class="t">Administrator</text><text x="120" y="264" text-anchor="middle" class="s">authorized sandbox</text>
-  <rect x="255" y="205" width="170" height="82" class="box id"/><text x="340" y="240" text-anchor="middle" class="t">Azure CLI</text><text x="340" y="264" text-anchor="middle" class="s">az ad + az rest</text>
-  <rect x="475" y="205" width="190" height="82" class="box id"/><text x="570" y="240" text-anchor="middle" class="t">Microsoft Graph</text><text x="570" y="264" text-anchor="middle" class="s">v1.0 directory APIs</text>
-  <rect x="735" y="55" width="300" height="82" class="box id"/><text x="885" y="89" text-anchor="middle" class="t">Cloud user A</text><text x="885" y="113" text-anchor="middle" class="s">member of the security group</text>
-  <rect x="735" y="205" width="300" height="82" class="box id"/><text x="885" y="239" text-anchor="middle" class="t">Security group</text><text x="885" y="263" text-anchor="middle" class="s">description, member, and owner</text>
-  <rect x="735" y="355" width="300" height="82" class="box id"/><text x="885" y="389" text-anchor="middle" class="t">Cloud user B</text><text x="885" y="413" text-anchor="middle" class="s">owner of the security group</text>
-  <rect x="255" y="375" width="190" height="82" class="box local"/><text x="350" y="409" text-anchor="middle" class="t">Local state</text><text x="350" y="433" text-anchor="middle" class="s">exact object IDs; no password</text>
-  <rect x="500" y="375" width="165" height="82" class="box local"/><text x="582" y="409" text-anchor="middle" class="t">Validation</text><text x="582" y="433" text-anchor="middle" class="s">read-only checks</text>
-  <path d="M205 246 H255" class="line"/><path d="M425 246 H475" class="line"/><path d="M665 225 C700 190 705 105 735 96" class="line"/><path d="M665 246 H735" class="line"/><path d="M665 267 C700 300 705 386 735 396" class="line"/>
-  <path d="M340 287 V375" class="line"/><path d="M445 416 H500" class="line"/><path d="M582 375 V300 C582 292 582 292 582 287" class="line"/>
+  <rect width="100%" height="100%" fill="#ffffff"/>
+  <g aria-hidden="true">
+    <path class="edge" d="M 324 307 C 384 307, 384 307, 444 307"/>
+    <path class="edge" d="M 704 307 C 764 307, 764 124, 824 124"/>
+    <path class="edge" d="M 704 307 C 764 307, 764 246, 824 246"/>
+    <path class="edge" d="M 704 307 C 764 307, 764 368, 824 368"/>
+    <path class="edge" d="M 954 168 C 988 246, 988 246, 954 324"/>
+    <path class="edge" d="M 954 290 C 998 307, 998 307, 954 324"/>
+    <path class="edge" d="M 704 307 C 764 307, 764 490, 824 490"/>
+    <path class="edge" d="M 1084 490 C 1144 490, 1144 256, 1204 256"/>
+    <path class="edge" d="M 1084 490 C 1144 490, 1144 358, 1204 358"/>
+    <rect class="edge-label-bg" x="352.5" y="296" width="63" height="22" rx="4"/>
+    <text class="edge-label" x="384" y="307">az rest</text>
+    <rect class="edge-label-bg" x="736" y="204.5" width="56" height="22" rx="4"/>
+    <text class="edge-label" x="764" y="215.5">create</text>
+    <rect class="edge-label-bg" x="736" y="265.5" width="56" height="22" rx="4"/>
+    <text class="edge-label" x="764" y="276.5">create</text>
+    <rect class="edge-label-bg" x="736" y="326.5" width="56" height="22" rx="4"/>
+    <text class="edge-label" x="764" y="337.5">create</text>
+    <rect class="edge-label-bg" x="935.5" y="235" width="105" height="22" rx="4"/>
+    <text class="edge-label" x="988" y="246">direct member</text>
+    <rect class="edge-label-bg" x="942" y="296" width="112" height="22" rx="4"/>
+    <text class="edge-label" x="998" y="307">explicit owner</text>
+    <rect class="edge-label-bg" x="680" y="387.5" width="168" height="22" rx="4"/>
+    <text class="edge-label" x="764" y="398.5">returned immutable IDs</text>
+    <rect class="edge-label-bg" x="1081" y="362" width="126" height="22" rx="4"/>
+    <text class="edge-label" x="1144" y="373">exact-ID queries</text>
+    <rect class="edge-label-bg" x="1056.5" y="413" width="175" height="22" rx="4"/>
+    <text class="edge-label" x="1144" y="424">group first, then users</text>
+    <rect x="64" y="273" width="260" height="68" rx="10" fill="#e8f1ff" stroke="#2563eb"/>
+    <text x="194" y="307" class="node-label" fill="#102a43">Identity administrator</text>
+    <rect x="444" y="273" width="260" height="68" rx="10" fill="#eef6ff" stroke="#0078d4"/>
+    <text x="574" y="307" class="node-label" fill="#10253f">Microsoft Graph v1.0</text>
+    <rect x="824" y="80" width="260" height="88" rx="10" fill="#eef6ff" stroke="#0078d4"/>
+    <text x="954" y="114" class="node-label" fill="#10253f">Alex</text>
+    <text x="954" y="134" class="node-label" fill="#10253f">cloud user</text>
+    <rect x="824" y="202" width="260" height="88" rx="10" fill="#eef6ff" stroke="#0078d4"/>
+    <text x="954" y="236" class="node-label" fill="#10253f">Blair</text>
+    <text x="954" y="256" class="node-label" fill="#10253f">cloud user</text>
+    <rect x="824" y="324" width="260" height="88" rx="10" fill="#eef6ff" stroke="#0078d4"/>
+    <text x="954" y="358" class="node-label" fill="#10253f">Operations</text>
+    <text x="954" y="378" class="node-label" fill="#10253f">security group</text>
+    <rect x="824" y="446" width="260" height="88" rx="10" fill="#f4f4f4" stroke="#666"/>
+    <text x="954" y="480" class="node-label" fill="#222">Local run.json</text>
+    <text x="954" y="500" class="node-label" fill="#222">users and group</text>
+    <rect x="1204" y="222" width="260" height="68" rx="10" fill="#f4f4f4" stroke="#666"/>
+    <text x="1334" y="256" class="node-label" fill="#222">Independent validation</text>
+    <rect x="1204" y="324" width="260" height="68" rx="10" fill="#f4f4f4" stroke="#666"/>
+    <text x="1334" y="358" class="node-label" fill="#222">Scoped cleanup</text>
+  </g>
 </svg>

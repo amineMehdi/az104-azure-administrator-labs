@@ -1,8 +1,11 @@
+
+# BEGIN GENERATED AZ104 V2
+schemaVersion: 2.0.0
 id: LAB-18
 slug: 18-routing-nsg-asg
 title: Control traffic with routes, NSGs, ASGs, and effective rules
 blueprintVersion: '2026-04-17'
-domain: Implement and manage virtual networking
+domain: networking
 objectives:
 - NW-VNET-04
 - NW-VNET-05
@@ -14,18 +17,29 @@ testedToolVersions:
   azureCli: '>=2.88.0'
   powershell: '>=7.4'
 estimatedMinutes: 120
-difficulty: intermediate
+difficulty: applied
+experience:
+  scenario: 'You are a network security administrator diagnosing application traffic flow. Build and prove this disposable
+    service path: Frontend and backend NICs join distinct ASGs inside one subnet; NSG rules evaluate ASG identities, the route
+    table supplies the next hop, and Network Watcher reads effective rules and routes from the provisioned VMs.'
+  role: A network security administrator diagnosing application traffic flow.
+  outcome: Use Azure CLI in PowerShell to create application and management security groups, apply asg-aware nsg rules and
+    a custom route, and reconcile authored and effective network policy, with recoverable state and deterministic cleanup.
+  completionCriteria:
+  - All required checkpoints report pass.
+  - The deterministic break/fix is injected, diagnosed, and repaired.
+  - cleanup.json reports no active run-owned resources, with any retained item explicitly documented.
 cost:
-  class: low
-  billableResources: &id001
-  - resource group
-  - virtual network
-  - network security group
-  - two application security groups
-  - route table
-  - test network interfaces
+  class: moderate
+  billableResources:
+  - two small Linux virtual machines
+  - managed OS disks
   notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator before
     execution and clean up immediately.
+  pricingLinks:
+  - title: Azure Virtual Network pricing
+    url: https://azure.microsoft.com/pricing/details/virtual-network/
+  acknowledgementRequired: true
 permissions:
   azureRbacRoles:
   - Network Contributor on the lab resource group
@@ -38,40 +52,426 @@ prerequisites:
 - 'External gate review: None beyond the declared role and a disposable subscription.'
 - Azure CLI hosted in PowerShell 7.4 or later
 providers:
-  observed:
+  required:
   - Microsoft.Network
+  - Microsoft.Compute
+  optional: []
   registeredByLab: []
-regions:
-  applicable: true
-  primary: supplied at execution time
-  secondary: null
+inputs:
+- id: run-id
+  parameter: RunId
+  description: Unique lowercase run ownership identifier
+  required: true
+  secret: false
+  source: parameter
+  safeExample: az104l18-01
+  gateBehavior: block
+  checkpointIds:
+  - LAB18-CP01
+  - LAB18-CP02
+  - LAB18-CP03
+  - LAB18-CP04
+  - LAB18-CP05
+- id: subscription-id
+  parameter: SubscriptionId
+  environmentVariable: AZ104_SUBSCRIPTION_ID
+  description: Expected disposable subscription ID
+  required: true
+  secret: false
+  source: parameter-or-environment
+  safeExample: 00000000-0000-0000-0000-000000000000
+  gateBehavior: block
+  checkpointIds:
+  - LAB18-CP01
+  - LAB18-CP02
+  - LAB18-CP03
+  - LAB18-CP04
+  - LAB18-CP05
+- id: location
+  parameter: Location
+  environmentVariable: AZ104_LOCATION
+  description: Approved primary Azure region
+  required: true
+  secret: false
+  source: parameter-or-environment
+  safeExample: westeurope
+  gateBehavior: block
+  checkpointIds:
+  - LAB18-CP01
+  - LAB18-CP02
+  - LAB18-CP03
+  - LAB18-CP04
+  - LAB18-CP05
+acknowledgements:
+  cost:
+    required: true
+    parameter: AcknowledgeCost
+    message: I reviewed current pricing, quota, and the same-session cleanup plan.
+  tenantChange:
+    required: false
+    parameter: AcknowledgeTenantChange
+    message: I am authorized to create or change the declared tenant-scoped objects and will restore recorded settings.
 creates:
-  azureResources: *id001
+  azureResources:
+  - resource group
+  - virtual network
+  - network security group
+  - two application security groups
+  - route table
+  - test network interfaces
   entraObjects: []
   localArtifacts:
   - .state/<run-id>/run.json
   - .state/<run-id>/validation.json
+  - .state/<run-id>/cleanup.json
 tenantScopedChanges: []
 externalRequirements: []
+preflightChecks:
+- id: preflight.context
+  type: context
+  required: true
+  description: Confirm active cloud, tenant, and subscription without changing them.
+  command: az account show --output json
+  expected: Active context matches the supplied subscription and disposable environment.
+- id: preflight.tools
+  type: tool
+  required: true
+  description: Confirm PowerShell, Azure CLI, and az bicep are available.
+  command: az version; az bicep version
+  expected: All required tools meet the versions declared by this lab.
+- id: preflight.inputs
+  type: input
+  required: true
+  description: Check required parameters and environment gates without printing secrets.
+  command: $PSBoundParameters.Keys; Get-ChildItem Env:AZ104_* | Select-Object Name
+  expected: Every required input is present and optional gates are explicitly reported.
+- id: preflight.providers
+  type: provider
+  required: true
+  description: Read registration state for required resource providers.
+  command: az provider show --namespace <provider> --query registrationState --output tsv
+  expected: Every required provider is Registered; preflight performs no registration.
+- id: preflight.region
+  type: region
+  required: true
+  description: Confirm the requested region is available to the subscription.
+  command: az account list-locations --query "[?name=='<location>'].name" --output tsv
+  expected: The supplied region appears in the subscription location inventory.
+- id: preflight.authored.service
+  type: sku
+  required: true
+  description: Prove verify effective-security and route-diagnostics prerequisites with LAB-18's authored read-only provider,
+    feature, tool, region, and SKU queries.
+  command: '$network = az provider show --namespace Microsoft.Network --query registrationState --output tsv
+
+    if ($network -ne ''Registered'') { throw ''Microsoft.Network is not registered.'' }
+
+    $compute = az provider show --namespace Microsoft.Compute --query registrationState --output tsv
+
+    if ($compute -ne ''Registered'') { throw ''Microsoft.Compute is not registered.'' }'
+  expected: The region supports the private VM SKU and Network Watcher can inspect effective NSGs and routes for the planned
+    NICs.
+checkpoints:
+- id: LAB18-CP01
+  title: Verify effective-security and route-diagnostics prerequisites
+  purpose: Read the provider, region, SKU, feature, quota, and companion-tool signals needed for verify effective-security
+    and route-diagnostics prerequisites, without changing Azure state.
+  objectiveIds:
+  - NW-VNET-04
+  required: true
+  expectedState: The region supports the private VM SKU and Network Watcher can inspect effective NSGs and routes for the
+    planned NICs.
+  scriptMarkers:
+    setup: LAB18-CP01
+    validate: LAB18-CP01
+    cleanup: LAB18-CP01
+  validation:
+    positive:
+      id: cp01.positive
+      description: Read the service properties for verify effective-security and route-diagnostics prerequisites by using
+        exact run-owned identifiers.
+      command: '$validationId=''LAB18-CP01-positive''; $network = az provider show --namespace Microsoft.Network --query registrationState
+        --output tsv
+
+        if ($network -ne ''Registered'') { throw ''Microsoft.Network is not registered.'' }'
+      expected: The region supports the private VM SKU and Network Watcher can inspect effective NSGs and routes for the planned
+        NICs.
+    negative:
+      id: cp01.negative
+      description: Search for conflicting, unowned, or excessive state after verify effective-security and route-diagnostics
+        prerequisites.
+      command: '$validationId=''LAB18-CP01-negative''; $compute = az provider show --namespace Microsoft.Compute --query registrationState
+        --output tsv
+
+        if ($compute -ne ''Registered'') { throw ''Microsoft.Compute is not registered.'' }'
+      expected: 'LAB18-CP01 negative boundary: The undesired state is absent; the negative assertion must not report: Microsoft.Compute
+        is not registered.'
+  cleanup:
+    dependsOn:
+    - LAB18-CP02
+    - LAB18-CP03
+    - LAB18-CP04
+    - LAB18-CP05
+    action: Remove only manifest-recorded objects owned by LAB18-CP01, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp01.residual
+      description: Prove no active managed object remains for LAB18-CP01.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-1
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Network security groups and effective security rules
+      url: https://learn.microsoft.com/en-us/azure/virtual-network/manage-network-security-group
+- id: LAB18-CP02
+  title: Create application and management security groups
+  purpose: Provision and immediately inventory the exact run-owned resources needed to create application and management security
+    groups, so partial completion remains recoverable.
+  objectiveIds:
+  - NW-VNET-05
+  required: true
+  expectedState: The NSG, ASG, route table, two private NICs, and their subnet associations are recorded in the run boundary.
+  scriptMarkers:
+    setup: LAB18-CP02
+    validate: LAB18-CP02
+    cleanup: LAB18-CP02
+  validation:
+    positive:
+      id: cp02.positive
+      description: Read the service properties for create application and management security groups by using exact run-owned
+        identifiers.
+      command: '$validationId=''LAB18-CP02-positive''; $rule = az network nsg rule show --resource-group $ResourceGroupName
+        --nsg-name $nsg --name AllowFrontendToBackend443 --query access --output tsv
+
+        if ($rule -ne ''Allow'') { throw "NSG access is $rule." }'
+      expected: The NSG, ASG, route table, two private NICs, and their subnet associations are recorded in the run boundary.
+    negative:
+      id: cp02.negative
+      description: Search for conflicting, unowned, or excessive state after create application and management security groups.
+      command: '$validationId=''LAB18-CP02-negative''; $defaultRoute = az network route-table route show --resource-group
+        $ResourceGroupName --route-table-name $route --name DefaultToInternet --query nextHopType --output tsv
+
+        if ($defaultRoute -ne ''Internet'') { throw "Route next hop is $defaultRoute." }'
+      expected: 'LAB18-CP02 negative boundary: The undesired state is absent; the negative assertion must not report: Route
+        next hop is reported defaultRoute.'
+  cleanup:
+    dependsOn:
+    - LAB18-CP03
+    - LAB18-CP04
+    - LAB18-CP05
+    action: Remove only manifest-recorded objects owned by LAB18-CP02, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp02.residual
+      description: Prove no active managed object remains for LAB18-CP02.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-2
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Network security groups and effective security rules
+      url: https://learn.microsoft.com/en-us/azure/virtual-network/manage-network-security-group
+- id: LAB18-CP03
+  title: Apply ASG-aware NSG rules and a custom route
+  purpose: Configure and independently inspect the control-plane and data-path properties needed to apply asg-aware nsg rules
+    and a custom route.
+  objectiveIds:
+  - NW-SECURE-01
+  required: true
+  expectedState: The application NIC belongs to the ASG, the subnet has the route table, and rule priorities produce the intended
+    flow boundary.
+  scriptMarkers:
+    setup: LAB18-CP03
+    validate: LAB18-CP03
+    cleanup: LAB18-CP03
+  validation:
+    positive:
+      id: cp03.positive
+      description: Read the service properties for apply ASG-aware NSG rules and a custom route by using exact run-owned identifiers.
+      command: '$validationId=''LAB18-CP03-positive''; $frontAsg = az network nic show --resource-group $ResourceGroupName
+        --name "nic-front-$suffix" --query "ipConfigurations[0].applicationSecurityGroups[0].id" --output tsv
+
+        if ($frontAsg -notmatch "/$front$") { throw ''Front-end NIC is not in the front ASG.'' }'
+      expected: The application NIC belongs to the ASG, the subnet has the route table, and rule priorities produce the intended
+        flow boundary.
+    negative:
+      id: cp03.negative
+      description: Search for conflicting, unowned, or excessive state after apply ASG-aware NSG rules and a custom route.
+      command: '$validationId=''LAB18-CP03-negative''; $backAsg = az network nic show --resource-group $ResourceGroupName
+        --name "nic-back-$suffix" --query "ipConfigurations[0].applicationSecurityGroups[0].id" --output tsv
+
+        if ($backAsg -notmatch "/$back$") { throw ''Back-end NIC is not in the back ASG.'' }'
+      expected: 'LAB18-CP03 negative boundary: The undesired state is absent; the negative assertion must not report: Back-end
+        NIC is not in the back ASG.'
+  cleanup:
+    dependsOn:
+    - LAB18-CP04
+    - LAB18-CP05
+    action: Remove only manifest-recorded objects owned by LAB18-CP03, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp03.residual
+      description: Prove no active managed object remains for LAB18-CP03.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-3
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Network security groups and effective security rules
+      url: https://learn.microsoft.com/en-us/azure/virtual-network/manage-network-security-group
+- id: LAB18-CP04
+  title: Inspect effective NSG and route precedence
+  purpose: Exercise the deterministic operational or denied path needed to inspect effective nsg and route precedence, then
+    retain comparable before-and-after results.
+  objectiveIds:
+  - NW-SECURE-02
+  required: true
+  expectedState: Effective rules and routes on the VM NIC expose the configured allow/deny and next-hop decisions rather than
+    only the authored objects.
+  scriptMarkers:
+    setup: LAB18-CP04
+    validate: LAB18-CP04
+    cleanup: LAB18-CP04
+  validation:
+    positive:
+      id: cp04.positive
+      description: Read the service properties for inspect effective NSG and route precedence by using exact run-owned identifiers.
+      command: '$validationId=''LAB18-CP04-positive''; $effectiveRule = az network nic list-effective-nsg --resource-group
+        $ResourceGroupName --name "nic-back-$suffix" --query "value[].effectiveSecurityRules[?name==''AllowFrontendToBackend443'']
+        | length(@)" --output tsv
+
+        if (-not $effectiveRule -or [int]$effectiveRule -lt 1) { throw ''The ASG allow is absent from effective NSG rules.''
+        }'
+      expected: Effective rules and routes on the VM NIC expose the configured allow/deny and next-hop decisions rather than
+        only the authored objects.
+    negative:
+      id: cp04.negative
+      description: Search for conflicting, unowned, or excessive state after inspect effective NSG and route precedence.
+      command: '$validationId=''LAB18-CP04-negative''; $routeCount = az network nic show-effective-route-table --resource-group
+        $ResourceGroupName --name "nic-back-$suffix" --query "value[?addressPrefix==''0.0.0.0/0''] | length(@)" --output tsv
+
+        if ([int]$routeCount -lt 1) { throw ''No effective default route exists.'' }'
+      expected: 'LAB18-CP04 negative boundary: The undesired state is absent; the negative assertion must not report: No effective
+        default route exists.'
+  cleanup:
+    dependsOn:
+    - LAB18-CP05
+    action: Remove only manifest-recorded objects owned by LAB18-CP04, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp04.residual
+      description: Prove no active managed object remains for LAB18-CP04.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-4
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Network security groups and effective security rules
+      url: https://learn.microsoft.com/en-us/azure/virtual-network/manage-network-security-group
+- id: LAB18-CP05
+  title: Reconcile authored and effective network policy
+  purpose: Reconcile live service properties, returned IDs, and dependency-aware removal needed to reconcile authored and
+    effective network policy before handoff.
+  objectiveIds:
+  - NW-VNET-04
+  - NW-VNET-05
+  - NW-SECURE-01
+  - NW-SECURE-02
+  required: true
+  expectedState: ASG membership, NSG rule priority, subnet association, and NIC effective-state queries agree for both test
+    paths.
+  scriptMarkers:
+    setup: LAB18-CP05
+    validate: LAB18-CP05
+    cleanup: LAB18-CP05
+  validation:
+    positive:
+      id: cp05.positive
+      description: Read the service properties for reconcile authored and effective network policy by using exact run-owned
+        identifiers.
+      command: '$validationId=''LAB18-CP05-positive''; $running = az vm list --resource-group $ResourceGroupName --show-details
+        --query "[?powerState==''VM running''] | length(@)" --output tsv
+
+        if ([int]$running -ne 2) { throw "Expected two running VMs; found $running." }'
+      expected: ASG membership, NSG rule priority, subnet association, and NIC effective-state queries agree for both test
+        paths.
+    negative:
+      id: cp05.negative
+      description: Search for conflicting, unowned, or excessive state after reconcile authored and effective network policy.
+      command: '$validationId=''LAB18-CP05-negative''; $faultRule = az network nsg rule list --resource-group $ResourceGroupName
+        --nsg-name $nsg --query "[?name==''DenyInjected443''] | length(@)" --output tsv
+
+        if ([int]$faultRule -ne 0) { throw ''The injected deny rule still exists.'' }'
+      expected: 'LAB18-CP05 negative boundary: The undesired state is absent; the negative assertion must not report: The
+        injected deny rule still exists.'
+  cleanup:
+    dependsOn: []
+    action: Remove only manifest-recorded objects owned by LAB18-CP05, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp05.residual
+      description: Prove no active managed object remains for LAB18-CP05.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-5
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Network security groups and effective security rules
+      url: https://learn.microsoft.com/en-us/azure/virtual-network/manage-network-security-group
 validation:
-  commandLanes:
-  - scripts/cli/Validate.ps1
-  output: .state/<run-id>/validation.json
-  statuses:
-  - pass
-  - fail
-  - warning
-  - skipped
-  liveExecutionRequiredForLiveVerified: true
+  script: scripts/cli/Validate.ps1
+  artifact: .state/<run-id>/validation.json
+  modes:
+  - Deployment
+  - PostCleanup
+  resultPolicy:
+    requiredFailureResult: fail
+    optionalSkipResult: partial
+    allRequiredPassResult: pass
 cleanup:
-  azureDeletion: exact recorded resource-group ID after tag verification
-  entraDeletion: none
-  reportOnlyByDefault: true
+  script: scripts/cli/Cleanup.ps1
+  artifact: .state/<run-id>/cleanup.json
+  previewByDefault: true
   requiresExecuteFlag: true
-  residualAuditRequired: true
+  ownershipVerification:
+    manifestIdMatch: true
+    requiredTags:
+    - purpose
+    - labId
+    - runId
+  residualChecks:
+  - id: cp01.residual
+    description: Prove no active managed object remains for LAB18-CP01.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp02.residual
+    description: Prove no active managed object remains for LAB18-CP02.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp03.residual
+    description: Prove no active managed object remains for LAB18-CP03.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp04.residual
+    description: Prove no active managed object remains for LAB18-CP04.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp05.residual
+    description: Prove no active managed object remains for LAB18-CP05.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  retainedItemsAllowed: true
+  irreversiblePurge: never
 assessment:
   enabled: true
   questionCount: 50
   primaryDomain: networking
-lastOfflineValidated: '2026-08-30'
+lastOfflineValidated: '2026-08-31'
 lastLiveVerified: null
+# END GENERATED AZ104 V2

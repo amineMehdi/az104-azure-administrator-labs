@@ -1,18 +1,57 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="460" viewBox="0 0 1040 460" role="img" aria-labelledby="title desc">
-<title id="title">Lab 27 architecture</title>
-<desc id="desc">Preview-first operator workflow, a recorded lab boundary, intended resources, independent validation, redacted command evidence, and scoped cleanup.</desc>
-<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#46647f"/></marker></defs>
-<style>text{font-family:Segoe UI,Arial,sans-serif;font-size:14px;fill:#102a43} .control{fill:#e8f1ff;stroke:#2563eb;stroke-width:2} .resource{fill:#e9f8ef;stroke:#16803a;stroke-width:2} .arrow{fill:none;stroke:#46647f;stroke-width:2;marker-end:url(#arrow)}</style>
-<rect width="100%" height="100%" fill="#ffffff"/>
-<rect x="40" y="55" width="180" height="55" rx="8" class="control"/><text x="130" y="79" text-anchor="middle">Operator</text><text x="130" y="98" text-anchor="middle">Azure CLI and KQL</text>
-<rect x="275" y="55" width="180" height="55" rx="8" class="control"/><text x="365" y="79" text-anchor="middle">Preview and preflight</text><text x="365" y="98" text-anchor="middle">read-only context check</text>
-<path d="M220 82 L275 82" class="arrow"/>
-<rect x="275" y="130" width="180" height="50" rx="8" class="control"/><text x="365" y="151" text-anchor="middle">Recorded Lab 27</text><text x="365" y="170" text-anchor="middle">exact cleanup boundary</text>
-<path d="M365 110 L365 130" class="arrow"/>
-<rect x="500" y="110" width="470" height="40" rx="8" class="resource"/><text x="735" y="135" text-anchor="middle">resource group</text><rect x="500" y="168" width="470" height="40" rx="8" class="resource"/><text x="735" y="193" text-anchor="middle">test workload</text><rect x="500" y="226" width="470" height="40" rx="8" class="resource"/><text x="735" y="251" text-anchor="middle">Log Analytics workspace</text><rect x="500" y="284" width="470" height="40" rx="8" class="resource"/><text x="735" y="309" text-anchor="middle">alerts</text><rect x="500" y="342" width="470" height="40" rx="8" class="resource"/><text x="735" y="367" text-anchor="middle">Recovery Services vault</text>
-<path d="M 455 155 L 500 130" class="arrow"/><path d="M 455 155 L 500 188" class="arrow"/><path d="M 455 155 L 500 246" class="arrow"/><path d="M 455 155 L 500 304" class="arrow"/><path d="M 455 155 L 500 362" class="arrow"/>
-<rect x="40" y="215" width="180" height="50" rx="8" class="control"/><text x="130" y="237" text-anchor="middle">Independent validation</text><text x="130" y="256" text-anchor="middle">positive + negative</text>
-<path d="M275 165 L220 230" class="arrow"/>
-<rect x="40" y="290" width="180" height="50" rx="8" class="control"/><text x="130" y="312" text-anchor="middle">Evidence + cleanup</text><text x="130" y="331" text-anchor="middle">redacted and scoped</text>
-<path d="M130 265 L130 290" class="arrow"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1528" height="534" viewBox="0 0 1528 534" role="img" aria-labelledby="lab27-title lab27-desc">
+  <title id="lab27-title">LAB-27 architecture: Capstone — Operate, troubleshoot, back up, and recover an Azure workload</title>
+  <desc id="lab27-desc">Left-to-right service topology with 12 components and 13 directed relationships. Components: Private workload VM, Effective NSG path, Injected deny and repair, Storage transaction, Diagnostic setting, Log Analytics and KQL, Scoped metric alert, Recovery protection, Recovery point, Disk restore artifact, Network, telemetry, alert, and recovery assertions, Workload cleanup and deleted-vault proof. Relationships: Private workload VM to Effective NSG path; Injected deny and repair to Effective NSG path; Storage transaction to Diagnostic setting; Diagnostic setting to Log Analytics and KQL; Storage transaction to Scoped metric alert; Private workload VM to Recovery protection; Recovery protection to Recovery point; Recovery point to Disk restore artifact; Effective NSG path to Network, telemetry, alert, and recovery assertions; Log Analytics and KQL to Network, telemetry, alert, and recovery assertions; Scoped metric alert to Network, telemetry, alert, and recovery assertions; Disk restore artifact to Network, telemetry, alert, and recovery assertions; Network, telemetry, alert, and recovery assertions to Workload cleanup and deleted-vault proof.</desc>
+  <metadata id="lab27-metadata">{&quot;renderer&quot;:&quot;az104-mermaid-flowchart-svg/1.0.0&quot;,&quot;source&quot;:&quot;architecture.mmd&quot;,&quot;sourceSha256&quot;:&quot;2c9cd80f13823e95e22866f7d4a6834b4d8ef0555cd1a67bbc269ebb72d36e85&quot;}</metadata>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M 0 0 L 10 4 L 0 8 z" fill="#57606a"/>
+    </marker>
+    <style>
+      .edge { fill: none; stroke: #57606a; stroke-width: 2; marker-end: url(#arrow); }
+      .edge-label-bg { fill: #ffffff; opacity: .94; }
+      .edge-label { fill: #57606a; font: 13px 'Segoe UI', Arial, sans-serif; text-anchor: middle; dominant-baseline: central; }
+      .node-label { font: 600 15px 'Segoe UI', Arial, sans-serif; text-anchor: middle; dominant-baseline: central; }
+    </style>
+  </defs>
+  <rect width="100%" height="100%" fill="#ffffff"/>
+  <g aria-hidden="true">
+    <path class="edge" d="M 324 165 C 384 165, 384 114, 444 114"/>
+    <path class="edge" d="M 324 267 C 384 267, 384 114, 444 114"/>
+    <path class="edge" d="M 324 369 C 384 369, 384 216, 444 216"/>
+    <path class="edge" d="M 704 216 C 764 216, 764 165, 824 165"/>
+    <path class="edge" d="M 324 369 C 384 369, 384 318, 444 318"/>
+    <path class="edge" d="M 324 165 C 384 165, 384 420, 444 420"/>
+    <path class="edge" d="M 704 420 C 764 420, 764 267, 824 267"/>
+    <path class="edge" d="M 1084 267 C 1144 267, 1144 216, 1204 216"/>
+    <path class="edge" d="M 704 114 C 764 114, 764 369, 824 369"/>
+    <path class="edge" d="M 954 199 C 978 267, 978 267, 954 335"/>
+    <path class="edge" d="M 704 318 C 764 318, 764 369, 824 369"/>
+    <path class="edge" d="M 1204 216 C 1154 461, 1134 461, 1084 369"/>
+    <path class="edge" d="M 1084 369 C 1144 369, 1144 318, 1204 318"/>
+    <rect x="64" y="131" width="260" height="68" rx="10" fill="#e9f8ef" stroke="#16803a"/>
+    <text x="194" y="165" class="node-label" fill="#102a43">Private workload VM</text>
+    <rect x="444" y="80" width="260" height="68" rx="10" fill="#e9f8ef" stroke="#16803a"/>
+    <text x="574" y="114" class="node-label" fill="#102a43">Effective NSG path</text>
+    <rect x="64" y="233" width="260" height="68" rx="10" fill="#e8f1ff" stroke="#2563eb"/>
+    <text x="194" y="267" class="node-label" fill="#102a43">Injected deny and repair</text>
+    <rect x="64" y="335" width="260" height="68" rx="10" fill="#e9f8ef" stroke="#16803a"/>
+    <text x="194" y="369" class="node-label" fill="#102a43">Storage transaction</text>
+    <rect x="444" y="182" width="260" height="68" rx="10" fill="#e9f8ef" stroke="#16803a"/>
+    <text x="574" y="216" class="node-label" fill="#102a43">Diagnostic setting</text>
+    <rect x="824" y="131" width="260" height="68" rx="10" fill="#e9f8ef" stroke="#16803a"/>
+    <text x="954" y="165" class="node-label" fill="#102a43">Log Analytics and KQL</text>
+    <rect x="444" y="284" width="260" height="68" rx="10" fill="#e9f8ef" stroke="#16803a"/>
+    <text x="574" y="318" class="node-label" fill="#102a43">Scoped metric alert</text>
+    <rect x="444" y="386" width="260" height="68" rx="10" fill="#e9f8ef" stroke="#16803a"/>
+    <text x="574" y="420" class="node-label" fill="#102a43">Recovery protection</text>
+    <rect x="824" y="233" width="260" height="68" rx="10" fill="#e9f8ef" stroke="#16803a"/>
+    <text x="954" y="267" class="node-label" fill="#102a43">Recovery point</text>
+    <rect x="1204" y="182" width="260" height="68" rx="10" fill="#e9f8ef" stroke="#16803a"/>
+    <text x="1334" y="216" class="node-label" fill="#102a43">Disk restore artifact</text>
+    <rect x="824" y="335" width="260" height="68" rx="10" fill="#e8f1ff" stroke="#2563eb"/>
+    <text x="954" y="369" class="node-label" fill="#102a43">Network, telemetry, alert, and recovery assertions</text>
+    <rect x="1204" y="284" width="260" height="68" rx="10" fill="#e8f1ff" stroke="#2563eb"/>
+    <text x="1334" y="318" class="node-label" fill="#102a43">Workload cleanup and deleted-vault proof</text>
+  </g>
 </svg>

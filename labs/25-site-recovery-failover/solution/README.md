@@ -1,6 +1,6 @@
 # Lab 25 solution and diagnostic notes
 
-Use this only after completing the lab and knowledge check. The solution is evidence-led: it does not replace the independent validator or silently repair live state.
+Use this only after completing the guided lab. In Labs 01–25, complete the knowledge check before reading these notes. The solution is evidence-led: it does not replace the independent validator or silently repair live state.
 
 ## Intended checkpoint sequence
 
@@ -8,6 +8,7 @@ Use this only after completing the lab and knowledge check. The solution is evid
 2. **Checkpoint 2:** Create a source VM and Recovery Services vault, then configure Azure-to-Azure fabric, container, policy, and network mappings.
 3. **Checkpoint 3:** Enable replication and wait for protected health before running an isolated test failover into a test subnet.
 4. **Checkpoint 4:** Clean up test failover, compare planned and unplanned failover, and remove replication in the required order before vault deletion.
+5. **Checkpoint 5:** Correlate service state with the run manifest, retain redacted validation evidence, and prove cleanup readiness.
 
 ## Diagnostic order
 
@@ -38,4 +39,4 @@ The live gate is: This elevated lab requires two approved regions and explicit c
 
 ## Completion evidence
 
-A defensible result includes a run manifest, independent validation report, redacted CLI or PowerShell evidence, and a cleanup/residual audit. Offline repository tests alone do not establish live verification.
+A defensible result includes a run manifest, independent validation report, redacted Azure CLI evidence captured from PowerShell, and a cleanup/residual audit. Offline repository tests alone do not establish live verification.

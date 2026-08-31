@@ -1,453 +1,459 @@
 # Lab 10 knowledge check
 
-Choose the single best answer for each question. Record your choices before opening `ANSWERS.md`.
+[Return to the guided lab](../README.md)
+
+Complete all 50 questions before opening the answer key. Allow about 50–60 minutes and choose the single best answer.
+
+Use the result as a learning signal: 85–100% indicates mastery, 70–84% calls for targeted review, and below 70% means repeat the mapped lab tasks before retrying.
 
 ## LAB10-Q01 — Foundational
 
-Which principle is most important when working on 'Interpret an Azure Resource Manager template or a Bicep file' in Lab 10?
+A template deployment reviewer challenges whether the reviewed Bicep deployment pipeline can describe desired Azure resources so repeated deployments converge on that state. Which response resolves the concern?
 
-- A. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- B. A recognizable resource name removes the need for validation and scoped cleanup.
-- C. Bicep compiles to ARM JSON, what-if predicts control-plane changes, and exported/decompiled templates require human review rather than being treated as pristine source.
-- D. The shortest command is always correct even when it changes a broader scope.
+- A. Parameters expose deployment-time inputs while decorators can constrain allowed values, length, or security handling.
+- B. A symbolic resource reference creates an implicit dependency when one resource consumes another's property.
+- C. Bicep declares the desired resource state and lets Resource Manager determine dependency-aware operations.
+- D. Changing a Bicep resource property can update in place or replace the resource according to provider behavior.
 
 ## LAB10-Q02 — Foundational
 
-Which lab action directly supports the objective 'Modify an existing Azure Resource Manager template'?
+The reviewed Bicep deployment pipeline handoff omits the template deployment rule needed to vary deployment inputs between environments without changing the template body. Which statement should the team add?
 
-- A. Search the whole tenant for a similar display name and modify the first match.
-- B. Mark the objective complete after reading documentation without checking any state.
-- C. Change the active tenant without displaying or confirming the resulting context.
-- D. Modify parameter values and run a resource-group what-if before deployment.
+- A. Variables derive reusable values inside a Bicep file and are not supplied by the deployer at runtime.
+- B. What-if predicts resource changes without applying the deployment, although some properties may produce noise.
+- C. Decompilation provides a starting point and may require manual refactoring, naming, and semantic review.
+- D. Parameters expose deployment-time inputs while decorators can constrain allowed values, length, or security handling.
 
 ## LAB10-Q03 — Foundational
 
-Which authorization approach is appropriate before practicing 'Modify an existing Bicep file'?
+A template deployment incident review of the reviewed Bicep deployment pipeline depends on the ability to reuse a computed expression inside the template without exposing it to callers. Which platform description is reliable?
 
-- A. Confirm the active context and use only the declared role boundary: Contributor on the lab resource group
-- B. Skip role checks when the run ID contains the lab number.
-- C. Use a production subscription because its resources already exist.
-- D. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
+- A. Outputs return deployment information but should not expose secrets or sensitive values.
+- B. The deployment scope determines available resources, and complete mode can delete resources absent from the template at resource-group scope.
+- C. ARM template edits must preserve valid expressions, dependencies, parameter types, and API-version behavior.
+- D. Variables derive reusable values inside a Bicep file and are not supplied by the deployer at runtime.
 
 ## LAB10-Q04 — Foundational
 
-Before making a change, a learner checks this core behavior: Which principle is most important when working on 'Interpret an Azure Resource Manager template or a Bicep file' in Lab 10?
+An infrastructure administrator reviewing and deploying Bicep safely is updating the template deployment runbook. The requirement is to return a deployment value needed by a later workflow. Which statement describes Azure behavior correctly?
 
-- A. A recognizable resource name removes the need for validation and scoped cleanup.
-- B. Bicep compiles to ARM JSON, what-if predicts control-plane changes, and exported/decompiled templates require human review rather than being treated as pristine source.
-- C. The shortest command is always correct even when it changes a broader scope.
-- D. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+- A. A symbolic resource reference creates an implicit dependency when one resource consumes another's property.
+- B. Changing a Bicep resource property can update in place or replace the resource according to provider behavior.
+- C. Outputs return deployment information but should not expose secrets or sensitive values.
+- D. Bicep declares the desired resource state and lets Resource Manager determine dependency-aware operations.
 
 ## LAB10-Q05 — Foundational
 
-During a design vocabulary review, the team evaluates this situation: Which lab action directly supports the objective 'Modify an existing Azure Resource Manager template'?
+A template deployment peer review asks how the reviewed Bicep deployment pipeline should handle this outcome: ensure one declared resource is deployed after another resource it references. Which explanation is accurate?
 
-- A. Mark the objective complete after reading documentation without checking any state.
-- B. Change the active tenant without displaying or confirming the resulting context.
-- C. Modify parameter values and run a resource-group what-if before deployment.
-- D. Search the whole tenant for a similar display name and modify the first match.
+- A. What-if predicts resource changes without applying the deployment, although some properties may produce noise.
+- B. Decompilation provides a starting point and may require manual refactoring, naming, and semantic review.
+- C. Parameters expose deployment-time inputs while decorators can constrain allowed values, length, or security handling.
+- D. A symbolic resource reference creates an implicit dependency when one resource consumes another's property.
 
 ## LAB10-Q06 — Foundational
 
-In a command-planning session, an administrator asks this question: Which authorization approach is appropriate before practicing 'Modify an existing Bicep file'?
+For the reviewed Bicep deployment pipeline, the template deployment plan must preview control-plane changes before applying the deployment. Which statement about template deployment belongs in the reviewed Bicep deployment pipeline record?
 
-- A. Skip role checks when the run ID contains the lab number.
-- B. Use a production subscription because its resources already exist.
-- C. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
-- D. Confirm the active context and use only the declared role boundary: Contributor on the lab resource group
+- A. What-if predicts resource changes without applying the deployment, although some properties may produce noise.
+- B. The deployment scope determines available resources, and complete mode can delete resources absent from the template at resource-group scope.
+- C. ARM template edits must preserve valid expressions, dependencies, parameter types, and API-version behavior.
+- D. Variables derive reusable values inside a Bicep file and are not supplied by the deployer at runtime.
 
 ## LAB10-Q07 — Foundational
 
-While preparing the lab, a learner verifies this platform rule: Which principle is most important when working on 'Interpret an Azure Resource Manager template or a Bicep file' in Lab 10?
+The template deployment review compares four claims for the reviewed Bicep deployment pipeline requirement to deploy the template at the intended boundary with understood replacement behavior. Which claim is technically sound?
 
-- A. Bicep compiles to ARM JSON, what-if predicts control-plane changes, and exported/decompiled templates require human review rather than being treated as pristine source.
-- B. The shortest command is always correct even when it changes a broader scope.
-- C. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- D. A recognizable resource name removes the need for validation and scoped cleanup.
+- A. Changing a Bicep resource property can update in place or replace the resource according to provider behavior.
+- B. Bicep declares the desired resource state and lets Resource Manager determine dependency-aware operations.
+- C. Outputs return deployment information but should not expose secrets or sensitive values.
+- D. The deployment scope determines available resources, and complete mode can delete resources absent from the template at resource-group scope.
 
 ## LAB10-Q08 — Foundational
 
-During peer review, the team must identify the accurate response to this scenario: Which lab action directly supports the objective 'Modify an existing Azure Resource Manager template'?
+The template deployment architecture note requires the reviewed Bicep deployment pipeline environment to change a declared resource and redeploy the updated desired state. Which statement defines the relevant template deployment boundary?
 
-- A. Change the active tenant without displaying or confirming the resulting context.
-- B. Modify parameter values and run a resource-group what-if before deployment.
-- C. Search the whole tenant for a similar display name and modify the first match.
-- D. Mark the objective complete after reading documentation without checking any state.
+- A. Decompilation provides a starting point and may require manual refactoring, naming, and semantic review.
+- B. Parameters expose deployment-time inputs while decorators can constrain allowed values, length, or security handling.
+- C. A symbolic resource reference creates an implicit dependency when one resource consumes another's property.
+- D. Changing a Bicep resource property can update in place or replace the resource according to provider behavior.
 
 ## LAB10-Q09 — Foundational
 
-In an operations briefing, a new team member receives this question: Which authorization approach is appropriate before practicing 'Modify an existing Bicep file'?
+A new template deployment operator must explain why the reviewed Bicep deployment pipeline can turn an exported JSON template into maintainable Bicep as a starting point. Which explanation is accurate?
 
-- A. Use a production subscription because its resources already exist.
-- B. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
-- C. Confirm the active context and use only the declared role boundary: Contributor on the lab resource group
-- D. Skip role checks when the run ID contains the lab number.
+- A. ARM template edits must preserve valid expressions, dependencies, parameter types, and API-version behavior.
+- B. Decompilation provides a starting point and may require manual refactoring, naming, and semantic review.
+- C. Variables derive reusable values inside a Bicep file and are not supplied by the deployer at runtime.
+- D. What-if predicts resource changes without applying the deployment, although some properties may produce noise.
 
 ## LAB10-Q10 — Foundational
 
-While building a support checklist, an engineer reviews this requirement: Which principle is most important when working on 'Interpret an Azure Resource Manager template or a Bicep file' in Lab 10?
+The reviewed Bicep deployment pipeline acceptance criteria require operators to modify a JSON deployment template without breaking its schema structure. Which service fact supports that requirement?
 
-- A. The shortest command is always correct even when it changes a broader scope.
-- B. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- C. A recognizable resource name removes the need for validation and scoped cleanup.
-- D. Bicep compiles to ARM JSON, what-if predicts control-plane changes, and exported/decompiled templates require human review rather than being treated as pristine source.
+- A. Bicep declares the desired resource state and lets Resource Manager determine dependency-aware operations.
+- B. Outputs return deployment information but should not expose secrets or sensitive values.
+- C. The deployment scope determines available resources, and complete mode can delete resources absent from the template at resource-group scope.
+- D. ARM template edits must preserve valid expressions, dependencies, parameter types, and API-version behavior.
 
 ## LAB10-Q11 — Foundational
 
-During a readiness check, the administrator considers this behavior: Which lab action directly supports the objective 'Modify an existing Azure Resource Manager template'?
+The reviewed Bicep deployment pipeline window permits only the template deployment change needed to describe desired Azure resources so repeated deployments converge on that state. Which option respects the boundary?
 
-- A. Modify parameter values and run a resource-group what-if before deployment.
-- B. Search the whole tenant for a similar display name and modify the first match.
-- C. Mark the objective complete after reading documentation without checking any state.
-- D. Change the active tenant without displaying or confirming the resulting context.
+- A. Describe resources and properties declaratively rather than scripting imperative create steps.
+- B. Use a variable for a deterministic expression derived from parameters and resource metadata.
+- C. Run group what-if and review create, modify, delete, and ignore results before execution.
+- D. Decompile the JSON template, build the result, and review warnings before adopting it.
 
 ## LAB10-Q12 — Foundational
 
-In a service overview, the team discusses this scenario: Which authorization approach is appropriate before practicing 'Modify an existing Bicep file'?
+The template deployment preflight has passed; the reviewed Bicep deployment pipeline must now vary deployment inputs between environments without changing the template body. Which operation should run?
 
-- A. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
-- B. Confirm the active context and use only the declared role boundary: Contributor on the lab resource group
-- C. Skip role checks when the run ID contains the lab number.
-- D. Use a production subscription because its resources already exist.
+- A. Output nonsecret resource IDs or endpoints needed by later validation stages.
+- B. Use the intended scope and choose incremental behavior unless complete-mode deletion is explicitly reviewed.
+- C. Define parameters for environment-specific values and supply them from an approved parameter source.
+- D. Validate the modified JSON template and preview its changes before deployment.
 
 ## LAB10-Q13 — Foundational
 
-While reviewing official guidance, a learner must resolve this question: Which principle is most important when working on 'Interpret an Azure Resource Manager template or a Bicep file' in Lab 10?
+The reviewed Bicep deployment pipeline plan must reuse a computed expression inside the template without exposing it to callers while limiting the mutation scope to template deployment. Which action is appropriate?
 
-- A. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- B. A recognizable resource name removes the need for validation and scoped cleanup.
-- C. Bicep compiles to ARM JSON, what-if predicts control-plane changes, and exported/decompiled templates require human review rather than being treated as pristine source.
-- D. The shortest command is always correct even when it changes a broader scope.
+- A. Reference the symbolic resource directly and add dependsOn only for dependencies Bicep cannot infer.
+- B. Use a variable for a deterministic expression derived from parameters and resource metadata.
+- C. Modify the symbolic resource and inspect what-if before approving the new deployment.
+- D. Describe resources and properties declaratively rather than scripting imperative create steps.
 
 ## LAB10-Q14 — Foundational
 
-During a configuration walkthrough, the instructor asks about this situation: Which lab action directly supports the objective 'Modify an existing Azure Resource Manager template'?
+A template deployment ticket in the reviewed Bicep deployment pipeline says to return a deployment value needed by a later workflow. Which template deployment action completes the reviewed Bicep deployment pipeline request with minimal change?
 
-- A. Search the whole tenant for a similar display name and modify the first match.
-- B. Mark the objective complete after reading documentation without checking any state.
-- C. Change the active tenant without displaying or confirming the resulting context.
-- D. Modify parameter values and run a resource-group what-if before deployment.
+- A. Run group what-if and review create, modify, delete, and ignore results before execution.
+- B. Decompile the JSON template, build the result, and review warnings before adopting it.
+- C. Output nonsecret resource IDs or endpoints needed by later validation stages.
+- D. Define parameters for environment-specific values and supply them from an approved parameter source.
 
 ## LAB10-Q15 — Foundational
 
-In a preflight knowledge check, the operator evaluates this requirement: Which authorization approach is appropriate before practicing 'Modify an existing Bicep file'?
+The approach for the reviewed Bicep deployment pipeline is approved, but the template deployment environment still cannot ensure one declared resource is deployed after another resource it references. Which implementation step closes the gap?
 
-- A. Confirm the active context and use only the declared role boundary: Contributor on the lab resource group
-- B. Skip role checks when the run ID contains the lab number.
-- C. Use a production subscription because its resources already exist.
-- D. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
+- A. Use the intended scope and choose incremental behavior unless complete-mode deletion is explicitly reviewed.
+- B. Validate the modified JSON template and preview its changes before deployment.
+- C. Reference the symbolic resource directly and add dependsOn only for dependencies Bicep cannot infer.
+- D. Use a variable for a deterministic expression derived from parameters and resource metadata.
 
 ## LAB10-Q16 — Applied
 
-A learner previews the implementation for 'Deploy resources by using an Azure Resource Manager template or a Bicep file'. What behavior is required?
+The infrastructure administrator reviewing and deploying Bicep safely may change the reviewed Bicep deployment pipeline only to preview control-plane changes before applying the deployment. Which template deployment action stays within that assignment?
 
-- A. Delete any older resource whose name resembles the new run ID.
-- B. Display the context, intended changes, cost and gated branches without mutating Azure.
-- C. Create the baseline immediately and request approval only before cleanup.
-- D. Select the first accessible subscription and hide the resulting context.
+- A. Run group what-if and review create, modify, delete, and ignore results before execution.
+- B. Modify the symbolic resource and inspect what-if before approving the new deployment.
+- C. Describe resources and properties declaratively rather than scripting imperative create steps.
+- D. Output nonsecret resource IDs or endpoints needed by later validation stages.
 
 ## LAB10-Q17 — Applied
 
-Which implementation step should the learner perform for 'Export a deployment as an Azure Resource Manager template or convert an Azure Resource Manager template to a Bicep file'?
+A template deployment dry run shows no reviewed Bicep deployment pipeline command will deploy the template at the intended boundary with understood replacement behavior. Which action belongs before execution?
 
-- A. Copy resource identifiers from another run instead of recording returned IDs.
-- B. Skip the operation and edit validation.json to show a passing result.
-- C. Build and lint the supplied Bicep file and inspect its generated ARM JSON.
-- D. Replace the lab action with a tenant-wide change that is easier to discover.
+- A. Decompile the JSON template, build the result, and review warnings before adopting it.
+- B. Define parameters for environment-specific values and supply them from an approved parameter source.
+- C. Use the intended scope and choose incremental behavior unless complete-mode deletion is explicitly reviewed.
+- D. Reference the symbolic resource directly and add dependsOn only for dependencies Bicep cannot infer.
 
 ## LAB10-Q18 — Applied
 
-Which evidence most directly validates 'Interpret an Azure Resource Manager template or a Bicep file' for Bicep deployment?
+For the reviewed Bicep deployment pipeline, operators need to change a declared resource and redeploy the updated desired state. Which change realizes that requirement?
 
-- A. List the entire subscription and assume similarly named resources belong to this run.
-- B. Record a credential so another learner can replay the authenticated session.
-- C. Treat the setup exit code as proof of every configuration and relationship.
-- D. Query the exact recorded scope and independently verify Microsoft.Storage/storageAccounts.
+- A. Modify the symbolic resource and inspect what-if before approving the new deployment.
+- B. Validate the modified JSON template and preview its changes before deployment.
+- C. Use a variable for a deterministic expression derived from parameters and resource metadata.
+- D. Run group what-if and review create, modify, delete, and ignore results before execution.
 
 ## LAB10-Q19 — Applied
 
-The 'Modify an existing Azure Resource Manager template' checkpoint reaches an external prerequisite. What should happen?
+Operators must automate the reviewed Bicep deployment pipeline change needed to turn an exported JSON template into maintainable Bicep as a starting point. Which template deployment operation belongs in the runbook?
 
-- A. Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.
-- B. Mark the branch passed because its command syntax was checked offline.
-- C. Invent a domain, notification target, license, quota, or tenant value and continue.
-- D. Broaden permissions until the prerequisite can no longer block the operation.
+- A. Decompile the JSON template, build the result, and review warnings before adopting it.
+- B. Describe resources and properties declaratively rather than scripting imperative create steps.
+- C. Output nonsecret resource IDs or endpoints needed by later validation stages.
+- D. Use the intended scope and choose incremental behavior unless complete-mode deletion is explicitly reviewed.
 
 ## LAB10-Q20 — Applied
 
-What is the safest command-evidence practice after completing 'Modify an existing Bicep file'?
+A reviewed Bicep deployment pipeline review finds template deployment drift from the need to modify a JSON deployment template without breaking its schema structure. Which correction addresses that drift?
 
-- A. Reuse successful output from an earlier run with a similar resource name.
-- B. Retain only redacted structured output from an independent query of the recorded run.
-- C. Commit the complete account object so reviewers can identify the tenant.
-- D. Save tokens, keys, passwords, or SAS values beside the validation result.
+- A. Define parameters for environment-specific values and supply them from an approved parameter source.
+- B. Validate the modified JSON template and preview its changes before deployment.
+- C. Reference the symbolic resource directly and add dependsOn only for dependencies Bicep cannot infer.
+- D. Modify the symbolic resource and inspect what-if before approving the new deployment.
 
 ## LAB10-Q21 — Applied
 
-While validating a configuration, the team evaluates this situation: A learner previews the implementation for 'Deploy resources by using an Azure Resource Manager template or a Bicep file'. What behavior is required?
+A reviewed Bicep deployment pipeline review must prove the template deployment ability to describe desired Azure resources so repeated deployments converge on that state. Which check avoids an adjacent feature?
 
-- A. Select the first accessible subscription and hide the resulting context.
-- B. Delete any older resource whose name resembles the new run ID.
-- C. Display the context, intended changes, cost and gated branches without mutating Azure.
-- D. Create the baseline immediately and request approval only before cleanup.
+- A. Read deployment outputs and confirm no credential or access token is present.
+- B. Build the Bicep file and inspect the resulting template resources and dependencies.
+- C. Query deployment scope, provisioning state, mode, and operations after execution.
+- D. Run template validation and what-if, then inspect deployment operations after execution.
 
 ## LAB10-Q22 — Applied
 
-A delegated administrator receives the following support request: Which implementation step should the learner perform for 'Export a deployment as an Azure Resource Manager template or convert an Azure Resource Manager template to a Bicep file'?
+The reviewed Bicep deployment pipeline evidence bundle needs a template deployment result showing it can vary deployment inputs between environments without changing the template body. Which result belongs in the checkpoint?
 
-- A. Replace the lab action with a tenant-wide change that is easier to discover.
-- B. Copy resource identifiers from another run instead of recording returned IDs.
-- C. Skip the operation and edit validation.json to show a passing result.
-- D. Build and lint the supplied Bicep file and inspect its generated ARM JSON.
+- A. Build the file and inspect parameter types, defaults, decorators, and supplied deployment values.
+- B. Build the template and inspect dependency relationships between the relevant resources.
+- C. Compare what-if and deployment operations with the final resource properties.
+- D. Build the Bicep file and inspect the resulting template resources and dependencies.
 
 ## LAB10-Q23 — Applied
 
-During a maintenance window, an engineer must decide how to respond: Which evidence most directly validates 'Interpret an Azure Resource Manager template or a Bicep file' for Bicep deployment?
+Before reviewed Bicep deployment pipeline cleanup, the template deployment team must reconfirm it can reuse a computed expression inside the template without exposing it to callers. Which read-only inspection should run?
 
-- A. Query the exact recorded scope and independently verify Microsoft.Storage/storageAccounts.
-- B. List the entire subscription and assume similarly named resources belong to this run.
-- C. Record a credential so another learner can replay the authenticated session.
-- D. Treat the setup exit code as proof of every configuration and relationship.
+- A. Save the what-if result and confirm no unapproved deletion or replacement is predicted.
+- B. Inspect the compiled expression and confirm the value is not exposed as an unnecessary parameter.
+- C. Compare resources and expressions in the source template with the compiled Bicep output.
+- D. Build the file and inspect parameter types, defaults, decorators, and supplied deployment values.
 
 ## LAB10-Q24 — Applied
 
-A deployment pipeline reaches this decision point: The 'Modify an existing Azure Resource Manager template' checkpoint reaches an external prerequisite. What should happen?
+The reviewed Bicep deployment pipeline setup reports success after the template deployment attempt to return a deployment value needed by a later workflow. Which template deployment read-only observation proves the reviewed Bicep deployment pipeline outcome?
 
-- A. Broaden permissions until the prerequisite can no longer block the operation.
-- B. Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.
-- C. Mark the branch passed because its command syntax was checked offline.
-- D. Invent a domain, notification target, license, quota, or tenant value and continue.
+- A. Query deployment scope, provisioning state, mode, and operations after execution.
+- B. Run template validation and what-if, then inspect deployment operations after execution.
+- C. Read deployment outputs and confirm no credential or access token is present.
+- D. Inspect the compiled expression and confirm the value is not exposed as an unnecessary parameter.
 
 ## LAB10-Q25 — Applied
 
-While applying least-privilege controls, the administrator reviews this scenario: What is the safest command-evidence practice after completing 'Modify an existing Bicep file'?
+The template deployment log says the reviewed Bicep deployment pipeline can now ensure one declared resource is deployed after another resource it references. Which template deployment state should the reviewed Bicep deployment pipeline acceptance test retain?
 
-- A. Save tokens, keys, passwords, or SAS values beside the validation result.
-- B. Reuse successful output from an earlier run with a similar resource name.
-- C. Retain only redacted structured output from an independent query of the recorded run.
-- D. Commit the complete account object so reviewers can identify the tenant.
+- A. Compare what-if and deployment operations with the final resource properties.
+- B. Build the Bicep file and inspect the resulting template resources and dependencies.
+- C. Build the template and inspect dependency relationships between the relevant resources.
+- D. Read deployment outputs and confirm no credential or access token is present.
 
 ## LAB10-Q26 — Applied
 
-A repeatable Azure CLI workflow must address this requirement: A learner previews the implementation for 'Deploy resources by using an Azure Resource Manager template or a Bicep file'. What behavior is required?
+The reviewed Bicep deployment pipeline rejects template deployment exit status as proof it can preview control-plane changes before applying the deployment. Which reviewed Bicep deployment pipeline result is valid evidence?
 
-- A. Create the baseline immediately and request approval only before cleanup.
-- B. Select the first accessible subscription and hide the resulting context.
-- C. Delete any older resource whose name resembles the new run ID.
-- D. Display the context, intended changes, cost and gated branches without mutating Azure.
+- A. Compare resources and expressions in the source template with the compiled Bicep output.
+- B. Save the what-if result and confirm no unapproved deletion or replacement is predicted.
+- C. Build the file and inspect parameter types, defaults, decorators, and supplied deployment values.
+- D. Build the template and inspect dependency relationships between the relevant resources.
 
 ## LAB10-Q27 — Applied
 
-During an environment handoff, the receiving team asks this question: Which implementation step should the learner perform for 'Export a deployment as an Azure Resource Manager template or convert an Azure Resource Manager template to a Bicep file'?
+The template deployment validator needs one reviewed Bicep deployment pipeline query after the change to deploy the template at the intended boundary with understood replacement behavior. Which template deployment property should the reviewed Bicep deployment pipeline validator inspect?
 
-- A. Build and lint the supplied Bicep file and inspect its generated ARM JSON.
-- B. Replace the lab action with a tenant-wide change that is easier to discover.
-- C. Copy resource identifiers from another run instead of recording returned IDs.
-- D. Skip the operation and edit validation.json to show a passing result.
+- A. Run template validation and what-if, then inspect deployment operations after execution.
+- B. Inspect the compiled expression and confirm the value is not exposed as an unnecessary parameter.
+- C. Query deployment scope, provisioning state, mode, and operations after execution.
+- D. Save the what-if result and confirm no unapproved deletion or replacement is predicted.
 
 ## LAB10-Q28 — Applied
 
-A configuration change produces the following operational choice: Which evidence most directly validates 'Interpret an Azure Resource Manager template or a Bicep file' for Bicep deployment?
+The infrastructure administrator reviewing and deploying Bicep safely must confirm the reviewed Bicep deployment pipeline, without mutation, can change a declared resource and redeploy the updated desired state. Which template deployment check qualifies?
 
-- A. Treat the setup exit code as proof of every configuration and relationship.
-- B. Query the exact recorded scope and independently verify Microsoft.Storage/storageAccounts.
-- C. List the entire subscription and assume similarly named resources belong to this run.
-- D. Record a credential so another learner can replay the authenticated session.
+- A. Build the Bicep file and inspect the resulting template resources and dependencies.
+- B. Compare what-if and deployment operations with the final resource properties.
+- C. Read deployment outputs and confirm no credential or access token is present.
+- D. Query deployment scope, provisioning state, mode, and operations after execution.
 
 ## LAB10-Q29 — Applied
 
-While preparing independent validation, an engineer considers this scenario: The 'Modify an existing Azure Resource Manager template' checkpoint reaches an external prerequisite. What should happen?
+The reviewed Bicep deployment pipeline configuration is complete; the template deployment reviewers need evidence it can turn an exported JSON template into maintainable Bicep as a starting point. Which observation shows success?
 
-- A. Invent a domain, notification target, license, quota, or tenant value and continue.
-- B. Broaden permissions until the prerequisite can no longer block the operation.
-- C. Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.
-- D. Mark the branch passed because its command syntax was checked offline.
+- A. Build the file and inspect parameter types, defaults, decorators, and supplied deployment values.
+- B. Compare resources and expressions in the source template with the compiled Bicep output.
+- C. Build the template and inspect dependency relationships between the relevant resources.
+- D. Compare what-if and deployment operations with the final resource properties.
 
 ## LAB10-Q30 — Applied
 
-A service owner asks the administrator to resolve this requirement: What is the safest command-evidence practice after completing 'Modify an existing Bicep file'?
+The template deployment validation asks whether the reviewed Bicep deployment pipeline can modify a JSON deployment template without breaking its schema structure. Which observable state is strongest?
 
-- A. Commit the complete account object so reviewers can identify the tenant.
-- B. Save tokens, keys, passwords, or SAS values beside the validation result.
-- C. Reuse successful output from an earlier run with a similar resource name.
-- D. Retain only redacted structured output from an independent query of the recorded run.
+- A. Run template validation and what-if, then inspect deployment operations after execution.
+- B. Inspect the compiled expression and confirm the value is not exposed as an unnecessary parameter.
+- C. Save the what-if result and confirm no unapproved deletion or replacement is predicted.
+- D. Compare resources and expressions in the source template with the compiled Bicep output.
 
 ## LAB10-Q31 — Applied
 
-During a scoped cleanup review, the team evaluates this situation: A learner previews the implementation for 'Deploy resources by using an Azure Resource Manager template or a Bicep file'. What behavior is required?
+The template deployment support team isolated the reviewed Bicep deployment pipeline incident to the attempt to describe desired Azure resources so repeated deployments converge on that state. Which condition prevents success?
 
-- A. Display the context, intended changes, cost and gated branches without mutating Azure.
-- B. Create the baseline immediately and request approval only before cleanup.
-- C. Select the first accessible subscription and hide the resulting context.
-- D. Delete any older resource whose name resembles the new run ID.
+- A. A tenant-specific resource name is hard-coded and collides in another environment.
+- B. The file embeds an imperative shell sequence instead of declaring Azure resources.
+- C. The runbook treats what-if output as proof that resources were actually deployed.
+- D. An edited resource reference points to a parameter of the wrong type.
 
 ## LAB10-Q32 — Applied
 
-An automation author must choose the correct response to this scenario: Which implementation step should the learner perform for 'Export a deployment as an Azure Resource Manager template or convert an Azure Resource Manager template to a Bicep file'?
+A reviewed Bicep deployment pipeline query surprises the infrastructure administrator reviewing and deploying Bicep safely during the template deployment attempt to vary deployment inputs between environments without changing the template body. Which finding explains it?
 
-- A. Skip the operation and edit validation.json to show a passing result.
-- B. Build and lint the supplied Bicep file and inspect its generated ARM JSON.
-- C. Replace the lab action with a tenant-wide change that is easier to discover.
-- D. Copy resource identifiers from another run instead of recording returned IDs.
+- A. A value that operators must choose per environment was hidden in a variable instead of a parameter.
+- B. Complete mode targets a shared resource group containing resources not declared by the template.
+- C. A tenant-specific resource name is hard-coded and collides in another environment.
+- D. The file embeds an imperative shell sequence instead of declaring Azure resources.
 
 ## LAB10-Q33 — Applied
 
-A lab run with a unique run ID reaches this decision: Which evidence most directly validates 'Interpret an Azure Resource Manager template or a Bicep file' for Bicep deployment?
+Other reviewed Bicep deployment pipeline components are healthy, but the template deployment still cannot reuse a computed expression inside the template without exposing it to callers. Which state causes the isolated failure?
 
-- A. Record a credential so another learner can replay the authenticated session.
-- B. Treat the setup exit code as proof of every configuration and relationship.
-- C. Query the exact recorded scope and independently verify Microsoft.Storage/storageAccounts.
-- D. List the entire subscription and assume similarly named resources belong to this run.
+- A. A storage key is emitted as a deployment output and copied into logs.
+- B. A property change triggers replacement but the review considered it an in-place update.
+- C. A tenant-specific resource name is hard-coded and collides in another environment.
+- D. A value that operators must choose per environment was hidden in a variable instead of a parameter.
 
 ## LAB10-Q34 — Applied
 
-While comparing the intended and actual states, the operator asks this question: The 'Modify an existing Azure Resource Manager template' checkpoint reaches an external prerequisite. What should happen?
+During a template deployment fault drill, the reviewed Bicep deployment pipeline does not return a deployment value needed by a later workflow. Which finding identifies the defect?
 
-- A. Mark the branch passed because its command syntax was checked offline.
-- B. Invent a domain, notification target, license, quota, or tenant value and continue.
-- C. Broaden permissions until the prerequisite can no longer block the operation.
-- D. Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.
+- A. The deployment constructs a resource ID as text and omits a dependency required for correct ordering.
+- B. A storage key is emitted as a deployment output and copied into logs.
+- C. The generated Bicep was accepted without resolving decompiler warnings or restoring meaningful symbols.
+- D. A value that operators must choose per environment was hidden in a variable instead of a parameter.
 
 ## LAB10-Q35 — Applied
 
-A peer reviewer examines the proposed implementation for this scenario: What is the safest command-evidence practice after completing 'Modify an existing Bicep file'?
+The reviewed Bicep deployment pipeline setup finishes, yet the template deployment cannot ensure one declared resource is deployed after another resource it references. Which misconfiguration explains the mismatch?
 
-- A. Retain only redacted structured output from an independent query of the recorded run.
-- B. Commit the complete account object so reviewers can identify the tenant.
-- C. Save tokens, keys, passwords, or SAS values beside the validation result.
-- D. Reuse successful output from an earlier run with a similar resource name.
+- A. The runbook treats what-if output as proof that resources were actually deployed.
+- B. The deployment constructs a resource ID as text and omits a dependency required for correct ordering.
+- C. An edited resource reference points to a parameter of the wrong type.
+- D. A storage key is emitted as a deployment output and copied into logs.
 
 ## LAB10-Q36 — Applied
 
-During a controlled rollout, the change team encounters this requirement: A learner previews the implementation for 'Deploy resources by using an Azure Resource Manager template or a Bicep file'. What behavior is required?
+A template deployment break/fix in the reviewed Bicep deployment pipeline fails when operators try to preview control-plane changes before applying the deployment. Which diagnosis fits?
 
-- A. Delete any older resource whose name resembles the new run ID.
-- B. Display the context, intended changes, cost and gated branches without mutating Azure.
-- C. Create the baseline immediately and request approval only before cleanup.
-- D. Select the first accessible subscription and hide the resulting context.
+- A. The runbook treats what-if output as proof that resources were actually deployed.
+- B. Complete mode targets a shared resource group containing resources not declared by the template.
+- C. The file embeds an imperative shell sequence instead of declaring Azure resources.
+- D. The deployment constructs a resource ID as text and omits a dependency required for correct ordering.
 
 ## LAB10-Q37 — Applied
 
-A support engineer reproduces the following situation in a test environment: Which implementation step should the learner perform for 'Export a deployment as an Azure Resource Manager template or convert an Azure Resource Manager template to a Bicep file'?
+The reviewed Bicep deployment pipeline troubleshooting scope is the template deployment need to deploy the template at the intended boundary with understood replacement behavior. Which condition should be corrected first?
 
-- A. Copy resource identifiers from another run instead of recording returned IDs.
-- B. Skip the operation and edit validation.json to show a passing result.
-- C. Build and lint the supplied Bicep file and inspect its generated ARM JSON.
-- D. Replace the lab action with a tenant-wide change that is easier to discover.
+- A. A property change triggers replacement but the review considered it an in-place update.
+- B. A tenant-specific resource name is hard-coded and collides in another environment.
+- C. Complete mode targets a shared resource group containing resources not declared by the template.
+- D. The runbook treats what-if output as proof that resources were actually deployed.
 
 ## LAB10-Q38 — Applied
 
-While recording validation evidence, the administrator evaluates this question: Which evidence most directly validates 'Interpret an Azure Resource Manager template or a Bicep file' for Bicep deployment?
+The reviewed Bicep deployment pipeline result is partial because the template deployment cannot change a declared resource and redeploy the updated desired state. Which condition accounts for that result?
 
-- A. List the entire subscription and assume similarly named resources belong to this run.
-- B. Record a credential so another learner can replay the authenticated session.
-- C. Treat the setup exit code as proof of every configuration and relationship.
-- D. Query the exact recorded scope and independently verify Microsoft.Storage/storageAccounts.
+- A. The generated Bicep was accepted without resolving decompiler warnings or restoring meaningful symbols.
+- B. A value that operators must choose per environment was hidden in a variable instead of a parameter.
+- C. Complete mode targets a shared resource group containing resources not declared by the template.
+- D. A property change triggers replacement but the review considered it an in-place update.
 
 ## LAB10-Q39 — Applied
 
-A configuration owner must approve one response to this scenario: The 'Modify an existing Azure Resource Manager template' checkpoint reaches an external prerequisite. What should happen?
+The template deployment evidence shows the reviewed Bicep deployment pipeline cannot turn an exported JSON template into maintainable Bicep as a starting point. Which root cause fits that evidence?
 
-- A. Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.
-- B. Mark the branch passed because its command syntax was checked offline.
-- C. Invent a domain, notification target, license, quota, or tenant value and continue.
-- D. Broaden permissions until the prerequisite can no longer block the operation.
+- A. The generated Bicep was accepted without resolving decompiler warnings or restoring meaningful symbols.
+- B. An edited resource reference points to a parameter of the wrong type.
+- C. A storage key is emitted as a deployment output and copied into logs.
+- D. A property change triggers replacement but the review considered it an in-place update.
 
 ## LAB10-Q40 — Applied
 
-During post-deployment verification, the team reviews this situation: What is the safest command-evidence practice after completing 'Modify an existing Bicep file'?
+Although the reviewed Bicep deployment pipeline is meant to let the template deployment modify a JSON deployment template without breaking its schema structure, its checkpoint fails. Which template deployment defect explains the failure?
 
-- A. Reuse successful output from an earlier run with a similar resource name.
-- B. Retain only redacted structured output from an independent query of the recorded run.
-- C. Commit the complete account object so reviewers can identify the tenant.
-- D. Save tokens, keys, passwords, or SAS values beside the validation result.
+- A. An edited resource reference points to a parameter of the wrong type.
+- B. The file embeds an imperative shell sequence instead of declaring Azure resources.
+- C. The deployment constructs a resource ID as text and omits a dependency required for correct ordering.
+- D. The generated Bicep was accepted without resolving decompiler warnings or restoring meaningful symbols.
 
 ## LAB10-Q41 — Advanced
 
-Validation for 'Deploy resources by using an Azure Resource Manager template or a Bicep file' fails after setup. What is the best break/fix method?
+Only the reviewed Bicep deployment pipeline change needed to describe desired Azure resources so repeated deployments converge on that state is allowed, and template deployment proof is mandatory. Which pair fits?
 
-- A. Change validation.json directly so the failed result reads pass.
-- B. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- C. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-- D. Rerun setup repeatedly with new names until one attempt appears successful.
+- A. First, Describe resources and properties declaratively rather than scripting imperative create steps. Then, Build the Bicep file and inspect the resulting template resources and dependencies.
+- B. First, Use a variable for a deterministic expression derived from parameters and resource metadata. Then, Inspect the compiled expression and confirm the value is not exposed as an unnecessary parameter.
+- C. First, Use the intended scope and choose incremental behavior unless complete-mode deletion is explicitly reviewed. Then, Query deployment scope, provisioning state, mode, and operations after execution.
+- D. First, Modify the symbolic resource and inspect what-if before approving the new deployment. Then, Compare what-if and deployment operations with the final resource properties.
 
 ## LAB10-Q42 — Advanced
 
-The operation for 'Export a deployment as an Azure Resource Manager template or convert an Azure Resource Manager template to a Bicep file' is asynchronous or gated. How should completion be recorded?
+The reviewed Bicep deployment pipeline runbook separates template deployment mutation from validation while it must vary deployment inputs between environments without changing the template body. Which sequence proves it cleanly?
 
-- A. Fabricate expected output so the assessment and documentation appear complete.
-- B. Remove the check from validation whenever the service takes longer than expected.
-- C. Record pass as soon as the request is accepted, regardless of its final state.
-- D. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
+- A. First, Output nonsecret resource IDs or endpoints needed by later validation stages. Then, Read deployment outputs and confirm no credential or access token is present.
+- B. First, Modify the symbolic resource and inspect what-if before approving the new deployment. Then, Compare what-if and deployment operations with the final resource properties.
+- C. First, Decompile the JSON template, build the result, and review warnings before adopting it. Then, Compare resources and expressions in the source template with the compiled Bicep output.
+- D. First, Define parameters for environment-specific values and supply them from an approved parameter source. Then, Build the file and inspect parameter types, defaults, decorators, and supplied deployment values.
 
 ## LAB10-Q43 — Advanced
 
-A security and reliability review identifies this design decision: Validation for 'Deploy resources by using an Azure Resource Manager template or a Bicep file' fails after setup. What is the best break/fix method?
+The reviewed Bicep deployment pipeline checkpoint requires both this template deployment outcome—reuse a computed expression inside the template without exposing it to callers—and a read-only reviewed Bicep deployment pipeline state check. Which template deployment response is complete?
 
-- A. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-- B. Rerun setup repeatedly with new names until one attempt appears successful.
-- C. Change validation.json directly so the failed result reads pass.
-- D. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+- A. First, Reference the symbolic resource directly and add dependsOn only for dependencies Bicep cannot infer. Then, Build the template and inspect dependency relationships between the relevant resources.
+- B. First, Decompile the JSON template, build the result, and review warnings before adopting it. Then, Compare resources and expressions in the source template with the compiled Bicep output.
+- C. First, Validate the modified JSON template and preview its changes before deployment. Then, Run template validation and what-if, then inspect deployment operations after execution.
+- D. First, Use a variable for a deterministic expression derived from parameters and resource metadata. Then, Inspect the compiled expression and confirm the value is not exposed as an unnecessary parameter.
 
 ## LAB10-Q44 — Advanced
 
-While diagnosing unexpected Azure behavior, the engineer considers this situation: The operation for 'Export a deployment as an Azure Resource Manager template or convert an Azure Resource Manager template to a Bicep file' is asynchronous or gated. How should completion be recorded?
+The reviewed Bicep deployment pipeline runbook must return a deployment value needed by a later workflow, then retain template deployment read-back evidence. Which reviewed Bicep deployment pipeline pair completes both duties?
 
-- A. Record pass as soon as the request is accepted, regardless of its final state.
-- B. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
-- C. Fabricate expected output so the assessment and documentation appear complete.
-- D. Remove the check from validation whenever the service takes longer than expected.
+- A. First, Output nonsecret resource IDs or endpoints needed by later validation stages. Then, Read deployment outputs and confirm no credential or access token is present.
+- B. First, Run group what-if and review create, modify, delete, and ignore results before execution. Then, Save the what-if result and confirm no unapproved deletion or replacement is predicted.
+- C. First, Validate the modified JSON template and preview its changes before deployment. Then, Run template validation and what-if, then inspect deployment operations after execution.
+- D. First, Describe resources and properties declaratively rather than scripting imperative create steps. Then, Build the Bicep file and inspect the resulting template resources and dependencies.
 
 ## LAB10-Q45 — Advanced
 
-An architecture review requires the strongest response to this scenario: Validation for 'Deploy resources by using an Azure Resource Manager template or a Bicep file' fails after setup. What is the best break/fix method?
+To satisfy the template deployment requirement, operators must change the reviewed Bicep deployment pipeline configuration and prove it can ensure one declared resource is deployed after another resource it references. Which sequence is coherent?
 
-- A. Change validation.json directly so the failed result reads pass.
-- B. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- C. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-- D. Rerun setup repeatedly with new names until one attempt appears successful.
+- A. First, Use the intended scope and choose incremental behavior unless complete-mode deletion is explicitly reviewed. Then, Query deployment scope, provisioning state, mode, and operations after execution.
+- B. First, Describe resources and properties declaratively rather than scripting imperative create steps. Then, Build the Bicep file and inspect the resulting template resources and dependencies.
+- C. First, Reference the symbolic resource directly and add dependsOn only for dependencies Bicep cannot infer. Then, Build the template and inspect dependency relationships between the relevant resources.
+- D. First, Define parameters for environment-specific values and supply them from an approved parameter source. Then, Build the file and inspect parameter types, defaults, decorators, and supplied deployment values.
 
 ## LAB10-Q46 — Advanced
 
-During break/fix validation, the operator encounters this question: The operation for 'Export a deployment as an Azure Resource Manager template or convert an Azure Resource Manager template to a Bicep file' is asynchronous or gated. How should completion be recorded?
+The infrastructure administrator reviewing and deploying Bicep safely needs a safe reviewed Bicep deployment pipeline change to preview control-plane changes before applying the deployment, followed by template deployment evidence. Which pair merits approval?
 
-- A. Fabricate expected output so the assessment and documentation appear complete.
-- B. Remove the check from validation whenever the service takes longer than expected.
-- C. Record pass as soon as the request is accepted, regardless of its final state.
-- D. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
+- A. First, Modify the symbolic resource and inspect what-if before approving the new deployment. Then, Compare what-if and deployment operations with the final resource properties.
+- B. First, Define parameters for environment-specific values and supply them from an approved parameter source. Then, Build the file and inspect parameter types, defaults, decorators, and supplied deployment values.
+- C. First, Use a variable for a deterministic expression derived from parameters and resource metadata. Then, Inspect the compiled expression and confirm the value is not exposed as an unnecessary parameter.
+- D. First, Run group what-if and review create, modify, delete, and ignore results before execution. Then, Save the what-if result and confirm no unapproved deletion or replacement is predicted.
 
 ## LAB10-Q47 — Advanced
 
-A complex support case depends on correctly interpreting this requirement: Validation for 'Deploy resources by using an Azure Resource Manager template or a Bicep file' fails after setup. What is the best break/fix method?
+The reviewed Bicep deployment pipeline has two template deployment gates: deploy the template at the intended boundary with understood replacement behavior, then prove the reviewed Bicep deployment pipeline state. Which template deployment sequence works?
 
-- A. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-- B. Rerun setup repeatedly with new names until one attempt appears successful.
-- C. Change validation.json directly so the failed result reads pass.
-- D. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+- A. First, Decompile the JSON template, build the result, and review warnings before adopting it. Then, Compare resources and expressions in the source template with the compiled Bicep output.
+- B. First, Use a variable for a deterministic expression derived from parameters and resource metadata. Then, Inspect the compiled expression and confirm the value is not exposed as an unnecessary parameter.
+- C. First, Output nonsecret resource IDs or endpoints needed by later validation stages. Then, Read deployment outputs and confirm no credential or access token is present.
+- D. First, Use the intended scope and choose incremental behavior unless complete-mode deletion is explicitly reviewed. Then, Query deployment scope, provisioning state, mode, and operations after execution.
 
 ## LAB10-Q48 — Advanced
 
-While correcting configuration drift, the team evaluates this scenario: The operation for 'Export a deployment as an Azure Resource Manager template or convert an Azure Resource Manager template to a Bicep file' is asynchronous or gated. How should completion be recorded?
+Which template deployment path makes the reviewed Bicep deployment pipeline able to change a declared resource and redeploy the updated desired state, then inspects the defining properties?
 
-- A. Record pass as soon as the request is accepted, regardless of its final state.
-- B. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
-- C. Fabricate expected output so the assessment and documentation appear complete.
-- D. Remove the check from validation whenever the service takes longer than expected.
+- A. First, Modify the symbolic resource and inspect what-if before approving the new deployment. Then, Compare what-if and deployment operations with the final resource properties.
+- B. First, Validate the modified JSON template and preview its changes before deployment. Then, Run template validation and what-if, then inspect deployment operations after execution.
+- C. First, Output nonsecret resource IDs or endpoints needed by later validation stages. Then, Read deployment outputs and confirm no credential or access token is present.
+- D. First, Reference the symbolic resource directly and add dependsOn only for dependencies Bicep cannot infer. Then, Build the template and inspect dependency relationships between the relevant resources.
 
 ## LAB10-Q49 — Advanced
 
-A recovery exercise exposes the following technical decision: Validation for 'Deploy resources by using an Azure Resource Manager template or a Bicep file' fails after setup. What is the best break/fix method?
+At the reviewed Bicep deployment pipeline approval gate, operators must show that the template deployment can turn an exported JSON template into maintainable Bicep as a starting point. Which template deployment configure-and-check pair is defensible?
 
-- A. Change validation.json directly so the failed result reads pass.
-- B. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- C. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-- D. Rerun setup repeatedly with new names until one attempt appears successful.
+- A. First, Describe resources and properties declaratively rather than scripting imperative create steps. Then, Build the Bicep file and inspect the resulting template resources and dependencies.
+- B. First, Decompile the JSON template, build the result, and review warnings before adopting it. Then, Compare resources and expressions in the source template with the compiled Bicep output.
+- C. First, Reference the symbolic resource directly and add dependsOn only for dependencies Bicep cannot infer. Then, Build the template and inspect dependency relationships between the relevant resources.
+- D. First, Run group what-if and review create, modify, delete, and ignore results before execution. Then, Save the what-if result and confirm no unapproved deletion or replacement is predicted.
 
 ## LAB10-Q50 — Advanced
 
-During final design assurance, the reviewer must resolve this situation: The operation for 'Export a deployment as an Azure Resource Manager template or convert an Azure Resource Manager template to a Bicep file' is asynchronous or gated. How should completion be recorded?
+The reviewed Bicep deployment pipeline forbids a partial template deployment result. Operators must first modify a JSON deployment template without breaking its schema structure and afterward confirm the reviewed Bicep deployment pipeline outcome. Which template deployment sequence is complete?
 
-- A. Fabricate expected output so the assessment and documentation appear complete.
-- B. Remove the check from validation whenever the service takes longer than expected.
-- C. Record pass as soon as the request is accepted, regardless of its final state.
-- D. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
+- A. First, Define parameters for environment-specific values and supply them from an approved parameter source. Then, Build the file and inspect parameter types, defaults, decorators, and supplied deployment values.
+- B. First, Validate the modified JSON template and preview its changes before deployment. Then, Run template validation and what-if, then inspect deployment operations after execution.
+- C. First, Run group what-if and review create, modify, delete, and ignore results before execution. Then, Save the what-if result and confirm no unapproved deletion or replacement is predicted.
+- D. First, Use the intended scope and choose incremental behavior unless complete-mode deletion is explicitly reviewed. Then, Query deployment scope, provisioning state, mode, and operations after execution.
+
+[Open the answer key](./ANSWERS.md)

@@ -1,14 +1,13 @@
 flowchart LR
-    A["Operator<br/>Azure CLI and Bicep"] --> P["Preview and preflight"]
-    P --> S["Recorded Lab 10 boundary"]
-    S --> R1["resource group"]
-    S --> R2["Bicep deployment"]
-    S --> R3["StorageV2 account"]
-    S --> R4["exported ARM template"]
-    S --> V["Independent validation"]
-    V --> E["Redacted command evidence"]
-    V --> C["Previewed cleanup"]
+    A["Operator and Bicep"] --> B["Bicep source"]
+    B --> W["Build and ARM what-if"]
+    W --> D["Resource-group deployment"]
+    D --> S["Tagged StorageV2 account"]
+    D --> X["Export and decompile"]
+    S --> V["ID, TLS, and tag assertions"]
+    X --> V
+    V --> R["Manifest-scoped cleanup"]
     classDef control fill:#e8f1ff,stroke:#2563eb,color:#102a43;
     classDef resource fill:#e9f8ef,stroke:#16803a,color:#102a43;
-    class A,P,S,V,E,C control;
-    class R1,R2,R3,R4 resource;
+    class A,B,W,V,R control;
+    class D,S,X resource;

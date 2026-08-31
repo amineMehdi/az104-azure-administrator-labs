@@ -1,13 +1,13 @@
 flowchart LR
-    A["Operator<br/>Azure CLI"] --> P["Preview and preflight"]
-    P --> S["Recorded Lab 04 boundary"]
-    S --> R1["resource group"]
-    S --> R2["resource lock"]
-    S --> R3["optional management group"]
-    S --> V["Independent validation"]
-    V --> E["Redacted command evidence"]
-    V --> C["Previewed cleanup"]
+    root[Tenant root<br/>management group] -->|existing hierarchy| sub[Subscription]
+    root -->|optional exact-YES gate| optional[Empty lab<br/>management group]
+    sub -->|contains| rg[Tagged resource group]
+    rg -->|contains| vnet[Virtual network]
+    tags[Governance and<br/>ownership tags] -->|merge| rg
+    tags -->|explicit apply<br/>no inheritance| vnet
+    lock[CanNotDelete lock] -->|protects control plane| rg
+    cleanup[Dependency-aware cleanup] -->|remove exact lock first| lock
     classDef control fill:#e8f1ff,stroke:#2563eb,color:#102a43;
     classDef resource fill:#e9f8ef,stroke:#16803a,color:#102a43;
-    class A,P,S,V,E,C control;
-    class R1,R2,R3 resource;
+    class tags,cleanup control;
+    class root,sub,optional,rg,vnet,lock resource;

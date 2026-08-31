@@ -27,16 +27,22 @@ jobs:
         run: python -m pip install -r requirements-dev.txt
 
       - name: Validate repository contract
-        run: python tools/validate_repository.py
+        run: python tools/validate_repository.py --release
 
-      - name: Confirm inline command documentation is synchronized
-        run: python tools/sync_inline_commands.py --check
+      - name: Confirm generated labs and inline command lanes are synchronized
+        run: python tools/generate_labs.py --check
+
+      - name: Confirm Mermaid sources and accessible SVGs are synchronized
+        run: python tools/render_diagrams.py --check
 
       - name: Confirm generated indexes are current
         run: python tools/generate_indexes.py --check
 
       - name: Confirm 50-question lab assessments are current
         run: python tools/expand_assessments.py --check
+
+      - name: Validate all 1,250 authored assessment records
+        run: python tools/validate_assessments.py
 
       - name: Install PowerShell quality modules
         shell: pwsh
@@ -92,5 +98,7 @@ jobs:
 
       - name: Build and lint Bicep artifacts
         run: |
-          az bicep install
-          find labs -type f -name '*.bicep' -print0 | xargs -0 -r -n1 -I{} az bicep build --file {} --outdir /tmp
+          az bicep install --version v0.46.1
+          az config set bicep.check_version=false
+          find labs -type f -name '*.bicep' -print0 | xargs -0 -r -I{} az bicep lint --file {}
+          find labs -type f -name '*.bicep' -print0 | xargs -0 -r -I{} az bicep build --file {} --outdir /tmp

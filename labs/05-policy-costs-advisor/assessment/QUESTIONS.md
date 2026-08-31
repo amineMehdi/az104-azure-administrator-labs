@@ -1,453 +1,459 @@
 # Lab 05 knowledge check
 
-Choose the single best answer for each question. Record your choices before opening `ANSWERS.md`.
+[Return to the guided lab](../README.md)
+
+Complete all 50 questions before opening the answer key. Allow about 50–60 minutes and choose the single best answer.
+
+Use the result as a learning signal: 85–100% indicates mastery, 70–84% calls for targeted review, and below 70% means repeat the mapped lab tasks before retrying.
 
 ## LAB05-Q01 — Foundational
 
-Which principle is most important when working on 'Implement and manage Azure Policy' in Lab 05?
+For the policy-and-cost governance rollout, the cost governance plan must package a governance rule and apply it at the intended scope. Which statement about cost governance belongs in the policy-and-cost governance rollout record?
 
-- A. A recognizable resource name removes the need for validation and scoped cleanup.
-- B. Policy compliance is eventually evaluated, budgets notify rather than stop spending, and Advisor recommendations remain advisory until an administrator acts.
-- C. The shortest command is always correct even when it changes a broader scope.
-- D. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+- A. An initiative groups multiple policy definitions so they can be assigned and reported together.
+- B. Modify can correct supported properties and existing resources require a remediation task with an authorized managed identity.
+- C. A policy definition expresses a rule, while an assignment applies that rule at a selected scope.
+- D. Budget notifications require supported contact emails, roles, or action groups at the budget scope.
 
 ## LAB05-Q02 — Foundational
 
-Which lab action directly supports the objective 'Manage costs by using alerts, budgets, and Azure Advisor recommendations'?
+The cost governance review compares four claims for the policy-and-cost governance rollout requirement to deploy several related governance rules as one versioned assignment. Which claim is technically sound?
 
-- A. Mark the objective complete after reading documentation without checking any state.
-- B. Change the active tenant without displaying or confirming the resulting context.
-- C. Assign the built-in Require a tag and its value on resources policy at resource-group scope.
-- D. Search the whole tenant for a similar display name and modify the first match.
+- A. Azure Policy compliance state can lag a change until the next evaluation or an explicit scan completes.
+- B. An Azure budget tracks actual or forecast cost and sends notifications but does not stop resource consumption.
+- C. Azure Advisor analyzes resource use and publishes recommendations; it does not automatically apply cost changes.
+- D. An initiative groups multiple policy definitions so they can be assigned and reported together.
 
 ## LAB05-Q03 — Foundational
 
-Which authorization approach is appropriate before practicing 'Configure management groups'?
+The cost governance architecture note requires the policy-and-cost governance rollout environment to measure existing resources against an assigned governance rule. Which statement defines the relevant cost governance boundary?
 
-- A. Skip role checks when the run ID contains the lab number.
-- B. Use a production subscription because its resources already exist.
-- C. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
-- D. Confirm the active context and use only the declared role boundary: Resource Policy Contributor at the lab scope; Cost Management Contributor for the optional budget path
+- A. The deny effect rejects a noncompliant create or update request before the resource provider completes it.
+- B. A forecast threshold warns when projected spend is expected to cross a percentage of the budget.
+- C. Azure Policy compliance state can lag a change until the next evaluation or an explicit scan completes.
+- D. A management-group policy assignment affects descendant subscriptions except explicitly excluded scopes.
 
 ## LAB05-Q04 — Foundational
 
-Before making a change, a learner checks this core behavior: Which principle is most important when working on 'Implement and manage Azure Policy' in Lab 05?
+A new cost governance operator must explain why the policy-and-cost governance rollout can block a noncompliant creation request before the resource is deployed. Which explanation is accurate?
 
-- A. Policy compliance is eventually evaluated, budgets notify rather than stop spending, and Advisor recommendations remain advisory until an administrator acts.
-- B. The shortest command is always correct even when it changes a broader scope.
-- C. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- D. A recognizable resource name removes the need for validation and scoped cleanup.
+- A. The deny effect rejects a noncompliant create or update request before the resource provider completes it.
+- B. Modify can correct supported properties and existing resources require a remediation task with an authorized managed identity.
+- C. Budget notifications require supported contact emails, roles, or action groups at the budget scope.
+- D. A policy definition expresses a rule, while an assignment applies that rule at a selected scope.
 
 ## LAB05-Q05 — Foundational
 
-During a design vocabulary review, the team evaluates this situation: Which lab action directly supports the objective 'Manage costs by using alerts, budgets, and Azure Advisor recommendations'?
+The policy-and-cost governance rollout acceptance criteria require operators to correct existing noncompliant resources after a managed change is assigned. Which service fact supports that requirement?
 
-- A. Change the active tenant without displaying or confirming the resulting context.
-- B. Assign the built-in Require a tag and its value on resources policy at resource-group scope.
-- C. Search the whole tenant for a similar display name and modify the first match.
-- D. Mark the objective complete after reading documentation without checking any state.
+- A. Modify can correct supported properties and existing resources require a remediation task with an authorized managed identity.
+- B. An Azure budget tracks actual or forecast cost and sends notifications but does not stop resource consumption.
+- C. Azure Advisor analyzes resource use and publishes recommendations; it does not automatically apply cost changes.
+- D. An initiative groups multiple policy definitions so they can be assigned and reported together.
 
 ## LAB05-Q06 — Foundational
 
-In a command-planning session, an administrator asks this question: Which authorization approach is appropriate before practicing 'Configure management groups'?
+A cost governance reviewer challenges whether the policy-and-cost governance rollout can receive notifications without expecting spending to be stopped automatically. Which response resolves the concern?
 
-- A. Use a production subscription because its resources already exist.
-- B. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
-- C. Confirm the active context and use only the declared role boundary: Resource Policy Contributor at the lab scope; Cost Management Contributor for the optional budget path
-- D. Skip role checks when the run ID contains the lab number.
+- A. A forecast threshold warns when projected spend is expected to cross a percentage of the budget.
+- B. An Azure budget tracks actual or forecast cost and sends notifications but does not stop resource consumption.
+- C. A management-group policy assignment affects descendant subscriptions except explicitly excluded scopes.
+- D. Azure Policy compliance state can lag a change until the next evaluation or an explicit scan completes.
 
 ## LAB05-Q07 — Foundational
 
-While preparing the lab, a learner verifies this platform rule: Which principle is most important when working on 'Implement and manage Azure Policy' in Lab 05?
+The policy-and-cost governance rollout handoff omits the cost governance rule needed to notify owners before projected spending reaches the configured limit. Which statement should the team add?
 
-- A. The shortest command is always correct even when it changes a broader scope.
-- B. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- C. A recognizable resource name removes the need for validation and scoped cleanup.
-- D. Policy compliance is eventually evaluated, budgets notify rather than stop spending, and Advisor recommendations remain advisory until an administrator acts.
+- A. Budget notifications require supported contact emails, roles, or action groups at the budget scope.
+- B. A forecast threshold warns when projected spend is expected to cross a percentage of the budget.
+- C. A policy definition expresses a rule, while an assignment applies that rule at a selected scope.
+- D. The deny effect rejects a noncompliant create or update request before the resource provider completes it.
 
 ## LAB05-Q08 — Foundational
 
-During peer review, the team must identify the accurate response to this scenario: Which lab action directly supports the objective 'Manage costs by using alerts, budgets, and Azure Advisor recommendations'?
+A cost governance incident review of the policy-and-cost governance rollout depends on the ability to route cost notifications to the approved recipients. Which platform description is reliable?
 
-- A. Assign the built-in Require a tag and its value on resources policy at resource-group scope.
-- B. Search the whole tenant for a similar display name and modify the first match.
-- C. Mark the objective complete after reading documentation without checking any state.
-- D. Change the active tenant without displaying or confirming the resulting context.
+- A. Azure Advisor analyzes resource use and publishes recommendations; it does not automatically apply cost changes.
+- B. An initiative groups multiple policy definitions so they can be assigned and reported together.
+- C. Modify can correct supported properties and existing resources require a remediation task with an authorized managed identity.
+- D. Budget notifications require supported contact emails, roles, or action groups at the budget scope.
 
 ## LAB05-Q09 — Foundational
 
-In an operations briefing, a new team member receives this question: Which authorization approach is appropriate before practicing 'Configure management groups'?
+A cloud governance analyst enforcing standards and controlling spend is updating the cost governance runbook. The requirement is to identify rightsizing or shutdown opportunities from service telemetry. Which statement describes Azure behavior correctly?
 
-- A. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
-- B. Confirm the active context and use only the declared role boundary: Resource Policy Contributor at the lab scope; Cost Management Contributor for the optional budget path
-- C. Skip role checks when the run ID contains the lab number.
-- D. Use a production subscription because its resources already exist.
+- A. A management-group policy assignment affects descendant subscriptions except explicitly excluded scopes.
+- B. Azure Policy compliance state can lag a change until the next evaluation or an explicit scan completes.
+- C. An Azure budget tracks actual or forecast cost and sends notifications but does not stop resource consumption.
+- D. Azure Advisor analyzes resource use and publishes recommendations; it does not automatically apply cost changes.
 
 ## LAB05-Q10 — Foundational
 
-While building a support checklist, an engineer reviews this requirement: Which principle is most important when working on 'Implement and manage Azure Policy' in Lab 05?
+A cost governance peer review asks how the policy-and-cost governance rollout should handle this outcome: exclude an approved child scope without weakening governance elsewhere. Which explanation is accurate?
 
-- A. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- B. A recognizable resource name removes the need for validation and scoped cleanup.
-- C. Policy compliance is eventually evaluated, budgets notify rather than stop spending, and Advisor recommendations remain advisory until an administrator acts.
-- D. The shortest command is always correct even when it changes a broader scope.
+- A. A policy definition expresses a rule, while an assignment applies that rule at a selected scope.
+- B. A management-group policy assignment affects descendant subscriptions except explicitly excluded scopes.
+- C. The deny effect rejects a noncompliant create or update request before the resource provider completes it.
+- D. A forecast threshold warns when projected spend is expected to cross a percentage of the budget.
 
 ## LAB05-Q11 — Foundational
 
-During a readiness check, the administrator considers this behavior: Which lab action directly supports the objective 'Manage costs by using alerts, budgets, and Azure Advisor recommendations'?
+The cloud governance analyst enforcing standards and controlling spend may change the policy-and-cost governance rollout only to package a governance rule and apply it at the intended scope. Which cost governance action stays within that assignment?
 
-- A. Search the whole tenant for a similar display name and modify the first match.
-- B. Mark the objective complete after reading documentation without checking any state.
-- C. Change the active tenant without displaying or confirming the resulting context.
-- D. Assign the built-in Require a tag and its value on resources policy at resource-group scope.
+- A. Trigger a compliance scan after assignment when the lab needs deterministic validation timing.
+- B. Create a budget at the intended billing scope with thresholds and notification recipients.
+- C. Retrieve active cost recommendations and review impact before approving any remediation.
+- D. Select or author the definition and then assign it at the narrowest required governance scope.
 
 ## LAB05-Q12 — Foundational
 
-In a service overview, the team discusses this scenario: Which authorization approach is appropriate before practicing 'Configure management groups'?
+A cost governance dry run shows no policy-and-cost governance rollout command will deploy several related governance rules as one versioned assignment. Which action belongs before execution?
 
-- A. Confirm the active context and use only the declared role boundary: Resource Policy Contributor at the lab scope; Cost Management Contributor for the optional budget path
-- B. Skip role checks when the run ID contains the lab number.
-- C. Use a production subscription because its resources already exist.
-- D. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
+- A. Use a deny assignment only after validating its condition and approved exclusions.
+- B. Add a forecast notification early enough for the owner to correct projected overspend.
+- C. Set notScopes only for approved exceptions and keep the assignment at the shared parent scope.
+- D. Use an initiative when one compliance baseline requires several coordinated policy rules.
 
 ## LAB05-Q13 — Foundational
 
-While reviewing official guidance, a learner must resolve this question: Which principle is most important when working on 'Implement and manage Azure Policy' in Lab 05?
+For the policy-and-cost governance rollout, operators need to measure existing resources against an assigned governance rule. Which change realizes that requirement?
 
-- A. A recognizable resource name removes the need for validation and scoped cleanup.
-- B. Policy compliance is eventually evaluated, budgets notify rather than stop spending, and Advisor recommendations remain advisory until an administrator acts.
-- C. The shortest command is always correct even when it changes a broader scope.
-- D. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+- A. Assign the modify policy with a managed identity and create remediation for existing resources.
+- B. Configure an approved notification recipient and verify it is valid at the selected scope.
+- C. Trigger a compliance scan after assignment when the lab needs deterministic validation timing.
+- D. Select or author the definition and then assign it at the narrowest required governance scope.
 
 ## LAB05-Q14 — Foundational
 
-During a configuration walkthrough, the instructor asks about this situation: Which lab action directly supports the objective 'Manage costs by using alerts, budgets, and Azure Advisor recommendations'?
+Operators must automate the policy-and-cost governance rollout change needed to block a noncompliant creation request before the resource is deployed. Which cost governance operation belongs in the runbook?
 
-- A. Mark the objective complete after reading documentation without checking any state.
-- B. Change the active tenant without displaying or confirming the resulting context.
-- C. Assign the built-in Require a tag and its value on resources policy at resource-group scope.
-- D. Search the whole tenant for a similar display name and modify the first match.
+- A. Create a budget at the intended billing scope with thresholds and notification recipients.
+- B. Use a deny assignment only after validating its condition and approved exclusions.
+- C. Retrieve active cost recommendations and review impact before approving any remediation.
+- D. Use an initiative when one compliance baseline requires several coordinated policy rules.
 
 ## LAB05-Q15 — Foundational
 
-In a preflight knowledge check, the operator evaluates this requirement: Which authorization approach is appropriate before practicing 'Configure management groups'?
+A policy-and-cost governance rollout review finds cost governance drift from the need to correct existing noncompliant resources after a managed change is assigned. Which correction addresses that drift?
 
-- A. Skip role checks when the run ID contains the lab number.
-- B. Use a production subscription because its resources already exist.
-- C. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
-- D. Confirm the active context and use only the declared role boundary: Resource Policy Contributor at the lab scope; Cost Management Contributor for the optional budget path
+- A. Assign the modify policy with a managed identity and create remediation for existing resources.
+- B. Add a forecast notification early enough for the owner to correct projected overspend.
+- C. Set notScopes only for approved exceptions and keep the assignment at the shared parent scope.
+- D. Trigger a compliance scan after assignment when the lab needs deterministic validation timing.
 
 ## LAB05-Q16 — Applied
 
-A learner previews the implementation for 'Implement and manage Azure Policy'. What behavior is required?
+The policy-and-cost governance rollout window permits only the cost governance change needed to receive notifications without expecting spending to be stopped automatically. Which option respects the boundary?
 
-- A. Display the context, intended changes, cost and gated branches without mutating Azure.
-- B. Create the baseline immediately and request approval only before cleanup.
-- C. Select the first accessible subscription and hide the resulting context.
-- D. Delete any older resource whose name resembles the new run ID.
+- A. Configure an approved notification recipient and verify it is valid at the selected scope.
+- B. Select or author the definition and then assign it at the narrowest required governance scope.
+- C. Create a budget at the intended billing scope with thresholds and notification recipients.
+- D. Use a deny assignment only after validating its condition and approved exclusions.
 
 ## LAB05-Q17 — Applied
 
-Which implementation step should the learner perform for 'Manage costs by using alerts, budgets, and Azure Advisor recommendations'?
+The cost governance preflight has passed; the policy-and-cost governance rollout must now notify owners before projected spending reaches the configured limit. Which operation should run?
 
-- A. Skip the operation and edit validation.json to show a passing result.
-- B. Create the tagged policy-test resource group.
-- C. Replace the lab action with a tenant-wide change that is easier to discover.
-- D. Copy resource identifiers from another run instead of recording returned IDs.
+- A. Retrieve active cost recommendations and review impact before approving any remediation.
+- B. Use an initiative when one compliance baseline requires several coordinated policy rules.
+- C. Assign the modify policy with a managed identity and create remediation for existing resources.
+- D. Add a forecast notification early enough for the owner to correct projected overspend.
 
 ## LAB05-Q18 — Applied
 
-Which evidence most directly validates 'Configure management groups' for optional cost budget?
+The policy-and-cost governance rollout plan must route cost notifications to the approved recipients while limiting the mutation scope to cost governance. Which action is appropriate?
 
-- A. Record a credential so another learner can replay the authenticated session.
-- B. Treat the setup exit code as proof of every configuration and relationship.
-- C. Query the exact recorded scope and independently verify Microsoft.Authorization/policyAssignments.
-- D. List the entire subscription and assume similarly named resources belong to this run.
+- A. Configure an approved notification recipient and verify it is valid at the selected scope.
+- B. Set notScopes only for approved exceptions and keep the assignment at the shared parent scope.
+- C. Trigger a compliance scan after assignment when the lab needs deterministic validation timing.
+- D. Create a budget at the intended billing scope with thresholds and notification recipients.
 
 ## LAB05-Q19 — Applied
 
-The 'Implement and manage Azure Policy' checkpoint reaches an external prerequisite. What should happen?
+A cost governance ticket in the policy-and-cost governance rollout says to identify rightsizing or shutdown opportunities from service telemetry. Which cost governance action completes the policy-and-cost governance rollout request with minimal change?
 
-- A. Mark the branch passed because its command syntax was checked offline.
-- B. Invent a domain, notification target, license, quota, or tenant value and continue.
-- C. Broaden permissions until the prerequisite can no longer block the operation.
-- D. Run the branch only when this documented gate is satisfied: Budget creation requires AZ104_BUDGET_EMAIL and Cost Management authorization; otherwise the lab inventories cost controls without creating one.
+- A. Select or author the definition and then assign it at the narrowest required governance scope.
+- B. Use a deny assignment only after validating its condition and approved exclusions.
+- C. Retrieve active cost recommendations and review impact before approving any remediation.
+- D. Add a forecast notification early enough for the owner to correct projected overspend.
 
 ## LAB05-Q20 — Applied
 
-What is the safest command-evidence practice after completing 'Manage costs by using alerts, budgets, and Azure Advisor recommendations'?
+The approach for the policy-and-cost governance rollout is approved, but the cost governance environment still cannot exclude an approved child scope without weakening governance elsewhere. Which implementation step closes the gap?
 
-- A. Retain only redacted structured output from an independent query of the recorded run.
-- B. Commit the complete account object so reviewers can identify the tenant.
-- C. Save tokens, keys, passwords, or SAS values beside the validation result.
-- D. Reuse successful output from an earlier run with a similar resource name.
+- A. Use an initiative when one compliance baseline requires several coordinated policy rules.
+- B. Set notScopes only for approved exceptions and keep the assignment at the shared parent scope.
+- C. Assign the modify policy with a managed identity and create remediation for existing resources.
+- D. Configure an approved notification recipient and verify it is valid at the selected scope.
 
 ## LAB05-Q21 — Applied
 
-While validating a configuration, the team evaluates this situation: A learner previews the implementation for 'Implement and manage Azure Policy'. What behavior is required?
+The policy-and-cost governance rollout rejects cost governance exit status as proof it can package a governance rule and apply it at the intended scope. Which policy-and-cost governance rollout result is valid evidence?
 
-- A. Delete any older resource whose name resembles the new run ID.
-- B. Display the context, intended changes, cost and gated branches without mutating Azure.
-- C. Create the baseline immediately and request approval only before cleanup.
-- D. Select the first accessible subscription and hide the resulting context.
+- A. Read the assignment's definition ID, scope, parameters, and enforcement mode.
+- B. Attempt a controlled noncompliant deployment and confirm the denial references the expected assignment.
+- C. Read the notification operator, threshold, threshold type, and enabled state.
+- D. Compare the assignment scope, excluded scopes, and compliance records from each descendant subscription.
 
 ## LAB05-Q22 — Applied
 
-A delegated administrator receives the following support request: Which implementation step should the learner perform for 'Manage costs by using alerts, budgets, and Azure Advisor recommendations'?
+The cost governance validator needs one policy-and-cost governance rollout query after the change to deploy several related governance rules as one versioned assignment. Which cost governance property should the policy-and-cost governance rollout validator inspect?
 
-- A. Copy resource identifiers from another run instead of recording returned IDs.
-- B. Skip the operation and edit validation.json to show a passing result.
-- C. Create the tagged policy-test resource group.
-- D. Replace the lab action with a tenant-wide change that is easier to discover.
+- A. Inspect the remediation deployment and query the corrected property on each target resource.
+- B. Query the initiative assignment and enumerate its member definition references.
+- C. Query the notification contact collection and confirm the threshold is enabled.
+- D. Read the assignment's definition ID, scope, parameters, and enforcement mode.
 
 ## LAB05-Q23 — Applied
 
-During a maintenance window, an engineer must decide how to respond: Which evidence most directly validates 'Configure management groups' for optional cost budget?
+The cloud governance analyst enforcing standards and controlling spend must confirm the policy-and-cost governance rollout, without mutation, can measure existing resources against an assigned governance rule. Which cost governance check qualifies?
 
-- A. List the entire subscription and assume similarly named resources belong to this run.
-- B. Record a credential so another learner can replay the authenticated session.
-- C. Treat the setup exit code as proof of every configuration and relationship.
-- D. Query the exact recorded scope and independently verify Microsoft.Authorization/policyAssignments.
+- A. Query the budget amount, time grain, thresholds, and current cost separately.
+- B. Query recommendation category, impact, resource ID, and short description.
+- C. Query the initiative assignment and enumerate its member definition references.
+- D. Query policy states after evaluation and match the resource ID, assignment ID, and compliance state.
 
 ## LAB05-Q24 — Applied
 
-A deployment pipeline reaches this decision point: The 'Implement and manage Azure Policy' checkpoint reaches an external prerequisite. What should happen?
+The policy-and-cost governance rollout configuration is complete; the cost governance reviewers need evidence it can block a noncompliant creation request before the resource is deployed. Which observation shows success?
 
-- A. Run the branch only when this documented gate is satisfied: Budget creation requires AZ104_BUDGET_EMAIL and Cost Management authorization; otherwise the lab inventories cost controls without creating one.
-- B. Mark the branch passed because its command syntax was checked offline.
-- C. Invent a domain, notification target, license, quota, or tenant value and continue.
-- D. Broaden permissions until the prerequisite can no longer block the operation.
+- A. Read the notification operator, threshold, threshold type, and enabled state.
+- B. Compare the assignment scope, excluded scopes, and compliance records from each descendant subscription.
+- C. Query policy states after evaluation and match the resource ID, assignment ID, and compliance state.
+- D. Attempt a controlled noncompliant deployment and confirm the denial references the expected assignment.
 
 ## LAB05-Q25 — Applied
 
-While applying least-privilege controls, the administrator reviews this scenario: What is the safest command-evidence practice after completing 'Manage costs by using alerts, budgets, and Azure Advisor recommendations'?
+The cost governance validation asks whether the policy-and-cost governance rollout can correct existing noncompliant resources after a managed change is assigned. Which observable state is strongest?
 
-- A. Reuse successful output from an earlier run with a similar resource name.
-- B. Retain only redacted structured output from an independent query of the recorded run.
-- C. Commit the complete account object so reviewers can identify the tenant.
-- D. Save tokens, keys, passwords, or SAS values beside the validation result.
+- A. Query the notification contact collection and confirm the threshold is enabled.
+- B. Inspect the remediation deployment and query the corrected property on each target resource.
+- C. Read the assignment's definition ID, scope, parameters, and enforcement mode.
+- D. Attempt a controlled noncompliant deployment and confirm the denial references the expected assignment.
 
 ## LAB05-Q26 — Applied
 
-A repeatable Azure CLI workflow must address this requirement: A learner previews the implementation for 'Implement and manage Azure Policy'. What behavior is required?
+A policy-and-cost governance rollout review must prove the cost governance ability to receive notifications without expecting spending to be stopped automatically. Which check avoids an adjacent feature?
 
-- A. Select the first accessible subscription and hide the resulting context.
-- B. Delete any older resource whose name resembles the new run ID.
-- C. Display the context, intended changes, cost and gated branches without mutating Azure.
-- D. Create the baseline immediately and request approval only before cleanup.
+- A. Query recommendation category, impact, resource ID, and short description.
+- B. Query the initiative assignment and enumerate its member definition references.
+- C. Inspect the remediation deployment and query the corrected property on each target resource.
+- D. Query the budget amount, time grain, thresholds, and current cost separately.
 
 ## LAB05-Q27 — Applied
 
-During an environment handoff, the receiving team asks this question: Which implementation step should the learner perform for 'Manage costs by using alerts, budgets, and Azure Advisor recommendations'?
+The policy-and-cost governance rollout evidence bundle needs a cost governance result showing it can notify owners before projected spending reaches the configured limit. Which result belongs in the checkpoint?
 
-- A. Replace the lab action with a tenant-wide change that is easier to discover.
-- B. Copy resource identifiers from another run instead of recording returned IDs.
-- C. Skip the operation and edit validation.json to show a passing result.
-- D. Create the tagged policy-test resource group.
+- A. Compare the assignment scope, excluded scopes, and compliance records from each descendant subscription.
+- B. Query policy states after evaluation and match the resource ID, assignment ID, and compliance state.
+- C. Query the budget amount, time grain, thresholds, and current cost separately.
+- D. Read the notification operator, threshold, threshold type, and enabled state.
 
 ## LAB05-Q28 — Applied
 
-A configuration change produces the following operational choice: Which evidence most directly validates 'Configure management groups' for optional cost budget?
+Before policy-and-cost governance rollout cleanup, the cost governance team must reconfirm it can route cost notifications to the approved recipients. Which read-only inspection should run?
 
-- A. Query the exact recorded scope and independently verify Microsoft.Authorization/policyAssignments.
-- B. List the entire subscription and assume similarly named resources belong to this run.
-- C. Record a credential so another learner can replay the authenticated session.
-- D. Treat the setup exit code as proof of every configuration and relationship.
+- A. Read the assignment's definition ID, scope, parameters, and enforcement mode.
+- B. Query the notification contact collection and confirm the threshold is enabled.
+- C. Attempt a controlled noncompliant deployment and confirm the denial references the expected assignment.
+- D. Read the notification operator, threshold, threshold type, and enabled state.
 
 ## LAB05-Q29 — Applied
 
-While preparing independent validation, an engineer considers this scenario: The 'Implement and manage Azure Policy' checkpoint reaches an external prerequisite. What should happen?
+The policy-and-cost governance rollout setup reports success after the cost governance attempt to identify rightsizing or shutdown opportunities from service telemetry. Which cost governance read-only observation proves the policy-and-cost governance rollout outcome?
 
-- A. Broaden permissions until the prerequisite can no longer block the operation.
-- B. Run the branch only when this documented gate is satisfied: Budget creation requires AZ104_BUDGET_EMAIL and Cost Management authorization; otherwise the lab inventories cost controls without creating one.
-- C. Mark the branch passed because its command syntax was checked offline.
-- D. Invent a domain, notification target, license, quota, or tenant value and continue.
+- A. Query the initiative assignment and enumerate its member definition references.
+- B. Inspect the remediation deployment and query the corrected property on each target resource.
+- C. Query the notification contact collection and confirm the threshold is enabled.
+- D. Query recommendation category, impact, resource ID, and short description.
 
 ## LAB05-Q30 — Applied
 
-A service owner asks the administrator to resolve this requirement: What is the safest command-evidence practice after completing 'Manage costs by using alerts, budgets, and Azure Advisor recommendations'?
+The cost governance log says the policy-and-cost governance rollout can now exclude an approved child scope without weakening governance elsewhere. Which cost governance state should the policy-and-cost governance rollout acceptance test retain?
 
-- A. Save tokens, keys, passwords, or SAS values beside the validation result.
-- B. Reuse successful output from an earlier run with a similar resource name.
-- C. Retain only redacted structured output from an independent query of the recorded run.
-- D. Commit the complete account object so reviewers can identify the tenant.
+- A. Query policy states after evaluation and match the resource ID, assignment ID, and compliance state.
+- B. Query the budget amount, time grain, thresholds, and current cost separately.
+- C. Compare the assignment scope, excluded scopes, and compliance records from each descendant subscription.
+- D. Query recommendation category, impact, resource ID, and short description.
 
 ## LAB05-Q31 — Applied
 
-During a scoped cleanup review, the team evaluates this situation: A learner previews the implementation for 'Implement and manage Azure Policy'. What behavior is required?
+A cost governance break/fix in the policy-and-cost governance rollout fails when operators try to package a governance rule and apply it at the intended scope. Which diagnosis fits?
 
-- A. Create the baseline immediately and request approval only before cleanup.
-- B. Select the first accessible subscription and hide the resulting context.
-- C. Delete any older resource whose name resembles the new run ID.
-- D. Display the context, intended changes, cost and gated branches without mutating Azure.
+- A. Only one member definition was assigned, leaving the rest of the baseline unapplied.
+- B. The design expects reaching the budget threshold to shut down resources automatically.
+- C. The definition exists in the tenant but has never been assigned to the target scope.
+- D. The target subscription is listed in notScopes and therefore never receives the policy assignment.
 
 ## LAB05-Q32 — Applied
 
-An automation author must choose the correct response to this scenario: Which implementation step should the learner perform for 'Manage costs by using alerts, budgets, and Azure Advisor recommendations'?
+The policy-and-cost governance rollout troubleshooting scope is the cost governance need to deploy several related governance rules as one versioned assignment. Which condition should be corrected first?
 
-- A. Create the tagged policy-test resource group.
-- B. Replace the lab action with a tenant-wide change that is easier to discover.
-- C. Copy resource identifiers from another run instead of recording returned IDs.
-- D. Skip the operation and edit validation.json to show a passing result.
+- A. Only one member definition was assigned, leaving the rest of the baseline unapplied.
+- B. Validation ran immediately after assignment and treated a not-started evaluation as compliant.
+- C. Only an actual-cost alert exists, so no warning occurs while spend is merely forecast to exceed the limit.
+- D. The definition exists in the tenant but has never been assigned to the target scope.
 
 ## LAB05-Q33 — Applied
 
-A lab run with a unique run ID reaches this decision: Which evidence most directly validates 'Configure management groups' for optional cost budget?
+The policy-and-cost governance rollout result is partial because the cost governance cannot measure existing resources against an assigned governance rule. Which condition accounts for that result?
 
-- A. Treat the setup exit code as proof of every configuration and relationship.
-- B. Query the exact recorded scope and independently verify Microsoft.Authorization/policyAssignments.
-- C. List the entire subscription and assume similarly named resources belong to this run.
-- D. Record a credential so another learner can replay the authenticated session.
+- A. The assignment uses audit, so the noncompliant request succeeds and is only reported.
+- B. Validation ran immediately after assignment and treated a not-started evaluation as compliant.
+- C. The action group resource ID belongs to a scope that the budget notification cannot resolve.
+- D. Only one member definition was assigned, leaving the rest of the baseline unapplied.
 
 ## LAB05-Q34 — Applied
 
-While comparing the intended and actual states, the operator asks this question: The 'Implement and manage Azure Policy' checkpoint reaches an external prerequisite. What should happen?
+The cost governance evidence shows the policy-and-cost governance rollout cannot block a noncompliant creation request before the resource is deployed. Which root cause fits that evidence?
 
-- A. Invent a domain, notification target, license, quota, or tenant value and continue.
-- B. Broaden permissions until the prerequisite can no longer block the operation.
-- C. Run the branch only when this documented gate is satisfied: Budget creation requires AZ104_BUDGET_EMAIL and Cost Management authorization; otherwise the lab inventories cost controls without creating one.
-- D. Mark the branch passed because its command syntax was checked offline.
+- A. The assignment has no managed identity permission to perform its required modification.
+- B. The workflow assumes a cost recommendation has already resized or deleted the resource.
+- C. The assignment uses audit, so the noncompliant request succeeds and is only reported.
+- D. Validation ran immediately after assignment and treated a not-started evaluation as compliant.
 
 ## LAB05-Q35 — Applied
 
-A peer reviewer examines the proposed implementation for this scenario: What is the safest command-evidence practice after completing 'Manage costs by using alerts, budgets, and Azure Advisor recommendations'?
+Although the policy-and-cost governance rollout is meant to let the cost governance correct existing noncompliant resources after a managed change is assigned, its checkpoint fails. Which cost governance defect explains the failure?
 
-- A. Commit the complete account object so reviewers can identify the tenant.
-- B. Save tokens, keys, passwords, or SAS values beside the validation result.
-- C. Reuse successful output from an earlier run with a similar resource name.
-- D. Retain only redacted structured output from an independent query of the recorded run.
+- A. The assignment has no managed identity permission to perform its required modification.
+- B. The design expects reaching the budget threshold to shut down resources automatically.
+- C. The target subscription is listed in notScopes and therefore never receives the policy assignment.
+- D. The assignment uses audit, so the noncompliant request succeeds and is only reported.
 
 ## LAB05-Q36 — Applied
 
-During a controlled rollout, the change team encounters this requirement: A learner previews the implementation for 'Implement and manage Azure Policy'. What behavior is required?
+The cost governance support team isolated the policy-and-cost governance rollout incident to the attempt to receive notifications without expecting spending to be stopped automatically. Which condition prevents success?
 
-- A. Display the context, intended changes, cost and gated branches without mutating Azure.
-- B. Create the baseline immediately and request approval only before cleanup.
-- C. Select the first accessible subscription and hide the resulting context.
-- D. Delete any older resource whose name resembles the new run ID.
+- A. Only an actual-cost alert exists, so no warning occurs while spend is merely forecast to exceed the limit.
+- B. The design expects reaching the budget threshold to shut down resources automatically.
+- C. The definition exists in the tenant but has never been assigned to the target scope.
+- D. The assignment has no managed identity permission to perform its required modification.
 
 ## LAB05-Q37 — Applied
 
-A support engineer reproduces the following situation in a test environment: Which implementation step should the learner perform for 'Manage costs by using alerts, budgets, and Azure Advisor recommendations'?
+A policy-and-cost governance rollout query surprises the cloud governance analyst enforcing standards and controlling spend during the cost governance attempt to notify owners before projected spending reaches the configured limit. Which finding explains it?
 
-- A. Skip the operation and edit validation.json to show a passing result.
-- B. Create the tagged policy-test resource group.
-- C. Replace the lab action with a tenant-wide change that is easier to discover.
-- D. Copy resource identifiers from another run instead of recording returned IDs.
+- A. The action group resource ID belongs to a scope that the budget notification cannot resolve.
+- B. Only one member definition was assigned, leaving the rest of the baseline unapplied.
+- C. Only an actual-cost alert exists, so no warning occurs while spend is merely forecast to exceed the limit.
+- D. The design expects reaching the budget threshold to shut down resources automatically.
 
 ## LAB05-Q38 — Applied
 
-While recording validation evidence, the administrator evaluates this question: Which evidence most directly validates 'Configure management groups' for optional cost budget?
+Other policy-and-cost governance rollout components are healthy, but the cost governance still cannot route cost notifications to the approved recipients. Which state causes the isolated failure?
 
-- A. Record a credential so another learner can replay the authenticated session.
-- B. Treat the setup exit code as proof of every configuration and relationship.
-- C. Query the exact recorded scope and independently verify Microsoft.Authorization/policyAssignments.
-- D. List the entire subscription and assume similarly named resources belong to this run.
+- A. The workflow assumes a cost recommendation has already resized or deleted the resource.
+- B. Validation ran immediately after assignment and treated a not-started evaluation as compliant.
+- C. Only an actual-cost alert exists, so no warning occurs while spend is merely forecast to exceed the limit.
+- D. The action group resource ID belongs to a scope that the budget notification cannot resolve.
 
 ## LAB05-Q39 — Applied
 
-A configuration owner must approve one response to this scenario: The 'Implement and manage Azure Policy' checkpoint reaches an external prerequisite. What should happen?
+During a cost governance fault drill, the policy-and-cost governance rollout does not identify rightsizing or shutdown opportunities from service telemetry. Which finding identifies the defect?
 
-- A. Mark the branch passed because its command syntax was checked offline.
-- B. Invent a domain, notification target, license, quota, or tenant value and continue.
-- C. Broaden permissions until the prerequisite can no longer block the operation.
-- D. Run the branch only when this documented gate is satisfied: Budget creation requires AZ104_BUDGET_EMAIL and Cost Management authorization; otherwise the lab inventories cost controls without creating one.
+- A. The workflow assumes a cost recommendation has already resized or deleted the resource.
+- B. The target subscription is listed in notScopes and therefore never receives the policy assignment.
+- C. The assignment uses audit, so the noncompliant request succeeds and is only reported.
+- D. The action group resource ID belongs to a scope that the budget notification cannot resolve.
 
 ## LAB05-Q40 — Applied
 
-During post-deployment verification, the team reviews this situation: What is the safest command-evidence practice after completing 'Manage costs by using alerts, budgets, and Azure Advisor recommendations'?
+The policy-and-cost governance rollout setup finishes, yet the cost governance cannot exclude an approved child scope without weakening governance elsewhere. Which misconfiguration explains the mismatch?
 
-- A. Retain only redacted structured output from an independent query of the recorded run.
-- B. Commit the complete account object so reviewers can identify the tenant.
-- C. Save tokens, keys, passwords, or SAS values beside the validation result.
-- D. Reuse successful output from an earlier run with a similar resource name.
+- A. The target subscription is listed in notScopes and therefore never receives the policy assignment.
+- B. The definition exists in the tenant but has never been assigned to the target scope.
+- C. The assignment has no managed identity permission to perform its required modification.
+- D. The workflow assumes a cost recommendation has already resized or deleted the resource.
 
 ## LAB05-Q41 — Advanced
 
-Validation for 'Configure management groups' fails after setup. What is the best break/fix method?
+The cloud governance analyst enforcing standards and controlling spend needs a safe policy-and-cost governance rollout change to package a governance rule and apply it at the intended scope, followed by cost governance evidence. Which pair merits approval?
 
-- A. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- B. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-- C. Rerun setup repeatedly with new names until one attempt appears successful.
-- D. Change validation.json directly so the failed result reads pass.
+- A. First, Trigger a compliance scan after assignment when the lab needs deterministic validation timing. Then, Query policy states after evaluation and match the resource ID, assignment ID, and compliance state.
+- B. First, Add a forecast notification early enough for the owner to correct projected overspend. Then, Read the notification operator, threshold, threshold type, and enabled state.
+- C. First, Select or author the definition and then assign it at the narrowest required governance scope. Then, Read the assignment's definition ID, scope, parameters, and enforcement mode.
+- D. First, Configure an approved notification recipient and verify it is valid at the selected scope. Then, Query the notification contact collection and confirm the threshold is enabled.
 
 ## LAB05-Q42 — Advanced
 
-The operation for 'Implement and manage Azure Policy' is asynchronous or gated. How should completion be recorded?
+The policy-and-cost governance rollout has two cost governance gates: deploy several related governance rules as one versioned assignment, then prove the policy-and-cost governance rollout state. Which cost governance sequence works?
 
-- A. Remove the check from validation whenever the service takes longer than expected.
-- B. Record pass as soon as the request is accepted, regardless of its final state.
-- C. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
-- D. Fabricate expected output so the assessment and documentation appear complete.
+- A. First, Use an initiative when one compliance baseline requires several coordinated policy rules. Then, Query the initiative assignment and enumerate its member definition references.
+- B. First, Use a deny assignment only after validating its condition and approved exclusions. Then, Attempt a controlled noncompliant deployment and confirm the denial references the expected assignment.
+- C. First, Configure an approved notification recipient and verify it is valid at the selected scope. Then, Query the notification contact collection and confirm the threshold is enabled.
+- D. First, Retrieve active cost recommendations and review impact before approving any remediation. Then, Query recommendation category, impact, resource ID, and short description.
 
 ## LAB05-Q43 — Advanced
 
-A security and reliability review identifies this design decision: Validation for 'Configure management groups' fails after setup. What is the best break/fix method?
+Which cost governance path makes the policy-and-cost governance rollout able to measure existing resources against an assigned governance rule, then inspects the defining properties?
 
-- A. Rerun setup repeatedly with new names until one attempt appears successful.
-- B. Change validation.json directly so the failed result reads pass.
-- C. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- D. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+- A. First, Assign the modify policy with a managed identity and create remediation for existing resources. Then, Inspect the remediation deployment and query the corrected property on each target resource.
+- B. First, Retrieve active cost recommendations and review impact before approving any remediation. Then, Query recommendation category, impact, resource ID, and short description.
+- C. First, Trigger a compliance scan after assignment when the lab needs deterministic validation timing. Then, Query policy states after evaluation and match the resource ID, assignment ID, and compliance state.
+- D. First, Set notScopes only for approved exceptions and keep the assignment at the shared parent scope. Then, Compare the assignment scope, excluded scopes, and compliance records from each descendant subscription.
 
 ## LAB05-Q44 — Advanced
 
-While diagnosing unexpected Azure behavior, the engineer considers this situation: The operation for 'Implement and manage Azure Policy' is asynchronous or gated. How should completion be recorded?
+At the policy-and-cost governance rollout approval gate, operators must show that the cost governance can block a noncompliant creation request before the resource is deployed. Which cost governance configure-and-check pair is defensible?
 
-- A. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
-- B. Fabricate expected output so the assessment and documentation appear complete.
-- C. Remove the check from validation whenever the service takes longer than expected.
-- D. Record pass as soon as the request is accepted, regardless of its final state.
+- A. First, Create a budget at the intended billing scope with thresholds and notification recipients. Then, Query the budget amount, time grain, thresholds, and current cost separately.
+- B. First, Set notScopes only for approved exceptions and keep the assignment at the shared parent scope. Then, Compare the assignment scope, excluded scopes, and compliance records from each descendant subscription.
+- C. First, Select or author the definition and then assign it at the narrowest required governance scope. Then, Read the assignment's definition ID, scope, parameters, and enforcement mode.
+- D. First, Use a deny assignment only after validating its condition and approved exclusions. Then, Attempt a controlled noncompliant deployment and confirm the denial references the expected assignment.
 
 ## LAB05-Q45 — Advanced
 
-An architecture review requires the strongest response to this scenario: Validation for 'Configure management groups' fails after setup. What is the best break/fix method?
+The policy-and-cost governance rollout forbids a partial cost governance result. Operators must first correct existing noncompliant resources after a managed change is assigned and afterward confirm the policy-and-cost governance rollout outcome. Which cost governance sequence is complete?
 
-- A. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- B. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-- C. Rerun setup repeatedly with new names until one attempt appears successful.
-- D. Change validation.json directly so the failed result reads pass.
+- A. First, Add a forecast notification early enough for the owner to correct projected overspend. Then, Read the notification operator, threshold, threshold type, and enabled state.
+- B. First, Select or author the definition and then assign it at the narrowest required governance scope. Then, Read the assignment's definition ID, scope, parameters, and enforcement mode.
+- C. First, Assign the modify policy with a managed identity and create remediation for existing resources. Then, Inspect the remediation deployment and query the corrected property on each target resource.
+- D. First, Use an initiative when one compliance baseline requires several coordinated policy rules. Then, Query the initiative assignment and enumerate its member definition references.
 
 ## LAB05-Q46 — Advanced
 
-During break/fix validation, the operator encounters this question: The operation for 'Implement and manage Azure Policy' is asynchronous or gated. How should completion be recorded?
+Only the policy-and-cost governance rollout change needed to receive notifications without expecting spending to be stopped automatically is allowed, and cost governance proof is mandatory. Which pair fits?
 
-- A. Remove the check from validation whenever the service takes longer than expected.
-- B. Record pass as soon as the request is accepted, regardless of its final state.
-- C. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
-- D. Fabricate expected output so the assessment and documentation appear complete.
+- A. First, Create a budget at the intended billing scope with thresholds and notification recipients. Then, Query the budget amount, time grain, thresholds, and current cost separately.
+- B. First, Configure an approved notification recipient and verify it is valid at the selected scope. Then, Query the notification contact collection and confirm the threshold is enabled.
+- C. First, Use an initiative when one compliance baseline requires several coordinated policy rules. Then, Query the initiative assignment and enumerate its member definition references.
+- D. First, Trigger a compliance scan after assignment when the lab needs deterministic validation timing. Then, Query policy states after evaluation and match the resource ID, assignment ID, and compliance state.
 
 ## LAB05-Q47 — Advanced
 
-A complex support case depends on correctly interpreting this requirement: Validation for 'Configure management groups' fails after setup. What is the best break/fix method?
+The policy-and-cost governance rollout runbook separates cost governance mutation from validation while it must notify owners before projected spending reaches the configured limit. Which sequence proves it cleanly?
 
-- A. Rerun setup repeatedly with new names until one attempt appears successful.
-- B. Change validation.json directly so the failed result reads pass.
-- C. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- D. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+- A. First, Retrieve active cost recommendations and review impact before approving any remediation. Then, Query recommendation category, impact, resource ID, and short description.
+- B. First, Add a forecast notification early enough for the owner to correct projected overspend. Then, Read the notification operator, threshold, threshold type, and enabled state.
+- C. First, Trigger a compliance scan after assignment when the lab needs deterministic validation timing. Then, Query policy states after evaluation and match the resource ID, assignment ID, and compliance state.
+- D. First, Use a deny assignment only after validating its condition and approved exclusions. Then, Attempt a controlled noncompliant deployment and confirm the denial references the expected assignment.
 
 ## LAB05-Q48 — Advanced
 
-While correcting configuration drift, the team evaluates this scenario: The operation for 'Implement and manage Azure Policy' is asynchronous or gated. How should completion be recorded?
+The policy-and-cost governance rollout checkpoint requires both this cost governance outcome—route cost notifications to the approved recipients—and a read-only policy-and-cost governance rollout state check. Which cost governance response is complete?
 
-- A. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
-- B. Fabricate expected output so the assessment and documentation appear complete.
-- C. Remove the check from validation whenever the service takes longer than expected.
-- D. Record pass as soon as the request is accepted, regardless of its final state.
+- A. First, Set notScopes only for approved exceptions and keep the assignment at the shared parent scope. Then, Compare the assignment scope, excluded scopes, and compliance records from each descendant subscription.
+- B. First, Configure an approved notification recipient and verify it is valid at the selected scope. Then, Query the notification contact collection and confirm the threshold is enabled.
+- C. First, Use a deny assignment only after validating its condition and approved exclusions. Then, Attempt a controlled noncompliant deployment and confirm the denial references the expected assignment.
+- D. First, Assign the modify policy with a managed identity and create remediation for existing resources. Then, Inspect the remediation deployment and query the corrected property on each target resource.
 
 ## LAB05-Q49 — Advanced
 
-A recovery exercise exposes the following technical decision: Validation for 'Configure management groups' fails after setup. What is the best break/fix method?
+The policy-and-cost governance rollout runbook must identify rightsizing or shutdown opportunities from service telemetry, then retain cost governance read-back evidence. Which policy-and-cost governance rollout pair completes both duties?
 
-- A. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- B. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-- C. Rerun setup repeatedly with new names until one attempt appears successful.
-- D. Change validation.json directly so the failed result reads pass.
+- A. First, Retrieve active cost recommendations and review impact before approving any remediation. Then, Query recommendation category, impact, resource ID, and short description.
+- B. First, Select or author the definition and then assign it at the narrowest required governance scope. Then, Read the assignment's definition ID, scope, parameters, and enforcement mode.
+- C. First, Assign the modify policy with a managed identity and create remediation for existing resources. Then, Inspect the remediation deployment and query the corrected property on each target resource.
+- D. First, Create a budget at the intended billing scope with thresholds and notification recipients. Then, Query the budget amount, time grain, thresholds, and current cost separately.
 
 ## LAB05-Q50 — Advanced
 
-During final design assurance, the reviewer must resolve this situation: The operation for 'Implement and manage Azure Policy' is asynchronous or gated. How should completion be recorded?
+To satisfy the cost governance requirement, operators must change the policy-and-cost governance rollout configuration and prove it can exclude an approved child scope without weakening governance elsewhere. Which sequence is coherent?
 
-- A. Remove the check from validation whenever the service takes longer than expected.
-- B. Record pass as soon as the request is accepted, regardless of its final state.
-- C. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
-- D. Fabricate expected output so the assessment and documentation appear complete.
+- A. First, Use an initiative when one compliance baseline requires several coordinated policy rules. Then, Query the initiative assignment and enumerate its member definition references.
+- B. First, Create a budget at the intended billing scope with thresholds and notification recipients. Then, Query the budget amount, time grain, thresholds, and current cost separately.
+- C. First, Set notScopes only for approved exceptions and keep the assignment at the shared parent scope. Then, Compare the assignment scope, excluded scopes, and compliance records from each descendant subscription.
+- D. First, Add a forecast notification early enough for the owner to correct projected overspend. Then, Read the notification operator, threshold, threshold type, and enabled state.
+
+[Open the answer key](./ANSWERS.md)

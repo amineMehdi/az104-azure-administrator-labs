@@ -1,453 +1,459 @@
 # Lab 08 knowledge check
 
-Choose the single best answer for each question. Record your choices before opening `ANSWERS.md`.
+[Return to the guided lab](../README.md)
+
+Complete all 50 questions before opening the answer key. Allow about 50–60 minutes and choose the single best answer.
+
+Use the result as a learning signal: 85–100% indicates mastery, 70–84% calls for targeted review, and below 70% means repeat the mapped lab tasks before retrying.
 
 ## LAB08-Q01 — Foundational
 
-Which principle is most important when working on 'Configure object replication' in Lab 08?
+A blob retention peer review asks how the blob retention and replication service should handle this outcome: keep private data from being read without an authorization header. Which explanation is accurate?
 
-- A. Object replication depends on versioning and change feed, while lifecycle rules act asynchronously and should be validated as configuration rather than immediate data movement.
-- B. The shortest command is always correct even when it changes a broader scope.
-- C. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- D. A recognizable resource name removes the need for validation and scoped cleanup.
+- A. Hot, cool, cold, and archive tiers trade storage cost against access and rehydration characteristics.
+- B. A blob container organizes blobs inside one storage account and its public access setting is independent of account authorization controls.
+- C. A lifecycle delete action permanently removes eligible current or previous versions after its age condition.
+- D. Blob versioning preserves a new immutable version when a block blob is modified or deleted.
 
 ## LAB08-Q02 — Foundational
 
-Which lab action directly supports the objective 'Manage data by using Azure Storage Explorer and AzCopy'?
+For the blob retention and replication service, the blob retention plan must place frequently read and rarely read blobs in cost-appropriate tiers. Which statement about blob retention belongs in the blob retention and replication service record?
 
-- A. Change the active tenant without displaying or confirming the resulting context.
-- B. Enable blob and container soft delete and create private containers.
-- C. Search the whole tenant for a similar display name and modify the first match.
-- D. Mark the objective complete after reading documentation without checking any state.
+- A. Lifecycle rules can target blobs by prefix, blob type, and supported blob index tag filters.
+- B. Blob soft delete retains deleted blobs and versions for the configured retention period so they can be undeleted.
+- C. Object replication asynchronously copies block blobs between source and destination accounts and depends on versioning and change feed requirements.
+- D. Hot, cool, cold, and archive tiers trade storage cost against access and rehydration characteristics.
 
 ## LAB08-Q03 — Foundational
 
-Which authorization approach is appropriate before practicing 'Create and configure a container in Azure Blob Storage'?
+The blob retention review compares four claims for the blob retention and replication service requirement to apply retention automation only to blobs matching the intended prefix or type. Which claim is technically sound?
 
-- A. Use a production subscription because its resources already exist.
-- B. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
-- C. Confirm the active context and use only the declared role boundary: Contributor and Storage Blob Data Contributor on the lab resource group
-- D. Skip role checks when the run ID contains the lab number.
+- A. Lifecycle age conditions can tier a current blob version after the configured number of days since modification or access.
+- B. Lifecycle rules can target blobs by prefix, blob type, and supported blob index tag filters.
+- C. Container soft delete protects a deleted container and its contents for a separate configured retention period.
+- D. AzCopy copy transfers selected data, while sync compares source and destination and can optionally delete destination-only items.
 
 ## LAB08-Q04 — Foundational
 
-Which resource or object belongs inside the recorded boundary for 'Configure storage tiers'?
+The blob retention architecture note requires the blob retention and replication service environment to move eligible data to a cooler tier after the configured age. Which statement defines the relevant blob retention boundary?
 
-- A. Use whichever similarly named object appears first in a broad search.
-- B. Use an unrelated shared resource without recording its immutable ID.
-- C. Use a production object when the sandbox prerequisite is unavailable.
-- D. Use the exact recorded identity and scope for lifecycle policy.
+- A. A lifecycle delete action permanently removes eligible current or previous versions after its age condition.
+- B. Blob versioning preserves a new immutable version when a block blob is modified or deleted.
+- C. Lifecycle age conditions can tier a current blob version after the configured number of days since modification or access.
+- D. A blob container organizes blobs inside one storage account and its public access setting is independent of account authorization controls.
 
 ## LAB08-Q05 — Foundational
 
-During a design vocabulary review, the team evaluates this situation: Which principle is most important when working on 'Configure object replication' in Lab 08?
+A new blob retention operator must explain why the blob retention and replication service can delete only objects that satisfy the retention rule's age conditions. Which explanation is accurate?
 
-- A. Object replication depends on versioning and change feed, while lifecycle rules act asynchronously and should be validated as configuration rather than immediate data movement.
-- B. The shortest command is always correct even when it changes a broader scope.
-- C. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- D. A recognizable resource name removes the need for validation and scoped cleanup.
+- A. Blob soft delete retains deleted blobs and versions for the configured retention period so they can be undeleted.
+- B. Object replication asynchronously copies block blobs between source and destination accounts and depends on versioning and change feed requirements.
+- C. A lifecycle delete action permanently removes eligible current or previous versions after its age condition.
+- D. Hot, cool, cold, and archive tiers trade storage cost against access and rehydration characteristics.
 
 ## LAB08-Q06 — Foundational
 
-In a command-planning session, an administrator asks this question: Which lab action directly supports the objective 'Manage data by using Azure Storage Explorer and AzCopy'?
+The blob retention and replication service acceptance criteria require operators to recover a blob deleted after data protection was enabled. Which service fact supports that requirement?
 
-- A. Change the active tenant without displaying or confirming the resulting context.
-- B. Enable blob and container soft delete and create private containers.
-- C. Search the whole tenant for a similar display name and modify the first match.
-- D. Mark the objective complete after reading documentation without checking any state.
+- A. Container soft delete protects a deleted container and its contents for a separate configured retention period.
+- B. AzCopy copy transfers selected data, while sync compares source and destination and can optionally delete destination-only items.
+- C. Lifecycle rules can target blobs by prefix, blob type, and supported blob index tag filters.
+- D. Blob soft delete retains deleted blobs and versions for the configured retention period so they can be undeleted.
 
 ## LAB08-Q07 — Foundational
 
-While preparing the lab, a learner verifies this platform rule: Which authorization approach is appropriate before practicing 'Create and configure a container in Azure Blob Storage'?
+A blob retention reviewer challenges whether the blob retention and replication service can recover a container removed during its retention window. Which response resolves the concern?
 
-- A. Use a production subscription because its resources already exist.
-- B. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
-- C. Confirm the active context and use only the declared role boundary: Contributor and Storage Blob Data Contributor on the lab resource group
-- D. Skip role checks when the run ID contains the lab number.
+- A. Blob versioning preserves a new immutable version when a block blob is modified or deleted.
+- B. A blob container organizes blobs inside one storage account and its public access setting is independent of account authorization controls.
+- C. Lifecycle age conditions can tier a current blob version after the configured number of days since modification or access.
+- D. Container soft delete protects a deleted container and its contents for a separate configured retention period.
 
 ## LAB08-Q08 — Foundational
 
-During peer review, the team must identify the accurate response to this scenario: Which resource or object belongs inside the recorded boundary for 'Configure storage tiers'?
+The blob retention and replication service handoff omits the blob retention rule needed to retain an earlier block-blob state after a write or deletion. Which statement should the team add?
 
-- A. Use whichever similarly named object appears first in a broad search.
-- B. Use an unrelated shared resource without recording its immutable ID.
-- C. Use a production object when the sandbox prerequisite is unavailable.
-- D. Use the exact recorded identity and scope for lifecycle policy.
+- A. Object replication asynchronously copies block blobs between source and destination accounts and depends on versioning and change feed requirements.
+- B. Hot, cool, cold, and archive tiers trade storage cost against access and rehydration characteristics.
+- C. A lifecycle delete action permanently removes eligible current or previous versions after its age condition.
+- D. Blob versioning preserves a new immutable version when a block blob is modified or deleted.
 
 ## LAB08-Q09 — Foundational
 
-In an operations briefing, a new team member receives this question: Which principle is most important when working on 'Configure object replication' in Lab 08?
+A blob retention incident review of the blob retention and replication service depends on the ability to copy supported block-blob changes asynchronously to a second account. Which platform description is reliable?
 
-- A. Object replication depends on versioning and change feed, while lifecycle rules act asynchronously and should be validated as configuration rather than immediate data movement.
-- B. The shortest command is always correct even when it changes a broader scope.
-- C. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- D. A recognizable resource name removes the need for validation and scoped cleanup.
+- A. AzCopy copy transfers selected data, while sync compares source and destination and can optionally delete destination-only items.
+- B. Lifecycle rules can target blobs by prefix, blob type, and supported blob index tag filters.
+- C. Object replication asynchronously copies block blobs between source and destination accounts and depends on versioning and change feed requirements.
+- D. Blob soft delete retains deleted blobs and versions for the configured retention period so they can be undeleted.
 
 ## LAB08-Q10 — Foundational
 
-While building a support checklist, an engineer reviews this requirement: Which lab action directly supports the objective 'Manage data by using Azure Storage Explorer and AzCopy'?
+A data-platform administrator managing blob retention and replication is updating the blob retention runbook. The requirement is to copy a directory safely without deleting unrelated destination data. Which statement describes Azure behavior correctly?
 
-- A. Change the active tenant without displaying or confirming the resulting context.
-- B. Enable blob and container soft delete and create private containers.
-- C. Search the whole tenant for a similar display name and modify the first match.
-- D. Mark the objective complete after reading documentation without checking any state.
+- A. A blob container organizes blobs inside one storage account and its public access setting is independent of account authorization controls.
+- B. AzCopy copy transfers selected data, while sync compares source and destination and can optionally delete destination-only items.
+- C. Lifecycle age conditions can tier a current blob version after the configured number of days since modification or access.
+- D. Container soft delete protects a deleted container and its contents for a separate configured retention period.
 
 ## LAB08-Q11 — Foundational
 
-During a readiness check, the administrator considers this behavior: Which authorization approach is appropriate before practicing 'Create and configure a container in Azure Blob Storage'?
+The approach for the blob retention and replication service is approved, but the blob retention environment still cannot keep private data from being read without an authorization header. Which implementation step closes the gap?
 
-- A. Use a production subscription because its resources already exist.
-- B. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
-- C. Confirm the active context and use only the declared role boundary: Contributor and Storage Blob Data Contributor on the lab resource group
-- D. Skip role checks when the run ID contains the lab number.
+- A. Create the container with private access unless anonymous blob access is explicitly required.
+- B. Constrain the lifecycle rule to the intended container prefix and blob type before enabling destructive actions.
+- C. Enable blob soft delete with the approved retention days before testing deletion recovery.
+- D. Enable prerequisites on both accounts and create a replication policy with matching source and destination container rules.
 
 ## LAB08-Q12 — Foundational
 
-In a service overview, the team discusses this scenario: Which resource or object belongs inside the recorded boundary for 'Configure storage tiers'?
+The data-platform administrator managing blob retention and replication may change the blob retention and replication service only to place frequently read and rarely read blobs in cost-appropriate tiers. Which blob retention action stays within that assignment?
 
-- A. Use whichever similarly named object appears first in a broad search.
-- B. Use an unrelated shared resource without recording its immutable ID.
-- C. Use a production object when the sandbox prerequisite is unavailable.
-- D. Use the exact recorded identity and scope for lifecycle policy.
+- A. Configure the appropriate baseBlob tierToCool, tierToCold, or tierToArchive action with an age condition.
+- B. Enable container delete retention and use a unique test container for recovery validation.
+- C. Choose the tier from observed access frequency, retention period, and retrieval-time requirements.
+- D. Use copy for a one-time transfer and reserve sync deletion for an explicitly reviewed mirror operation.
 
 ## LAB08-Q13 — Foundational
 
-While reviewing official guidance, a learner must resolve this question: Which principle is most important when working on 'Configure object replication' in Lab 08?
+A blob retention dry run shows no blob retention and replication service command will apply retention automation only to blobs matching the intended prefix or type. Which action belongs before execution?
 
-- A. Object replication depends on versioning and change feed, while lifecycle rules act asynchronously and should be validated as configuration rather than immediate data movement.
-- B. The shortest command is always correct even when it changes a broader scope.
-- C. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- D. A recognizable resource name removes the need for validation and scoped cleanup.
+- A. Use a delete action only after data-protection retention and legal requirements are satisfied.
+- B. Enable versioning before overwriting the test blob and persist the returned version IDs.
+- C. Create the container with private access unless anonymous blob access is explicitly required.
+- D. Constrain the lifecycle rule to the intended container prefix and blob type before enabling destructive actions.
 
 ## LAB08-Q14 — Foundational
 
-During a configuration walkthrough, the instructor asks about this situation: Which lab action directly supports the objective 'Manage data by using Azure Storage Explorer and AzCopy'?
+For the blob retention and replication service, operators need to move eligible data to a cooler tier after the configured age. Which change realizes that requirement?
 
-- A. Change the active tenant without displaying or confirming the resulting context.
-- B. Enable blob and container soft delete and create private containers.
-- C. Search the whole tenant for a similar display name and modify the first match.
-- D. Mark the objective complete after reading documentation without checking any state.
+- A. Enable blob soft delete with the approved retention days before testing deletion recovery.
+- B. Configure the appropriate baseBlob tierToCool, tierToCold, or tierToArchive action with an age condition.
+- C. Enable prerequisites on both accounts and create a replication policy with matching source and destination container rules.
+- D. Choose the tier from observed access frequency, retention period, and retrieval-time requirements.
 
 ## LAB08-Q15 — Foundational
 
-In a preflight knowledge check, the operator evaluates this requirement: Which authorization approach is appropriate before practicing 'Create and configure a container in Azure Blob Storage'?
+Operators must automate the blob retention and replication service change needed to delete only objects that satisfy the retention rule's age conditions. Which blob retention operation belongs in the runbook?
 
-- A. Use a production subscription because its resources already exist.
-- B. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
-- C. Confirm the active context and use only the declared role boundary: Contributor and Storage Blob Data Contributor on the lab resource group
-- D. Skip role checks when the run ID contains the lab number.
+- A. Enable container delete retention and use a unique test container for recovery validation.
+- B. Use a delete action only after data-protection retention and legal requirements are satisfied.
+- C. Use copy for a one-time transfer and reserve sync deletion for an explicitly reviewed mirror operation.
+- D. Constrain the lifecycle rule to the intended container prefix and blob type before enabling destructive actions.
 
 ## LAB08-Q16 — Applied
 
-A learner previews the implementation for 'Configure soft delete for blobs and containers'. What behavior is required?
+A blob retention and replication service review finds blob retention drift from the need to recover a blob deleted after data protection was enabled. Which correction addresses that drift?
 
-- A. Create the baseline immediately and request approval only before cleanup.
-- B. Select the first accessible subscription and hide the resulting context.
-- C. Delete any older resource whose name resembles the new run ID.
-- D. Display the context, intended changes, cost and gated branches without mutating Azure.
+- A. Enable versioning before overwriting the test blob and persist the returned version IDs.
+- B. Create the container with private access unless anonymous blob access is explicitly required.
+- C. Configure the appropriate baseBlob tierToCool, tierToCold, or tierToArchive action with an age condition.
+- D. Enable blob soft delete with the approved retention days before testing deletion recovery.
 
 ## LAB08-Q17 — Applied
 
-Which implementation step should the learner perform for 'Configure blob lifecycle management'?
+The blob retention and replication service window permits only the blob retention change needed to recover a container removed during its retention window. Which option respects the boundary?
 
-- A. Enable blob and container soft delete and create private containers.
-- B. Copy resource identifiers from another run instead of recording returned IDs.
-- C. Skip the operation and edit validation.json to show a passing result.
-- D. Replace the lab action with a tenant-wide change that is easier to discover.
+- A. Enable prerequisites on both accounts and create a replication policy with matching source and destination container rules.
+- B. Choose the tier from observed access frequency, retention period, and retrieval-time requirements.
+- C. Use a delete action only after data-protection retention and legal requirements are satisfied.
+- D. Enable container delete retention and use a unique test container for recovery validation.
 
 ## LAB08-Q18 — Applied
 
-Which evidence most directly validates 'Configure blob versioning' for two StorageV2 accounts?
+The blob retention preflight has passed; the blob retention and replication service must now retain an earlier block-blob state after a write or deletion. Which operation should run?
 
-- A. List the entire subscription and assume similarly named resources belong to this run.
-- B. Query the exact recorded scope and independently verify Microsoft.Storage/storageAccounts.
-- C. Record a credential so another learner can replay the authenticated session.
-- D. Treat the setup exit code as proof of every configuration and relationship.
+- A. Use copy for a one-time transfer and reserve sync deletion for an explicitly reviewed mirror operation.
+- B. Enable versioning before overwriting the test blob and persist the returned version IDs.
+- C. Constrain the lifecycle rule to the intended container prefix and blob type before enabling destructive actions.
+- D. Enable blob soft delete with the approved retention days before testing deletion recovery.
 
 ## LAB08-Q19 — Applied
 
-The 'Configure object replication' checkpoint reaches an external prerequisite. What should happen?
+The blob retention and replication service plan must copy supported block-blob changes asynchronously to a second account while limiting the mutation scope to blob retention. Which action is appropriate?
 
-- A. Broaden permissions until the prerequisite can no longer block the operation.
-- B. Mark the branch passed because its command syntax was checked offline.
-- C. Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.
-- D. Invent a domain, notification target, license, quota, or tenant value and continue.
+- A. Enable prerequisites on both accounts and create a replication policy with matching source and destination container rules.
+- B. Create the container with private access unless anonymous blob access is explicitly required.
+- C. Configure the appropriate baseBlob tierToCool, tierToCold, or tierToArchive action with an age condition.
+- D. Enable container delete retention and use a unique test container for recovery validation.
 
 ## LAB08-Q20 — Applied
 
-What is the safest command-evidence practice after completing 'Manage data by using Azure Storage Explorer and AzCopy'?
+A blob retention ticket in the blob retention and replication service says to copy a directory safely without deleting unrelated destination data. Which blob retention action completes the blob retention and replication service request with minimal change?
 
-- A. Commit the complete account object so reviewers can identify the tenant.
-- B. Save tokens, keys, passwords, or SAS values beside the validation result.
-- C. Reuse successful output from an earlier run with a similar resource name.
-- D. Retain only redacted structured output from an independent query of the recorded run.
+- A. Choose the tier from observed access frequency, retention period, and retrieval-time requirements.
+- B. Use a delete action only after data-protection retention and legal requirements are satisfied.
+- C. Enable versioning before overwriting the test blob and persist the returned version IDs.
+- D. Use copy for a one-time transfer and reserve sync deletion for an explicitly reviewed mirror operation.
 
 ## LAB08-Q21 — Applied
 
-Which negative check strengthens validation of 'Create and configure a container in Azure Blob Storage'?
+The blob retention log says the blob retention and replication service can now keep private data from being read without an authorization header. Which blob retention state should the blob retention and replication service acceptance test retain?
 
-- A. Confirm the intended state and also prove that broader, anonymous, or unintended access was not introduced.
-- B. Repair every warning automatically before recording what caused it.
-- C. Ignore denied queries and record them as passing checks.
-- D. Check only that at least one resource exists in the subscription.
+- A. Read the lifecycle action and condition, then confirm only eligible test blobs match the rule.
+- B. Query containerDeleteRetentionPolicy and list deleted containers with the test name.
+- C. List the container and confirm its name, lease state, and publicAccess value.
+- D. Run a dry comparison or list both endpoints and verify object counts, names, and hashes where available.
 
 ## LAB08-Q22 — Applied
 
-Why should the run manifest record the exact ID of resource group?
+The blob retention and replication service rejects blob retention exit status as proof it can place frequently read and rarely read blobs in cost-appropriate tiers. Which blob retention and replication service result is valid evidence?
 
-- A. It allows cleanup to delete every object with the same prefix.
-- B. It lets validation and cleanup target the immutable object created by this run rather than a name match.
-- C. It removes the need to confirm the tenant or subscription context.
-- D. It lets setup store access tokens and passwords for later reuse.
+- A. Inspect the delete condition and verify protected or excluded blob prefixes do not match.
+- B. List blob versions and confirm distinct version IDs and current-version state.
+- C. Read the blob's accessTier and accessTierChangeTime after the tier operation completes.
+- D. List the container and confirm its name, lease state, and publicAccess value.
 
 ## LAB08-Q23 — Applied
 
-During a maintenance window, an engineer must decide how to respond: A learner previews the implementation for 'Configure soft delete for blobs and containers'. What behavior is required?
+The blob retention validator needs one blob retention and replication service query after the change to apply retention automation only to blobs matching the intended prefix or type. Which blob retention property should the blob retention and replication service validator inspect?
 
-- A. Select the first accessible subscription and hide the resulting context.
-- B. Delete any older resource whose name resembles the new run ID.
-- C. Display the context, intended changes, cost and gated branches without mutating Azure.
-- D. Create the baseline immediately and request approval only before cleanup.
+- A. Query deleteRetentionPolicy and confirm enabled and days values.
+- B. Query the policy IDs on both accounts and verify replication status on a versioned test blob.
+- C. Read the blob's accessTier and accessTierChangeTime after the tier operation completes.
+- D. Read the policy filters and test them against both an included and excluded blob name.
 
 ## LAB08-Q24 — Applied
 
-A deployment pipeline reaches this decision point: Which implementation step should the learner perform for 'Configure blob lifecycle management'?
+The data-platform administrator managing blob retention and replication must confirm the blob retention and replication service, without mutation, can move eligible data to a cooler tier after the configured age. Which blob retention check qualifies?
 
-- A. Copy resource identifiers from another run instead of recording returned IDs.
-- B. Skip the operation and edit validation.json to show a passing result.
-- C. Replace the lab action with a tenant-wide change that is easier to discover.
-- D. Enable blob and container soft delete and create private containers.
+- A. Query containerDeleteRetentionPolicy and list deleted containers with the test name.
+- B. Run a dry comparison or list both endpoints and verify object counts, names, and hashes where available.
+- C. Read the lifecycle action and condition, then confirm only eligible test blobs match the rule.
+- D. Read the policy filters and test them against both an included and excluded blob name.
 
 ## LAB08-Q25 — Applied
 
-While applying least-privilege controls, the administrator reviews this scenario: Which evidence most directly validates 'Configure blob versioning' for two StorageV2 accounts?
+The blob retention and replication service configuration is complete; the blob retention reviewers need evidence it can delete only objects that satisfy the retention rule's age conditions. Which observation shows success?
 
-- A. Query the exact recorded scope and independently verify Microsoft.Storage/storageAccounts.
-- B. Record a credential so another learner can replay the authenticated session.
-- C. Treat the setup exit code as proof of every configuration and relationship.
-- D. List the entire subscription and assume similarly named resources belong to this run.
+- A. List blob versions and confirm distinct version IDs and current-version state.
+- B. List the container and confirm its name, lease state, and publicAccess value.
+- C. Read the lifecycle action and condition, then confirm only eligible test blobs match the rule.
+- D. Inspect the delete condition and verify protected or excluded blob prefixes do not match.
 
 ## LAB08-Q26 — Applied
 
-A repeatable Azure CLI workflow must address this requirement: The 'Configure object replication' checkpoint reaches an external prerequisite. What should happen?
+The blob retention validation asks whether the blob retention and replication service can recover a blob deleted after data protection was enabled. Which observable state is strongest?
 
-- A. Mark the branch passed because its command syntax was checked offline.
-- B. Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.
-- C. Invent a domain, notification target, license, quota, or tenant value and continue.
-- D. Broaden permissions until the prerequisite can no longer block the operation.
+- A. Query the policy IDs on both accounts and verify replication status on a versioned test blob.
+- B. Query deleteRetentionPolicy and confirm enabled and days values.
+- C. Read the blob's accessTier and accessTierChangeTime after the tier operation completes.
+- D. Inspect the delete condition and verify protected or excluded blob prefixes do not match.
 
 ## LAB08-Q27 — Applied
 
-During an environment handoff, the receiving team asks this question: What is the safest command-evidence practice after completing 'Manage data by using Azure Storage Explorer and AzCopy'?
+A blob retention and replication service review must prove the blob retention ability to recover a container removed during its retention window. Which check avoids an adjacent feature?
 
-- A. Save tokens, keys, passwords, or SAS values beside the validation result.
-- B. Reuse successful output from an earlier run with a similar resource name.
-- C. Retain only redacted structured output from an independent query of the recorded run.
-- D. Commit the complete account object so reviewers can identify the tenant.
+- A. Run a dry comparison or list both endpoints and verify object counts, names, and hashes where available.
+- B. Read the policy filters and test them against both an included and excluded blob name.
+- C. Query containerDeleteRetentionPolicy and list deleted containers with the test name.
+- D. Query deleteRetentionPolicy and confirm enabled and days values.
 
 ## LAB08-Q28 — Applied
 
-A configuration change produces the following operational choice: Which negative check strengthens validation of 'Create and configure a container in Azure Blob Storage'?
+The blob retention and replication service evidence bundle needs a blob retention result showing it can retain an earlier block-blob state after a write or deletion. Which result belongs in the checkpoint?
 
-- A. Repair every warning automatically before recording what caused it.
-- B. Ignore denied queries and record them as passing checks.
-- C. Check only that at least one resource exists in the subscription.
-- D. Confirm the intended state and also prove that broader, anonymous, or unintended access was not introduced.
+- A. List the container and confirm its name, lease state, and publicAccess value.
+- B. List blob versions and confirm distinct version IDs and current-version state.
+- C. Read the lifecycle action and condition, then confirm only eligible test blobs match the rule.
+- D. Query containerDeleteRetentionPolicy and list deleted containers with the test name.
 
 ## LAB08-Q29 — Applied
 
-While preparing independent validation, an engineer considers this scenario: Why should the run manifest record the exact ID of resource group?
+Before blob retention and replication service cleanup, the blob retention team must reconfirm it can copy supported block-blob changes asynchronously to a second account. Which read-only inspection should run?
 
-- A. It lets validation and cleanup target the immutable object created by this run rather than a name match.
-- B. It removes the need to confirm the tenant or subscription context.
-- C. It lets setup store access tokens and passwords for later reuse.
-- D. It allows cleanup to delete every object with the same prefix.
+- A. Read the blob's accessTier and accessTierChangeTime after the tier operation completes.
+- B. Inspect the delete condition and verify protected or excluded blob prefixes do not match.
+- C. Query the policy IDs on both accounts and verify replication status on a versioned test blob.
+- D. List blob versions and confirm distinct version IDs and current-version state.
 
 ## LAB08-Q30 — Applied
 
-A service owner asks the administrator to resolve this requirement: A learner previews the implementation for 'Configure soft delete for blobs and containers'. What behavior is required?
+The blob retention and replication service setup reports success after the blob retention attempt to copy a directory safely without deleting unrelated destination data. Which blob retention read-only observation proves the blob retention and replication service outcome?
 
-- A. Delete any older resource whose name resembles the new run ID.
-- B. Display the context, intended changes, cost and gated branches without mutating Azure.
-- C. Create the baseline immediately and request approval only before cleanup.
-- D. Select the first accessible subscription and hide the resulting context.
+- A. Run a dry comparison or list both endpoints and verify object counts, names, and hashes where available.
+- B. Read the policy filters and test them against both an included and excluded blob name.
+- C. Query deleteRetentionPolicy and confirm enabled and days values.
+- D. Query the policy IDs on both accounts and verify replication status on a versioned test blob.
 
 ## LAB08-Q31 — Applied
 
-During a scoped cleanup review, the team evaluates this situation: Which implementation step should the learner perform for 'Configure blob lifecycle management'?
+The blob retention and replication service setup finishes, yet the blob retention cannot keep private data from being read without an authorization header. Which misconfiguration explains the mismatch?
 
-- A. Skip the operation and edit validation.json to show a passing result.
-- B. Replace the lab action with a tenant-wide change that is easier to discover.
-- C. Enable blob and container soft delete and create private containers.
-- D. Copy resource identifiers from another run instead of recording returned IDs.
+- A. Frequently read data was moved to archive even though the application requires immediate retrieval.
+- B. The blob was deleted before soft delete was enabled and has no recoverable soft-deleted state.
+- C. The container permits anonymous blob reads despite a private-data requirement.
+- D. Sync was run with destination deletion against a path that contains unrelated retained data.
 
 ## LAB08-Q32 — Applied
 
-An automation author must choose the correct response to this scenario: Which evidence most directly validates 'Configure blob versioning' for two StorageV2 accounts?
+A blob retention break/fix in the blob retention and replication service fails when operators try to place frequently read and rarely read blobs in cost-appropriate tiers. Which diagnosis fits?
 
-- A. Record a credential so another learner can replay the authenticated session.
-- B. Treat the setup exit code as proof of every configuration and relationship.
-- C. List the entire subscription and assume similarly named resources belong to this run.
-- D. Query the exact recorded scope and independently verify Microsoft.Storage/storageAccounts.
+- A. The rule has no prefix filter and therefore evaluates unrelated containers in the account.
+- B. Only blob soft delete is enabled, so deleting the entire container is not covered by container retention.
+- C. Frequently read data was moved to archive even though the application requires immediate retrieval.
+- D. The container permits anonymous blob reads despite a private-data requirement.
 
 ## LAB08-Q33 — Applied
 
-A lab run with a unique run ID reaches this decision: The 'Configure object replication' checkpoint reaches an external prerequisite. What should happen?
+The blob retention and replication service troubleshooting scope is the blob retention need to apply retention automation only to blobs matching the intended prefix or type. Which condition should be corrected first?
 
-- A. Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.
-- B. Invent a domain, notification target, license, quota, or tenant value and continue.
-- C. Broaden permissions until the prerequisite can no longer block the operation.
-- D. Mark the branch passed because its command syntax was checked offline.
+- A. The rule uses daysAfterModificationGreaterThan later than the required retention transition.
+- B. The rule has no prefix filter and therefore evaluates unrelated containers in the account.
+- C. The overwrite occurred before versioning was enabled, so no earlier version was created.
+- D. Frequently read data was moved to archive even though the application requires immediate retrieval.
 
 ## LAB08-Q34 — Applied
 
-While comparing the intended and actual states, the operator asks this question: What is the safest command-evidence practice after completing 'Manage data by using Azure Storage Explorer and AzCopy'?
+The blob retention and replication service result is partial because the blob retention cannot move eligible data to a cooler tier after the configured age. Which condition accounts for that result?
 
-- A. Reuse successful output from an earlier run with a similar resource name.
-- B. Retain only redacted structured output from an independent query of the recorded run.
-- C. Commit the complete account object so reviewers can identify the tenant.
-- D. Save tokens, keys, passwords, or SAS values beside the validation result.
+- A. The delete action targets current versions before the mandated retention period ends.
+- B. The rule uses daysAfterModificationGreaterThan later than the required retention transition.
+- C. Versioning is disabled on one account, preventing the replication policy from operating.
+- D. The rule has no prefix filter and therefore evaluates unrelated containers in the account.
 
 ## LAB08-Q35 — Applied
 
-A peer reviewer examines the proposed implementation for this scenario: Which negative check strengthens validation of 'Create and configure a container in Azure Blob Storage'?
+The blob retention evidence shows the blob retention and replication service cannot delete only objects that satisfy the retention rule's age conditions. Which root cause fits that evidence?
 
-- A. Ignore denied queries and record them as passing checks.
-- B. Check only that at least one resource exists in the subscription.
-- C. Confirm the intended state and also prove that broader, anonymous, or unintended access was not introduced.
-- D. Repair every warning automatically before recording what caused it.
+- A. The blob was deleted before soft delete was enabled and has no recoverable soft-deleted state.
+- B. Sync was run with destination deletion against a path that contains unrelated retained data.
+- C. The rule uses daysAfterModificationGreaterThan later than the required retention transition.
+- D. The delete action targets current versions before the mandated retention period ends.
 
 ## LAB08-Q36 — Applied
 
-During a controlled rollout, the change team encounters this requirement: Why should the run manifest record the exact ID of resource group?
+Although the blob retention and replication service is meant to let the blob retention recover a blob deleted after data protection was enabled, its checkpoint fails. Which blob retention defect explains the failure?
 
-- A. It removes the need to confirm the tenant or subscription context.
-- B. It lets setup store access tokens and passwords for later reuse.
-- C. It allows cleanup to delete every object with the same prefix.
-- D. It lets validation and cleanup target the immutable object created by this run rather than a name match.
+- A. The blob was deleted before soft delete was enabled and has no recoverable soft-deleted state.
+- B. Only blob soft delete is enabled, so deleting the entire container is not covered by container retention.
+- C. The container permits anonymous blob reads despite a private-data requirement.
+- D. The delete action targets current versions before the mandated retention period ends.
 
 ## LAB08-Q37 — Applied
 
-A support engineer reproduces the following situation in a test environment: A learner previews the implementation for 'Configure soft delete for blobs and containers'. What behavior is required?
+The blob retention support team isolated the blob retention and replication service incident to the attempt to recover a container removed during its retention window. Which condition prevents success?
 
-- A. Display the context, intended changes, cost and gated branches without mutating Azure.
-- B. Create the baseline immediately and request approval only before cleanup.
-- C. Select the first accessible subscription and hide the resulting context.
-- D. Delete any older resource whose name resembles the new run ID.
+- A. Only blob soft delete is enabled, so deleting the entire container is not covered by container retention.
+- B. The overwrite occurred before versioning was enabled, so no earlier version was created.
+- C. Frequently read data was moved to archive even though the application requires immediate retrieval.
+- D. The blob was deleted before soft delete was enabled and has no recoverable soft-deleted state.
 
 ## LAB08-Q38 — Applied
 
-While recording validation evidence, the administrator evaluates this question: Which implementation step should the learner perform for 'Configure blob lifecycle management'?
+A blob retention and replication service query surprises the data-platform administrator managing blob retention and replication during the blob retention attempt to retain an earlier block-blob state after a write or deletion. Which finding explains it?
 
-- A. Replace the lab action with a tenant-wide change that is easier to discover.
-- B. Enable blob and container soft delete and create private containers.
-- C. Copy resource identifiers from another run instead of recording returned IDs.
-- D. Skip the operation and edit validation.json to show a passing result.
+- A. The overwrite occurred before versioning was enabled, so no earlier version was created.
+- B. Versioning is disabled on one account, preventing the replication policy from operating.
+- C. The rule has no prefix filter and therefore evaluates unrelated containers in the account.
+- D. Only blob soft delete is enabled, so deleting the entire container is not covered by container retention.
 
 ## LAB08-Q39 — Applied
 
-A configuration owner must approve one response to this scenario: Which evidence most directly validates 'Configure blob versioning' for two StorageV2 accounts?
+Other blob retention and replication service components are healthy, but the blob retention still cannot copy supported block-blob changes asynchronously to a second account. Which state causes the isolated failure?
 
-- A. Treat the setup exit code as proof of every configuration and relationship.
-- B. List the entire subscription and assume similarly named resources belong to this run.
-- C. Query the exact recorded scope and independently verify Microsoft.Storage/storageAccounts.
-- D. Record a credential so another learner can replay the authenticated session.
+- A. Sync was run with destination deletion against a path that contains unrelated retained data.
+- B. Versioning is disabled on one account, preventing the replication policy from operating.
+- C. The rule uses daysAfterModificationGreaterThan later than the required retention transition.
+- D. The overwrite occurred before versioning was enabled, so no earlier version was created.
 
 ## LAB08-Q40 — Applied
 
-During post-deployment verification, the team reviews this situation: The 'Configure object replication' checkpoint reaches an external prerequisite. What should happen?
+During a blob retention fault drill, the blob retention and replication service does not copy a directory safely without deleting unrelated destination data. Which finding identifies the defect?
 
-- A. Invent a domain, notification target, license, quota, or tenant value and continue.
-- B. Broaden permissions until the prerequisite can no longer block the operation.
-- C. Mark the branch passed because its command syntax was checked offline.
-- D. Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.
+- A. Sync was run with destination deletion against a path that contains unrelated retained data.
+- B. The container permits anonymous blob reads despite a private-data requirement.
+- C. The delete action targets current versions before the mandated retention period ends.
+- D. Versioning is disabled on one account, preventing the replication policy from operating.
 
 ## LAB08-Q41 — Advanced
 
-Validation for 'Configure soft delete for blobs and containers' fails after setup. What is the best break/fix method?
+To satisfy the blob retention requirement, operators must change the blob retention and replication service configuration and prove it can keep private data from being read without an authorization header. Which sequence is coherent?
 
-- A. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-- B. Rerun setup repeatedly with new names until one attempt appears successful.
-- C. Change validation.json directly so the failed result reads pass.
-- D. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+- A. First, Create the container with private access unless anonymous blob access is explicitly required. Then, List the container and confirm its name, lease state, and publicAccess value.
+- B. First, Constrain the lifecycle rule to the intended container prefix and blob type before enabling destructive actions. Then, Read the policy filters and test them against both an included and excluded blob name.
+- C. First, Enable container delete retention and use a unique test container for recovery validation. Then, Query containerDeleteRetentionPolicy and list deleted containers with the test name.
+- D. First, Enable versioning before overwriting the test blob and persist the returned version IDs. Then, List blob versions and confirm distinct version IDs and current-version state.
 
 ## LAB08-Q42 — Advanced
 
-The operation for 'Configure blob lifecycle management' is asynchronous or gated. How should completion be recorded?
+The data-platform administrator managing blob retention and replication needs a safe blob retention and replication service change to place frequently read and rarely read blobs in cost-appropriate tiers, followed by blob retention evidence. Which pair merits approval?
 
-- A. Remove the check from validation whenever the service takes longer than expected.
-- B. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
-- C. Record pass as soon as the request is accepted, regardless of its final state.
-- D. Fabricate expected output so the assessment and documentation appear complete.
+- A. First, Configure the appropriate baseBlob tierToCool, tierToCold, or tierToArchive action with an age condition. Then, Read the lifecycle action and condition, then confirm only eligible test blobs match the rule.
+- B. First, Enable versioning before overwriting the test blob and persist the returned version IDs. Then, List blob versions and confirm distinct version IDs and current-version state.
+- C. First, Choose the tier from observed access frequency, retention period, and retrieval-time requirements. Then, Read the blob's accessTier and accessTierChangeTime after the tier operation completes.
+- D. First, Enable prerequisites on both accounts and create a replication policy with matching source and destination container rules. Then, Query the policy IDs on both accounts and verify replication status on a versioned test blob.
 
 ## LAB08-Q43 — Advanced
 
-An administrator discovers drift while validating 'Configure blob versioning'. Which response preserves least privilege?
+The blob retention and replication service has two blob retention gates: apply retention automation only to blobs matching the intended prefix or type, then prove the blob retention and replication service state. Which blob retention sequence works?
 
-- A. Accept the drift when the resource name still matches the lab prefix.
-- B. Grant subscription Owner and tenant administrator roles to avoid further authorization errors.
-- C. Compare the live query with the recorded expectation, change only the mismatched setting, and validate again.
-- D. Replace every resource in the subscription instead of identifying the mismatch.
+- A. First, Constrain the lifecycle rule to the intended container prefix and blob type before enabling destructive actions. Then, Read the policy filters and test them against both an included and excluded blob name.
+- B. First, Use a delete action only after data-protection retention and legal requirements are satisfied. Then, Inspect the delete condition and verify protected or excluded blob prefixes do not match.
+- C. First, Enable prerequisites on both accounts and create a replication policy with matching source and destination container rules. Then, Query the policy IDs on both accounts and verify replication status on a versioned test blob.
+- D. First, Use copy for a one-time transfer and reserve sync deletion for an explicitly reviewed mirror operation. Then, Run a dry comparison or list both endpoints and verify object counts, names, and hashes where available.
 
 ## LAB08-Q44 — Advanced
 
-While diagnosing unexpected Azure behavior, the engineer considers this situation: Validation for 'Configure soft delete for blobs and containers' fails after setup. What is the best break/fix method?
+Which blob retention path makes the blob retention and replication service able to move eligible data to a cooler tier after the configured age, then inspects the defining properties?
 
-- A. Rerun setup repeatedly with new names until one attempt appears successful.
-- B. Change validation.json directly so the failed result reads pass.
-- C. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- D. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+- A. First, Configure the appropriate baseBlob tierToCool, tierToCold, or tierToArchive action with an age condition. Then, Read the lifecycle action and condition, then confirm only eligible test blobs match the rule.
+- B. First, Enable blob soft delete with the approved retention days before testing deletion recovery. Then, Query deleteRetentionPolicy and confirm enabled and days values.
+- C. First, Use copy for a one-time transfer and reserve sync deletion for an explicitly reviewed mirror operation. Then, Run a dry comparison or list both endpoints and verify object counts, names, and hashes where available.
+- D. First, Create the container with private access unless anonymous blob access is explicitly required. Then, List the container and confirm its name, lease state, and publicAccess value.
 
 ## LAB08-Q45 — Advanced
 
-An architecture review requires the strongest response to this scenario: The operation for 'Configure blob lifecycle management' is asynchronous or gated. How should completion be recorded?
+At the blob retention and replication service approval gate, operators must show that the blob retention can delete only objects that satisfy the retention rule's age conditions. Which blob retention configure-and-check pair is defensible?
 
-- A. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
-- B. Record pass as soon as the request is accepted, regardless of its final state.
-- C. Fabricate expected output so the assessment and documentation appear complete.
-- D. Remove the check from validation whenever the service takes longer than expected.
+- A. First, Use a delete action only after data-protection retention and legal requirements are satisfied. Then, Inspect the delete condition and verify protected or excluded blob prefixes do not match.
+- B. First, Enable container delete retention and use a unique test container for recovery validation. Then, Query containerDeleteRetentionPolicy and list deleted containers with the test name.
+- C. First, Create the container with private access unless anonymous blob access is explicitly required. Then, List the container and confirm its name, lease state, and publicAccess value.
+- D. First, Choose the tier from observed access frequency, retention period, and retrieval-time requirements. Then, Read the blob's accessTier and accessTierChangeTime after the tier operation completes.
 
 ## LAB08-Q46 — Advanced
 
-During break/fix validation, the operator encounters this question: An administrator discovers drift while validating 'Configure blob versioning'. Which response preserves least privilege?
+The blob retention and replication service forbids a partial blob retention result. Operators must first recover a blob deleted after data protection was enabled and afterward confirm the blob retention and replication service outcome. Which blob retention sequence is complete?
 
-- A. Grant subscription Owner and tenant administrator roles to avoid further authorization errors.
-- B. Compare the live query with the recorded expectation, change only the mismatched setting, and validate again.
-- C. Replace every resource in the subscription instead of identifying the mismatch.
-- D. Accept the drift when the resource name still matches the lab prefix.
+- A. First, Enable versioning before overwriting the test blob and persist the returned version IDs. Then, List blob versions and confirm distinct version IDs and current-version state.
+- B. First, Enable blob soft delete with the approved retention days before testing deletion recovery. Then, Query deleteRetentionPolicy and confirm enabled and days values.
+- C. First, Choose the tier from observed access frequency, retention period, and retrieval-time requirements. Then, Read the blob's accessTier and accessTierChangeTime after the tier operation completes.
+- D. First, Constrain the lifecycle rule to the intended container prefix and blob type before enabling destructive actions. Then, Read the policy filters and test them against both an included and excluded blob name.
 
 ## LAB08-Q47 — Advanced
 
-A complex support case depends on correctly interpreting this requirement: Validation for 'Configure soft delete for blobs and containers' fails after setup. What is the best break/fix method?
+Only the blob retention and replication service change needed to recover a container removed during its retention window is allowed, and blob retention proof is mandatory. Which pair fits?
 
-- A. Change validation.json directly so the failed result reads pass.
-- B. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- C. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-- D. Rerun setup repeatedly with new names until one attempt appears successful.
+- A. First, Enable container delete retention and use a unique test container for recovery validation. Then, Query containerDeleteRetentionPolicy and list deleted containers with the test name.
+- B. First, Enable prerequisites on both accounts and create a replication policy with matching source and destination container rules. Then, Query the policy IDs on both accounts and verify replication status on a versioned test blob.
+- C. First, Constrain the lifecycle rule to the intended container prefix and blob type before enabling destructive actions. Then, Read the policy filters and test them against both an included and excluded blob name.
+- D. First, Configure the appropriate baseBlob tierToCool, tierToCold, or tierToArchive action with an age condition. Then, Read the lifecycle action and condition, then confirm only eligible test blobs match the rule.
 
 ## LAB08-Q48 — Advanced
 
-While correcting configuration drift, the team evaluates this scenario: The operation for 'Configure blob lifecycle management' is asynchronous or gated. How should completion be recorded?
+The blob retention and replication service runbook separates blob retention mutation from validation while it must retain an earlier block-blob state after a write or deletion. Which sequence proves it cleanly?
 
-- A. Record pass as soon as the request is accepted, regardless of its final state.
-- B. Fabricate expected output so the assessment and documentation appear complete.
-- C. Remove the check from validation whenever the service takes longer than expected.
-- D. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
+- A. First, Enable versioning before overwriting the test blob and persist the returned version IDs. Then, List blob versions and confirm distinct version IDs and current-version state.
+- B. First, Use copy for a one-time transfer and reserve sync deletion for an explicitly reviewed mirror operation. Then, Run a dry comparison or list both endpoints and verify object counts, names, and hashes where available.
+- C. First, Configure the appropriate baseBlob tierToCool, tierToCold, or tierToArchive action with an age condition. Then, Read the lifecycle action and condition, then confirm only eligible test blobs match the rule.
+- D. First, Use a delete action only after data-protection retention and legal requirements are satisfied. Then, Inspect the delete condition and verify protected or excluded blob prefixes do not match.
 
 ## LAB08-Q49 — Advanced
 
-A recovery exercise exposes the following technical decision: An administrator discovers drift while validating 'Configure blob versioning'. Which response preserves least privilege?
+The blob retention and replication service checkpoint requires both this blob retention outcome—copy supported block-blob changes asynchronously to a second account—and a read-only blob retention and replication service state check. Which blob retention response is complete?
 
-- A. Compare the live query with the recorded expectation, change only the mismatched setting, and validate again.
-- B. Replace every resource in the subscription instead of identifying the mismatch.
-- C. Accept the drift when the resource name still matches the lab prefix.
-- D. Grant subscription Owner and tenant administrator roles to avoid further authorization errors.
+- A. First, Create the container with private access unless anonymous blob access is explicitly required. Then, List the container and confirm its name, lease state, and publicAccess value.
+- B. First, Use a delete action only after data-protection retention and legal requirements are satisfied. Then, Inspect the delete condition and verify protected or excluded blob prefixes do not match.
+- C. First, Enable blob soft delete with the approved retention days before testing deletion recovery. Then, Query deleteRetentionPolicy and confirm enabled and days values.
+- D. First, Enable prerequisites on both accounts and create a replication policy with matching source and destination container rules. Then, Query the policy IDs on both accounts and verify replication status on a versioned test blob.
 
 ## LAB08-Q50 — Advanced
 
-During final design assurance, the reviewer must resolve this situation: Validation for 'Configure soft delete for blobs and containers' fails after setup. What is the best break/fix method?
+The blob retention and replication service runbook must copy a directory safely without deleting unrelated destination data, then retain blob retention read-back evidence. Which blob retention and replication service pair completes both duties?
 
-- A. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- B. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-- C. Rerun setup repeatedly with new names until one attempt appears successful.
-- D. Change validation.json directly so the failed result reads pass.
+- A. First, Choose the tier from observed access frequency, retention period, and retrieval-time requirements. Then, Read the blob's accessTier and accessTierChangeTime after the tier operation completes.
+- B. First, Enable blob soft delete with the approved retention days before testing deletion recovery. Then, Query deleteRetentionPolicy and confirm enabled and days values.
+- C. First, Use copy for a one-time transfer and reserve sync deletion for an explicitly reviewed mirror operation. Then, Run a dry comparison or list both endpoints and verify object counts, names, and hashes where available.
+- D. First, Enable container delete retention and use a unique test container for recovery validation. Then, Query containerDeleteRetentionPolicy and list deleted containers with the test name.
+
+[Open the answer key](./ANSWERS.md)

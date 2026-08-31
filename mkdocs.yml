@@ -1,0 +1,109 @@
+site_name: AZ-104 Complete Learning Environment
+site_description: Hands-on Azure Administrator labs, assessments, and job-ready learning paths
+site_url: https://jamonygr.github.io/az104-azure-administrator-labs/
+repo_url: https://github.com/Jamonygr/az104-azure-administrator-labs
+repo_name: Jamonygr/az104-azure-administrator-labs
+edit_uri: edit/main/
+docs_dir: .site-docs
+site_dir: site
+use_directory_urls: true
+strict: true
+
+theme:
+  name: material
+  language: en
+  font: false
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.indexes
+    - navigation.top
+    - toc.follow
+    - search.highlight
+    - search.share
+    - search.suggest
+    - content.code.copy
+    - content.code.annotate
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: blue
+      accent: cyan
+      toggle:
+        icon: material/brightness-7
+        name: Use dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: blue
+      accent: cyan
+      toggle:
+        icon: material/brightness-4
+        name: Use light mode
+
+nav:
+  - Home: index.md
+  - Learning paths: learning-pathways.md
+  - Labs:
+      - Catalog: labs/README.md
+      - Foundation: domains/foundation.md
+      - Identity and governance: domains/identity-governance.md
+      - Storage: domains/storage.md
+      - Compute: domains/compute.md
+      - Networking: domains/networking.md
+      - Monitoring and recovery: domains/monitor-recovery.md
+      - Capstones: domains/capstone.md
+  - Study resources:
+      - Study plan: docs/study-plan.md
+      - Objective map: docs/objective-map.md
+      - Assessment guide: docs/assessment-guide.md
+      - Question-bank dashboard: docs/question-bank-index.md
+      - Command cheatsheet: docs/command-cheatsheet.md
+      - Glossary: glossary.md
+  - Run safely:
+      - Environment readiness: environment-readiness.md
+      - Prerequisites: docs/prerequisites.md
+      - Permissions: docs/permissions-matrix.md
+      - Cost and cleanup: docs/cost-and-cleanup.md
+      - Troubleshooting: docs/troubleshooting.md
+      - Evidence handling: docs/evidence-handling.md
+  - Progress: learner-progress.md
+
+plugins:
+  - search:
+      lang: en
+      separator: '[\\s\\-\\.]+'
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+
+extra_css:
+  - assets/progress.css
+
+extra_javascript:
+  - assets/progress.js
+
+validation:
+  nav:
+    omitted_files: ignore
+    not_found: warn
+    absolute_links: info
+  links:
+    not_found: warn
+    anchors: info
+    absolute_links: info
+    unrecognized_links: info
+
+copyright: Content is provided for authorized, non-production Azure learning environments.

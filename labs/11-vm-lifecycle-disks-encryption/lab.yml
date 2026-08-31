@@ -1,8 +1,11 @@
+
+# BEGIN GENERATED AZ104 V2
+schemaVersion: 2.0.0
 id: LAB-11
 slug: 11-vm-lifecycle-disks-encryption
 title: Manage VM lifecycle, size, disks, and host encryption
 blueprintVersion: '2026-04-17'
-domain: Deploy and manage Azure compute resources
+domain: compute
 objectives:
 - CP-VM-01
 - CP-VM-02
@@ -14,10 +17,22 @@ testedToolVersions:
   azureCli: '>=2.88.0'
   powershell: '>=7.4'
 estimatedMinutes: 120
-difficulty: intermediate
+difficulty: applied
+experience:
+  scenario: 'You are a compute administrator maintaining a secured linux vm. Build and prove this disposable service path:
+    A private NIC connects the VM to its workload subnet; the VM security profile enables encryption at host, the managed
+    data disk attaches at a declared LUN, and resize operations flow through deallocation before instance-view validation.'
+  role: A compute administrator maintaining a secured Linux VM.
+  outcome: Use Azure CLI in PowerShell to create the private-nic vm with encryption at host, attach and verify the managed
+    data disk, and reconcile vm size, disks, host encryption, and private exposure, with recoverable state and deterministic
+    cleanup.
+  completionCriteria:
+  - All required checkpoints report pass.
+  - The deterministic break/fix is injected, diagnosed, and repaired.
+  - cleanup.json reports no active run-owned resources, with any retained item explicitly documented.
 cost:
   class: moderate
-  billableResources: &id001
+  billableResources:
   - resource group
   - virtual network
   - network security group
@@ -26,6 +41,10 @@ cost:
   - managed data disk
   notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator before
     execution and clean up immediately.
+  pricingLinks:
+  - title: Azure compute pricing
+    url: https://azure.microsoft.com/pricing/details/virtual-machines/
+  acknowledgementRequired: true
 permissions:
   azureRbacRoles:
   - Virtual Machine Contributor and Network Contributor on the lab resource group
@@ -38,41 +57,456 @@ prerequisites:
 - 'External gate review: None beyond the declared role and a disposable subscription.'
 - Azure CLI hosted in PowerShell 7.4 or later
 providers:
-  observed:
+  required:
   - Microsoft.Compute
   - Microsoft.Network
+  optional: []
   registeredByLab: []
-regions:
-  applicable: true
-  primary: supplied at execution time
-  secondary: null
+inputs:
+- id: run-id
+  parameter: RunId
+  description: Unique lowercase run ownership identifier
+  required: true
+  secret: false
+  source: parameter
+  safeExample: az104l11-01
+  gateBehavior: block
+  checkpointIds:
+  - LAB11-CP01
+  - LAB11-CP02
+  - LAB11-CP03
+  - LAB11-CP04
+  - LAB11-CP05
+- id: subscription-id
+  parameter: SubscriptionId
+  environmentVariable: AZ104_SUBSCRIPTION_ID
+  description: Expected disposable subscription ID
+  required: true
+  secret: false
+  source: parameter-or-environment
+  safeExample: 00000000-0000-0000-0000-000000000000
+  gateBehavior: block
+  checkpointIds:
+  - LAB11-CP01
+  - LAB11-CP02
+  - LAB11-CP03
+  - LAB11-CP04
+  - LAB11-CP05
+- id: location
+  parameter: Location
+  environmentVariable: AZ104_LOCATION
+  description: Approved primary Azure region
+  required: true
+  secret: false
+  source: parameter-or-environment
+  safeExample: westeurope
+  gateBehavior: block
+  checkpointIds:
+  - LAB11-CP01
+  - LAB11-CP02
+  - LAB11-CP03
+  - LAB11-CP04
+  - LAB11-CP05
+acknowledgements:
+  cost:
+    required: true
+    parameter: AcknowledgeCost
+    message: I reviewed current pricing, quota, and the same-session cleanup plan.
+  tenantChange:
+    required: false
+    parameter: AcknowledgeTenantChange
+    message: I am authorized to create or change the declared tenant-scoped objects and will restore recorded settings.
 creates:
-  azureResources: *id001
+  azureResources:
+  - resource group
+  - virtual network
+  - network security group
+  - network interface
+  - Linux virtual machine
+  - managed data disk
   entraObjects: []
   localArtifacts:
   - .state/<run-id>/run.json
   - .state/<run-id>/validation.json
+  - .state/<run-id>/cleanup.json
 tenantScopedChanges: []
 externalRequirements: []
+preflightChecks:
+- id: preflight.context
+  type: context
+  required: true
+  description: Confirm active cloud, tenant, and subscription without changing them.
+  command: az account show --output json
+  expected: Active context matches the supplied subscription and disposable environment.
+- id: preflight.tools
+  type: tool
+  required: true
+  description: Confirm PowerShell, Azure CLI, and az bicep are available.
+  command: az version; az bicep version
+  expected: All required tools meet the versions declared by this lab.
+- id: preflight.inputs
+  type: input
+  required: true
+  description: Check required parameters and environment gates without printing secrets.
+  command: $PSBoundParameters.Keys; Get-ChildItem Env:AZ104_* | Select-Object Name
+  expected: Every required input is present and optional gates are explicitly reported.
+- id: preflight.providers
+  type: provider
+  required: true
+  description: Read registration state for required resource providers.
+  command: az provider show --namespace <provider> --query registrationState --output tsv
+  expected: Every required provider is Registered; preflight performs no registration.
+- id: preflight.region
+  type: region
+  required: true
+  description: Confirm the requested region is available to the subscription.
+  command: az account list-locations --query "[?name=='<location>'].name" --output tsv
+  expected: The supplied region appears in the subscription location inventory.
+- id: preflight.quota
+  type: quota
+  required: true
+  description: Read regional compute usage before deployment.
+  command: az vm list-usage --location <location> --output table
+  expected: Required regional vCPU quota has safe headroom.
+- id: preflight.sku
+  type: sku
+  required: true
+  description: Read available VM or service SKUs in the selected region.
+  command: az vm list-skus --location <location> --all --output table
+  expected: The documented lab SKU has no blocking regional restriction.
+- id: preflight.authored.service
+  type: sku
+  required: true
+  description: Prove verify vm sku and encryption-at-host capability with LAB-11's authored read-only provider, feature, tool,
+    region, and SKU queries.
+  command: '$registration = az provider show --namespace Microsoft.Compute --query registrationState --output tsv
+
+    if ($registration -ne ''Registered'') { throw ''Microsoft.Compute is not registered.'' }
+
+    $restrictions = az vm list-skus --location $Location --size Standard_B2s --all --query "[?name==''Standard_B2s''].restrictions[]
+    | length(@)" --output tsv
+
+    if ($restrictions -and [int]$restrictions -gt 0) { throw ''Standard_B2s is restricted in this region.'' }
+
+    $sku = az vm list-skus --location $Location --size Standard_B1s --all --query "[?name==''Standard_B1s''] | [0]" --output
+    json | ConvertFrom-Json
+
+    $hostEncryption = @($sku.capabilities | Where-Object { $_.name -eq ''EncryptionAtHostSupported'' -and $_.value -eq ''True''
+    })
+
+    if ($hostEncryption.Count -ne 1) { throw ''Standard_B1s does not advertise encryption at host in this region.'' }'
+  expected: Standard_B1s is unrestricted in the selected region and its capability inventory explicitly supports EncryptionAtHost.
+checkpoints:
+- id: LAB11-CP01
+  title: Verify VM SKU and encryption-at-host capability
+  purpose: Read the provider, region, SKU, feature, quota, and companion-tool signals needed for verify vm sku and encryption-at-host
+    capability, without changing Azure state.
+  objectiveIds:
+  - CP-VM-01
+  required: true
+  expectedState: Standard_B1s is unrestricted in the selected region and its capability inventory explicitly supports EncryptionAtHost.
+  scriptMarkers:
+    setup: LAB11-CP01
+    validate: LAB11-CP01
+    cleanup: LAB11-CP01
+  validation:
+    positive:
+      id: cp01.positive
+      description: Read the service properties for verify VM SKU and encryption-at-host capability by using exact run-owned
+        identifiers.
+      command: '$validationId=''LAB11-CP01-positive''; $registration = az provider show --namespace Microsoft.Compute --query
+        registrationState --output tsv
+
+        if ($registration -ne ''Registered'') { throw ''Microsoft.Compute is not registered.'' }'
+      expected: Standard_B1s is unrestricted in the selected region and its capability inventory explicitly supports EncryptionAtHost.
+    negative:
+      id: cp01.negative
+      description: Search for conflicting, unowned, or excessive state after verify VM SKU and encryption-at-host capability.
+      command: '$validationId=''LAB11-CP01-negative''; $restrictions = az vm list-skus --location $Location --size Standard_B2s
+        --all --query "[?name==''Standard_B2s''].restrictions[] | length(@)" --output tsv
+
+        if ($restrictions -and [int]$restrictions -gt 0) { throw ''Standard_B2s is restricted in this region.'' }
+
+        $sku = az vm list-skus --location $Location --size Standard_B1s --all --query "[?name==''Standard_B1s''] | [0]" --output
+        json | ConvertFrom-Json
+
+        $hostEncryption = @($sku.capabilities | Where-Object { $_.name -eq ''EncryptionAtHostSupported'' -and $_.value -eq
+        ''True'' })
+
+        if ($hostEncryption.Count -ne 1) { throw ''Standard_B1s does not advertise encryption at host in this region.'' }'
+      expected: 'LAB11-CP01 negative boundary: The undesired state is absent; the negative assertion must not report: Standard_B1s
+        does not advertise encryption at host in this region.'
+  cleanup:
+    dependsOn:
+    - LAB11-CP02
+    - LAB11-CP03
+    - LAB11-CP04
+    - LAB11-CP05
+    action: Remove only manifest-recorded objects owned by LAB11-CP01, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp01.residual
+      description: Prove no active managed object remains for LAB11-CP01.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-1
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Create a Linux VM with Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/virtual-machines/linux/quick-create-cli
+- id: LAB11-CP02
+  title: Create the private-NIC VM with encryption at host
+  purpose: Provision and immediately inventory the exact run-owned resources needed to create the private-nic vm with encryption
+    at host, so partial completion remains recoverable.
+  objectiveIds:
+  - CP-VM-02
+  required: true
+  expectedState: The VM has no public IP, uses the selected SKU, and securityProfile.encryptionAtHost is true.
+  scriptMarkers:
+    setup: LAB11-CP02
+    validate: LAB11-CP02
+    cleanup: LAB11-CP02
+  validation:
+    positive:
+      id: cp02.positive
+      description: Read the service properties for create the private-NIC VM with encryption at host by using exact run-owned
+        identifiers.
+      command: '$validationId=''LAB11-CP02-positive''; $power = az vm show --resource-group $ResourceGroupName --name $vm
+        --show-details --query powerState --output tsv
+
+        if ($power -notmatch ''running'') { throw "VM power state is $power." }'
+      expected: The VM has no public IP, uses the selected SKU, and securityProfile.encryptionAtHost is true.
+    negative:
+      id: cp02.negative
+      description: Search for conflicting, unowned, or excessive state after create the private-NIC VM with encryption at
+        host.
+      command: '$validationId=''LAB11-CP02-negative''; $publicIp = az vm show --resource-group $ResourceGroupName --name $vm
+        --show-details --query publicIps --output tsv
+
+        if ($publicIp) { throw ''The VM unexpectedly has a public IP address.'' }'
+      expected: 'LAB11-CP02 negative boundary: The undesired state is absent; the negative assertion must not report: The
+        VM unexpectedly has a public IP address.'
+  cleanup:
+    dependsOn:
+    - LAB11-CP03
+    - LAB11-CP04
+    - LAB11-CP05
+    action: Remove only manifest-recorded objects owned by LAB11-CP02, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp02.residual
+      description: Prove no active managed object remains for LAB11-CP02.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-2
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Create a Linux VM with Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/virtual-machines/linux/quick-create-cli
+- id: LAB11-CP03
+  title: Attach and verify the managed data disk
+  purpose: Configure and independently inspect the control-plane and data-path properties needed to attach and verify the
+    managed data disk.
+  objectiveIds:
+  - CP-VM-04
+  required: true
+  expectedState: The managed disk is attached at the declared LUN and reports a Succeeded provisioning state.
+  scriptMarkers:
+    setup: LAB11-CP03
+    validate: LAB11-CP03
+    cleanup: LAB11-CP03
+  validation:
+    positive:
+      id: cp03.positive
+      description: Read the service properties for attach and verify the managed data disk by using exact run-owned identifiers.
+      command: '$validationId=''LAB11-CP03-positive''; $size = az vm show --resource-group $ResourceGroupName --name $vm --query
+        hardwareProfile.vmSize --output tsv
+
+        if ($size -ne ''Standard_B2s'') { throw "VM size is $size." }'
+      expected: The managed disk is attached at the declared LUN and reports a Succeeded provisioning state.
+    negative:
+      id: cp03.negative
+      description: Search for conflicting, unowned, or excessive state after attach and verify the managed data disk.
+      command: '$validationId=''LAB11-CP03-negative''; $missing = az vm disk list --resource-group $ResourceGroupName --vm-name
+        $vm --query "[?name==''$disk''] | length(@)" --output tsv
+
+        if ([int]$missing -ne 1) { throw ''The managed data disk is not attached exactly once.'' }'
+      expected: 'LAB11-CP03 negative boundary: The undesired state is absent; the negative assertion must not report: The
+        managed data disk is not attached exactly once.'
+  cleanup:
+    dependsOn:
+    - LAB11-CP04
+    - LAB11-CP05
+    action: Remove only manifest-recorded objects owned by LAB11-CP03, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp03.residual
+      description: Prove no active managed object remains for LAB11-CP03.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-3
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Create a Linux VM with Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/virtual-machines/linux/quick-create-cli
+- id: LAB11-CP04
+  title: Resize the VM through a deallocated transition
+  purpose: Exercise the deterministic operational or denied path needed to resize the vm through a deallocated transition,
+    then retain comparable before-and-after results.
+  objectiveIds:
+  - CP-VM-05
+  required: true
+  expectedState: The VM is restarted on the target size only after deallocation, and the instance view reports a running power
+    state.
+  scriptMarkers:
+    setup: LAB11-CP04
+    validate: LAB11-CP04
+    cleanup: LAB11-CP04
+  validation:
+    positive:
+      id: cp04.positive
+      description: Read the service properties for resize the VM through a deallocated transition by using exact run-owned
+        identifiers.
+      command: '$validationId=''LAB11-CP04-positive''; $encryptionAtHost = az vm show --resource-group $ResourceGroupName
+        --name $vm --query securityProfile.encryptionAtHost --output tsv
+
+        if ($encryptionAtHost -ne ''true'') { throw ''VM encryption at host is not enabled.'' }'
+      expected: The VM is restarted on the target size only after deallocation, and the instance view reports a running power
+        state.
+    negative:
+      id: cp04.negative
+      description: Search for conflicting, unowned, or excessive state after resize the VM through a deallocated transition.
+      command: '$validationId=''LAB11-CP04-negative''; $encryptionType = az disk show --resource-group $ResourceGroupName
+        --name $disk --query encryption.type --output tsv
+
+        if ($encryptionType -notin @(''EncryptionAtRestWithPlatformKey'',''EncryptionAtRestWithCustomerKey'')) { throw "Unexpected
+        disk encryption type: $encryptionType" }
+
+        $unattached = az disk list --resource-group $ResourceGroupName --query "[?name==''$disk'' && managedBy==null] | length(@)"
+        --output tsv
+
+        if ([int]$unattached -ne 0) { throw ''The data disk is detached.'' }'
+      expected: 'LAB11-CP04 negative boundary: The undesired state is absent; the negative assertion must not report: The
+        data disk is detached.'
+  cleanup:
+    dependsOn:
+    - LAB11-CP05
+    action: Remove only manifest-recorded objects owned by LAB11-CP04, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp04.residual
+      description: Prove no active managed object remains for LAB11-CP04.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-4
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Create a Linux VM with Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/virtual-machines/linux/quick-create-cli
+- id: LAB11-CP05
+  title: Reconcile VM size, disks, host encryption, and private exposure
+  purpose: Reconcile live service properties, returned IDs, and dependency-aware removal needed to reconcile vm size, disks,
+    host encryption, and private exposure before handoff.
+  objectiveIds:
+  - CP-VM-01
+  - CP-VM-02
+  - CP-VM-04
+  - CP-VM-05
+  required: true
+  expectedState: The VM model simultaneously proves the target hardware profile, attached disk, encryptionAtHost=true, and
+    no public-IP association.
+  scriptMarkers:
+    setup: LAB11-CP05
+    validate: LAB11-CP05
+    cleanup: LAB11-CP05
+  validation:
+    positive:
+      id: cp05.positive
+      description: Read the service properties for reconcile VM size, disks, host encryption, and private exposure by using
+        exact run-owned identifiers.
+      command: '$validationId=''LAB11-CP05-positive''; $diskCount = az vm show --resource-group $ResourceGroupName --name
+        $vm --query "storageProfile.dataDisks[?name==''$disk''] | length(@)" --output tsv
+
+        if ([int]$diskCount -ne 1) { throw "Expected one attached data disk; found $diskCount." }'
+      expected: The VM model simultaneously proves the target hardware profile, attached disk, encryptionAtHost=true, and
+        no public-IP association.
+    negative:
+      id: cp05.negative
+      description: Search for conflicting, unowned, or excessive state after reconcile VM size, disks, host encryption, and
+        private exposure.
+      command: '$validationId=''LAB11-CP05-negative''; $failed = az resource list --resource-group $ResourceGroupName --query
+        "[?properties.provisioningState==''Failed''] | length(@)" --output tsv
+
+        if ([int]$failed -ne 0) { throw ''A VM dependency is in Failed provisioning state.'' }'
+      expected: 'LAB11-CP05 negative boundary: The undesired state is absent; the negative assertion must not report: A VM
+        dependency is in Failed provisioning state.'
+  cleanup:
+    dependsOn: []
+    action: Remove only manifest-recorded objects owned by LAB11-CP05, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp05.residual
+      description: Prove no active managed object remains for LAB11-CP05.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-5
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Create a Linux VM with Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/virtual-machines/linux/quick-create-cli
 validation:
-  commandLanes:
-  - scripts/cli/Validate.ps1
-  output: .state/<run-id>/validation.json
-  statuses:
-  - pass
-  - fail
-  - warning
-  - skipped
-  liveExecutionRequiredForLiveVerified: true
+  script: scripts/cli/Validate.ps1
+  artifact: .state/<run-id>/validation.json
+  modes:
+  - Deployment
+  - PostCleanup
+  resultPolicy:
+    requiredFailureResult: fail
+    optionalSkipResult: partial
+    allRequiredPassResult: pass
 cleanup:
-  azureDeletion: exact recorded resource-group ID after tag verification
-  entraDeletion: none
-  reportOnlyByDefault: true
+  script: scripts/cli/Cleanup.ps1
+  artifact: .state/<run-id>/cleanup.json
+  previewByDefault: true
   requiresExecuteFlag: true
-  residualAuditRequired: true
+  ownershipVerification:
+    manifestIdMatch: true
+    requiredTags:
+    - purpose
+    - labId
+    - runId
+  residualChecks:
+  - id: cp01.residual
+    description: Prove no active managed object remains for LAB11-CP01.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp02.residual
+    description: Prove no active managed object remains for LAB11-CP02.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp03.residual
+    description: Prove no active managed object remains for LAB11-CP03.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp04.residual
+    description: Prove no active managed object remains for LAB11-CP04.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp05.residual
+    description: Prove no active managed object remains for LAB11-CP05.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  retainedItemsAllowed: true
+  irreversiblePurge: never
 assessment:
   enabled: true
   questionCount: 50
   primaryDomain: compute
-lastOfflineValidated: '2026-08-30'
+lastOfflineValidated: '2026-08-31'
 lastLiveVerified: null
+# END GENERATED AZ104 V2

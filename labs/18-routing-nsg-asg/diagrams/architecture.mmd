@@ -1,15 +1,16 @@
 flowchart LR
-    A["Operator<br/>Azure CLI"] --> P["Preview and preflight"]
-    P --> S["Recorded Lab 18 boundary"]
-    S --> R1["resource group"]
-    S --> R2["virtual network"]
-    S --> R3["network security group"]
-    S --> R4["two application security groups"]
-    S --> R5["route table"]
-    S --> V["Independent validation"]
-    V --> E["Redacted command evidence"]
-    V --> C["Previewed cleanup"]
+    F["Frontend VM and NIC"] --> FA["Frontend ASG"]
+    B["Backend VM and NIC"] --> BA["Backend ASG"]
+    FA --> N["ASG-aware NSG rule"]
+    N --> BA
+    RT["Route table"] --> S["Application subnet"]
+    N --> S
+    S --> F
+    S --> B
+    F --> E["Effective NSG and route queries"]
+    B --> E
+    E --> C["NIC and policy cleanup"]
     classDef control fill:#e8f1ff,stroke:#2563eb,color:#102a43;
     classDef resource fill:#e9f8ef,stroke:#16803a,color:#102a43;
-    class A,P,S,V,E,C control;
-    class R1,R2,R3,R4,R5 resource;
+    class E,C control;
+    class F,FA,B,BA,N,RT,S resource;

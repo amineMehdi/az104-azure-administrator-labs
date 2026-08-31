@@ -1,18 +1,62 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="460" viewBox="0 0 1040 460" role="img" aria-labelledby="title desc">
-<title id="title">Lab 07 architecture</title>
-<desc id="desc">Preview-first operator workflow, a recorded lab boundary, intended resources, independent validation, redacted command evidence, and scoped cleanup.</desc>
-<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#46647f"/></marker></defs>
-<style>text{font-family:Segoe UI,Arial,sans-serif;font-size:14px;fill:#102a43} .control{fill:#e8f1ff;stroke:#2563eb;stroke-width:2} .resource{fill:#e9f8ef;stroke:#16803a;stroke-width:2} .arrow{fill:none;stroke:#46647f;stroke-width:2;marker-end:url(#arrow)}</style>
-<rect width="100%" height="100%" fill="#ffffff"/>
-<rect x="40" y="55" width="180" height="55" rx="8" class="control"/><text x="130" y="79" text-anchor="middle">Operator</text><text x="130" y="98" text-anchor="middle">Azure CLI</text>
-<rect x="275" y="55" width="180" height="55" rx="8" class="control"/><text x="365" y="79" text-anchor="middle">Preview and preflight</text><text x="365" y="98" text-anchor="middle">read-only context check</text>
-<path d="M220 82 L275 82" class="arrow"/>
-<rect x="275" y="130" width="180" height="50" rx="8" class="control"/><text x="365" y="151" text-anchor="middle">Recorded Lab 07</text><text x="365" y="170" text-anchor="middle">exact cleanup boundary</text>
-<path d="M365 110 L365 130" class="arrow"/>
-<rect x="500" y="110" width="470" height="40" rx="8" class="resource"/><text x="735" y="135" text-anchor="middle">resource group</text><rect x="500" y="168" width="470" height="40" rx="8" class="resource"/><text x="735" y="193" text-anchor="middle">virtual network and subnet</text><rect x="500" y="226" width="470" height="40" rx="8" class="resource"/><text x="735" y="251" text-anchor="middle">storage account</text><rect x="500" y="284" width="470" height="40" rx="8" class="resource"/><text x="735" y="309" text-anchor="middle">blob container</text><rect x="500" y="342" width="470" height="40" rx="8" class="resource"/><text x="735" y="367" text-anchor="middle">stored access policy</text>
-<path d="M 455 155 L 500 130" class="arrow"/><path d="M 455 155 L 500 188" class="arrow"/><path d="M 455 155 L 500 246" class="arrow"/><path d="M 455 155 L 500 304" class="arrow"/><path d="M 455 155 L 500 362" class="arrow"/>
-<rect x="40" y="215" width="180" height="50" rx="8" class="control"/><text x="130" y="237" text-anchor="middle">Independent validation</text><text x="130" y="256" text-anchor="middle">positive + negative</text>
-<path d="M275 165 L220 230" class="arrow"/>
-<rect x="40" y="290" width="180" height="50" rx="8" class="control"/><text x="130" y="312" text-anchor="middle">Evidence + cleanup</text><text x="130" y="331" text-anchor="middle">redacted and scoped</text>
-<path d="M130 265 L130 290" class="arrow"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1148" height="696" viewBox="0 0 1148 696" role="img" aria-labelledby="lab07-title lab07-desc">
+  <title id="lab07-title">LAB-07 architecture: Restrict storage networking and issue scoped SAS access</title>
+  <desc id="lab07-desc">Left-to-right service topology with 9 components and 8 directed relationships. Components: Authorized workload subnet, Storage firewall default deny, Public storage endpoint, Private blob container, Stored access policy revocation point, Short-lived service SAS, Unapproved learner workstation, Denied data request, Break and restore subnet rule. Relationships: Authorized workload subnet to Storage firewall default deny (Microsoft.Storage
+service endpoint); Public storage endpoint to Storage firewall default deny; Storage firewall default deny to Private blob container (allowed subnet only); Stored access policy revocation point to Short-lived service SAS; Short-lived service SAS to Private blob container (authorization proof); Unapproved learner workstation to Storage firewall default deny (SAS request); Storage firewall default deny to Denied data request (network denial); Break and restore subnet rule to Storage firewall default deny.</desc>
+  <metadata id="lab07-metadata">{&quot;renderer&quot;:&quot;az104-mermaid-flowchart-svg/1.0.0&quot;,&quot;source&quot;:&quot;architecture.mmd&quot;,&quot;sourceSha256&quot;:&quot;e6058b1608bd09f59fd4a9578d382ce1046db2c740d6179dcc679757c9e188bd&quot;}</metadata>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M 0 0 L 10 4 L 0 8 z" fill="#57606a"/>
+    </marker>
+    <style>
+      .edge { fill: none; stroke: #57606a; stroke-width: 2; marker-end: url(#arrow); }
+      .edge-label-bg { fill: #ffffff; opacity: .94; }
+      .edge-label { fill: #57606a; font: 13px 'Segoe UI', Arial, sans-serif; text-anchor: middle; dominant-baseline: central; }
+      .node-label { font: 600 15px 'Segoe UI', Arial, sans-serif; text-anchor: middle; dominant-baseline: central; }
+    </style>
+  </defs>
+  <rect width="100%" height="100%" fill="#ffffff"/>
+  <g aria-hidden="true">
+    <path class="edge" d="M 324 114 C 384 114, 384 297, 444 297"/>
+    <path class="edge" d="M 324 216 C 384 216, 384 297, 444 297"/>
+    <path class="edge" d="M 704 297 C 764 297, 764 297, 824 297"/>
+    <path class="edge" d="M 324 328 C 384 328, 384 409, 444 409"/>
+    <path class="edge" d="M 704 409 C 764 409, 764 297, 824 297"/>
+    <path class="edge" d="M 324 450 C 384 450, 384 297, 444 297"/>
+    <path class="edge" d="M 704 297 C 764 297, 764 399, 824 399"/>
+    <path class="edge" d="M 324 572 C 384 572, 384 297, 444 297"/>
+    <rect class="edge-label-bg" x="258" y="194.5" width="252" height="22" rx="4"/>
+    <text class="edge-label" x="384" y="205.5">Microsoft.Storage
+service endpoint</text>
+    <rect class="edge-label-bg" x="690.5" y="286" width="147" height="22" rx="4"/>
+    <text class="edge-label" x="764" y="297">allowed subnet only</text>
+    <rect class="edge-label-bg" x="690.5" y="342" width="147" height="22" rx="4"/>
+    <text class="edge-label" x="764" y="353">authorization proof</text>
+    <rect class="edge-label-bg" x="338.5" y="362.5" width="91" height="22" rx="4"/>
+    <text class="edge-label" x="384" y="373.5">SAS request</text>
+    <rect class="edge-label-bg" x="708" y="337" width="112" height="22" rx="4"/>
+    <text class="edge-label" x="764" y="348">network denial</text>
+    <rect x="64" y="80" width="260" height="68" rx="10" fill="#e9f8ef" stroke="#16803a"/>
+    <text x="194" y="114" class="node-label" fill="#102a43">Authorized workload subnet</text>
+    <rect x="444" y="253" width="260" height="88" rx="10" fill="#e9f8ef" stroke="#16803a"/>
+    <text x="574" y="287" class="node-label" fill="#102a43">Storage firewall</text>
+    <text x="574" y="307" class="node-label" fill="#102a43">default deny</text>
+    <rect x="64" y="182" width="260" height="68" rx="10" fill="#e9f8ef" stroke="#16803a"/>
+    <text x="194" y="216" class="node-label" fill="#102a43">Public storage endpoint</text>
+    <rect x="824" y="263" width="260" height="68" rx="10" fill="#e9f8ef" stroke="#16803a"/>
+    <text x="954" y="297" class="node-label" fill="#102a43">Private blob container</text>
+    <rect x="64" y="284" width="260" height="88" rx="10" fill="#e8f1ff" stroke="#2563eb"/>
+    <text x="194" y="318" class="node-label" fill="#102a43">Stored access policy</text>
+    <text x="194" y="338" class="node-label" fill="#102a43">revocation point</text>
+    <rect x="444" y="375" width="260" height="68" rx="10" fill="#e8f1ff" stroke="#2563eb"/>
+    <text x="574" y="409" class="node-label" fill="#102a43">Short-lived service SAS</text>
+    <rect x="64" y="406" width="260" height="88" rx="10" fill="#e8f1ff" stroke="#2563eb"/>
+    <text x="194" y="440" class="node-label" fill="#102a43">Unapproved learner</text>
+    <text x="194" y="460" class="node-label" fill="#102a43">workstation</text>
+    <rect x="824" y="365" width="260" height="68" rx="10" fill="#e8f1ff" stroke="#2563eb"/>
+    <text x="954" y="399" class="node-label" fill="#102a43">Denied data request</text>
+    <rect x="64" y="528" width="260" height="88" rx="10" fill="#e8f1ff" stroke="#2563eb"/>
+    <text x="194" y="562" class="node-label" fill="#102a43">Break and restore</text>
+    <text x="194" y="582" class="node-label" fill="#102a43">subnet rule</text>
+  </g>
 </svg>

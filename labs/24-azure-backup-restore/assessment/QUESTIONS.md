@@ -1,453 +1,459 @@
 # Lab 24 knowledge check
 
-Choose the single best answer for each question. Record your choices before opening `ANSWERS.md`.
+[Return to the guided lab](../README.md)
+
+Complete all 50 questions before opening the answer key. Allow about 50–60 minutes and choose the single best answer.
+
+Use the result as a learning signal: 85–100% indicates mastery, 70–84% calls for targeted review, and below 70% means repeat the mapped lab tasks before retrying.
 
 ## LAB24-Q01 — Foundational
 
-Which principle is most important when working on 'Create a Recovery Services vault' in Lab 24?
+A restore rehearsal incident review of the test-VM protection and restore drill depends on the ability to store supported Azure VM protection metadata in the correct vault type. Which platform description is reliable?
 
-- A. Vault type must match the workload, protection creates retained recovery points, and vault deletion requires ordered removal of protected items, soft-delete state, and dependencies.
-- B. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- C. A recognizable resource name removes the need for validation and scoped cleanup.
-- D. The shortest command is always correct even when it changes a broader scope.
+- A. A Backup vault is the newer management entity used by Azure Data Protection for supported datasource types.
+- B. An on-demand backup creates a recovery point outside the normal schedule and can use an allowed retention date.
+- C. A Recovery Services vault stores management data and recovery points for supported workloads such as Azure VM backup and Site Recovery.
+- D. Azure VM restore can create a new VM, restore disks, or replace disks depending on workload and recovery requirements.
 
 ## LAB24-Q02 — Foundational
 
-Which lab action directly supports the objective 'Create an Azure Backup vault'?
+A recovery administrator protecting and restoring a test VM is updating the restore rehearsal runbook. The requirement is to use the vault type designed for newer data-source protection workloads. Which statement describes Azure behavior correctly?
 
-- A. Search the whole tenant for a similar display name and modify the first match.
-- B. Create a bounded-retention VM backup policy and enable protection for the test VM.
-- C. Mark the objective complete after reading documentation without checking any state.
-- D. Change the active tenant without displaying or confirming the resulting context.
+- A. A backup policy defines when recovery points are created and how long daily, weekly, monthly, or yearly points are retained.
+- B. A restore operation must select a successful recovery point compatible with the desired restore type.
+- C. Backup soft delete retains deleted backup data for a recovery period and may require explicit handling before vault deletion.
+- D. A Backup vault is the newer management entity used by Azure Data Protection for supported datasource types.
 
 ## LAB24-Q03 — Foundational
 
-Which authorization approach is appropriate before practicing 'Create and configure a backup policy'?
+A restore rehearsal peer review asks how the test-VM protection and restore drill should handle this outcome: define how often recovery points are created and how long they remain. Which explanation is accurate?
 
-- A. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
-- B. Skip role checks when the run ID contains the lab number.
-- C. Confirm the active context and use only the declared role boundary: Backup Contributor and Virtual Machine Contributor on the lab resource group
-- D. Use a production subscription because its resources already exist.
+- A. A backup policy defines when recovery points are created and how long daily, weekly, monthly, or yearly points are retained.
+- B. A backup policy has no effect on a workload until a backup instance or protected item associates that policy with the datasource.
+- C. Azure VM file recovery mounts or exposes a recovery point so selected files can be copied without restoring the entire VM.
+- D. Backup Center, jobs, built-in alerts, Azure Monitor, and reports expose protection health and operational failures.
 
 ## LAB24-Q04 — Foundational
 
-Which resource or object belongs inside the recorded boundary for 'Perform backup and restore operations by using Azure Backup'?
+For the test-VM protection and restore drill, the restore rehearsal plan must associate the intended protection schedule with the test workload. Which statement about restore rehearsal belongs in the test-VM protection and restore drill record?
 
-- A. Use whichever similarly named object appears first in a broad search.
-- B. Use an unrelated shared resource without recording its immutable ID.
-- C. Use a production object when the sandbox prerequisite is unavailable.
-- D. Use the exact recorded identity and scope for backup policy.
+- A. An on-demand backup creates a recovery point outside the normal schedule and can use an allowed retention date.
+- B. A backup policy has no effect on a workload until a backup instance or protected item associates that policy with the datasource.
+- C. Azure VM restore can create a new VM, restore disks, or replace disks depending on workload and recovery requirements.
+- D. A Recovery Services vault stores management data and recovery points for supported workloads such as Azure VM backup and Site Recovery.
 
 ## LAB24-Q05 — Foundational
 
-During a design vocabulary review, the team evaluates this situation: Which principle is most important when working on 'Create a Recovery Services vault' in Lab 24?
+The restore rehearsal review compares four claims for the test-VM protection and restore drill requirement to create an extra recovery point before a risky maintenance window. Which claim is technically sound?
 
-- A. Vault type must match the workload, protection creates retained recovery points, and vault deletion requires ordered removal of protected items, soft-delete state, and dependencies.
-- B. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- C. A recognizable resource name removes the need for validation and scoped cleanup.
-- D. The shortest command is always correct even when it changes a broader scope.
+- A. A restore operation must select a successful recovery point compatible with the desired restore type.
+- B. Backup soft delete retains deleted backup data for a recovery period and may require explicit handling before vault deletion.
+- C. A Backup vault is the newer management entity used by Azure Data Protection for supported datasource types.
+- D. An on-demand backup creates a recovery point outside the normal schedule and can use an allowed retention date.
 
 ## LAB24-Q06 — Foundational
 
-In a command-planning session, an administrator asks this question: Which lab action directly supports the objective 'Create an Azure Backup vault'?
+The restore rehearsal architecture note requires the test-VM protection and restore drill environment to select a recovery point that meets the required recovery time. Which statement defines the relevant restore rehearsal boundary?
 
-- A. Search the whole tenant for a similar display name and modify the first match.
-- B. Create a bounded-retention VM backup policy and enable protection for the test VM.
-- C. Mark the objective complete after reading documentation without checking any state.
-- D. Change the active tenant without displaying or confirming the resulting context.
+- A. Azure VM file recovery mounts or exposes a recovery point so selected files can be copied without restoring the entire VM.
+- B. Backup Center, jobs, built-in alerts, Azure Monitor, and reports expose protection health and operational failures.
+- C. A restore operation must select a successful recovery point compatible with the desired restore type.
+- D. A backup policy defines when recovery points are created and how long daily, weekly, monthly, or yearly points are retained.
 
 ## LAB24-Q07 — Foundational
 
-While preparing the lab, a learner verifies this platform rule: Which authorization approach is appropriate before practicing 'Create and configure a backup policy'?
+A new restore rehearsal operator must explain why the test-VM protection and restore drill can recover selected files without replacing the complete virtual machine. Which explanation is accurate?
 
-- A. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
-- B. Skip role checks when the run ID contains the lab number.
-- C. Confirm the active context and use only the declared role boundary: Backup Contributor and Virtual Machine Contributor on the lab resource group
-- D. Use a production subscription because its resources already exist.
+- A. Azure VM file recovery mounts or exposes a recovery point so selected files can be copied without restoring the entire VM.
+- B. Azure VM restore can create a new VM, restore disks, or replace disks depending on workload and recovery requirements.
+- C. A Recovery Services vault stores management data and recovery points for supported workloads such as Azure VM backup and Site Recovery.
+- D. A backup policy has no effect on a workload until a backup instance or protected item associates that policy with the datasource.
 
 ## LAB24-Q08 — Foundational
 
-During peer review, the team must identify the accurate response to this scenario: Which resource or object belongs inside the recorded boundary for 'Perform backup and restore operations by using Azure Backup'?
+The test-VM protection and restore drill acceptance criteria require operators to choose between creating a restored machine and restoring disks for controlled assembly. Which service fact supports that requirement?
 
-- A. Use whichever similarly named object appears first in a broad search.
-- B. Use an unrelated shared resource without recording its immutable ID.
-- C. Use a production object when the sandbox prerequisite is unavailable.
-- D. Use the exact recorded identity and scope for backup policy.
+- A. Backup soft delete retains deleted backup data for a recovery period and may require explicit handling before vault deletion.
+- B. A Backup vault is the newer management entity used by Azure Data Protection for supported datasource types.
+- C. Azure VM restore can create a new VM, restore disks, or replace disks depending on workload and recovery requirements.
+- D. An on-demand backup creates a recovery point outside the normal schedule and can use an allowed retention date.
 
 ## LAB24-Q09 — Foundational
 
-In an operations briefing, a new team member receives this question: Which principle is most important when working on 'Create a Recovery Services vault' in Lab 24?
+A restore rehearsal reviewer challenges whether the test-VM protection and restore drill can hold erased recovery data temporarily so accidental removal can be reversed. Which response resolves the concern?
 
-- A. Vault type must match the workload, protection creates retained recovery points, and vault deletion requires ordered removal of protected items, soft-delete state, and dependencies.
-- B. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- C. A recognizable resource name removes the need for validation and scoped cleanup.
-- D. The shortest command is always correct even when it changes a broader scope.
+- A. Backup Center, jobs, built-in alerts, Azure Monitor, and reports expose protection health and operational failures.
+- B. A backup policy defines when recovery points are created and how long daily, weekly, monthly, or yearly points are retained.
+- C. Backup soft delete retains deleted backup data for a recovery period and may require explicit handling before vault deletion.
+- D. A restore operation must select a successful recovery point compatible with the desired restore type.
 
 ## LAB24-Q10 — Foundational
 
-While building a support checklist, an engineer reviews this requirement: Which lab action directly supports the objective 'Create an Azure Backup vault'?
+The test-VM protection and restore drill handoff omits the restore rehearsal rule needed to detect failed protection jobs and route them to operators. Which statement should the team add?
 
-- A. Search the whole tenant for a similar display name and modify the first match.
-- B. Create a bounded-retention VM backup policy and enable protection for the test VM.
-- C. Mark the objective complete after reading documentation without checking any state.
-- D. Change the active tenant without displaying or confirming the resulting context.
+- A. A Recovery Services vault stores management data and recovery points for supported workloads such as Azure VM backup and Site Recovery.
+- B. Backup Center, jobs, built-in alerts, Azure Monitor, and reports expose protection health and operational failures.
+- C. A backup policy has no effect on a workload until a backup instance or protected item associates that policy with the datasource.
+- D. Azure VM file recovery mounts or exposes a recovery point so selected files can be copied without restoring the entire VM.
 
 ## LAB24-Q11 — Foundational
 
-During a readiness check, the administrator considers this behavior: Which authorization approach is appropriate before practicing 'Create and configure a backup policy'?
+The test-VM protection and restore drill plan must store supported Azure VM protection metadata in the correct vault type while limiting the mutation scope to restore rehearsal. Which action is appropriate?
 
-- A. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
-- B. Skip role checks when the run ID contains the lab number.
-- C. Confirm the active context and use only the declared role boundary: Backup Contributor and Virtual Machine Contributor on the lab resource group
-- D. Use a production subscription because its resources already exist.
+- A. Create the vault in the approved region and resource group before protecting the VM.
+- B. Configure frequency, time zone, and retention ranges from the recovery objectives.
+- C. List recovery points and choose one captured before the simulated data loss.
+- D. Keep soft delete enabled and document retained items rather than attempting irreversible purge in routine cleanup.
 
 ## LAB24-Q12 — Foundational
 
-In a service overview, the team discusses this scenario: Which resource or object belongs inside the recorded boundary for 'Perform backup and restore operations by using Azure Backup'?
+A restore rehearsal ticket in the test-VM protection and restore drill says to use the vault type designed for newer data-source protection workloads. Which restore rehearsal action completes the test-VM protection and restore drill request with minimal change?
 
-- A. Use whichever similarly named object appears first in a broad search.
-- B. Use an unrelated shared resource without recording its immutable ID.
-- C. Use a production object when the sandbox prerequisite is unavailable.
-- D. Use the exact recorded identity and scope for backup policy.
+- A. Enable protection for the exact datasource using the approved policy ID.
+- B. Use file recovery when only a small set of guest files must be recovered.
+- C. Enable the required monitoring path and route actionable backup failures to an approved receiver.
+- D. Choose a Backup vault only for a workload supported by its data-protection model.
 
 ## LAB24-Q13 — Foundational
 
-While reviewing official guidance, a learner must resolve this question: Which principle is most important when working on 'Create a Recovery Services vault' in Lab 24?
+The approach for the test-VM protection and restore drill is approved, but the restore rehearsal environment still cannot define how often recovery points are created and how long they remain. Which implementation step closes the gap?
 
-- A. Vault type must match the workload, protection creates retained recovery points, and vault deletion requires ordered removal of protected items, soft-delete state, and dependencies.
-- B. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- C. A recognizable resource name removes the need for validation and scoped cleanup.
-- D. The shortest command is always correct even when it changes a broader scope.
+- A. Configure frequency, time zone, and retention ranges from the recovery objectives.
+- B. Trigger an on-demand backup before the destructive test and persist its job ID.
+- C. Choose restore disks for controlled validation before deciding whether to replace production resources.
+- D. Create the vault in the approved region and resource group before protecting the VM.
 
 ## LAB24-Q14 — Foundational
 
-During a configuration walkthrough, the instructor asks about this situation: Which lab action directly supports the objective 'Create an Azure Backup vault'?
+The recovery administrator protecting and restoring a test VM may change the test-VM protection and restore drill only to associate the intended protection schedule with the test workload. Which restore rehearsal action stays within that assignment?
 
-- A. Search the whole tenant for a similar display name and modify the first match.
-- B. Create a bounded-retention VM backup policy and enable protection for the test VM.
-- C. Mark the objective complete after reading documentation without checking any state.
-- D. Change the active tenant without displaying or confirming the resulting context.
+- A. Enable protection for the exact datasource using the approved policy ID.
+- B. List recovery points and choose one captured before the simulated data loss.
+- C. Keep soft delete enabled and document retained items rather than attempting irreversible purge in routine cleanup.
+- D. Choose a Backup vault only for a workload supported by its data-protection model.
 
 ## LAB24-Q15 — Foundational
 
-In a preflight knowledge check, the operator evaluates this requirement: Which authorization approach is appropriate before practicing 'Create and configure a backup policy'?
+A restore rehearsal dry run shows no test-VM protection and restore drill command will create an extra recovery point before a risky maintenance window. Which action belongs before execution?
 
-- A. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
-- B. Skip role checks when the run ID contains the lab number.
-- C. Confirm the active context and use only the declared role boundary: Backup Contributor and Virtual Machine Contributor on the lab resource group
-- D. Use a production subscription because its resources already exist.
+- A. Use file recovery when only a small set of guest files must be recovered.
+- B. Enable the required monitoring path and route actionable backup failures to an approved receiver.
+- C. Configure frequency, time zone, and retention ranges from the recovery objectives.
+- D. Trigger an on-demand backup before the destructive test and persist its job ID.
 
 ## LAB24-Q16 — Applied
 
-A learner previews the implementation for 'Configure and interpret reports and alerts for backups'. What behavior is required?
+For the test-VM protection and restore drill, operators need to select a recovery point that meets the required recovery time. Which change realizes that requirement?
 
-- A. Select the first accessible subscription and hide the resulting context.
-- B. Delete any older resource whose name resembles the new run ID.
-- C. Create the baseline immediately and request approval only before cleanup.
-- D. Display the context, intended changes, cost and gated branches without mutating Azure.
+- A. List recovery points and choose one captured before the simulated data loss.
+- B. Choose restore disks for controlled validation before deciding whether to replace production resources.
+- C. Create the vault in the approved region and resource group before protecting the VM.
+- D. Enable protection for the exact datasource using the approved policy ID.
 
 ## LAB24-Q17 — Applied
 
-Which implementation step should the learner perform for 'Create a Recovery Services vault'?
+Operators must automate the test-VM protection and restore drill change needed to recover selected files without replacing the complete virtual machine. Which restore rehearsal operation belongs in the runbook?
 
-- A. Create a bounded-retention VM backup policy and enable protection for the test VM.
-- B. Skip the operation and edit validation.json to show a passing result.
-- C. Replace the lab action with a tenant-wide change that is easier to discover.
-- D. Copy resource identifiers from another run instead of recording returned IDs.
+- A. Keep soft delete enabled and document retained items rather than attempting irreversible purge in routine cleanup.
+- B. Choose a Backup vault only for a workload supported by its data-protection model.
+- C. Trigger an on-demand backup before the destructive test and persist its job ID.
+- D. Use file recovery when only a small set of guest files must be recovered.
 
 ## LAB24-Q18 — Applied
 
-Which evidence most directly validates 'Create an Azure Backup vault' for resource group?
+A test-VM protection and restore drill review finds restore rehearsal drift from the need to choose between creating a restored machine and restoring disks for controlled assembly. Which correction addresses that drift?
 
-- A. Record a credential so another learner can replay the authenticated session.
-- B. Query the exact recorded scope and independently verify Microsoft.RecoveryServices/vaults.
-- C. Treat the setup exit code as proof of every configuration and relationship.
-- D. List the entire subscription and assume similarly named resources belong to this run.
+- A. Enable the required monitoring path and route actionable backup failures to an approved receiver.
+- B. Configure frequency, time zone, and retention ranges from the recovery objectives.
+- C. List recovery points and choose one captured before the simulated data loss.
+- D. Choose restore disks for controlled validation before deciding whether to replace production resources.
 
 ## LAB24-Q19 — Applied
 
-The 'Create and configure a backup policy' checkpoint reaches an external prerequisite. What should happen?
+The test-VM protection and restore drill window permits only the restore rehearsal change needed to hold erased recovery data temporarily so accidental removal can be reversed. Which option respects the boundary?
 
-- A. Broaden permissions until the prerequisite can no longer block the operation.
-- B. Mark the branch passed because its command syntax was checked offline.
-- C. Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.
-- D. Invent a domain, notification target, license, quota, or tenant value and continue.
+- A. Create the vault in the approved region and resource group before protecting the VM.
+- B. Keep soft delete enabled and document retained items rather than attempting irreversible purge in routine cleanup.
+- C. Enable protection for the exact datasource using the approved policy ID.
+- D. Use file recovery when only a small set of guest files must be recovered.
 
 ## LAB24-Q20 — Applied
 
-What is the safest command-evidence practice after completing 'Perform backup and restore operations by using Azure Backup'?
+The restore rehearsal preflight has passed; the test-VM protection and restore drill must now detect failed protection jobs and route them to operators. Which operation should run?
 
-- A. Save tokens, keys, passwords, or SAS values beside the validation result.
-- B. Reuse successful output from an earlier run with a similar resource name.
-- C. Commit the complete account object so reviewers can identify the tenant.
-- D. Retain only redacted structured output from an independent query of the recorded run.
+- A. Enable the required monitoring path and route actionable backup failures to an approved receiver.
+- B. Choose a Backup vault only for a workload supported by its data-protection model.
+- C. Trigger an on-demand backup before the destructive test and persist its job ID.
+- D. Choose restore disks for controlled validation before deciding whether to replace production resources.
 
 ## LAB24-Q21 — Applied
 
-Which negative check strengthens validation of 'Configure and interpret reports and alerts for backups'?
+Before test-VM protection and restore drill cleanup, the restore rehearsal team must reconfirm it can store supported Azure VM protection metadata in the correct vault type. Which read-only inspection should run?
 
-- A. Confirm the intended state and also prove that broader, anonymous, or unintended access was not introduced.
-- B. Ignore denied queries and record them as passing checks.
-- C. Check only that at least one resource exists in the subscription.
-- D. Repair every warning automatically before recording what caused it.
+- A. Query the protected item and match policy ID, protection state, health, and datasource ID.
+- B. Verify the selected recovery point is mounted, copy the target file, and unmount the recovery session.
+- C. Query failed jobs, protection health, alert state, and diagnostic or reporting configuration.
+- D. Query vault type, location, provisioningState, storage model, and protected-item count.
 
 ## LAB24-Q22 — Applied
 
-Why should the run manifest record the exact ID of protected test VM?
+The test-VM protection and restore drill setup reports success after the restore rehearsal attempt to use the vault type designed for newer data-source protection workloads. Which restore rehearsal read-only observation proves the test-VM protection and restore drill outcome?
 
-- A. It removes the need to confirm the tenant or subscription context.
-- B. It lets validation and cleanup target the immutable object created by this run rather than a name match.
-- C. It lets setup store access tokens and passwords for later reuse.
-- D. It allows cleanup to delete every object with the same prefix.
+- A. Track the backup job to completion and list the resulting recovery point timestamp.
+- B. Query the restore job output and resolve every created disk, template, or VM resource ID.
+- C. Query vault type, location, provisioningState, storage model, and protected-item count.
+- D. Query the vault's storage settings, identity, provisioning state, and backup instances.
 
 ## LAB24-Q23 — Applied
 
-Several similarly named resources exist when cleaning up 'Create an Azure Backup vault'. What is correct?
+The restore rehearsal log says the test-VM protection and restore drill can now define how often recovery points are created and how long they remain. Which restore rehearsal state should the test-VM protection and restore drill acceptance test retain?
 
-- A. Delete the active subscription to guarantee that no lab state remains.
-- B. Choose targets only by creation time and remove the oldest objects.
-- C. Verify the recorded IDs and ownership tags, preview the targets, and delete only this run's boundary.
-- D. Delete all resources containing az104 in their names.
+- A. Compare recovery-point time, type, consistency, and expiry with the incident timeline.
+- B. Query soft-delete state and list soft-deleted backup items in the cleanup report.
+- C. Read the policy schedule and retention rules and calculate the oldest expected recovery point.
+- D. Query the vault's storage settings, identity, provisioning state, and backup instances.
 
 ## LAB24-Q24 — Applied
 
-A deployment pipeline reaches this decision point: A learner previews the implementation for 'Configure and interpret reports and alerts for backups'. What behavior is required?
+The test-VM protection and restore drill rejects restore rehearsal exit status as proof it can associate the intended protection schedule with the test workload. Which test-VM protection and restore drill result is valid evidence?
 
-- A. Select the first accessible subscription and hide the resulting context.
-- B. Delete any older resource whose name resembles the new run ID.
-- C. Create the baseline immediately and request approval only before cleanup.
-- D. Display the context, intended changes, cost and gated branches without mutating Azure.
+- A. Verify the selected recovery point is mounted, copy the target file, and unmount the recovery session.
+- B. Query failed jobs, protection health, alert state, and diagnostic or reporting configuration.
+- C. Query the protected item and match policy ID, protection state, health, and datasource ID.
+- D. Read the policy schedule and retention rules and calculate the oldest expected recovery point.
 
 ## LAB24-Q25 — Applied
 
-While applying least-privilege controls, the administrator reviews this scenario: Which implementation step should the learner perform for 'Create a Recovery Services vault'?
+The restore rehearsal validator needs one test-VM protection and restore drill query after the change to create an extra recovery point before a risky maintenance window. Which restore rehearsal property should the test-VM protection and restore drill validator inspect?
 
-- A. Create a bounded-retention VM backup policy and enable protection for the test VM.
-- B. Skip the operation and edit validation.json to show a passing result.
-- C. Replace the lab action with a tenant-wide change that is easier to discover.
-- D. Copy resource identifiers from another run instead of recording returned IDs.
+- A. Query the restore job output and resolve every created disk, template, or VM resource ID.
+- B. Track the backup job to completion and list the resulting recovery point timestamp.
+- C. Query vault type, location, provisioningState, storage model, and protected-item count.
+- D. Query the protected item and match policy ID, protection state, health, and datasource ID.
 
 ## LAB24-Q26 — Applied
 
-A repeatable Azure CLI workflow must address this requirement: Which evidence most directly validates 'Create an Azure Backup vault' for resource group?
+The recovery administrator protecting and restoring a test VM must confirm the test-VM protection and restore drill, without mutation, can select a recovery point that meets the required recovery time. Which restore rehearsal check qualifies?
 
-- A. Record a credential so another learner can replay the authenticated session.
-- B. Query the exact recorded scope and independently verify Microsoft.RecoveryServices/vaults.
-- C. Treat the setup exit code as proof of every configuration and relationship.
-- D. List the entire subscription and assume similarly named resources belong to this run.
+- A. Compare recovery-point time, type, consistency, and expiry with the incident timeline.
+- B. Query soft-delete state and list soft-deleted backup items in the cleanup report.
+- C. Query the vault's storage settings, identity, provisioning state, and backup instances.
+- D. Track the backup job to completion and list the resulting recovery point timestamp.
 
 ## LAB24-Q27 — Applied
 
-During an environment handoff, the receiving team asks this question: The 'Create and configure a backup policy' checkpoint reaches an external prerequisite. What should happen?
+The test-VM protection and restore drill configuration is complete; the restore rehearsal reviewers need evidence it can recover selected files without replacing the complete virtual machine. Which observation shows success?
 
-- A. Broaden permissions until the prerequisite can no longer block the operation.
-- B. Mark the branch passed because its command syntax was checked offline.
-- C. Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.
-- D. Invent a domain, notification target, license, quota, or tenant value and continue.
+- A. Verify the selected recovery point is mounted, copy the target file, and unmount the recovery session.
+- B. Query failed jobs, protection health, alert state, and diagnostic or reporting configuration.
+- C. Read the policy schedule and retention rules and calculate the oldest expected recovery point.
+- D. Compare recovery-point time, type, consistency, and expiry with the incident timeline.
 
 ## LAB24-Q28 — Applied
 
-A configuration change produces the following operational choice: What is the safest command-evidence practice after completing 'Perform backup and restore operations by using Azure Backup'?
+The restore rehearsal validation asks whether the test-VM protection and restore drill can choose between creating a restored machine and restoring disks for controlled assembly. Which observable state is strongest?
 
-- A. Save tokens, keys, passwords, or SAS values beside the validation result.
-- B. Reuse successful output from an earlier run with a similar resource name.
-- C. Commit the complete account object so reviewers can identify the tenant.
-- D. Retain only redacted structured output from an independent query of the recorded run.
+- A. Query vault type, location, provisioningState, storage model, and protected-item count.
+- B. Query the protected item and match policy ID, protection state, health, and datasource ID.
+- C. Verify the selected recovery point is mounted, copy the target file, and unmount the recovery session.
+- D. Query the restore job output and resolve every created disk, template, or VM resource ID.
 
 ## LAB24-Q29 — Applied
 
-While preparing independent validation, an engineer considers this scenario: Which negative check strengthens validation of 'Configure and interpret reports and alerts for backups'?
+A test-VM protection and restore drill review must prove the restore rehearsal ability to hold erased recovery data temporarily so accidental removal can be reversed. Which check avoids an adjacent feature?
 
-- A. Confirm the intended state and also prove that broader, anonymous, or unintended access was not introduced.
-- B. Ignore denied queries and record them as passing checks.
-- C. Check only that at least one resource exists in the subscription.
-- D. Repair every warning automatically before recording what caused it.
+- A. Query soft-delete state and list soft-deleted backup items in the cleanup report.
+- B. Query the vault's storage settings, identity, provisioning state, and backup instances.
+- C. Track the backup job to completion and list the resulting recovery point timestamp.
+- D. Query the restore job output and resolve every created disk, template, or VM resource ID.
 
 ## LAB24-Q30 — Applied
 
-A service owner asks the administrator to resolve this requirement: Why should the run manifest record the exact ID of protected test VM?
+The test-VM protection and restore drill evidence bundle needs a restore rehearsal result showing it can detect failed protection jobs and route them to operators. Which result belongs in the checkpoint?
 
-- A. It removes the need to confirm the tenant or subscription context.
-- B. It lets validation and cleanup target the immutable object created by this run rather than a name match.
-- C. It lets setup store access tokens and passwords for later reuse.
-- D. It allows cleanup to delete every object with the same prefix.
+- A. Query failed jobs, protection health, alert state, and diagnostic or reporting configuration.
+- B. Read the policy schedule and retention rules and calculate the oldest expected recovery point.
+- C. Compare recovery-point time, type, consistency, and expiry with the incident timeline.
+- D. Query soft-delete state and list soft-deleted backup items in the cleanup report.
 
 ## LAB24-Q31 — Applied
 
-During a scoped cleanup review, the team evaluates this situation: Several similarly named resources exist when cleaning up 'Create an Azure Backup vault'. What is correct?
+Other test-VM protection and restore drill components are healthy, but the restore rehearsal still cannot store supported Azure VM protection metadata in the correct vault type. Which state causes the isolated failure?
 
-- A. Delete the active subscription to guarantee that no lab state remains.
-- B. Choose targets only by creation time and remove the oldest objects.
-- C. Verify the recorded IDs and ownership tags, preview the targets, and delete only this run's boundary.
-- D. Delete all resources containing az104 in their names.
+- A. The runbook attempts to configure classic Azure VM backup in an incompatible vault type.
+- B. The selected recovery point was created after the unwanted change.
+- C. The vault is in a region that cannot protect the selected VM with the required scenario.
+- D. The backup failed, but no alert route covers the vault or datasource scope.
 
 ## LAB24-Q32 — Applied
 
-An automation author must choose the correct response to this scenario: A learner previews the implementation for 'Configure and interpret reports and alerts for backups'. What behavior is required?
+During a restore rehearsal fault drill, the test-VM protection and restore drill does not use the vault type designed for newer data-source protection workloads. Which finding identifies the defect?
 
-- A. Select the first accessible subscription and hide the resulting context.
-- B. Delete any older resource whose name resembles the new run ID.
-- C. Create the baseline immediately and request approval only before cleanup.
-- D. Display the context, intended changes, cost and gated branches without mutating Azure.
+- A. Daily recovery points expire sooner than the required recovery window.
+- B. The recovery session was left mounted after the files were copied.
+- C. The runbook attempts to configure classic Azure VM backup in an incompatible vault type.
+- D. The vault is in a region that cannot protect the selected VM with the required scenario.
 
 ## LAB24-Q33 — Applied
 
-A lab run with a unique run ID reaches this decision: Which implementation step should the learner perform for 'Create a Recovery Services vault'?
+The test-VM protection and restore drill setup finishes, yet the restore rehearsal cannot define how often recovery points are created and how long they remain. Which misconfiguration explains the mismatch?
 
-- A. Create a bounded-retention VM backup policy and enable protection for the test VM.
-- B. Skip the operation and edit validation.json to show a passing result.
-- C. Replace the lab action with a tenant-wide change that is easier to discover.
-- D. Copy resource identifiers from another run instead of recording returned IDs.
+- A. Daily recovery points expire sooner than the required recovery window.
+- B. The policy exists, but the VM has never been registered as a protected item.
+- C. The runbook selects replace disks without first validating application recovery impact.
+- D. The runbook attempts to configure classic Azure VM backup in an incompatible vault type.
 
 ## LAB24-Q34 — Applied
 
-While comparing the intended and actual states, the operator asks this question: Which evidence most directly validates 'Create an Azure Backup vault' for resource group?
+A restore rehearsal break/fix in the test-VM protection and restore drill fails when operators try to associate the intended protection schedule with the test workload. Which diagnosis fits?
 
-- A. Record a credential so another learner can replay the authenticated session.
-- B. Query the exact recorded scope and independently verify Microsoft.RecoveryServices/vaults.
-- C. Treat the setup exit code as proof of every configuration and relationship.
-- D. List the entire subscription and assume similarly named resources belong to this run.
+- A. The lab starts its break/fix change before the backup job finishes.
+- B. The policy exists, but the VM has never been registered as a protected item.
+- C. Cleanup reports success while a soft-deleted protected item remains undocumented.
+- D. Daily recovery points expire sooner than the required recovery window.
 
 ## LAB24-Q35 — Applied
 
-A peer reviewer examines the proposed implementation for this scenario: The 'Create and configure a backup policy' checkpoint reaches an external prerequisite. What should happen?
+The test-VM protection and restore drill troubleshooting scope is the restore rehearsal need to create an extra recovery point before a risky maintenance window. Which condition should be corrected first?
 
-- A. Broaden permissions until the prerequisite can no longer block the operation.
-- B. Mark the branch passed because its command syntax was checked offline.
-- C. Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.
-- D. Invent a domain, notification target, license, quota, or tenant value and continue.
+- A. The selected recovery point was created after the unwanted change.
+- B. The backup failed, but no alert route covers the vault or datasource scope.
+- C. The lab starts its break/fix change before the backup job finishes.
+- D. The policy exists, but the VM has never been registered as a protected item.
 
 ## LAB24-Q36 — Applied
 
-During a controlled rollout, the change team encounters this requirement: What is the safest command-evidence practice after completing 'Perform backup and restore operations by using Azure Backup'?
+The test-VM protection and restore drill result is partial because the restore rehearsal cannot select a recovery point that meets the required recovery time. Which condition accounts for that result?
 
-- A. Save tokens, keys, passwords, or SAS values beside the validation result.
-- B. Reuse successful output from an earlier run with a similar resource name.
-- C. Commit the complete account object so reviewers can identify the tenant.
-- D. Retain only redacted structured output from an independent query of the recorded run.
+- A. The recovery session was left mounted after the files were copied.
+- B. The vault is in a region that cannot protect the selected VM with the required scenario.
+- C. The selected recovery point was created after the unwanted change.
+- D. The lab starts its break/fix change before the backup job finishes.
 
 ## LAB24-Q37 — Applied
 
-A support engineer reproduces the following situation in a test environment: Which negative check strengthens validation of 'Configure and interpret reports and alerts for backups'?
+The restore rehearsal evidence shows the test-VM protection and restore drill cannot recover selected files without replacing the complete virtual machine. Which root cause fits that evidence?
 
-- A. Confirm the intended state and also prove that broader, anonymous, or unintended access was not introduced.
-- B. Ignore denied queries and record them as passing checks.
-- C. Check only that at least one resource exists in the subscription.
-- D. Repair every warning automatically before recording what caused it.
+- A. The runbook selects replace disks without first validating application recovery impact.
+- B. The recovery session was left mounted after the files were copied.
+- C. The runbook attempts to configure classic Azure VM backup in an incompatible vault type.
+- D. The selected recovery point was created after the unwanted change.
 
 ## LAB24-Q38 — Applied
 
-While recording validation evidence, the administrator evaluates this question: Why should the run manifest record the exact ID of protected test VM?
+Although the test-VM protection and restore drill is meant to let the restore rehearsal choose between creating a restored machine and restoring disks for controlled assembly, its checkpoint fails. Which restore rehearsal defect explains the failure?
 
-- A. It removes the need to confirm the tenant or subscription context.
-- B. It lets validation and cleanup target the immutable object created by this run rather than a name match.
-- C. It lets setup store access tokens and passwords for later reuse.
-- D. It allows cleanup to delete every object with the same prefix.
+- A. Cleanup reports success while a soft-deleted protected item remains undocumented.
+- B. Daily recovery points expire sooner than the required recovery window.
+- C. The recovery session was left mounted after the files were copied.
+- D. The runbook selects replace disks without first validating application recovery impact.
 
 ## LAB24-Q39 — Applied
 
-A configuration owner must approve one response to this scenario: Several similarly named resources exist when cleaning up 'Create an Azure Backup vault'. What is correct?
+The restore rehearsal support team isolated the test-VM protection and restore drill incident to the attempt to hold erased recovery data temporarily so accidental removal can be reversed. Which condition prevents success?
 
-- A. Delete the active subscription to guarantee that no lab state remains.
-- B. Choose targets only by creation time and remove the oldest objects.
-- C. Verify the recorded IDs and ownership tags, preview the targets, and delete only this run's boundary.
-- D. Delete all resources containing az104 in their names.
+- A. The backup failed, but no alert route covers the vault or datasource scope.
+- B. Cleanup reports success while a soft-deleted protected item remains undocumented.
+- C. The policy exists, but the VM has never been registered as a protected item.
+- D. The runbook selects replace disks without first validating application recovery impact.
 
 ## LAB24-Q40 — Applied
 
-During post-deployment verification, the team reviews this situation: A learner previews the implementation for 'Configure and interpret reports and alerts for backups'. What behavior is required?
+A test-VM protection and restore drill query surprises the recovery administrator protecting and restoring a test VM during the restore rehearsal attempt to detect failed protection jobs and route them to operators. Which finding explains it?
 
-- A. Select the first accessible subscription and hide the resulting context.
-- B. Delete any older resource whose name resembles the new run ID.
-- C. Create the baseline immediately and request approval only before cleanup.
-- D. Display the context, intended changes, cost and gated branches without mutating Azure.
+- A. The vault is in a region that cannot protect the selected VM with the required scenario.
+- B. The lab starts its break/fix change before the backup job finishes.
+- C. The backup failed, but no alert route covers the vault or datasource scope.
+- D. Cleanup reports success while a soft-deleted protected item remains undocumented.
 
 ## LAB24-Q41 — Advanced
 
-Validation for 'Create and configure a backup policy' fails after setup. What is the best break/fix method?
+The test-VM protection and restore drill checkpoint requires both this restore rehearsal outcome—store supported Azure VM protection metadata in the correct vault type—and a read-only test-VM protection and restore drill state check. Which restore rehearsal response is complete?
 
-- A. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-- B. Change validation.json directly so the failed result reads pass.
-- C. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- D. Rerun setup repeatedly with new names until one attempt appears successful.
+- A. First, Configure frequency, time zone, and retention ranges from the recovery objectives. Then, Read the policy schedule and retention rules and calculate the oldest expected recovery point.
+- B. First, Create the vault in the approved region and resource group before protecting the VM. Then, Query vault type, location, provisioningState, storage model, and protected-item count.
+- C. First, Use file recovery when only a small set of guest files must be recovered. Then, Verify the selected recovery point is mounted, copy the target file, and unmount the recovery session.
+- D. First, Choose restore disks for controlled validation before deciding whether to replace production resources. Then, Query the restore job output and resolve every created disk, template, or VM resource ID.
 
 ## LAB24-Q42 — Advanced
 
-The operation for 'Perform backup and restore operations by using Azure Backup' is asynchronous or gated. How should completion be recorded?
+The test-VM protection and restore drill runbook must use the vault type designed for newer data-source protection workloads, then retain restore rehearsal read-back evidence. Which test-VM protection and restore drill pair completes both duties?
 
-- A. Fabricate expected output so the assessment and documentation appear complete.
-- B. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
-- C. Remove the check from validation whenever the service takes longer than expected.
-- D. Record pass as soon as the request is accepted, regardless of its final state.
+- A. First, Enable protection for the exact datasource using the approved policy ID. Then, Query the protected item and match policy ID, protection state, health, and datasource ID.
+- B. First, Choose a Backup vault only for a workload supported by its data-protection model. Then, Query the vault's storage settings, identity, provisioning state, and backup instances.
+- C. First, Choose restore disks for controlled validation before deciding whether to replace production resources. Then, Query the restore job output and resolve every created disk, template, or VM resource ID.
+- D. First, Keep soft delete enabled and document retained items rather than attempting irreversible purge in routine cleanup. Then, Query soft-delete state and list soft-deleted backup items in the cleanup report.
 
 ## LAB24-Q43 — Advanced
 
-An administrator discovers drift while validating 'Configure and interpret reports and alerts for backups'. Which response preserves least privilege?
+To satisfy the restore rehearsal requirement, operators must change the test-VM protection and restore drill configuration and prove it can define how often recovery points are created and how long they remain. Which sequence is coherent?
 
-- A. Replace every resource in the subscription instead of identifying the mismatch.
-- B. Accept the drift when the resource name still matches the lab prefix.
-- C. Compare the live query with the recorded expectation, change only the mismatched setting, and validate again.
-- D. Grant subscription Owner and tenant administrator roles to avoid further authorization errors.
+- A. First, Trigger an on-demand backup before the destructive test and persist its job ID. Then, Track the backup job to completion and list the resulting recovery point timestamp.
+- B. First, Configure frequency, time zone, and retention ranges from the recovery objectives. Then, Read the policy schedule and retention rules and calculate the oldest expected recovery point.
+- C. First, Keep soft delete enabled and document retained items rather than attempting irreversible purge in routine cleanup. Then, Query soft-delete state and list soft-deleted backup items in the cleanup report.
+- D. First, Enable the required monitoring path and route actionable backup failures to an approved receiver. Then, Query failed jobs, protection health, alert state, and diagnostic or reporting configuration.
 
 ## LAB24-Q44 — Advanced
 
-While diagnosing unexpected Azure behavior, the engineer considers this situation: Validation for 'Create and configure a backup policy' fails after setup. What is the best break/fix method?
+The recovery administrator protecting and restoring a test VM needs a safe test-VM protection and restore drill change to associate the intended protection schedule with the test workload, followed by restore rehearsal evidence. Which pair merits approval?
 
-- A. Change validation.json directly so the failed result reads pass.
-- B. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- C. Rerun setup repeatedly with new names until one attempt appears successful.
-- D. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+- A. First, List recovery points and choose one captured before the simulated data loss. Then, Compare recovery-point time, type, consistency, and expiry with the incident timeline.
+- B. First, Enable the required monitoring path and route actionable backup failures to an approved receiver. Then, Query failed jobs, protection health, alert state, and diagnostic or reporting configuration.
+- C. First, Enable protection for the exact datasource using the approved policy ID. Then, Query the protected item and match policy ID, protection state, health, and datasource ID.
+- D. First, Create the vault in the approved region and resource group before protecting the VM. Then, Query vault type, location, provisioningState, storage model, and protected-item count.
 
 ## LAB24-Q45 — Advanced
 
-An architecture review requires the strongest response to this scenario: The operation for 'Perform backup and restore operations by using Azure Backup' is asynchronous or gated. How should completion be recorded?
+The test-VM protection and restore drill has two restore rehearsal gates: create an extra recovery point before a risky maintenance window, then prove the test-VM protection and restore drill state. Which restore rehearsal sequence works?
 
-- A. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
-- B. Remove the check from validation whenever the service takes longer than expected.
-- C. Record pass as soon as the request is accepted, regardless of its final state.
-- D. Fabricate expected output so the assessment and documentation appear complete.
+- A. First, Use file recovery when only a small set of guest files must be recovered. Then, Verify the selected recovery point is mounted, copy the target file, and unmount the recovery session.
+- B. First, Create the vault in the approved region and resource group before protecting the VM. Then, Query vault type, location, provisioningState, storage model, and protected-item count.
+- C. First, Choose a Backup vault only for a workload supported by its data-protection model. Then, Query the vault's storage settings, identity, provisioning state, and backup instances.
+- D. First, Trigger an on-demand backup before the destructive test and persist its job ID. Then, Track the backup job to completion and list the resulting recovery point timestamp.
 
 ## LAB24-Q46 — Advanced
 
-During break/fix validation, the operator encounters this question: An administrator discovers drift while validating 'Configure and interpret reports and alerts for backups'. Which response preserves least privilege?
+Which restore rehearsal path makes the test-VM protection and restore drill able to select a recovery point that meets the required recovery time, then inspects the defining properties?
 
-- A. Accept the drift when the resource name still matches the lab prefix.
-- B. Compare the live query with the recorded expectation, change only the mismatched setting, and validate again.
-- C. Grant subscription Owner and tenant administrator roles to avoid further authorization errors.
-- D. Replace every resource in the subscription instead of identifying the mismatch.
+- A. First, List recovery points and choose one captured before the simulated data loss. Then, Compare recovery-point time, type, consistency, and expiry with the incident timeline.
+- B. First, Choose restore disks for controlled validation before deciding whether to replace production resources. Then, Query the restore job output and resolve every created disk, template, or VM resource ID.
+- C. First, Choose a Backup vault only for a workload supported by its data-protection model. Then, Query the vault's storage settings, identity, provisioning state, and backup instances.
+- D. First, Configure frequency, time zone, and retention ranges from the recovery objectives. Then, Read the policy schedule and retention rules and calculate the oldest expected recovery point.
 
 ## LAB24-Q47 — Advanced
 
-A complex support case depends on correctly interpreting this requirement: Validation for 'Create and configure a backup policy' fails after setup. What is the best break/fix method?
+At the test-VM protection and restore drill approval gate, operators must show that the restore rehearsal can recover selected files without replacing the complete virtual machine. Which restore rehearsal configure-and-check pair is defensible?
 
-- A. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- B. Rerun setup repeatedly with new names until one attempt appears successful.
-- C. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-- D. Change validation.json directly so the failed result reads pass.
+- A. First, Keep soft delete enabled and document retained items rather than attempting irreversible purge in routine cleanup. Then, Query soft-delete state and list soft-deleted backup items in the cleanup report.
+- B. First, Configure frequency, time zone, and retention ranges from the recovery objectives. Then, Read the policy schedule and retention rules and calculate the oldest expected recovery point.
+- C. First, Use file recovery when only a small set of guest files must be recovered. Then, Verify the selected recovery point is mounted, copy the target file, and unmount the recovery session.
+- D. First, Enable protection for the exact datasource using the approved policy ID. Then, Query the protected item and match policy ID, protection state, health, and datasource ID.
 
 ## LAB24-Q48 — Advanced
 
-While correcting configuration drift, the team evaluates this scenario: The operation for 'Perform backup and restore operations by using Azure Backup' is asynchronous or gated. How should completion be recorded?
+The test-VM protection and restore drill forbids a partial restore rehearsal result. Operators must first choose between creating a restored machine and restoring disks for controlled assembly and afterward confirm the test-VM protection and restore drill outcome. Which restore rehearsal sequence is complete?
 
-- A. Remove the check from validation whenever the service takes longer than expected.
-- B. Record pass as soon as the request is accepted, regardless of its final state.
-- C. Fabricate expected output so the assessment and documentation appear complete.
-- D. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
+- A. First, Enable the required monitoring path and route actionable backup failures to an approved receiver. Then, Query failed jobs, protection health, alert state, and diagnostic or reporting configuration.
+- B. First, Choose restore disks for controlled validation before deciding whether to replace production resources. Then, Query the restore job output and resolve every created disk, template, or VM resource ID.
+- C. First, Enable protection for the exact datasource using the approved policy ID. Then, Query the protected item and match policy ID, protection state, health, and datasource ID.
+- D. First, Trigger an on-demand backup before the destructive test and persist its job ID. Then, Track the backup job to completion and list the resulting recovery point timestamp.
 
 ## LAB24-Q49 — Advanced
 
-A recovery exercise exposes the following technical decision: An administrator discovers drift while validating 'Configure and interpret reports and alerts for backups'. Which response preserves least privilege?
+Only the test-VM protection and restore drill change needed to hold erased recovery data temporarily so accidental removal can be reversed is allowed, and restore rehearsal proof is mandatory. Which pair fits?
 
-- A. Compare the live query with the recorded expectation, change only the mismatched setting, and validate again.
-- B. Grant subscription Owner and tenant administrator roles to avoid further authorization errors.
-- C. Replace every resource in the subscription instead of identifying the mismatch.
-- D. Accept the drift when the resource name still matches the lab prefix.
+- A. First, Create the vault in the approved region and resource group before protecting the VM. Then, Query vault type, location, provisioningState, storage model, and protected-item count.
+- B. First, Trigger an on-demand backup before the destructive test and persist its job ID. Then, Track the backup job to completion and list the resulting recovery point timestamp.
+- C. First, List recovery points and choose one captured before the simulated data loss. Then, Compare recovery-point time, type, consistency, and expiry with the incident timeline.
+- D. First, Keep soft delete enabled and document retained items rather than attempting irreversible purge in routine cleanup. Then, Query soft-delete state and list soft-deleted backup items in the cleanup report.
 
 ## LAB24-Q50 — Advanced
 
-During final design assurance, the reviewer must resolve this situation: Validation for 'Create and configure a backup policy' fails after setup. What is the best break/fix method?
+The test-VM protection and restore drill runbook separates restore rehearsal mutation from validation while it must detect failed protection jobs and route them to operators. Which sequence proves it cleanly?
 
-- A. Rerun setup repeatedly with new names until one attempt appears successful.
-- B. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-- C. Change validation.json directly so the failed result reads pass.
-- D. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+- A. First, Choose a Backup vault only for a workload supported by its data-protection model. Then, Query the vault's storage settings, identity, provisioning state, and backup instances.
+- B. First, Enable the required monitoring path and route actionable backup failures to an approved receiver. Then, Query failed jobs, protection health, alert state, and diagnostic or reporting configuration.
+- C. First, List recovery points and choose one captured before the simulated data loss. Then, Compare recovery-point time, type, consistency, and expiry with the incident timeline.
+- D. First, Use file recovery when only a small set of guest files must be recovered. Then, Verify the selected recovery point is mounted, copy the target file, and unmount the recovery session.
+
+[Open the answer key](./ANSWERS.md)

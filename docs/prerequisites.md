@@ -17,13 +17,13 @@ Never use production or an employer tenant unless the owner has explicitly appro
 ## Tools
 
 - Git
-- Azure CLI
-- PowerShell 7 and the current Az modules
-- Python 3 with the development requirements
-- Bicep and AzCopy for the labs that declare them
-- A secure location for temporary, redacted Azure CLI or PowerShell live-verification output
+- Azure CLI 2.88 or later
+- PowerShell 7.4 or later as the command host; Azure PowerShell modules are not used
+- Bicep 0.46.1 or later through `az bicep`, AzCopy 10.32.8 or later, and the Container Apps extension 1.3.0b4 or later
+- Python 3.12 and Node.js 22 for repository tooling and the local documentation site
+- A secure location for temporary, redacted Azure CLI live-verification output
 
-The dev container provides a reproducible starting point. Every lab still checks its own required extensions and modules.
+The dev container provides a reproducible starting point. Every lab still checks its own required Azure CLI extensions, providers, tools, and service prerequisites.
 
 ## Authentication
 

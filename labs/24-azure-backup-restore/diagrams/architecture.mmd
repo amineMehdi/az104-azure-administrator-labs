@@ -1,15 +1,15 @@
 flowchart LR
-    A["Operator<br/>Azure CLI"] --> P["Preview and preflight"]
-    P --> S["Recorded Lab 24 boundary"]
-    S --> R1["resource group"]
-    S --> R2["Recovery Services vault"]
-    S --> R3["Backup vault"]
-    S --> R4["backup policy"]
-    S --> R5["protected test VM"]
-    S --> V["Independent validation"]
-    V --> E["Redacted command evidence"]
-    V --> C["Previewed cleanup"]
+    VM["Private Azure VM"] --> P["Vault protection item"]
+    RV["Recovery Services vault"] --> P
+    P --> J["On-demand backup job"]
+    J --> RP["Recovery point"]
+    RP --> RJ["Disk restore job"]
+    ST["Staging storage"] --> RJ
+    RJ --> RA["Restore artifacts"]
+    P --> V["Item, job, point, and restore assertions"]
+    RA --> V
+    V --> C["Protection removal and deleted-vault proof"]
     classDef control fill:#e8f1ff,stroke:#2563eb,color:#102a43;
     classDef resource fill:#e9f8ef,stroke:#16803a,color:#102a43;
-    class A,P,S,V,E,C control;
-    class R1,R2,R3,R4,R5 resource;
+    class V,C control;
+    class VM,P,RV,J,RP,RJ,ST,RA resource;

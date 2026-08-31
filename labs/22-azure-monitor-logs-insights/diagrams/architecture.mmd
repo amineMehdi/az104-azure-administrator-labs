@@ -1,15 +1,13 @@
 flowchart LR
-    A["Operator<br/>Azure CLI and KQL"] --> P["Preview and preflight"]
-    P --> S["Recorded Lab 22 boundary"]
-    S --> R1["resource group"]
-    S --> R2["Log Analytics workspace"]
-    S --> R3["storage account"]
-    S --> R4["diagnostic setting"]
-    S --> R5["optional data collection rule"]
-    S --> V["Independent validation"]
-    V --> E["Redacted command evidence"]
-    V --> C["Previewed cleanup"]
+    A["Harmless Blob transaction"] --> S["Storage account"]
+    S --> M["Transactions metric"]
+    M --> D["Diagnostic setting"]
+    D --> W["Log Analytics workspace"]
+    W --> K["Bounded KQL query"]
+    K --> R["Assert row count above zero"]
+    R --> V["Collection and destination assertions"]
+    V --> C["Diagnostic before workspace cleanup"]
     classDef control fill:#e8f1ff,stroke:#2563eb,color:#102a43;
     classDef resource fill:#e9f8ef,stroke:#16803a,color:#102a43;
-    class A,P,S,V,E,C control;
-    class R1,R2,R3,R4,R5 resource;
+    class A,K,R,V,C control;
+    class S,M,D,W resource;

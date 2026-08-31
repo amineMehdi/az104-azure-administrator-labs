@@ -1,453 +1,459 @@
 # Lab 13 knowledge check
 
-Choose the single best answer for each question. Record your choices before opening `ANSWERS.md`.
+[Return to the guided lab](../README.md)
+
+Complete all 50 questions before opening the answer key. Allow about 50–60 minutes and choose the single best answer.
+
+Use the result as a learning signal: 85–100% indicates mastery, 70–84% calls for targeted review, and below 70% means repeat the mapped lab tasks before retrying.
 
 ## LAB13-Q01 — Foundational
 
-Which principle is most important when working on 'Create and manage an Azure Container Registry' in Lab 13?
+The approved container image release acceptance criteria require operators to choose registry capabilities and throughput appropriate for the image workload. Which service fact supports that requirement?
 
-- A. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- B. ACR stores image artifacts and ACI runs container groups; registry admin credentials are not required when managed identities or scoped tokens are available.
-- C. A recognizable resource name removes the need for validation and scoped cleanup.
-- D. The shortest command is always correct even when it changes a broader scope.
+- A. ACR Basic, Standard, and Premium share core registry APIs but differ in included performance, scale, and premium features.
+- B. An image tag is a mutable label, while a manifest digest identifies immutable image content.
+- C. An ACI container group is the deployment and scheduling boundary whose containers share lifecycle, network, and local volumes.
+- D. Always, OnFailure, and Never restart policies suit long-running services, retryable tasks, and one-time jobs respectively.
 
 ## LAB13-Q02 — Foundational
 
-Which lab action directly supports the objective 'Provision a container by using Azure Container Instances'?
+An image release reviewer challenges whether the approved container image release can deploy by digest so later tag changes cannot move the release. Which response resolves the concern?
 
-- A. Search the whole tenant for a similar display name and modify the first match.
-- B. Mark the objective complete after reading documentation without checking any state.
-- C. Import a public Microsoft sample image and inspect repository and tag metadata.
-- D. Change the active tenant without displaying or confirming the resulting context.
+- A. A managed identity needs the appropriate ACR pull data permission scoped to the registry or repository.
+- B. A public ACI DNS name combines a region-scoped unique label with the regional Azure container endpoint.
+- C. ACI CPU and memory requests are specified per container and determine scheduling support and cost.
+- D. An image tag is a mutable label, while a manifest digest identifies immutable image content.
 
 ## LAB13-Q03 — Foundational
 
-In a fundamentals workshop, the instructor presents this requirement: Which principle is most important when working on 'Create and manage an Azure Container Registry' in Lab 13?
+The approved container image release handoff omits the image release rule needed to let the runtime pull a private image without embedding an administrator password. Which statement should the team add?
 
-- A. A recognizable resource name removes the need for validation and scoped cleanup.
-- B. The shortest command is always correct even when it changes a broader scope.
-- C. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- D. ACR stores image artifacts and ACI runs container groups; registry admin credentials are not required when managed identities or scoped tokens are available.
+- A. ACR import copies an image from a supported source into the registry without requiring a local Docker pull and push.
+- B. ACI secure environment variables hide values from ordinary container property output but still require careful source and state handling.
+- C. A managed identity needs the appropriate ACR pull data permission scoped to the registry or repository.
+- D. The ACR admin account provides broad registry credentials, whereas workload identity supports scoped, revocable authorization.
 
 ## LAB13-Q04 — Foundational
 
-Before making a change, a learner checks this core behavior: Which lab action directly supports the objective 'Provision a container by using Azure Container Instances'?
+An image release incident review of the approved container image release depends on the ability to copy an existing image into the registry without a local pull and push. Which platform description is reliable?
 
-- A. Import a public Microsoft sample image and inspect repository and tag metadata.
-- B. Change the active tenant without displaying or confirming the resulting context.
-- C. Search the whole tenant for a similar display name and modify the first match.
-- D. Mark the objective complete after reading documentation without checking any state.
+- A. An ACI container group is the deployment and scheduling boundary whose containers share lifecycle, network, and local volumes.
+- B. Always, OnFailure, and Never restart policies suit long-running services, retryable tasks, and one-time jobs respectively.
+- C. ACR Basic, Standard, and Premium share core registry APIs but differ in included performance, scale, and premium features.
+- D. ACR import copies an image from a supported source into the registry without requiring a local Docker pull and push.
 
 ## LAB13-Q05 — Foundational
 
-During a design vocabulary review, the team evaluates this situation: Which principle is most important when working on 'Create and manage an Azure Container Registry' in Lab 13?
+A container administrator publishing an approved image and running it in ACI is updating the image release runbook. The requirement is to run sidecars inside one jointly managed execution unit. Which statement describes Azure behavior correctly?
 
-- A. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- B. ACR stores image artifacts and ACI runs container groups; registry admin credentials are not required when managed identities or scoped tokens are available.
-- C. A recognizable resource name removes the need for validation and scoped cleanup.
-- D. The shortest command is always correct even when it changes a broader scope.
+- A. A public ACI DNS name combines a region-scoped unique label with the regional Azure container endpoint.
+- B. An ACI container group is the deployment and scheduling boundary whose containers share lifecycle, network, and local volumes.
+- C. ACI CPU and memory requests are specified per container and determine scheduling support and cost.
+- D. An image tag is a mutable label, while a manifest digest identifies immutable image content.
 
 ## LAB13-Q06 — Foundational
 
-In a command-planning session, an administrator asks this question: Which lab action directly supports the objective 'Provision a container by using Azure Container Instances'?
+An image release peer review asks how the approved container image release should handle this outcome: publish a stable regional name for the container group's public endpoint. Which explanation is accurate?
 
-- A. Search the whole tenant for a similar display name and modify the first match.
-- B. Mark the objective complete after reading documentation without checking any state.
-- C. Import a public Microsoft sample image and inspect repository and tag metadata.
-- D. Change the active tenant without displaying or confirming the resulting context.
+- A. ACI secure environment variables hide values from ordinary container property output but still require careful source and state handling.
+- B. A public ACI DNS name combines a region-scoped unique label with the regional Azure container endpoint.
+- C. The ACR admin account provides broad registry credentials, whereas workload identity supports scoped, revocable authorization.
+- D. A managed identity needs the appropriate ACR pull data permission scoped to the registry or repository.
 
 ## LAB13-Q07 — Foundational
 
-While preparing the lab, a learner verifies this platform rule: Which principle is most important when working on 'Create and manage an Azure Container Registry' in Lab 13?
+For the approved container image release, the image release plan must pass sensitive configuration without writing the clear value into ordinary output. Which statement about image release belongs in the approved container image release record?
 
-- A. A recognizable resource name removes the need for validation and scoped cleanup.
-- B. The shortest command is always correct even when it changes a broader scope.
-- C. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- D. ACR stores image artifacts and ACI runs container groups; registry admin credentials are not required when managed identities or scoped tokens are available.
+- A. ACI secure environment variables hide values from ordinary container property output but still require careful source and state handling.
+- B. Always, OnFailure, and Never restart policies suit long-running services, retryable tasks, and one-time jobs respectively.
+- C. ACR Basic, Standard, and Premium share core registry APIs but differ in included performance, scale, and premium features.
+- D. ACR import copies an image from a supported source into the registry without requiring a local Docker pull and push.
 
 ## LAB13-Q08 — Foundational
 
-During peer review, the team must identify the accurate response to this scenario: Which lab action directly supports the objective 'Provision a container by using Azure Container Instances'?
+The image release review compares four claims for the approved container image release requirement to control whether a terminated container restarts. Which claim is technically sound?
 
-- A. Import a public Microsoft sample image and inspect repository and tag metadata.
-- B. Change the active tenant without displaying or confirming the resulting context.
-- C. Search the whole tenant for a similar display name and modify the first match.
-- D. Mark the objective complete after reading documentation without checking any state.
+- A. ACI CPU and memory requests are specified per container and determine scheduling support and cost.
+- B. An image tag is a mutable label, while a manifest digest identifies immutable image content.
+- C. An ACI container group is the deployment and scheduling boundary whose containers share lifecycle, network, and local volumes.
+- D. Always, OnFailure, and Never restart policies suit long-running services, retryable tasks, and one-time jobs respectively.
 
 ## LAB13-Q09 — Foundational
 
-In an operations briefing, a new team member receives this question: Which principle is most important when working on 'Create and manage an Azure Container Registry' in Lab 13?
+The image release architecture note requires the approved container image release environment to request CPU and memory values supported in the selected region. Which statement defines the relevant image release boundary?
 
-- A. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- B. ACR stores image artifacts and ACI runs container groups; registry admin credentials are not required when managed identities or scoped tokens are available.
-- C. A recognizable resource name removes the need for validation and scoped cleanup.
-- D. The shortest command is always correct even when it changes a broader scope.
+- A. The ACR admin account provides broad registry credentials, whereas workload identity supports scoped, revocable authorization.
+- B. A managed identity needs the appropriate ACR pull data permission scoped to the registry or repository.
+- C. A public ACI DNS name combines a region-scoped unique label with the regional Azure container endpoint.
+- D. ACI CPU and memory requests are specified per container and determine scheduling support and cost.
 
 ## LAB13-Q10 — Foundational
 
-While building a support checklist, an engineer reviews this requirement: Which lab action directly supports the objective 'Provision a container by using Azure Container Instances'?
+A new image release operator must explain why the approved container image release can prefer an identity-scoped image pull over long-lived registry credentials. Which explanation is accurate?
 
-- A. Search the whole tenant for a similar display name and modify the first match.
-- B. Mark the objective complete after reading documentation without checking any state.
-- C. Import a public Microsoft sample image and inspect repository and tag metadata.
-- D. Change the active tenant without displaying or confirming the resulting context.
+- A. ACR Basic, Standard, and Premium share core registry APIs but differ in included performance, scale, and premium features.
+- B. ACR import copies an image from a supported source into the registry without requiring a local Docker pull and push.
+- C. ACI secure environment variables hide values from ordinary container property output but still require careful source and state handling.
+- D. The ACR admin account provides broad registry credentials, whereas workload identity supports scoped, revocable authorization.
 
 ## LAB13-Q11 — Foundational
 
-During a readiness check, the administrator considers this behavior: Which principle is most important when working on 'Create and manage an Azure Container Registry' in Lab 13?
+An approved container image release review finds image release drift from the need to choose registry capabilities and throughput appropriate for the image workload. Which correction addresses that drift?
 
-- A. A recognizable resource name removes the need for validation and scoped cleanup.
-- B. The shortest command is always correct even when it changes a broader scope.
-- C. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- D. ACR stores image artifacts and ACI runs container groups; registry admin credentials are not required when managed identities or scoped tokens are available.
+- A. Assign the pull role to the workload identity and reference the private registry without embedding a password.
+- B. Check label availability and configure the DNS name label only for a deliberately public container group.
+- C. Choose the lowest registry SKU that meets throughput, storage, replication, and network-control requirements.
+- D. Set explicit CPU and memory requests within the selected region's supported combinations.
 
 ## LAB13-Q12 — Foundational
 
-In a service overview, the team discusses this scenario: Which lab action directly supports the objective 'Provision a container by using Azure Container Instances'?
+The approved container image release window permits only the image release change needed to deploy by digest so later tag changes cannot move the release. Which option respects the boundary?
 
-- A. Import a public Microsoft sample image and inspect repository and tag metadata.
-- B. Change the active tenant without displaying or confirming the resulting context.
-- C. Search the whole tenant for a similar display name and modify the first match.
-- D. Mark the objective complete after reading documentation without checking any state.
+- A. Import the approved source image into a uniquely versioned target repository and tag.
+- B. Use a unique version tag for delivery and retain the resolved digest for reproducible deployment evidence.
+- C. Pass secret values through a transient secure mechanism and never commit them in scripts or run-state files.
+- D. Prefer managed identity for the container pull path and leave the registry admin account disabled.
 
 ## LAB13-Q13 — Foundational
 
-While reviewing official guidance, a learner must resolve this question: Which principle is most important when working on 'Create and manage an Azure Container Registry' in Lab 13?
+The image release preflight has passed; the approved container image release must now let the runtime pull a private image without embedding an administrator password. Which operation should run?
 
-- A. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- B. ACR stores image artifacts and ACI runs container groups; registry admin credentials are not required when managed identities or scoped tokens are available.
-- C. A recognizable resource name removes the need for validation and scoped cleanup.
-- D. The shortest command is always correct even when it changes a broader scope.
+- A. Place tightly coupled containers in one group only when they should share deployment lifecycle and network namespace.
+- B. Set the restart policy from the workload's intended lifecycle and exit-code behavior.
+- C. Assign the pull role to the workload identity and reference the private registry without embedding a password.
+- D. Choose the lowest registry SKU that meets throughput, storage, replication, and network-control requirements.
 
 ## LAB13-Q14 — Foundational
 
-During a configuration walkthrough, the instructor asks about this situation: Which lab action directly supports the objective 'Provision a container by using Azure Container Instances'?
+The approved container image release plan must copy an existing image into the registry without a local pull and push while limiting the mutation scope to image release. Which action is appropriate?
 
-- A. Search the whole tenant for a similar display name and modify the first match.
-- B. Mark the objective complete after reading documentation without checking any state.
-- C. Import a public Microsoft sample image and inspect repository and tag metadata.
-- D. Change the active tenant without displaying or confirming the resulting context.
+- A. Check label availability and configure the DNS name label only for a deliberately public container group.
+- B. Set explicit CPU and memory requests within the selected region's supported combinations.
+- C. Use a unique version tag for delivery and retain the resolved digest for reproducible deployment evidence.
+- D. Import the approved source image into a uniquely versioned target repository and tag.
 
 ## LAB13-Q15 — Foundational
 
-In a preflight knowledge check, the operator evaluates this requirement: Which principle is most important when working on 'Create and manage an Azure Container Registry' in Lab 13?
+An image release ticket in the approved container image release says to run sidecars inside one jointly managed execution unit. Which image release action completes the approved container image release request with minimal change?
 
-- A. A recognizable resource name removes the need for validation and scoped cleanup.
-- B. The shortest command is always correct even when it changes a broader scope.
-- C. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- D. ACR stores image artifacts and ACI runs container groups; registry admin credentials are not required when managed identities or scoped tokens are available.
+- A. Pass secret values through a transient secure mechanism and never commit them in scripts or run-state files.
+- B. Prefer managed identity for the container pull path and leave the registry admin account disabled.
+- C. Assign the pull role to the workload identity and reference the private registry without embedding a password.
+- D. Place tightly coupled containers in one group only when they should share deployment lifecycle and network namespace.
 
 ## LAB13-Q16 — Applied
 
-A learner previews the implementation for 'Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps'. What behavior is required?
+The approach for the approved container image release is approved, but the image release environment still cannot publish a stable regional name for the container group's public endpoint. Which implementation step closes the gap?
 
-- A. Display the context, intended changes, cost and gated branches without mutating Azure.
-- B. Create the baseline immediately and request approval only before cleanup.
-- C. Select the first accessible subscription and hide the resulting context.
-- D. Delete any older resource whose name resembles the new run ID.
+- A. Set the restart policy from the workload's intended lifecycle and exit-code behavior.
+- B. Choose the lowest registry SKU that meets throughput, storage, replication, and network-control requirements.
+- C. Check label availability and configure the DNS name label only for a deliberately public container group.
+- D. Import the approved source image into a uniquely versioned target repository and tag.
 
 ## LAB13-Q17 — Applied
 
-Which implementation step should the learner perform for 'Create and manage an Azure Container Registry'?
+The container administrator publishing an approved image and running it in ACI may change the approved container image release only to pass sensitive configuration without writing the clear value into ordinary output. Which image release action stays within that assignment?
 
-- A. Replace the lab action with a tenant-wide change that is easier to discover.
-- B. Inspect CPU, memory, restart policy, events, logs, and current container state.
-- C. Copy resource identifiers from another run instead of recording returned IDs.
-- D. Skip the operation and edit validation.json to show a passing result.
+- A. Pass secret values through a transient secure mechanism and never commit them in scripts or run-state files.
+- B. Set explicit CPU and memory requests within the selected region's supported combinations.
+- C. Use a unique version tag for delivery and retain the resolved digest for reproducible deployment evidence.
+- D. Place tightly coupled containers in one group only when they should share deployment lifecycle and network namespace.
 
 ## LAB13-Q18 — Applied
 
-Which evidence most directly validates 'Provision a container by using Azure Container Instances' for Basic container registry?
+An image release dry run shows no approved container image release command will control whether a terminated container restarts. Which action belongs before execution?
 
-- A. Treat the setup exit code as proof of every configuration and relationship.
-- B. List the entire subscription and assume similarly named resources belong to this run.
-- C. Query the exact recorded scope and independently verify Microsoft.ContainerRegistry/registries.
-- D. Record a credential so another learner can replay the authenticated session.
+- A. Prefer managed identity for the container pull path and leave the registry admin account disabled.
+- B. Set the restart policy from the workload's intended lifecycle and exit-code behavior.
+- C. Assign the pull role to the workload identity and reference the private registry without embedding a password.
+- D. Check label availability and configure the DNS name label only for a deliberately public container group.
 
 ## LAB13-Q19 — Applied
 
-During an implementation review, the operator considers this requirement: A learner previews the implementation for 'Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps'. What behavior is required?
+For the approved container image release, operators need to request CPU and memory values supported in the selected region. Which change realizes that requirement?
 
-- A. Create the baseline immediately and request approval only before cleanup.
-- B. Select the first accessible subscription and hide the resulting context.
-- C. Delete any older resource whose name resembles the new run ID.
-- D. Display the context, intended changes, cost and gated branches without mutating Azure.
+- A. Choose the lowest registry SKU that meets throughput, storage, replication, and network-control requirements.
+- B. Import the approved source image into a uniquely versioned target repository and tag.
+- C. Pass secret values through a transient secure mechanism and never commit them in scripts or run-state files.
+- D. Set explicit CPU and memory requests within the selected region's supported combinations.
 
 ## LAB13-Q20 — Applied
 
-A production runbook must correctly handle this scenario: Which implementation step should the learner perform for 'Create and manage an Azure Container Registry'?
+Operators must automate the approved container image release change needed to prefer an identity-scoped image pull over long-lived registry credentials. Which image release operation belongs in the runbook?
 
-- A. Inspect CPU, memory, restart policy, events, logs, and current container state.
-- B. Copy resource identifiers from another run instead of recording returned IDs.
-- C. Skip the operation and edit validation.json to show a passing result.
-- D. Replace the lab action with a tenant-wide change that is easier to discover.
+- A. Use a unique version tag for delivery and retain the resolved digest for reproducible deployment evidence.
+- B. Place tightly coupled containers in one group only when they should share deployment lifecycle and network namespace.
+- C. Set the restart policy from the workload's intended lifecycle and exit-code behavior.
+- D. Prefer managed identity for the container pull path and leave the registry admin account disabled.
 
 ## LAB13-Q21 — Applied
 
-While validating a configuration, the team evaluates this situation: Which evidence most directly validates 'Provision a container by using Azure Container Instances' for Basic container registry?
+The image release validation asks whether the approved container image release can choose registry capabilities and throughput appropriate for the image workload. Which observable state is strongest?
 
-- A. List the entire subscription and assume similarly named resources belong to this run.
-- B. Query the exact recorded scope and independently verify Microsoft.ContainerRegistry/registries.
-- C. Record a credential so another learner can replay the authenticated session.
-- D. Treat the setup exit code as proof of every configuration and relationship.
+- A. List the target repository and verify its tag, digest, and import timestamp.
+- B. Query sku.name, provisioningState, loginServer, and configured premium features.
+- C. Inspect the container definition and evidence output to confirm secret values are redacted.
+- D. Query adminUserEnabled and confirm the workload identity's scoped pull assignment.
 
 ## LAB13-Q22 — Applied
 
-A delegated administrator receives the following support request: A learner previews the implementation for 'Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps'. What behavior is required?
+An approved container image release review must prove the image release ability to deploy by digest so later tag changes cannot move the release. Which check avoids an adjacent feature?
 
-- A. Select the first accessible subscription and hide the resulting context.
-- B. Delete any older resource whose name resembles the new run ID.
-- C. Display the context, intended changes, cost and gated branches without mutating Azure.
-- D. Create the baseline immediately and request approval only before cleanup.
+- A. Query container group provisioningState, instanceView state, IP configuration, and each container status.
+- B. Query restartPolicy, currentState, previousState, exitCode, and restartCount.
+- C. List repository manifests and match the selected tag to its sha256 digest.
+- D. Query sku.name, provisioningState, loginServer, and configured premium features.
 
 ## LAB13-Q23 — Applied
 
-During a maintenance window, an engineer must decide how to respond: Which implementation step should the learner perform for 'Create and manage an Azure Container Registry'?
+The approved container image release evidence bundle needs an image release result showing it can let the runtime pull a private image without embedding an administrator password. Which result belongs in the checkpoint?
 
-- A. Copy resource identifiers from another run instead of recording returned IDs.
-- B. Skip the operation and edit validation.json to show a passing result.
-- C. Replace the lab action with a tenant-wide change that is easier to discover.
-- D. Inspect CPU, memory, restart policy, events, logs, and current container state.
+- A. List the identity's role assignment and confirm the deployed image resolves from the private login server.
+- B. Query ipAddress.fqdn, type, ports, and the container's running state.
+- C. Query each container's resources.requests and compare them with measured workload demand.
+- D. List repository manifests and match the selected tag to its sha256 digest.
 
 ## LAB13-Q24 — Applied
 
-A deployment pipeline reaches this decision point: Which evidence most directly validates 'Provision a container by using Azure Container Instances' for Basic container registry?
+Before approved container image release cleanup, the image release team must reconfirm it can copy an existing image into the registry without a local pull and push. Which read-only inspection should run?
 
-- A. Query the exact recorded scope and independently verify Microsoft.ContainerRegistry/registries.
-- B. Record a credential so another learner can replay the authenticated session.
-- C. Treat the setup exit code as proof of every configuration and relationship.
-- D. List the entire subscription and assume similarly named resources belong to this run.
+- A. Inspect the container definition and evidence output to confirm secret values are redacted.
+- B. Query adminUserEnabled and confirm the workload identity's scoped pull assignment.
+- C. List the identity's role assignment and confirm the deployed image resolves from the private login server.
+- D. List the target repository and verify its tag, digest, and import timestamp.
 
 ## LAB13-Q25 — Applied
 
-While applying least-privilege controls, the administrator reviews this scenario: A learner previews the implementation for 'Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps'. What behavior is required?
+The approved container image release setup reports success after the image release attempt to run sidecars inside one jointly managed execution unit. Which image release read-only observation proves the approved container image release outcome?
 
-- A. Delete any older resource whose name resembles the new run ID.
-- B. Display the context, intended changes, cost and gated branches without mutating Azure.
-- C. Create the baseline immediately and request approval only before cleanup.
-- D. Select the first accessible subscription and hide the resulting context.
+- A. Query restartPolicy, currentState, previousState, exitCode, and restartCount.
+- B. Query container group provisioningState, instanceView state, IP configuration, and each container status.
+- C. Query sku.name, provisioningState, loginServer, and configured premium features.
+- D. List the target repository and verify its tag, digest, and import timestamp.
 
 ## LAB13-Q26 — Applied
 
-A repeatable Azure CLI workflow must address this requirement: Which implementation step should the learner perform for 'Create and manage an Azure Container Registry'?
+The image release log says the approved container image release can now publish a stable regional name for the container group's public endpoint. Which image release state should the approved container image release acceptance test retain?
 
-- A. Skip the operation and edit validation.json to show a passing result.
-- B. Replace the lab action with a tenant-wide change that is easier to discover.
-- C. Inspect CPU, memory, restart policy, events, logs, and current container state.
-- D. Copy resource identifiers from another run instead of recording returned IDs.
+- A. Query ipAddress.fqdn, type, ports, and the container's running state.
+- B. Query each container's resources.requests and compare them with measured workload demand.
+- C. List repository manifests and match the selected tag to its sha256 digest.
+- D. Query container group provisioningState, instanceView state, IP configuration, and each container status.
 
 ## LAB13-Q27 — Applied
 
-During an environment handoff, the receiving team asks this question: Which evidence most directly validates 'Provision a container by using Azure Container Instances' for Basic container registry?
+The approved container image release rejects image release exit status as proof it can pass sensitive configuration without writing the clear value into ordinary output. Which approved container image release result is valid evidence?
 
-- A. Record a credential so another learner can replay the authenticated session.
-- B. Treat the setup exit code as proof of every configuration and relationship.
-- C. List the entire subscription and assume similarly named resources belong to this run.
-- D. Query the exact recorded scope and independently verify Microsoft.ContainerRegistry/registries.
+- A. Query adminUserEnabled and confirm the workload identity's scoped pull assignment.
+- B. List the identity's role assignment and confirm the deployed image resolves from the private login server.
+- C. Query ipAddress.fqdn, type, ports, and the container's running state.
+- D. Inspect the container definition and evidence output to confirm secret values are redacted.
 
 ## LAB13-Q28 — Applied
 
-A configuration change produces the following operational choice: A learner previews the implementation for 'Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps'. What behavior is required?
+The image release validator needs one approved container image release query after the change to control whether a terminated container restarts. Which image release property should the approved container image release validator inspect?
 
-- A. Display the context, intended changes, cost and gated branches without mutating Azure.
-- B. Create the baseline immediately and request approval only before cleanup.
-- C. Select the first accessible subscription and hide the resulting context.
-- D. Delete any older resource whose name resembles the new run ID.
+- A. Query restartPolicy, currentState, previousState, exitCode, and restartCount.
+- B. Query sku.name, provisioningState, loginServer, and configured premium features.
+- C. List the target repository and verify its tag, digest, and import timestamp.
+- D. Inspect the container definition and evidence output to confirm secret values are redacted.
 
 ## LAB13-Q29 — Applied
 
-While preparing independent validation, an engineer considers this scenario: Which implementation step should the learner perform for 'Create and manage an Azure Container Registry'?
+The container administrator publishing an approved image and running it in ACI must confirm the approved container image release, without mutation, can request CPU and memory values supported in the selected region. Which image release check qualifies?
 
-- A. Replace the lab action with a tenant-wide change that is easier to discover.
-- B. Inspect CPU, memory, restart policy, events, logs, and current container state.
-- C. Copy resource identifiers from another run instead of recording returned IDs.
-- D. Skip the operation and edit validation.json to show a passing result.
+- A. List repository manifests and match the selected tag to its sha256 digest.
+- B. Query each container's resources.requests and compare them with measured workload demand.
+- C. Query container group provisioningState, instanceView state, IP configuration, and each container status.
+- D. Query restartPolicy, currentState, previousState, exitCode, and restartCount.
 
 ## LAB13-Q30 — Applied
 
-A service owner asks the administrator to resolve this requirement: Which evidence most directly validates 'Provision a container by using Azure Container Instances' for Basic container registry?
+The approved container image release configuration is complete; the image release reviewers need evidence it can prefer an identity-scoped image pull over long-lived registry credentials. Which observation shows success?
 
-- A. Treat the setup exit code as proof of every configuration and relationship.
-- B. List the entire subscription and assume similarly named resources belong to this run.
-- C. Query the exact recorded scope and independently verify Microsoft.ContainerRegistry/registries.
-- D. Record a credential so another learner can replay the authenticated session.
+- A. List the identity's role assignment and confirm the deployed image resolves from the private login server.
+- B. Query ipAddress.fqdn, type, ports, and the container's running state.
+- C. Query adminUserEnabled and confirm the workload identity's scoped pull assignment.
+- D. Query each container's resources.requests and compare them with measured workload demand.
 
 ## LAB13-Q31 — Applied
 
-During a scoped cleanup review, the team evaluates this situation: A learner previews the implementation for 'Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps'. What behavior is required?
+Although the approved container image release is meant to let the image release choose registry capabilities and throughput appropriate for the image workload, its checkpoint fails. Which image release defect explains the failure?
 
-- A. Create the baseline immediately and request approval only before cleanup.
-- B. Select the first accessible subscription and hide the resulting context.
-- C. Delete any older resource whose name resembles the new run ID.
-- D. Display the context, intended changes, cost and gated branches without mutating Azure.
+- A. The deployment uses the mutable latest tag and cannot prove which image content ran.
+- B. The requested DNS label is already used in the selected region.
+- C. The design requires geo-replication while the registry uses a non-Premium SKU.
+- D. The deployment depends on an enabled registry admin password embedded in automation.
 
 ## LAB13-Q32 — Applied
 
-An automation author must choose the correct response to this scenario: Which implementation step should the learner perform for 'Create and manage an Azure Container Registry'?
+The image release support team isolated the approved container image release incident to the attempt to deploy by digest so later tag changes cannot move the release. Which condition prevents success?
 
-- A. Inspect CPU, memory, restart policy, events, logs, and current container state.
-- B. Copy resource identifiers from another run instead of recording returned IDs.
-- C. Skip the operation and edit validation.json to show a passing result.
-- D. Replace the lab action with a tenant-wide change that is easier to discover.
+- A. The deployment uses the mutable latest tag and cannot prove which image content ran.
+- B. The identity exists but has no permission to pull image content from the registry.
+- C. A credential was stored as a plain environment variable in the committed deployment definition.
+- D. The design requires geo-replication while the registry uses a non-Premium SKU.
 
 ## LAB13-Q33 — Applied
 
-A lab run with a unique run ID reaches this decision: Which evidence most directly validates 'Provision a container by using Azure Container Instances' for Basic container registry?
+An approved container image release query surprises the container administrator publishing an approved image and running it in ACI during the image release attempt to let the runtime pull a private image without embedding an administrator password. Which finding explains it?
 
-- A. List the entire subscription and assume similarly named resources belong to this run.
-- B. Query the exact recorded scope and independently verify Microsoft.ContainerRegistry/registries.
-- C. Record a credential so another learner can replay the authenticated session.
-- D. Treat the setup exit code as proof of every configuration and relationship.
+- A. The source registry requires credentials that were not supplied to the import operation.
+- B. A completed batch job uses Always and repeatedly starts again.
+- C. The identity exists but has no permission to pull image content from the registry.
+- D. The deployment uses the mutable latest tag and cannot prove which image content ran.
 
 ## LAB13-Q34 — Applied
 
-While comparing the intended and actual states, the operator asks this question: A learner previews the implementation for 'Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps'. What behavior is required?
+Other approved container image release components are healthy, but the image release still cannot copy an existing image into the registry without a local pull and push. Which state causes the isolated failure?
 
-- A. Select the first accessible subscription and hide the resulting context.
-- B. Delete any older resource whose name resembles the new run ID.
-- C. Display the context, intended changes, cost and gated branches without mutating Azure.
-- D. Create the baseline immediately and request approval only before cleanup.
+- A. The source registry requires credentials that were not supplied to the import operation.
+- B. Two independently scaled services were placed in one container group.
+- C. The requested CPU and memory combination is unavailable in the deployment region.
+- D. The identity exists but has no permission to pull image content from the registry.
 
 ## LAB13-Q35 — Applied
 
-A peer reviewer examines the proposed implementation for this scenario: Which implementation step should the learner perform for 'Create and manage an Azure Container Registry'?
+During an image release fault drill, the approved container image release does not run sidecars inside one jointly managed execution unit. Which finding identifies the defect?
 
-- A. Copy resource identifiers from another run instead of recording returned IDs.
-- B. Skip the operation and edit validation.json to show a passing result.
-- C. Replace the lab action with a tenant-wide change that is easier to discover.
-- D. Inspect CPU, memory, restart policy, events, logs, and current container state.
+- A. The requested DNS label is already used in the selected region.
+- B. The deployment depends on an enabled registry admin password embedded in automation.
+- C. The source registry requires credentials that were not supplied to the import operation.
+- D. Two independently scaled services were placed in one container group.
 
 ## LAB13-Q36 — Applied
 
-During a controlled rollout, the change team encounters this requirement: Which evidence most directly validates 'Provision a container by using Azure Container Instances' for Basic container registry?
+The approved container image release setup finishes, yet the image release cannot publish a stable regional name for the container group's public endpoint. Which misconfiguration explains the mismatch?
 
-- A. Query the exact recorded scope and independently verify Microsoft.ContainerRegistry/registries.
-- B. Record a credential so another learner can replay the authenticated session.
-- C. Treat the setup exit code as proof of every configuration and relationship.
-- D. List the entire subscription and assume similarly named resources belong to this run.
+- A. A credential was stored as a plain environment variable in the committed deployment definition.
+- B. The requested DNS label is already used in the selected region.
+- C. The design requires geo-replication while the registry uses a non-Premium SKU.
+- D. Two independently scaled services were placed in one container group.
 
 ## LAB13-Q37 — Applied
 
-A support engineer reproduces the following situation in a test environment: A learner previews the implementation for 'Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps'. What behavior is required?
+An image release break/fix in the approved container image release fails when operators try to pass sensitive configuration without writing the clear value into ordinary output. Which diagnosis fits?
 
-- A. Delete any older resource whose name resembles the new run ID.
-- B. Display the context, intended changes, cost and gated branches without mutating Azure.
-- C. Create the baseline immediately and request approval only before cleanup.
-- D. Select the first accessible subscription and hide the resulting context.
+- A. A credential was stored as a plain environment variable in the committed deployment definition.
+- B. A completed batch job uses Always and repeatedly starts again.
+- C. The deployment uses the mutable latest tag and cannot prove which image content ran.
+- D. The requested DNS label is already used in the selected region.
 
 ## LAB13-Q38 — Applied
 
-While recording validation evidence, the administrator evaluates this question: Which implementation step should the learner perform for 'Create and manage an Azure Container Registry'?
+The approved container image release troubleshooting scope is the image release need to control whether a terminated container restarts. Which condition should be corrected first?
 
-- A. Skip the operation and edit validation.json to show a passing result.
-- B. Replace the lab action with a tenant-wide change that is easier to discover.
-- C. Inspect CPU, memory, restart policy, events, logs, and current container state.
-- D. Copy resource identifiers from another run instead of recording returned IDs.
+- A. The requested CPU and memory combination is unavailable in the deployment region.
+- B. A completed batch job uses Always and repeatedly starts again.
+- C. The identity exists but has no permission to pull image content from the registry.
+- D. A credential was stored as a plain environment variable in the committed deployment definition.
 
 ## LAB13-Q39 — Applied
 
-A configuration owner must approve one response to this scenario: Which evidence most directly validates 'Provision a container by using Azure Container Instances' for Basic container registry?
+The approved container image release result is partial because the image release cannot request CPU and memory values supported in the selected region. Which condition accounts for that result?
 
-- A. Record a credential so another learner can replay the authenticated session.
-- B. Treat the setup exit code as proof of every configuration and relationship.
-- C. List the entire subscription and assume similarly named resources belong to this run.
-- D. Query the exact recorded scope and independently verify Microsoft.ContainerRegistry/registries.
+- A. The requested CPU and memory combination is unavailable in the deployment region.
+- B. The deployment depends on an enabled registry admin password embedded in automation.
+- C. The source registry requires credentials that were not supplied to the import operation.
+- D. A completed batch job uses Always and repeatedly starts again.
 
 ## LAB13-Q40 — Applied
 
-During post-deployment verification, the team reviews this situation: A learner previews the implementation for 'Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps'. What behavior is required?
+The image release evidence shows the approved container image release cannot prefer an identity-scoped image pull over long-lived registry credentials. Which root cause fits that evidence?
 
-- A. Display the context, intended changes, cost and gated branches without mutating Azure.
-- B. Create the baseline immediately and request approval only before cleanup.
-- C. Select the first accessible subscription and hide the resulting context.
-- D. Delete any older resource whose name resembles the new run ID.
+- A. The design requires geo-replication while the registry uses a non-Premium SKU.
+- B. Two independently scaled services were placed in one container group.
+- C. The deployment depends on an enabled registry admin password embedded in automation.
+- D. The requested CPU and memory combination is unavailable in the deployment region.
 
 ## LAB13-Q41 — Advanced
 
-Validation for 'Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps' fails after setup. What is the best break/fix method?
+The approved container image release forbids a partial image release result. Operators must first choose registry capabilities and throughput appropriate for the image workload and afterward confirm the approved container image release outcome. Which image release sequence is complete?
 
-- A. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- B. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-- C. Rerun setup repeatedly with new names until one attempt appears successful.
-- D. Change validation.json directly so the failed result reads pass.
+- A. First, Assign the pull role to the workload identity and reference the private registry without embedding a password. Then, List the identity's role assignment and confirm the deployed image resolves from the private login server.
+- B. First, Choose the lowest registry SKU that meets throughput, storage, replication, and network-control requirements. Then, Query sku.name, provisioningState, loginServer, and configured premium features.
+- C. First, Pass secret values through a transient secure mechanism and never commit them in scripts or run-state files. Then, Inspect the container definition and evidence output to confirm secret values are redacted.
+- D. First, Set the restart policy from the workload's intended lifecycle and exit-code behavior. Then, Query restartPolicy, currentState, previousState, exitCode, and restartCount.
 
 ## LAB13-Q42 — Advanced
 
-During root-cause analysis, the team must resolve this question: Validation for 'Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps' fails after setup. What is the best break/fix method?
+Only the approved container image release change needed to deploy by digest so later tag changes cannot move the release is allowed, and image release proof is mandatory. Which pair fits?
 
-- A. Change validation.json directly so the failed result reads pass.
-- B. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- C. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-- D. Rerun setup repeatedly with new names until one attempt appears successful.
+- A. First, Import the approved source image into a uniquely versioned target repository and tag. Then, List the target repository and verify its tag, digest, and import timestamp.
+- B. First, Set the restart policy from the workload's intended lifecycle and exit-code behavior. Then, Query restartPolicy, currentState, previousState, exitCode, and restartCount.
+- C. First, Set explicit CPU and memory requests within the selected region's supported combinations. Then, Query each container's resources.requests and compare them with measured workload demand.
+- D. First, Use a unique version tag for delivery and retain the resolved digest for reproducible deployment evidence. Then, List repository manifests and match the selected tag to its sha256 digest.
 
 ## LAB13-Q43 — Advanced
 
-A security and reliability review identifies this design decision: Validation for 'Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps' fails after setup. What is the best break/fix method?
+The approved container image release runbook separates image release mutation from validation while it must let the runtime pull a private image without embedding an administrator password. Which sequence proves it cleanly?
 
-- A. Rerun setup repeatedly with new names until one attempt appears successful.
-- B. Change validation.json directly so the failed result reads pass.
-- C. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- D. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+- A. First, Assign the pull role to the workload identity and reference the private registry without embedding a password. Then, List the identity's role assignment and confirm the deployed image resolves from the private login server.
+- B. First, Place tightly coupled containers in one group only when they should share deployment lifecycle and network namespace. Then, Query container group provisioningState, instanceView state, IP configuration, and each container status.
+- C. First, Set explicit CPU and memory requests within the selected region's supported combinations. Then, Query each container's resources.requests and compare them with measured workload demand.
+- D. First, Prefer managed identity for the container pull path and leave the registry admin account disabled. Then, Query adminUserEnabled and confirm the workload identity's scoped pull assignment.
 
 ## LAB13-Q44 — Advanced
 
-While diagnosing unexpected Azure behavior, the engineer considers this situation: Validation for 'Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps' fails after setup. What is the best break/fix method?
+The approved container image release checkpoint requires both this image release outcome—copy an existing image into the registry without a local pull and push—and a read-only approved container image release state check. Which image release response is complete?
 
-- A. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-- B. Rerun setup repeatedly with new names until one attempt appears successful.
-- C. Change validation.json directly so the failed result reads pass.
-- D. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+- A. First, Check label availability and configure the DNS name label only for a deliberately public container group. Then, Query ipAddress.fqdn, type, ports, and the container's running state.
+- B. First, Import the approved source image into a uniquely versioned target repository and tag. Then, List the target repository and verify its tag, digest, and import timestamp.
+- C. First, Prefer managed identity for the container pull path and leave the registry admin account disabled. Then, Query adminUserEnabled and confirm the workload identity's scoped pull assignment.
+- D. First, Choose the lowest registry SKU that meets throughput, storage, replication, and network-control requirements. Then, Query sku.name, provisioningState, loginServer, and configured premium features.
 
 ## LAB13-Q45 — Advanced
 
-An architecture review requires the strongest response to this scenario: Validation for 'Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps' fails after setup. What is the best break/fix method?
+The approved container image release runbook must run sidecars inside one jointly managed execution unit, then retain image release read-back evidence. Which approved container image release pair completes both duties?
 
-- A. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- B. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-- C. Rerun setup repeatedly with new names until one attempt appears successful.
-- D. Change validation.json directly so the failed result reads pass.
+- A. First, Pass secret values through a transient secure mechanism and never commit them in scripts or run-state files. Then, Inspect the container definition and evidence output to confirm secret values are redacted.
+- B. First, Choose the lowest registry SKU that meets throughput, storage, replication, and network-control requirements. Then, Query sku.name, provisioningState, loginServer, and configured premium features.
+- C. First, Place tightly coupled containers in one group only when they should share deployment lifecycle and network namespace. Then, Query container group provisioningState, instanceView state, IP configuration, and each container status.
+- D. First, Use a unique version tag for delivery and retain the resolved digest for reproducible deployment evidence. Then, List repository manifests and match the selected tag to its sha256 digest.
 
 ## LAB13-Q46 — Advanced
 
-During break/fix validation, the operator encounters this question: Validation for 'Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps' fails after setup. What is the best break/fix method?
+To satisfy the image release requirement, operators must change the approved container image release configuration and prove it can publish a stable regional name for the container group's public endpoint. Which sequence is coherent?
 
-- A. Change validation.json directly so the failed result reads pass.
-- B. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- C. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-- D. Rerun setup repeatedly with new names until one attempt appears successful.
+- A. First, Set the restart policy from the workload's intended lifecycle and exit-code behavior. Then, Query restartPolicy, currentState, previousState, exitCode, and restartCount.
+- B. First, Use a unique version tag for delivery and retain the resolved digest for reproducible deployment evidence. Then, List repository manifests and match the selected tag to its sha256 digest.
+- C. First, Check label availability and configure the DNS name label only for a deliberately public container group. Then, Query ipAddress.fqdn, type, ports, and the container's running state.
+- D. First, Assign the pull role to the workload identity and reference the private registry without embedding a password. Then, List the identity's role assignment and confirm the deployed image resolves from the private login server.
 
 ## LAB13-Q47 — Advanced
 
-A complex support case depends on correctly interpreting this requirement: Validation for 'Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps' fails after setup. What is the best break/fix method?
+The container administrator publishing an approved image and running it in ACI needs a safe approved container image release change to pass sensitive configuration without writing the clear value into ordinary output, followed by image release evidence. Which pair merits approval?
 
-- A. Rerun setup repeatedly with new names until one attempt appears successful.
-- B. Change validation.json directly so the failed result reads pass.
-- C. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- D. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+- A. First, Set explicit CPU and memory requests within the selected region's supported combinations. Then, Query each container's resources.requests and compare them with measured workload demand.
+- B. First, Pass secret values through a transient secure mechanism and never commit them in scripts or run-state files. Then, Inspect the container definition and evidence output to confirm secret values are redacted.
+- C. First, Assign the pull role to the workload identity and reference the private registry without embedding a password. Then, List the identity's role assignment and confirm the deployed image resolves from the private login server.
+- D. First, Import the approved source image into a uniquely versioned target repository and tag. Then, List the target repository and verify its tag, digest, and import timestamp.
 
 ## LAB13-Q48 — Advanced
 
-While correcting configuration drift, the team evaluates this scenario: Validation for 'Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps' fails after setup. What is the best break/fix method?
+The approved container image release has two image release gates: control whether a terminated container restarts, then prove the approved container image release state. Which image release sequence works?
 
-- A. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-- B. Rerun setup repeatedly with new names until one attempt appears successful.
-- C. Change validation.json directly so the failed result reads pass.
-- D. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+- A. First, Prefer managed identity for the container pull path and leave the registry admin account disabled. Then, Query adminUserEnabled and confirm the workload identity's scoped pull assignment.
+- B. First, Import the approved source image into a uniquely versioned target repository and tag. Then, List the target repository and verify its tag, digest, and import timestamp.
+- C. First, Set the restart policy from the workload's intended lifecycle and exit-code behavior. Then, Query restartPolicy, currentState, previousState, exitCode, and restartCount.
+- D. First, Place tightly coupled containers in one group only when they should share deployment lifecycle and network namespace. Then, Query container group provisioningState, instanceView state, IP configuration, and each container status.
 
 ## LAB13-Q49 — Advanced
 
-A recovery exercise exposes the following technical decision: Validation for 'Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps' fails after setup. What is the best break/fix method?
+Which image release path makes the approved container image release able to request CPU and memory values supported in the selected region, then inspects the defining properties?
 
-- A. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- B. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-- C. Rerun setup repeatedly with new names until one attempt appears successful.
-- D. Change validation.json directly so the failed result reads pass.
+- A. First, Choose the lowest registry SKU that meets throughput, storage, replication, and network-control requirements. Then, Query sku.name, provisioningState, loginServer, and configured premium features.
+- B. First, Set explicit CPU and memory requests within the selected region's supported combinations. Then, Query each container's resources.requests and compare them with measured workload demand.
+- C. First, Place tightly coupled containers in one group only when they should share deployment lifecycle and network namespace. Then, Query container group provisioningState, instanceView state, IP configuration, and each container status.
+- D. First, Check label availability and configure the DNS name label only for a deliberately public container group. Then, Query ipAddress.fqdn, type, ports, and the container's running state.
 
 ## LAB13-Q50 — Advanced
 
-During final design assurance, the reviewer must resolve this situation: Validation for 'Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps' fails after setup. What is the best break/fix method?
+At the approved container image release approval gate, operators must show that the image release can prefer an identity-scoped image pull over long-lived registry credentials. Which image release configure-and-check pair is defensible?
 
-- A. Change validation.json directly so the failed result reads pass.
-- B. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- C. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-- D. Rerun setup repeatedly with new names until one attempt appears successful.
+- A. First, Prefer managed identity for the container pull path and leave the registry admin account disabled. Then, Query adminUserEnabled and confirm the workload identity's scoped pull assignment.
+- B. First, Use a unique version tag for delivery and retain the resolved digest for reproducible deployment evidence. Then, List repository manifests and match the selected tag to its sha256 digest.
+- C. First, Check label availability and configure the DNS name label only for a deliberately public container group. Then, Query ipAddress.fqdn, type, ports, and the container's running state.
+- D. First, Pass secret values through a transient secure mechanism and never commit them in scripts or run-state files. Then, Inspect the container definition and evidence output to confirm secret values are redacted.
+
+[Open the answer key](./ANSWERS.md)

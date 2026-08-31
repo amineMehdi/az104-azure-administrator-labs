@@ -1,453 +1,459 @@
 # Lab 17 knowledge check
 
-Choose the single best answer for each question. Record your choices before opening `ANSWERS.md`.
+[Return to the guided lab](../README.md)
+
+Complete all 50 questions before opening the answer key. Allow about 50–60 minutes and choose the single best answer.
+
+Use the result as a learning signal: 85–100% indicates mastery, 70–84% calls for targeted review, and below 70% means repeat the mapped lab tasks before retrying.
 
 ## LAB17-Q01 — Foundational
 
-Which principle is most important when working on 'Create and configure virtual networks and subnets' in Lab 17?
+The hub-and-spoke network build handoff omits the network peering rule needed to connect networks without overlapping their address ranges. Which statement should the team add?
 
-- A. A recognizable resource name removes the need for validation and scoped cleanup.
-- B. VNet peering is non-transitive and requires compatible address spaces and two directional peering objects, while Standard public IPs are secure by default until an NSG permits traffic.
-- C. The shortest command is always correct even when it changes a broader scope.
-- D. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+- A. Peered virtual networks require nonoverlapping IP address spaces for routable connectivity.
+- B. Each subnet prefix must fit inside its virtual network address space and cannot overlap another subnet in that network.
+- C. The allowForwardedTraffic setting controls whether traffic forwarded by a network virtual appliance can cross a peering.
+- D. A Standard public IP can be zone-redundant or zonal in supported regions, and its zone choice must fit the attached resource design.
 
 ## LAB17-Q02 — Foundational
 
-Which lab action directly supports the objective 'Create and configure virtual network peering'?
+A network peering incident review of the hub-and-spoke network build depends on the ability to reserve subnet ranges that do not collide with future network segments. Which platform description is reliable?
 
-- A. Mark the objective complete after reading documentation without checking any state.
-- B. Change the active tenant without displaying or confirming the resulting context.
-- C. Create both sides of VNet peering and interpret Connected, Initiated, and Disconnected states.
-- D. Search the whole tenant for a similar display name and modify the first match.
+- A. Each subnet prefix must fit inside its virtual network address space and cannot overlap another subnet in that network.
+- B. A usable virtual-network peering relationship has one peering resource in each direction.
+- C. Standard public IP addresses are secure by default and require an NSG rule to permit inbound traffic to an attached resource.
+- D. Custom DNS server addresses configured on a virtual network are inherited by attached interfaces after renewal, and the DNS servers must be reachable.
 
 ## LAB17-Q03 — Foundational
 
-Which authorization approach is appropriate before practicing 'Configure public IP addresses'?
+A network administrator connecting hub and spoke address spaces is updating the network peering runbook. The requirement is to create both directional control-plane links required for connected networks. Which statement describes Azure behavior correctly?
 
-- A. Skip role checks when the run ID contains the lab number.
-- B. Use a production subscription because its resources already exist.
-- C. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
-- D. Confirm the active context and use only the declared role boundary: Network Contributor on the lab resource group
+- A. Gateway transit requires one side to allow gateway transit and the other to use the remote gateway, with topology constraints.
+- B. A static public IP retains its assigned address while the resource exists, subject to platform lifecycle behavior.
+- C. A usable virtual-network peering relationship has one peering resource in each direction.
+- D. Virtual-network peering is not transitive; peering A to B and B to C does not automatically connect A to C.
 
 ## LAB17-Q04 — Foundational
 
-Before making a change, a learner checks this core behavior: Which principle is most important when working on 'Create and configure virtual networks and subnets' in Lab 17?
+A network peering peer review asks how the hub-and-spoke network build should handle this outcome: let a spoke use a hub gateway only when both peering sides permit it. Which explanation is accurate?
 
-- A. VNet peering is non-transitive and requires compatible address spaces and two directional peering objects, while Standard public IPs are secure by default until an NSG permits traffic.
-- B. The shortest command is always correct even when it changes a broader scope.
-- C. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- D. A recognizable resource name removes the need for validation and scoped cleanup.
+- A. The allowForwardedTraffic setting controls whether traffic forwarded by a network virtual appliance can cross a peering.
+- B. A Standard public IP can be zone-redundant or zonal in supported regions, and its zone choice must fit the attached resource design.
+- C. Gateway transit requires one side to allow gateway transit and the other to use the remote gateway, with topology constraints.
+- D. Peered virtual networks require nonoverlapping IP address spaces for routable connectivity.
 
 ## LAB17-Q05 — Foundational
 
-During a design vocabulary review, the team evaluates this situation: Which lab action directly supports the objective 'Create and configure virtual network peering'?
+For the hub-and-spoke network build, the network peering plan must carry forwarded packets from an NVA across connected networks. Which statement about network peering belongs in the hub-and-spoke network build record?
 
-- A. Change the active tenant without displaying or confirming the resulting context.
-- B. Create both sides of VNet peering and interpret Connected, Initiated, and Disconnected states.
-- C. Search the whole tenant for a similar display name and modify the first match.
-- D. Mark the objective complete after reading documentation without checking any state.
+- A. The allowForwardedTraffic setting controls whether traffic forwarded by a network virtual appliance can cross a peering.
+- B. Standard public IP addresses are secure by default and require an NSG rule to permit inbound traffic to an attached resource.
+- C. Custom DNS server addresses configured on a virtual network are inherited by attached interfaces after renewal, and the DNS servers must be reachable.
+- D. Each subnet prefix must fit inside its virtual network address space and cannot overlap another subnet in that network.
 
 ## LAB17-Q06 — Foundational
 
-In a command-planning session, an administrator asks this question: Which authorization approach is appropriate before practicing 'Configure public IP addresses'?
+The network peering review compares four claims for the hub-and-spoke network build requirement to use the production public-address SKU with secure defaults. Which claim is technically sound?
 
-- A. Use a production subscription because its resources already exist.
-- B. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
-- C. Confirm the active context and use only the declared role boundary: Network Contributor on the lab resource group
-- D. Skip role checks when the run ID contains the lab number.
+- A. A static public IP retains its assigned address while the resource exists, subject to platform lifecycle behavior.
+- B. Standard public IP addresses are secure by default and require an NSG rule to permit inbound traffic to an attached resource.
+- C. Virtual-network peering is not transitive; peering A to B and B to C does not automatically connect A to C.
+- D. A usable virtual-network peering relationship has one peering resource in each direction.
 
 ## LAB17-Q07 — Foundational
 
-While preparing the lab, a learner verifies this platform rule: Which principle is most important when working on 'Create and configure virtual networks and subnets' in Lab 17?
+The network peering architecture note requires the hub-and-spoke network build environment to keep the assigned public address stable across resource restarts. Which statement defines the relevant network peering boundary?
 
-- A. The shortest command is always correct even when it changes a broader scope.
-- B. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- C. A recognizable resource name removes the need for validation and scoped cleanup.
-- D. VNet peering is non-transitive and requires compatible address spaces and two directional peering objects, while Standard public IPs are secure by default until an NSG permits traffic.
+- A. A Standard public IP can be zone-redundant or zonal in supported regions, and its zone choice must fit the attached resource design.
+- B. Peered virtual networks require nonoverlapping IP address spaces for routable connectivity.
+- C. A static public IP retains its assigned address while the resource exists, subject to platform lifecycle behavior.
+- D. Gateway transit requires one side to allow gateway transit and the other to use the remote gateway, with topology constraints.
 
 ## LAB17-Q08 — Foundational
 
-During peer review, the team must identify the accurate response to this scenario: Which lab action directly supports the objective 'Create and configure virtual network peering'?
+A new network peering operator must explain why the hub-and-spoke network build can pin a public address to the intended availability-zone design. Which explanation is accurate?
 
-- A. Create both sides of VNet peering and interpret Connected, Initiated, and Disconnected states.
-- B. Search the whole tenant for a similar display name and modify the first match.
-- C. Mark the objective complete after reading documentation without checking any state.
-- D. Change the active tenant without displaying or confirming the resulting context.
+- A. Custom DNS server addresses configured on a virtual network are inherited by attached interfaces after renewal, and the DNS servers must be reachable.
+- B. Each subnet prefix must fit inside its virtual network address space and cannot overlap another subnet in that network.
+- C. The allowForwardedTraffic setting controls whether traffic forwarded by a network virtual appliance can cross a peering.
+- D. A Standard public IP can be zone-redundant or zonal in supported regions, and its zone choice must fit the attached resource design.
 
 ## LAB17-Q09 — Foundational
 
-In an operations briefing, a new team member receives this question: Which authorization approach is appropriate before practicing 'Configure public IP addresses'?
+The hub-and-spoke network build acceptance criteria require operators to make virtual machines use approved custom DNS resolvers. Which service fact supports that requirement?
 
-- A. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
-- B. Confirm the active context and use only the declared role boundary: Network Contributor on the lab resource group
-- C. Skip role checks when the run ID contains the lab number.
-- D. Use a production subscription because its resources already exist.
+- A. Virtual-network peering is not transitive; peering A to B and B to C does not automatically connect A to C.
+- B. A usable virtual-network peering relationship has one peering resource in each direction.
+- C. Standard public IP addresses are secure by default and require an NSG rule to permit inbound traffic to an attached resource.
+- D. Custom DNS server addresses configured on a virtual network are inherited by attached interfaces after renewal, and the DNS servers must be reachable.
 
 ## LAB17-Q10 — Foundational
 
-While building a support checklist, an engineer reviews this requirement: Which principle is most important when working on 'Create and configure virtual networks and subnets' in Lab 17?
+A network peering reviewer challenges whether the hub-and-spoke network build can avoid assuming that connectivity automatically crosses a second peering hop. Which response resolves the concern?
 
-- A. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- B. A recognizable resource name removes the need for validation and scoped cleanup.
-- C. VNet peering is non-transitive and requires compatible address spaces and two directional peering objects, while Standard public IPs are secure by default until an NSG permits traffic.
-- D. The shortest command is always correct even when it changes a broader scope.
+- A. Peered virtual networks require nonoverlapping IP address spaces for routable connectivity.
+- B. Gateway transit requires one side to allow gateway transit and the other to use the remote gateway, with topology constraints.
+- C. A static public IP retains its assigned address while the resource exists, subject to platform lifecycle behavior.
+- D. Virtual-network peering is not transitive; peering A to B and B to C does not automatically connect A to C.
 
 ## LAB17-Q11 — Foundational
 
-During a readiness check, the administrator considers this behavior: Which lab action directly supports the objective 'Create and configure virtual network peering'?
+The network peering preflight has passed; the hub-and-spoke network build must now connect networks without overlapping their address ranges. Which operation should run?
 
-- A. Search the whole tenant for a similar display name and modify the first match.
-- B. Mark the objective complete after reading documentation without checking any state.
-- C. Change the active tenant without displaying or confirming the resulting context.
-- D. Create both sides of VNet peering and interpret Connected, Initiated, and Disconnected states.
+- A. Create and validate both local-to-remote and remote-to-local peering objects.
+- B. Use Standard SKU and add only the required inbound NSG exposure.
+- C. Allocate approved RFC 1918 ranges and check them against existing and planned connected networks.
+- D. Configure approved resolver IP addresses and renew affected clients when required.
 
 ## LAB17-Q12 — Foundational
 
-In a service overview, the team discusses this scenario: Which authorization approach is appropriate before practicing 'Configure public IP addresses'?
+The hub-and-spoke network build plan must reserve subnet ranges that do not collide with future network segments while limiting the mutation scope to network peering. Which action is appropriate?
 
-- A. Confirm the active context and use only the declared role boundary: Network Contributor on the lab resource group
-- B. Skip role checks when the run ID contains the lab number.
-- C. Use a production subscription because its resources already exist.
-- D. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
+- A. Configure allowGatewayTransit and useRemoteGateways on the correct opposite peering objects.
+- B. Reserve distinct prefixes for workloads, private endpoints, gateways, and platform-specific subnets.
+- C. Use static allocation when DNS or allowlists require a stable public address.
+- D. Create the required direct peering or introduce an approved routed hub design.
 
 ## LAB17-Q13 — Foundational
 
-While reviewing official guidance, a learner must resolve this question: Which principle is most important when working on 'Create and configure virtual networks and subnets' in Lab 17?
+A network peering ticket in the hub-and-spoke network build says to create both directional control-plane links required for connected networks. Which network peering action completes the hub-and-spoke network build request with minimal change?
 
-- A. A recognizable resource name removes the need for validation and scoped cleanup.
-- B. VNet peering is non-transitive and requires compatible address spaces and two directional peering objects, while Standard public IPs are secure by default until an NSG permits traffic.
-- C. The shortest command is always correct even when it changes a broader scope.
-- D. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+- A. Enable forwarded traffic only on the peering directions required by the approved routing design.
+- B. Create and validate both local-to-remote and remote-to-local peering objects.
+- C. Select zone-redundant placement for regional zonal resilience when supported.
+- D. Allocate approved RFC 1918 ranges and check them against existing and planned connected networks.
 
 ## LAB17-Q14 — Foundational
 
-During a configuration walkthrough, the instructor asks about this situation: Which lab action directly supports the objective 'Create and configure virtual network peering'?
+The approach for the hub-and-spoke network build is approved, but the network peering environment still cannot let a spoke use a hub gateway only when both peering sides permit it. Which implementation step closes the gap?
 
-- A. Mark the objective complete after reading documentation without checking any state.
-- B. Change the active tenant without displaying or confirming the resulting context.
-- C. Create both sides of VNet peering and interpret Connected, Initiated, and Disconnected states.
-- D. Search the whole tenant for a similar display name and modify the first match.
+- A. Use Standard SKU and add only the required inbound NSG exposure.
+- B. Configure approved resolver IP addresses and renew affected clients when required.
+- C. Reserve distinct prefixes for workloads, private endpoints, gateways, and platform-specific subnets.
+- D. Configure allowGatewayTransit and useRemoteGateways on the correct opposite peering objects.
 
 ## LAB17-Q15 — Foundational
 
-In a preflight knowledge check, the operator evaluates this requirement: Which authorization approach is appropriate before practicing 'Configure public IP addresses'?
+The network administrator connecting hub and spoke address spaces may change the hub-and-spoke network build only to carry forwarded packets from an NVA across connected networks. Which network peering action stays within that assignment?
 
-- A. Skip role checks when the run ID contains the lab number.
-- B. Use a production subscription because its resources already exist.
-- C. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
-- D. Confirm the active context and use only the declared role boundary: Network Contributor on the lab resource group
+- A. Enable forwarded traffic only on the peering directions required by the approved routing design.
+- B. Use static allocation when DNS or allowlists require a stable public address.
+- C. Create the required direct peering or introduce an approved routed hub design.
+- D. Create and validate both local-to-remote and remote-to-local peering objects.
 
 ## LAB17-Q16 — Applied
 
-A learner previews the implementation for 'Create and configure virtual networks and subnets'. What behavior is required?
+A network peering dry run shows no hub-and-spoke network build command will use the production public-address SKU with secure defaults. Which action belongs before execution?
 
-- A. Display the context, intended changes, cost and gated branches without mutating Azure.
-- B. Create the baseline immediately and request approval only before cleanup.
-- C. Select the first accessible subscription and hide the resulting context.
-- D. Delete any older resource whose name resembles the new run ID.
+- A. Select zone-redundant placement for regional zonal resilience when supported.
+- B. Allocate approved RFC 1918 ranges and check them against existing and planned connected networks.
+- C. Configure allowGatewayTransit and useRemoteGateways on the correct opposite peering objects.
+- D. Use Standard SKU and add only the required inbound NSG exposure.
 
 ## LAB17-Q17 — Applied
 
-Which implementation step should the learner perform for 'Create and configure virtual network peering'?
+For the hub-and-spoke network build, operators need to keep the assigned public address stable across resource restarts. Which change realizes that requirement?
 
-- A. Skip the operation and edit validation.json to show a passing result.
-- B. Create hub and spoke address spaces that do not overlap and subdivide them into purpose-specific subnets.
-- C. Replace the lab action with a tenant-wide change that is easier to discover.
-- D. Copy resource identifiers from another run instead of recording returned IDs.
+- A. Configure approved resolver IP addresses and renew affected clients when required.
+- B. Reserve distinct prefixes for workloads, private endpoints, gateways, and platform-specific subnets.
+- C. Enable forwarded traffic only on the peering directions required by the approved routing design.
+- D. Use static allocation when DNS or allowlists require a stable public address.
 
 ## LAB17-Q18 — Applied
 
-Which evidence most directly validates 'Configure public IP addresses' for resource group?
+Operators must automate the hub-and-spoke network build change needed to pin a public address to the intended availability-zone design. Which network peering operation belongs in the runbook?
 
-- A. Record a credential so another learner can replay the authenticated session.
-- B. Treat the setup exit code as proof of every configuration and relationship.
-- C. Query the exact recorded scope and independently verify Microsoft.Network/publicIPAddresses.
-- D. List the entire subscription and assume similarly named resources belong to this run.
+- A. Select zone-redundant placement for regional zonal resilience when supported.
+- B. Create the required direct peering or introduce an approved routed hub design.
+- C. Create and validate both local-to-remote and remote-to-local peering objects.
+- D. Use Standard SKU and add only the required inbound NSG exposure.
 
 ## LAB17-Q19 — Applied
 
-The 'Create and configure virtual networks and subnets' checkpoint reaches an external prerequisite. What should happen?
+A hub-and-spoke network build review finds network peering drift from the need to make virtual machines use approved custom DNS resolvers. Which correction addresses that drift?
 
-- A. Mark the branch passed because its command syntax was checked offline.
-- B. Invent a domain, notification target, license, quota, or tenant value and continue.
-- C. Broaden permissions until the prerequisite can no longer block the operation.
-- D. Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.
+- A. Allocate approved RFC 1918 ranges and check them against existing and planned connected networks.
+- B. Configure allowGatewayTransit and useRemoteGateways on the correct opposite peering objects.
+- C. Use static allocation when DNS or allowlists require a stable public address.
+- D. Configure approved resolver IP addresses and renew affected clients when required.
 
 ## LAB17-Q20 — Applied
 
-What is the safest command-evidence practice after completing 'Create and configure virtual network peering'?
+The hub-and-spoke network build window permits only the network peering change needed to avoid assuming that connectivity automatically crosses a second peering hop. Which option respects the boundary?
 
-- A. Retain only redacted structured output from an independent query of the recorded run.
-- B. Commit the complete account object so reviewers can identify the tenant.
-- C. Save tokens, keys, passwords, or SAS values beside the validation result.
-- D. Reuse successful output from an earlier run with a similar resource name.
+- A. Create the required direct peering or introduce an approved routed hub design.
+- B. Reserve distinct prefixes for workloads, private endpoints, gateways, and platform-specific subnets.
+- C. Enable forwarded traffic only on the peering directions required by the approved routing design.
+- D. Select zone-redundant placement for regional zonal resilience when supported.
 
 ## LAB17-Q21 — Applied
 
-While validating a configuration, the team evaluates this situation: A learner previews the implementation for 'Create and configure virtual networks and subnets'. What behavior is required?
+The hub-and-spoke network build evidence bundle needs a network peering result showing it can connect networks without overlapping their address ranges. Which result belongs in the checkpoint?
 
-- A. Delete any older resource whose name resembles the new run ID.
-- B. Display the context, intended changes, cost and gated branches without mutating Azure.
-- C. Create the baseline immediately and request approval only before cleanup.
-- D. Select the first accessible subscription and hide the resulting context.
+- A. Query both peerings and confirm the gateway flags and connected state.
+- B. Query every addressSpace.addressPrefixes value and prove no peered range overlaps.
+- C. Query publicIPAllocationMethod and persist the assigned ipAddress after provisioning.
+- D. Inspect effective routes from the source and test the exact destination path.
 
 ## LAB17-Q22 — Applied
 
-A delegated administrator receives the following support request: Which implementation step should the learner perform for 'Create and configure virtual network peering'?
+Before hub-and-spoke network build cleanup, the network peering team must reconfirm it can reserve subnet ranges that do not collide with future network segments. Which read-only inspection should run?
 
-- A. Copy resource identifiers from another run instead of recording returned IDs.
-- B. Skip the operation and edit validation.json to show a passing result.
-- C. Create hub and spoke address spaces that do not overlap and subdivide them into purpose-specific subnets.
-- D. Replace the lab action with a tenant-wide change that is easier to discover.
+- A. Read allowForwardedTraffic on both directional peering resources.
+- B. List subnet prefixes and verify containment, nonoverlap, delegations, and available addresses.
+- C. Query the public IP zones array and the region's zone support.
+- D. Query every addressSpace.addressPrefixes value and prove no peered range overlaps.
 
 ## LAB17-Q23 — Applied
 
-During a maintenance window, an engineer must decide how to respond: Which evidence most directly validates 'Configure public IP addresses' for resource group?
+The hub-and-spoke network build setup reports success after the network peering attempt to create both directional control-plane links required for connected networks. Which network peering read-only observation proves the hub-and-spoke network build outcome?
 
-- A. List the entire subscription and assume similarly named resources belong to this run.
-- B. Record a credential so another learner can replay the authenticated session.
-- C. Treat the setup exit code as proof of every configuration and relationship.
-- D. Query the exact recorded scope and independently verify Microsoft.Network/publicIPAddresses.
+- A. Query sku.name, publicIPAllocationMethod, ipAddress, and associated IP configuration.
+- B. Query peeringState and peeringSyncLevel on both virtual networks.
+- C. Query dhcpOptions.dnsServers and test resolution from a VM after renewing its configuration.
+- D. List subnet prefixes and verify containment, nonoverlap, delegations, and available addresses.
 
 ## LAB17-Q24 — Applied
 
-A deployment pipeline reaches this decision point: The 'Create and configure virtual networks and subnets' checkpoint reaches an external prerequisite. What should happen?
+The network peering log says the hub-and-spoke network build can now let a spoke use a hub gateway only when both peering sides permit it. Which network peering state should the hub-and-spoke network build acceptance test retain?
 
-- A. Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.
-- B. Mark the branch passed because its command syntax was checked offline.
-- C. Invent a domain, notification target, license, quota, or tenant value and continue.
-- D. Broaden permissions until the prerequisite can no longer block the operation.
+- A. Query publicIPAllocationMethod and persist the assigned ipAddress after provisioning.
+- B. Inspect effective routes from the source and test the exact destination path.
+- C. Query peeringState and peeringSyncLevel on both virtual networks.
+- D. Query both peerings and confirm the gateway flags and connected state.
 
 ## LAB17-Q25 — Applied
 
-While applying least-privilege controls, the administrator reviews this scenario: What is the safest command-evidence practice after completing 'Create and configure virtual network peering'?
+The hub-and-spoke network build rejects network peering exit status as proof it can carry forwarded packets from an NVA across connected networks. Which hub-and-spoke network build result is valid evidence?
 
-- A. Reuse successful output from an earlier run with a similar resource name.
-- B. Retain only redacted structured output from an independent query of the recorded run.
-- C. Commit the complete account object so reviewers can identify the tenant.
-- D. Save tokens, keys, passwords, or SAS values beside the validation result.
+- A. Query the public IP zones array and the region's zone support.
+- B. Query every addressSpace.addressPrefixes value and prove no peered range overlaps.
+- C. Query both peerings and confirm the gateway flags and connected state.
+- D. Read allowForwardedTraffic on both directional peering resources.
 
 ## LAB17-Q26 — Applied
 
-A repeatable Azure CLI workflow must address this requirement: A learner previews the implementation for 'Create and configure virtual networks and subnets'. What behavior is required?
+The network peering validator needs one hub-and-spoke network build query after the change to use the production public-address SKU with secure defaults. Which network peering property should the hub-and-spoke network build validator inspect?
 
-- A. Select the first accessible subscription and hide the resulting context.
-- B. Delete any older resource whose name resembles the new run ID.
-- C. Display the context, intended changes, cost and gated branches without mutating Azure.
-- D. Create the baseline immediately and request approval only before cleanup.
+- A. Query dhcpOptions.dnsServers and test resolution from a VM after renewing its configuration.
+- B. List subnet prefixes and verify containment, nonoverlap, delegations, and available addresses.
+- C. Query sku.name, publicIPAllocationMethod, ipAddress, and associated IP configuration.
+- D. Read allowForwardedTraffic on both directional peering resources.
 
 ## LAB17-Q27 — Applied
 
-During an environment handoff, the receiving team asks this question: Which implementation step should the learner perform for 'Create and configure virtual network peering'?
+The network administrator connecting hub and spoke address spaces must confirm the hub-and-spoke network build, without mutation, can keep the assigned public address stable across resource restarts. Which network peering check qualifies?
 
-- A. Replace the lab action with a tenant-wide change that is easier to discover.
-- B. Copy resource identifiers from another run instead of recording returned IDs.
-- C. Skip the operation and edit validation.json to show a passing result.
-- D. Create hub and spoke address spaces that do not overlap and subdivide them into purpose-specific subnets.
+- A. Inspect effective routes from the source and test the exact destination path.
+- B. Query publicIPAllocationMethod and persist the assigned ipAddress after provisioning.
+- C. Query peeringState and peeringSyncLevel on both virtual networks.
+- D. Query sku.name, publicIPAllocationMethod, ipAddress, and associated IP configuration.
 
 ## LAB17-Q28 — Applied
 
-A configuration change produces the following operational choice: Which evidence most directly validates 'Configure public IP addresses' for resource group?
+The hub-and-spoke network build configuration is complete; the network peering reviewers need evidence it can pin a public address to the intended availability-zone design. Which observation shows success?
 
-- A. Query the exact recorded scope and independently verify Microsoft.Network/publicIPAddresses.
-- B. List the entire subscription and assume similarly named resources belong to this run.
-- C. Record a credential so another learner can replay the authenticated session.
-- D. Treat the setup exit code as proof of every configuration and relationship.
+- A. Query the public IP zones array and the region's zone support.
+- B. Query every addressSpace.addressPrefixes value and prove no peered range overlaps.
+- C. Query both peerings and confirm the gateway flags and connected state.
+- D. Query publicIPAllocationMethod and persist the assigned ipAddress after provisioning.
 
 ## LAB17-Q29 — Applied
 
-While preparing independent validation, an engineer considers this scenario: The 'Create and configure virtual networks and subnets' checkpoint reaches an external prerequisite. What should happen?
+The network peering validation asks whether the hub-and-spoke network build can make virtual machines use approved custom DNS resolvers. Which observable state is strongest?
 
-- A. Broaden permissions until the prerequisite can no longer block the operation.
-- B. Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.
-- C. Mark the branch passed because its command syntax was checked offline.
-- D. Invent a domain, notification target, license, quota, or tenant value and continue.
+- A. Query dhcpOptions.dnsServers and test resolution from a VM after renewing its configuration.
+- B. List subnet prefixes and verify containment, nonoverlap, delegations, and available addresses.
+- C. Read allowForwardedTraffic on both directional peering resources.
+- D. Query the public IP zones array and the region's zone support.
 
 ## LAB17-Q30 — Applied
 
-A service owner asks the administrator to resolve this requirement: What is the safest command-evidence practice after completing 'Create and configure virtual network peering'?
+A hub-and-spoke network build review must prove the network peering ability to avoid assuming that connectivity automatically crosses a second peering hop. Which check avoids an adjacent feature?
 
-- A. Save tokens, keys, passwords, or SAS values beside the validation result.
-- B. Reuse successful output from an earlier run with a similar resource name.
-- C. Retain only redacted structured output from an independent query of the recorded run.
-- D. Commit the complete account object so reviewers can identify the tenant.
+- A. Query peeringState and peeringSyncLevel on both virtual networks.
+- B. Inspect effective routes from the source and test the exact destination path.
+- C. Query sku.name, publicIPAllocationMethod, ipAddress, and associated IP configuration.
+- D. Query dhcpOptions.dnsServers and test resolution from a VM after renewing its configuration.
 
 ## LAB17-Q31 — Applied
 
-During a scoped cleanup review, the team evaluates this situation: A learner previews the implementation for 'Create and configure virtual networks and subnets'. What behavior is required?
+A hub-and-spoke network build query surprises the network administrator connecting hub and spoke address spaces during the network peering attempt to connect networks without overlapping their address ranges. Which finding explains it?
 
-- A. Create the baseline immediately and request approval only before cleanup.
-- B. Select the first accessible subscription and hide the resulting context.
-- C. Delete any older resource whose name resembles the new run ID.
-- D. Display the context, intended changes, cost and gated branches without mutating Azure.
+- A. The proposed subnet prefix overlaps an existing application subnet.
+- B. A Standard public IP is attached, but no NSG rule allows the intended inbound flow.
+- C. The two virtual networks contain overlapping prefixes.
+- D. The topology assumes two peering hops provide automatic transitive routing.
 
 ## LAB17-Q32 — Applied
 
-An automation author must choose the correct response to this scenario: Which implementation step should the learner perform for 'Create and configure virtual network peering'?
+Other hub-and-spoke network build components are healthy, but the network peering still cannot reserve subnet ranges that do not collide with future network segments. Which state causes the isolated failure?
 
-- A. Create hub and spoke address spaces that do not overlap and subdivide them into purpose-specific subnets.
-- B. Replace the lab action with a tenant-wide change that is easier to discover.
-- C. Copy resource identifiers from another run instead of recording returned IDs.
-- D. Skip the operation and edit validation.json to show a passing result.
+- A. Only one directional peering object was created.
+- B. A dynamic allocation was selected for an address consumed by an external allowlist.
+- C. The proposed subnet prefix overlaps an existing application subnet.
+- D. The two virtual networks contain overlapping prefixes.
 
 ## LAB17-Q33 — Applied
 
-A lab run with a unique run ID reaches this decision: Which evidence most directly validates 'Configure public IP addresses' for resource group?
+During a network peering fault drill, the hub-and-spoke network build does not create both directional control-plane links required for connected networks. Which finding identifies the defect?
 
-- A. Treat the setup exit code as proof of every configuration and relationship.
-- B. Query the exact recorded scope and independently verify Microsoft.Network/publicIPAddresses.
-- C. List the entire subscription and assume similarly named resources belong to this run.
-- D. Record a credential so another learner can replay the authenticated session.
+- A. Both sides attempt to use a remote gateway, which is not a valid transit relationship.
+- B. Only one directional peering object was created.
+- C. A zonal frontend address is bound to a design that expects zone-redundant availability.
+- D. The proposed subnet prefix overlaps an existing application subnet.
 
 ## LAB17-Q34 — Applied
 
-While comparing the intended and actual states, the operator asks this question: The 'Create and configure virtual networks and subnets' checkpoint reaches an external prerequisite. What should happen?
+The hub-and-spoke network build setup finishes, yet the network peering cannot let a spoke use a hub gateway only when both peering sides permit it. Which misconfiguration explains the mismatch?
 
-- A. Invent a domain, notification target, license, quota, or tenant value and continue.
-- B. Broaden permissions until the prerequisite can no longer block the operation.
-- C. Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.
-- D. Mark the branch passed because its command syntax was checked offline.
+- A. Both sides attempt to use a remote gateway, which is not a valid transit relationship.
+- B. An NVA forwards packets, but the receiving peering blocks forwarded traffic.
+- C. The configured DNS server address is not reachable from the workload subnet.
+- D. Only one directional peering object was created.
 
 ## LAB17-Q35 — Applied
 
-A peer reviewer examines the proposed implementation for this scenario: What is the safest command-evidence practice after completing 'Create and configure virtual network peering'?
+A network peering break/fix in the hub-and-spoke network build fails when operators try to carry forwarded packets from an NVA across connected networks. Which diagnosis fits?
 
-- A. Commit the complete account object so reviewers can identify the tenant.
-- B. Save tokens, keys, passwords, or SAS values beside the validation result.
-- C. Reuse successful output from an earlier run with a similar resource name.
-- D. Retain only redacted structured output from an independent query of the recorded run.
+- A. A Standard public IP is attached, but no NSG rule allows the intended inbound flow.
+- B. An NVA forwards packets, but the receiving peering blocks forwarded traffic.
+- C. The topology assumes two peering hops provide automatic transitive routing.
+- D. Both sides attempt to use a remote gateway, which is not a valid transit relationship.
 
 ## LAB17-Q36 — Applied
 
-During a controlled rollout, the change team encounters this requirement: A learner previews the implementation for 'Create and configure virtual networks and subnets'. What behavior is required?
+The hub-and-spoke network build troubleshooting scope is the network peering need to use the production public-address SKU with secure defaults. Which condition should be corrected first?
 
-- A. Display the context, intended changes, cost and gated branches without mutating Azure.
-- B. Create the baseline immediately and request approval only before cleanup.
-- C. Select the first accessible subscription and hide the resulting context.
-- D. Delete any older resource whose name resembles the new run ID.
+- A. A dynamic allocation was selected for an address consumed by an external allowlist.
+- B. The two virtual networks contain overlapping prefixes.
+- C. An NVA forwards packets, but the receiving peering blocks forwarded traffic.
+- D. A Standard public IP is attached, but no NSG rule allows the intended inbound flow.
 
 ## LAB17-Q37 — Applied
 
-A support engineer reproduces the following situation in a test environment: Which implementation step should the learner perform for 'Create and configure virtual network peering'?
+The hub-and-spoke network build result is partial because the network peering cannot keep the assigned public address stable across resource restarts. Which condition accounts for that result?
 
-- A. Skip the operation and edit validation.json to show a passing result.
-- B. Create hub and spoke address spaces that do not overlap and subdivide them into purpose-specific subnets.
-- C. Replace the lab action with a tenant-wide change that is easier to discover.
-- D. Copy resource identifiers from another run instead of recording returned IDs.
+- A. A dynamic allocation was selected for an address consumed by an external allowlist.
+- B. A zonal frontend address is bound to a design that expects zone-redundant availability.
+- C. The proposed subnet prefix overlaps an existing application subnet.
+- D. A Standard public IP is attached, but no NSG rule allows the intended inbound flow.
 
 ## LAB17-Q38 — Applied
 
-While recording validation evidence, the administrator evaluates this question: Which evidence most directly validates 'Configure public IP addresses' for resource group?
+The network peering evidence shows the hub-and-spoke network build cannot pin a public address to the intended availability-zone design. Which root cause fits that evidence?
 
-- A. Record a credential so another learner can replay the authenticated session.
-- B. Treat the setup exit code as proof of every configuration and relationship.
-- C. Query the exact recorded scope and independently verify Microsoft.Network/publicIPAddresses.
-- D. List the entire subscription and assume similarly named resources belong to this run.
+- A. The configured DNS server address is not reachable from the workload subnet.
+- B. A zonal frontend address is bound to a design that expects zone-redundant availability.
+- C. Only one directional peering object was created.
+- D. A dynamic allocation was selected for an address consumed by an external allowlist.
 
 ## LAB17-Q39 — Applied
 
-A configuration owner must approve one response to this scenario: The 'Create and configure virtual networks and subnets' checkpoint reaches an external prerequisite. What should happen?
+Although the hub-and-spoke network build is meant to let the network peering make virtual machines use approved custom DNS resolvers, its checkpoint fails. Which network peering defect explains the failure?
 
-- A. Mark the branch passed because its command syntax was checked offline.
-- B. Invent a domain, notification target, license, quota, or tenant value and continue.
-- C. Broaden permissions until the prerequisite can no longer block the operation.
-- D. Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.
+- A. The configured DNS server address is not reachable from the workload subnet.
+- B. The topology assumes two peering hops provide automatic transitive routing.
+- C. Both sides attempt to use a remote gateway, which is not a valid transit relationship.
+- D. A zonal frontend address is bound to a design that expects zone-redundant availability.
 
 ## LAB17-Q40 — Applied
 
-During post-deployment verification, the team reviews this situation: What is the safest command-evidence practice after completing 'Create and configure virtual network peering'?
+The network peering support team isolated the hub-and-spoke network build incident to the attempt to avoid assuming that connectivity automatically crosses a second peering hop. Which condition prevents success?
 
-- A. Retain only redacted structured output from an independent query of the recorded run.
-- B. Commit the complete account object so reviewers can identify the tenant.
-- C. Save tokens, keys, passwords, or SAS values beside the validation result.
-- D. Reuse successful output from an earlier run with a similar resource name.
+- A. The two virtual networks contain overlapping prefixes.
+- B. The topology assumes two peering hops provide automatic transitive routing.
+- C. An NVA forwards packets, but the receiving peering blocks forwarded traffic.
+- D. The configured DNS server address is not reachable from the workload subnet.
 
 ## LAB17-Q41 — Advanced
 
-Validation for 'Configure public IP addresses' fails after setup. What is the best break/fix method?
+The hub-and-spoke network build runbook separates network peering mutation from validation while it must connect networks without overlapping their address ranges. Which sequence proves it cleanly?
 
-- A. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- B. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-- C. Rerun setup repeatedly with new names until one attempt appears successful.
-- D. Change validation.json directly so the failed result reads pass.
+- A. First, Allocate approved RFC 1918 ranges and check them against existing and planned connected networks. Then, Query every addressSpace.addressPrefixes value and prove no peered range overlaps.
+- B. First, Create and validate both local-to-remote and remote-to-local peering objects. Then, Query peeringState and peeringSyncLevel on both virtual networks.
+- C. First, Use static allocation when DNS or allowlists require a stable public address. Then, Query publicIPAllocationMethod and persist the assigned ipAddress after provisioning.
+- D. First, Select zone-redundant placement for regional zonal resilience when supported. Then, Query the public IP zones array and the region's zone support.
 
 ## LAB17-Q42 — Advanced
 
-The operation for 'Create and configure virtual networks and subnets' is asynchronous or gated. How should completion be recorded?
+The hub-and-spoke network build checkpoint requires both this network peering outcome—reserve subnet ranges that do not collide with future network segments—and a read-only hub-and-spoke network build state check. Which network peering response is complete?
 
-- A. Remove the check from validation whenever the service takes longer than expected.
-- B. Record pass as soon as the request is accepted, regardless of its final state.
-- C. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
-- D. Fabricate expected output so the assessment and documentation appear complete.
+- A. First, Configure allowGatewayTransit and useRemoteGateways on the correct opposite peering objects. Then, Query both peerings and confirm the gateway flags and connected state.
+- B. First, Select zone-redundant placement for regional zonal resilience when supported. Then, Query the public IP zones array and the region's zone support.
+- C. First, Reserve distinct prefixes for workloads, private endpoints, gateways, and platform-specific subnets. Then, List subnet prefixes and verify containment, nonoverlap, delegations, and available addresses.
+- D. First, Configure approved resolver IP addresses and renew affected clients when required. Then, Query dhcpOptions.dnsServers and test resolution from a VM after renewing its configuration.
 
 ## LAB17-Q43 — Advanced
 
-A security and reliability review identifies this design decision: Validation for 'Configure public IP addresses' fails after setup. What is the best break/fix method?
+The hub-and-spoke network build runbook must create both directional control-plane links required for connected networks, then retain network peering read-back evidence. Which hub-and-spoke network build pair completes both duties?
 
-- A. Rerun setup repeatedly with new names until one attempt appears successful.
-- B. Change validation.json directly so the failed result reads pass.
-- C. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- D. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+- A. First, Enable forwarded traffic only on the peering directions required by the approved routing design. Then, Read allowForwardedTraffic on both directional peering resources.
+- B. First, Create and validate both local-to-remote and remote-to-local peering objects. Then, Query peeringState and peeringSyncLevel on both virtual networks.
+- C. First, Configure approved resolver IP addresses and renew affected clients when required. Then, Query dhcpOptions.dnsServers and test resolution from a VM after renewing its configuration.
+- D. First, Create the required direct peering or introduce an approved routed hub design. Then, Inspect effective routes from the source and test the exact destination path.
 
 ## LAB17-Q44 — Advanced
 
-While diagnosing unexpected Azure behavior, the engineer considers this situation: The operation for 'Create and configure virtual networks and subnets' is asynchronous or gated. How should completion be recorded?
+To satisfy the network peering requirement, operators must change the hub-and-spoke network build configuration and prove it can let a spoke use a hub gateway only when both peering sides permit it. Which sequence is coherent?
 
-- A. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
-- B. Fabricate expected output so the assessment and documentation appear complete.
-- C. Remove the check from validation whenever the service takes longer than expected.
-- D. Record pass as soon as the request is accepted, regardless of its final state.
+- A. First, Use Standard SKU and add only the required inbound NSG exposure. Then, Query sku.name, publicIPAllocationMethod, ipAddress, and associated IP configuration.
+- B. First, Create the required direct peering or introduce an approved routed hub design. Then, Inspect effective routes from the source and test the exact destination path.
+- C. First, Allocate approved RFC 1918 ranges and check them against existing and planned connected networks. Then, Query every addressSpace.addressPrefixes value and prove no peered range overlaps.
+- D. First, Configure allowGatewayTransit and useRemoteGateways on the correct opposite peering objects. Then, Query both peerings and confirm the gateway flags and connected state.
 
 ## LAB17-Q45 — Advanced
 
-An architecture review requires the strongest response to this scenario: Validation for 'Configure public IP addresses' fails after setup. What is the best break/fix method?
+The network administrator connecting hub and spoke address spaces needs a safe hub-and-spoke network build change to carry forwarded packets from an NVA across connected networks, followed by network peering evidence. Which pair merits approval?
 
-- A. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- B. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-- C. Rerun setup repeatedly with new names until one attempt appears successful.
-- D. Change validation.json directly so the failed result reads pass.
+- A. First, Use static allocation when DNS or allowlists require a stable public address. Then, Query publicIPAllocationMethod and persist the assigned ipAddress after provisioning.
+- B. First, Allocate approved RFC 1918 ranges and check them against existing and planned connected networks. Then, Query every addressSpace.addressPrefixes value and prove no peered range overlaps.
+- C. First, Enable forwarded traffic only on the peering directions required by the approved routing design. Then, Read allowForwardedTraffic on both directional peering resources.
+- D. First, Reserve distinct prefixes for workloads, private endpoints, gateways, and platform-specific subnets. Then, List subnet prefixes and verify containment, nonoverlap, delegations, and available addresses.
 
 ## LAB17-Q46 — Advanced
 
-During break/fix validation, the operator encounters this question: The operation for 'Create and configure virtual networks and subnets' is asynchronous or gated. How should completion be recorded?
+The hub-and-spoke network build has two network peering gates: use the production public-address SKU with secure defaults, then prove the hub-and-spoke network build state. Which network peering sequence works?
 
-- A. Remove the check from validation whenever the service takes longer than expected.
-- B. Record pass as soon as the request is accepted, regardless of its final state.
-- C. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
-- D. Fabricate expected output so the assessment and documentation appear complete.
+- A. First, Select zone-redundant placement for regional zonal resilience when supported. Then, Query the public IP zones array and the region's zone support.
+- B. First, Reserve distinct prefixes for workloads, private endpoints, gateways, and platform-specific subnets. Then, List subnet prefixes and verify containment, nonoverlap, delegations, and available addresses.
+- C. First, Create and validate both local-to-remote and remote-to-local peering objects. Then, Query peeringState and peeringSyncLevel on both virtual networks.
+- D. First, Use Standard SKU and add only the required inbound NSG exposure. Then, Query sku.name, publicIPAllocationMethod, ipAddress, and associated IP configuration.
 
 ## LAB17-Q47 — Advanced
 
-A complex support case depends on correctly interpreting this requirement: Validation for 'Configure public IP addresses' fails after setup. What is the best break/fix method?
+Which network peering path makes the hub-and-spoke network build able to keep the assigned public address stable across resource restarts, then inspects the defining properties?
 
-- A. Rerun setup repeatedly with new names until one attempt appears successful.
-- B. Change validation.json directly so the failed result reads pass.
-- C. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- D. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+- A. First, Use static allocation when DNS or allowlists require a stable public address. Then, Query publicIPAllocationMethod and persist the assigned ipAddress after provisioning.
+- B. First, Configure approved resolver IP addresses and renew affected clients when required. Then, Query dhcpOptions.dnsServers and test resolution from a VM after renewing its configuration.
+- C. First, Create and validate both local-to-remote and remote-to-local peering objects. Then, Query peeringState and peeringSyncLevel on both virtual networks.
+- D. First, Configure allowGatewayTransit and useRemoteGateways on the correct opposite peering objects. Then, Query both peerings and confirm the gateway flags and connected state.
 
 ## LAB17-Q48 — Advanced
 
-While correcting configuration drift, the team evaluates this scenario: The operation for 'Create and configure virtual networks and subnets' is asynchronous or gated. How should completion be recorded?
+At the hub-and-spoke network build approval gate, operators must show that the network peering can pin a public address to the intended availability-zone design. Which network peering configure-and-check pair is defensible?
 
-- A. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
-- B. Fabricate expected output so the assessment and documentation appear complete.
-- C. Remove the check from validation whenever the service takes longer than expected.
-- D. Record pass as soon as the request is accepted, regardless of its final state.
+- A. First, Create the required direct peering or introduce an approved routed hub design. Then, Inspect effective routes from the source and test the exact destination path.
+- B. First, Configure allowGatewayTransit and useRemoteGateways on the correct opposite peering objects. Then, Query both peerings and confirm the gateway flags and connected state.
+- C. First, Select zone-redundant placement for regional zonal resilience when supported. Then, Query the public IP zones array and the region's zone support.
+- D. First, Enable forwarded traffic only on the peering directions required by the approved routing design. Then, Read allowForwardedTraffic on both directional peering resources.
 
 ## LAB17-Q49 — Advanced
 
-A recovery exercise exposes the following technical decision: Validation for 'Configure public IP addresses' fails after setup. What is the best break/fix method?
+The hub-and-spoke network build forbids a partial network peering result. Operators must first make virtual machines use approved custom DNS resolvers and afterward confirm the hub-and-spoke network build outcome. Which network peering sequence is complete?
 
-- A. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- B. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-- C. Rerun setup repeatedly with new names until one attempt appears successful.
-- D. Change validation.json directly so the failed result reads pass.
+- A. First, Allocate approved RFC 1918 ranges and check them against existing and planned connected networks. Then, Query every addressSpace.addressPrefixes value and prove no peered range overlaps.
+- B. First, Enable forwarded traffic only on the peering directions required by the approved routing design. Then, Read allowForwardedTraffic on both directional peering resources.
+- C. First, Configure approved resolver IP addresses and renew affected clients when required. Then, Query dhcpOptions.dnsServers and test resolution from a VM after renewing its configuration.
+- D. First, Use Standard SKU and add only the required inbound NSG exposure. Then, Query sku.name, publicIPAllocationMethod, ipAddress, and associated IP configuration.
 
 ## LAB17-Q50 — Advanced
 
-During final design assurance, the reviewer must resolve this situation: The operation for 'Create and configure virtual networks and subnets' is asynchronous or gated. How should completion be recorded?
+Only the hub-and-spoke network build change needed to avoid assuming that connectivity automatically crosses a second peering hop is allowed, and network peering proof is mandatory. Which pair fits?
 
-- A. Remove the check from validation whenever the service takes longer than expected.
-- B. Record pass as soon as the request is accepted, regardless of its final state.
-- C. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
-- D. Fabricate expected output so the assessment and documentation appear complete.
+- A. First, Reserve distinct prefixes for workloads, private endpoints, gateways, and platform-specific subnets. Then, List subnet prefixes and verify containment, nonoverlap, delegations, and available addresses.
+- B. First, Use Standard SKU and add only the required inbound NSG exposure. Then, Query sku.name, publicIPAllocationMethod, ipAddress, and associated IP configuration.
+- C. First, Create the required direct peering or introduce an approved routed hub design. Then, Inspect effective routes from the source and test the exact destination path.
+- D. First, Use static allocation when DNS or allowlists require a stable public address. Then, Query publicIPAllocationMethod and persist the assigned ipAddress after provisioning.
+
+[Open the answer key](./ANSWERS.md)

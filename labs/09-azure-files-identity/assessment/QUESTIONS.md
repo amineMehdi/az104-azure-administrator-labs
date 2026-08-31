@@ -1,453 +1,459 @@
 # Lab 09 knowledge check
 
-Choose the single best answer for each question. Record your choices before opening `ANSWERS.md`.
+[Return to the guided lab](../README.md)
+
+Complete all 50 questions before opening the answer key. Allow about 50–60 minutes and choose the single best answer.
+
+Use the result as a learning signal: 85–100% indicates mastery, 70–84% calls for targeted review, and below 70% means repeat the mapped lab tasks before retrying.
 
 ## LAB09-Q01 — Foundational
 
-Which principle is most important when working on 'Configure identity-based access for Azure Files' in Lab 09?
+The file-service acceptance architecture note requires the recoverable team file share environment to cap the capacity available to a team file share. Which statement defines the relevant file-service acceptance boundary?
 
-- A. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- B. Share snapshots and soft delete solve different recovery problems, while identity-based SMB authentication requires an approved directory source and data-plane authorization.
-- C. A recognizable resource name removes the need for validation and scoped cleanup.
-- D. The shortest command is always correct even when it changes a broader scope.
+- A. The enabled file-share protocol and account configuration determine which clients and identity options can connect.
+- B. For identity-based SMB access, effective authorization combines share-level permission with Windows ACLs.
+- C. An Azure file share quota limits the maximum provisioned capacity for that share.
+- D. Soft delete retains a deleted file share for the configured retention period but does not replace file-level snapshots.
 
 ## LAB09-Q02 — Foundational
 
-Within Lab 09, the team evaluates this scenario: Which lab action directly supports the objective 'Manage data by using Azure Storage Explorer and AzCopy'?
+A new file-service acceptance operator must explain why the recoverable team file share can select the file-sharing protocol that matches the client workload. Which explanation is accurate?
 
-- A. Search the whole tenant for a similar display name and modify the first match.
-- B. Mark the objective complete after reading documentation without checking any state.
-- C. Enable Azure Files share soft delete and create a point-in-time share snapshot.
-- D. Change the active tenant without displaying or confirming the resulting context.
+- A. The enabled file-share protocol and account configuration determine which clients and identity options can connect.
+- B. Identity-based Azure Files authentication replaces account-key authentication for supported SMB clients and directory sources.
+- C. Identity authorization does not bypass storage firewall, private endpoint, DNS, or SMB transport requirements.
+- D. AzCopy supports copying files to and from Azure Files when the supplied identity or SAS has sufficient data permissions.
 
 ## LAB09-Q03 — Foundational
 
-Which authorization approach is appropriate before practicing 'Create and configure a file share in Azure Files'?
+The recoverable team file share acceptance criteria require operators to authenticate file clients with an approved directory identity. Which service fact supports that requirement?
 
-- A. Use a production subscription because its resources already exist.
-- B. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
-- C. Skip role checks when the run ID contains the lab number.
-- D. Confirm the active context and use only the declared role boundary: Contributor and Storage File Data SMB Share Contributor; directory permissions for the optional identity-source path
+- A. Identity-based Azure Files authentication replaces account-key authentication for supported SMB clients and directory sources.
+- B. Azure Files share-level roles authorize data access at the share scope but do not replace file and directory ACL evaluation.
+- C. A share snapshot is a read-only point-in-time copy used to recover prior file and directory content.
+- D. Direct SMB mounting commonly requires outbound TCP port 445 unless an alternate connectivity design is used.
 
 ## LAB09-Q04 — Foundational
 
-Before making a change, a learner checks this core behavior: Which principle is most important when working on 'Configure identity-based access for Azure Files' in Lab 09?
+A file-service acceptance reviewer challenges whether the recoverable team file share can grant a principal access at the share boundary. Which response resolves the concern?
 
-- A. Share snapshots and soft delete solve different recovery problems, while identity-based SMB authentication requires an approved directory source and data-plane authorization.
-- B. A recognizable resource name removes the need for validation and scoped cleanup.
-- C. The shortest command is always correct even when it changes a broader scope.
-- D. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+- A. Azure Files share-level roles authorize data access at the share scope but do not replace file and directory ACL evaluation.
+- B. For identity-based SMB access, effective authorization combines share-level permission with Windows ACLs.
+- C. Soft delete retains a deleted file share for the configured retention period but does not replace file-level snapshots.
+- D. An Azure file share quota limits the maximum provisioned capacity for that share.
 
 ## LAB09-Q05 — Foundational
 
-During a design vocabulary review, the team evaluates this situation: Which lab action directly supports the objective 'Manage data by using Azure Storage Explorer and AzCopy'?
+The recoverable team file share handoff omits the file-service acceptance rule needed to limit access to particular directories and files after share access is granted. Which statement should the team add?
 
-- A. Mark the objective complete after reading documentation without checking any state.
-- B. Enable Azure Files share soft delete and create a point-in-time share snapshot.
-- C. Change the active tenant without displaying or confirming the resulting context.
-- D. Search the whole tenant for a similar display name and modify the first match.
+- A. Identity authorization does not bypass storage firewall, private endpoint, DNS, or SMB transport requirements.
+- B. AzCopy supports copying files to and from Azure Files when the supplied identity or SAS has sufficient data permissions.
+- C. The enabled file-share protocol and account configuration determine which clients and identity options can connect.
+- D. For identity-based SMB access, effective authorization combines share-level permission with Windows ACLs.
 
 ## LAB09-Q06 — Foundational
 
-In a command-planning session, an administrator asks this question: Which authorization approach is appropriate before practicing 'Create and configure a file share in Azure Files'?
+A file-service acceptance incident review of the recoverable team file share depends on the ability to restrict share connectivity to the sanctioned route. Which platform description is reliable?
 
-- A. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
-- B. Skip role checks when the run ID contains the lab number.
-- C. Confirm the active context and use only the declared role boundary: Contributor and Storage File Data SMB Share Contributor; directory permissions for the optional identity-source path
-- D. Use a production subscription because its resources already exist.
+- A. A share snapshot is a read-only point-in-time copy used to recover prior file and directory content.
+- B. Identity authorization does not bypass storage firewall, private endpoint, DNS, or SMB transport requirements.
+- C. Direct SMB mounting commonly requires outbound TCP port 445 unless an alternate connectivity design is used.
+- D. Identity-based Azure Files authentication replaces account-key authentication for supported SMB clients and directory sources.
 
 ## LAB09-Q07 — Foundational
 
-While preparing the lab, a learner verifies this platform rule: Which principle is most important when working on 'Configure identity-based access for Azure Files' in Lab 09?
+A file-services administrator publishing a recoverable team share is updating the file-service acceptance runbook. The requirement is to capture a point-in-time, read-only view of share contents. Which statement describes Azure behavior correctly?
 
-- A. A recognizable resource name removes the need for validation and scoped cleanup.
-- B. The shortest command is always correct even when it changes a broader scope.
-- C. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- D. Share snapshots and soft delete solve different recovery problems, while identity-based SMB authentication requires an approved directory source and data-plane authorization.
+- A. A share snapshot is a read-only point-in-time copy used to recover prior file and directory content.
+- B. Soft delete retains a deleted file share for the configured retention period but does not replace file-level snapshots.
+- C. An Azure file share quota limits the maximum provisioned capacity for that share.
+- D. Azure Files share-level roles authorize data access at the share scope but do not replace file and directory ACL evaluation.
 
 ## LAB09-Q08 — Foundational
 
-During peer review, the team must identify the accurate response to this scenario: Which lab action directly supports the objective 'Manage data by using Azure Storage Explorer and AzCopy'?
+A file-service acceptance peer review asks how the recoverable team file share should handle this outcome: restore a share removed during the service retention period. Which explanation is accurate?
 
-- A. Enable Azure Files share soft delete and create a point-in-time share snapshot.
-- B. Change the active tenant without displaying or confirming the resulting context.
-- C. Search the whole tenant for a similar display name and modify the first match.
-- D. Mark the objective complete after reading documentation without checking any state.
+- A. AzCopy supports copying files to and from Azure Files when the supplied identity or SAS has sufficient data permissions.
+- B. The enabled file-share protocol and account configuration determine which clients and identity options can connect.
+- C. Soft delete retains a deleted file share for the configured retention period but does not replace file-level snapshots.
+- D. For identity-based SMB access, effective authorization combines share-level permission with Windows ACLs.
 
 ## LAB09-Q09 — Foundational
 
-In an operations briefing, a new team member receives this question: Which authorization approach is appropriate before practicing 'Create and configure a file share in Azure Files'?
+For the recoverable team file share, the file-service acceptance plan must transfer file-share content with a resumable command-line data mover. Which statement about file-service acceptance belongs in the recoverable team file share record?
 
-- A. Skip role checks when the run ID contains the lab number.
-- B. Confirm the active context and use only the declared role boundary: Contributor and Storage File Data SMB Share Contributor; directory permissions for the optional identity-source path
-- C. Use a production subscription because its resources already exist.
-- D. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
+- A. Direct SMB mounting commonly requires outbound TCP port 445 unless an alternate connectivity design is used.
+- B. Identity-based Azure Files authentication replaces account-key authentication for supported SMB clients and directory sources.
+- C. AzCopy supports copying files to and from Azure Files when the supplied identity or SAS has sufficient data permissions.
+- D. Identity authorization does not bypass storage firewall, private endpoint, DNS, or SMB transport requirements.
 
 ## LAB09-Q10 — Foundational
 
-While building a support checklist, an engineer reviews this requirement: Which principle is most important when working on 'Configure identity-based access for Azure Files' in Lab 09?
+The file-service acceptance review compares four claims for the recoverable team file share requirement to diagnose clients that cannot reach the SMB endpoint on its required port. Which claim is technically sound?
 
-- A. The shortest command is always correct even when it changes a broader scope.
-- B. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- C. Share snapshots and soft delete solve different recovery problems, while identity-based SMB authentication requires an approved directory source and data-plane authorization.
-- D. A recognizable resource name removes the need for validation and scoped cleanup.
+- A. An Azure file share quota limits the maximum provisioned capacity for that share.
+- B. Azure Files share-level roles authorize data access at the share scope but do not replace file and directory ACL evaluation.
+- C. A share snapshot is a read-only point-in-time copy used to recover prior file and directory content.
+- D. Direct SMB mounting commonly requires outbound TCP port 445 unless an alternate connectivity design is used.
 
 ## LAB09-Q11 — Foundational
 
-During a readiness check, the administrator considers this behavior: Which lab action directly supports the objective 'Manage data by using Azure Storage Explorer and AzCopy'?
+For the recoverable team file share, operators need to cap the capacity available to a team file share. Which change realizes that requirement?
 
-- A. Change the active tenant without displaying or confirming the resulting context.
-- B. Search the whole tenant for a similar display name and modify the first match.
-- C. Mark the objective complete after reading documentation without checking any state.
-- D. Enable Azure Files share soft delete and create a point-in-time share snapshot.
+- A. Configure the supported directory source on the storage account before assigning users access.
+- B. Provide an approved network path and name resolution in addition to identity permissions.
+- C. Authenticate with the least-privilege mechanism and copy a deterministic test directory.
+- D. Create the share with an approved quota that fits the account tier and workload forecast.
 
 ## LAB09-Q12 — Foundational
 
-In a service overview, the team discusses this scenario: Which authorization approach is appropriate before practicing 'Create and configure a file share in Azure Files'?
+Operators must automate the recoverable team file share change needed to select the file-sharing protocol that matches the client workload. Which file-service acceptance operation belongs in the runbook?
 
-- A. Confirm the active context and use only the declared role boundary: Contributor and Storage File Data SMB Share Contributor; directory permissions for the optional identity-source path
-- B. Use a production subscription because its resources already exist.
-- C. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
-- D. Skip role checks when the run ID contains the lab number.
+- A. Assign the narrowest Storage File Data SMB Share role at the share or account scope.
+- B. Create a share snapshot before the controlled file modification in the recovery exercise.
+- C. Choose SMB for the identity-based scenario and verify account compatibility before creation.
+- D. Test the client-to-file-endpoint network path before troubleshooting storage permissions.
 
 ## LAB09-Q13 — Foundational
 
-While reviewing official guidance, a learner must resolve this question: Which principle is most important when working on 'Configure identity-based access for Azure Files' in Lab 09?
+A recoverable team file share review finds file-service acceptance drift from the need to authenticate file clients with an approved directory identity. Which correction addresses that drift?
 
-- A. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- B. Share snapshots and soft delete solve different recovery problems, while identity-based SMB authentication requires an approved directory source and data-plane authorization.
-- C. A recognizable resource name removes the need for validation and scoped cleanup.
-- D. The shortest command is always correct even when it changes a broader scope.
+- A. Grant both the required share-level role and the minimum NTFS ACL on the target path.
+- B. Enable share soft delete before testing deletion of the entire share.
+- C. Configure the supported directory source on the storage account before assigning users access.
+- D. Create the share with an approved quota that fits the account tier and workload forecast.
 
 ## LAB09-Q14 — Foundational
 
-Within Lab 09, the team evaluates this scenario: During a configuration walkthrough, the instructor asks about this situation: Which lab action directly supports the objective 'Manage data by using Azure Storage Explorer and AzCopy'?
+The recoverable team file share window permits only the file-service acceptance change needed to grant a principal access at the share boundary. Which option respects the boundary?
 
-- A. Search the whole tenant for a similar display name and modify the first match.
-- B. Mark the objective complete after reading documentation without checking any state.
-- C. Enable Azure Files share soft delete and create a point-in-time share snapshot.
-- D. Change the active tenant without displaying or confirming the resulting context.
+- A. Provide an approved network path and name resolution in addition to identity permissions.
+- B. Authenticate with the least-privilege mechanism and copy a deterministic test directory.
+- C. Assign the narrowest Storage File Data SMB Share role at the share or account scope.
+- D. Choose SMB for the identity-based scenario and verify account compatibility before creation.
 
 ## LAB09-Q15 — Foundational
 
-In a preflight knowledge check, the operator evaluates this requirement: Which authorization approach is appropriate before practicing 'Create and configure a file share in Azure Files'?
+The file-service acceptance preflight has passed; the recoverable team file share must now limit access to particular directories and files after share access is granted. Which operation should run?
 
-- A. Use a production subscription because its resources already exist.
-- B. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
-- C. Skip role checks when the run ID contains the lab number.
-- D. Confirm the active context and use only the declared role boundary: Contributor and Storage File Data SMB Share Contributor; directory permissions for the optional identity-source path
+- A. Create a share snapshot before the controlled file modification in the recovery exercise.
+- B. Grant both the required share-level role and the minimum NTFS ACL on the target path.
+- C. Test the client-to-file-endpoint network path before troubleshooting storage permissions.
+- D. Configure the supported directory source on the storage account before assigning users access.
 
 ## LAB09-Q16 — Applied
 
-A learner previews the implementation for 'Configure snapshots and soft delete for Azure Files'. What behavior is required?
+The recoverable team file share plan must restrict share connectivity to the sanctioned route while limiting the mutation scope to file-service acceptance. Which action is appropriate?
 
-- A. Display the context, intended changes, cost and gated branches without mutating Azure.
-- B. Select the first accessible subscription and hide the resulting context.
-- C. Delete any older resource whose name resembles the new run ID.
-- D. Create the baseline immediately and request approval only before cleanup.
+- A. Provide an approved network path and name resolution in addition to identity permissions.
+- B. Enable share soft delete before testing deletion of the entire share.
+- C. Create the share with an approved quota that fits the account tier and workload forecast.
+- D. Assign the narrowest Storage File Data SMB Share role at the share or account scope.
 
 ## LAB09-Q17 — Applied
 
-Which implementation step should the learner perform for 'Configure identity-based access for Azure Files'?
+A file-service acceptance ticket in the recoverable team file share says to capture a point-in-time, read-only view of share contents. Which file-service acceptance action completes the recoverable team file share request with minimal change?
 
-- A. Copy resource identifiers from another run instead of recording returned IDs.
-- B. Create a secure StorageV2 account and transaction-optimized file share with quota.
-- C. Skip the operation and edit validation.json to show a passing result.
-- D. Replace the lab action with a tenant-wide change that is easier to discover.
+- A. Authenticate with the least-privilege mechanism and copy a deterministic test directory.
+- B. Choose SMB for the identity-based scenario and verify account compatibility before creation.
+- C. Grant both the required share-level role and the minimum NTFS ACL on the target path.
+- D. Create a share snapshot before the controlled file modification in the recovery exercise.
 
 ## LAB09-Q18 — Applied
 
-Which evidence most directly validates 'Manage data by using Azure Storage Explorer and AzCopy' for storage account?
+The approach for the recoverable team file share is approved, but the file-service acceptance environment still cannot restore a share removed during the service retention period. Which implementation step closes the gap?
 
-- A. List the entire subscription and assume similarly named resources belong to this run.
-- B. Record a credential so another learner can replay the authenticated session.
-- C. Query the exact recorded scope and independently verify Microsoft.Storage/storageAccounts/fileServices/shares.
-- D. Treat the setup exit code as proof of every configuration and relationship.
+- A. Test the client-to-file-endpoint network path before troubleshooting storage permissions.
+- B. Enable share soft delete before testing deletion of the entire share.
+- C. Configure the supported directory source on the storage account before assigning users access.
+- D. Provide an approved network path and name resolution in addition to identity permissions.
 
 ## LAB09-Q19 — Applied
 
-The 'Create and configure a file share in Azure Files' checkpoint reaches an external prerequisite. What should happen?
+The file-services administrator publishing a recoverable team share may change the recoverable team file share only to transfer file-share content with a resumable command-line data mover. Which file-service acceptance action stays within that assignment?
 
-- A. Invent a domain, notification target, license, quota, or tenant value and continue.
-- B. Broaden permissions until the prerequisite can no longer block the operation.
-- C. Mark the branch passed because its command syntax was checked offline.
-- D. Run the branch only when this documented gate is satisfied: Identity-based SMB configuration is gated by AZ104_FILES_IDENTITY_SOURCE because Entra Kerberos, AD DS, and Entra Domain Services have different prerequisites.
+- A. Authenticate with the least-privilege mechanism and copy a deterministic test directory.
+- B. Create the share with an approved quota that fits the account tier and workload forecast.
+- C. Assign the narrowest Storage File Data SMB Share role at the share or account scope.
+- D. Create a share snapshot before the controlled file modification in the recovery exercise.
 
 ## LAB09-Q20 — Applied
 
-What is the safest command-evidence practice after completing 'Configure snapshots and soft delete for Azure Files'?
+A file-service acceptance dry run shows no recoverable team file share command will diagnose clients that cannot reach the SMB endpoint on its required port. Which action belongs before execution?
 
-- A. Retain only redacted structured output from an independent query of the recorded run.
-- B. Save tokens, keys, passwords, or SAS values beside the validation result.
-- C. Reuse successful output from an earlier run with a similar resource name.
-- D. Commit the complete account object so reviewers can identify the tenant.
+- A. Choose SMB for the identity-based scenario and verify account compatibility before creation.
+- B. Grant both the required share-level role and the minimum NTFS ACL on the target path.
+- C. Enable share soft delete before testing deletion of the entire share.
+- D. Test the client-to-file-endpoint network path before troubleshooting storage permissions.
 
 ## LAB09-Q21 — Applied
 
-Which negative check strengthens validation of 'Configure identity-based access for Azure Files'?
+The file-services administrator publishing a recoverable team share must confirm the recoverable team file share, without mutation, can cap the capacity available to a team file share. Which file-service acceptance check qualifies?
 
-- A. Repair every warning automatically before recording what caused it.
-- B. Confirm the intended state and also prove that broader, anonymous, or unintended access was not introduced.
-- C. Ignore denied queries and record them as passing checks.
-- D. Check only that at least one resource exists in the subscription.
+- A. List the principal's data-role assignment and confirm its scope includes the intended share.
+- B. List snapshots and confirm the snapshot timestamp precedes the modification.
+- C. Resolve the endpoint and test TCP 445 independently of the SMB sign-in attempt.
+- D. Query share quota and access tier and compare them with the lab inputs.
 
 ## LAB09-Q22 — Applied
 
-A delegated administrator receives the following support request: A learner previews the implementation for 'Configure snapshots and soft delete for Azure Files'. What behavior is required?
+The recoverable team file share configuration is complete; the file-service acceptance reviewers need evidence it can select the file-sharing protocol that matches the client workload. Which observation shows success?
 
-- A. Delete any older resource whose name resembles the new run ID.
-- B. Create the baseline immediately and request approval only before cleanup.
-- C. Display the context, intended changes, cost and gated branches without mutating Azure.
-- D. Select the first accessible subscription and hide the resulting context.
+- A. Query enabledProtocols and confirm the client uses the matching mount protocol.
+- B. Verify the principal's role assignment and inspect the path ACL from a domain-connected client.
+- C. Query shareDeleteRetentionPolicy and list the deleted share by name.
+- D. Query share quota and access tier and compare them with the lab inputs.
 
 ## LAB09-Q23 — Applied
 
-During a maintenance window, an engineer must decide how to respond: Which implementation step should the learner perform for 'Configure identity-based access for Azure Files'?
+The file-service acceptance validation asks whether the recoverable team file share can authenticate file clients with an approved directory identity. Which observable state is strongest?
 
-- A. Skip the operation and edit validation.json to show a passing result.
-- B. Replace the lab action with a tenant-wide change that is easier to discover.
-- C. Copy resource identifiers from another run instead of recording returned IDs.
-- D. Create a secure StorageV2 account and transaction-optimized file share with quota.
+- A. Resolve the file endpoint, test TCP 445 where applicable, and then validate SMB identity access.
+- B. Query directoryServiceOptions and the account's identity configuration.
+- C. Compare source and destination file counts, relative paths, lengths, and hashes where supported.
+- D. Query enabledProtocols and confirm the client uses the matching mount protocol.
 
 ## LAB09-Q24 — Applied
 
-A deployment pipeline reaches this decision point: Which evidence most directly validates 'Manage data by using Azure Storage Explorer and AzCopy' for storage account?
+A recoverable team file share review must prove the file-service acceptance ability to grant a principal access at the share boundary. Which check avoids an adjacent feature?
 
-- A. Query the exact recorded scope and independently verify Microsoft.Storage/storageAccounts/fileServices/shares.
-- B. Treat the setup exit code as proof of every configuration and relationship.
-- C. List the entire subscription and assume similarly named resources belong to this run.
-- D. Record a credential so another learner can replay the authenticated session.
+- A. List snapshots and confirm the snapshot timestamp precedes the modification.
+- B. Resolve the endpoint and test TCP 445 independently of the SMB sign-in attempt.
+- C. List the principal's data-role assignment and confirm its scope includes the intended share.
+- D. Query directoryServiceOptions and the account's identity configuration.
 
 ## LAB09-Q25 — Applied
 
-While applying least-privilege controls, the administrator reviews this scenario: The 'Create and configure a file share in Azure Files' checkpoint reaches an external prerequisite. What should happen?
+The recoverable team file share evidence bundle needs a file-service acceptance result showing it can limit access to particular directories and files after share access is granted. Which result belongs in the checkpoint?
 
-- A. Mark the branch passed because its command syntax was checked offline.
-- B. Run the branch only when this documented gate is satisfied: Identity-based SMB configuration is gated by AZ104_FILES_IDENTITY_SOURCE because Entra Kerberos, AD DS, and Entra Domain Services have different prerequisites.
-- C. Invent a domain, notification target, license, quota, or tenant value and continue.
-- D. Broaden permissions until the prerequisite can no longer block the operation.
+- A. Verify the principal's role assignment and inspect the path ACL from a domain-connected client.
+- B. Query shareDeleteRetentionPolicy and list the deleted share by name.
+- C. Query share quota and access tier and compare them with the lab inputs.
+- D. List the principal's data-role assignment and confirm its scope includes the intended share.
 
 ## LAB09-Q26 — Applied
 
-A repeatable Azure CLI workflow must address this requirement: What is the safest command-evidence practice after completing 'Configure snapshots and soft delete for Azure Files'?
+Before recoverable team file share cleanup, the file-service acceptance team must reconfirm it can restrict share connectivity to the sanctioned route. Which read-only inspection should run?
 
-- A. Reuse successful output from an earlier run with a similar resource name.
-- B. Commit the complete account object so reviewers can identify the tenant.
-- C. Retain only redacted structured output from an independent query of the recorded run.
-- D. Save tokens, keys, passwords, or SAS values beside the validation result.
+- A. Compare source and destination file counts, relative paths, lengths, and hashes where supported.
+- B. Query enabledProtocols and confirm the client uses the matching mount protocol.
+- C. Verify the principal's role assignment and inspect the path ACL from a domain-connected client.
+- D. Resolve the file endpoint, test TCP 445 where applicable, and then validate SMB identity access.
 
 ## LAB09-Q27 — Applied
 
-During an environment handoff, the receiving team asks this question: Which negative check strengthens validation of 'Configure identity-based access for Azure Files'?
+The recoverable team file share setup reports success after the file-service acceptance attempt to capture a point-in-time, read-only view of share contents. Which file-service acceptance read-only observation proves the recoverable team file share outcome?
 
-- A. Ignore denied queries and record them as passing checks.
-- B. Check only that at least one resource exists in the subscription.
-- C. Repair every warning automatically before recording what caused it.
-- D. Confirm the intended state and also prove that broader, anonymous, or unintended access was not introduced.
+- A. Resolve the endpoint and test TCP 445 independently of the SMB sign-in attempt.
+- B. Query directoryServiceOptions and the account's identity configuration.
+- C. List snapshots and confirm the snapshot timestamp precedes the modification.
+- D. Resolve the file endpoint, test TCP 445 where applicable, and then validate SMB identity access.
 
 ## LAB09-Q28 — Applied
 
-A configuration change produces the following operational choice: A learner previews the implementation for 'Configure snapshots and soft delete for Azure Files'. What behavior is required?
+The file-service acceptance log says the recoverable team file share can now restore a share removed during the service retention period. Which file-service acceptance state should the recoverable team file share acceptance test retain?
 
-- A. Display the context, intended changes, cost and gated branches without mutating Azure.
-- B. Select the first accessible subscription and hide the resulting context.
-- C. Delete any older resource whose name resembles the new run ID.
-- D. Create the baseline immediately and request approval only before cleanup.
+- A. Query share quota and access tier and compare them with the lab inputs.
+- B. List the principal's data-role assignment and confirm its scope includes the intended share.
+- C. Query shareDeleteRetentionPolicy and list the deleted share by name.
+- D. List snapshots and confirm the snapshot timestamp precedes the modification.
 
 ## LAB09-Q29 — Applied
 
-While preparing independent validation, an engineer considers this scenario: Which implementation step should the learner perform for 'Configure identity-based access for Azure Files'?
+The recoverable team file share rejects file-service acceptance exit status as proof it can transfer file-share content with a resumable command-line data mover. Which recoverable team file share result is valid evidence?
 
-- A. Copy resource identifiers from another run instead of recording returned IDs.
-- B. Create a secure StorageV2 account and transaction-optimized file share with quota.
-- C. Skip the operation and edit validation.json to show a passing result.
-- D. Replace the lab action with a tenant-wide change that is easier to discover.
+- A. Query enabledProtocols and confirm the client uses the matching mount protocol.
+- B. Compare source and destination file counts, relative paths, lengths, and hashes where supported.
+- C. Verify the principal's role assignment and inspect the path ACL from a domain-connected client.
+- D. Query shareDeleteRetentionPolicy and list the deleted share by name.
 
 ## LAB09-Q30 — Applied
 
-A service owner asks the administrator to resolve this requirement: Which evidence most directly validates 'Manage data by using Azure Storage Explorer and AzCopy' for storage account?
+The file-service acceptance validator needs one recoverable team file share query after the change to diagnose clients that cannot reach the SMB endpoint on its required port. Which file-service acceptance property should the recoverable team file share validator inspect?
 
-- A. List the entire subscription and assume similarly named resources belong to this run.
-- B. Record a credential so another learner can replay the authenticated session.
-- C. Query the exact recorded scope and independently verify Microsoft.Storage/storageAccounts/fileServices/shares.
-- D. Treat the setup exit code as proof of every configuration and relationship.
+- A. Query directoryServiceOptions and the account's identity configuration.
+- B. Resolve the file endpoint, test TCP 445 where applicable, and then validate SMB identity access.
+- C. Resolve the endpoint and test TCP 445 independently of the SMB sign-in attempt.
+- D. Compare source and destination file counts, relative paths, lengths, and hashes where supported.
 
 ## LAB09-Q31 — Applied
 
-During a scoped cleanup review, the team evaluates this situation: The 'Create and configure a file share in Azure Files' checkpoint reaches an external prerequisite. What should happen?
+The recoverable team file share result is partial because the file-service acceptance cannot cap the capacity available to a team file share. Which condition accounts for that result?
 
-- A. Invent a domain, notification target, license, quota, or tenant value and continue.
-- B. Broaden permissions until the prerequisite can no longer block the operation.
-- C. Mark the branch passed because its command syntax was checked offline.
-- D. Run the branch only when this documented gate is satisfied: Identity-based SMB configuration is gated by AZ104_FILES_IDENTITY_SOURCE because Entra Kerberos, AD DS, and Entra Domain Services have different prerequisites.
+- A. The share was created for NFS while the validation client attempts an SMB connection.
+- B. The principal is authorized, but the client network blocks outbound SMB traffic.
+- C. The client network provider blocks outbound TCP 445 to the storage endpoint.
+- D. The requested quota exceeds the supported limit for the selected account and share tier.
 
 ## LAB09-Q32 — Applied
 
-An automation author must choose the correct response to this scenario: What is the safest command-evidence practice after completing 'Configure snapshots and soft delete for Azure Files'?
+The file-service acceptance evidence shows the recoverable team file share cannot select the file-sharing protocol that matches the client workload. Which root cause fits that evidence?
 
-- A. Retain only redacted structured output from an independent query of the recorded run.
-- B. Save tokens, keys, passwords, or SAS values beside the validation result.
-- C. Reuse successful output from an earlier run with a similar resource name.
-- D. Commit the complete account object so reviewers can identify the tenant.
+- A. The share was created for NFS while the validation client attempts an SMB connection.
+- B. The storage account has no configured directory service for SMB identity authentication.
+- C. The snapshot was created after the unwanted file change and contains only the changed content.
+- D. The requested quota exceeds the supported limit for the selected account and share tier.
 
 ## LAB09-Q33 — Applied
 
-A lab run with a unique run ID reaches this decision: Which negative check strengthens validation of 'Configure identity-based access for Azure Files'?
+Although the recoverable team file share is meant to let the file-service acceptance authenticate file clients with an approved directory identity, its checkpoint fails. Which file-service acceptance defect explains the failure?
 
-- A. Repair every warning automatically before recording what caused it.
-- B. Confirm the intended state and also prove that broader, anonymous, or unintended access was not introduced.
-- C. Ignore denied queries and record them as passing checks.
-- D. Check only that at least one resource exists in the subscription.
+- A. The principal has Reader, which grants control-plane visibility but not SMB file data access.
+- B. The storage account has no configured directory service for SMB identity authentication.
+- C. Soft delete was disabled when the share was removed.
+- D. The share was created for NFS while the validation client attempts an SMB connection.
 
 ## LAB09-Q34 — Applied
 
-While comparing the intended and actual states, the operator asks this question: A learner previews the implementation for 'Configure snapshots and soft delete for Azure Files'. What behavior is required?
+The file-service acceptance support team isolated the recoverable team file share incident to the attempt to grant a principal access at the share boundary. Which condition prevents success?
 
-- A. Delete any older resource whose name resembles the new run ID.
-- B. Create the baseline immediately and request approval only before cleanup.
-- C. Display the context, intended changes, cost and gated branches without mutating Azure.
-- D. Select the first accessible subscription and hide the resulting context.
+- A. The user has a share-level role but the directory ACL denies the requested operation.
+- B. The SAS omits a permission required to create files in the destination share.
+- C. The storage account has no configured directory service for SMB identity authentication.
+- D. The principal has Reader, which grants control-plane visibility but not SMB file data access.
 
 ## LAB09-Q35 — Applied
 
-A peer reviewer examines the proposed implementation for this scenario: Which implementation step should the learner perform for 'Configure identity-based access for Azure Files'?
+A recoverable team file share query surprises the file-services administrator publishing a recoverable team share during the file-service acceptance attempt to limit access to particular directories and files after share access is granted. Which finding explains it?
 
-- A. Skip the operation and edit validation.json to show a passing result.
-- B. Replace the lab action with a tenant-wide change that is easier to discover.
-- C. Copy resource identifiers from another run instead of recording returned IDs.
-- D. Create a secure StorageV2 account and transaction-optimized file share with quota.
+- A. The principal is authorized, but the client network blocks outbound SMB traffic.
+- B. The client network provider blocks outbound TCP 445 to the storage endpoint.
+- C. The principal has Reader, which grants control-plane visibility but not SMB file data access.
+- D. The user has a share-level role but the directory ACL denies the requested operation.
 
 ## LAB09-Q36 — Applied
 
-During a controlled rollout, the change team encounters this requirement: Which evidence most directly validates 'Manage data by using Azure Storage Explorer and AzCopy' for storage account?
+Other recoverable team file share components are healthy, but the file-service acceptance still cannot restrict share connectivity to the sanctioned route. Which state causes the isolated failure?
 
-- A. Query the exact recorded scope and independently verify Microsoft.Storage/storageAccounts/fileServices/shares.
-- B. Treat the setup exit code as proof of every configuration and relationship.
-- C. List the entire subscription and assume similarly named resources belong to this run.
-- D. Record a credential so another learner can replay the authenticated session.
+- A. The snapshot was created after the unwanted file change and contains only the changed content.
+- B. The requested quota exceeds the supported limit for the selected account and share tier.
+- C. The principal is authorized, but the client network blocks outbound SMB traffic.
+- D. The user has a share-level role but the directory ACL denies the requested operation.
 
 ## LAB09-Q37 — Applied
 
-A support engineer reproduces the following situation in a test environment: The 'Create and configure a file share in Azure Files' checkpoint reaches an external prerequisite. What should happen?
+During a file-service acceptance fault drill, the recoverable team file share does not capture a point-in-time, read-only view of share contents. Which finding identifies the defect?
 
-- A. Mark the branch passed because its command syntax was checked offline.
-- B. Run the branch only when this documented gate is satisfied: Identity-based SMB configuration is gated by AZ104_FILES_IDENTITY_SOURCE because Entra Kerberos, AD DS, and Entra Domain Services have different prerequisites.
-- C. Invent a domain, notification target, license, quota, or tenant value and continue.
-- D. Broaden permissions until the prerequisite can no longer block the operation.
+- A. Soft delete was disabled when the share was removed.
+- B. The snapshot was created after the unwanted file change and contains only the changed content.
+- C. The share was created for NFS while the validation client attempts an SMB connection.
+- D. The principal is authorized, but the client network blocks outbound SMB traffic.
 
 ## LAB09-Q38 — Applied
 
-While recording validation evidence, the administrator evaluates this question: What is the safest command-evidence practice after completing 'Configure snapshots and soft delete for Azure Files'?
+The recoverable team file share setup finishes, yet the file-service acceptance cannot restore a share removed during the service retention period. Which misconfiguration explains the mismatch?
 
-- A. Reuse successful output from an earlier run with a similar resource name.
-- B. Commit the complete account object so reviewers can identify the tenant.
-- C. Retain only redacted structured output from an independent query of the recorded run.
-- D. Save tokens, keys, passwords, or SAS values beside the validation result.
+- A. The SAS omits a permission required to create files in the destination share.
+- B. Soft delete was disabled when the share was removed.
+- C. The storage account has no configured directory service for SMB identity authentication.
+- D. The snapshot was created after the unwanted file change and contains only the changed content.
 
 ## LAB09-Q39 — Applied
 
-A configuration owner must approve one response to this scenario: Which negative check strengthens validation of 'Configure identity-based access for Azure Files'?
+A file-service acceptance break/fix in the recoverable team file share fails when operators try to transfer file-share content with a resumable command-line data mover. Which diagnosis fits?
 
-- A. Ignore denied queries and record them as passing checks.
-- B. Check only that at least one resource exists in the subscription.
-- C. Repair every warning automatically before recording what caused it.
-- D. Confirm the intended state and also prove that broader, anonymous, or unintended access was not introduced.
+- A. The client network provider blocks outbound TCP 445 to the storage endpoint.
+- B. The SAS omits a permission required to create files in the destination share.
+- C. The principal has Reader, which grants control-plane visibility but not SMB file data access.
+- D. Soft delete was disabled when the share was removed.
 
 ## LAB09-Q40 — Applied
 
-During post-deployment verification, the team reviews this situation: A learner previews the implementation for 'Configure snapshots and soft delete for Azure Files'. What behavior is required?
+The recoverable team file share troubleshooting scope is the file-service acceptance need to diagnose clients that cannot reach the SMB endpoint on its required port. Which condition should be corrected first?
 
-- A. Display the context, intended changes, cost and gated branches without mutating Azure.
-- B. Select the first accessible subscription and hide the resulting context.
-- C. Delete any older resource whose name resembles the new run ID.
-- D. Create the baseline immediately and request approval only before cleanup.
+- A. The client network provider blocks outbound TCP 445 to the storage endpoint.
+- B. The requested quota exceeds the supported limit for the selected account and share tier.
+- C. The user has a share-level role but the directory ACL denies the requested operation.
+- D. The SAS omits a permission required to create files in the destination share.
 
 ## LAB09-Q41 — Advanced
 
-Validation for 'Manage data by using Azure Storage Explorer and AzCopy' fails after setup. What is the best break/fix method?
+Which file-service acceptance path makes the recoverable team file share able to cap the capacity available to a team file share, then inspects the defining properties?
 
-- A. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- B. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-- C. Rerun setup repeatedly with new names until one attempt appears successful.
-- D. Change validation.json directly so the failed result reads pass.
+- A. First, Create the share with an approved quota that fits the account tier and workload forecast. Then, Query share quota and access tier and compare them with the lab inputs.
+- B. First, Configure the supported directory source on the storage account before assigning users access. Then, Query directoryServiceOptions and the account's identity configuration.
+- C. First, Create a share snapshot before the controlled file modification in the recovery exercise. Then, List snapshots and confirm the snapshot timestamp precedes the modification.
+- D. First, Enable share soft delete before testing deletion of the entire share. Then, Query shareDeleteRetentionPolicy and list the deleted share by name.
 
 ## LAB09-Q42 — Advanced
 
-The operation for 'Create and configure a file share in Azure Files' is asynchronous or gated. How should completion be recorded?
+At the recoverable team file share approval gate, operators must show that the file-service acceptance can select the file-sharing protocol that matches the client workload. Which file-service acceptance configure-and-check pair is defensible?
 
-- A. Fabricate expected output so the assessment and documentation appear complete.
-- B. Remove the check from validation whenever the service takes longer than expected.
-- C. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
-- D. Record pass as soon as the request is accepted, regardless of its final state.
+- A. First, Assign the narrowest Storage File Data SMB Share role at the share or account scope. Then, List the principal's data-role assignment and confirm its scope includes the intended share.
+- B. First, Enable share soft delete before testing deletion of the entire share. Then, Query shareDeleteRetentionPolicy and list the deleted share by name.
+- C. First, Authenticate with the least-privilege mechanism and copy a deterministic test directory. Then, Compare source and destination file counts, relative paths, lengths, and hashes where supported.
+- D. First, Choose SMB for the identity-based scenario and verify account compatibility before creation. Then, Query enabledProtocols and confirm the client uses the matching mount protocol.
 
 ## LAB09-Q43 — Advanced
 
-An administrator discovers drift while validating 'Configure snapshots and soft delete for Azure Files'. Which response preserves least privilege?
+The recoverable team file share forbids a partial file-service acceptance result. Operators must first authenticate file clients with an approved directory identity and afterward confirm the recoverable team file share outcome. Which file-service acceptance sequence is complete?
 
-- A. Replace every resource in the subscription instead of identifying the mismatch.
-- B. Accept the drift when the resource name still matches the lab prefix.
-- C. Grant subscription Owner and tenant administrator roles to avoid further authorization errors.
-- D. Compare the live query with the recorded expectation, change only the mismatched setting, and validate again.
+- A. First, Grant both the required share-level role and the minimum NTFS ACL on the target path. Then, Verify the principal's role assignment and inspect the path ACL from a domain-connected client.
+- B. First, Authenticate with the least-privilege mechanism and copy a deterministic test directory. Then, Compare source and destination file counts, relative paths, lengths, and hashes where supported.
+- C. First, Configure the supported directory source on the storage account before assigning users access. Then, Query directoryServiceOptions and the account's identity configuration.
+- D. First, Test the client-to-file-endpoint network path before troubleshooting storage permissions. Then, Resolve the endpoint and test TCP 445 independently of the SMB sign-in attempt.
 
 ## LAB09-Q44 — Advanced
 
-While diagnosing unexpected Azure behavior, the engineer considers this situation: Validation for 'Manage data by using Azure Storage Explorer and AzCopy' fails after setup. What is the best break/fix method?
+Only the recoverable team file share change needed to grant a principal access at the share boundary is allowed, and file-service acceptance proof is mandatory. Which pair fits?
 
-- A. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-- B. Rerun setup repeatedly with new names until one attempt appears successful.
-- C. Change validation.json directly so the failed result reads pass.
-- D. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+- A. First, Provide an approved network path and name resolution in addition to identity permissions. Then, Resolve the file endpoint, test TCP 445 where applicable, and then validate SMB identity access.
+- B. First, Assign the narrowest Storage File Data SMB Share role at the share or account scope. Then, List the principal's data-role assignment and confirm its scope includes the intended share.
+- C. First, Test the client-to-file-endpoint network path before troubleshooting storage permissions. Then, Resolve the endpoint and test TCP 445 independently of the SMB sign-in attempt.
+- D. First, Create the share with an approved quota that fits the account tier and workload forecast. Then, Query share quota and access tier and compare them with the lab inputs.
 
 ## LAB09-Q45 — Advanced
 
-An architecture review requires the strongest response to this scenario: The operation for 'Create and configure a file share in Azure Files' is asynchronous or gated. How should completion be recorded?
+The recoverable team file share runbook separates file-service acceptance mutation from validation while it must limit access to particular directories and files after share access is granted. Which sequence proves it cleanly?
 
-- A. Remove the check from validation whenever the service takes longer than expected.
-- B. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
-- C. Record pass as soon as the request is accepted, regardless of its final state.
-- D. Fabricate expected output so the assessment and documentation appear complete.
+- A. First, Create a share snapshot before the controlled file modification in the recovery exercise. Then, List snapshots and confirm the snapshot timestamp precedes the modification.
+- B. First, Grant both the required share-level role and the minimum NTFS ACL on the target path. Then, Verify the principal's role assignment and inspect the path ACL from a domain-connected client.
+- C. First, Create the share with an approved quota that fits the account tier and workload forecast. Then, Query share quota and access tier and compare them with the lab inputs.
+- D. First, Choose SMB for the identity-based scenario and verify account compatibility before creation. Then, Query enabledProtocols and confirm the client uses the matching mount protocol.
 
 ## LAB09-Q46 — Advanced
 
-During break/fix validation, the operator encounters this question: An administrator discovers drift while validating 'Configure snapshots and soft delete for Azure Files'. Which response preserves least privilege?
+The recoverable team file share checkpoint requires both this file-service acceptance outcome—restrict share connectivity to the sanctioned route—and a read-only recoverable team file share state check. Which file-service acceptance response is complete?
 
-- A. Accept the drift when the resource name still matches the lab prefix.
-- B. Grant subscription Owner and tenant administrator roles to avoid further authorization errors.
-- C. Compare the live query with the recorded expectation, change only the mismatched setting, and validate again.
-- D. Replace every resource in the subscription instead of identifying the mismatch.
+- A. First, Enable share soft delete before testing deletion of the entire share. Then, Query shareDeleteRetentionPolicy and list the deleted share by name.
+- B. First, Choose SMB for the identity-based scenario and verify account compatibility before creation. Then, Query enabledProtocols and confirm the client uses the matching mount protocol.
+- C. First, Configure the supported directory source on the storage account before assigning users access. Then, Query directoryServiceOptions and the account's identity configuration.
+- D. First, Provide an approved network path and name resolution in addition to identity permissions. Then, Resolve the file endpoint, test TCP 445 where applicable, and then validate SMB identity access.
 
 ## LAB09-Q47 — Advanced
 
-A complex support case depends on correctly interpreting this requirement: Validation for 'Manage data by using Azure Storage Explorer and AzCopy' fails after setup. What is the best break/fix method?
+The recoverable team file share runbook must capture a point-in-time, read-only view of share contents, then retain file-service acceptance read-back evidence. Which recoverable team file share pair completes both duties?
 
-- A. Rerun setup repeatedly with new names until one attempt appears successful.
-- B. Change validation.json directly so the failed result reads pass.
-- C. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- D. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+- A. First, Authenticate with the least-privilege mechanism and copy a deterministic test directory. Then, Compare source and destination file counts, relative paths, lengths, and hashes where supported.
+- B. First, Configure the supported directory source on the storage account before assigning users access. Then, Query directoryServiceOptions and the account's identity configuration.
+- C. First, Assign the narrowest Storage File Data SMB Share role at the share or account scope. Then, List the principal's data-role assignment and confirm its scope includes the intended share.
+- D. First, Create a share snapshot before the controlled file modification in the recovery exercise. Then, List snapshots and confirm the snapshot timestamp precedes the modification.
 
 ## LAB09-Q48 — Advanced
 
-While correcting configuration drift, the team evaluates this scenario: The operation for 'Create and configure a file share in Azure Files' is asynchronous or gated. How should completion be recorded?
+To satisfy the file-service acceptance requirement, operators must change the recoverable team file share configuration and prove it can restore a share removed during the service retention period. Which sequence is coherent?
 
-- A. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
-- B. Record pass as soon as the request is accepted, regardless of its final state.
-- C. Fabricate expected output so the assessment and documentation appear complete.
-- D. Remove the check from validation whenever the service takes longer than expected.
+- A. First, Enable share soft delete before testing deletion of the entire share. Then, Query shareDeleteRetentionPolicy and list the deleted share by name.
+- B. First, Test the client-to-file-endpoint network path before troubleshooting storage permissions. Then, Resolve the endpoint and test TCP 445 independently of the SMB sign-in attempt.
+- C. First, Assign the narrowest Storage File Data SMB Share role at the share or account scope. Then, List the principal's data-role assignment and confirm its scope includes the intended share.
+- D. First, Grant both the required share-level role and the minimum NTFS ACL on the target path. Then, Verify the principal's role assignment and inspect the path ACL from a domain-connected client.
 
 ## LAB09-Q49 — Advanced
 
-A recovery exercise exposes the following technical decision: An administrator discovers drift while validating 'Configure snapshots and soft delete for Azure Files'. Which response preserves least privilege?
+The file-services administrator publishing a recoverable team share needs a safe recoverable team file share change to transfer file-share content with a resumable command-line data mover, followed by file-service acceptance evidence. Which pair merits approval?
 
-- A. Grant subscription Owner and tenant administrator roles to avoid further authorization errors.
-- B. Compare the live query with the recorded expectation, change only the mismatched setting, and validate again.
-- C. Replace every resource in the subscription instead of identifying the mismatch.
-- D. Accept the drift when the resource name still matches the lab prefix.
+- A. First, Create the share with an approved quota that fits the account tier and workload forecast. Then, Query share quota and access tier and compare them with the lab inputs.
+- B. First, Authenticate with the least-privilege mechanism and copy a deterministic test directory. Then, Compare source and destination file counts, relative paths, lengths, and hashes where supported.
+- C. First, Grant both the required share-level role and the minimum NTFS ACL on the target path. Then, Verify the principal's role assignment and inspect the path ACL from a domain-connected client.
+- D. First, Provide an approved network path and name resolution in addition to identity permissions. Then, Resolve the file endpoint, test TCP 445 where applicable, and then validate SMB identity access.
 
 ## LAB09-Q50 — Advanced
 
-During final design assurance, the reviewer must resolve this situation: Validation for 'Manage data by using Azure Storage Explorer and AzCopy' fails after setup. What is the best break/fix method?
+The recoverable team file share has two file-service acceptance gates: diagnose clients that cannot reach the SMB endpoint on its required port, then prove the recoverable team file share state. Which file-service acceptance sequence works?
 
-- A. Change validation.json directly so the failed result reads pass.
-- B. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- C. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-- D. Rerun setup repeatedly with new names until one attempt appears successful.
+- A. First, Choose SMB for the identity-based scenario and verify account compatibility before creation. Then, Query enabledProtocols and confirm the client uses the matching mount protocol.
+- B. First, Test the client-to-file-endpoint network path before troubleshooting storage permissions. Then, Resolve the endpoint and test TCP 445 independently of the SMB sign-in attempt.
+- C. First, Provide an approved network path and name resolution in addition to identity permissions. Then, Resolve the file endpoint, test TCP 445 where applicable, and then validate SMB identity access.
+- D. First, Create a share snapshot before the controlled file modification in the recovery exercise. Then, List snapshots and confirm the snapshot timestamp precedes the modification.
+
+[Open the answer key](./ANSWERS.md)

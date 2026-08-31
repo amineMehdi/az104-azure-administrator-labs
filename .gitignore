@@ -14,15 +14,17 @@
 *.key
 
 # Editors and operating systems
-.vscode/
+.vscode/*
 !.vscode/extensions.json
 !.vscode/settings.json
+!.vscode/tasks.json
 .idea/
 .DS_Store
 Thumbs.db
 
 # Tool caches and generated output
 node_modules/
+.packages/
 .venv/
 venv/
 __pycache__/
@@ -34,6 +36,11 @@ dist/
 build/
 coverage/
 reports/
+/.site-docs/
+/site/
+/.state/learner.config.yml
+/.state/progress.json
+/.state/readiness.json
 **/testResults.xml
 **/TestResults/
 *.trx

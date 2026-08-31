@@ -1,13 +1,13 @@
 flowchart LR
-    A["Operator<br/>Azure CLI"] --> P["Preview and preflight"]
-    P --> S["Recorded Lab 05 boundary"]
-    S --> R1["resource group"]
-    S --> R2["policy assignment"]
-    S --> R3["optional cost budget"]
-    S --> V["Independent validation"]
-    V --> E["Redacted command evidence"]
-    V --> C["Previewed cleanup"]
+    definition[Built-in require-tag<br/>deny Policy] --> assignment[Policy assignment<br/>purpose equals az104-lab]
+    assignment -->|resource-group scope| rg[Governed resource group]
+    rg -->|compliant request| storage[Tagged storage account]
+    rg -->|deny untagged request| denial[Policy denial evidence]
+    rg -->|monthly cost scope| budget[Budget<br/>80 percent actual]
+    budget -->|contact group ID| action[Action group]
+    action -->|optional approved receiver| email[Budget email]
+    advisor[Azure Advisor<br/>Cost category] -->|read-only recommendations| review[Administrator review]
     classDef control fill:#e8f1ff,stroke:#2563eb,color:#102a43;
     classDef resource fill:#e9f8ef,stroke:#16803a,color:#102a43;
-    class A,P,S,V,E,C control;
-    class R1,R2,R3 resource;
+    class definition,assignment,denial,review control;
+    class rg,storage,budget,action,email,advisor resource;

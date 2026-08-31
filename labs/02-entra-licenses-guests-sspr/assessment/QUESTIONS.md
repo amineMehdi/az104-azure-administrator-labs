@@ -1,453 +1,459 @@
 # Lab 02 knowledge check
 
-Choose the single best answer for each question. Record your choices before opening `ANSWERS.md`.
+[Return to the guided lab](../README.md)
+
+Complete all 50 questions before opening the answer key. Allow about 50–60 minutes and choose the single best answer.
+
+Use the result as a learning signal: 85–100% indicates mastery, 70–84% calls for targeted review, and below 70% means repeat the mapped lab tasks before retrying.
 
 ## LAB02-Q01 — Foundational
 
-Which principle is most important when working on 'Manage licenses in Microsoft Entra ID' in Lab 02?
+The guest collaboration review compares four claims for the external-collaboration and SSPR pilot requirement to confirm that the tenant has an unused product unit before assignment. Which claim is technically sound?
 
-- A. The shortest command is always correct even when it changes a broader scope.
-- B. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- C. SSPR and group-based licensing are tenant capabilities with role and license gates; inventory and scoped pilots are safer than tenant-wide changes.
-- D. A recognizable resource name removes the need for validation and scoped cleanup.
+- A. A user's usageLocation must be set before Microsoft Entra can assign many commercial licenses.
+- B. A B2B invitation creates an external user object and sends or returns a redemption invitation.
+- C. A tenant can assign a product license only when its subscribed quantity has an unconsumed unit.
+- D. SSPR can target all users or selected groups, subject to tenant licensing and authentication-method policy.
 
 ## LAB02-Q02 — Foundational
 
-Which lab action directly supports the objective 'Manage external users'?
+The guest collaboration architecture note requires the external-collaboration and SSPR pilot environment to supply the regional attribute required before a cloud license is assigned. Which statement defines the relevant guest collaboration boundary?
 
-- A. Change the active tenant without displaying or confirming the resulting context.
-- B. Search the whole tenant for a similar display name and modify the first match.
-- C. Mark the objective complete after reading documentation without checking any state.
-- D. Invite a disposable external account only when AZ104_GUEST_EMAIL is supplied.
+- A. Direct licensing adds a SKU to one user and can disable selected service plans within that SKU.
+- B. externalUserState changes from PendingAcceptance after the invited guest successfully redeems access.
+- C. A user's usageLocation must be set before Microsoft Entra can assign many commercial licenses.
+- D. The tenant policy determines how many and which registered methods a user needs for password reset.
 
 ## LAB02-Q03 — Foundational
 
-Which authorization approach is appropriate before practicing 'Configure self-service password reset (SSPR)'?
+A new guest collaboration operator must explain why the external-collaboration and SSPR pilot can license one pilot user without depending on group membership. Which explanation is accurate?
 
-- A. Confirm the active context and use only the declared role boundary: User Administrator and License Administrator; Authentication Policy Administrator for the SSPR policy path
-- B. Use a production subscription because its resources already exist.
-- C. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
-- D. Skip role checks when the run ID contains the lab number.
+- A. Group-based licensing applies assigned product licenses to eligible members of a licensed group.
+- B. A guest remains a tenant directory object whose display name, sponsors, groups, and access require lifecycle governance.
+- C. Direct licensing adds a SKU to one user and can disable selected service plans within that SKU.
+- D. SSPR capabilities depend on eligible licensing, policy scope, and special rules for administrator accounts.
 
 ## LAB02-Q04 — Foundational
 
-Before making a change, a learner checks this core behavior: Which principle is most important when working on 'Manage licenses in Microsoft Entra ID' in Lab 02?
+The external-collaboration and SSPR pilot acceptance criteria require operators to license a rotating team through membership rather than individual assignments. Which service fact supports that requirement?
 
-- A. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- B. SSPR and group-based licensing are tenant capabilities with role and license gates; inventory and scoped pilots are safer than tenant-wide changes.
-- C. A recognizable resource name removes the need for validation and scoped cleanup.
-- D. The shortest command is always correct even when it changes a broader scope.
+- A. Group-based licensing applies assigned product licenses to eligible members of a licensed group.
+- B. A B2B invitation creates an external user object and sends or returns a redemption invitation.
+- C. SSPR can target all users or selected groups, subject to tenant licensing and authentication-method policy.
+- D. A tenant can assign a product license only when its subscribed quantity has an unconsumed unit.
 
 ## LAB02-Q05 — Foundational
 
-During a design vocabulary review, the team evaluates this situation: Which lab action directly supports the objective 'Manage external users'?
+A guest collaboration reviewer challenges whether the external-collaboration and SSPR pilot can send a redeemable collaboration invitation to an external address. Which response resolves the concern?
 
-- A. Search the whole tenant for a similar display name and modify the first match.
-- B. Mark the objective complete after reading documentation without checking any state.
-- C. Invite a disposable external account only when AZ104_GUEST_EMAIL is supplied.
-- D. Change the active tenant without displaying or confirming the resulting context.
+- A. externalUserState changes from PendingAcceptance after the invited guest successfully redeems access.
+- B. The tenant policy determines how many and which registered methods a user needs for password reset.
+- C. A user's usageLocation must be set before Microsoft Entra can assign many commercial licenses.
+- D. A B2B invitation creates an external user object and sends or returns a redemption invitation.
 
 ## LAB02-Q06 — Foundational
 
-In a command-planning session, an administrator asks this question: Which authorization approach is appropriate before practicing 'Configure self-service password reset (SSPR)'?
+The external-collaboration and SSPR pilot handoff omits the guest collaboration rule needed to distinguish an invited account from one that has accepted its invitation. Which statement should the team add?
 
-- A. Use a production subscription because its resources already exist.
-- B. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
-- C. Skip role checks when the run ID contains the lab number.
-- D. Confirm the active context and use only the declared role boundary: User Administrator and License Administrator; Authentication Policy Administrator for the SSPR policy path
+- A. externalUserState changes from PendingAcceptance after the invited guest successfully redeems access.
+- B. A guest remains a tenant directory object whose display name, sponsors, groups, and access require lifecycle governance.
+- C. SSPR capabilities depend on eligible licensing, policy scope, and special rules for administrator accounts.
+- D. Direct licensing adds a SKU to one user and can disable selected service plans within that SKU.
 
 ## LAB02-Q07 — Foundational
 
-While preparing the lab, a learner verifies this platform rule: Which principle is most important when working on 'Manage licenses in Microsoft Entra ID' in Lab 02?
+A guest collaboration incident review of the external-collaboration and SSPR pilot depends on the ability to identify external collaborators without relying on their display names. Which platform description is reliable?
 
-- A. SSPR and group-based licensing are tenant capabilities with role and license gates; inventory and scoped pilots are safer than tenant-wide changes.
-- B. A recognizable resource name removes the need for validation and scoped cleanup.
-- C. The shortest command is always correct even when it changes a broader scope.
-- D. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+- A. SSPR can target all users or selected groups, subject to tenant licensing and authentication-method policy.
+- B. A tenant can assign a product license only when its subscribed quantity has an unconsumed unit.
+- C. Group-based licensing applies assigned product licenses to eligible members of a licensed group.
+- D. A guest remains a tenant directory object whose display name, sponsors, groups, and access require lifecycle governance.
 
 ## LAB02-Q08 — Foundational
 
-During peer review, the team must identify the accurate response to this scenario: Which lab action directly supports the objective 'Manage external users'?
+An identity administrator preparing a controlled external-collaboration and SSPR pilot is updating the guest collaboration runbook. The requirement is to limit password-reset registration to the approved pilot population. Which statement describes Azure behavior correctly?
 
-- A. Mark the objective complete after reading documentation without checking any state.
-- B. Invite a disposable external account only when AZ104_GUEST_EMAIL is supplied.
-- C. Change the active tenant without displaying or confirming the resulting context.
-- D. Search the whole tenant for a similar display name and modify the first match.
+- A. The tenant policy determines how many and which registered methods a user needs for password reset.
+- B. A user's usageLocation must be set before Microsoft Entra can assign many commercial licenses.
+- C. SSPR can target all users or selected groups, subject to tenant licensing and authentication-method policy.
+- D. A B2B invitation creates an external user object and sends or returns a redemption invitation.
 
 ## LAB02-Q09 — Foundational
 
-In an operations briefing, a new team member receives this question: Which authorization approach is appropriate before practicing 'Configure self-service password reset (SSPR)'?
+A guest collaboration peer review asks how the external-collaboration and SSPR pilot should handle this outcome: allow only the approved proofs during password reset. Which explanation is accurate?
 
-- A. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
-- B. Skip role checks when the run ID contains the lab number.
-- C. Confirm the active context and use only the declared role boundary: User Administrator and License Administrator; Authentication Policy Administrator for the SSPR policy path
-- D. Use a production subscription because its resources already exist.
+- A. The tenant policy determines how many and which registered methods a user needs for password reset.
+- B. SSPR capabilities depend on eligible licensing, policy scope, and special rules for administrator accounts.
+- C. Direct licensing adds a SKU to one user and can disable selected service plans within that SKU.
+- D. externalUserState changes from PendingAcceptance after the invited guest successfully redeems access.
 
 ## LAB02-Q10 — Foundational
 
-While building a support checklist, an engineer reviews this requirement: Which principle is most important when working on 'Manage licenses in Microsoft Entra ID' in Lab 02?
+For the external-collaboration and SSPR pilot, the guest collaboration plan must stop safely when the tenant lacks the entitlement or role needed for reset changes. Which statement about guest collaboration belongs in the external-collaboration and SSPR pilot record?
 
-- A. A recognizable resource name removes the need for validation and scoped cleanup.
-- B. The shortest command is always correct even when it changes a broader scope.
-- C. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- D. SSPR and group-based licensing are tenant capabilities with role and license gates; inventory and scoped pilots are safer than tenant-wide changes.
+- A. A tenant can assign a product license only when its subscribed quantity has an unconsumed unit.
+- B. Group-based licensing applies assigned product licenses to eligible members of a licensed group.
+- C. A guest remains a tenant directory object whose display name, sponsors, groups, and access require lifecycle governance.
+- D. SSPR capabilities depend on eligible licensing, policy scope, and special rules for administrator accounts.
 
 ## LAB02-Q11 — Foundational
 
-During a readiness check, the administrator considers this behavior: Which lab action directly supports the objective 'Manage external users'?
+A guest collaboration dry run shows no external-collaboration and SSPR pilot command will confirm that the tenant has an unused product unit before assignment. Which action belongs before execution?
 
-- A. Invite a disposable external account only when AZ104_GUEST_EMAIL is supplied.
-- B. Change the active tenant without displaying or confirming the resulting context.
-- C. Search the whole tenant for a similar display name and modify the first match.
-- D. Mark the objective complete after reading documentation without checking any state.
+- A. Submit addLicenses for the target user with the required SKU ID and any disabled plan IDs.
+- B. Track the guest by object ID and wait for redemption before depending on interactive access.
+- C. Configure permitted reset methods and require users to register enough approved methods.
+- D. Read subscribedSkus and calculate enabled units minus consumed units before assigning a license.
 
 ## LAB02-Q12 — Foundational
 
-In a service overview, the team discusses this scenario: Which authorization approach is appropriate before practicing 'Configure self-service password reset (SSPR)'?
+For the external-collaboration and SSPR pilot, operators need to supply the regional attribute required before a cloud license is assigned. Which change realizes that requirement?
 
-- A. Skip role checks when the run ID contains the lab number.
-- B. Confirm the active context and use only the declared role boundary: User Administrator and License Administrator; Authentication Policy Administrator for the SSPR policy path
-- C. Use a production subscription because its resources already exist.
-- D. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
+- A. Assign the SKU to the licensing group and add eligible users as members.
+- B. Set the user's two-letter usage location before submitting the license assignment.
+- C. Record the guest object ID and assign only the groups needed for the collaboration period.
+- D. Verify licensing and use a nonprivileged pilot identity before validating the standard SSPR path.
 
 ## LAB02-Q13 — Foundational
 
-While reviewing official guidance, a learner must resolve this question: Which principle is most important when working on 'Manage licenses in Microsoft Entra ID' in Lab 02?
+Operators must automate the external-collaboration and SSPR pilot change needed to license one pilot user without depending on group membership. Which guest collaboration operation belongs in the runbook?
 
-- A. The shortest command is always correct even when it changes a broader scope.
-- B. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- C. SSPR and group-based licensing are tenant capabilities with role and license gates; inventory and scoped pilots are safer than tenant-wide changes.
-- D. A recognizable resource name removes the need for validation and scoped cleanup.
+- A. Create an invitation with the guest email address and an approved redirect URL.
+- B. Submit addLicenses for the target user with the required SKU ID and any disabled plan IDs.
+- C. Enable SSPR for the approved pilot group before broadening the scope.
+- D. Read subscribedSkus and calculate enabled units minus consumed units before assigning a license.
 
 ## LAB02-Q14 — Foundational
 
-During a configuration walkthrough, the instructor asks about this situation: Which lab action directly supports the objective 'Manage external users'?
+An external-collaboration and SSPR pilot review finds guest collaboration drift from the need to license a rotating team through membership rather than individual assignments. Which correction addresses that drift?
 
-- A. Change the active tenant without displaying or confirming the resulting context.
-- B. Search the whole tenant for a similar display name and modify the first match.
-- C. Mark the objective complete after reading documentation without checking any state.
-- D. Invite a disposable external account only when AZ104_GUEST_EMAIL is supplied.
+- A. Track the guest by object ID and wait for redemption before depending on interactive access.
+- B. Configure permitted reset methods and require users to register enough approved methods.
+- C. Assign the SKU to the licensing group and add eligible users as members.
+- D. Set the user's two-letter usage location before submitting the license assignment.
 
 ## LAB02-Q15 — Foundational
 
-In a preflight knowledge check, the operator evaluates this requirement: Which authorization approach is appropriate before practicing 'Configure self-service password reset (SSPR)'?
+The external-collaboration and SSPR pilot window permits only the guest collaboration change needed to send a redeemable collaboration invitation to an external address. Which option respects the boundary?
 
-- A. Confirm the active context and use only the declared role boundary: User Administrator and License Administrator; Authentication Policy Administrator for the SSPR policy path
-- B. Use a production subscription because its resources already exist.
-- C. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
-- D. Skip role checks when the run ID contains the lab number.
+- A. Record the guest object ID and assign only the groups needed for the collaboration period.
+- B. Verify licensing and use a nonprivileged pilot identity before validating the standard SSPR path.
+- C. Submit addLicenses for the target user with the required SKU ID and any disabled plan IDs.
+- D. Create an invitation with the guest email address and an approved redirect URL.
 
 ## LAB02-Q16 — Applied
 
-A learner previews the implementation for 'Manage licenses in Microsoft Entra ID'. What behavior is required?
+The guest collaboration preflight has passed; the external-collaboration and SSPR pilot must now distinguish an invited account from one that has accepted its invitation. Which operation should run?
 
-- A. Create the baseline immediately and request approval only before cleanup.
-- B. Display the context, intended changes, cost and gated branches without mutating Azure.
-- C. Select the first accessible subscription and hide the resulting context.
-- D. Delete any older resource whose name resembles the new run ID.
+- A. Enable SSPR for the approved pilot group before broadening the scope.
+- B. Read subscribedSkus and calculate enabled units minus consumed units before assigning a license.
+- C. Assign the SKU to the licensing group and add eligible users as members.
+- D. Track the guest by object ID and wait for redemption before depending on interactive access.
 
 ## LAB02-Q17 — Applied
 
-Which implementation step should the learner perform for 'Manage external users'?
+The external-collaboration and SSPR pilot plan must identify external collaborators without relying on their display names while limiting the mutation scope to guest collaboration. Which action is appropriate?
 
-- A. Replace the lab action with a tenant-wide change that is easier to discover.
-- B. Copy resource identifiers from another run instead of recording returned IDs.
-- C. Create a security group that represents the SSPR pilot cohort.
-- D. Skip the operation and edit validation.json to show a passing result.
+- A. Configure permitted reset methods and require users to register enough approved methods.
+- B. Set the user's two-letter usage location before submitting the license assignment.
+- C. Create an invitation with the guest email address and an approved redirect URL.
+- D. Record the guest object ID and assign only the groups needed for the collaboration period.
 
 ## LAB02-Q18 — Applied
 
-Which evidence most directly validates 'Configure self-service password reset (SSPR)' for invited guest user?
+A guest collaboration ticket in the external-collaboration and SSPR pilot says to limit password-reset registration to the approved pilot population. Which guest collaboration action completes the external-collaboration and SSPR pilot request with minimal change?
 
-- A. Treat the setup exit code as proof of every configuration and relationship.
-- B. List the entire subscription and assume similarly named resources belong to this run.
-- C. Record a credential so another learner can replay the authenticated session.
-- D. Query the exact recorded scope and independently verify the intended recorded state.
+- A. Enable SSPR for the approved pilot group before broadening the scope.
+- B. Verify licensing and use a nonprivileged pilot identity before validating the standard SSPR path.
+- C. Submit addLicenses for the target user with the required SKU ID and any disabled plan IDs.
+- D. Track the guest by object ID and wait for redemption before depending on interactive access.
 
 ## LAB02-Q19 — Applied
 
-The 'Manage licenses in Microsoft Entra ID' checkpoint reaches an external prerequisite. What should happen?
+The approach for the external-collaboration and SSPR pilot is approved, but the guest collaboration environment still cannot allow only the approved proofs during password reset. Which implementation step closes the gap?
 
-- A. Run the branch only when this documented gate is satisfied: Requires a real disposable guest email for invitation, an available SKU for license assignment, and an authorized tenant policy change for SSPR.
-- B. Invent a domain, notification target, license, quota, or tenant value and continue.
-- C. Broaden permissions until the prerequisite can no longer block the operation.
-- D. Mark the branch passed because its command syntax was checked offline.
+- A. Configure permitted reset methods and require users to register enough approved methods.
+- B. Read subscribedSkus and calculate enabled units minus consumed units before assigning a license.
+- C. Assign the SKU to the licensing group and add eligible users as members.
+- D. Record the guest object ID and assign only the groups needed for the collaboration period.
 
 ## LAB02-Q20 — Applied
 
-What is the safest command-evidence practice after completing 'Manage external users'?
+The identity administrator preparing a controlled external-collaboration and SSPR pilot may change the external-collaboration and SSPR pilot only to stop safely when the tenant lacks the entitlement or role needed for reset changes. Which guest collaboration action stays within that assignment?
 
-- A. Commit the complete account object so reviewers can identify the tenant.
-- B. Retain only redacted structured output from an independent query of the recorded run.
-- C. Save tokens, keys, passwords, or SAS values beside the validation result.
-- D. Reuse successful output from an earlier run with a similar resource name.
+- A. Verify licensing and use a nonprivileged pilot identity before validating the standard SSPR path.
+- B. Set the user's two-letter usage location before submitting the license assignment.
+- C. Create an invitation with the guest email address and an approved redirect URL.
+- D. Enable SSPR for the approved pilot group before broadening the scope.
 
 ## LAB02-Q21 — Applied
 
-While validating a configuration, the team evaluates this situation: A learner previews the implementation for 'Manage licenses in Microsoft Entra ID'. What behavior is required?
+The guest collaboration validator needs one external-collaboration and SSPR pilot query after the change to confirm that the tenant has an unused product unit before assignment. Which guest collaboration property should the external-collaboration and SSPR pilot validator inspect?
 
-- A. Delete any older resource whose name resembles the new run ID.
-- B. Create the baseline immediately and request approval only before cleanup.
-- C. Display the context, intended changes, cost and gated branches without mutating Azure.
-- D. Select the first accessible subscription and hide the resulting context.
+- A. Inspect the user's inherited assignment state and confirm the assigning group ID.
+- B. Query the selected SKU and confirm that available units remain greater than or equal to the requested assignments.
+- C. Review userType, group memberships, and sign-in state for the exact guest object.
+- D. Confirm the pilot's license assignment, scope membership, and registered methods as separate checks.
 
 ## LAB02-Q22 — Applied
 
-A delegated administrator receives the following support request: Which implementation step should the learner perform for 'Manage external users'?
+The identity administrator preparing a controlled external-collaboration and SSPR pilot must confirm the external-collaboration and SSPR pilot, without mutation, can supply the regional attribute required before a cloud license is assigned. Which guest collaboration check qualifies?
 
-- A. Skip the operation and edit validation.json to show a passing result.
-- B. Replace the lab action with a tenant-wide change that is easier to discover.
-- C. Copy resource identifiers from another run instead of recording returned IDs.
-- D. Create a security group that represents the SSPR pilot cohort.
+- A. Read usageLocation for the target object and confirm it is a valid country or region code.
+- B. Read the invited user's userType and externalUserState from the returned invitedUser ID.
+- C. Read the authorization policy and target-group configuration through Microsoft Graph.
+- D. Query the selected SKU and confirm that available units remain greater than or equal to the requested assignments.
 
 ## LAB02-Q23 — Applied
 
-During a maintenance window, an engineer must decide how to respond: Which evidence most directly validates 'Configure self-service password reset (SSPR)' for invited guest user?
+The external-collaboration and SSPR pilot configuration is complete; the guest collaboration reviewers need evidence it can license one pilot user without depending on group membership. Which observation shows success?
 
-- A. Query the exact recorded scope and independently verify the intended recorded state.
-- B. Treat the setup exit code as proof of every configuration and relationship.
-- C. List the entire subscription and assume similarly named resources belong to this run.
-- D. Record a credential so another learner can replay the authenticated session.
+- A. Read licenseAssignmentStates and confirm the intended SKU is assigned without an error state.
+- B. Query externalUserState and its change timestamp for the invited user.
+- C. Compare the user's registered authentication methods with the tenant's SSPR method requirements.
+- D. Read usageLocation for the target object and confirm it is a valid country or region code.
 
 ## LAB02-Q24 — Applied
 
-A deployment pipeline reaches this decision point: The 'Manage licenses in Microsoft Entra ID' checkpoint reaches an external prerequisite. What should happen?
+The guest collaboration validation asks whether the external-collaboration and SSPR pilot can license a rotating team through membership rather than individual assignments. Which observable state is strongest?
 
-- A. Mark the branch passed because its command syntax was checked offline.
-- B. Run the branch only when this documented gate is satisfied: Requires a real disposable guest email for invitation, an available SKU for license assignment, and an authorized tenant policy change for SSPR.
-- C. Invent a domain, notification target, license, quota, or tenant value and continue.
-- D. Broaden permissions until the prerequisite can no longer block the operation.
+- A. Review userType, group memberships, and sign-in state for the exact guest object.
+- B. Confirm the pilot's license assignment, scope membership, and registered methods as separate checks.
+- C. Read licenseAssignmentStates and confirm the intended SKU is assigned without an error state.
+- D. Inspect the user's inherited assignment state and confirm the assigning group ID.
 
 ## LAB02-Q25 — Applied
 
-While applying least-privilege controls, the administrator reviews this scenario: What is the safest command-evidence practice after completing 'Manage external users'?
+An external-collaboration and SSPR pilot review must prove the guest collaboration ability to send a redeemable collaboration invitation to an external address. Which check avoids an adjacent feature?
 
-- A. Reuse successful output from an earlier run with a similar resource name.
-- B. Commit the complete account object so reviewers can identify the tenant.
-- C. Retain only redacted structured output from an independent query of the recorded run.
-- D. Save tokens, keys, passwords, or SAS values beside the validation result.
+- A. Read the authorization policy and target-group configuration through Microsoft Graph.
+- B. Query the selected SKU and confirm that available units remain greater than or equal to the requested assignments.
+- C. Inspect the user's inherited assignment state and confirm the assigning group ID.
+- D. Read the invited user's userType and externalUserState from the returned invitedUser ID.
 
 ## LAB02-Q26 — Applied
 
-A repeatable Azure CLI workflow must address this requirement: A learner previews the implementation for 'Manage licenses in Microsoft Entra ID'. What behavior is required?
+The external-collaboration and SSPR pilot evidence bundle needs a guest collaboration result showing it can distinguish an invited account from one that has accepted its invitation. Which result belongs in the checkpoint?
 
-- A. Select the first accessible subscription and hide the resulting context.
-- B. Delete any older resource whose name resembles the new run ID.
-- C. Create the baseline immediately and request approval only before cleanup.
-- D. Display the context, intended changes, cost and gated branches without mutating Azure.
+- A. Compare the user's registered authentication methods with the tenant's SSPR method requirements.
+- B. Query externalUserState and its change timestamp for the invited user.
+- C. Read usageLocation for the target object and confirm it is a valid country or region code.
+- D. Read the invited user's userType and externalUserState from the returned invitedUser ID.
 
 ## LAB02-Q27 — Applied
 
-During an environment handoff, the receiving team asks this question: Which implementation step should the learner perform for 'Manage external users'?
+Before external-collaboration and SSPR pilot cleanup, the guest collaboration team must reconfirm it can identify external collaborators without relying on their display names. Which read-only inspection should run?
 
-- A. Create a security group that represents the SSPR pilot cohort.
-- B. Skip the operation and edit validation.json to show a passing result.
-- C. Replace the lab action with a tenant-wide change that is easier to discover.
-- D. Copy resource identifiers from another run instead of recording returned IDs.
+- A. Review userType, group memberships, and sign-in state for the exact guest object.
+- B. Confirm the pilot's license assignment, scope membership, and registered methods as separate checks.
+- C. Read licenseAssignmentStates and confirm the intended SKU is assigned without an error state.
+- D. Query externalUserState and its change timestamp for the invited user.
 
 ## LAB02-Q28 — Applied
 
-A configuration change produces the following operational choice: Which evidence most directly validates 'Configure self-service password reset (SSPR)' for invited guest user?
+The external-collaboration and SSPR pilot setup reports success after the guest collaboration attempt to limit password-reset registration to the approved pilot population. Which guest collaboration read-only observation proves the external-collaboration and SSPR pilot outcome?
 
-- A. Record a credential so another learner can replay the authenticated session.
-- B. Query the exact recorded scope and independently verify the intended recorded state.
-- C. Treat the setup exit code as proof of every configuration and relationship.
-- D. List the entire subscription and assume similarly named resources belong to this run.
+- A. Query the selected SKU and confirm that available units remain greater than or equal to the requested assignments.
+- B. Inspect the user's inherited assignment state and confirm the assigning group ID.
+- C. Read the authorization policy and target-group configuration through Microsoft Graph.
+- D. Review userType, group memberships, and sign-in state for the exact guest object.
 
 ## LAB02-Q29 — Applied
 
-While preparing independent validation, an engineer considers this scenario: The 'Manage licenses in Microsoft Entra ID' checkpoint reaches an external prerequisite. What should happen?
+The guest collaboration log says the external-collaboration and SSPR pilot can now allow only the approved proofs during password reset. Which guest collaboration state should the external-collaboration and SSPR pilot acceptance test retain?
 
-- A. Broaden permissions until the prerequisite can no longer block the operation.
-- B. Mark the branch passed because its command syntax was checked offline.
-- C. Run the branch only when this documented gate is satisfied: Requires a real disposable guest email for invitation, an available SKU for license assignment, and an authorized tenant policy change for SSPR.
-- D. Invent a domain, notification target, license, quota, or tenant value and continue.
+- A. Read usageLocation for the target object and confirm it is a valid country or region code.
+- B. Compare the user's registered authentication methods with the tenant's SSPR method requirements.
+- C. Read the invited user's userType and externalUserState from the returned invitedUser ID.
+- D. Read the authorization policy and target-group configuration through Microsoft Graph.
 
 ## LAB02-Q30 — Applied
 
-A service owner asks the administrator to resolve this requirement: What is the safest command-evidence practice after completing 'Manage external users'?
+The external-collaboration and SSPR pilot rejects guest collaboration exit status as proof it can stop safely when the tenant lacks the entitlement or role needed for reset changes. Which external-collaboration and SSPR pilot result is valid evidence?
 
-- A. Save tokens, keys, passwords, or SAS values beside the validation result.
-- B. Reuse successful output from an earlier run with a similar resource name.
-- C. Commit the complete account object so reviewers can identify the tenant.
-- D. Retain only redacted structured output from an independent query of the recorded run.
+- A. Read licenseAssignmentStates and confirm the intended SKU is assigned without an error state.
+- B. Query externalUserState and its change timestamp for the invited user.
+- C. Compare the user's registered authentication methods with the tenant's SSPR method requirements.
+- D. Confirm the pilot's license assignment, scope membership, and registered methods as separate checks.
 
 ## LAB02-Q31 — Applied
 
-During a scoped cleanup review, the team evaluates this situation: A learner previews the implementation for 'Manage licenses in Microsoft Entra ID'. What behavior is required?
+The external-collaboration and SSPR pilot troubleshooting scope is the guest collaboration need to confirm that the tenant has an unused product unit before assignment. Which condition should be corrected first?
 
-- A. Display the context, intended changes, cost and gated branches without mutating Azure.
-- B. Select the first accessible subscription and hide the resulting context.
-- C. Delete any older resource whose name resembles the new run ID.
-- D. Create the baseline immediately and request approval only before cleanup.
+- A. The user has no usageLocation value when the license request is processed.
+- B. All enabled units for the selected SKU are already consumed.
+- C. The invitation exists, but the recipient has not completed redemption.
+- D. The pilot is a privileged administrator subject to stricter reset-method requirements.
 
 ## LAB02-Q32 — Applied
 
-An automation author must choose the correct response to this scenario: Which implementation step should the learner perform for 'Manage external users'?
+The external-collaboration and SSPR pilot result is partial because the guest collaboration cannot supply the regional attribute required before a cloud license is assigned. Which condition accounts for that result?
 
-- A. Copy resource identifiers from another run instead of recording returned IDs.
-- B. Create a security group that represents the SSPR pilot cohort.
-- C. Skip the operation and edit validation.json to show a passing result.
-- D. Replace the lab action with a tenant-wide change that is easier to discover.
+- A. The request used a product display name where Microsoft Graph requires the SKU GUID.
+- B. The offboarding job removed an invitation email but left the guest object and its group memberships active.
+- C. The user has no usageLocation value when the license request is processed.
+- D. All enabled units for the selected SKU are already consumed.
 
 ## LAB02-Q33 — Applied
 
-A lab run with a unique run ID reaches this decision: Which evidence most directly validates 'Configure self-service password reset (SSPR)' for invited guest user?
+The guest collaboration evidence shows the external-collaboration and SSPR pilot cannot license one pilot user without depending on group membership. Which root cause fits that evidence?
 
-- A. List the entire subscription and assume similarly named resources belong to this run.
-- B. Record a credential so another learner can replay the authenticated session.
-- C. Query the exact recorded scope and independently verify the intended recorded state.
-- D. Treat the setup exit code as proof of every configuration and relationship.
+- A. The user was made a group owner but was not added to the licensed group's members.
+- B. The request used a product display name where Microsoft Graph requires the SKU GUID.
+- C. The test user is outside the group selected for SSPR.
+- D. The user has no usageLocation value when the license request is processed.
 
 ## LAB02-Q34 — Applied
 
-While comparing the intended and actual states, the operator asks this question: The 'Manage licenses in Microsoft Entra ID' checkpoint reaches an external prerequisite. What should happen?
+Although the external-collaboration and SSPR pilot is meant to let the guest collaboration license a rotating team through membership rather than individual assignments, its checkpoint fails. Which guest collaboration defect explains the failure?
 
-- A. Invent a domain, notification target, license, quota, or tenant value and continue.
-- B. Broaden permissions until the prerequisite can no longer block the operation.
-- C. Mark the branch passed because its command syntax was checked offline.
-- D. Run the branch only when this documented gate is satisfied: Requires a real disposable guest email for invitation, an available SKU for license assignment, and an authorized tenant policy change for SSPR.
+- A. The user was made a group owner but was not added to the licensed group's members.
+- B. The redirect URL is not authorized for the tenant's invitation workflow.
+- C. The user registered fewer usable methods than the reset policy requires.
+- D. The request used a product display name where Microsoft Graph requires the SKU GUID.
 
 ## LAB02-Q35 — Applied
 
-A peer reviewer examines the proposed implementation for this scenario: What is the safest command-evidence practice after completing 'Manage external users'?
+The guest collaboration support team isolated the external-collaboration and SSPR pilot incident to the attempt to send a redeemable collaboration invitation to an external address. Which condition prevents success?
 
-- A. Retain only redacted structured output from an independent query of the recorded run.
-- B. Save tokens, keys, passwords, or SAS values beside the validation result.
-- C. Reuse successful output from an earlier run with a similar resource name.
-- D. Commit the complete account object so reviewers can identify the tenant.
+- A. The invitation exists, but the recipient has not completed redemption.
+- B. The redirect URL is not authorized for the tenant's invitation workflow.
+- C. The pilot is a privileged administrator subject to stricter reset-method requirements.
+- D. The user was made a group owner but was not added to the licensed group's members.
 
 ## LAB02-Q36 — Applied
 
-During a controlled rollout, the change team encounters this requirement: A learner previews the implementation for 'Manage licenses in Microsoft Entra ID'. What behavior is required?
+An external-collaboration and SSPR pilot query surprises the identity administrator preparing a controlled external-collaboration and SSPR pilot during the guest collaboration attempt to distinguish an invited account from one that has accepted its invitation. Which finding explains it?
 
-- A. Create the baseline immediately and request approval only before cleanup.
-- B. Display the context, intended changes, cost and gated branches without mutating Azure.
-- C. Select the first accessible subscription and hide the resulting context.
-- D. Delete any older resource whose name resembles the new run ID.
+- A. The offboarding job removed an invitation email but left the guest object and its group memberships active.
+- B. The invitation exists, but the recipient has not completed redemption.
+- C. All enabled units for the selected SKU are already consumed.
+- D. The redirect URL is not authorized for the tenant's invitation workflow.
 
 ## LAB02-Q37 — Applied
 
-A support engineer reproduces the following situation in a test environment: Which implementation step should the learner perform for 'Manage external users'?
+Other external-collaboration and SSPR pilot components are healthy, but the guest collaboration still cannot identify external collaborators without relying on their display names. Which state causes the isolated failure?
 
-- A. Replace the lab action with a tenant-wide change that is easier to discover.
-- B. Copy resource identifiers from another run instead of recording returned IDs.
-- C. Create a security group that represents the SSPR pilot cohort.
-- D. Skip the operation and edit validation.json to show a passing result.
+- A. The test user is outside the group selected for SSPR.
+- B. The user has no usageLocation value when the license request is processed.
+- C. The offboarding job removed an invitation email but left the guest object and its group memberships active.
+- D. The invitation exists, but the recipient has not completed redemption.
 
 ## LAB02-Q38 — Applied
 
-While recording validation evidence, the administrator evaluates this question: Which evidence most directly validates 'Configure self-service password reset (SSPR)' for invited guest user?
+During a guest collaboration fault drill, the external-collaboration and SSPR pilot does not limit password-reset registration to the approved pilot population. Which finding identifies the defect?
 
-- A. Treat the setup exit code as proof of every configuration and relationship.
-- B. List the entire subscription and assume similarly named resources belong to this run.
-- C. Record a credential so another learner can replay the authenticated session.
-- D. Query the exact recorded scope and independently verify the intended recorded state.
+- A. The user registered fewer usable methods than the reset policy requires.
+- B. The request used a product display name where Microsoft Graph requires the SKU GUID.
+- C. The offboarding job removed an invitation email but left the guest object and its group memberships active.
+- D. The test user is outside the group selected for SSPR.
 
 ## LAB02-Q39 — Applied
 
-A configuration owner must approve one response to this scenario: The 'Manage licenses in Microsoft Entra ID' checkpoint reaches an external prerequisite. What should happen?
+The external-collaboration and SSPR pilot setup finishes, yet the guest collaboration cannot allow only the approved proofs during password reset. Which misconfiguration explains the mismatch?
 
-- A. Run the branch only when this documented gate is satisfied: Requires a real disposable guest email for invitation, an available SKU for license assignment, and an authorized tenant policy change for SSPR.
-- B. Invent a domain, notification target, license, quota, or tenant value and continue.
-- C. Broaden permissions until the prerequisite can no longer block the operation.
-- D. Mark the branch passed because its command syntax was checked offline.
+- A. The pilot is a privileged administrator subject to stricter reset-method requirements.
+- B. The user was made a group owner but was not added to the licensed group's members.
+- C. The user registered fewer usable methods than the reset policy requires.
+- D. The test user is outside the group selected for SSPR.
 
 ## LAB02-Q40 — Applied
 
-During post-deployment verification, the team reviews this situation: What is the safest command-evidence practice after completing 'Manage external users'?
+A guest collaboration break/fix in the external-collaboration and SSPR pilot fails when operators try to stop safely when the tenant lacks the entitlement or role needed for reset changes. Which diagnosis fits?
 
-- A. Commit the complete account object so reviewers can identify the tenant.
-- B. Retain only redacted structured output from an independent query of the recorded run.
-- C. Save tokens, keys, passwords, or SAS values beside the validation result.
-- D. Reuse successful output from an earlier run with a similar resource name.
+- A. The pilot is a privileged administrator subject to stricter reset-method requirements.
+- B. All enabled units for the selected SKU are already consumed.
+- C. The redirect URL is not authorized for the tenant's invitation workflow.
+- D. The user registered fewer usable methods than the reset policy requires.
 
 ## LAB02-Q41 — Advanced
 
-Validation for 'Configure self-service password reset (SSPR)' fails after setup. What is the best break/fix method?
+The external-collaboration and SSPR pilot has two guest collaboration gates: confirm that the tenant has an unused product unit before assignment, then prove the external-collaboration and SSPR pilot state. Which guest collaboration sequence works?
 
-- A. Rerun setup repeatedly with new names until one attempt appears successful.
-- B. Change validation.json directly so the failed result reads pass.
-- C. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-- D. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+- A. First, Submit addLicenses for the target user with the required SKU ID and any disabled plan IDs. Then, Read licenseAssignmentStates and confirm the intended SKU is assigned without an error state.
+- B. First, Record the guest object ID and assign only the groups needed for the collaboration period. Then, Review userType, group memberships, and sign-in state for the exact guest object.
+- C. First, Read subscribedSkus and calculate enabled units minus consumed units before assigning a license. Then, Query the selected SKU and confirm that available units remain greater than or equal to the requested assignments.
+- D. First, Enable SSPR for the approved pilot group before broadening the scope. Then, Read the authorization policy and target-group configuration through Microsoft Graph.
 
 ## LAB02-Q42 — Advanced
 
-The operation for 'Manage licenses in Microsoft Entra ID' is asynchronous or gated. How should completion be recorded?
+Which guest collaboration path makes the external-collaboration and SSPR pilot able to supply the regional attribute required before a cloud license is assigned, then inspects the defining properties?
 
-- A. Record pass as soon as the request is accepted, regardless of its final state.
-- B. Fabricate expected output so the assessment and documentation appear complete.
-- C. Remove the check from validation whenever the service takes longer than expected.
-- D. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
+- A. First, Assign the SKU to the licensing group and add eligible users as members. Then, Inspect the user's inherited assignment state and confirm the assigning group ID.
+- B. First, Set the user's two-letter usage location before submitting the license assignment. Then, Read usageLocation for the target object and confirm it is a valid country or region code.
+- C. First, Enable SSPR for the approved pilot group before broadening the scope. Then, Read the authorization policy and target-group configuration through Microsoft Graph.
+- D. First, Configure permitted reset methods and require users to register enough approved methods. Then, Compare the user's registered authentication methods with the tenant's SSPR method requirements.
 
 ## LAB02-Q43 — Advanced
 
-A security and reliability review identifies this design decision: Validation for 'Configure self-service password reset (SSPR)' fails after setup. What is the best break/fix method?
+At the external-collaboration and SSPR pilot approval gate, operators must show that the guest collaboration can license one pilot user without depending on group membership. Which guest collaboration configure-and-check pair is defensible?
 
-- A. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-- B. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- C. Rerun setup repeatedly with new names until one attempt appears successful.
-- D. Change validation.json directly so the failed result reads pass.
+- A. First, Submit addLicenses for the target user with the required SKU ID and any disabled plan IDs. Then, Read licenseAssignmentStates and confirm the intended SKU is assigned without an error state.
+- B. First, Create an invitation with the guest email address and an approved redirect URL. Then, Read the invited user's userType and externalUserState from the returned invitedUser ID.
+- C. First, Configure permitted reset methods and require users to register enough approved methods. Then, Compare the user's registered authentication methods with the tenant's SSPR method requirements.
+- D. First, Verify licensing and use a nonprivileged pilot identity before validating the standard SSPR path. Then, Confirm the pilot's license assignment, scope membership, and registered methods as separate checks.
 
 ## LAB02-Q44 — Advanced
 
-While diagnosing unexpected Azure behavior, the engineer considers this situation: The operation for 'Manage licenses in Microsoft Entra ID' is asynchronous or gated. How should completion be recorded?
+The external-collaboration and SSPR pilot forbids a partial guest collaboration result. Operators must first license a rotating team through membership rather than individual assignments and afterward confirm the external-collaboration and SSPR pilot outcome. Which guest collaboration sequence is complete?
 
-- A. Remove the check from validation whenever the service takes longer than expected.
-- B. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
-- C. Record pass as soon as the request is accepted, regardless of its final state.
-- D. Fabricate expected output so the assessment and documentation appear complete.
+- A. First, Track the guest by object ID and wait for redemption before depending on interactive access. Then, Query externalUserState and its change timestamp for the invited user.
+- B. First, Verify licensing and use a nonprivileged pilot identity before validating the standard SSPR path. Then, Confirm the pilot's license assignment, scope membership, and registered methods as separate checks.
+- C. First, Read subscribedSkus and calculate enabled units minus consumed units before assigning a license. Then, Query the selected SKU and confirm that available units remain greater than or equal to the requested assignments.
+- D. First, Assign the SKU to the licensing group and add eligible users as members. Then, Inspect the user's inherited assignment state and confirm the assigning group ID.
 
 ## LAB02-Q45 — Advanced
 
-An architecture review requires the strongest response to this scenario: Validation for 'Configure self-service password reset (SSPR)' fails after setup. What is the best break/fix method?
+Only the external-collaboration and SSPR pilot change needed to send a redeemable collaboration invitation to an external address is allowed, and guest collaboration proof is mandatory. Which pair fits?
 
-- A. Rerun setup repeatedly with new names until one attempt appears successful.
-- B. Change validation.json directly so the failed result reads pass.
-- C. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-- D. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+- A. First, Record the guest object ID and assign only the groups needed for the collaboration period. Then, Review userType, group memberships, and sign-in state for the exact guest object.
+- B. First, Create an invitation with the guest email address and an approved redirect URL. Then, Read the invited user's userType and externalUserState from the returned invitedUser ID.
+- C. First, Read subscribedSkus and calculate enabled units minus consumed units before assigning a license. Then, Query the selected SKU and confirm that available units remain greater than or equal to the requested assignments.
+- D. First, Set the user's two-letter usage location before submitting the license assignment. Then, Read usageLocation for the target object and confirm it is a valid country or region code.
 
 ## LAB02-Q46 — Advanced
 
-During break/fix validation, the operator encounters this question: The operation for 'Manage licenses in Microsoft Entra ID' is asynchronous or gated. How should completion be recorded?
+The external-collaboration and SSPR pilot runbook separates guest collaboration mutation from validation while it must distinguish an invited account from one that has accepted its invitation. Which sequence proves it cleanly?
 
-- A. Record pass as soon as the request is accepted, regardless of its final state.
-- B. Fabricate expected output so the assessment and documentation appear complete.
-- C. Remove the check from validation whenever the service takes longer than expected.
-- D. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
+- A. First, Enable SSPR for the approved pilot group before broadening the scope. Then, Read the authorization policy and target-group configuration through Microsoft Graph.
+- B. First, Set the user's two-letter usage location before submitting the license assignment. Then, Read usageLocation for the target object and confirm it is a valid country or region code.
+- C. First, Track the guest by object ID and wait for redemption before depending on interactive access. Then, Query externalUserState and its change timestamp for the invited user.
+- D. First, Submit addLicenses for the target user with the required SKU ID and any disabled plan IDs. Then, Read licenseAssignmentStates and confirm the intended SKU is assigned without an error state.
 
 ## LAB02-Q47 — Advanced
 
-A complex support case depends on correctly interpreting this requirement: Validation for 'Configure self-service password reset (SSPR)' fails after setup. What is the best break/fix method?
+The external-collaboration and SSPR pilot checkpoint requires both this guest collaboration outcome—identify external collaborators without relying on their display names—and a read-only external-collaboration and SSPR pilot state check. Which guest collaboration response is complete?
 
-- A. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-- B. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- C. Rerun setup repeatedly with new names until one attempt appears successful.
-- D. Change validation.json directly so the failed result reads pass.
+- A. First, Record the guest object ID and assign only the groups needed for the collaboration period. Then, Review userType, group memberships, and sign-in state for the exact guest object.
+- B. First, Configure permitted reset methods and require users to register enough approved methods. Then, Compare the user's registered authentication methods with the tenant's SSPR method requirements.
+- C. First, Submit addLicenses for the target user with the required SKU ID and any disabled plan IDs. Then, Read licenseAssignmentStates and confirm the intended SKU is assigned without an error state.
+- D. First, Assign the SKU to the licensing group and add eligible users as members. Then, Inspect the user's inherited assignment state and confirm the assigning group ID.
 
 ## LAB02-Q48 — Advanced
 
-While correcting configuration drift, the team evaluates this scenario: The operation for 'Manage licenses in Microsoft Entra ID' is asynchronous or gated. How should completion be recorded?
+The external-collaboration and SSPR pilot runbook must limit password-reset registration to the approved pilot population, then retain guest collaboration read-back evidence. Which external-collaboration and SSPR pilot pair completes both duties?
 
-- A. Remove the check from validation whenever the service takes longer than expected.
-- B. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
-- C. Record pass as soon as the request is accepted, regardless of its final state.
-- D. Fabricate expected output so the assessment and documentation appear complete.
+- A. First, Verify licensing and use a nonprivileged pilot identity before validating the standard SSPR path. Then, Confirm the pilot's license assignment, scope membership, and registered methods as separate checks.
+- B. First, Enable SSPR for the approved pilot group before broadening the scope. Then, Read the authorization policy and target-group configuration through Microsoft Graph.
+- C. First, Assign the SKU to the licensing group and add eligible users as members. Then, Inspect the user's inherited assignment state and confirm the assigning group ID.
+- D. First, Create an invitation with the guest email address and an approved redirect URL. Then, Read the invited user's userType and externalUserState from the returned invitedUser ID.
 
 ## LAB02-Q49 — Advanced
 
-A recovery exercise exposes the following technical decision: Validation for 'Configure self-service password reset (SSPR)' fails after setup. What is the best break/fix method?
+To satisfy the guest collaboration requirement, operators must change the external-collaboration and SSPR pilot configuration and prove it can allow only the approved proofs during password reset. Which sequence is coherent?
 
-- A. Rerun setup repeatedly with new names until one attempt appears successful.
-- B. Change validation.json directly so the failed result reads pass.
-- C. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-- D. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+- A. First, Read subscribedSkus and calculate enabled units minus consumed units before assigning a license. Then, Query the selected SKU and confirm that available units remain greater than or equal to the requested assignments.
+- B. First, Create an invitation with the guest email address and an approved redirect URL. Then, Read the invited user's userType and externalUserState from the returned invitedUser ID.
+- C. First, Configure permitted reset methods and require users to register enough approved methods. Then, Compare the user's registered authentication methods with the tenant's SSPR method requirements.
+- D. First, Track the guest by object ID and wait for redemption before depending on interactive access. Then, Query externalUserState and its change timestamp for the invited user.
 
 ## LAB02-Q50 — Advanced
 
-During final design assurance, the reviewer must resolve this situation: The operation for 'Manage licenses in Microsoft Entra ID' is asynchronous or gated. How should completion be recorded?
+The identity administrator preparing a controlled external-collaboration and SSPR pilot needs a safe external-collaboration and SSPR pilot change to stop safely when the tenant lacks the entitlement or role needed for reset changes, followed by guest collaboration evidence. Which pair merits approval?
 
-- A. Record pass as soon as the request is accepted, regardless of its final state.
-- B. Fabricate expected output so the assessment and documentation appear complete.
-- C. Remove the check from validation whenever the service takes longer than expected.
-- D. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
+- A. First, Set the user's two-letter usage location before submitting the license assignment. Then, Read usageLocation for the target object and confirm it is a valid country or region code.
+- B. First, Verify licensing and use a nonprivileged pilot identity before validating the standard SSPR path. Then, Confirm the pilot's license assignment, scope membership, and registered methods as separate checks.
+- C. First, Track the guest by object ID and wait for redemption before depending on interactive access. Then, Query externalUserState and its change timestamp for the invited user.
+- D. First, Record the guest object ID and assign only the groups needed for the collaboration period. Then, Review userType, group memberships, and sign-in state for the exact guest object.
+
+[Open the answer key](./ANSWERS.md)

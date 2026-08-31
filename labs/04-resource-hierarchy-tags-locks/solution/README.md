@@ -1,6 +1,6 @@
 # Lab 04 solution and diagnostic notes
 
-Use this only after completing the lab and knowledge check. The solution is evidence-led: it does not replace the independent validator or silently repair live state.
+Use this only after completing the guided lab. In Labs 01–25, complete the knowledge check before reading these notes. The solution is evidence-led: it does not replace the independent validator or silently repair live state.
 
 ## Intended checkpoint sequence
 
@@ -8,6 +8,7 @@ Use this only after completing the lab and knowledge check. The solution is evid
 2. **Checkpoint 2:** Update tags using merge semantics and verify which values do not inherit automatically.
 3. **Checkpoint 3:** Create a CanNotDelete lock and test the protected deletion path.
 4. **Checkpoint 4:** Inventory the active subscription and run the optional management-group branch only with AZ104_ALLOW_MANAGEMENT_GROUP_CHANGE=YES.
+5. **Checkpoint 5:** Correlate service state with the run manifest, retain redacted validation evidence, and prove cleanup readiness.
 
 ## Diagnostic order
 
@@ -38,4 +39,4 @@ The live gate is: Management-group creation is optional and requires explicit te
 
 ## Completion evidence
 
-A defensible result includes a run manifest, independent validation report, redacted CLI or PowerShell evidence, and a cleanup/residual audit. Offline repository tests alone do not establish live verification.
+A defensible result includes a run manifest, independent validation report, redacted Azure CLI evidence captured from PowerShell, and a cleanup/residual audit. Offline repository tests alone do not establish live verification.

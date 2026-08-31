@@ -1,9 +1,11 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.invalid/az104/lab-schema.json",
-  "title": "AZ-104 lab metadata",
+  "$id": "https://jamonygr.github.io/az104-azure-administrator-labs/schemas/lab-schema.json",
+  "title": "AZ-104 lab contract",
+  "description": "Authoritative, offline-verifiable metadata for one learner lab.",
   "type": "object",
   "required": [
+    "schemaVersion",
     "id",
     "slug",
     "title",
@@ -12,44 +14,265 @@
     "objectives",
     "track",
     "status",
+    "testedToolVersions",
     "estimatedMinutes",
+    "difficulty",
+    "experience",
     "cost",
     "permissions",
     "prerequisites",
+    "providers",
+    "inputs",
+    "acknowledgements",
+    "creates",
+    "tenantScopedChanges",
+    "externalRequirements",
+    "preflightChecks",
+    "checkpoints",
     "validation",
     "cleanup",
-    "assessment"
+    "assessment",
+    "lastOfflineValidated",
+    "lastLiveVerified"
   ],
   "properties": {
-    "id": { "type": "string", "pattern": "^LAB-[0-9]{2}$" },
+    "schemaVersion": { "const": "2.0.0" },
+    "id": { "$ref": "#/$defs/labId" },
     "slug": { "type": "string", "pattern": "^[0-9]{2}-[a-z0-9]+(?:-[a-z0-9]+)*$" },
-    "title": { "type": "string", "minLength": 5 },
+    "title": { "type": "string", "minLength": 10 },
     "blueprintVersion": { "type": "string", "format": "date" },
-    "domain": { "type": "string", "minLength": 2 },
+    "domain": {
+      "enum": [
+        "foundation",
+        "identity-governance",
+        "storage",
+        "compute",
+        "networking",
+        "monitor-recovery",
+        "capstone"
+      ]
+    },
     "objectives": {
       "type": "array",
       "minItems": 1,
       "uniqueItems": true,
-      "items": { "type": "string", "pattern": "^(?:FD|IG|ST|CP|NW|MR)-[A-Z]+-[0-9]{2}$" }
+      "items": { "$ref": "#/$defs/objectiveId" }
     },
-    "track": { "type": "string", "minLength": 2 },
+    "track": { "enum": ["azure-cli", "azure-cli-bicep"] },
     "status": {
-      "enum": ["planned", "in-progress", "offline-validated", "live-verified", "partial", "blocked"]
+      "enum": ["draft", "offline-validated", "live-verified", "partial", "blocked"]
     },
-    "estimatedMinutes": { "type": "integer", "minimum": 15 },
+    "testedToolVersions": {
+      "type": "object",
+      "required": ["azureCli", "powershell"],
+      "properties": {
+        "azureCli": { "type": "string", "pattern": "^>=?[0-9]+\\.[0-9]+(?:\\.[0-9]+)?$" },
+        "powershell": { "type": "string", "pattern": "^>=?[0-9]+\\.[0-9]+(?:\\.[0-9]+)?$" },
+        "bicep": { "type": "string", "minLength": 3 },
+        "azCopy": { "type": "string", "minLength": 3 }
+      },
+      "additionalProperties": false
+    },
+    "estimatedMinutes": { "type": "integer", "minimum": 30, "maximum": 480 },
+    "difficulty": { "enum": ["foundational", "applied", "advanced"] },
+    "experience": {
+      "type": "object",
+      "required": ["scenario", "role", "outcome", "completionCriteria"],
+      "properties": {
+        "scenario": { "type": "string", "minLength": 80 },
+        "role": { "type": "string", "minLength": 20 },
+        "outcome": { "type": "string", "minLength": 40 },
+        "completionCriteria": {
+          "type": "array",
+          "minItems": 3,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 20 }
+        }
+      },
+      "additionalProperties": false
+    },
     "cost": {
       "type": "object",
-      "required": ["class", "billableResources"],
+      "required": ["class", "billableResources", "notes", "pricingLinks", "acknowledgementRequired"],
       "properties": {
         "class": { "enum": ["none", "low", "moderate", "elevated"] },
-        "billableResources": { "type": "array", "items": { "type": "string" } }
+        "billableResources": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 2 }
+        },
+        "notes": { "type": "string", "minLength": 30 },
+        "pricingLinks": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/reference" }
+        },
+        "acknowledgementRequired": { "type": "boolean" }
       },
-      "additionalProperties": true
+      "allOf": [
+        {
+          "if": { "properties": { "class": { "const": "none" } }, "required": ["class"] },
+          "then": {
+            "properties": {
+              "billableResources": { "maxItems": 0 },
+              "acknowledgementRequired": { "const": false }
+            }
+          },
+          "else": {
+            "properties": {
+              "billableResources": { "minItems": 1 },
+              "pricingLinks": { "minItems": 1 }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": { "class": { "enum": ["moderate", "elevated"] } },
+            "required": ["class"]
+          },
+          "then": { "properties": { "acknowledgementRequired": { "const": true } } }
+        }
+      ],
+      "additionalProperties": false
     },
-    "permissions": { "type": "object" },
-    "prerequisites": { "type": "array", "items": { "type": "string" } },
-    "validation": { "type": "object" },
-    "cleanup": { "type": "object" },
+    "permissions": {
+      "type": "object",
+      "required": ["azureRbacRoles", "entraRoles", "graphScopes"],
+      "properties": {
+        "azureRbacRoles": { "$ref": "#/$defs/stringList" },
+        "entraRoles": { "$ref": "#/$defs/stringList" },
+        "graphScopes": { "$ref": "#/$defs/stringList" }
+      },
+      "additionalProperties": false
+    },
+    "prerequisites": {
+      "type": "array",
+      "minItems": 2,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 10 }
+    },
+    "providers": {
+      "type": "object",
+      "required": ["required", "optional", "registeredByLab"],
+      "properties": {
+        "required": { "$ref": "#/$defs/providerList" },
+        "optional": { "$ref": "#/$defs/providerList" },
+        "registeredByLab": { "$ref": "#/$defs/providerList" }
+      },
+      "additionalProperties": false
+    },
+    "inputs": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/input" }
+    },
+    "acknowledgements": {
+      "type": "object",
+      "required": ["cost", "tenantChange"],
+      "properties": {
+        "cost": { "$ref": "#/$defs/acknowledgement" },
+        "tenantChange": { "$ref": "#/$defs/acknowledgement" }
+      },
+      "additionalProperties": false
+    },
+    "creates": {
+      "type": "object",
+      "required": ["azureResources", "entraObjects", "localArtifacts"],
+      "properties": {
+        "azureResources": { "$ref": "#/$defs/stringList" },
+        "entraObjects": { "$ref": "#/$defs/stringList" },
+        "localArtifacts": {
+          "type": "array",
+          "minItems": 3,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 5 }
+        }
+      },
+      "additionalProperties": false
+    },
+    "tenantScopedChanges": { "$ref": "#/$defs/stringList" },
+    "externalRequirements": { "$ref": "#/$defs/stringList" },
+    "preflightChecks": {
+      "type": "array",
+      "minItems": 3,
+      "items": { "$ref": "#/$defs/preflightCheck" }
+    },
+    "checkpoints": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "items": { "$ref": "#/$defs/checkpoint" }
+    },
+    "validation": {
+      "type": "object",
+      "required": ["script", "artifact", "modes", "resultPolicy"],
+      "properties": {
+        "script": { "const": "scripts/cli/Validate.ps1" },
+        "artifact": { "const": ".state/<run-id>/validation.json" },
+        "modes": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "uniqueItems": true,
+          "items": { "enum": ["Deployment", "PostCleanup"] },
+          "allOf": [
+            { "contains": { "const": "Deployment" } },
+            { "contains": { "const": "PostCleanup" } }
+          ]
+        },
+        "resultPolicy": {
+          "type": "object",
+          "required": ["requiredFailureResult", "optionalSkipResult", "allRequiredPassResult"],
+          "properties": {
+            "requiredFailureResult": { "const": "fail" },
+            "optionalSkipResult": { "const": "partial" },
+            "allRequiredPassResult": { "const": "pass" }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "cleanup": {
+      "type": "object",
+      "required": [
+        "script",
+        "artifact",
+        "previewByDefault",
+        "requiresExecuteFlag",
+        "ownershipVerification",
+        "residualChecks",
+        "retainedItemsAllowed",
+        "irreversiblePurge"
+      ],
+      "properties": {
+        "script": { "const": "scripts/cli/Cleanup.ps1" },
+        "artifact": { "const": ".state/<run-id>/cleanup.json" },
+        "previewByDefault": { "const": true },
+        "requiresExecuteFlag": { "const": true },
+        "ownershipVerification": {
+          "type": "object",
+          "required": ["manifestIdMatch", "requiredTags"],
+          "properties": {
+            "manifestIdMatch": { "const": true },
+            "requiredTags": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": { "enum": ["purpose", "labId", "runId", "expiresOn"] }
+            }
+          },
+          "additionalProperties": false
+        },
+        "residualChecks": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/residualCheck" }
+        },
+        "retainedItemsAllowed": { "type": "boolean" },
+        "irreversiblePurge": { "const": "never" }
+      },
+      "additionalProperties": false
+    },
     "assessment": {
       "type": "object",
       "required": ["enabled", "questionCount"],
@@ -64,16 +287,19 @@
             "monitor-recovery"
           ]
         },
-        "questionCount": { "type": "integer", "minimum": 0, "maximum": 99 }
+        "questionCount": { "type": "integer", "minimum": 0, "maximum": 50 }
       },
       "allOf": [
         {
-          "if": { "properties": { "enabled": { "const": true } } },
+          "if": { "properties": { "enabled": { "const": true } }, "required": ["enabled"] },
           "then": {
             "required": ["primaryDomain"],
-            "properties": { "questionCount": { "minimum": 1 } }
+            "properties": { "questionCount": { "const": 50 } }
           },
-          "else": { "properties": { "questionCount": { "const": 0 } } }
+          "else": {
+            "not": { "required": ["primaryDomain"] },
+            "properties": { "questionCount": { "const": 0 } }
+          }
         }
       ],
       "additionalProperties": false
@@ -81,5 +307,238 @@
     "lastOfflineValidated": { "type": ["string", "null"], "format": "date" },
     "lastLiveVerified": { "type": ["string", "null"], "format": "date" }
   },
-  "additionalProperties": true
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "cost": {
+            "properties": { "acknowledgementRequired": { "const": true } },
+            "required": ["acknowledgementRequired"]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "acknowledgements": {
+            "properties": { "cost": { "properties": { "required": { "const": true } } } }
+          }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "tenantScopedChanges": { "minItems": 1 } } },
+      "then": {
+        "properties": {
+          "acknowledgements": {
+            "properties": { "tenantChange": { "properties": { "required": { "const": true } } } }
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "acknowledgements": {
+            "properties": { "tenantChange": { "properties": { "required": { "const": false } } } }
+          }
+        }
+      }
+    }
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "labId": { "type": "string", "pattern": "^LAB-[0-9]{2}$" },
+    "objectiveId": {
+      "type": "string",
+      "pattern": "^(?:FD|IG|ST|CP|NW|MR)-[A-Z]+-[0-9]{2}$"
+    },
+    "checkpointId": { "type": "string", "pattern": "^LAB[0-9]{2}-CP0[1-5]$" },
+    "checkId": { "type": "string", "pattern": "^[a-z][a-z0-9-]*(?:\\.[a-z0-9-]+)+$" },
+    "stringList": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 2 }
+    },
+    "providerList": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "pattern": "^Microsoft\\.[A-Za-z0-9.]+$" }
+    },
+    "reference": {
+      "type": "object",
+      "required": ["title", "url"],
+      "properties": {
+        "title": { "type": "string", "minLength": 8 },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://(?:learn\\.microsoft\\.com|azure\\.microsoft\\.com)/"
+        }
+      },
+      "additionalProperties": false
+    },
+    "input": {
+      "type": "object",
+      "required": [
+        "id",
+        "parameter",
+        "description",
+        "required",
+        "secret",
+        "source",
+        "safeExample",
+        "gateBehavior",
+        "checkpointIds"
+      ],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$" },
+        "parameter": { "type": "string", "pattern": "^[A-Z][A-Za-z0-9]+$" },
+        "environmentVariable": { "type": "string", "pattern": "^AZ104_[A-Z0-9_]+$" },
+        "description": { "type": "string", "minLength": 20 },
+        "required": { "type": "boolean" },
+        "secret": { "type": "boolean" },
+        "source": { "enum": ["parameter", "environment", "parameter-or-environment", "derived"] },
+        "safeExample": { "type": "string", "minLength": 2 },
+        "gateBehavior": { "enum": ["block", "skip-checkpoint", "use-default"] },
+        "checkpointIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/checkpointId" }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "source": { "enum": ["environment", "parameter-or-environment"] } },
+            "required": ["source"]
+          },
+          "then": { "required": ["environmentVariable"] }
+        },
+        {
+          "if": { "properties": { "required": { "const": true } }, "required": ["required"] },
+          "then": { "properties": { "gateBehavior": { "const": "block" } } }
+        }
+      ],
+      "additionalProperties": false
+    },
+    "acknowledgement": {
+      "type": "object",
+      "required": ["required", "parameter", "message"],
+      "properties": {
+        "required": { "type": "boolean" },
+        "parameter": { "enum": ["AcknowledgeCost", "AcknowledgeTenantChange"] },
+        "message": { "type": "string", "minLength": 30 }
+      },
+      "additionalProperties": false
+    },
+    "preflightCheck": {
+      "type": "object",
+      "required": ["id", "type", "required", "description", "command", "expected"],
+      "properties": {
+        "id": { "$ref": "#/$defs/checkId" },
+        "type": { "enum": ["context", "tool", "input", "permission", "provider", "quota", "sku", "region", "service", "capacity"] },
+        "required": { "type": "boolean" },
+        "description": { "type": "string", "minLength": 20 },
+        "command": { "type": "string", "minLength": 5 },
+        "expected": { "type": "string", "minLength": 10 }
+      },
+      "additionalProperties": false
+    },
+    "validationCheck": {
+      "type": "object",
+      "required": ["id", "description", "command", "expected"],
+      "properties": {
+        "id": { "$ref": "#/$defs/checkId" },
+        "description": { "type": "string", "minLength": 25 },
+        "command": { "type": "string", "minLength": 5 },
+        "expected": { "type": "string", "minLength": 10 }
+      },
+      "additionalProperties": false
+    },
+    "residualCheck": {
+      "type": "object",
+      "required": ["id", "description", "command", "expected"],
+      "properties": {
+        "id": { "$ref": "#/$defs/checkId" },
+        "description": { "type": "string", "minLength": 20 },
+        "command": { "type": "string", "minLength": 5 },
+        "expected": { "type": "string", "minLength": 10 }
+      },
+      "additionalProperties": false
+    },
+    "checkpoint": {
+      "type": "object",
+      "required": [
+        "id",
+        "title",
+        "purpose",
+        "objectiveIds",
+        "required",
+        "expectedState",
+        "scriptMarkers",
+        "validation",
+        "cleanup",
+        "remediation"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/checkpointId" },
+        "title": { "type": "string", "minLength": 8 },
+        "purpose": { "type": "string", "minLength": 50 },
+        "objectiveIds": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/objectiveId" }
+        },
+        "required": { "type": "boolean" },
+        "expectedState": { "type": "string", "minLength": 30 },
+        "scriptMarkers": {
+          "type": "object",
+          "required": ["setup", "validate", "cleanup"],
+          "properties": {
+            "setup": { "$ref": "#/$defs/checkpointId" },
+            "validate": { "$ref": "#/$defs/checkpointId" },
+            "cleanup": { "$ref": "#/$defs/checkpointId" }
+          },
+          "additionalProperties": false
+        },
+        "validation": {
+          "type": "object",
+          "required": ["positive", "negative"],
+          "properties": {
+            "positive": { "$ref": "#/$defs/validationCheck" },
+            "negative": { "$ref": "#/$defs/validationCheck" }
+          },
+          "additionalProperties": false
+        },
+        "cleanup": {
+          "type": "object",
+          "required": ["dependsOn", "action", "residualCheck"],
+          "properties": {
+            "dependsOn": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": { "$ref": "#/$defs/checkpointId" }
+            },
+            "action": { "type": "string", "minLength": 25 },
+            "residualCheck": { "$ref": "#/$defs/residualCheck" }
+          },
+          "additionalProperties": false
+        },
+        "remediation": {
+          "type": "object",
+          "required": ["anchor", "links"],
+          "properties": {
+            "anchor": { "type": "string", "pattern": "^task-[1-5]$" },
+            "links": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": { "$ref": "#/$defs/reference" }
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  }
 }

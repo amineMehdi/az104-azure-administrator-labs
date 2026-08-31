@@ -1,8 +1,11 @@
+
+# BEGIN GENERATED AZ104 V2
+schemaVersion: 2.0.0
 id: LAB-12
 slug: 12-vm-resilience-scale-mobility
 title: Design VM resilience, scale sets, and mobility
 blueprintVersion: '2026-04-17'
-domain: Deploy and manage Azure compute resources
+domain: compute
 objectives:
 - CP-VM-03
 - CP-VM-04
@@ -14,10 +17,21 @@ testedToolVersions:
   azureCli: '>=2.88.0'
   powershell: '>=7.4'
 estimatedMinutes: 150
-difficulty: intermediate
+difficulty: applied
+experience:
+  scenario: 'You are a reliability administrator designing resilient compute. Build and prove this disposable service path:
+    One private VM is placed in an availability set while a separate VMSS feeds an autoscale profile; the standalone VM, NIC,
+    disk, VNet, and availability set then move together into a second tagged resource-group boundary.'
+  role: A reliability administrator designing resilient compute.
+  outcome: Use Azure CLI in PowerShell to place a vm in the run-owned availability set, deploy a resilient vm scale set with
+    autoscale, and reconcile placement, scaling, and both ownership boundaries, with recoverable state and deterministic cleanup.
+  completionCriteria:
+  - All required checkpoints report pass.
+  - The deterministic break/fix is injected, diagnosed, and repaired.
+  - cleanup.json reports no active run-owned resources, with any retained item explicitly documented.
 cost:
   class: elevated
-  billableResources: &id001
+  billableResources:
   - resource group
   - availability set
   - zonal VM metadata
@@ -25,6 +39,10 @@ cost:
   - autoscale setting
   notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator before
     execution and clean up immediately.
+  pricingLinks:
+  - title: Azure compute pricing
+    url: https://azure.microsoft.com/pricing/details/virtual-machines/
+  acknowledgementRequired: true
 permissions:
   azureRbacRoles:
   - Virtual Machine Contributor, Network Contributor, and move permissions on source and destination scopes
@@ -38,43 +56,465 @@ prerequisites:
 - 'External gate review: None beyond the declared role and a disposable subscription.'
 - Azure CLI hosted in PowerShell 7.4 or later
 providers:
-  observed:
+  required:
   - Microsoft.Compute
   - Microsoft.Insights
   - Microsoft.Network
   - Microsoft.Resources
+  optional: []
   registeredByLab: []
-regions:
-  applicable: true
-  primary: supplied at execution time
-  secondary: required only for multi-region checkpoints
+inputs:
+- id: run-id
+  parameter: RunId
+  description: Unique lowercase run ownership identifier
+  required: true
+  secret: false
+  source: parameter
+  safeExample: az104l12-01
+  gateBehavior: block
+  checkpointIds:
+  - LAB12-CP01
+  - LAB12-CP02
+  - LAB12-CP03
+  - LAB12-CP04
+  - LAB12-CP05
+- id: subscription-id
+  parameter: SubscriptionId
+  environmentVariable: AZ104_SUBSCRIPTION_ID
+  description: Expected disposable subscription ID
+  required: true
+  secret: false
+  source: parameter-or-environment
+  safeExample: 00000000-0000-0000-0000-000000000000
+  gateBehavior: block
+  checkpointIds:
+  - LAB12-CP01
+  - LAB12-CP02
+  - LAB12-CP03
+  - LAB12-CP04
+  - LAB12-CP05
+- id: location
+  parameter: Location
+  environmentVariable: AZ104_LOCATION
+  description: Approved primary Azure region
+  required: true
+  secret: false
+  source: parameter-or-environment
+  safeExample: westeurope
+  gateBehavior: block
+  checkpointIds:
+  - LAB12-CP01
+  - LAB12-CP02
+  - LAB12-CP03
+  - LAB12-CP04
+  - LAB12-CP05
+acknowledgements:
+  cost:
+    required: true
+    parameter: AcknowledgeCost
+    message: I reviewed current pricing, quota, and the same-session cleanup plan.
+  tenantChange:
+    required: false
+    parameter: AcknowledgeTenantChange
+    message: I am authorized to create or change the declared tenant-scoped objects and will restore recorded settings.
 creates:
-  azureResources: *id001
+  azureResources:
+  - resource group
+  - availability set
+  - zonal VM metadata
+  - flexible VM scale set
+  - autoscale setting
   entraObjects: []
   localArtifacts:
   - .state/<run-id>/run.json
   - .state/<run-id>/validation.json
+  - .state/<run-id>/cleanup.json
 tenantScopedChanges: []
 externalRequirements: []
+preflightChecks:
+- id: preflight.context
+  type: context
+  required: true
+  description: Confirm active cloud, tenant, and subscription without changing them.
+  command: az account show --output json
+  expected: Active context matches the supplied subscription and disposable environment.
+- id: preflight.tools
+  type: tool
+  required: true
+  description: Confirm PowerShell, Azure CLI, and az bicep are available.
+  command: az version; az bicep version
+  expected: All required tools meet the versions declared by this lab.
+- id: preflight.inputs
+  type: input
+  required: true
+  description: Check required parameters and environment gates without printing secrets.
+  command: $PSBoundParameters.Keys; Get-ChildItem Env:AZ104_* | Select-Object Name
+  expected: Every required input is present and optional gates are explicitly reported.
+- id: preflight.providers
+  type: provider
+  required: true
+  description: Read registration state for required resource providers.
+  command: az provider show --namespace <provider> --query registrationState --output tsv
+  expected: Every required provider is Registered; preflight performs no registration.
+- id: preflight.region
+  type: region
+  required: true
+  description: Confirm the requested region is available to the subscription.
+  command: az account list-locations --query "[?name=='<location>'].name" --output tsv
+  expected: The supplied region appears in the subscription location inventory.
+- id: preflight.quota
+  type: quota
+  required: true
+  description: Read regional compute usage before deployment.
+  command: az vm list-usage --location <location> --output table
+  expected: Required regional vCPU quota has safe headroom.
+- id: preflight.sku
+  type: sku
+  required: true
+  description: Read available VM or service SKUs in the selected region.
+  command: az vm list-skus --location <location> --all --output table
+  expected: The documented lab SKU has no blocking regional restriction.
+- id: preflight.authored.service
+  type: sku
+  required: true
+  description: Prove verify zone, availability-set, and vmss regional support with LAB-12's authored read-only provider, feature,
+    tool, region, and SKU queries.
+  command: '$registration = az provider show --namespace Microsoft.Compute --query registrationState --output tsv
+
+    if ($registration -ne ''Registered'') { throw ''Microsoft.Compute is not registered.'' }
+
+    $insights = az provider show --namespace Microsoft.Insights --query registrationState --output tsv
+
+    if ($insights -ne ''Registered'') { throw ''Microsoft.Insights is not registered.'' }
+
+    $zoneSku = az vm list-skus --location $Location --size Standard_B1s --zone --all --query "[?name==''Standard_B1s''] |
+    length(@)" --output tsv
+
+    if ([int]$zoneSku -lt 1) { throw ''The selected region does not advertise a zonal Standard_B1s placement.'' }'
+  expected: The selected region exposes the documented VM SKU plus the placement capabilities required by the availability-set
+    and scale-set designs.
+checkpoints:
+- id: LAB12-CP01
+  title: Verify zone, availability-set, and VMSS regional support
+  purpose: Read the provider, region, SKU, feature, quota, and companion-tool signals needed for verify zone, availability-set,
+    and vmss regional support, without changing Azure state.
+  objectiveIds:
+  - CP-VM-03
+  required: true
+  expectedState: The selected region exposes the documented VM SKU plus the placement capabilities required by the availability-set
+    and scale-set designs.
+  scriptMarkers:
+    setup: LAB12-CP01
+    validate: LAB12-CP01
+    cleanup: LAB12-CP01
+  validation:
+    positive:
+      id: cp01.positive
+      description: Read the service properties for verify zone, availability-set, and VMSS regional support by using exact
+        run-owned identifiers.
+      command: '$validationId=''LAB12-CP01-positive''; $registration = az provider show --namespace Microsoft.Compute --query
+        registrationState --output tsv
+
+        if ($registration -ne ''Registered'') { throw ''Microsoft.Compute is not registered.'' }'
+      expected: The selected region exposes the documented VM SKU plus the placement capabilities required by the availability-set
+        and scale-set designs.
+    negative:
+      id: cp01.negative
+      description: Search for conflicting, unowned, or excessive state after verify zone, availability-set, and VMSS regional
+        support.
+      command: '$validationId=''LAB12-CP01-negative''; $insights = az provider show --namespace Microsoft.Insights --query
+        registrationState --output tsv
+
+        if ($insights -ne ''Registered'') { throw ''Microsoft.Insights is not registered.'' }
+
+        $zoneSku = az vm list-skus --location $Location --size Standard_B1s --zone --all --query "[?name==''Standard_B1s'']
+        | length(@)" --output tsv
+
+        if ([int]$zoneSku -lt 1) { throw ''The selected region does not advertise a zonal Standard_B1s placement.'' }'
+      expected: 'LAB12-CP01 negative boundary: The undesired state is absent; the negative assertion must not report: The
+        selected region does not advertise a zonal Standard_B1s placement.'
+  cleanup:
+    dependsOn:
+    - LAB12-CP02
+    - LAB12-CP03
+    - LAB12-CP04
+    - LAB12-CP05
+    action: Remove only manifest-recorded objects owned by LAB12-CP01, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp01.residual
+      description: Prove no active managed object remains for LAB12-CP01.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-1
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Flexible orchestration for Virtual Machine Scale Sets
+      url: https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/flexible-virtual-machine-scale-sets
+- id: LAB12-CP02
+  title: Place a VM in the run-owned availability set
+  purpose: Provision and immediately inventory the exact run-owned resources needed to place a vm in the run-owned availability
+    set, so partial completion remains recoverable.
+  objectiveIds:
+  - CP-VM-04
+  required: true
+  expectedState: The VM resource references the created availability set and its private NIC remains inside the source resource
+    group.
+  scriptMarkers:
+    setup: LAB12-CP02
+    validate: LAB12-CP02
+    cleanup: LAB12-CP02
+  validation:
+    positive:
+      id: cp02.positive
+      description: Read the service properties for place a VM in the run-owned availability set by using exact run-owned identifiers.
+      command: '$validationId=''LAB12-CP02-positive''; $capacity = az vmss show --resource-group $ResourceGroupName --name
+        $vmss --query sku.capacity --output tsv
+
+        if ([int]$capacity -ne 1) { throw "Initial VMSS capacity is $capacity." }'
+      expected: The VM resource references the created availability set and its private NIC remains inside the source resource
+        group.
+    negative:
+      id: cp02.negative
+      description: Search for conflicting, unowned, or excessive state after place a VM in the run-owned availability set.
+      command: '$validationId=''LAB12-CP02-negative''; $failed = az vmss list-instances --resource-group $ResourceGroupName
+        --name $vmss --query "[?provisioningState==''Failed''] | length(@)" --output tsv
+
+        if ([int]$failed -ne 0) { throw ''A scale-set instance failed provisioning.'' }
+
+        $placementId = az vm show --resource-group $ResourceGroupName --name $availabilityVm --query availabilitySet.id --output
+        tsv
+
+        if ($placementId -notmatch "/availabilitySets/$availabilitySet$") { throw ''The availability-set VM is not attached
+        to the planned availability set.'' }'
+      expected: 'LAB12-CP02 negative boundary: The undesired state is absent; the negative assertion must not report: The
+        availability-set VM is not attached to the planned availability set.'
+  cleanup:
+    dependsOn:
+    - LAB12-CP03
+    - LAB12-CP04
+    - LAB12-CP05
+    action: Remove only manifest-recorded objects owned by LAB12-CP02, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp02.residual
+      description: Prove no active managed object remains for LAB12-CP02.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-2
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Flexible orchestration for Virtual Machine Scale Sets
+      url: https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/flexible-virtual-machine-scale-sets
+- id: LAB12-CP03
+  title: Deploy a resilient VM scale set with autoscale
+  purpose: Configure and independently inspect the control-plane and data-path properties needed to deploy a resilient vm
+    scale set with autoscale.
+  objectiveIds:
+  - CP-VM-06
+  required: true
+  expectedState: The VMSS has the requested capacity and the autoscale profile contains bounded minimum, default, and maximum
+    instance counts.
+  scriptMarkers:
+    setup: LAB12-CP03
+    validate: LAB12-CP03
+    cleanup: LAB12-CP03
+  validation:
+    positive:
+      id: cp03.positive
+      description: Read the service properties for deploy a resilient VM scale set with autoscale by using exact run-owned
+        identifiers.
+      command: '$validationId=''LAB12-CP03-positive''; $maximum = az monitor autoscale show --resource-group $ResourceGroupName
+        --name $autoscale --query "profiles[0].capacity.maximum" --output tsv
+
+        if ([int]$maximum -ne 3) { throw "Autoscale maximum is $maximum." }'
+      expected: The VMSS has the requested capacity and the autoscale profile contains bounded minimum, default, and maximum
+        instance counts.
+    negative:
+      id: cp03.negative
+      description: Search for conflicting, unowned, or excessive state after deploy a resilient VM scale set with autoscale.
+      command: '$validationId=''LAB12-CP03-negative''; $minimum = az monitor autoscale show --resource-group $ResourceGroupName
+        --name $autoscale --query "profiles[0].capacity.minimum" --output tsv
+
+        $maximum = az monitor autoscale show --resource-group $ResourceGroupName --name $autoscale --query "profiles[0].capacity.maximum"
+        --output tsv
+
+        if ([int]$minimum -gt [int]$maximum) { throw ''Autoscale minimum exceeds maximum.'' }'
+      expected: 'LAB12-CP03 negative boundary: The undesired state is absent; the negative assertion must not report: Autoscale
+        minimum exceeds maximum.'
+  cleanup:
+    dependsOn:
+    - LAB12-CP04
+    - LAB12-CP05
+    action: Remove only manifest-recorded objects owned by LAB12-CP03, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp03.residual
+      description: Prove no active managed object remains for LAB12-CP03.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-3
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Flexible orchestration for Virtual Machine Scale Sets
+      url: https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/flexible-virtual-machine-scale-sets
+- id: LAB12-CP04
+  title: Move the standalone VM boundary to a second resource group
+  purpose: Exercise the deterministic operational or denied path needed to move the standalone vm boundary to a second resource
+    group, then retain comparable before-and-after results.
+  objectiveIds:
+  - CP-VM-07
+  required: true
+  expectedState: The selected VM and dependent NIC/disk IDs resolve only in the tagged destination group recorded in run.json.
+  scriptMarkers:
+    setup: LAB12-CP04
+    validate: LAB12-CP04
+    cleanup: LAB12-CP04
+  validation:
+    positive:
+      id: cp04.positive
+      description: Read the service properties for move the standalone VM boundary to a second resource group by using exact
+        run-owned identifiers.
+      command: '$validationId=''LAB12-CP04-positive''; $movedVm = az vm show --resource-group $moveResourceGroup --name $availabilityVm
+        --query id --output tsv
+
+        if ($movedVm -notmatch "/resourceGroups/$moveResourceGroup/") { throw ''The availability-set VM did not move to the
+        recorded destination group.'' }'
+      expected: The selected VM and dependent NIC/disk IDs resolve only in the tagged destination group recorded in run.json.
+    negative:
+      id: cp04.negative
+      description: Search for conflicting, unowned, or excessive state after move the standalone VM boundary to a second resource
+        group.
+      command: '$validationId=''LAB12-CP04-negative''; $sourceVmCount = az vm list --resource-group $ResourceGroupName --query
+        "[?name==''$availabilityVm''] | length(@)" --output tsv
+
+        if ([int]$sourceVmCount -ne 0) { throw ''The moved VM remains in the source resource group.'' }'
+      expected: 'LAB12-CP04 negative boundary: The undesired state is absent; the negative assertion must not report: The
+        moved VM remains in the source resource group.'
+  cleanup:
+    dependsOn:
+    - LAB12-CP05
+    action: Remove only manifest-recorded objects owned by LAB12-CP04, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp04.residual
+      description: Prove no active managed object remains for LAB12-CP04.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-4
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Flexible orchestration for Virtual Machine Scale Sets
+      url: https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/flexible-virtual-machine-scale-sets
+- id: LAB12-CP05
+  title: Reconcile placement, scaling, and both ownership boundaries
+  purpose: Reconcile live service properties, returned IDs, and dependency-aware removal needed to reconcile placement, scaling,
+    and both ownership boundaries before handoff.
+  objectiveIds:
+  - CP-VM-03
+  - CP-VM-04
+  - CP-VM-06
+  - CP-VM-07
+  required: true
+  expectedState: Availability-set membership, VMSS capacity/autoscale, and source/destination group inventories all match
+    the manifest.
+  scriptMarkers:
+    setup: LAB12-CP05
+    validate: LAB12-CP05
+    cleanup: LAB12-CP05
+  validation:
+    positive:
+      id: cp05.positive
+      description: Read the service properties for reconcile placement, scaling, and both ownership boundaries by using exact
+        run-owned identifiers.
+      command: '$validationId=''LAB12-CP05-positive''; $stateValue = az vmss show --resource-group $ResourceGroupName --name
+        $vmss --query provisioningState --output tsv
+
+        if ($stateValue -ne ''Succeeded'') { throw "VMSS provisioning state is $stateValue." }
+
+        $ruleCount = az monitor autoscale show --resource-group $ResourceGroupName --name $autoscale --query "profiles[0].rules
+        | length(@)" --output tsv
+
+        if ([int]$ruleCount -ne 2) { throw "Expected two autoscale rules; found $ruleCount." }'
+      expected: Availability-set membership, VMSS capacity/autoscale, and source/destination group inventories all match the
+        manifest.
+    negative:
+      id: cp05.negative
+      description: Search for conflicting, unowned, or excessive state after reconcile placement, scaling, and both ownership
+        boundaries.
+      command: '$validationId=''LAB12-CP05-negative''; $invalidRules = az monitor autoscale show --resource-group $ResourceGroupName
+        --name $autoscale --query ''profiles[0].rules[?scaleAction.value<=`0`] | length(@)'' --output tsv
+
+        if ([int]$invalidRules -ne 0) { throw ''An autoscale rule has a nonpositive scale value.'' }'
+      expected: 'LAB12-CP05 negative boundary: The undesired state is absent; the negative assertion must not report: An autoscale
+        rule has a nonpositive scale value.'
+  cleanup:
+    dependsOn: []
+    action: Remove only manifest-recorded objects owned by LAB12-CP05, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp05.residual
+      description: Prove no active managed object remains for LAB12-CP05.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-5
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Flexible orchestration for Virtual Machine Scale Sets
+      url: https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/flexible-virtual-machine-scale-sets
 validation:
-  commandLanes:
-  - scripts/cli/Validate.ps1
-  output: .state/<run-id>/validation.json
-  statuses:
-  - pass
-  - fail
-  - warning
-  - skipped
-  liveExecutionRequiredForLiveVerified: true
+  script: scripts/cli/Validate.ps1
+  artifact: .state/<run-id>/validation.json
+  modes:
+  - Deployment
+  - PostCleanup
+  resultPolicy:
+    requiredFailureResult: fail
+    optionalSkipResult: partial
+    allRequiredPassResult: pass
 cleanup:
-  azureDeletion: exact recorded resource-group ID after tag verification
-  entraDeletion: none
-  reportOnlyByDefault: true
+  script: scripts/cli/Cleanup.ps1
+  artifact: .state/<run-id>/cleanup.json
+  previewByDefault: true
   requiresExecuteFlag: true
-  residualAuditRequired: true
+  ownershipVerification:
+    manifestIdMatch: true
+    requiredTags:
+    - purpose
+    - labId
+    - runId
+  residualChecks:
+  - id: cp01.residual
+    description: Prove no active managed object remains for LAB12-CP01.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp02.residual
+    description: Prove no active managed object remains for LAB12-CP02.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp03.residual
+    description: Prove no active managed object remains for LAB12-CP03.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp04.residual
+    description: Prove no active managed object remains for LAB12-CP04.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp05.residual
+    description: Prove no active managed object remains for LAB12-CP05.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  retainedItemsAllowed: true
+  irreversiblePurge: never
 assessment:
   enabled: true
   questionCount: 50
   primaryDomain: compute
-lastOfflineValidated: '2026-08-30'
+lastOfflineValidated: '2026-08-31'
 lastLiveVerified: null
+# END GENERATED AZ104 V2

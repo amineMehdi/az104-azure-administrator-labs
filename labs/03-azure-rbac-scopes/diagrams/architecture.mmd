@@ -1,12 +1,12 @@
 flowchart LR
-    A["Operator<br/>Azure CLI"] --> P["Preview and preflight"]
-    P --> S["Recorded Lab 03 boundary"]
-    S --> R1["resource group"]
-    S --> R2["resource-group-scoped role assignment"]
-    S --> V["Independent validation"]
-    V --> E["Redacted command evidence"]
-    V --> C["Previewed cleanup"]
+    principal[Disposable principal] -->|Reader assignment| rg[Resource group]
+    rg -->|scope inheritance| storage[Storage account]
+    principal -->|Blob Data Reader<br/>direct assignment| storage
+    reader[Reader role definition<br/>control-plane read] --> rg
+    dataRole[Blob Data Reader definition<br/>blob dataActions] --> storage
+    fault[Temporary Contributor<br/>assignment] -->|detect and remove by ID| rg
+    storage -->|include inherited| matrix[Effective role matrix]
     classDef control fill:#e8f1ff,stroke:#2563eb,color:#102a43;
     classDef resource fill:#e9f8ef,stroke:#16803a,color:#102a43;
-    class A,P,S,V,E,C control;
-    class R1,R2 resource;
+    class principal,reader,dataRole,fault,matrix control;
+    class rg,storage resource;

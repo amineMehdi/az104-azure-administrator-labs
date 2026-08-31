@@ -1,453 +1,459 @@
 # Lab 04 knowledge check
 
-Choose the single best answer for each question. Record your choices before opening `ANSWERS.md`.
+[Return to the guided lab](../README.md)
+
+Complete all 50 questions before opening the answer key. Allow about 50–60 minutes and choose the single best answer.
+
+Use the result as a learning signal: 85–100% indicates mastery, 70–84% calls for targeted review, and below 70% means repeat the mapped lab tasks before retrying.
 
 ## LAB04-Q01 — Foundational
 
-Which principle is most important when working on 'Configure resource locks' in Lab 04?
+A resource hierarchy incident review of the governed disposable-workload hierarchy depends on the ability to create and later remove one owned deployment boundary. Which platform description is reliable?
 
-- A. Tags are metadata rather than access controls, and resource locks protect the control plane without replacing RBAC or data-plane protection.
-- B. A recognizable resource name removes the need for validation and scoped cleanup.
-- C. The shortest command is always correct even when it changes a broader scope.
-- D. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+- A. Azure CLI resource operations target the active subscription unless an explicit subscription is supplied.
+- B. Tags are case-insensitive for key operations but their values are case-sensitive strings used for organization and cost analysis.
+- C. A resource group is a management container whose deletion attempts to delete all resources it contains.
+- D. A ReadOnly lock blocks control-plane update operations as well as deletion and can disrupt services that require writes.
 
 ## LAB04-Q02 — Foundational
 
-Which lab action directly supports the objective 'Apply and manage tags on resources'?
+A governance administrator organizing disposable workloads is updating the resource hierarchy runbook. The requirement is to prevent commands from targeting the wrong Azure subscription. Which statement describes Azure behavior correctly?
 
-- A. Mark the objective complete after reading documentation without checking any state.
-- B. Update tags using merge semantics and verify which values do not inherit automatically.
-- C. Change the active tenant without displaying or confirming the resulting context.
-- D. Search the whole tenant for a similar display name and modify the first match.
+- A. Management groups provide governance scope above subscriptions in a tenant hierarchy.
+- B. Azure CLI resource operations target the active subscription unless an explicit subscription is supplied.
+- C. Resource-group or subscription tags do not automatically become resource tags without policy or automation.
+- D. A resource move changes its parent resource group or subscription while resource IDs and dependencies may change or constrain the move.
 
 ## LAB04-Q03 — Foundational
 
-Which authorization approach is appropriate before practicing 'Manage resource groups'?
+A resource hierarchy peer review asks how the governed disposable-workload hierarchy should handle this outcome: organize subscriptions under the intended governance parent. Which explanation is accurate?
 
-- A. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
-- B. Skip role checks when the run ID contains the lab number.
-- C. Confirm the active context and use only the declared role boundary: Contributor plus User Access Administrator for lock management; Management Group Contributor for the optional hierarchy path
-- D. Use a production subscription because its resources already exist.
+- A. Management groups provide governance scope above subscriptions in a tenant hierarchy.
+- B. Policy and access assignments at a management group can flow to descendant subscriptions.
+- C. A CanNotDelete lock allows updates but blocks deletion at and below its scope.
+- D. A resource group's location stores its management metadata and does not force contained resources into that region.
 
 ## LAB04-Q04 — Foundational
 
-Before making a change, a learner checks this core behavior: Which principle is most important when working on 'Configure resource locks' in Lab 04?
+For the governed disposable-workload hierarchy, the resource hierarchy plan must apply parent governance consistently to descendant subscriptions. Which statement about resource hierarchy belongs in the governed disposable-workload hierarchy record?
 
-- A. A recognizable resource name removes the need for validation and scoped cleanup.
-- B. The shortest command is always correct even when it changes a broader scope.
-- C. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- D. Tags are metadata rather than access controls, and resource locks protect the control plane without replacing RBAC or data-plane protection.
+- A. Policy and access assignments at a management group can flow to descendant subscriptions.
+- B. Tags are case-insensitive for key operations but their values are case-sensitive strings used for organization and cost analysis.
+- C. A ReadOnly lock blocks control-plane update operations as well as deletion and can disrupt services that require writes.
+- D. A resource group is a management container whose deletion attempts to delete all resources it contains.
 
 ## LAB04-Q05 — Foundational
 
-During a design vocabulary review, the team evaluates this situation: Which lab action directly supports the objective 'Apply and manage tags on resources'?
+The resource hierarchy review compares four claims for the governed disposable-workload hierarchy requirement to label resources so cost and ownership queries can find them. Which claim is technically sound?
 
-- A. Update tags using merge semantics and verify which values do not inherit automatically.
-- B. Change the active tenant without displaying or confirming the resulting context.
-- C. Search the whole tenant for a similar display name and modify the first match.
-- D. Mark the objective complete after reading documentation without checking any state.
+- A. Tags are case-insensitive for key operations but their values are case-sensitive strings used for organization and cost analysis.
+- B. Resource-group or subscription tags do not automatically become resource tags without policy or automation.
+- C. A resource move changes its parent resource group or subscription while resource IDs and dependencies may change or constrain the move.
+- D. Azure CLI resource operations target the active subscription unless an explicit subscription is supplied.
 
 ## LAB04-Q06 — Foundational
 
-In a command-planning session, an administrator asks this question: Which authorization approach is appropriate before practicing 'Manage resource groups'?
+The resource hierarchy architecture note requires the governed disposable-workload hierarchy environment to avoid assuming that a parent label automatically appears on every child. Which statement defines the relevant resource hierarchy boundary?
 
-- A. Skip role checks when the run ID contains the lab number.
-- B. Confirm the active context and use only the declared role boundary: Contributor plus User Access Administrator for lock management; Management Group Contributor for the optional hierarchy path
-- C. Use a production subscription because its resources already exist.
-- D. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
+- A. A CanNotDelete lock allows updates but blocks deletion at and below its scope.
+- B. A resource group's location stores its management metadata and does not force contained resources into that region.
+- C. Resource-group or subscription tags do not automatically become resource tags without policy or automation.
+- D. Management groups provide governance scope above subscriptions in a tenant hierarchy.
 
 ## LAB04-Q07 — Foundational
 
-While preparing the lab, a learner verifies this platform rule: Which principle is most important when working on 'Configure resource locks' in Lab 04?
+A new resource hierarchy operator must explain why the governed disposable-workload hierarchy can prevent accidental deletion while still allowing supported updates. Which explanation is accurate?
 
-- A. The shortest command is always correct even when it changes a broader scope.
-- B. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- C. Tags are metadata rather than access controls, and resource locks protect the control plane without replacing RBAC or data-plane protection.
-- D. A recognizable resource name removes the need for validation and scoped cleanup.
+- A. A ReadOnly lock blocks control-plane update operations as well as deletion and can disrupt services that require writes.
+- B. A resource group is a management container whose deletion attempts to delete all resources it contains.
+- C. Policy and access assignments at a management group can flow to descendant subscriptions.
+- D. A CanNotDelete lock allows updates but blocks deletion at and below its scope.
 
 ## LAB04-Q08 — Foundational
 
-During peer review, the team must identify the accurate response to this scenario: Which lab action directly supports the objective 'Apply and manage tags on resources'?
+The governed disposable-workload hierarchy acceptance criteria require operators to prevent both deletion and control-plane modification of a protected resource. Which service fact supports that requirement?
 
-- A. Change the active tenant without displaying or confirming the resulting context.
-- B. Search the whole tenant for a similar display name and modify the first match.
-- C. Mark the objective complete after reading documentation without checking any state.
-- D. Update tags using merge semantics and verify which values do not inherit automatically.
+- A. A resource move changes its parent resource group or subscription while resource IDs and dependencies may change or constrain the move.
+- B. A ReadOnly lock blocks control-plane update operations as well as deletion and can disrupt services that require writes.
+- C. Azure CLI resource operations target the active subscription unless an explicit subscription is supplied.
+- D. Tags are case-insensitive for key operations but their values are case-sensitive strings used for organization and cost analysis.
 
 ## LAB04-Q09 — Foundational
 
-In an operations briefing, a new team member receives this question: Which authorization approach is appropriate before practicing 'Manage resource groups'?
+A resource hierarchy reviewer challenges whether the governed disposable-workload hierarchy can relocate supported resources without recreating them. Which response resolves the concern?
 
-- A. Confirm the active context and use only the declared role boundary: Contributor plus User Access Administrator for lock management; Management Group Contributor for the optional hierarchy path
-- B. Use a production subscription because its resources already exist.
-- C. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
-- D. Skip role checks when the run ID contains the lab number.
+- A. A resource group's location stores its management metadata and does not force contained resources into that region.
+- B. Management groups provide governance scope above subscriptions in a tenant hierarchy.
+- C. Resource-group or subscription tags do not automatically become resource tags without policy or automation.
+- D. A resource move changes its parent resource group or subscription while resource IDs and dependencies may change or constrain the move.
 
 ## LAB04-Q10 — Foundational
 
-While building a support checklist, an engineer reviews this requirement: Which principle is most important when working on 'Configure resource locks' in Lab 04?
+The governed disposable-workload hierarchy handoff omits the resource hierarchy rule needed to choose the metadata region for a deployment boundary independently of its resources. Which statement should the team add?
 
-- A. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- B. Tags are metadata rather than access controls, and resource locks protect the control plane without replacing RBAC or data-plane protection.
-- C. A recognizable resource name removes the need for validation and scoped cleanup.
-- D. The shortest command is always correct even when it changes a broader scope.
+- A. A resource group is a management container whose deletion attempts to delete all resources it contains.
+- B. A resource group's location stores its management metadata and does not force contained resources into that region.
+- C. Policy and access assignments at a management group can flow to descendant subscriptions.
+- D. A CanNotDelete lock allows updates but blocks deletion at and below its scope.
 
 ## LAB04-Q11 — Foundational
 
-During a readiness check, the administrator considers this behavior: Which lab action directly supports the objective 'Apply and manage tags on resources'?
+The governed disposable-workload hierarchy plan must create and later remove one owned deployment boundary while limiting the mutation scope to resource hierarchy. Which action is appropriate?
 
-- A. Search the whole tenant for a similar display name and modify the first match.
-- B. Mark the objective complete after reading documentation without checking any state.
-- C. Update tags using merge semantics and verify which values do not inherit automatically.
-- D. Change the active tenant without displaying or confirming the resulting context.
+- A. Place subscriptions beneath the approved management group before applying inherited governance.
+- B. Use Azure Policy or explicit automation when child resources must receive parent tag values.
+- C. Validate every dependent resource and destination prerequisite before starting the move.
+- D. Group resources that share ownership and lifecycle into a deliberately scoped resource group.
 
 ## LAB04-Q12 — Foundational
 
-In a service overview, the team discusses this scenario: Which authorization approach is appropriate before practicing 'Manage resource groups'?
+A resource hierarchy ticket in the governed disposable-workload hierarchy says to prevent commands from targeting the wrong Azure subscription. Which resource hierarchy action completes the governed disposable-workload hierarchy request with minimal change?
 
-- A. Use a production subscription because its resources already exist.
-- B. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
-- C. Skip role checks when the run ID contains the lab number.
-- D. Confirm the active context and use only the declared role boundary: Contributor plus User Access Administrator for lock management; Management Group Contributor for the optional hierarchy path
+- A. Assign shared governance at the lowest management group that contains every intended subscription.
+- B. Apply a CanNotDelete lock at the narrowest scope that requires deletion protection.
+- C. Choose an approved metadata location while selecting each resource's supported deployment region independently.
+- D. Set and re-read the intended subscription before creating any resource group.
 
 ## LAB04-Q13 — Foundational
 
-While reviewing official guidance, a learner must resolve this question: Which principle is most important when working on 'Configure resource locks' in Lab 04?
+The approach for the governed disposable-workload hierarchy is approved, but the resource hierarchy environment still cannot organize subscriptions under the intended governance parent. Which implementation step closes the gap?
 
-- A. Tags are metadata rather than access controls, and resource locks protect the control plane without replacing RBAC or data-plane protection.
-- B. A recognizable resource name removes the need for validation and scoped cleanup.
-- C. The shortest command is always correct even when it changes a broader scope.
-- D. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+- A. Place subscriptions beneath the approved management group before applying inherited governance.
+- B. Apply the required owner, environment, and run ID tags to each managed resource.
+- C. Use ReadOnly only when the operational impact of blocking updates is acceptable.
+- D. Group resources that share ownership and lifecycle into a deliberately scoped resource group.
 
 ## LAB04-Q14 — Foundational
 
-During a configuration walkthrough, the instructor asks about this situation: Which lab action directly supports the objective 'Apply and manage tags on resources'?
+The governance administrator organizing disposable workloads may change the governed disposable-workload hierarchy only to apply parent governance consistently to descendant subscriptions. Which resource hierarchy action stays within that assignment?
 
-- A. Mark the objective complete after reading documentation without checking any state.
-- B. Update tags using merge semantics and verify which values do not inherit automatically.
-- C. Change the active tenant without displaying or confirming the resulting context.
-- D. Search the whole tenant for a similar display name and modify the first match.
+- A. Use Azure Policy or explicit automation when child resources must receive parent tag values.
+- B. Assign shared governance at the lowest management group that contains every intended subscription.
+- C. Validate every dependent resource and destination prerequisite before starting the move.
+- D. Set and re-read the intended subscription before creating any resource group.
 
 ## LAB04-Q15 — Foundational
 
-In a preflight knowledge check, the operator evaluates this requirement: Which authorization approach is appropriate before practicing 'Manage resource groups'?
+A resource hierarchy dry run shows no governed disposable-workload hierarchy command will label resources so cost and ownership queries can find them. Which action belongs before execution?
 
-- A. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
-- B. Skip role checks when the run ID contains the lab number.
-- C. Confirm the active context and use only the declared role boundary: Contributor plus User Access Administrator for lock management; Management Group Contributor for the optional hierarchy path
-- D. Use a production subscription because its resources already exist.
+- A. Apply a CanNotDelete lock at the narrowest scope that requires deletion protection.
+- B. Apply the required owner, environment, and run ID tags to each managed resource.
+- C. Choose an approved metadata location while selecting each resource's supported deployment region independently.
+- D. Place subscriptions beneath the approved management group before applying inherited governance.
 
 ## LAB04-Q16 — Applied
 
-A learner previews the implementation for 'Manage subscriptions'. What behavior is required?
+For the governed disposable-workload hierarchy, operators need to avoid assuming that a parent label automatically appears on every child. Which change realizes that requirement?
 
-- A. Select the first accessible subscription and hide the resulting context.
-- B. Delete any older resource whose name resembles the new run ID.
-- C. Create the baseline immediately and request approval only before cleanup.
-- D. Display the context, intended changes, cost and gated branches without mutating Azure.
+- A. Use ReadOnly only when the operational impact of blocking updates is acceptable.
+- B. Use Azure Policy or explicit automation when child resources must receive parent tag values.
+- C. Group resources that share ownership and lifecycle into a deliberately scoped resource group.
+- D. Assign shared governance at the lowest management group that contains every intended subscription.
 
 ## LAB04-Q17 — Applied
 
-Which implementation step should the learner perform for 'Configure management groups'?
+Operators must automate the governed disposable-workload hierarchy change needed to prevent accidental deletion while still allowing supported updates. Which resource hierarchy operation belongs in the runbook?
 
-- A. Create a resource group with purpose, labId, runId, owner, and expiresOn tags.
-- B. Skip the operation and edit validation.json to show a passing result.
-- C. Replace the lab action with a tenant-wide change that is easier to discover.
-- D. Copy resource identifiers from another run instead of recording returned IDs.
+- A. Validate every dependent resource and destination prerequisite before starting the move.
+- B. Set and re-read the intended subscription before creating any resource group.
+- C. Apply a CanNotDelete lock at the narrowest scope that requires deletion protection.
+- D. Apply the required owner, environment, and run ID tags to each managed resource.
 
 ## LAB04-Q18 — Applied
 
-Which evidence most directly validates 'Configure resource locks' for optional management group?
+A governed disposable-workload hierarchy review finds resource hierarchy drift from the need to prevent both deletion and control-plane modification of a protected resource. Which correction addresses that drift?
 
-- A. Record a credential so another learner can replay the authenticated session.
-- B. Query the exact recorded scope and independently verify Microsoft.Authorization/locks.
-- C. Treat the setup exit code as proof of every configuration and relationship.
-- D. List the entire subscription and assume similarly named resources belong to this run.
+- A. Use ReadOnly only when the operational impact of blocking updates is acceptable.
+- B. Choose an approved metadata location while selecting each resource's supported deployment region independently.
+- C. Place subscriptions beneath the approved management group before applying inherited governance.
+- D. Use Azure Policy or explicit automation when child resources must receive parent tag values.
 
 ## LAB04-Q19 — Applied
 
-The 'Apply and manage tags on resources' checkpoint reaches an external prerequisite. What should happen?
+The governed disposable-workload hierarchy window permits only the resource hierarchy change needed to relocate supported resources without recreating them. Which option respects the boundary?
 
-- A. Broaden permissions until the prerequisite can no longer block the operation.
-- B. Mark the branch passed because its command syntax was checked offline.
-- C. Run the branch only when this documented gate is satisfied: Management-group creation is optional and requires explicit tenant hierarchy authorization.
-- D. Invent a domain, notification target, license, quota, or tenant value and continue.
+- A. Group resources that share ownership and lifecycle into a deliberately scoped resource group.
+- B. Assign shared governance at the lowest management group that contains every intended subscription.
+- C. Validate every dependent resource and destination prerequisite before starting the move.
+- D. Apply a CanNotDelete lock at the narrowest scope that requires deletion protection.
 
 ## LAB04-Q20 — Applied
 
-What is the safest command-evidence practice after completing 'Manage resource groups'?
+The resource hierarchy preflight has passed; the governed disposable-workload hierarchy must now choose the metadata region for a deployment boundary independently of its resources. Which operation should run?
 
-- A. Save tokens, keys, passwords, or SAS values beside the validation result.
-- B. Reuse successful output from an earlier run with a similar resource name.
-- C. Commit the complete account object so reviewers can identify the tenant.
-- D. Retain only redacted structured output from an independent query of the recorded run.
+- A. Choose an approved metadata location while selecting each resource's supported deployment region independently.
+- B. Set and re-read the intended subscription before creating any resource group.
+- C. Apply the required owner, environment, and run ID tags to each managed resource.
+- D. Use ReadOnly only when the operational impact of blocking updates is acceptable.
 
 ## LAB04-Q21 — Applied
 
-While validating a configuration, the team evaluates this situation: A learner previews the implementation for 'Manage subscriptions'. What behavior is required?
+Before governed disposable-workload hierarchy cleanup, the resource hierarchy team must reconfirm it can create and later remove one owned deployment boundary. Which read-only inspection should run?
 
-- A. Display the context, intended changes, cost and gated branches without mutating Azure.
-- B. Select the first accessible subscription and hide the resulting context.
-- C. Delete any older resource whose name resembles the new run ID.
-- D. Create the baseline immediately and request approval only before cleanup.
+- A. Inspect the descendant subscription and identify the inherited assignment's management-group scope.
+- B. List the group's resources and verify every managed resource carries the expected lab ownership tag.
+- C. Read the lock and demonstrate a safe update is allowed while a controlled delete attempt is denied.
+- D. Query the resource group location and each contained resource location as separate values.
 
 ## LAB04-Q22 — Applied
 
-A delegated administrator receives the following support request: Which implementation step should the learner perform for 'Configure management groups'?
+The governed disposable-workload hierarchy setup reports success after the resource hierarchy attempt to prevent commands from targeting the wrong Azure subscription. Which resource hierarchy read-only observation proves the governed disposable-workload hierarchy outcome?
 
-- A. Copy resource identifiers from another run instead of recording returned IDs.
-- B. Create a resource group with purpose, labId, runId, owner, and expiresOn tags.
-- C. Skip the operation and edit validation.json to show a passing result.
-- D. Replace the lab action with a tenant-wide change that is easier to discover.
+- A. Query resource tags and compare every required key and exact expected value.
+- B. List locks at the target scope and test a harmless control-plane update in the break/fix exercise.
+- C. List the group's resources and verify every managed resource carries the expected lab ownership tag.
+- D. Compare az account show output with the approved subscription and tenant IDs.
 
 ## LAB04-Q23 — Applied
 
-During a maintenance window, an engineer must decide how to respond: Which evidence most directly validates 'Configure resource locks' for optional management group?
+The resource hierarchy log says the governed disposable-workload hierarchy can now organize subscriptions under the intended governance parent. Which resource hierarchy state should the governed disposable-workload hierarchy acceptance test retain?
 
-- A. List the entire subscription and assume similarly named resources belong to this run.
-- B. Record a credential so another learner can replay the authenticated session.
-- C. Query the exact recorded scope and independently verify Microsoft.Authorization/locks.
-- D. Treat the setup exit code as proof of every configuration and relationship.
+- A. Query both parent and child resources to prove the required tag exists on each child.
+- B. Run move validation and then query the resource ID and dependencies in the destination scope.
+- C. Query the hierarchy and confirm each subscription's parent management group ID.
+- D. Compare az account show output with the approved subscription and tenant IDs.
 
 ## LAB04-Q24 — Applied
 
-A deployment pipeline reaches this decision point: The 'Apply and manage tags on resources' checkpoint reaches an external prerequisite. What should happen?
+The governed disposable-workload hierarchy rejects resource hierarchy exit status as proof it can apply parent governance consistently to descendant subscriptions. Which governed disposable-workload hierarchy result is valid evidence?
 
-- A. Invent a domain, notification target, license, quota, or tenant value and continue.
-- B. Broaden permissions until the prerequisite can no longer block the operation.
-- C. Mark the branch passed because its command syntax was checked offline.
-- D. Run the branch only when this documented gate is satisfied: Management-group creation is optional and requires explicit tenant hierarchy authorization.
+- A. Inspect the descendant subscription and identify the inherited assignment's management-group scope.
+- B. Read the lock and demonstrate a safe update is allowed while a controlled delete attempt is denied.
+- C. Query the resource group location and each contained resource location as separate values.
+- D. Query the hierarchy and confirm each subscription's parent management group ID.
 
 ## LAB04-Q25 — Applied
 
-While applying least-privilege controls, the administrator reviews this scenario: What is the safest command-evidence practice after completing 'Manage resource groups'?
+The resource hierarchy validator needs one governed disposable-workload hierarchy query after the change to label resources so cost and ownership queries can find them. Which resource hierarchy property should the governed disposable-workload hierarchy validator inspect?
 
-- A. Retain only redacted structured output from an independent query of the recorded run.
-- B. Save tokens, keys, passwords, or SAS values beside the validation result.
-- C. Reuse successful output from an earlier run with a similar resource name.
-- D. Commit the complete account object so reviewers can identify the tenant.
+- A. List locks at the target scope and test a harmless control-plane update in the break/fix exercise.
+- B. List the group's resources and verify every managed resource carries the expected lab ownership tag.
+- C. Query resource tags and compare every required key and exact expected value.
+- D. Inspect the descendant subscription and identify the inherited assignment's management-group scope.
 
 ## LAB04-Q26 — Applied
 
-A repeatable Azure CLI workflow must address this requirement: A learner previews the implementation for 'Manage subscriptions'. What behavior is required?
+The governance administrator organizing disposable workloads must confirm the governed disposable-workload hierarchy, without mutation, can avoid assuming that a parent label automatically appears on every child. Which resource hierarchy check qualifies?
 
-- A. Create the baseline immediately and request approval only before cleanup.
-- B. Display the context, intended changes, cost and gated branches without mutating Azure.
-- C. Select the first accessible subscription and hide the resulting context.
-- D. Delete any older resource whose name resembles the new run ID.
+- A. Query both parent and child resources to prove the required tag exists on each child.
+- B. Run move validation and then query the resource ID and dependencies in the destination scope.
+- C. Compare az account show output with the approved subscription and tenant IDs.
+- D. Query resource tags and compare every required key and exact expected value.
 
 ## LAB04-Q27 — Applied
 
-During an environment handoff, the receiving team asks this question: Which implementation step should the learner perform for 'Configure management groups'?
+The governed disposable-workload hierarchy configuration is complete; the resource hierarchy reviewers need evidence it can prevent accidental deletion while still allowing supported updates. Which observation shows success?
 
-- A. Replace the lab action with a tenant-wide change that is easier to discover.
-- B. Copy resource identifiers from another run instead of recording returned IDs.
-- C. Create a resource group with purpose, labId, runId, owner, and expiresOn tags.
-- D. Skip the operation and edit validation.json to show a passing result.
+- A. Query the resource group location and each contained resource location as separate values.
+- B. Read the lock and demonstrate a safe update is allowed while a controlled delete attempt is denied.
+- C. Query the hierarchy and confirm each subscription's parent management group ID.
+- D. Query both parent and child resources to prove the required tag exists on each child.
 
 ## LAB04-Q28 — Applied
 
-A configuration change produces the following operational choice: Which evidence most directly validates 'Configure resource locks' for optional management group?
+The resource hierarchy validation asks whether the governed disposable-workload hierarchy can prevent both deletion and control-plane modification of a protected resource. Which observable state is strongest?
 
-- A. Treat the setup exit code as proof of every configuration and relationship.
-- B. List the entire subscription and assume similarly named resources belong to this run.
-- C. Record a credential so another learner can replay the authenticated session.
-- D. Query the exact recorded scope and independently verify Microsoft.Authorization/locks.
+- A. List the group's resources and verify every managed resource carries the expected lab ownership tag.
+- B. Inspect the descendant subscription and identify the inherited assignment's management-group scope.
+- C. Read the lock and demonstrate a safe update is allowed while a controlled delete attempt is denied.
+- D. List locks at the target scope and test a harmless control-plane update in the break/fix exercise.
 
 ## LAB04-Q29 — Applied
 
-While preparing independent validation, an engineer considers this scenario: The 'Apply and manage tags on resources' checkpoint reaches an external prerequisite. What should happen?
+A governed disposable-workload hierarchy review must prove the resource hierarchy ability to relocate supported resources without recreating them. Which check avoids an adjacent feature?
 
-- A. Run the branch only when this documented gate is satisfied: Management-group creation is optional and requires explicit tenant hierarchy authorization.
-- B. Invent a domain, notification target, license, quota, or tenant value and continue.
-- C. Broaden permissions until the prerequisite can no longer block the operation.
-- D. Mark the branch passed because its command syntax was checked offline.
+- A. Compare az account show output with the approved subscription and tenant IDs.
+- B. Query resource tags and compare every required key and exact expected value.
+- C. Run move validation and then query the resource ID and dependencies in the destination scope.
+- D. List locks at the target scope and test a harmless control-plane update in the break/fix exercise.
 
 ## LAB04-Q30 — Applied
 
-A service owner asks the administrator to resolve this requirement: What is the safest command-evidence practice after completing 'Manage resource groups'?
+The governed disposable-workload hierarchy evidence bundle needs a resource hierarchy result showing it can choose the metadata region for a deployment boundary independently of its resources. Which result belongs in the checkpoint?
 
-- A. Commit the complete account object so reviewers can identify the tenant.
-- B. Retain only redacted structured output from an independent query of the recorded run.
-- C. Save tokens, keys, passwords, or SAS values beside the validation result.
-- D. Reuse successful output from an earlier run with a similar resource name.
+- A. Query the hierarchy and confirm each subscription's parent management group ID.
+- B. Query the resource group location and each contained resource location as separate values.
+- C. Query both parent and child resources to prove the required tag exists on each child.
+- D. Run move validation and then query the resource ID and dependencies in the destination scope.
 
 ## LAB04-Q31 — Applied
 
-During a scoped cleanup review, the team evaluates this situation: A learner previews the implementation for 'Manage subscriptions'. What behavior is required?
+Other governed disposable-workload hierarchy components are healthy, but the resource hierarchy still cannot create and later remove one owned deployment boundary. Which state causes the isolated failure?
 
-- A. Delete any older resource whose name resembles the new run ID.
-- B. Create the baseline immediately and request approval only before cleanup.
-- C. Display the context, intended changes, cost and gated branches without mutating Azure.
-- D. Select the first accessible subscription and hide the resulting context.
+- A. The active subscription changed after sign-in and points at an unapproved environment.
+- B. The runbook assumed a resource inherited its resource group's tags automatically.
+- C. The design assumes all resources must share the resource group's metadata location.
+- D. Cleanup targets a resource group that contains resources outside the lab's ownership boundary.
 
 ## LAB04-Q32 — Applied
 
-An automation author must choose the correct response to this scenario: Which implementation step should the learner perform for 'Configure management groups'?
+During a resource hierarchy fault drill, the governed disposable-workload hierarchy does not prevent commands from targeting the wrong Azure subscription. Which finding identifies the defect?
 
-- A. Skip the operation and edit validation.json to show a passing result.
-- B. Replace the lab action with a tenant-wide change that is easier to discover.
-- C. Copy resource identifiers from another run instead of recording returned IDs.
-- D. Create a resource group with purpose, labId, runId, owner, and expiresOn tags.
+- A. The subscription remains attached to a different management-group branch.
+- B. Cleanup begins before removing the lab-owned CanNotDelete lock.
+- C. The active subscription changed after sign-in and points at an unapproved environment.
+- D. Cleanup targets a resource group that contains resources outside the lab's ownership boundary.
 
 ## LAB04-Q33 — Applied
 
-A lab run with a unique run ID reaches this decision: Which evidence most directly validates 'Configure resource locks' for optional management group?
+The governed disposable-workload hierarchy setup finishes, yet the resource hierarchy cannot organize subscriptions under the intended governance parent. Which misconfiguration explains the mismatch?
 
-- A. Query the exact recorded scope and independently verify Microsoft.Authorization/locks.
-- B. Treat the setup exit code as proof of every configuration and relationship.
-- C. List the entire subscription and assume similarly named resources belong to this run.
-- D. Record a credential so another learner can replay the authenticated session.
+- A. The assignment was created on a sibling management group with no ancestor relationship to the subscription.
+- B. A ReadOnly lock prevents a service from updating configuration that its normal operation requires.
+- C. The subscription remains attached to a different management-group branch.
+- D. The active subscription changed after sign-in and points at an unapproved environment.
 
 ## LAB04-Q34 — Applied
 
-While comparing the intended and actual states, the operator asks this question: The 'Apply and manage tags on resources' checkpoint reaches an external prerequisite. What should happen?
+A resource hierarchy break/fix in the governed disposable-workload hierarchy fails when operators try to apply parent governance consistently to descendant subscriptions. Which diagnosis fits?
 
-- A. Mark the branch passed because its command syntax was checked offline.
-- B. Run the branch only when this documented gate is satisfied: Management-group creation is optional and requires explicit tenant hierarchy authorization.
-- C. Invent a domain, notification target, license, quota, or tenant value and continue.
-- D. Broaden permissions until the prerequisite can no longer block the operation.
+- A. A required tag value differs in case from the value used by the cost-reporting convention.
+- B. The assignment was created on a sibling management group with no ancestor relationship to the subscription.
+- C. A dependent resource that must move with the target was omitted from the move request.
+- D. The subscription remains attached to a different management-group branch.
 
 ## LAB04-Q35 — Applied
 
-A peer reviewer examines the proposed implementation for this scenario: What is the safest command-evidence practice after completing 'Manage resource groups'?
+The governed disposable-workload hierarchy troubleshooting scope is the resource hierarchy need to label resources so cost and ownership queries can find them. Which condition should be corrected first?
 
-- A. Reuse successful output from an earlier run with a similar resource name.
-- B. Commit the complete account object so reviewers can identify the tenant.
-- C. Retain only redacted structured output from an independent query of the recorded run.
-- D. Save tokens, keys, passwords, or SAS values beside the validation result.
+- A. The runbook assumed a resource inherited its resource group's tags automatically.
+- B. The design assumes all resources must share the resource group's metadata location.
+- C. A required tag value differs in case from the value used by the cost-reporting convention.
+- D. The assignment was created on a sibling management group with no ancestor relationship to the subscription.
 
 ## LAB04-Q36 — Applied
 
-During a controlled rollout, the change team encounters this requirement: A learner previews the implementation for 'Manage subscriptions'. What behavior is required?
+The governed disposable-workload hierarchy result is partial because the resource hierarchy cannot avoid assuming that a parent label automatically appears on every child. Which condition accounts for that result?
 
-- A. Select the first accessible subscription and hide the resulting context.
-- B. Delete any older resource whose name resembles the new run ID.
-- C. Create the baseline immediately and request approval only before cleanup.
-- D. Display the context, intended changes, cost and gated branches without mutating Azure.
+- A. Cleanup begins before removing the lab-owned CanNotDelete lock.
+- B. Cleanup targets a resource group that contains resources outside the lab's ownership boundary.
+- C. A required tag value differs in case from the value used by the cost-reporting convention.
+- D. The runbook assumed a resource inherited its resource group's tags automatically.
 
 ## LAB04-Q37 — Applied
 
-A support engineer reproduces the following situation in a test environment: Which implementation step should the learner perform for 'Configure management groups'?
+The resource hierarchy evidence shows the governed disposable-workload hierarchy cannot prevent accidental deletion while still allowing supported updates. Which root cause fits that evidence?
 
-- A. Create a resource group with purpose, labId, runId, owner, and expiresOn tags.
-- B. Skip the operation and edit validation.json to show a passing result.
-- C. Replace the lab action with a tenant-wide change that is easier to discover.
-- D. Copy resource identifiers from another run instead of recording returned IDs.
+- A. A ReadOnly lock prevents a service from updating configuration that its normal operation requires.
+- B. The active subscription changed after sign-in and points at an unapproved environment.
+- C. The runbook assumed a resource inherited its resource group's tags automatically.
+- D. Cleanup begins before removing the lab-owned CanNotDelete lock.
 
 ## LAB04-Q38 — Applied
 
-While recording validation evidence, the administrator evaluates this question: Which evidence most directly validates 'Configure resource locks' for optional management group?
+Although the governed disposable-workload hierarchy is meant to let the resource hierarchy prevent both deletion and control-plane modification of a protected resource, its checkpoint fails. Which resource hierarchy defect explains the failure?
 
-- A. Record a credential so another learner can replay the authenticated session.
-- B. Query the exact recorded scope and independently verify Microsoft.Authorization/locks.
-- C. Treat the setup exit code as proof of every configuration and relationship.
-- D. List the entire subscription and assume similarly named resources belong to this run.
+- A. A dependent resource that must move with the target was omitted from the move request.
+- B. The subscription remains attached to a different management-group branch.
+- C. Cleanup begins before removing the lab-owned CanNotDelete lock.
+- D. A ReadOnly lock prevents a service from updating configuration that its normal operation requires.
 
 ## LAB04-Q39 — Applied
 
-A configuration owner must approve one response to this scenario: The 'Apply and manage tags on resources' checkpoint reaches an external prerequisite. What should happen?
+The resource hierarchy support team isolated the governed disposable-workload hierarchy incident to the attempt to relocate supported resources without recreating them. Which condition prevents success?
 
-- A. Broaden permissions until the prerequisite can no longer block the operation.
-- B. Mark the branch passed because its command syntax was checked offline.
-- C. Run the branch only when this documented gate is satisfied: Management-group creation is optional and requires explicit tenant hierarchy authorization.
-- D. Invent a domain, notification target, license, quota, or tenant value and continue.
+- A. A dependent resource that must move with the target was omitted from the move request.
+- B. The design assumes all resources must share the resource group's metadata location.
+- C. The assignment was created on a sibling management group with no ancestor relationship to the subscription.
+- D. A ReadOnly lock prevents a service from updating configuration that its normal operation requires.
 
 ## LAB04-Q40 — Applied
 
-During post-deployment verification, the team reviews this situation: What is the safest command-evidence practice after completing 'Manage resource groups'?
+A governed disposable-workload hierarchy query surprises the governance administrator organizing disposable workloads during the resource hierarchy attempt to choose the metadata region for a deployment boundary independently of its resources. Which finding explains it?
 
-- A. Save tokens, keys, passwords, or SAS values beside the validation result.
-- B. Reuse successful output from an earlier run with a similar resource name.
-- C. Commit the complete account object so reviewers can identify the tenant.
-- D. Retain only redacted structured output from an independent query of the recorded run.
+- A. Cleanup targets a resource group that contains resources outside the lab's ownership boundary.
+- B. A required tag value differs in case from the value used by the cost-reporting convention.
+- C. The design assumes all resources must share the resource group's metadata location.
+- D. A dependent resource that must move with the target was omitted from the move request.
 
 ## LAB04-Q41 — Advanced
 
-Validation for 'Manage subscriptions' fails after setup. What is the best break/fix method?
+The governed disposable-workload hierarchy checkpoint requires both this resource hierarchy outcome—create and later remove one owned deployment boundary—and a read-only governed disposable-workload hierarchy state check. Which resource hierarchy response is complete?
 
-- A. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-- B. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- C. Rerun setup repeatedly with new names until one attempt appears successful.
-- D. Change validation.json directly so the failed result reads pass.
+- A. First, Place subscriptions beneath the approved management group before applying inherited governance. Then, Query the hierarchy and confirm each subscription's parent management group ID.
+- B. First, Group resources that share ownership and lifecycle into a deliberately scoped resource group. Then, List the group's resources and verify every managed resource carries the expected lab ownership tag.
+- C. First, Apply a CanNotDelete lock at the narrowest scope that requires deletion protection. Then, Read the lock and demonstrate a safe update is allowed while a controlled delete attempt is denied.
+- D. First, Use ReadOnly only when the operational impact of blocking updates is acceptable. Then, List locks at the target scope and test a harmless control-plane update in the break/fix exercise.
 
 ## LAB04-Q42 — Advanced
 
-The operation for 'Configure management groups' is asynchronous or gated. How should completion be recorded?
+The governed disposable-workload hierarchy runbook must prevent commands from targeting the wrong Azure subscription, then retain resource hierarchy read-back evidence. Which governed disposable-workload hierarchy pair completes both duties?
 
-- A. Remove the check from validation whenever the service takes longer than expected.
-- B. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
-- C. Record pass as soon as the request is accepted, regardless of its final state.
-- D. Fabricate expected output so the assessment and documentation appear complete.
+- A. First, Assign shared governance at the lowest management group that contains every intended subscription. Then, Inspect the descendant subscription and identify the inherited assignment's management-group scope.
+- B. First, Set and re-read the intended subscription before creating any resource group. Then, Compare az account show output with the approved subscription and tenant IDs.
+- C. First, Use ReadOnly only when the operational impact of blocking updates is acceptable. Then, List locks at the target scope and test a harmless control-plane update in the break/fix exercise.
+- D. First, Validate every dependent resource and destination prerequisite before starting the move. Then, Run move validation and then query the resource ID and dependencies in the destination scope.
 
 ## LAB04-Q43 — Advanced
 
-A security and reliability review identifies this design decision: Validation for 'Manage subscriptions' fails after setup. What is the best break/fix method?
+To satisfy the resource hierarchy requirement, operators must change the governed disposable-workload hierarchy configuration and prove it can organize subscriptions under the intended governance parent. Which sequence is coherent?
 
-- A. Rerun setup repeatedly with new names until one attempt appears successful.
-- B. Change validation.json directly so the failed result reads pass.
-- C. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-- D. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+- A. First, Place subscriptions beneath the approved management group before applying inherited governance. Then, Query the hierarchy and confirm each subscription's parent management group ID.
+- B. First, Apply the required owner, environment, and run ID tags to each managed resource. Then, Query resource tags and compare every required key and exact expected value.
+- C. First, Validate every dependent resource and destination prerequisite before starting the move. Then, Run move validation and then query the resource ID and dependencies in the destination scope.
+- D. First, Choose an approved metadata location while selecting each resource's supported deployment region independently. Then, Query the resource group location and each contained resource location as separate values.
 
 ## LAB04-Q44 — Advanced
 
-While diagnosing unexpected Azure behavior, the engineer considers this situation: The operation for 'Configure management groups' is asynchronous or gated. How should completion be recorded?
+The governance administrator organizing disposable workloads needs a safe governed disposable-workload hierarchy change to apply parent governance consistently to descendant subscriptions, followed by resource hierarchy evidence. Which pair merits approval?
 
-- A. Record pass as soon as the request is accepted, regardless of its final state.
-- B. Fabricate expected output so the assessment and documentation appear complete.
-- C. Remove the check from validation whenever the service takes longer than expected.
-- D. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
+- A. First, Use Azure Policy or explicit automation when child resources must receive parent tag values. Then, Query both parent and child resources to prove the required tag exists on each child.
+- B. First, Choose an approved metadata location while selecting each resource's supported deployment region independently. Then, Query the resource group location and each contained resource location as separate values.
+- C. First, Assign shared governance at the lowest management group that contains every intended subscription. Then, Inspect the descendant subscription and identify the inherited assignment's management-group scope.
+- D. First, Group resources that share ownership and lifecycle into a deliberately scoped resource group. Then, List the group's resources and verify every managed resource carries the expected lab ownership tag.
 
 ## LAB04-Q45 — Advanced
 
-An architecture review requires the strongest response to this scenario: Validation for 'Manage subscriptions' fails after setup. What is the best break/fix method?
+The governed disposable-workload hierarchy has two resource hierarchy gates: label resources so cost and ownership queries can find them, then prove the governed disposable-workload hierarchy state. Which resource hierarchy sequence works?
 
-- A. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-- B. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- C. Rerun setup repeatedly with new names until one attempt appears successful.
-- D. Change validation.json directly so the failed result reads pass.
+- A. First, Apply the required owner, environment, and run ID tags to each managed resource. Then, Query resource tags and compare every required key and exact expected value.
+- B. First, Apply a CanNotDelete lock at the narrowest scope that requires deletion protection. Then, Read the lock and demonstrate a safe update is allowed while a controlled delete attempt is denied.
+- C. First, Group resources that share ownership and lifecycle into a deliberately scoped resource group. Then, List the group's resources and verify every managed resource carries the expected lab ownership tag.
+- D. First, Set and re-read the intended subscription before creating any resource group. Then, Compare az account show output with the approved subscription and tenant IDs.
 
 ## LAB04-Q46 — Advanced
 
-During break/fix validation, the operator encounters this question: The operation for 'Configure management groups' is asynchronous or gated. How should completion be recorded?
+Which resource hierarchy path makes the governed disposable-workload hierarchy able to avoid assuming that a parent label automatically appears on every child, then inspects the defining properties?
 
-- A. Remove the check from validation whenever the service takes longer than expected.
-- B. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
-- C. Record pass as soon as the request is accepted, regardless of its final state.
-- D. Fabricate expected output so the assessment and documentation appear complete.
+- A. First, Use ReadOnly only when the operational impact of blocking updates is acceptable. Then, List locks at the target scope and test a harmless control-plane update in the break/fix exercise.
+- B. First, Set and re-read the intended subscription before creating any resource group. Then, Compare az account show output with the approved subscription and tenant IDs.
+- C. First, Place subscriptions beneath the approved management group before applying inherited governance. Then, Query the hierarchy and confirm each subscription's parent management group ID.
+- D. First, Use Azure Policy or explicit automation when child resources must receive parent tag values. Then, Query both parent and child resources to prove the required tag exists on each child.
 
 ## LAB04-Q47 — Advanced
 
-A complex support case depends on correctly interpreting this requirement: Validation for 'Manage subscriptions' fails after setup. What is the best break/fix method?
+At the governed disposable-workload hierarchy approval gate, operators must show that the resource hierarchy can prevent accidental deletion while still allowing supported updates. Which resource hierarchy configure-and-check pair is defensible?
 
-- A. Rerun setup repeatedly with new names until one attempt appears successful.
-- B. Change validation.json directly so the failed result reads pass.
-- C. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-- D. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+- A. First, Validate every dependent resource and destination prerequisite before starting the move. Then, Run move validation and then query the resource ID and dependencies in the destination scope.
+- B. First, Apply a CanNotDelete lock at the narrowest scope that requires deletion protection. Then, Read the lock and demonstrate a safe update is allowed while a controlled delete attempt is denied.
+- C. First, Place subscriptions beneath the approved management group before applying inherited governance. Then, Query the hierarchy and confirm each subscription's parent management group ID.
+- D. First, Assign shared governance at the lowest management group that contains every intended subscription. Then, Inspect the descendant subscription and identify the inherited assignment's management-group scope.
 
 ## LAB04-Q48 — Advanced
 
-While correcting configuration drift, the team evaluates this scenario: The operation for 'Configure management groups' is asynchronous or gated. How should completion be recorded?
+The governed disposable-workload hierarchy forbids a partial resource hierarchy result. Operators must first prevent both deletion and control-plane modification of a protected resource and afterward confirm the governed disposable-workload hierarchy outcome. Which resource hierarchy sequence is complete?
 
-- A. Record pass as soon as the request is accepted, regardless of its final state.
-- B. Fabricate expected output so the assessment and documentation appear complete.
-- C. Remove the check from validation whenever the service takes longer than expected.
-- D. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
+- A. First, Use ReadOnly only when the operational impact of blocking updates is acceptable. Then, List locks at the target scope and test a harmless control-plane update in the break/fix exercise.
+- B. First, Choose an approved metadata location while selecting each resource's supported deployment region independently. Then, Query the resource group location and each contained resource location as separate values.
+- C. First, Assign shared governance at the lowest management group that contains every intended subscription. Then, Inspect the descendant subscription and identify the inherited assignment's management-group scope.
+- D. First, Apply the required owner, environment, and run ID tags to each managed resource. Then, Query resource tags and compare every required key and exact expected value.
 
 ## LAB04-Q49 — Advanced
 
-A recovery exercise exposes the following technical decision: Validation for 'Manage subscriptions' fails after setup. What is the best break/fix method?
+Only the governed disposable-workload hierarchy change needed to relocate supported resources without recreating them is allowed, and resource hierarchy proof is mandatory. Which pair fits?
 
-- A. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-- B. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- C. Rerun setup repeatedly with new names until one attempt appears successful.
-- D. Change validation.json directly so the failed result reads pass.
+- A. First, Group resources that share ownership and lifecycle into a deliberately scoped resource group. Then, List the group's resources and verify every managed resource carries the expected lab ownership tag.
+- B. First, Apply the required owner, environment, and run ID tags to each managed resource. Then, Query resource tags and compare every required key and exact expected value.
+- C. First, Use Azure Policy or explicit automation when child resources must receive parent tag values. Then, Query both parent and child resources to prove the required tag exists on each child.
+- D. First, Validate every dependent resource and destination prerequisite before starting the move. Then, Run move validation and then query the resource ID and dependencies in the destination scope.
 
 ## LAB04-Q50 — Advanced
 
-During final design assurance, the reviewer must resolve this situation: The operation for 'Configure management groups' is asynchronous or gated. How should completion be recorded?
+The governed disposable-workload hierarchy runbook separates resource hierarchy mutation from validation while it must choose the metadata region for a deployment boundary independently of its resources. Which sequence proves it cleanly?
 
-- A. Remove the check from validation whenever the service takes longer than expected.
-- B. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
-- C. Record pass as soon as the request is accepted, regardless of its final state.
-- D. Fabricate expected output so the assessment and documentation appear complete.
+- A. First, Set and re-read the intended subscription before creating any resource group. Then, Compare az account show output with the approved subscription and tenant IDs.
+- B. First, Use Azure Policy or explicit automation when child resources must receive parent tag values. Then, Query both parent and child resources to prove the required tag exists on each child.
+- C. First, Apply a CanNotDelete lock at the narrowest scope that requires deletion protection. Then, Read the lock and demonstrate a safe update is allowed while a controlled delete attempt is denied.
+- D. First, Choose an approved metadata location while selecting each resource's supported deployment region independently. Then, Query the resource group location and each contained resource location as separate values.
+
+[Open the answer key](./ANSWERS.md)

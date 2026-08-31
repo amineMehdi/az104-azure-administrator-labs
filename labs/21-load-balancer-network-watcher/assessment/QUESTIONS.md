@@ -1,453 +1,459 @@
 # Lab 21 knowledge check
 
-Choose the single best answer for each question. Record your choices before opening `ANSWERS.md`.
+[Return to the guided lab](../README.md)
+
+Complete all 50 questions before opening the answer key. Allow about 50–60 minutes and choose the single best answer.
+
+Use the result as a learning signal: 85–100% indicates mastery, 70–84% calls for targeted review, and below 70% means repeat the mapped lab tasks before retrying.
 
 ## LAB21-Q01 — Foundational
 
-Which principle is most important when working on 'Troubleshoot network connectivity' in Lab 21?
+A network operations administrator publishing a resilient HTTP backend is updating the backend readiness runbook. The requirement is to expose one ingress IP for incoming balanced traffic. Which statement describes Azure behavior correctly?
 
-- A. A recognizable resource name removes the need for validation and scoped cleanup.
-- B. A load-balancing rule depends on a healthy probe and reachable backend, while Network Watcher distinguishes DNS, routing, NSG, guest firewall, and application-listener failures.
-- C. The shortest command is always correct even when it changes a broader scope.
-- D. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+- A. A backend pool identifies the NIC configurations or IP addresses eligible to receive balanced flows.
+- B. Standard Load Balancer health probes use the AzureLoadBalancer service tag and must reach the probed backend port through effective NSG rules.
+- C. When every backend probe is unhealthy, the load balancer cannot select a healthy target for new client flows.
+- D. A load-balancer frontend IP configuration is the client-facing address used by load-balancing and inbound NAT rules.
 
 ## LAB21-Q02 — Foundational
 
-Which lab action directly supports the objective 'Configure an internal or public load balancer'?
+A backend readiness peer review asks how the resilient HTTP backend publication should handle this outcome: register every serving network interface as an eligible target. Which explanation is accurate?
 
-- A. Mark the objective complete after reading documentation without checking any state.
-- B. Change the active tenant without displaying or confirming the resulting context.
-- C. Create a Standard public load balancer, backend pool, TCP probe, and frontend rule.
-- D. Search the whole tenant for a similar display name and modify the first match.
+- A. A health probe tests a configured protocol, port, and optional path so unhealthy backends stop receiving new flows.
+- B. A backend pool identifies the NIC configurations or IP addresses eligible to receive balanced flows.
+- C. A Standard Load Balancer needs an explicit outbound design, such as outbound rules or NAT Gateway, for predictable backend egress.
+- D. Connection troubleshoot performs an on-demand path test and reports reachability, latency, and diagnosed failure information.
 
 ## LAB21-Q03 — Foundational
 
-Which authorization approach is appropriate before practicing 'Troubleshoot load balancing'?
+For the resilient HTTP backend publication, the backend readiness plan must remove an instance from rotation when its application endpoint is unhealthy. Which statement about backend readiness belongs in the resilient HTTP backend publication record?
 
-- A. Skip role checks when the run ID contains the lab number.
-- B. Use a production subscription because its resources already exist.
-- C. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
-- D. Confirm the active context and use only the declared role boundary: Network Contributor and Virtual Machine Contributor on the lab resource group
+- A. A load-balancing rule binds a frontend, backend pool, probe, protocol, and port mapping into one traffic path.
+- B. Load distribution mode can hash two or three tuple fields to provide none, client IP, or client IP and protocol session persistence.
+- C. A health probe tests a configured protocol, port, and optional path so unhealthy backends stop receiving new flows.
+- D. Connection Monitor continuously tests configured source and destination endpoints and records reachability and latency over time.
 
 ## LAB21-Q04 — Foundational
 
-Before making a change, a learner checks this core behavior: Which principle is most important when working on 'Troubleshoot network connectivity' in Lab 21?
+The backend readiness review compares four claims for the resilient HTTP backend publication requirement to connect the ingress IP, eligible targets, health signal, protocol, and ports in one rule. Which claim is technically sound?
 
-- A. A load-balancing rule depends on a healthy probe and reachable backend, while Network Watcher distinguishes DNS, routing, NSG, guest firewall, and application-listener failures.
-- B. The shortest command is always correct even when it changes a broader scope.
-- C. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- D. A recognizable resource name removes the need for validation and scoped cleanup.
+- A. Standard Load Balancer health probes use the AzureLoadBalancer service tag and must reach the probed backend port through effective NSG rules.
+- B. When every backend probe is unhealthy, the load balancer cannot select a healthy target for new client flows.
+- C. A load-balancer frontend IP configuration is the client-facing address used by load-balancing and inbound NAT rules.
+- D. A load-balancing rule binds a frontend, backend pool, probe, protocol, and port mapping into one traffic path.
 
 ## LAB21-Q05 — Foundational
 
-During a design vocabulary review, the team evaluates this situation: Which lab action directly supports the objective 'Configure an internal or public load balancer'?
+The backend readiness architecture note requires the resilient HTTP backend publication environment to allow the platform probe source while keeping other unsolicited traffic denied. Which statement defines the relevant backend readiness boundary?
 
-- A. Change the active tenant without displaying or confirming the resulting context.
-- B. Create a Standard public load balancer, backend pool, TCP probe, and frontend rule.
-- C. Search the whole tenant for a similar display name and modify the first match.
-- D. Mark the objective complete after reading documentation without checking any state.
+- A. Standard Load Balancer health probes use the AzureLoadBalancer service tag and must reach the probed backend port through effective NSG rules.
+- B. A Standard Load Balancer needs an explicit outbound design, such as outbound rules or NAT Gateway, for predictable backend egress.
+- C. Connection troubleshoot performs an on-demand path test and reports reachability, latency, and diagnosed failure information.
+- D. A backend pool identifies the NIC configurations or IP addresses eligible to receive balanced flows.
 
 ## LAB21-Q06 — Foundational
 
-In a command-planning session, an administrator asks this question: Which authorization approach is appropriate before practicing 'Troubleshoot load balancing'?
+A new backend readiness operator must explain why the resilient HTTP backend publication can provide explicit outbound connectivity for a Standard load-balanced backend. Which explanation is accurate?
 
-- A. Use a production subscription because its resources already exist.
-- B. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
-- C. Confirm the active context and use only the declared role boundary: Network Contributor and Virtual Machine Contributor on the lab resource group
-- D. Skip role checks when the run ID contains the lab number.
+- A. A Standard Load Balancer needs an explicit outbound design, such as outbound rules or NAT Gateway, for predictable backend egress.
+- B. Load distribution mode can hash two or three tuple fields to provide none, client IP, or client IP and protocol session persistence.
+- C. Connection Monitor continuously tests configured source and destination endpoints and records reachability and latency over time.
+- D. A health probe tests a configured protocol, port, and optional path so unhealthy backends stop receiving new flows.
 
 ## LAB21-Q07 — Foundational
 
-While preparing the lab, a learner verifies this platform rule: Which principle is most important when working on 'Troubleshoot network connectivity' in Lab 21?
+The resilient HTTP backend publication acceptance criteria require operators to keep successive flows from one client on the affinity mode the application expects. Which service fact supports that requirement?
 
-- A. The shortest command is always correct even when it changes a broader scope.
-- B. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- C. A recognizable resource name removes the need for validation and scoped cleanup.
-- D. A load-balancing rule depends on a healthy probe and reachable backend, while Network Watcher distinguishes DNS, routing, NSG, guest firewall, and application-listener failures.
+- A. When every backend probe is unhealthy, the load balancer cannot select a healthy target for new client flows.
+- B. A load-balancer frontend IP configuration is the client-facing address used by load-balancing and inbound NAT rules.
+- C. Load distribution mode can hash two or three tuple fields to provide none, client IP, or client IP and protocol session persistence.
+- D. A load-balancing rule binds a frontend, backend pool, probe, protocol, and port mapping into one traffic path.
 
 ## LAB21-Q08 — Foundational
 
-During peer review, the team must identify the accurate response to this scenario: Which lab action directly supports the objective 'Configure an internal or public load balancer'?
+A backend readiness reviewer challenges whether the resilient HTTP backend publication can explain why no new client flow is sent when every target fails its probe. Which response resolves the concern?
 
-- A. Create a Standard public load balancer, backend pool, TCP probe, and frontend rule.
-- B. Search the whole tenant for a similar display name and modify the first match.
-- C. Mark the objective complete after reading documentation without checking any state.
-- D. Change the active tenant without displaying or confirming the resulting context.
+- A. Connection troubleshoot performs an on-demand path test and reports reachability, latency, and diagnosed failure information.
+- B. A backend pool identifies the NIC configurations or IP addresses eligible to receive balanced flows.
+- C. When every backend probe is unhealthy, the load balancer cannot select a healthy target for new client flows.
+- D. Standard Load Balancer health probes use the AzureLoadBalancer service tag and must reach the probed backend port through effective NSG rules.
 
 ## LAB21-Q09 — Foundational
 
-In an operations briefing, a new team member receives this question: Which authorization approach is appropriate before practicing 'Troubleshoot load balancing'?
+The resilient HTTP backend publication handoff omits the backend readiness rule needed to test reachability between two endpoints and return the responsible hop or policy. Which statement should the team add?
 
-- A. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
-- B. Confirm the active context and use only the declared role boundary: Network Contributor and Virtual Machine Contributor on the lab resource group
-- C. Skip role checks when the run ID contains the lab number.
-- D. Use a production subscription because its resources already exist.
+- A. Connection Monitor continuously tests configured source and destination endpoints and records reachability and latency over time.
+- B. A health probe tests a configured protocol, port, and optional path so unhealthy backends stop receiving new flows.
+- C. Connection troubleshoot performs an on-demand path test and reports reachability, latency, and diagnosed failure information.
+- D. A Standard Load Balancer needs an explicit outbound design, such as outbound rules or NAT Gateway, for predictable backend egress.
 
 ## LAB21-Q10 — Foundational
 
-While building a support checklist, an engineer reviews this requirement: Which principle is most important when working on 'Troubleshoot network connectivity' in Lab 21?
+A backend readiness incident review of the resilient HTTP backend publication depends on the ability to measure connection reachability and latency continuously over time. Which platform description is reliable?
 
-- A. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- B. A recognizable resource name removes the need for validation and scoped cleanup.
-- C. A load-balancing rule depends on a healthy probe and reachable backend, while Network Watcher distinguishes DNS, routing, NSG, guest firewall, and application-listener failures.
-- D. The shortest command is always correct even when it changes a broader scope.
+- A. A load-balancer frontend IP configuration is the client-facing address used by load-balancing and inbound NAT rules.
+- B. Connection Monitor continuously tests configured source and destination endpoints and records reachability and latency over time.
+- C. A load-balancing rule binds a frontend, backend pool, probe, protocol, and port mapping into one traffic path.
+- D. Load distribution mode can hash two or three tuple fields to provide none, client IP, or client IP and protocol session persistence.
 
 ## LAB21-Q11 — Foundational
 
-During a readiness check, the administrator considers this behavior: Which lab action directly supports the objective 'Configure an internal or public load balancer'?
+A backend readiness ticket in the resilient HTTP backend publication says to expose one ingress IP for incoming balanced traffic. Which backend readiness action completes the resilient HTTP backend publication request with minimal change?
 
-- A. Search the whole tenant for a similar display name and modify the first match.
-- B. Mark the objective complete after reading documentation without checking any state.
-- C. Change the active tenant without displaying or confirming the resulting context.
-- D. Create a Standard public load balancer, backend pool, TCP probe, and frontend rule.
+- A. Configure a probe that reflects actual application readiness rather than only host availability.
+- B. Configure the approved outbound method and size SNAT capacity for expected concurrency.
+- C. Run the diagnostic from the actual source resource to the exact destination and port.
+- D. Create a public or internal frontend that matches the approved reachability requirement.
 
 ## LAB21-Q12 — Foundational
 
-In a service overview, the team discusses this scenario: Which authorization approach is appropriate before practicing 'Troubleshoot load balancing'?
+The approach for the resilient HTTP backend publication is approved, but the backend readiness environment still cannot register every serving network interface as an eligible target. Which implementation step closes the gap?
 
-- A. Confirm the active context and use only the declared role boundary: Network Contributor and Virtual Machine Contributor on the lab resource group
-- B. Skip role checks when the run ID contains the lab number.
-- C. Use a production subscription because its resources already exist.
-- D. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
+- A. Create the rule with resource IDs from the intended frontend, backend pool, and health probe.
+- B. Choose the distribution mode only when the application requires client affinity.
+- C. Create a test group with representative endpoints, protocol, port, frequency, and success thresholds.
+- D. Add every intended healthy backend and exclude maintenance instances before production traffic.
 
 ## LAB21-Q13 — Foundational
 
-While reviewing official guidance, a learner must resolve this question: Which principle is most important when working on 'Troubleshoot network connectivity' in Lab 21?
+The network operations administrator publishing a resilient HTTP backend may change the resilient HTTP backend publication only to remove an instance from rotation when its application endpoint is unhealthy. Which backend readiness action stays within that assignment?
 
-- A. A recognizable resource name removes the need for validation and scoped cleanup.
-- B. A load-balancing rule depends on a healthy probe and reachable backend, while Network Watcher distinguishes DNS, routing, NSG, guest firewall, and application-listener failures.
-- C. The shortest command is always correct even when it changes a broader scope.
-- D. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+- A. Allow the AzureLoadBalancer service tag to the probe port without broadly exposing the application.
+- B. Configure a probe that reflects actual application readiness rather than only host availability.
+- C. Investigate application listener, probe configuration, guest firewall, and NSG path before changing the frontend.
+- D. Create a public or internal frontend that matches the approved reachability requirement.
 
 ## LAB21-Q14 — Foundational
 
-During a configuration walkthrough, the instructor asks about this situation: Which lab action directly supports the objective 'Configure an internal or public load balancer'?
+A backend readiness dry run shows no resilient HTTP backend publication command will connect the ingress IP, eligible targets, health signal, protocol, and ports in one rule. Which action belongs before execution?
 
-- A. Mark the objective complete after reading documentation without checking any state.
-- B. Change the active tenant without displaying or confirming the resulting context.
-- C. Create a Standard public load balancer, backend pool, TCP probe, and frontend rule.
-- D. Search the whole tenant for a similar display name and modify the first match.
+- A. Create the rule with resource IDs from the intended frontend, backend pool, and health probe.
+- B. Configure the approved outbound method and size SNAT capacity for expected concurrency.
+- C. Run the diagnostic from the actual source resource to the exact destination and port.
+- D. Add every intended healthy backend and exclude maintenance instances before production traffic.
 
 ## LAB21-Q15 — Foundational
 
-In a preflight knowledge check, the operator evaluates this requirement: Which authorization approach is appropriate before practicing 'Troubleshoot load balancing'?
+For the resilient HTTP backend publication, operators need to allow the platform probe source while keeping other unsolicited traffic denied. Which change realizes that requirement?
 
-- A. Skip role checks when the run ID contains the lab number.
-- B. Use a production subscription because its resources already exist.
-- C. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
-- D. Confirm the active context and use only the declared role boundary: Network Contributor and Virtual Machine Contributor on the lab resource group
+- A. Choose the distribution mode only when the application requires client affinity.
+- B. Allow the AzureLoadBalancer service tag to the probe port without broadly exposing the application.
+- C. Create a test group with representative endpoints, protocol, port, frequency, and success thresholds.
+- D. Configure a probe that reflects actual application readiness rather than only host availability.
 
 ## LAB21-Q16 — Applied
 
-A learner previews the implementation for 'Troubleshoot network connectivity'. What behavior is required?
+Operators must automate the resilient HTTP backend publication change needed to provide explicit outbound connectivity for a Standard load-balanced backend. Which backend readiness operation belongs in the runbook?
 
-- A. Display the context, intended changes, cost and gated branches without mutating Azure.
-- B. Create the baseline immediately and request approval only before cleanup.
-- C. Select the first accessible subscription and hide the resulting context.
-- D. Delete any older resource whose name resembles the new run ID.
+- A. Configure the approved outbound method and size SNAT capacity for expected concurrency.
+- B. Investigate application listener, probe configuration, guest firewall, and NSG path before changing the frontend.
+- C. Create a public or internal frontend that matches the approved reachability requirement.
+- D. Create the rule with resource IDs from the intended frontend, backend pool, and health probe.
 
 ## LAB21-Q17 — Applied
 
-Which implementation step should the learner perform for 'Configure an internal or public load balancer'?
+A resilient HTTP backend publication review finds backend readiness drift from the need to keep successive flows from one client on the affinity mode the application expects. Which correction addresses that drift?
 
-- A. Skip the operation and edit validation.json to show a passing result.
-- B. Create two backend NICs/VMs in an NSG-protected subnet without individual public IPs.
-- C. Replace the lab action with a tenant-wide change that is easier to discover.
-- D. Copy resource identifiers from another run instead of recording returned IDs.
+- A. Run the diagnostic from the actual source resource to the exact destination and port.
+- B. Add every intended healthy backend and exclude maintenance instances before production traffic.
+- C. Allow the AzureLoadBalancer service tag to the probe port without broadly exposing the application.
+- D. Choose the distribution mode only when the application requires client affinity.
 
 ## LAB21-Q18 — Applied
 
-Which evidence most directly validates 'Troubleshoot load balancing' for load-balancing rule?
+The resilient HTTP backend publication window permits only the backend readiness change needed to explain why no new client flow is sent when every target fails its probe. Which option respects the boundary?
 
-- A. Record a credential so another learner can replay the authenticated session.
-- B. Treat the setup exit code as proof of every configuration and relationship.
-- C. Query the exact recorded scope and independently verify Microsoft.Network/networkWatchers.
-- D. List the entire subscription and assume similarly named resources belong to this run.
+- A. Create a test group with representative endpoints, protocol, port, frequency, and success thresholds.
+- B. Investigate application listener, probe configuration, guest firewall, and NSG path before changing the frontend.
+- C. Configure a probe that reflects actual application readiness rather than only host availability.
+- D. Configure the approved outbound method and size SNAT capacity for expected concurrency.
 
 ## LAB21-Q19 — Applied
 
-The 'Troubleshoot network connectivity' checkpoint reaches an external prerequisite. What should happen?
+The backend readiness preflight has passed; the resilient HTTP backend publication must now test reachability between two endpoints and return the responsible hop or policy. Which operation should run?
 
-- A. Mark the branch passed because its command syntax was checked offline.
-- B. Invent a domain, notification target, license, quota, or tenant value and continue.
-- C. Broaden permissions until the prerequisite can no longer block the operation.
-- D. Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.
+- A. Create a public or internal frontend that matches the approved reachability requirement.
+- B. Run the diagnostic from the actual source resource to the exact destination and port.
+- C. Create the rule with resource IDs from the intended frontend, backend pool, and health probe.
+- D. Choose the distribution mode only when the application requires client affinity.
 
 ## LAB21-Q20 — Applied
 
-What is the safest command-evidence practice after completing 'Configure an internal or public load balancer'?
+The resilient HTTP backend publication plan must measure connection reachability and latency continuously over time while limiting the mutation scope to backend readiness. Which action is appropriate?
 
-- A. Retain only redacted structured output from an independent query of the recorded run.
-- B. Commit the complete account object so reviewers can identify the tenant.
-- C. Save tokens, keys, passwords, or SAS values beside the validation result.
-- D. Reuse successful output from an earlier run with a similar resource name.
+- A. Create a test group with representative endpoints, protocol, port, frequency, and success thresholds.
+- B. Add every intended healthy backend and exclude maintenance instances before production traffic.
+- C. Allow the AzureLoadBalancer service tag to the probe port without broadly exposing the application.
+- D. Investigate application listener, probe configuration, guest firewall, and NSG path before changing the frontend.
 
 ## LAB21-Q21 — Applied
 
-While validating a configuration, the team evaluates this situation: A learner previews the implementation for 'Troubleshoot network connectivity'. What behavior is required?
+The resilient HTTP backend publication setup reports success after the backend readiness attempt to expose one ingress IP for incoming balanced traffic. Which backend readiness read-only observation proves the resilient HTTP backend publication outcome?
 
-- A. Delete any older resource whose name resembles the new run ID.
-- B. Display the context, intended changes, cost and gated branches without mutating Azure.
-- C. Create the baseline immediately and request approval only before cleanup.
-- D. Select the first accessible subscription and hide the resulting context.
+- A. Query the rule and verify every referenced component and port value.
+- B. Query frontendIPConfigurations and confirm public IP or subnet, private allocation, and zone settings.
+- C. Query loadDistribution on the rule and test repeated flows from controlled clients.
+- D. Query monitor state, test configurations, test groups, and recent reachability results.
 
 ## LAB21-Q22 — Applied
 
-A delegated administrator receives the following support request: Which implementation step should the learner perform for 'Configure an internal or public load balancer'?
+The backend readiness log says the resilient HTTP backend publication can now register every serving network interface as an eligible target. Which backend readiness state should the resilient HTTP backend publication acceptance test retain?
 
-- A. Copy resource identifiers from another run instead of recording returned IDs.
-- B. Skip the operation and edit validation.json to show a passing result.
-- C. Create two backend NICs/VMs in an NSG-protected subnet without individual public IPs.
-- D. Replace the lab action with a tenant-wide change that is easier to discover.
+- A. Inspect effective NSG rules and probe health for the exact backend NIC and port.
+- B. Correlate per-instance health with listener tests and effective security rules.
+- C. Query frontendIPConfigurations and confirm public IP or subnet, private allocation, and zone settings.
+- D. Query backendAddressPools and resolve each backend membership to the expected VM NIC or IP.
 
 ## LAB21-Q23 — Applied
 
-During a maintenance window, an engineer must decide how to respond: Which evidence most directly validates 'Troubleshoot load balancing' for load-balancing rule?
+The resilient HTTP backend publication rejects backend readiness exit status as proof it can remove an instance from rotation when its application endpoint is unhealthy. Which resilient HTTP backend publication result is valid evidence?
 
-- A. List the entire subscription and assume similarly named resources belong to this run.
-- B. Record a credential so another learner can replay the authenticated session.
-- C. Treat the setup exit code as proof of every configuration and relationship.
-- D. Query the exact recorded scope and independently verify Microsoft.Network/networkWatchers.
+- A. Query outbound rules or NAT Gateway association and test backend egress independently.
+- B. Capture connectionStatus, probesSent, probesFailed, averageLatencyInMs, and diagnostic messages.
+- C. Query probe protocol, port, path, interval, threshold, and backend health status.
+- D. Query backendAddressPools and resolve each backend membership to the expected VM NIC or IP.
 
 ## LAB21-Q24 — Applied
 
-A deployment pipeline reaches this decision point: The 'Troubleshoot network connectivity' checkpoint reaches an external prerequisite. What should happen?
+The backend readiness validator needs one resilient HTTP backend publication query after the change to connect the ingress IP, eligible targets, health signal, protocol, and ports in one rule. Which backend readiness property should the resilient HTTP backend publication validator inspect?
 
-- A. Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.
-- B. Mark the branch passed because its command syntax was checked offline.
-- C. Invent a domain, notification target, license, quota, or tenant value and continue.
-- D. Broaden permissions until the prerequisite can no longer block the operation.
+- A. Query loadDistribution on the rule and test repeated flows from controlled clients.
+- B. Query monitor state, test configurations, test groups, and recent reachability results.
+- C. Query probe protocol, port, path, interval, threshold, and backend health status.
+- D. Query the rule and verify every referenced component and port value.
 
 ## LAB21-Q25 — Applied
 
-While applying least-privilege controls, the administrator reviews this scenario: What is the safest command-evidence practice after completing 'Configure an internal or public load balancer'?
+The network operations administrator publishing a resilient HTTP backend must confirm the resilient HTTP backend publication, without mutation, can allow the platform probe source while keeping other unsolicited traffic denied. Which backend readiness check qualifies?
 
-- A. Reuse successful output from an earlier run with a similar resource name.
-- B. Retain only redacted structured output from an independent query of the recorded run.
-- C. Commit the complete account object so reviewers can identify the tenant.
-- D. Save tokens, keys, passwords, or SAS values beside the validation result.
+- A. Inspect effective NSG rules and probe health for the exact backend NIC and port.
+- B. Correlate per-instance health with listener tests and effective security rules.
+- C. Query frontendIPConfigurations and confirm public IP or subnet, private allocation, and zone settings.
+- D. Query the rule and verify every referenced component and port value.
 
 ## LAB21-Q26 — Applied
 
-A repeatable Azure CLI workflow must address this requirement: A learner previews the implementation for 'Troubleshoot network connectivity'. What behavior is required?
+The resilient HTTP backend publication configuration is complete; the backend readiness reviewers need evidence it can provide explicit outbound connectivity for a Standard load-balanced backend. Which observation shows success?
 
-- A. Select the first accessible subscription and hide the resulting context.
-- B. Delete any older resource whose name resembles the new run ID.
-- C. Display the context, intended changes, cost and gated branches without mutating Azure.
-- D. Create the baseline immediately and request approval only before cleanup.
+- A. Capture connectionStatus, probesSent, probesFailed, averageLatencyInMs, and diagnostic messages.
+- B. Query outbound rules or NAT Gateway association and test backend egress independently.
+- C. Query backendAddressPools and resolve each backend membership to the expected VM NIC or IP.
+- D. Inspect effective NSG rules and probe health for the exact backend NIC and port.
 
 ## LAB21-Q27 — Applied
 
-During an environment handoff, the receiving team asks this question: Which implementation step should the learner perform for 'Configure an internal or public load balancer'?
+The backend readiness validation asks whether the resilient HTTP backend publication can keep successive flows from one client on the affinity mode the application expects. Which observable state is strongest?
 
-- A. Replace the lab action with a tenant-wide change that is easier to discover.
-- B. Copy resource identifiers from another run instead of recording returned IDs.
-- C. Skip the operation and edit validation.json to show a passing result.
-- D. Create two backend NICs/VMs in an NSG-protected subnet without individual public IPs.
+- A. Query monitor state, test configurations, test groups, and recent reachability results.
+- B. Query probe protocol, port, path, interval, threshold, and backend health status.
+- C. Query outbound rules or NAT Gateway association and test backend egress independently.
+- D. Query loadDistribution on the rule and test repeated flows from controlled clients.
 
 ## LAB21-Q28 — Applied
 
-A configuration change produces the following operational choice: Which evidence most directly validates 'Troubleshoot load balancing' for load-balancing rule?
+A resilient HTTP backend publication review must prove the backend readiness ability to explain why no new client flow is sent when every target fails its probe. Which check avoids an adjacent feature?
 
-- A. Query the exact recorded scope and independently verify Microsoft.Network/networkWatchers.
-- B. List the entire subscription and assume similarly named resources belong to this run.
-- C. Record a credential so another learner can replay the authenticated session.
-- D. Treat the setup exit code as proof of every configuration and relationship.
+- A. Query frontendIPConfigurations and confirm public IP or subnet, private allocation, and zone settings.
+- B. Query the rule and verify every referenced component and port value.
+- C. Query loadDistribution on the rule and test repeated flows from controlled clients.
+- D. Correlate per-instance health with listener tests and effective security rules.
 
 ## LAB21-Q29 — Applied
 
-While preparing independent validation, an engineer considers this scenario: The 'Troubleshoot network connectivity' checkpoint reaches an external prerequisite. What should happen?
+The resilient HTTP backend publication evidence bundle needs a backend readiness result showing it can test reachability between two endpoints and return the responsible hop or policy. Which result belongs in the checkpoint?
 
-- A. Broaden permissions until the prerequisite can no longer block the operation.
-- B. Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.
-- C. Mark the branch passed because its command syntax was checked offline.
-- D. Invent a domain, notification target, license, quota, or tenant value and continue.
+- A. Query backendAddressPools and resolve each backend membership to the expected VM NIC or IP.
+- B. Inspect effective NSG rules and probe health for the exact backend NIC and port.
+- C. Capture connectionStatus, probesSent, probesFailed, averageLatencyInMs, and diagnostic messages.
+- D. Correlate per-instance health with listener tests and effective security rules.
 
 ## LAB21-Q30 — Applied
 
-A service owner asks the administrator to resolve this requirement: What is the safest command-evidence practice after completing 'Configure an internal or public load balancer'?
+Before resilient HTTP backend publication cleanup, the backend readiness team must reconfirm it can measure connection reachability and latency continuously over time. Which read-only inspection should run?
 
-- A. Save tokens, keys, passwords, or SAS values beside the validation result.
-- B. Reuse successful output from an earlier run with a similar resource name.
-- C. Retain only redacted structured output from an independent query of the recorded run.
-- D. Commit the complete account object so reviewers can identify the tenant.
+- A. Query probe protocol, port, path, interval, threshold, and backend health status.
+- B. Query outbound rules or NAT Gateway association and test backend egress independently.
+- C. Query monitor state, test configurations, test groups, and recent reachability results.
+- D. Capture connectionStatus, probesSent, probesFailed, averageLatencyInMs, and diagnostic messages.
 
 ## LAB21-Q31 — Applied
 
-During a scoped cleanup review, the team evaluates this situation: A learner previews the implementation for 'Troubleshoot network connectivity'. What behavior is required?
+During a backend readiness fault drill, the resilient HTTP backend publication does not expose one ingress IP for incoming balanced traffic. Which finding identifies the defect?
 
-- A. Create the baseline immediately and request approval only before cleanup.
-- B. Select the first accessible subscription and hide the resulting context.
-- C. Delete any older resource whose name resembles the new run ID.
-- D. Display the context, intended changes, cost and gated branches without mutating Azure.
+- A. An internal-only service was assigned a public frontend IP.
+- B. The new VM exists but its NIC is not a member of the load balancer backend pool.
+- C. Backends rely on implicit outbound access that is unavailable for the chosen Standard load-balancer design.
+- D. The monitor has no enabled source endpoint in its test group.
 
 ## LAB21-Q32 — Applied
 
-An automation author must choose the correct response to this scenario: Which implementation step should the learner perform for 'Configure an internal or public load balancer'?
+The resilient HTTP backend publication setup finishes, yet the backend readiness cannot register every serving network interface as an eligible target. Which misconfiguration explains the mismatch?
 
-- A. Create two backend NICs/VMs in an NSG-protected subnet without individual public IPs.
-- B. Replace the lab action with a tenant-wide change that is easier to discover.
-- C. Copy resource identifiers from another run instead of recording returned IDs.
-- D. Skip the operation and edit validation.json to show a passing result.
+- A. The HTTP probe path returns a failure status even though the application root path works.
+- B. The application expects client affinity while the rule uses the default five-tuple distribution.
+- C. The new VM exists but its NIC is not a member of the load balancer backend pool.
+- D. An internal-only service was assigned a public frontend IP.
 
 ## LAB21-Q33 — Applied
 
-A lab run with a unique run ID reaches this decision: Which evidence most directly validates 'Troubleshoot load balancing' for load-balancing rule?
+A backend readiness break/fix in the resilient HTTP backend publication fails when operators try to remove an instance from rotation when its application endpoint is unhealthy. Which diagnosis fits?
 
-- A. Treat the setup exit code as proof of every configuration and relationship.
-- B. Query the exact recorded scope and independently verify Microsoft.Network/networkWatchers.
-- C. List the entire subscription and assume similarly named resources belong to this run.
-- D. Record a credential so another learner can replay the authenticated session.
+- A. The rule references a probe for a different backend application port.
+- B. The HTTP probe path returns a failure status even though the application root path works.
+- C. The backend service listens on a different port from the configured probe.
+- D. The new VM exists but its NIC is not a member of the load balancer backend pool.
 
 ## LAB21-Q34 — Applied
 
-While comparing the intended and actual states, the operator asks this question: The 'Troubleshoot network connectivity' checkpoint reaches an external prerequisite. What should happen?
+The resilient HTTP backend publication troubleshooting scope is the backend readiness need to connect the ingress IP, eligible targets, health signal, protocol, and ports in one rule. Which condition should be corrected first?
 
-- A. Invent a domain, notification target, license, quota, or tenant value and continue.
-- B. Broaden permissions until the prerequisite can no longer block the operation.
-- C. Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.
-- D. Mark the branch passed because its command syntax was checked offline.
+- A. A higher-priority NSG deny blocks the AzureLoadBalancer probe source.
+- B. The diagnostic targeted the destination's management port instead of the failing application port.
+- C. The HTTP probe path returns a failure status even though the application root path works.
+- D. The rule references a probe for a different backend application port.
 
 ## LAB21-Q35 — Applied
 
-A peer reviewer examines the proposed implementation for this scenario: What is the safest command-evidence practice after completing 'Configure an internal or public load balancer'?
+The resilient HTTP backend publication result is partial because the backend readiness cannot allow the platform probe source while keeping other unsolicited traffic denied. Which condition accounts for that result?
 
-- A. Commit the complete account object so reviewers can identify the tenant.
-- B. Save tokens, keys, passwords, or SAS values beside the validation result.
-- C. Reuse successful output from an earlier run with a similar resource name.
-- D. Retain only redacted structured output from an independent query of the recorded run.
+- A. A higher-priority NSG deny blocks the AzureLoadBalancer probe source.
+- B. Backends rely on implicit outbound access that is unavailable for the chosen Standard load-balancer design.
+- C. The monitor has no enabled source endpoint in its test group.
+- D. The rule references a probe for a different backend application port.
 
 ## LAB21-Q36 — Applied
 
-During a controlled rollout, the change team encounters this requirement: A learner previews the implementation for 'Troubleshoot network connectivity'. What behavior is required?
+The backend readiness evidence shows the resilient HTTP backend publication cannot provide explicit outbound connectivity for a Standard load-balanced backend. Which root cause fits that evidence?
 
-- A. Display the context, intended changes, cost and gated branches without mutating Azure.
-- B. Create the baseline immediately and request approval only before cleanup.
-- C. Select the first accessible subscription and hide the resulting context.
-- D. Delete any older resource whose name resembles the new run ID.
+- A. The application expects client affinity while the rule uses the default five-tuple distribution.
+- B. An internal-only service was assigned a public frontend IP.
+- C. Backends rely on implicit outbound access that is unavailable for the chosen Standard load-balancer design.
+- D. A higher-priority NSG deny blocks the AzureLoadBalancer probe source.
 
 ## LAB21-Q37 — Applied
 
-A support engineer reproduces the following situation in a test environment: Which implementation step should the learner perform for 'Configure an internal or public load balancer'?
+Although the resilient HTTP backend publication is meant to let the backend readiness keep successive flows from one client on the affinity mode the application expects, its checkpoint fails. Which backend readiness defect explains the failure?
 
-- A. Skip the operation and edit validation.json to show a passing result.
-- B. Create two backend NICs/VMs in an NSG-protected subnet without individual public IPs.
-- C. Replace the lab action with a tenant-wide change that is easier to discover.
-- D. Copy resource identifiers from another run instead of recording returned IDs.
+- A. The backend service listens on a different port from the configured probe.
+- B. The new VM exists but its NIC is not a member of the load balancer backend pool.
+- C. The application expects client affinity while the rule uses the default five-tuple distribution.
+- D. Backends rely on implicit outbound access that is unavailable for the chosen Standard load-balancer design.
 
 ## LAB21-Q38 — Applied
 
-While recording validation evidence, the administrator evaluates this question: Which evidence most directly validates 'Troubleshoot load balancing' for load-balancing rule?
+The backend readiness support team isolated the resilient HTTP backend publication incident to the attempt to explain why no new client flow is sent when every target fails its probe. Which condition prevents success?
 
-- A. Record a credential so another learner can replay the authenticated session.
-- B. Treat the setup exit code as proof of every configuration and relationship.
-- C. Query the exact recorded scope and independently verify Microsoft.Network/networkWatchers.
-- D. List the entire subscription and assume similarly named resources belong to this run.
+- A. The diagnostic targeted the destination's management port instead of the failing application port.
+- B. The backend service listens on a different port from the configured probe.
+- C. The HTTP probe path returns a failure status even though the application root path works.
+- D. The application expects client affinity while the rule uses the default five-tuple distribution.
 
 ## LAB21-Q39 — Applied
 
-A configuration owner must approve one response to this scenario: The 'Troubleshoot network connectivity' checkpoint reaches an external prerequisite. What should happen?
+A resilient HTTP backend publication query surprises the network operations administrator publishing a resilient HTTP backend during the backend readiness attempt to test reachability between two endpoints and return the responsible hop or policy. Which finding explains it?
 
-- A. Mark the branch passed because its command syntax was checked offline.
-- B. Invent a domain, notification target, license, quota, or tenant value and continue.
-- C. Broaden permissions until the prerequisite can no longer block the operation.
-- D. Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.
+- A. The diagnostic targeted the destination's management port instead of the failing application port.
+- B. The monitor has no enabled source endpoint in its test group.
+- C. The rule references a probe for a different backend application port.
+- D. The backend service listens on a different port from the configured probe.
 
 ## LAB21-Q40 — Applied
 
-During post-deployment verification, the team reviews this situation: What is the safest command-evidence practice after completing 'Configure an internal or public load balancer'?
+Other resilient HTTP backend publication components are healthy, but the backend readiness still cannot measure connection reachability and latency continuously over time. Which state causes the isolated failure?
 
-- A. Retain only redacted structured output from an independent query of the recorded run.
-- B. Commit the complete account object so reviewers can identify the tenant.
-- C. Save tokens, keys, passwords, or SAS values beside the validation result.
-- D. Reuse successful output from an earlier run with a similar resource name.
+- A. An internal-only service was assigned a public frontend IP.
+- B. The monitor has no enabled source endpoint in its test group.
+- C. A higher-priority NSG deny blocks the AzureLoadBalancer probe source.
+- D. The diagnostic targeted the destination's management port instead of the failing application port.
 
 ## LAB21-Q41 — Advanced
 
-Validation for 'Troubleshoot load balancing' fails after setup. What is the best break/fix method?
+The resilient HTTP backend publication runbook must expose one ingress IP for incoming balanced traffic, then retain backend readiness read-back evidence. Which resilient HTTP backend publication pair completes both duties?
 
-- A. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- B. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-- C. Rerun setup repeatedly with new names until one attempt appears successful.
-- D. Change validation.json directly so the failed result reads pass.
+- A. First, Create a public or internal frontend that matches the approved reachability requirement. Then, Query frontendIPConfigurations and confirm public IP or subnet, private allocation, and zone settings.
+- B. First, Configure a probe that reflects actual application readiness rather than only host availability. Then, Query probe protocol, port, path, interval, threshold, and backend health status.
+- C. First, Choose the distribution mode only when the application requires client affinity. Then, Query loadDistribution on the rule and test repeated flows from controlled clients.
+- D. First, Investigate application listener, probe configuration, guest firewall, and NSG path before changing the frontend. Then, Correlate per-instance health with listener tests and effective security rules.
 
 ## LAB21-Q42 — Advanced
 
-Within Lab 21, the team evaluates this scenario: The operation for 'Troubleshoot network connectivity' is asynchronous or gated. How should completion be recorded?
+To satisfy the backend readiness requirement, operators must change the resilient HTTP backend publication configuration and prove it can register every serving network interface as an eligible target. Which sequence is coherent?
 
-- A. Remove the check from validation whenever the service takes longer than expected.
-- B. Record pass as soon as the request is accepted, regardless of its final state.
-- C. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
-- D. Fabricate expected output so the assessment and documentation appear complete.
+- A. First, Create the rule with resource IDs from the intended frontend, backend pool, and health probe. Then, Query the rule and verify every referenced component and port value.
+- B. First, Investigate application listener, probe configuration, guest firewall, and NSG path before changing the frontend. Then, Correlate per-instance health with listener tests and effective security rules.
+- C. First, Run the diagnostic from the actual source resource to the exact destination and port. Then, Capture connectionStatus, probesSent, probesFailed, averageLatencyInMs, and diagnostic messages.
+- D. First, Add every intended healthy backend and exclude maintenance instances before production traffic. Then, Query backendAddressPools and resolve each backend membership to the expected VM NIC or IP.
 
 ## LAB21-Q43 — Advanced
 
-A security and reliability review identifies this design decision: Validation for 'Troubleshoot load balancing' fails after setup. What is the best break/fix method?
+The network operations administrator publishing a resilient HTTP backend needs a safe resilient HTTP backend publication change to remove an instance from rotation when its application endpoint is unhealthy, followed by backend readiness evidence. Which pair merits approval?
 
-- A. Rerun setup repeatedly with new names until one attempt appears successful.
-- B. Change validation.json directly so the failed result reads pass.
-- C. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- D. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+- A. First, Configure a probe that reflects actual application readiness rather than only host availability. Then, Query probe protocol, port, path, interval, threshold, and backend health status.
+- B. First, Allow the AzureLoadBalancer service tag to the probe port without broadly exposing the application. Then, Inspect effective NSG rules and probe health for the exact backend NIC and port.
+- C. First, Run the diagnostic from the actual source resource to the exact destination and port. Then, Capture connectionStatus, probesSent, probesFailed, averageLatencyInMs, and diagnostic messages.
+- D. First, Create a test group with representative endpoints, protocol, port, frequency, and success thresholds. Then, Query monitor state, test configurations, test groups, and recent reachability results.
 
 ## LAB21-Q44 — Advanced
 
-Within Lab 21, the team evaluates this scenario: While diagnosing unexpected Azure behavior, the engineer considers this situation: The operation for 'Troubleshoot network connectivity' is asynchronous or gated. How should completion be recorded?
+The resilient HTTP backend publication has two backend readiness gates: connect the ingress IP, eligible targets, health signal, protocol, and ports in one rule, then prove the resilient HTTP backend publication state. Which backend readiness sequence works?
 
-- A. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
-- B. Fabricate expected output so the assessment and documentation appear complete.
-- C. Remove the check from validation whenever the service takes longer than expected.
-- D. Record pass as soon as the request is accepted, regardless of its final state.
+- A. First, Create the rule with resource IDs from the intended frontend, backend pool, and health probe. Then, Query the rule and verify every referenced component and port value.
+- B. First, Configure the approved outbound method and size SNAT capacity for expected concurrency. Then, Query outbound rules or NAT Gateway association and test backend egress independently.
+- C. First, Create a test group with representative endpoints, protocol, port, frequency, and success thresholds. Then, Query monitor state, test configurations, test groups, and recent reachability results.
+- D. First, Create a public or internal frontend that matches the approved reachability requirement. Then, Query frontendIPConfigurations and confirm public IP or subnet, private allocation, and zone settings.
 
 ## LAB21-Q45 — Advanced
 
-An architecture review requires the strongest response to this scenario: Validation for 'Troubleshoot load balancing' fails after setup. What is the best break/fix method?
+Which backend readiness path makes the resilient HTTP backend publication able to allow the platform probe source while keeping other unsolicited traffic denied, then inspects the defining properties?
 
-- A. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- B. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-- C. Rerun setup repeatedly with new names until one attempt appears successful.
-- D. Change validation.json directly so the failed result reads pass.
+- A. First, Choose the distribution mode only when the application requires client affinity. Then, Query loadDistribution on the rule and test repeated flows from controlled clients.
+- B. First, Create a public or internal frontend that matches the approved reachability requirement. Then, Query frontendIPConfigurations and confirm public IP or subnet, private allocation, and zone settings.
+- C. First, Allow the AzureLoadBalancer service tag to the probe port without broadly exposing the application. Then, Inspect effective NSG rules and probe health for the exact backend NIC and port.
+- D. First, Add every intended healthy backend and exclude maintenance instances before production traffic. Then, Query backendAddressPools and resolve each backend membership to the expected VM NIC or IP.
 
 ## LAB21-Q46 — Advanced
 
-Within Lab 21, the team evaluates this scenario: During break/fix validation, the operator encounters this question: The operation for 'Troubleshoot network connectivity' is asynchronous or gated. How should completion be recorded?
+At the resilient HTTP backend publication approval gate, operators must show that the backend readiness can provide explicit outbound connectivity for a Standard load-balanced backend. Which backend readiness configure-and-check pair is defensible?
 
-- A. Remove the check from validation whenever the service takes longer than expected.
-- B. Record pass as soon as the request is accepted, regardless of its final state.
-- C. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
-- D. Fabricate expected output so the assessment and documentation appear complete.
+- A. First, Investigate application listener, probe configuration, guest firewall, and NSG path before changing the frontend. Then, Correlate per-instance health with listener tests and effective security rules.
+- B. First, Add every intended healthy backend and exclude maintenance instances before production traffic. Then, Query backendAddressPools and resolve each backend membership to the expected VM NIC or IP.
+- C. First, Configure a probe that reflects actual application readiness rather than only host availability. Then, Query probe protocol, port, path, interval, threshold, and backend health status.
+- D. First, Configure the approved outbound method and size SNAT capacity for expected concurrency. Then, Query outbound rules or NAT Gateway association and test backend egress independently.
 
 ## LAB21-Q47 — Advanced
 
-A complex support case depends on correctly interpreting this requirement: Validation for 'Troubleshoot load balancing' fails after setup. What is the best break/fix method?
+The resilient HTTP backend publication forbids a partial backend readiness result. Operators must first keep successive flows from one client on the affinity mode the application expects and afterward confirm the resilient HTTP backend publication outcome. Which backend readiness sequence is complete?
 
-- A. Rerun setup repeatedly with new names until one attempt appears successful.
-- B. Change validation.json directly so the failed result reads pass.
-- C. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- D. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+- A. First, Run the diagnostic from the actual source resource to the exact destination and port. Then, Capture connectionStatus, probesSent, probesFailed, averageLatencyInMs, and diagnostic messages.
+- B. First, Choose the distribution mode only when the application requires client affinity. Then, Query loadDistribution on the rule and test repeated flows from controlled clients.
+- C. First, Configure a probe that reflects actual application readiness rather than only host availability. Then, Query probe protocol, port, path, interval, threshold, and backend health status.
+- D. First, Create the rule with resource IDs from the intended frontend, backend pool, and health probe. Then, Query the rule and verify every referenced component and port value.
 
 ## LAB21-Q48 — Advanced
 
-Within Lab 21, the team evaluates this scenario: While correcting configuration drift, the team evaluates this scenario: The operation for 'Troubleshoot network connectivity' is asynchronous or gated. How should completion be recorded?
+Only the resilient HTTP backend publication change needed to explain why no new client flow is sent when every target fails its probe is allowed, and backend readiness proof is mandatory. Which pair fits?
 
-- A. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
-- B. Fabricate expected output so the assessment and documentation appear complete.
-- C. Remove the check from validation whenever the service takes longer than expected.
-- D. Record pass as soon as the request is accepted, regardless of its final state.
+- A. First, Create a test group with representative endpoints, protocol, port, frequency, and success thresholds. Then, Query monitor state, test configurations, test groups, and recent reachability results.
+- B. First, Create the rule with resource IDs from the intended frontend, backend pool, and health probe. Then, Query the rule and verify every referenced component and port value.
+- C. First, Investigate application listener, probe configuration, guest firewall, and NSG path before changing the frontend. Then, Correlate per-instance health with listener tests and effective security rules.
+- D. First, Allow the AzureLoadBalancer service tag to the probe port without broadly exposing the application. Then, Inspect effective NSG rules and probe health for the exact backend NIC and port.
 
 ## LAB21-Q49 — Advanced
 
-A recovery exercise exposes the following technical decision: Validation for 'Troubleshoot load balancing' fails after setup. What is the best break/fix method?
+The resilient HTTP backend publication runbook separates backend readiness mutation from validation while it must test reachability between two endpoints and return the responsible hop or policy. Which sequence proves it cleanly?
 
-- A. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- B. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-- C. Rerun setup repeatedly with new names until one attempt appears successful.
-- D. Change validation.json directly so the failed result reads pass.
+- A. First, Create a public or internal frontend that matches the approved reachability requirement. Then, Query frontendIPConfigurations and confirm public IP or subnet, private allocation, and zone settings.
+- B. First, Allow the AzureLoadBalancer service tag to the probe port without broadly exposing the application. Then, Inspect effective NSG rules and probe health for the exact backend NIC and port.
+- C. First, Configure the approved outbound method and size SNAT capacity for expected concurrency. Then, Query outbound rules or NAT Gateway association and test backend egress independently.
+- D. First, Run the diagnostic from the actual source resource to the exact destination and port. Then, Capture connectionStatus, probesSent, probesFailed, averageLatencyInMs, and diagnostic messages.
 
 ## LAB21-Q50 — Advanced
 
-Within Lab 21, the team evaluates this scenario: During final design assurance, the reviewer must resolve this situation: The operation for 'Troubleshoot network connectivity' is asynchronous or gated. How should completion be recorded?
+The resilient HTTP backend publication checkpoint requires both this backend readiness outcome—measure connection reachability and latency continuously over time—and a read-only resilient HTTP backend publication state check. Which backend readiness response is complete?
 
-- A. Remove the check from validation whenever the service takes longer than expected.
-- B. Record pass as soon as the request is accepted, regardless of its final state.
-- C. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
-- D. Fabricate expected output so the assessment and documentation appear complete.
+- A. First, Add every intended healthy backend and exclude maintenance instances before production traffic. Then, Query backendAddressPools and resolve each backend membership to the expected VM NIC or IP.
+- B. First, Configure the approved outbound method and size SNAT capacity for expected concurrency. Then, Query outbound rules or NAT Gateway association and test backend egress independently.
+- C. First, Create a test group with representative endpoints, protocol, port, frequency, and success thresholds. Then, Query monitor state, test configurations, test groups, and recent reachability results.
+- D. First, Choose the distribution mode only when the application requires client affinity. Then, Query loadDistribution on the rule and test repeated flows from controlled clients.
+
+[Open the answer key](./ANSWERS.md)

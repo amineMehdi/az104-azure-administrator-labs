@@ -1,453 +1,459 @@
 # Lab 18 knowledge check
 
-Choose the single best answer for each question. Record your choices before opening `ANSWERS.md`.
+[Return to the guided lab](../README.md)
+
+Complete all 50 questions before opening the answer key. Allow about 50–60 minutes and choose the single best answer.
+
+Use the result as a learning signal: 85–100% indicates mastery, 70–84% calls for targeted review, and below 70% means repeat the mapped lab tasks before retrying.
 
 ## LAB18-Q01 — Foundational
 
-Which principle is most important when working on 'Configure user-defined routes' in Lab 18?
+A traffic-flow investigation peer review asks how the application traffic-control investigation should handle this outcome: ensure the intended security rule is evaluated before a broader conflicting rule. Which explanation is accurate?
 
-- A. The shortest command is always correct even when it changes a broader scope.
-- B. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- C. NSG evaluation uses priority and direction, ASGs replace hard-coded IP membership, and route selection uses longest-prefix matching before connectivity diagnostics explain the result.
-- D. A recognizable resource name removes the need for validation and scoped cleanup.
+- A. NSG flow records are stateful, so return traffic for an allowed established flow does not require a mirrored rule.
+- B. Effective security rules combine default and custom rules from every NSG associated with the NIC and subnet.
+- C. NSG rules are evaluated from lower numeric priority to higher until the first matching rule decides the flow.
+- D. A VirtualAppliance route requires a reachable next-hop private IP and IP forwarding on the appliance path.
 
 ## LAB18-Q02 — Foundational
 
-Which lab action directly supports the objective 'Troubleshoot network connectivity'?
+For the application traffic-control investigation, the traffic-flow investigation plan must allow return packets for an established permitted flow without a mirror rule. Which statement about traffic-flow investigation belongs in the application traffic-control investigation record?
 
-- A. Change the active tenant without displaying or confirming the resulting context.
-- B. Search the whole tenant for a similar display name and modify the first match.
-- C. Mark the objective complete after reading documentation without checking any state.
-- D. Create ordered NSG rules that allow only the intended application flow and preserve default deny behavior.
+- A. NSG flow records are stateful, so return traffic for an allowed established flow does not require a mirrored rule.
+- B. When NSGs apply at both subnet and NIC, a flow must be allowed by the effective rules at both scopes.
+- C. Azure chooses the most specific matching route before applying route-source precedence rules.
+- D. Gateway route propagation can add learned routes to a subnet unless it is disabled on the associated route table.
 
 ## LAB18-Q03 — Foundational
 
-Which authorization approach is appropriate before practicing 'Create and configure network security groups (NSGs) and application security groups'?
+The traffic-flow investigation review compares four claims for the application traffic-control investigation requirement to account for security filters applied at both subnet and network-interface scopes. Which claim is technically sound?
 
-- A. Confirm the active context and use only the declared role boundary: Network Contributor on the lab resource group
-- B. Use a production subscription because its resources already exist.
-- C. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
-- D. Skip role checks when the run ID contains the lab number.
+- A. An ASG lets NSG rules refer to groups of NIC IP configurations by application role instead of fixed addresses.
+- B. A valid UDR can override a system route for the same or a broader destination prefix.
+- C. When NSGs apply at both subnet and NIC, a flow must be allowed by the effective rules at both scopes.
+- D. IP flow verify reports whether a specified packet would be allowed or denied and identifies the matching NSG rule.
 
 ## LAB18-Q04 — Foundational
 
-Before making a change, a learner checks this core behavior: Which principle is most important when working on 'Configure user-defined routes' in Lab 18?
+The traffic-flow investigation architecture note requires the application traffic-control investigation environment to refer to application-role groups instead of fixed addresses in security rules. Which statement defines the relevant traffic-flow investigation boundary?
 
-- A. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- B. NSG evaluation uses priority and direction, ASGs replace hard-coded IP membership, and route selection uses longest-prefix matching before connectivity diagnostics explain the result.
-- C. A recognizable resource name removes the need for validation and scoped cleanup.
-- D. The shortest command is always correct even when it changes a broader scope.
+- A. Effective security rules combine default and custom rules from every NSG associated with the NIC and subnet.
+- B. A VirtualAppliance route requires a reachable next-hop private IP and IP forwarding on the appliance path.
+- C. An ASG lets NSG rules refer to groups of NIC IP configurations by application role instead of fixed addresses.
+- D. NSG rules are evaluated from lower numeric priority to higher until the first matching rule decides the flow.
 
 ## LAB18-Q05 — Foundational
 
-During a design vocabulary review, the team evaluates this situation: Which lab action directly supports the objective 'Troubleshoot network connectivity'?
+A new traffic-flow investigation operator must explain why the application traffic-control investigation can see the combined security rules that actually apply to one interface. Which explanation is accurate?
 
-- A. Search the whole tenant for a similar display name and modify the first match.
-- B. Mark the objective complete after reading documentation without checking any state.
-- C. Create ordered NSG rules that allow only the intended application flow and preserve default deny behavior.
-- D. Change the active tenant without displaying or confirming the resulting context.
+- A. Azure chooses the most specific matching route before applying route-source precedence rules.
+- B. Effective security rules combine default and custom rules from every NSG associated with the NIC and subnet.
+- C. Gateway route propagation can add learned routes to a subnet unless it is disabled on the associated route table.
+- D. NSG flow records are stateful, so return traffic for an allowed established flow does not require a mirrored rule.
 
 ## LAB18-Q06 — Foundational
 
-In a command-planning session, an administrator asks this question: Which authorization approach is appropriate before practicing 'Create and configure network security groups (NSGs) and application security groups'?
+The application traffic-control investigation acceptance criteria require operators to select the most specific destination route before considering route origin. Which service fact supports that requirement?
 
-- A. Use a production subscription because its resources already exist.
-- B. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
-- C. Skip role checks when the run ID contains the lab number.
-- D. Confirm the active context and use only the declared role boundary: Network Contributor on the lab resource group
+- A. A valid UDR can override a system route for the same or a broader destination prefix.
+- B. Azure chooses the most specific matching route before applying route-source precedence rules.
+- C. IP flow verify reports whether a specified packet would be allowed or denied and identifies the matching NSG rule.
+- D. When NSGs apply at both subnet and NIC, a flow must be allowed by the effective rules at both scopes.
 
 ## LAB18-Q07 — Foundational
 
-While preparing the lab, a learner verifies this platform rule: Which principle is most important when working on 'Configure user-defined routes' in Lab 18?
+A traffic-flow investigation reviewer challenges whether the application traffic-control investigation can override an applicable system path with an intentional custom route. Which response resolves the concern?
 
-- A. NSG evaluation uses priority and direction, ASGs replace hard-coded IP membership, and route selection uses longest-prefix matching before connectivity diagnostics explain the result.
-- B. A recognizable resource name removes the need for validation and scoped cleanup.
-- C. The shortest command is always correct even when it changes a broader scope.
-- D. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+- A. A valid UDR can override a system route for the same or a broader destination prefix.
+- B. A VirtualAppliance route requires a reachable next-hop private IP and IP forwarding on the appliance path.
+- C. NSG rules are evaluated from lower numeric priority to higher until the first matching rule decides the flow.
+- D. An ASG lets NSG rules refer to groups of NIC IP configurations by application role instead of fixed addresses.
 
 ## LAB18-Q08 — Foundational
 
-During peer review, the team must identify the accurate response to this scenario: Which lab action directly supports the objective 'Troubleshoot network connectivity'?
+The application traffic-control investigation handoff omits the traffic-flow investigation rule needed to send traffic through a reachable forwarding appliance. Which statement should the team add?
 
-- A. Mark the objective complete after reading documentation without checking any state.
-- B. Create ordered NSG rules that allow only the intended application flow and preserve default deny behavior.
-- C. Change the active tenant without displaying or confirming the resulting context.
-- D. Search the whole tenant for a similar display name and modify the first match.
+- A. Gateway route propagation can add learned routes to a subnet unless it is disabled on the associated route table.
+- B. A VirtualAppliance route requires a reachable next-hop private IP and IP forwarding on the appliance path.
+- C. NSG flow records are stateful, so return traffic for an allowed established flow does not require a mirrored rule.
+- D. Effective security rules combine default and custom rules from every NSG associated with the NIC and subnet.
 
 ## LAB18-Q09 — Foundational
 
-In an operations briefing, a new team member receives this question: Which authorization approach is appropriate before practicing 'Create and configure network security groups (NSGs) and application security groups'?
+A traffic-flow investigation incident review of the application traffic-control investigation depends on the ability to control whether learned gateway paths enter a subnet route table. Which platform description is reliable?
 
-- A. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
-- B. Skip role checks when the run ID contains the lab number.
-- C. Confirm the active context and use only the declared role boundary: Network Contributor on the lab resource group
-- D. Use a production subscription because its resources already exist.
+- A. IP flow verify reports whether a specified packet would be allowed or denied and identifies the matching NSG rule.
+- B. When NSGs apply at both subnet and NIC, a flow must be allowed by the effective rules at both scopes.
+- C. Gateway route propagation can add learned routes to a subnet unless it is disabled on the associated route table.
+- D. Azure chooses the most specific matching route before applying route-source precedence rules.
 
 ## LAB18-Q10 — Foundational
 
-While building a support checklist, an engineer reviews this requirement: Which principle is most important when working on 'Configure user-defined routes' in Lab 18?
+A network security administrator diagnosing application traffic flow is updating the traffic-flow investigation runbook. The requirement is to ask the platform which security rule allows or denies a specific flow. Which statement describes Azure behavior correctly?
 
-- A. A recognizable resource name removes the need for validation and scoped cleanup.
-- B. The shortest command is always correct even when it changes a broader scope.
-- C. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- D. NSG evaluation uses priority and direction, ASGs replace hard-coded IP membership, and route selection uses longest-prefix matching before connectivity diagnostics explain the result.
+- A. IP flow verify reports whether a specified packet would be allowed or denied and identifies the matching NSG rule.
+- B. NSG rules are evaluated from lower numeric priority to higher until the first matching rule decides the flow.
+- C. An ASG lets NSG rules refer to groups of NIC IP configurations by application role instead of fixed addresses.
+- D. A valid UDR can override a system route for the same or a broader destination prefix.
 
 ## LAB18-Q11 — Foundational
 
-During a readiness check, the administrator considers this behavior: Which lab action directly supports the objective 'Troubleshoot network connectivity'?
+The approach for the application traffic-control investigation is approved, but the traffic-flow investigation environment still cannot ensure the intended security rule is evaluated before a broader conflicting rule. Which implementation step closes the gap?
 
-- A. Create ordered NSG rules that allow only the intended application flow and preserve default deny behavior.
-- B. Change the active tenant without displaying or confirming the resulting context.
-- C. Search the whole tenant for a similar display name and modify the first match.
-- D. Mark the objective complete after reading documentation without checking any state.
+- A. Review both associations and keep layered rules consistent with the intended flow.
+- B. Compare every matching prefix and identify the longest prefix for the destination address.
+- C. Choose propagation behavior explicitly when combining a gateway with custom routes.
+- D. Give the narrow required rule a unique priority that precedes conflicting broader rules.
 
 ## LAB18-Q12 — Foundational
 
-In a service overview, the team discusses this scenario: Which authorization approach is appropriate before practicing 'Create and configure network security groups (NSGs) and application security groups'?
+The network security administrator diagnosing application traffic flow may change the application traffic-control investigation only to allow return packets for an established permitted flow without a mirror rule. Which traffic-flow investigation action stays within that assignment?
 
-- A. Skip role checks when the run ID contains the lab number.
-- B. Confirm the active context and use only the declared role boundary: Network Contributor on the lab resource group
-- C. Use a production subscription because its resources already exist.
-- D. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
+- A. Place eligible NIC configurations in role-based ASGs and reference those ASGs in NSG rules.
+- B. Associate the route table with the source subnet and define the intended next hop.
+- C. Run IP flow verify with the exact VM, NIC, direction, protocol, addresses, and ports from the failed connection.
+- D. Authorize the initiating direction and avoid redundant return-only rules.
 
 ## LAB18-Q13 — Foundational
 
-While reviewing official guidance, a learner must resolve this question: Which principle is most important when working on 'Configure user-defined routes' in Lab 18?
+A traffic-flow investigation dry run shows no application traffic-control investigation command will account for security filters applied at both subnet and network-interface scopes. Which action belongs before execution?
 
-- A. The shortest command is always correct even when it changes a broader scope.
-- B. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- C. NSG evaluation uses priority and direction, ASGs replace hard-coded IP membership, and route selection uses longest-prefix matching before connectivity diagnostics explain the result.
-- D. A recognizable resource name removes the need for validation and scoped cleanup.
+- A. Review both associations and keep layered rules consistent with the intended flow.
+- B. Use the effective-rule view before modifying an individual NSG during troubleshooting.
+- C. Set the NVA private address as nextHopIpAddress and enable forwarding where required.
+- D. Give the narrow required rule a unique priority that precedes conflicting broader rules.
 
 ## LAB18-Q14 — Foundational
 
-During a configuration walkthrough, the instructor asks about this situation: Which lab action directly supports the objective 'Troubleshoot network connectivity'?
+For the application traffic-control investigation, operators need to refer to application-role groups instead of fixed addresses in security rules. Which change realizes that requirement?
 
-- A. Change the active tenant without displaying or confirming the resulting context.
-- B. Search the whole tenant for a similar display name and modify the first match.
-- C. Mark the objective complete after reading documentation without checking any state.
-- D. Create ordered NSG rules that allow only the intended application flow and preserve default deny behavior.
+- A. Place eligible NIC configurations in role-based ASGs and reference those ASGs in NSG rules.
+- B. Compare every matching prefix and identify the longest prefix for the destination address.
+- C. Choose propagation behavior explicitly when combining a gateway with custom routes.
+- D. Authorize the initiating direction and avoid redundant return-only rules.
 
 ## LAB18-Q15 — Foundational
 
-In a preflight knowledge check, the operator evaluates this requirement: Which authorization approach is appropriate before practicing 'Create and configure network security groups (NSGs) and application security groups'?
+Operators must automate the application traffic-control investigation change needed to see the combined security rules that actually apply to one interface. Which traffic-flow investigation operation belongs in the runbook?
 
-- A. Confirm the active context and use only the declared role boundary: Network Contributor on the lab resource group
-- B. Use a production subscription because its resources already exist.
-- C. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
-- D. Skip role checks when the run ID contains the lab number.
+- A. Associate the route table with the source subnet and define the intended next hop.
+- B. Run IP flow verify with the exact VM, NIC, direction, protocol, addresses, and ports from the failed connection.
+- C. Use the effective-rule view before modifying an individual NSG during troubleshooting.
+- D. Review both associations and keep layered rules consistent with the intended flow.
 
 ## LAB18-Q16 — Applied
 
-A learner previews the implementation for 'Evaluate effective security rules in NSGs'. What behavior is required?
+An application traffic-control investigation review finds traffic-flow investigation drift from the need to select the most specific destination route before considering route origin. Which correction addresses that drift?
 
-- A. Create the baseline immediately and request approval only before cleanup.
-- B. Display the context, intended changes, cost and gated branches without mutating Azure.
-- C. Select the first accessible subscription and hide the resulting context.
-- D. Delete any older resource whose name resembles the new run ID.
+- A. Set the NVA private address as nextHopIpAddress and enable forwarding where required.
+- B. Compare every matching prefix and identify the longest prefix for the destination address.
+- C. Give the narrow required rule a unique priority that precedes conflicting broader rules.
+- D. Place eligible NIC configurations in role-based ASGs and reference those ASGs in NSG rules.
 
 ## LAB18-Q17 — Applied
 
-Which implementation step should the learner perform for 'Configure user-defined routes'?
+The application traffic-control investigation window permits only the traffic-flow investigation change needed to override an applicable system path with an intentional custom route. Which option respects the boundary?
 
-- A. Replace the lab action with a tenant-wide change that is easier to discover.
-- B. Copy resource identifiers from another run instead of recording returned IDs.
-- C. Create frontend and backend ASGs and associate test NIC configurations.
-- D. Skip the operation and edit validation.json to show a passing result.
+- A. Choose propagation behavior explicitly when combining a gateway with custom routes.
+- B. Authorize the initiating direction and avoid redundant return-only rules.
+- C. Use the effective-rule view before modifying an individual NSG during troubleshooting.
+- D. Associate the route table with the source subnet and define the intended next hop.
 
 ## LAB18-Q18 — Applied
 
-Which evidence most directly validates 'Troubleshoot network connectivity' for test network interfaces?
+The traffic-flow investigation preflight has passed; the application traffic-control investigation must now send traffic through a reachable forwarding appliance. Which operation should run?
 
-- A. Treat the setup exit code as proof of every configuration and relationship.
-- B. List the entire subscription and assume similarly named resources belong to this run.
-- C. Record a credential so another learner can replay the authenticated session.
-- D. Query the exact recorded scope and independently verify Microsoft.Network/applicationSecurityGroups.
+- A. Set the NVA private address as nextHopIpAddress and enable forwarding where required.
+- B. Run IP flow verify with the exact VM, NIC, direction, protocol, addresses, and ports from the failed connection.
+- C. Review both associations and keep layered rules consistent with the intended flow.
+- D. Compare every matching prefix and identify the longest prefix for the destination address.
 
 ## LAB18-Q19 — Applied
 
-The 'Create and configure network security groups (NSGs) and application security groups' checkpoint reaches an external prerequisite. What should happen?
+The application traffic-control investigation plan must control whether learned gateway paths enter a subnet route table while limiting the mutation scope to traffic-flow investigation. Which action is appropriate?
 
-- A. Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.
-- B. Invent a domain, notification target, license, quota, or tenant value and continue.
-- C. Broaden permissions until the prerequisite can no longer block the operation.
-- D. Mark the branch passed because its command syntax was checked offline.
+- A. Give the narrow required rule a unique priority that precedes conflicting broader rules.
+- B. Place eligible NIC configurations in role-based ASGs and reference those ASGs in NSG rules.
+- C. Choose propagation behavior explicitly when combining a gateway with custom routes.
+- D. Associate the route table with the source subnet and define the intended next hop.
 
 ## LAB18-Q20 — Applied
 
-What is the safest command-evidence practice after completing 'Evaluate effective security rules in NSGs'?
+A traffic-flow investigation ticket in the application traffic-control investigation says to ask the platform which security rule allows or denies a specific flow. Which traffic-flow investigation action completes the application traffic-control investigation request with minimal change?
 
-- A. Commit the complete account object so reviewers can identify the tenant.
-- B. Retain only redacted structured output from an independent query of the recorded run.
-- C. Save tokens, keys, passwords, or SAS values beside the validation result.
-- D. Reuse successful output from an earlier run with a similar resource name.
+- A. Authorize the initiating direction and avoid redundant return-only rules.
+- B. Use the effective-rule view before modifying an individual NSG during troubleshooting.
+- C. Set the NVA private address as nextHopIpAddress and enable forwarding where required.
+- D. Run IP flow verify with the exact VM, NIC, direction, protocol, addresses, and ports from the failed connection.
 
 ## LAB18-Q21 — Applied
 
-While validating a configuration, the team evaluates this situation: A learner previews the implementation for 'Evaluate effective security rules in NSGs'. What behavior is required?
+The traffic-flow investigation log says the application traffic-control investigation can now ensure the intended security rule is evaluated before a broader conflicting rule. Which traffic-flow investigation state should the application traffic-control investigation acceptance test retain?
 
-- A. Delete any older resource whose name resembles the new run ID.
-- B. Create the baseline immediately and request approval only before cleanup.
-- C. Display the context, intended changes, cost and gated branches without mutating Azure.
-- D. Select the first accessible subscription and hide the resulting context.
+- A. Query ASG membership and confirm the effective rule resolves the intended source and destination roles.
+- B. Query subnet route-table association and the NIC's effective routes.
+- C. Capture access, rule name, and the tested five-tuple in validation evidence.
+- D. List rules ordered by priority and identify the first match for the test five-tuple.
 
 ## LAB18-Q22 — Applied
 
-A delegated administrator receives the following support request: Which implementation step should the learner perform for 'Configure user-defined routes'?
+The application traffic-control investigation rejects traffic-flow investigation exit status as proof it can allow return packets for an established permitted flow without a mirror rule. Which application traffic-control investigation result is valid evidence?
 
-- A. Skip the operation and edit validation.json to show a passing result.
-- B. Replace the lab action with a tenant-wide change that is easier to discover.
-- C. Copy resource identifiers from another run instead of recording returned IDs.
-- D. Create frontend and backend ASGs and associate test NIC configurations.
+- A. List effective rules for the target NIC and match direction, protocol, addresses, ports, and priority.
+- B. Inspect the initiating rule and use flow logs or a connection test to confirm the established response path.
+- C. Inspect the effective route and verify forwarding and reachability on the appliance NIC.
+- D. List rules ordered by priority and identify the first match for the test five-tuple.
 
 ## LAB18-Q23 — Applied
 
-During a maintenance window, an engineer must decide how to respond: Which evidence most directly validates 'Troubleshoot network connectivity' for test network interfaces?
+The traffic-flow investigation validator needs one application traffic-control investigation query after the change to account for security filters applied at both subnet and network-interface scopes. Which traffic-flow investigation property should the application traffic-control investigation validator inspect?
 
-- A. Query the exact recorded scope and independently verify Microsoft.Network/applicationSecurityGroups.
-- B. Treat the setup exit code as proof of every configuration and relationship.
-- C. List the entire subscription and assume similarly named resources belong to this run.
-- D. Record a credential so another learner can replay the authenticated session.
+- A. Read effective routes and show the selected prefix, next hop type, and next hop IP.
+- B. Query disableBgpRoutePropagation and inspect effective routes learned from the gateway.
+- C. Inspect the initiating rule and use flow logs or a connection test to confirm the established response path.
+- D. Query the NIC's effective security rules and trace each match to its source NSG.
 
 ## LAB18-Q24 — Applied
 
-A deployment pipeline reaches this decision point: The 'Create and configure network security groups (NSGs) and application security groups' checkpoint reaches an external prerequisite. What should happen?
+The network security administrator diagnosing application traffic flow must confirm the application traffic-control investigation, without mutation, can refer to application-role groups instead of fixed addresses in security rules. Which traffic-flow investigation check qualifies?
 
-- A. Mark the branch passed because its command syntax was checked offline.
-- B. Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.
-- C. Invent a domain, notification target, license, quota, or tenant value and continue.
-- D. Broaden permissions until the prerequisite can no longer block the operation.
+- A. Query ASG membership and confirm the effective rule resolves the intended source and destination roles.
+- B. Query subnet route-table association and the NIC's effective routes.
+- C. Capture access, rule name, and the tested five-tuple in validation evidence.
+- D. Query the NIC's effective security rules and trace each match to its source NSG.
 
 ## LAB18-Q25 — Applied
 
-While applying least-privilege controls, the administrator reviews this scenario: What is the safest command-evidence practice after completing 'Evaluate effective security rules in NSGs'?
+The application traffic-control investigation configuration is complete; the traffic-flow investigation reviewers need evidence it can see the combined security rules that actually apply to one interface. Which observation shows success?
 
-- A. Reuse successful output from an earlier run with a similar resource name.
-- B. Commit the complete account object so reviewers can identify the tenant.
-- C. Retain only redacted structured output from an independent query of the recorded run.
-- D. Save tokens, keys, passwords, or SAS values beside the validation result.
+- A. List effective rules for the target NIC and match direction, protocol, addresses, ports, and priority.
+- B. Inspect the effective route and verify forwarding and reachability on the appliance NIC.
+- C. List rules ordered by priority and identify the first match for the test five-tuple.
+- D. Query ASG membership and confirm the effective rule resolves the intended source and destination roles.
 
 ## LAB18-Q26 — Applied
 
-A repeatable Azure CLI workflow must address this requirement: A learner previews the implementation for 'Evaluate effective security rules in NSGs'. What behavior is required?
+The traffic-flow investigation validation asks whether the application traffic-control investigation can select the most specific destination route before considering route origin. Which observable state is strongest?
 
-- A. Select the first accessible subscription and hide the resulting context.
-- B. Delete any older resource whose name resembles the new run ID.
-- C. Create the baseline immediately and request approval only before cleanup.
-- D. Display the context, intended changes, cost and gated branches without mutating Azure.
+- A. Query disableBgpRoutePropagation and inspect effective routes learned from the gateway.
+- B. Read effective routes and show the selected prefix, next hop type, and next hop IP.
+- C. Inspect the initiating rule and use flow logs or a connection test to confirm the established response path.
+- D. List effective rules for the target NIC and match direction, protocol, addresses, ports, and priority.
 
 ## LAB18-Q27 — Applied
 
-During an environment handoff, the receiving team asks this question: Which implementation step should the learner perform for 'Configure user-defined routes'?
+An application traffic-control investigation review must prove the traffic-flow investigation ability to override an applicable system path with an intentional custom route. Which check avoids an adjacent feature?
 
-- A. Create frontend and backend ASGs and associate test NIC configurations.
-- B. Skip the operation and edit validation.json to show a passing result.
-- C. Replace the lab action with a tenant-wide change that is easier to discover.
-- D. Copy resource identifiers from another run instead of recording returned IDs.
+- A. Capture access, rule name, and the tested five-tuple in validation evidence.
+- B. Query the NIC's effective security rules and trace each match to its source NSG.
+- C. Query subnet route-table association and the NIC's effective routes.
+- D. Read effective routes and show the selected prefix, next hop type, and next hop IP.
 
 ## LAB18-Q28 — Applied
 
-A configuration change produces the following operational choice: Which evidence most directly validates 'Troubleshoot network connectivity' for test network interfaces?
+The application traffic-control investigation evidence bundle needs a traffic-flow investigation result showing it can send traffic through a reachable forwarding appliance. Which result belongs in the checkpoint?
 
-- A. Record a credential so another learner can replay the authenticated session.
-- B. Query the exact recorded scope and independently verify Microsoft.Network/applicationSecurityGroups.
-- C. Treat the setup exit code as proof of every configuration and relationship.
-- D. List the entire subscription and assume similarly named resources belong to this run.
+- A. List rules ordered by priority and identify the first match for the test five-tuple.
+- B. Inspect the effective route and verify forwarding and reachability on the appliance NIC.
+- C. Query ASG membership and confirm the effective rule resolves the intended source and destination roles.
+- D. Query subnet route-table association and the NIC's effective routes.
 
 ## LAB18-Q29 — Applied
 
-While preparing independent validation, an engineer considers this scenario: The 'Create and configure network security groups (NSGs) and application security groups' checkpoint reaches an external prerequisite. What should happen?
+Before application traffic-control investigation cleanup, the traffic-flow investigation team must reconfirm it can control whether learned gateway paths enter a subnet route table. Which read-only inspection should run?
 
-- A. Broaden permissions until the prerequisite can no longer block the operation.
-- B. Mark the branch passed because its command syntax was checked offline.
-- C. Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.
-- D. Invent a domain, notification target, license, quota, or tenant value and continue.
+- A. Inspect the initiating rule and use flow logs or a connection test to confirm the established response path.
+- B. List effective rules for the target NIC and match direction, protocol, addresses, ports, and priority.
+- C. Inspect the effective route and verify forwarding and reachability on the appliance NIC.
+- D. Query disableBgpRoutePropagation and inspect effective routes learned from the gateway.
 
 ## LAB18-Q30 — Applied
 
-A service owner asks the administrator to resolve this requirement: What is the safest command-evidence practice after completing 'Evaluate effective security rules in NSGs'?
+The application traffic-control investigation setup reports success after the traffic-flow investigation attempt to ask the platform which security rule allows or denies a specific flow. Which traffic-flow investigation read-only observation proves the application traffic-control investigation outcome?
 
-- A. Save tokens, keys, passwords, or SAS values beside the validation result.
-- B. Reuse successful output from an earlier run with a similar resource name.
-- C. Commit the complete account object so reviewers can identify the tenant.
-- D. Retain only redacted structured output from an independent query of the recorded run.
+- A. Capture access, rule name, and the tested five-tuple in validation evidence.
+- B. Query the NIC's effective security rules and trace each match to its source NSG.
+- C. Read effective routes and show the selected prefix, next hop type, and next hop IP.
+- D. Query disableBgpRoutePropagation and inspect effective routes learned from the gateway.
 
 ## LAB18-Q31 — Applied
 
-During a scoped cleanup review, the team evaluates this situation: A learner previews the implementation for 'Evaluate effective security rules in NSGs'. What behavior is required?
+The application traffic-control investigation setup finishes, yet the traffic-flow investigation cannot ensure the intended security rule is evaluated before a broader conflicting rule. Which misconfiguration explains the mismatch?
 
-- A. Display the context, intended changes, cost and gated branches without mutating Azure.
-- B. Select the first accessible subscription and hide the resulting context.
-- C. Delete any older resource whose name resembles the new run ID.
-- D. Create the baseline immediately and request approval only before cleanup.
+- A. Troubleshooting adds an unnecessary mirrored rule instead of checking the initiating flow.
+- B. Troubleshooting selected a broader default route even though a more-specific route exists.
+- C. A broad deny rule has a lower priority number than the required allow rule.
+- D. The diagnostic used the wrong local port and therefore evaluated a different flow.
 
 ## LAB18-Q32 — Applied
 
-An automation author must choose the correct response to this scenario: Which implementation step should the learner perform for 'Configure user-defined routes'?
+A traffic-flow investigation break/fix in the application traffic-control investigation fails when operators try to allow return packets for an established permitted flow without a mirror rule. Which diagnosis fits?
 
-- A. Copy resource identifiers from another run instead of recording returned IDs.
-- B. Create frontend and backend ASGs and associate test NIC configurations.
-- C. Skip the operation and edit validation.json to show a passing result.
-- D. Replace the lab action with a tenant-wide change that is easier to discover.
+- A. The subnet NSG allows the flow, but the NIC NSG denies it.
+- B. Troubleshooting adds an unnecessary mirrored rule instead of checking the initiating flow.
+- C. The route table exists but is associated with a different subnet.
+- D. A broad deny rule has a lower priority number than the required allow rule.
 
 ## LAB18-Q33 — Applied
 
-A lab run with a unique run ID reaches this decision: Which evidence most directly validates 'Troubleshoot network connectivity' for test network interfaces?
+The application traffic-control investigation troubleshooting scope is the traffic-flow investigation need to account for security filters applied at both subnet and network-interface scopes. Which condition should be corrected first?
 
-- A. List the entire subscription and assume similarly named resources belong to this run.
-- B. Record a credential so another learner can replay the authenticated session.
-- C. Query the exact recorded scope and independently verify Microsoft.Network/applicationSecurityGroups.
-- D. Treat the setup exit code as proof of every configuration and relationship.
+- A. The VM's NIC was never added to the ASG referenced by the allow rule.
+- B. The subnet NSG allows the flow, but the NIC NSG denies it.
+- C. The route points to an old NVA address that is no longer assigned.
+- D. Troubleshooting adds an unnecessary mirrored rule instead of checking the initiating flow.
 
 ## LAB18-Q34 — Applied
 
-While comparing the intended and actual states, the operator asks this question: The 'Create and configure network security groups (NSGs) and application security groups' checkpoint reaches an external prerequisite. What should happen?
+The application traffic-control investigation result is partial because the traffic-flow investigation cannot refer to application-role groups instead of fixed addresses in security rules. Which condition accounts for that result?
 
-- A. Invent a domain, notification target, license, quota, or tenant value and continue.
-- B. Broaden permissions until the prerequisite can no longer block the operation.
-- C. Mark the branch passed because its command syntax was checked offline.
-- D. Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.
+- A. The review examined only one NSG and missed a higher-priority rule from the other association.
+- B. Propagation is disabled, so the expected on-premises routes never reach the subnet.
+- C. The VM's NIC was never added to the ASG referenced by the allow rule.
+- D. The subnet NSG allows the flow, but the NIC NSG denies it.
 
 ## LAB18-Q35 — Applied
 
-A peer reviewer examines the proposed implementation for this scenario: What is the safest command-evidence practice after completing 'Evaluate effective security rules in NSGs'?
+The traffic-flow investigation evidence shows the application traffic-control investigation cannot see the combined security rules that actually apply to one interface. Which root cause fits that evidence?
 
-- A. Retain only redacted structured output from an independent query of the recorded run.
-- B. Save tokens, keys, passwords, or SAS values beside the validation result.
-- C. Reuse successful output from an earlier run with a similar resource name.
-- D. Commit the complete account object so reviewers can identify the tenant.
+- A. Troubleshooting selected a broader default route even though a more-specific route exists.
+- B. The review examined only one NSG and missed a higher-priority rule from the other association.
+- C. The diagnostic used the wrong local port and therefore evaluated a different flow.
+- D. The VM's NIC was never added to the ASG referenced by the allow rule.
 
 ## LAB18-Q36 — Applied
 
-During a controlled rollout, the change team encounters this requirement: A learner previews the implementation for 'Evaluate effective security rules in NSGs'. What behavior is required?
+Although the application traffic-control investigation is meant to let the traffic-flow investigation select the most specific destination route before considering route origin, its checkpoint fails. Which traffic-flow investigation defect explains the failure?
 
-- A. Create the baseline immediately and request approval only before cleanup.
-- B. Display the context, intended changes, cost and gated branches without mutating Azure.
-- C. Select the first accessible subscription and hide the resulting context.
-- D. Delete any older resource whose name resembles the new run ID.
+- A. Troubleshooting selected a broader default route even though a more-specific route exists.
+- B. The route table exists but is associated with a different subnet.
+- C. A broad deny rule has a lower priority number than the required allow rule.
+- D. The review examined only one NSG and missed a higher-priority rule from the other association.
 
 ## LAB18-Q37 — Applied
 
-A support engineer reproduces the following situation in a test environment: Which implementation step should the learner perform for 'Configure user-defined routes'?
+The traffic-flow investigation support team isolated the application traffic-control investigation incident to the attempt to override an applicable system path with an intentional custom route. Which condition prevents success?
 
-- A. Replace the lab action with a tenant-wide change that is easier to discover.
-- B. Copy resource identifiers from another run instead of recording returned IDs.
-- C. Create frontend and backend ASGs and associate test NIC configurations.
-- D. Skip the operation and edit validation.json to show a passing result.
+- A. The route points to an old NVA address that is no longer assigned.
+- B. Troubleshooting adds an unnecessary mirrored rule instead of checking the initiating flow.
+- C. Troubleshooting selected a broader default route even though a more-specific route exists.
+- D. The route table exists but is associated with a different subnet.
 
 ## LAB18-Q38 — Applied
 
-While recording validation evidence, the administrator evaluates this question: Which evidence most directly validates 'Troubleshoot network connectivity' for test network interfaces?
+An application traffic-control investigation query surprises the network security administrator diagnosing application traffic flow during the traffic-flow investigation attempt to send traffic through a reachable forwarding appliance. Which finding explains it?
 
-- A. Treat the setup exit code as proof of every configuration and relationship.
-- B. List the entire subscription and assume similarly named resources belong to this run.
-- C. Record a credential so another learner can replay the authenticated session.
-- D. Query the exact recorded scope and independently verify Microsoft.Network/applicationSecurityGroups.
+- A. Propagation is disabled, so the expected on-premises routes never reach the subnet.
+- B. The subnet NSG allows the flow, but the NIC NSG denies it.
+- C. The route table exists but is associated with a different subnet.
+- D. The route points to an old NVA address that is no longer assigned.
 
 ## LAB18-Q39 — Applied
 
-A configuration owner must approve one response to this scenario: The 'Create and configure network security groups (NSGs) and application security groups' checkpoint reaches an external prerequisite. What should happen?
+Other application traffic-control investigation components are healthy, but the traffic-flow investigation still cannot control whether learned gateway paths enter a subnet route table. Which state causes the isolated failure?
 
-- A. Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.
-- B. Invent a domain, notification target, license, quota, or tenant value and continue.
-- C. Broaden permissions until the prerequisite can no longer block the operation.
-- D. Mark the branch passed because its command syntax was checked offline.
+- A. The diagnostic used the wrong local port and therefore evaluated a different flow.
+- B. The VM's NIC was never added to the ASG referenced by the allow rule.
+- C. Propagation is disabled, so the expected on-premises routes never reach the subnet.
+- D. The route points to an old NVA address that is no longer assigned.
 
 ## LAB18-Q40 — Applied
 
-During post-deployment verification, the team reviews this situation: What is the safest command-evidence practice after completing 'Evaluate effective security rules in NSGs'?
+During a traffic-flow investigation fault drill, the application traffic-control investigation does not ask the platform which security rule allows or denies a specific flow. Which finding identifies the defect?
 
-- A. Commit the complete account object so reviewers can identify the tenant.
-- B. Retain only redacted structured output from an independent query of the recorded run.
-- C. Save tokens, keys, passwords, or SAS values beside the validation result.
-- D. Reuse successful output from an earlier run with a similar resource name.
+- A. A broad deny rule has a lower priority number than the required allow rule.
+- B. The diagnostic used the wrong local port and therefore evaluated a different flow.
+- C. The review examined only one NSG and missed a higher-priority rule from the other association.
+- D. Propagation is disabled, so the expected on-premises routes never reach the subnet.
 
 ## LAB18-Q41 — Advanced
 
-Validation for 'Configure user-defined routes' fails after setup. What is the best break/fix method?
+To satisfy the traffic-flow investigation requirement, operators must change the application traffic-control investigation configuration and prove it can ensure the intended security rule is evaluated before a broader conflicting rule. Which sequence is coherent?
 
-- A. Rerun setup repeatedly with new names until one attempt appears successful.
-- B. Change validation.json directly so the failed result reads pass.
-- C. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-- D. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+- A. First, Give the narrow required rule a unique priority that precedes conflicting broader rules. Then, List rules ordered by priority and identify the first match for the test five-tuple.
+- B. First, Review both associations and keep layered rules consistent with the intended flow. Then, Query the NIC's effective security rules and trace each match to its source NSG.
+- C. First, Associate the route table with the source subnet and define the intended next hop. Then, Query subnet route-table association and the NIC's effective routes.
+- D. First, Set the NVA private address as nextHopIpAddress and enable forwarding where required. Then, Inspect the effective route and verify forwarding and reachability on the appliance NIC.
 
 ## LAB18-Q42 — Advanced
 
-The operation for 'Troubleshoot network connectivity' is asynchronous or gated. How should completion be recorded?
+The network security administrator diagnosing application traffic flow needs a safe application traffic-control investigation change to allow return packets for an established permitted flow without a mirror rule, followed by traffic-flow investigation evidence. Which pair merits approval?
 
-- A. Record pass as soon as the request is accepted, regardless of its final state.
-- B. Fabricate expected output so the assessment and documentation appear complete.
-- C. Remove the check from validation whenever the service takes longer than expected.
-- D. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
+- A. First, Authorize the initiating direction and avoid redundant return-only rules. Then, Inspect the initiating rule and use flow logs or a connection test to confirm the established response path.
+- B. First, Place eligible NIC configurations in role-based ASGs and reference those ASGs in NSG rules. Then, Query ASG membership and confirm the effective rule resolves the intended source and destination roles.
+- C. First, Set the NVA private address as nextHopIpAddress and enable forwarding where required. Then, Inspect the effective route and verify forwarding and reachability on the appliance NIC.
+- D. First, Choose propagation behavior explicitly when combining a gateway with custom routes. Then, Query disableBgpRoutePropagation and inspect effective routes learned from the gateway.
 
 ## LAB18-Q43 — Advanced
 
-A security and reliability review identifies this design decision: Validation for 'Configure user-defined routes' fails after setup. What is the best break/fix method?
+The application traffic-control investigation has two traffic-flow investigation gates: account for security filters applied at both subnet and network-interface scopes, then prove the application traffic-control investigation state. Which traffic-flow investigation sequence works?
 
-- A. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-- B. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- C. Rerun setup repeatedly with new names until one attempt appears successful.
-- D. Change validation.json directly so the failed result reads pass.
+- A. First, Use the effective-rule view before modifying an individual NSG during troubleshooting. Then, List effective rules for the target NIC and match direction, protocol, addresses, ports, and priority.
+- B. First, Choose propagation behavior explicitly when combining a gateway with custom routes. Then, Query disableBgpRoutePropagation and inspect effective routes learned from the gateway.
+- C. First, Run IP flow verify with the exact VM, NIC, direction, protocol, addresses, and ports from the failed connection. Then, Capture access, rule name, and the tested five-tuple in validation evidence.
+- D. First, Review both associations and keep layered rules consistent with the intended flow. Then, Query the NIC's effective security rules and trace each match to its source NSG.
 
 ## LAB18-Q44 — Advanced
 
-While diagnosing unexpected Azure behavior, the engineer considers this situation: The operation for 'Troubleshoot network connectivity' is asynchronous or gated. How should completion be recorded?
+Which traffic-flow investigation path makes the application traffic-control investigation able to refer to application-role groups instead of fixed addresses in security rules, then inspects the defining properties?
 
-- A. Remove the check from validation whenever the service takes longer than expected.
-- B. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
-- C. Record pass as soon as the request is accepted, regardless of its final state.
-- D. Fabricate expected output so the assessment and documentation appear complete.
+- A. First, Compare every matching prefix and identify the longest prefix for the destination address. Then, Read effective routes and show the selected prefix, next hop type, and next hop IP.
+- B. First, Place eligible NIC configurations in role-based ASGs and reference those ASGs in NSG rules. Then, Query ASG membership and confirm the effective rule resolves the intended source and destination roles.
+- C. First, Run IP flow verify with the exact VM, NIC, direction, protocol, addresses, and ports from the failed connection. Then, Capture access, rule name, and the tested five-tuple in validation evidence.
+- D. First, Give the narrow required rule a unique priority that precedes conflicting broader rules. Then, List rules ordered by priority and identify the first match for the test five-tuple.
 
 ## LAB18-Q45 — Advanced
 
-An architecture review requires the strongest response to this scenario: Validation for 'Configure user-defined routes' fails after setup. What is the best break/fix method?
+At the application traffic-control investigation approval gate, operators must show that the traffic-flow investigation can see the combined security rules that actually apply to one interface. Which traffic-flow investigation configure-and-check pair is defensible?
 
-- A. Rerun setup repeatedly with new names until one attempt appears successful.
-- B. Change validation.json directly so the failed result reads pass.
-- C. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-- D. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+- A. First, Associate the route table with the source subnet and define the intended next hop. Then, Query subnet route-table association and the NIC's effective routes.
+- B. First, Use the effective-rule view before modifying an individual NSG during troubleshooting. Then, List effective rules for the target NIC and match direction, protocol, addresses, ports, and priority.
+- C. First, Give the narrow required rule a unique priority that precedes conflicting broader rules. Then, List rules ordered by priority and identify the first match for the test five-tuple.
+- D. First, Authorize the initiating direction and avoid redundant return-only rules. Then, Inspect the initiating rule and use flow logs or a connection test to confirm the established response path.
 
 ## LAB18-Q46 — Advanced
 
-During break/fix validation, the operator encounters this question: The operation for 'Troubleshoot network connectivity' is asynchronous or gated. How should completion be recorded?
+The application traffic-control investigation forbids a partial traffic-flow investigation result. Operators must first select the most specific destination route before considering route origin and afterward confirm the application traffic-control investigation outcome. Which traffic-flow investigation sequence is complete?
 
-- A. Record pass as soon as the request is accepted, regardless of its final state.
-- B. Fabricate expected output so the assessment and documentation appear complete.
-- C. Remove the check from validation whenever the service takes longer than expected.
-- D. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
+- A. First, Set the NVA private address as nextHopIpAddress and enable forwarding where required. Then, Inspect the effective route and verify forwarding and reachability on the appliance NIC.
+- B. First, Authorize the initiating direction and avoid redundant return-only rules. Then, Inspect the initiating rule and use flow logs or a connection test to confirm the established response path.
+- C. First, Compare every matching prefix and identify the longest prefix for the destination address. Then, Read effective routes and show the selected prefix, next hop type, and next hop IP.
+- D. First, Review both associations and keep layered rules consistent with the intended flow. Then, Query the NIC's effective security rules and trace each match to its source NSG.
 
 ## LAB18-Q47 — Advanced
 
-A complex support case depends on correctly interpreting this requirement: Validation for 'Configure user-defined routes' fails after setup. What is the best break/fix method?
+Only the application traffic-control investigation change needed to override an applicable system path with an intentional custom route is allowed, and traffic-flow investigation proof is mandatory. Which pair fits?
 
-- A. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-- B. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- C. Rerun setup repeatedly with new names until one attempt appears successful.
-- D. Change validation.json directly so the failed result reads pass.
+- A. First, Choose propagation behavior explicitly when combining a gateway with custom routes. Then, Query disableBgpRoutePropagation and inspect effective routes learned from the gateway.
+- B. First, Review both associations and keep layered rules consistent with the intended flow. Then, Query the NIC's effective security rules and trace each match to its source NSG.
+- C. First, Associate the route table with the source subnet and define the intended next hop. Then, Query subnet route-table association and the NIC's effective routes.
+- D. First, Place eligible NIC configurations in role-based ASGs and reference those ASGs in NSG rules. Then, Query ASG membership and confirm the effective rule resolves the intended source and destination roles.
 
 ## LAB18-Q48 — Advanced
 
-While correcting configuration drift, the team evaluates this scenario: The operation for 'Troubleshoot network connectivity' is asynchronous or gated. How should completion be recorded?
+The application traffic-control investigation runbook separates traffic-flow investigation mutation from validation while it must send traffic through a reachable forwarding appliance. Which sequence proves it cleanly?
 
-- A. Remove the check from validation whenever the service takes longer than expected.
-- B. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
-- C. Record pass as soon as the request is accepted, regardless of its final state.
-- D. Fabricate expected output so the assessment and documentation appear complete.
+- A. First, Run IP flow verify with the exact VM, NIC, direction, protocol, addresses, and ports from the failed connection. Then, Capture access, rule name, and the tested five-tuple in validation evidence.
+- B. First, Place eligible NIC configurations in role-based ASGs and reference those ASGs in NSG rules. Then, Query ASG membership and confirm the effective rule resolves the intended source and destination roles.
+- C. First, Use the effective-rule view before modifying an individual NSG during troubleshooting. Then, List effective rules for the target NIC and match direction, protocol, addresses, ports, and priority.
+- D. First, Set the NVA private address as nextHopIpAddress and enable forwarding where required. Then, Inspect the effective route and verify forwarding and reachability on the appliance NIC.
 
 ## LAB18-Q49 — Advanced
 
-A recovery exercise exposes the following technical decision: Validation for 'Configure user-defined routes' fails after setup. What is the best break/fix method?
+The application traffic-control investigation checkpoint requires both this traffic-flow investigation outcome—control whether learned gateway paths enter a subnet route table—and a read-only application traffic-control investigation state check. Which traffic-flow investigation response is complete?
 
-- A. Rerun setup repeatedly with new names until one attempt appears successful.
-- B. Change validation.json directly so the failed result reads pass.
-- C. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-- D. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+- A. First, Choose propagation behavior explicitly when combining a gateway with custom routes. Then, Query disableBgpRoutePropagation and inspect effective routes learned from the gateway.
+- B. First, Give the narrow required rule a unique priority that precedes conflicting broader rules. Then, List rules ordered by priority and identify the first match for the test five-tuple.
+- C. First, Use the effective-rule view before modifying an individual NSG during troubleshooting. Then, List effective rules for the target NIC and match direction, protocol, addresses, ports, and priority.
+- D. First, Compare every matching prefix and identify the longest prefix for the destination address. Then, Read effective routes and show the selected prefix, next hop type, and next hop IP.
 
 ## LAB18-Q50 — Advanced
 
-During final design assurance, the reviewer must resolve this situation: The operation for 'Troubleshoot network connectivity' is asynchronous or gated. How should completion be recorded?
+The application traffic-control investigation runbook must ask the platform which security rule allows or denies a specific flow, then retain traffic-flow investigation read-back evidence. Which application traffic-control investigation pair completes both duties?
 
-- A. Record pass as soon as the request is accepted, regardless of its final state.
-- B. Fabricate expected output so the assessment and documentation appear complete.
-- C. Remove the check from validation whenever the service takes longer than expected.
-- D. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
+- A. First, Authorize the initiating direction and avoid redundant return-only rules. Then, Inspect the initiating rule and use flow logs or a connection test to confirm the established response path.
+- B. First, Compare every matching prefix and identify the longest prefix for the destination address. Then, Read effective routes and show the selected prefix, next hop type, and next hop IP.
+- C. First, Associate the route table with the source subnet and define the intended next hop. Then, Query subnet route-table association and the NIC's effective routes.
+- D. First, Run IP flow verify with the exact VM, NIC, direction, protocol, addresses, and ports from the failed connection. Then, Capture access, rule name, and the tested five-tuple in validation evidence.
+
+[Open the answer key](./ANSWERS.md)

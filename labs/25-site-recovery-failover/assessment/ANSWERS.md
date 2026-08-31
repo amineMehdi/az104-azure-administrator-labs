@@ -1,653 +1,1159 @@
-# Lab 25 answer key
+# Lab 25 answer key and remediation
 
-Review these explanations only after answering all 50 questions.
+[Return to the questions](./QUESTIONS.md) · [Return to the guided lab](../README.md)
 
-## LAB25-Q01 — B
+Score one point per correct response:
 
-The lab establishes this design principle: Test failover validates recovery without committing production direction, while planned/unplanned failover, commit, reprotect, and failback are separate state transitions with cost and data-loss implications.
+- **43–50 (85–100%): Mastery.** Continue to the next lab and revisit these tasks during final review.
+- **35–42 (70–84%): Targeted review.** Repeat the linked tasks for every missed question.
+- **0–34 (below 70%): Rebuild.** Repeat the complete lab, including validation and break/fix, before retrying.
 
-- A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- B: Correct. The lab establishes this design principle: Test failover validates recovery without committing production direction, while planned/unplanned failover, commit, reprotect, and failback are separate state transitions with cost and data-loss implications.
-- C: This choice changes or trusts a broader scope than the recorded lab boundary.
-- D: This choice skips independent evidence or relies on ambiguous resource identity.
+## LAB25-Q01 — D
 
-Objectives: `MR-RECOVERY-05`.
+**Question:** For the Azure-to-Azure disaster-recovery pilot, the failover pilot plan must replicate supported virtual-machine disks from one region to recovery resources in another. Which statement about failover pilot belongs in the Azure-to-Azure disaster-recovery pilot record?
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-powershell).
+- **A — Incorrect.** The Recovery Services vault for Azure-to-Azure replication is placed outside the source VM's failure region according to scenario guidance.
+  The Recovery Services vault for Azure-to-Azure replication is placed outside the source VM's failure region according to scenario guidance. In the Azure-to-Azure disaster-recovery pilot, this statement describes Site Recovery vault placement. Azure-to-Azure disaster-recovery pilot asks about source and target regions; this Site Recovery vault placement choice leaves the source and target regions explanation missing.
+- **B — Incorrect.** Recovery settings map protected machines to target virtual networks, subnets, and optional target IP configuration.
+  Recovery settings map protected machines to target virtual networks, subnets, and optional target IP configuration. In the Azure-to-Azure disaster-recovery pilot, this statement describes target network mapping. The target network mapping statement accurately describes target network mapping; however, Azure-to-Azure disaster-recovery pilot needs source and target regions to replicate supported virtual-machine disks from one region to recovery resources in another; target network mapping cannot replace source and target regions.
+- **C — Incorrect.** A planned failover coordinates shutdown and final synchronization when the source is available to minimize data loss.
+  A planned failover coordinates shutdown and final synchronization when the source is available to minimize data loss. In the Azure-to-Azure disaster-recovery pilot, this statement describes planned failover. Selecting planned failover for Azure-to-Azure disaster-recovery pilot leaves source and target regions unanswered in Azure-to-Azure disaster-recovery pilot; the Azure-to-Azure disaster-recovery pilot lacks a source and target regions basis to replicate supported virtual-machine disks from one region to recovery resources in another.
+- **D — Correct.** Azure-to-Azure Site Recovery replicates supported VM disks from a source region into configured target-region resources.
+  The Azure-to-Azure disaster-recovery pilot needs source and target regions to replicate supported virtual-machine disks from one region to recovery resources in another; this option states the applicable source and target regions rule: Azure-to-Azure Site Recovery replicates supported VM disks from a source region into configured target-region resources.
 
-## LAB25-Q02 — C
+**Objectives:** `MR-RECOVERY-05`
 
-The reviewed hands-on action for this objective is: Create a source VM and Recovery Services vault, then configure Azure-to-Azure fabric, container, policy, and network mappings.
+**Remediation:** [Repeat the mapped guided task](../README.md#task-1) (`LAB25-CP01`).
 
-- A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- B: This choice changes or trusts a broader scope than the recorded lab boundary.
-- C: Correct. The reviewed hands-on action for this objective is: Create a source VM and Recovery Services vault, then configure Azure-to-Azure fabric, container, policy, and network mappings.
-- D: This choice skips independent evidence or relies on ambiguous resource identity.
+**Microsoft Learn sources:**
 
-Objectives: `MR-RECOVERY-06`.
+- [Azure-to-Azure disaster recovery architecture](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-architecture)
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-dr-drill).
+**Source reviewed:** 2026-08-31
 
-## LAB25-Q03 — D
+## LAB25-Q02 — B
 
-Least privilege requires the documented boundary: Site Recovery Contributor, Virtual Machine Contributor, and Network Contributor on both region scopes
+**Question:** The failover pilot review compares four claims for the Azure-to-Azure disaster-recovery pilot requirement to place recovery orchestration outside the failure boundary it must survive. Which claim is technically sound?
 
-- A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- B: This choice changes or trusts a broader scope than the recorded lab boundary.
-- C: This choice skips independent evidence or relies on ambiguous resource identity.
-- D: Correct. Least privilege requires the documented boundary: Site Recovery Contributor, Virtual Machine Contributor, and Network Contributor on both region scopes
+- **A — Incorrect.** A Site Recovery replication policy defines settings such as recovery-point retention and app-consistent snapshot frequency.
+  A Site Recovery replication policy defines settings such as recovery-point retention and app-consistent snapshot frequency. In the Azure-to-Azure disaster-recovery pilot, this statement describes replication policies. The replication policies statement accurately describes replication policies; however, Azure-to-Azure disaster-recovery pilot needs Site Recovery vault placement to place recovery orchestration outside the failure boundary it must survive; replication policies cannot replace Site Recovery vault placement.
+- **B — Correct.** The Recovery Services vault for Azure-to-Azure replication is placed outside the source VM's failure region according to scenario guidance.
+  The Recovery Services vault for Azure-to-Azure replication is placed outside the source VM's failure region according to scenario guidance. This Site Recovery vault placement fact resolves the Azure-to-Azure disaster-recovery pilot design question about how to place recovery orchestration outside the failure boundary it must survive.
+- **C — Incorrect.** A protected item must complete initial replication and reach a healthy protected state before it can meet recovery expectations.
+  A protected item must complete initial replication and reach a healthy protected state before it can meet recovery expectations. In the Azure-to-Azure disaster-recovery pilot, this statement describes replication health. Site Recovery vault placement governs Azure-to-Azure disaster-recovery pilot; replication health cannot support Site Recovery vault placement when operators must place recovery orchestration outside the failure boundary it must survive.
+- **D — Incorrect.** An unplanned failover recovers from an unavailable source using a selected available recovery point and may have data loss.
+  An unplanned failover recovers from an unavailable source using a selected available recovery point and may have data loss. In the Azure-to-Azure disaster-recovery pilot, this statement describes unplanned failover. Azure-to-Azure disaster-recovery pilot asks about Site Recovery vault placement; this unplanned failover choice leaves the Site Recovery vault placement explanation missing.
 
-Objectives: `MR-RECOVERY-05`.
+**Objectives:** `MR-RECOVERY-05`
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-failover-failback).
+**Remediation:** [Repeat the mapped guided task](../README.md#task-2) (`LAB25-CP02`).
 
-## LAB25-Q04 — A
+**Microsoft Learn sources:**
 
-The lab establishes this design principle: Test failover validates recovery without committing production direction, while planned/unplanned failover, commit, reprotect, and failback are separate state transitions with cost and data-loss implications.
+- [Azure-to-Azure disaster recovery architecture](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-architecture)
 
-- A: Correct. The lab establishes this design principle: Test failover validates recovery without committing production direction, while planned/unplanned failover, commit, reprotect, and failback are separate state transitions with cost and data-loss implications.
-- B: This choice changes or trusts a broader scope than the recorded lab boundary.
-- C: This choice skips independent evidence or relies on ambiguous resource identity.
-- D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+**Source reviewed:** 2026-08-31
 
-Objectives: `MR-RECOVERY-05`.
+## LAB25-Q03 — B
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-powershell).
+**Question:** The failover pilot architecture note requires the Azure-to-Azure disaster-recovery pilot environment to configure retention plus the cadence for application-aware recovery points. Which statement defines the relevant failover pilot boundary?
 
-## LAB25-Q05 — B
+- **A — Incorrect.** Azure-to-Azure replication uses a supported cache storage account in the source region for outgoing replication data.
+  Azure-to-Azure replication uses a supported cache storage account in the source region for outgoing replication data. In the Azure-to-Azure disaster-recovery pilot, this statement describes cache storage accounts. Selecting cache storage accounts for Azure-to-Azure disaster-recovery pilot leaves replication policies unanswered in Azure-to-Azure disaster-recovery pilot; the Azure-to-Azure disaster-recovery pilot lacks a replication policies basis to configure retention plus the cadence for application-aware recovery points.
+- **B — Correct.** A Site Recovery replication policy defines settings such as recovery-point retention and app-consistent snapshot frequency.
+  A Site Recovery replication policy defines settings such as recovery-point retention and app-consistent snapshot frequency. For Azure-to-Azure disaster-recovery pilot, replication policies supplies the service rule needed to configure retention plus the cadence for application-aware recovery points.
+- **C — Incorrect.** A test failover validates recovery without changing production replication and should use an isolated recovery network.
+  A test failover validates recovery without changing production replication and should use an isolated recovery network. In the Azure-to-Azure disaster-recovery pilot, this statement describes test failover isolation. Azure-to-Azure disaster-recovery pilot asks about replication policies; this test failover isolation choice leaves the replication policies explanation missing.
+- **D — Incorrect.** Commit finalizes the selected recovery point; reprotect reverses replication direction before a later failback.
+  Commit finalizes the selected recovery point; reprotect reverses replication direction before a later failback. In the Azure-to-Azure disaster-recovery pilot, this statement describes commit, reprotect, and failback. The commit, reprotect, and failback statement accurately describes commit, reprotect, and failback; however, Azure-to-Azure disaster-recovery pilot needs replication policies to configure retention plus the cadence for application-aware recovery points; commit, reprotect, and failback cannot replace replication policies.
 
-The reviewed hands-on action for this objective is: Create a source VM and Recovery Services vault, then configure Azure-to-Azure fabric, container, policy, and network mappings.
+**Objectives:** `MR-RECOVERY-05`
 
-- A: This choice changes or trusts a broader scope than the recorded lab boundary.
-- B: Correct. The reviewed hands-on action for this objective is: Create a source VM and Recovery Services vault, then configure Azure-to-Azure fabric, container, policy, and network mappings.
-- C: This choice skips independent evidence or relies on ambiguous resource identity.
-- D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+**Remediation:** [Repeat the mapped guided task](../README.md#task-3) (`LAB25-CP03`).
 
-Objectives: `MR-RECOVERY-06`.
+**Microsoft Learn sources:**
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-dr-drill).
+- [Set up disaster recovery for an Azure VM](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-how-to-enable-replication)
 
-## LAB25-Q06 — C
+**Source reviewed:** 2026-08-31
 
-Least privilege requires the documented boundary: Site Recovery Contributor, Virtual Machine Contributor, and Network Contributor on both region scopes
+## LAB25-Q04 — D
 
-- A: This choice changes or trusts a broader scope than the recorded lab boundary.
-- B: This choice skips independent evidence or relies on ambiguous resource identity.
-- C: Correct. Least privilege requires the documented boundary: Site Recovery Contributor, Virtual Machine Contributor, and Network Contributor on both region scopes
-- D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+**Question:** A new failover pilot operator must explain why the Azure-to-Azure disaster-recovery pilot can buffer replication changes in a supported source-region storage account. Which explanation is accurate?
 
-Objectives: `MR-RECOVERY-05`.
+- **A — Incorrect.** Recovery settings map protected machines to target virtual networks, subnets, and optional target IP configuration.
+  Recovery settings map protected machines to target virtual networks, subnets, and optional target IP configuration. In the Azure-to-Azure disaster-recovery pilot, this statement describes target network mapping. Cache storage accounts governs Azure-to-Azure disaster-recovery pilot; target network mapping cannot support cache storage accounts when operators must buffer replication changes in a supported source-region storage account.
+- **B — Incorrect.** A planned failover coordinates shutdown and final synchronization when the source is available to minimize data loss.
+  A planned failover coordinates shutdown and final synchronization when the source is available to minimize data loss. In the Azure-to-Azure disaster-recovery pilot, this statement describes planned failover. Azure-to-Azure disaster-recovery pilot asks about cache storage accounts; this planned failover choice leaves the cache storage accounts explanation missing.
+- **C — Incorrect.** Azure-to-Azure Site Recovery replicates supported VM disks from a source region into configured target-region resources.
+  Azure-to-Azure Site Recovery replicates supported VM disks from a source region into configured target-region resources. In the Azure-to-Azure disaster-recovery pilot, this statement describes source and target regions. The source and target regions statement accurately describes source and target regions; however, Azure-to-Azure disaster-recovery pilot needs cache storage accounts to buffer replication changes in a supported source-region storage account; source and target regions cannot replace cache storage accounts.
+- **D — Correct.** Azure-to-Azure replication uses a supported cache storage account in the source region for outgoing replication data.
+  Azure-to-Azure replication uses a supported cache storage account in the source region for outgoing replication data. In the Azure-to-Azure disaster-recovery pilot, this cache storage accounts rule supports the need to buffer replication changes in a supported source-region storage account.
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-failover-failback).
+**Objectives:** `MR-RECOVERY-05`
 
-## LAB25-Q07 — D
+**Remediation:** [Repeat the mapped guided task](../README.md#task-4) (`LAB25-CP04`).
 
-The lab establishes this design principle: Test failover validates recovery without committing production direction, while planned/unplanned failover, commit, reprotect, and failback are separate state transitions with cost and data-loss implications.
+**Microsoft Learn sources:**
 
-- A: This choice changes or trusts a broader scope than the recorded lab boundary.
-- B: This choice skips independent evidence or relies on ambiguous resource identity.
-- C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- D: Correct. The lab establishes this design principle: Test failover validates recovery without committing production direction, while planned/unplanned failover, commit, reprotect, and failback are separate state transitions with cost and data-loss implications.
+- [Azure-to-Azure disaster recovery architecture](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-architecture)
 
-Objectives: `MR-RECOVERY-05`.
+**Source reviewed:** 2026-08-31
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-powershell).
+## LAB25-Q05 — A
+
+**Question:** The Azure-to-Azure disaster-recovery pilot acceptance criteria require operators to connect recovered machines to the intended target network and subnet. Which service fact supports that requirement?
+
+- **A — Correct.** Recovery settings map protected machines to target virtual networks, subnets, and optional target IP configuration.
+  For the Azure-to-Azure disaster-recovery pilot, the rule for target network mapping is defined by this statement: recovery settings map protected machines to target virtual networks, subnets, and optional target IP configuration. It supports the required outcome to connect recovered machines to the intended target network and subnet.
+- **B — Incorrect.** A protected item must complete initial replication and reach a healthy protected state before it can meet recovery expectations.
+  A protected item must complete initial replication and reach a healthy protected state before it can meet recovery expectations. In the Azure-to-Azure disaster-recovery pilot, this statement describes replication health. The replication health statement accurately describes replication health; however, Azure-to-Azure disaster-recovery pilot needs target network mapping to connect recovered machines to the intended target network and subnet; replication health cannot replace target network mapping.
+- **C — Incorrect.** An unplanned failover recovers from an unavailable source using a selected available recovery point and may have data loss.
+  An unplanned failover recovers from an unavailable source using a selected available recovery point and may have data loss. In the Azure-to-Azure disaster-recovery pilot, this statement describes unplanned failover. Selecting unplanned failover for Azure-to-Azure disaster-recovery pilot leaves target network mapping unanswered in Azure-to-Azure disaster-recovery pilot; the Azure-to-Azure disaster-recovery pilot lacks a target network mapping basis to connect recovered machines to the intended target network and subnet.
+- **D — Incorrect.** The Recovery Services vault for Azure-to-Azure replication is placed outside the source VM's failure region according to scenario guidance.
+  The Recovery Services vault for Azure-to-Azure replication is placed outside the source VM's failure region according to scenario guidance. In the Azure-to-Azure disaster-recovery pilot, this statement describes Site Recovery vault placement. Target network mapping governs Azure-to-Azure disaster-recovery pilot; Site Recovery vault placement cannot support target network mapping when operators must connect recovered machines to the intended target network and subnet.
+
+**Objectives:** `MR-RECOVERY-05`
+
+**Remediation:** [Repeat the mapped guided task](../README.md#task-5) (`LAB25-CP05`).
+
+**Microsoft Learn sources:**
+
+- [Set up disaster recovery for an Azure VM](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-how-to-enable-replication)
+
+**Source reviewed:** 2026-08-31
+
+## LAB25-Q06 — A
+
+**Question:** A failover pilot reviewer challenges whether the Azure-to-Azure disaster-recovery pilot can wait until initial synchronization completes and protection reports normal. Which response resolves the concern?
+
+- **A — Correct.** A protected item must complete initial replication and reach a healthy protected state before it can meet recovery expectations.
+  A protected item must complete initial replication and reach a healthy protected state before it can meet recovery expectations. The Azure-to-Azure disaster-recovery pilot applies that replication health boundary when operators must wait until initial synchronization completes and protection reports normal.
+- **B — Incorrect.** A test failover validates recovery without changing production replication and should use an isolated recovery network.
+  A test failover validates recovery without changing production replication and should use an isolated recovery network. In the Azure-to-Azure disaster-recovery pilot, this statement describes test failover isolation. Selecting test failover isolation for Azure-to-Azure disaster-recovery pilot leaves replication health unanswered in Azure-to-Azure disaster-recovery pilot; the Azure-to-Azure disaster-recovery pilot lacks a replication health basis to wait until initial synchronization completes and protection reports normal.
+- **C — Incorrect.** Commit finalizes the selected recovery point; reprotect reverses replication direction before a later failback.
+  Commit finalizes the selected recovery point; reprotect reverses replication direction before a later failback. In the Azure-to-Azure disaster-recovery pilot, this statement describes commit, reprotect, and failback. Replication health governs Azure-to-Azure disaster-recovery pilot; commit, reprotect, and failback cannot support replication health when operators must wait until initial synchronization completes and protection reports normal.
+- **D — Incorrect.** A Site Recovery replication policy defines settings such as recovery-point retention and app-consistent snapshot frequency.
+  A Site Recovery replication policy defines settings such as recovery-point retention and app-consistent snapshot frequency. In the Azure-to-Azure disaster-recovery pilot, this statement describes replication policies. Azure-to-Azure disaster-recovery pilot asks about replication health; this replication policies choice leaves the replication health explanation missing.
+
+**Objectives:** `MR-RECOVERY-05`
+
+**Remediation:** [Repeat the mapped guided task](../README.md#task-1) (`LAB25-CP01`).
+
+**Microsoft Learn sources:**
+
+- [Set up disaster recovery for an Azure VM](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-how-to-enable-replication)
+
+**Source reviewed:** 2026-08-31
+
+## LAB25-Q07 — B
+
+**Question:** The Azure-to-Azure disaster-recovery pilot handoff omits the failover pilot rule needed to exercise recovery on an isolated network without disrupting production replication. Which statement should the team add?
+
+- **A — Incorrect.** A planned failover coordinates shutdown and final synchronization when the source is available to minimize data loss.
+  A planned failover coordinates shutdown and final synchronization when the source is available to minimize data loss. In the Azure-to-Azure disaster-recovery pilot, this statement describes planned failover. Selecting planned failover for Azure-to-Azure disaster-recovery pilot leaves test failover isolation unanswered in Azure-to-Azure disaster-recovery pilot; the Azure-to-Azure disaster-recovery pilot lacks a test failover isolation basis to exercise recovery on an isolated network without disrupting production replication.
+- **B — Correct.** A test failover validates recovery without changing production replication and should use an isolated recovery network.
+  The Azure-to-Azure disaster-recovery pilot needs test failover isolation to exercise recovery on an isolated network without disrupting production replication; this option states the applicable test failover isolation rule: a test failover validates recovery without changing production replication and should use an isolated recovery network.
+- **C — Incorrect.** Azure-to-Azure Site Recovery replicates supported VM disks from a source region into configured target-region resources.
+  Azure-to-Azure Site Recovery replicates supported VM disks from a source region into configured target-region resources. In the Azure-to-Azure disaster-recovery pilot, this statement describes source and target regions. Azure-to-Azure disaster-recovery pilot asks about test failover isolation; this source and target regions choice leaves the test failover isolation explanation missing.
+- **D — Incorrect.** Azure-to-Azure replication uses a supported cache storage account in the source region for outgoing replication data.
+  Azure-to-Azure replication uses a supported cache storage account in the source region for outgoing replication data. In the Azure-to-Azure disaster-recovery pilot, this statement describes cache storage accounts. The cache storage accounts statement accurately describes cache storage accounts; however, Azure-to-Azure disaster-recovery pilot needs test failover isolation to exercise recovery on an isolated network without disrupting production replication; cache storage accounts cannot replace test failover isolation.
+
+**Objectives:** `MR-RECOVERY-06`
+
+**Remediation:** [Repeat the mapped guided task](../README.md#task-2) (`LAB25-CP02`).
+
+**Microsoft Learn sources:**
+
+- [Run an Azure Site Recovery disaster recovery drill](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-dr-drill)
+
+**Source reviewed:** 2026-08-31
 
 ## LAB25-Q08 — A
 
-The reviewed hands-on action for this objective is: Create a source VM and Recovery Services vault, then configure Azure-to-Azure fabric, container, policy, and network mappings.
+**Question:** A failover pilot incident review of the Azure-to-Azure disaster-recovery pilot depends on the ability to shut down the source and capture its latest changes for low-loss recovery. Which platform description is reliable?
 
-- A: Correct. The reviewed hands-on action for this objective is: Create a source VM and Recovery Services vault, then configure Azure-to-Azure fabric, container, policy, and network mappings.
-- B: This choice skips independent evidence or relies on ambiguous resource identity.
-- C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- D: This choice changes or trusts a broader scope than the recorded lab boundary.
+- **A — Correct.** A planned failover coordinates shutdown and final synchronization when the source is available to minimize data loss.
+  A planned failover coordinates shutdown and final synchronization when the source is available to minimize data loss. This planned failover fact resolves the Azure-to-Azure disaster-recovery pilot design question about how to shut down the source and capture its latest changes for low-loss recovery.
+- **B — Incorrect.** An unplanned failover recovers from an unavailable source using a selected available recovery point and may have data loss.
+  An unplanned failover recovers from an unavailable source using a selected available recovery point and may have data loss. In the Azure-to-Azure disaster-recovery pilot, this statement describes unplanned failover. Azure-to-Azure disaster-recovery pilot asks about planned failover; this unplanned failover choice leaves the planned failover explanation missing.
+- **C — Incorrect.** The Recovery Services vault for Azure-to-Azure replication is placed outside the source VM's failure region according to scenario guidance.
+  The Recovery Services vault for Azure-to-Azure replication is placed outside the source VM's failure region according to scenario guidance. In the Azure-to-Azure disaster-recovery pilot, this statement describes Site Recovery vault placement. The Site Recovery vault placement statement accurately describes Site Recovery vault placement; however, Azure-to-Azure disaster-recovery pilot needs planned failover to shut down the source and capture its latest changes for low-loss recovery; Site Recovery vault placement cannot replace planned failover.
+- **D — Incorrect.** Recovery settings map protected machines to target virtual networks, subnets, and optional target IP configuration.
+  Recovery settings map protected machines to target virtual networks, subnets, and optional target IP configuration. In the Azure-to-Azure disaster-recovery pilot, this statement describes target network mapping. Selecting target network mapping for Azure-to-Azure disaster-recovery pilot leaves planned failover unanswered in Azure-to-Azure disaster-recovery pilot; the Azure-to-Azure disaster-recovery pilot lacks a planned failover basis to shut down the source and capture its latest changes for low-loss recovery.
 
-Objectives: `MR-RECOVERY-06`.
+**Objectives:** `MR-RECOVERY-06`
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-dr-drill).
+**Remediation:** [Repeat the mapped guided task](../README.md#task-3) (`LAB25-CP03`).
 
-## LAB25-Q09 — B
+**Microsoft Learn sources:**
 
-Least privilege requires the documented boundary: Site Recovery Contributor, Virtual Machine Contributor, and Network Contributor on both region scopes
+- [Fail over and fail back Azure virtual machines](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-failover-failback)
 
-- A: This choice skips independent evidence or relies on ambiguous resource identity.
-- B: Correct. Least privilege requires the documented boundary: Site Recovery Contributor, Virtual Machine Contributor, and Network Contributor on both region scopes
-- C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- D: This choice changes or trusts a broader scope than the recorded lab boundary.
+**Source reviewed:** 2026-08-31
 
-Objectives: `MR-RECOVERY-05`.
+## LAB25-Q09 — D
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-failover-failback).
+**Question:** A disaster-recovery administrator piloting Azure-to-Azure replication is updating the failover pilot runbook. The requirement is to start outage recovery from the most appropriate stored point. Which statement describes Azure behavior correctly?
 
-## LAB25-Q10 — C
+- **A — Incorrect.** Commit finalizes the selected recovery point; reprotect reverses replication direction before a later failback.
+  Commit finalizes the selected recovery point; reprotect reverses replication direction before a later failback. In the Azure-to-Azure disaster-recovery pilot, this statement describes commit, reprotect, and failback. Azure-to-Azure disaster-recovery pilot asks about unplanned failover; this commit, reprotect, and failback choice leaves the unplanned failover explanation missing.
+- **B — Incorrect.** A Site Recovery replication policy defines settings such as recovery-point retention and app-consistent snapshot frequency.
+  A Site Recovery replication policy defines settings such as recovery-point retention and app-consistent snapshot frequency. In the Azure-to-Azure disaster-recovery pilot, this statement describes replication policies. The replication policies statement accurately describes replication policies; however, Azure-to-Azure disaster-recovery pilot needs unplanned failover to start outage recovery from the most appropriate stored point; replication policies cannot replace unplanned failover.
+- **C — Incorrect.** A protected item must complete initial replication and reach a healthy protected state before it can meet recovery expectations.
+  A protected item must complete initial replication and reach a healthy protected state before it can meet recovery expectations. In the Azure-to-Azure disaster-recovery pilot, this statement describes replication health. Selecting replication health for Azure-to-Azure disaster-recovery pilot leaves unplanned failover unanswered in Azure-to-Azure disaster-recovery pilot; the Azure-to-Azure disaster-recovery pilot lacks a unplanned failover basis to start outage recovery from the most appropriate stored point.
+- **D — Correct.** An unplanned failover recovers from an unavailable source using a selected available recovery point and may have data loss.
+  An unplanned failover recovers from an unavailable source using a selected available recovery point and may have data loss. For Azure-to-Azure disaster-recovery pilot, unplanned failover supplies the service rule needed to start outage recovery from the most appropriate stored point.
 
-The lab establishes this design principle: Test failover validates recovery without committing production direction, while planned/unplanned failover, commit, reprotect, and failback are separate state transitions with cost and data-loss implications.
+**Objectives:** `MR-RECOVERY-06`
 
-- A: This choice skips independent evidence or relies on ambiguous resource identity.
-- B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- C: Correct. The lab establishes this design principle: Test failover validates recovery without committing production direction, while planned/unplanned failover, commit, reprotect, and failback are separate state transitions with cost and data-loss implications.
-- D: This choice changes or trusts a broader scope than the recorded lab boundary.
+**Remediation:** [Repeat the mapped guided task](../README.md#task-4) (`LAB25-CP04`).
 
-Objectives: `MR-RECOVERY-05`.
+**Microsoft Learn sources:**
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-powershell).
+- [Fail over and fail back Azure virtual machines](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-failover-failback)
 
-## LAB25-Q11 — D
+**Source reviewed:** 2026-08-31
 
-The reviewed hands-on action for this objective is: Create a source VM and Recovery Services vault, then configure Azure-to-Azure fabric, container, policy, and network mappings.
+## LAB25-Q10 — D
 
-- A: This choice skips independent evidence or relies on ambiguous resource identity.
-- B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- C: This choice changes or trusts a broader scope than the recorded lab boundary.
-- D: Correct. The reviewed hands-on action for this objective is: Create a source VM and Recovery Services vault, then configure Azure-to-Azure fabric, container, policy, and network mappings.
+**Question:** A failover pilot peer review asks how the Azure-to-Azure disaster-recovery pilot should handle this outcome: finalize recovery, reverse protection direction, and return service to the original region. Which explanation is accurate?
 
-Objectives: `MR-RECOVERY-06`.
+- **A — Incorrect.** Azure-to-Azure Site Recovery replicates supported VM disks from a source region into configured target-region resources.
+  Azure-to-Azure Site Recovery replicates supported VM disks from a source region into configured target-region resources. In the Azure-to-Azure disaster-recovery pilot, this statement describes source and target regions. The source and target regions statement accurately describes source and target regions; however, Azure-to-Azure disaster-recovery pilot needs commit, reprotect, and failback to finalize recovery, reverse protection direction, and return service to the original region; source and target regions cannot replace commit, reprotect, and failback.
+- **B — Incorrect.** Azure-to-Azure replication uses a supported cache storage account in the source region for outgoing replication data.
+  Azure-to-Azure replication uses a supported cache storage account in the source region for outgoing replication data. In the Azure-to-Azure disaster-recovery pilot, this statement describes cache storage accounts. Selecting cache storage accounts for Azure-to-Azure disaster-recovery pilot leaves commit, reprotect, and failback unanswered in Azure-to-Azure disaster-recovery pilot; the Azure-to-Azure disaster-recovery pilot lacks a commit, reprotect, and failback basis to finalize recovery, reverse protection direction, and return service to the original region.
+- **C — Incorrect.** A test failover validates recovery without changing production replication and should use an isolated recovery network.
+  A test failover validates recovery without changing production replication and should use an isolated recovery network. In the Azure-to-Azure disaster-recovery pilot, this statement describes test failover isolation. Commit, reprotect, and failback governs Azure-to-Azure disaster-recovery pilot; test failover isolation cannot support commit, reprotect, and failback when operators must finalize recovery, reverse protection direction, and return service to the original region.
+- **D — Correct.** Commit finalizes the selected recovery point; reprotect reverses replication direction before a later failback.
+  Commit finalizes the selected recovery point; reprotect reverses replication direction before a later failback. In the Azure-to-Azure disaster-recovery pilot, this commit, reprotect, and failback rule supports the need to finalize recovery, reverse protection direction, and return service to the original region.
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-dr-drill).
+**Objectives:** `MR-RECOVERY-06`
 
-## LAB25-Q12 — A
+**Remediation:** [Repeat the mapped guided task](../README.md#task-5) (`LAB25-CP05`).
 
-Least privilege requires the documented boundary: Site Recovery Contributor, Virtual Machine Contributor, and Network Contributor on both region scopes
+**Microsoft Learn sources:**
 
-- A: Correct. Least privilege requires the documented boundary: Site Recovery Contributor, Virtual Machine Contributor, and Network Contributor on both region scopes
-- B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- C: This choice changes or trusts a broader scope than the recorded lab boundary.
-- D: This choice skips independent evidence or relies on ambiguous resource identity.
+- [Fail over and fail back Azure virtual machines](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-failover-failback)
 
-Objectives: `MR-RECOVERY-05`.
+**Source reviewed:** 2026-08-31
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-failover-failback).
+## LAB25-Q11 — A
 
-## LAB25-Q13 — B
+**Question:** The disaster-recovery administrator piloting Azure-to-Azure replication may change the Azure-to-Azure disaster-recovery pilot only to replicate supported virtual-machine disks from one region to recovery resources in another. Which failover pilot action stays within that assignment?
 
-The lab establishes this design principle: Test failover validates recovery without committing production direction, while planned/unplanned failover, commit, reprotect, and failback are separate state transitions with cost and data-loss implications.
+- **A — Correct.** Choose a supported target region and validate VM, disk, network, quota, and feature compatibility.
+  For the Azure-to-Azure disaster-recovery pilot, the required source and target regions action is: choose a supported target region and validate VM, disk, network, quota, and feature compatibility. It makes the environment able to replicate supported virtual-machine disks from one region to recovery resources in another.
+- **B — Incorrect.** Create or select a policy whose recovery-point objectives match the application requirements.
+  Create or select a policy whose recovery-point objectives match the application requirements. In the Azure-to-Azure disaster-recovery pilot, this action changes replication policies. Azure-to-Azure disaster-recovery pilot requires source and target regions; changing replication policies leaves source and target regions absent in Azure-to-Azure disaster-recovery pilot; Azure-to-Azure disaster-recovery pilot cannot replicate supported virtual-machine disks from one region to recovery resources in another.
+- **C — Incorrect.** Monitor initial replication and resolve warnings or errors before scheduling the drill.
+  Monitor initial replication and resolve warnings or errors before scheduling the drill. In the Azure-to-Azure disaster-recovery pilot, this action changes replication health. Replication health does not implement source and target regions for Azure-to-Azure disaster-recovery pilot; the Azure-to-Azure disaster-recovery pilot still cannot replicate supported virtual-machine disks from one region to recovery resources in another.
+- **D — Incorrect.** Choose the most suitable recovery point, start failover, and validate the application before commit.
+  Choose the most suitable recovery point, start failover, and validate the application before commit. In the Azure-to-Azure disaster-recovery pilot, this action changes unplanned failover. Azure-to-Azure disaster-recovery pilot instead needs source and target regions: Choose a supported target region and validate VM, disk, network, quota, and feature compatibility. The unplanned failover action omits that source and target regions work.
 
-- A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- B: Correct. The lab establishes this design principle: Test failover validates recovery without committing production direction, while planned/unplanned failover, commit, reprotect, and failback are separate state transitions with cost and data-loss implications.
-- C: This choice changes or trusts a broader scope than the recorded lab boundary.
-- D: This choice skips independent evidence or relies on ambiguous resource identity.
+**Objectives:** `MR-RECOVERY-05`
 
-Objectives: `MR-RECOVERY-05`.
+**Remediation:** [Repeat the mapped guided task](../README.md#task-1) (`LAB25-CP01`).
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-powershell).
+**Microsoft Learn sources:**
 
-## LAB25-Q14 — C
+- [Azure-to-Azure disaster recovery architecture](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-architecture)
 
-The reviewed hands-on action for this objective is: Create a source VM and Recovery Services vault, then configure Azure-to-Azure fabric, container, policy, and network mappings.
+**Source reviewed:** 2026-08-31
 
-- A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- B: This choice changes or trusts a broader scope than the recorded lab boundary.
-- C: Correct. The reviewed hands-on action for this objective is: Create a source VM and Recovery Services vault, then configure Azure-to-Azure fabric, container, policy, and network mappings.
-- D: This choice skips independent evidence or relies on ambiguous resource identity.
+## LAB25-Q12 — D
 
-Objectives: `MR-RECOVERY-06`.
+**Question:** A failover pilot dry run shows no Azure-to-Azure disaster-recovery pilot command will place recovery orchestration outside the failure boundary it must survive. Which action belongs before execution?
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-dr-drill).
+- **A — Incorrect.** Select a compatible cache account in the source region and avoid unsupported firewall or performance constraints.
+  Select a compatible cache account in the source region and avoid unsupported firewall or performance constraints. In the Azure-to-Azure disaster-recovery pilot, this action changes cache storage accounts. Azure-to-Azure disaster-recovery pilot requires Site Recovery vault placement; changing cache storage accounts leaves Site Recovery vault placement absent in Azure-to-Azure disaster-recovery pilot; Azure-to-Azure disaster-recovery pilot cannot place recovery orchestration outside the failure boundary it must survive.
+- **B — Incorrect.** Start test failover to an isolated target VNet and validate the recovered application before cleanup.
+  Start test failover to an isolated target VNet and validate the recovered application before cleanup. In the Azure-to-Azure disaster-recovery pilot, this action changes test failover isolation. Test failover isolation does not implement Site Recovery vault placement for Azure-to-Azure disaster-recovery pilot; the Azure-to-Azure disaster-recovery pilot still cannot place recovery orchestration outside the failure boundary it must survive.
+- **C — Incorrect.** Validate recovery, commit deliberately, reprotect to the original region, and plan failback as a separate controlled change.
+  Validate recovery, commit deliberately, reprotect to the original region, and plan failback as a separate controlled change. In the Azure-to-Azure disaster-recovery pilot, this action changes commit, reprotect, and failback. Azure-to-Azure disaster-recovery pilot instead needs Site Recovery vault placement: Create or select the vault in the approved recovery region before enabling replication. The commit, reprotect, and failback action omits that Site Recovery vault placement work.
+- **D — Correct.** Create or select the vault in the approved recovery region before enabling replication.
+  Create or select the vault in the approved recovery region before enabling replication. This changes Site Recovery vault placement in the Azure-to-Azure disaster-recovery pilot, supplying the missing state needed to place recovery orchestration outside the failure boundary it must survive.
 
-## LAB25-Q15 — D
+**Objectives:** `MR-RECOVERY-05`
 
-Least privilege requires the documented boundary: Site Recovery Contributor, Virtual Machine Contributor, and Network Contributor on both region scopes
+**Remediation:** [Repeat the mapped guided task](../README.md#task-2) (`LAB25-CP02`).
 
-- A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- B: This choice changes or trusts a broader scope than the recorded lab boundary.
-- C: This choice skips independent evidence or relies on ambiguous resource identity.
-- D: Correct. Least privilege requires the documented boundary: Site Recovery Contributor, Virtual Machine Contributor, and Network Contributor on both region scopes
+**Microsoft Learn sources:**
 
-Objectives: `MR-RECOVERY-05`.
+- [Azure-to-Azure disaster recovery architecture](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-architecture)
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-failover-failback).
+**Source reviewed:** 2026-08-31
 
-## LAB25-Q16 — A
+## LAB25-Q13 — D
 
-Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+**Question:** For the Azure-to-Azure disaster-recovery pilot, operators need to configure retention plus the cadence for application-aware recovery points. Which change realizes that requirement?
 
-- A: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
-- B: This choice changes or trusts a broader scope than the recorded lab boundary.
-- C: This choice skips independent evidence or relies on ambiguous resource identity.
-- D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- **A — Incorrect.** Prepare nonoverlapping target networking and map every protected NIC before failover.
+  Prepare nonoverlapping target networking and map every protected NIC before failover. In the Azure-to-Azure disaster-recovery pilot, this action changes target network mapping. Target network mapping does not implement replication policies for Azure-to-Azure disaster-recovery pilot; the Azure-to-Azure disaster-recovery pilot still cannot configure retention plus the cadence for application-aware recovery points.
+- **B — Incorrect.** Use planned failover for an intentional migration or outage when source coordination is possible.
+  Use planned failover for an intentional migration or outage when source coordination is possible. In the Azure-to-Azure disaster-recovery pilot, this action changes planned failover. Azure-to-Azure disaster-recovery pilot instead needs replication policies: Create or select a policy whose recovery-point objectives match the application requirements. The planned failover action omits that replication policies work.
+- **C — Incorrect.** Choose a supported target region and validate VM, disk, network, quota, and feature compatibility.
+  Choose a supported target region and validate VM, disk, network, quota, and feature compatibility. In the Azure-to-Azure disaster-recovery pilot, this action changes source and target regions. Azure-to-Azure disaster-recovery pilot approved replication policies, not source and target regions; only the replication policies change can configure retention plus the cadence for application-aware recovery points.
+- **D — Correct.** Create or select a policy whose recovery-point objectives match the application requirements.
+  The Azure-to-Azure disaster-recovery pilot must configure retention plus the cadence for application-aware recovery points; this option performs its direct replication policies change: create or select a policy whose recovery-point objectives match the application requirements.
 
-Objectives: `MR-RECOVERY-06`.
+**Objectives:** `MR-RECOVERY-05`
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/site-recovery/site-recovery-manage-registration-and-protection).
+**Remediation:** [Repeat the mapped guided task](../README.md#task-3) (`LAB25-CP03`).
 
-## LAB25-Q17 — B
+**Microsoft Learn sources:**
 
-The lab's reviewed command path performs this bounded action: Create non-overlapping source and recovery VNets in the configured primary and secondary regions.
+- [Set up disaster recovery for an Azure VM](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-how-to-enable-replication)
 
-- A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- B: Correct. The lab's reviewed command path performs this bounded action: Create non-overlapping source and recovery VNets in the configured primary and secondary regions.
-- C: This choice changes or trusts a broader scope than the recorded lab boundary.
-- D: This choice skips independent evidence or relies on ambiguous resource identity.
+**Source reviewed:** 2026-08-31
 
-Objectives: `MR-RECOVERY-05`.
+## LAB25-Q14 — B
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-powershell).
+**Question:** Operators must automate the Azure-to-Azure disaster-recovery pilot change needed to buffer replication changes in a supported source-region storage account. Which failover pilot operation belongs in the runbook?
+
+- **A — Incorrect.** Monitor initial replication and resolve warnings or errors before scheduling the drill.
+  Monitor initial replication and resolve warnings or errors before scheduling the drill. In the Azure-to-Azure disaster-recovery pilot, this action changes replication health. Azure-to-Azure disaster-recovery pilot instead needs cache storage accounts: Select a compatible cache account in the source region and avoid unsupported firewall or performance constraints. The replication health action omits that cache storage accounts work.
+- **B — Correct.** Select a compatible cache account in the source region and avoid unsupported firewall or performance constraints.
+  Select a compatible cache account in the source region and avoid unsupported firewall or performance constraints. It is the least-change cache storage accounts path for the Azure-to-Azure disaster-recovery pilot requirement to buffer replication changes in a supported source-region storage account.
+- **C — Incorrect.** Choose the most suitable recovery point, start failover, and validate the application before commit.
+  Choose the most suitable recovery point, start failover, and validate the application before commit. In the Azure-to-Azure disaster-recovery pilot, this action changes unplanned failover. Azure-to-Azure disaster-recovery pilot requires cache storage accounts; changing unplanned failover leaves cache storage accounts absent in Azure-to-Azure disaster-recovery pilot; Azure-to-Azure disaster-recovery pilot cannot buffer replication changes in a supported source-region storage account.
+- **D — Incorrect.** Create or select the vault in the approved recovery region before enabling replication.
+  Create or select the vault in the approved recovery region before enabling replication. In the Azure-to-Azure disaster-recovery pilot, this action changes Site Recovery vault placement. Site Recovery vault placement does not implement cache storage accounts for Azure-to-Azure disaster-recovery pilot; the Azure-to-Azure disaster-recovery pilot still cannot buffer replication changes in a supported source-region storage account.
+
+**Objectives:** `MR-RECOVERY-05`
+
+**Remediation:** [Repeat the mapped guided task](../README.md#task-4) (`LAB25-CP04`).
+
+**Microsoft Learn sources:**
+
+- [Azure-to-Azure disaster recovery architecture](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-architecture)
+
+**Source reviewed:** 2026-08-31
+
+## LAB25-Q15 — B
+
+**Question:** An Azure-to-Azure disaster-recovery pilot review finds failover pilot drift from the need to connect recovered machines to the intended target network and subnet. Which correction addresses that drift?
+
+- **A — Incorrect.** Start test failover to an isolated target VNet and validate the recovered application before cleanup.
+  Start test failover to an isolated target VNet and validate the recovered application before cleanup. In the Azure-to-Azure disaster-recovery pilot, this action changes test failover isolation. Azure-to-Azure disaster-recovery pilot approved target network mapping, not test failover isolation; only the target network mapping change can connect recovered machines to the intended target network and subnet.
+- **B — Correct.** Prepare nonoverlapping target networking and map every protected NIC before failover.
+  Prepare nonoverlapping target networking and map every protected NIC before failover. In Azure-to-Azure disaster-recovery pilot, applying target network mapping is the scoped way to connect recovered machines to the intended target network and subnet.
+- **C — Incorrect.** Validate recovery, commit deliberately, reprotect to the original region, and plan failback as a separate controlled change.
+  Validate recovery, commit deliberately, reprotect to the original region, and plan failback as a separate controlled change. In the Azure-to-Azure disaster-recovery pilot, this action changes commit, reprotect, and failback. Commit, reprotect, and failback does not implement target network mapping for Azure-to-Azure disaster-recovery pilot; the Azure-to-Azure disaster-recovery pilot still cannot connect recovered machines to the intended target network and subnet.
+- **D — Incorrect.** Create or select a policy whose recovery-point objectives match the application requirements.
+  Create or select a policy whose recovery-point objectives match the application requirements. In the Azure-to-Azure disaster-recovery pilot, this action changes replication policies. Azure-to-Azure disaster-recovery pilot instead needs target network mapping: Prepare nonoverlapping target networking and map every protected NIC before failover. The replication policies action omits that target network mapping work.
+
+**Objectives:** `MR-RECOVERY-05`
+
+**Remediation:** [Repeat the mapped guided task](../README.md#task-5) (`LAB25-CP05`).
+
+**Microsoft Learn sources:**
+
+- [Set up disaster recovery for an Azure VM](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-how-to-enable-replication)
+
+**Source reviewed:** 2026-08-31
+
+## LAB25-Q16 — B
+
+**Question:** The Azure-to-Azure disaster-recovery pilot window permits only the failover pilot change needed to wait until initial synchronization completes and protection reports normal. Which option respects the boundary?
+
+- **A — Incorrect.** Use planned failover for an intentional migration or outage when source coordination is possible.
+  Use planned failover for an intentional migration or outage when source coordination is possible. In the Azure-to-Azure disaster-recovery pilot, this action changes planned failover. Azure-to-Azure disaster-recovery pilot requires replication health; changing planned failover leaves replication health absent in Azure-to-Azure disaster-recovery pilot; Azure-to-Azure disaster-recovery pilot cannot wait until initial synchronization completes and protection reports normal.
+- **B — Correct.** Monitor initial replication and resolve warnings or errors before scheduling the drill.
+  Monitor initial replication and resolve warnings or errors before scheduling the drill. The Azure-to-Azure disaster-recovery pilot uses this replication health operation to wait until initial synchronization completes and protection reports normal within the approved scope.
+- **C — Incorrect.** Choose a supported target region and validate VM, disk, network, quota, and feature compatibility.
+  Choose a supported target region and validate VM, disk, network, quota, and feature compatibility. In the Azure-to-Azure disaster-recovery pilot, this action changes source and target regions. Azure-to-Azure disaster-recovery pilot instead needs replication health: Monitor initial replication and resolve warnings or errors before scheduling the drill. The source and target regions action omits that replication health work.
+- **D — Incorrect.** Select a compatible cache account in the source region and avoid unsupported firewall or performance constraints.
+  Select a compatible cache account in the source region and avoid unsupported firewall or performance constraints. In the Azure-to-Azure disaster-recovery pilot, this action changes cache storage accounts. Azure-to-Azure disaster-recovery pilot approved replication health, not cache storage accounts; only the replication health change can wait until initial synchronization completes and protection reports normal.
+
+**Objectives:** `MR-RECOVERY-05`
+
+**Remediation:** [Repeat the mapped guided task](../README.md#task-1) (`LAB25-CP01`).
+
+**Microsoft Learn sources:**
+
+- [Set up disaster recovery for an Azure VM](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-how-to-enable-replication)
+
+**Source reviewed:** 2026-08-31
+
+## LAB25-Q17 — D
+
+**Question:** The failover pilot preflight has passed; the Azure-to-Azure disaster-recovery pilot must now exercise recovery on an isolated network without disrupting production replication. Which operation should run?
+
+- **A — Incorrect.** Choose the most suitable recovery point, start failover, and validate the application before commit.
+  Choose the most suitable recovery point, start failover, and validate the application before commit. In the Azure-to-Azure disaster-recovery pilot, this action changes unplanned failover. Unplanned failover does not implement test failover isolation for Azure-to-Azure disaster-recovery pilot; the Azure-to-Azure disaster-recovery pilot still cannot exercise recovery on an isolated network without disrupting production replication.
+- **B — Incorrect.** Create or select the vault in the approved recovery region before enabling replication.
+  Create or select the vault in the approved recovery region before enabling replication. In the Azure-to-Azure disaster-recovery pilot, this action changes Site Recovery vault placement. Azure-to-Azure disaster-recovery pilot instead needs test failover isolation: Start test failover to an isolated target VNet and validate the recovered application before cleanup. The Site Recovery vault placement action omits that test failover isolation work.
+- **C — Incorrect.** Prepare nonoverlapping target networking and map every protected NIC before failover.
+  Prepare nonoverlapping target networking and map every protected NIC before failover. In the Azure-to-Azure disaster-recovery pilot, this action changes target network mapping. Azure-to-Azure disaster-recovery pilot approved test failover isolation, not target network mapping; only the test failover isolation change can exercise recovery on an isolated network without disrupting production replication.
+- **D — Correct.** Start test failover to an isolated target VNet and validate the recovered application before cleanup.
+  For the Azure-to-Azure disaster-recovery pilot, the required test failover isolation action is: start test failover to an isolated target VNet and validate the recovered application before cleanup. It makes the environment able to exercise recovery on an isolated network without disrupting production replication.
+
+**Objectives:** `MR-RECOVERY-06`
+
+**Remediation:** [Repeat the mapped guided task](../README.md#task-2) (`LAB25-CP02`).
+
+**Microsoft Learn sources:**
+
+- [Run an Azure Site Recovery disaster recovery drill](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-dr-drill)
+
+**Source reviewed:** 2026-08-31
 
 ## LAB25-Q18 — C
 
-The independent validation path must prove Microsoft.Network/virtualNetworks for the exact recorded object.
+**Question:** The Azure-to-Azure disaster-recovery pilot plan must shut down the source and capture its latest changes for low-loss recovery while limiting the mutation scope to failover pilot. Which action is appropriate?
 
-- A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- B: This choice changes or trusts a broader scope than the recorded lab boundary.
-- C: Correct. The independent validation path must prove Microsoft.Network/virtualNetworks for the exact recorded object.
-- D: This choice skips independent evidence or relies on ambiguous resource identity.
+- **A — Incorrect.** Validate recovery, commit deliberately, reprotect to the original region, and plan failback as a separate controlled change.
+  Validate recovery, commit deliberately, reprotect to the original region, and plan failback as a separate controlled change. In the Azure-to-Azure disaster-recovery pilot, this action changes commit, reprotect, and failback. Azure-to-Azure disaster-recovery pilot instead needs planned failover: Use planned failover for an intentional migration or outage when source coordination is possible. The commit, reprotect, and failback action omits that planned failover work.
+- **B — Incorrect.** Create or select a policy whose recovery-point objectives match the application requirements.
+  Create or select a policy whose recovery-point objectives match the application requirements. In the Azure-to-Azure disaster-recovery pilot, this action changes replication policies. Azure-to-Azure disaster-recovery pilot approved planned failover, not replication policies; only the planned failover change can shut down the source and capture its latest changes for low-loss recovery.
+- **C — Correct.** Use planned failover for an intentional migration or outage when source coordination is possible.
+  Use planned failover for an intentional migration or outage when source coordination is possible. This changes planned failover in the Azure-to-Azure disaster-recovery pilot, supplying the missing state needed to shut down the source and capture its latest changes for low-loss recovery.
+- **D — Incorrect.** Monitor initial replication and resolve warnings or errors before scheduling the drill.
+  Monitor initial replication and resolve warnings or errors before scheduling the drill. In the Azure-to-Azure disaster-recovery pilot, this action changes replication health. Replication health does not implement planned failover for Azure-to-Azure disaster-recovery pilot; the Azure-to-Azure disaster-recovery pilot still cannot shut down the source and capture its latest changes for low-loss recovery.
 
-Objectives: `MR-RECOVERY-06`.
+**Objectives:** `MR-RECOVERY-06`
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-dr-drill).
+**Remediation:** [Repeat the mapped guided task](../README.md#task-3) (`LAB25-CP03`).
 
-## LAB25-Q19 — D
+**Microsoft Learn sources:**
 
-Unavailable live prerequisites remain skipped or partial; the documented gate is: This elevated lab requires two approved regions and explicit cost review before live execution; test failover must use an isolated network.
+- [Fail over and fail back Azure virtual machines](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-failover-failback)
 
-- A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- B: This choice changes or trusts a broader scope than the recorded lab boundary.
-- C: This choice skips independent evidence or relies on ambiguous resource identity.
-- D: Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: This elevated lab requires two approved regions and explicit cost review before live execution; test failover must use an isolated network.
+**Source reviewed:** 2026-08-31
 
-Objectives: `MR-RECOVERY-05`.
+## LAB25-Q19 — B
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-failover-failback).
+**Question:** A failover pilot ticket in the Azure-to-Azure disaster-recovery pilot says to start outage recovery from the most appropriate stored point. Which failover pilot action completes the Azure-to-Azure disaster-recovery pilot request with minimal change?
+
+- **A — Incorrect.** Choose a supported target region and validate VM, disk, network, quota, and feature compatibility.
+  Choose a supported target region and validate VM, disk, network, quota, and feature compatibility. In the Azure-to-Azure disaster-recovery pilot, this action changes source and target regions. Azure-to-Azure disaster-recovery pilot approved unplanned failover, not source and target regions; only the unplanned failover change can start outage recovery from the most appropriate stored point.
+- **B — Correct.** Choose the most suitable recovery point, start failover, and validate the application before commit.
+  The Azure-to-Azure disaster-recovery pilot must start outage recovery from the most appropriate stored point; this option performs its direct unplanned failover change: choose the most suitable recovery point, start failover, and validate the application before commit.
+- **C — Incorrect.** Select a compatible cache account in the source region and avoid unsupported firewall or performance constraints.
+  Select a compatible cache account in the source region and avoid unsupported firewall or performance constraints. In the Azure-to-Azure disaster-recovery pilot, this action changes cache storage accounts. Cache storage accounts does not implement unplanned failover for Azure-to-Azure disaster-recovery pilot; the Azure-to-Azure disaster-recovery pilot still cannot start outage recovery from the most appropriate stored point.
+- **D — Incorrect.** Start test failover to an isolated target VNet and validate the recovered application before cleanup.
+  Start test failover to an isolated target VNet and validate the recovered application before cleanup. In the Azure-to-Azure disaster-recovery pilot, this action changes test failover isolation. Azure-to-Azure disaster-recovery pilot instead needs unplanned failover: Choose the most suitable recovery point, start failover, and validate the application before commit. The test failover isolation action omits that unplanned failover work.
+
+**Objectives:** `MR-RECOVERY-06`
+
+**Remediation:** [Repeat the mapped guided task](../README.md#task-4) (`LAB25-CP04`).
+
+**Microsoft Learn sources:**
+
+- [Fail over and fail back Azure virtual machines](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-failover-failback)
+
+**Source reviewed:** 2026-08-31
 
 ## LAB25-Q20 — A
 
-Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
+**Question:** The approach for the Azure-to-Azure disaster-recovery pilot is approved, but the failover pilot environment still cannot finalize recovery, reverse protection direction, and return service to the original region. Which implementation step closes the gap?
 
-- A: Correct. Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
-- B: This choice changes or trusts a broader scope than the recorded lab boundary.
-- C: This choice skips independent evidence or relies on ambiguous resource identity.
-- D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- **A — Correct.** Validate recovery, commit deliberately, reprotect to the original region, and plan failback as a separate controlled change.
+  Validate recovery, commit deliberately, reprotect to the original region, and plan failback as a separate controlled change. It is the least-change commit, reprotect, and failback path for the Azure-to-Azure disaster-recovery pilot requirement to finalize recovery, reverse protection direction, and return service to the original region.
+- **B — Incorrect.** Create or select the vault in the approved recovery region before enabling replication.
+  Create or select the vault in the approved recovery region before enabling replication. In the Azure-to-Azure disaster-recovery pilot, this action changes Site Recovery vault placement. Site Recovery vault placement does not implement commit, reprotect, and failback for Azure-to-Azure disaster-recovery pilot; the Azure-to-Azure disaster-recovery pilot still cannot finalize recovery, reverse protection direction, and return service to the original region.
+- **C — Incorrect.** Prepare nonoverlapping target networking and map every protected NIC before failover.
+  Prepare nonoverlapping target networking and map every protected NIC before failover. In the Azure-to-Azure disaster-recovery pilot, this action changes target network mapping. Azure-to-Azure disaster-recovery pilot instead needs commit, reprotect, and failback: Validate recovery, commit deliberately, reprotect to the original region, and plan failback as a separate controlled change. The target network mapping action omits that commit, reprotect, and failback work.
+- **D — Incorrect.** Use planned failover for an intentional migration or outage when source coordination is possible.
+  Use planned failover for an intentional migration or outage when source coordination is possible. In the Azure-to-Azure disaster-recovery pilot, this action changes planned failover. Azure-to-Azure disaster-recovery pilot approved commit, reprotect, and failback, not planned failover; only the commit, reprotect, and failback change can finalize recovery, reverse protection direction, and return service to the original region.
 
-Objectives: `MR-RECOVERY-06`.
+**Objectives:** `MR-RECOVERY-06`
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/site-recovery/site-recovery-manage-registration-and-protection).
+**Remediation:** [Repeat the mapped guided task](../README.md#task-5) (`LAB25-CP05`).
 
-## LAB25-Q21 — B
+**Microsoft Learn sources:**
 
-Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+- [Fail over and fail back Azure virtual machines](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-failover-failback)
 
-- A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- B: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
-- C: This choice changes or trusts a broader scope than the recorded lab boundary.
-- D: This choice skips independent evidence or relies on ambiguous resource identity.
+**Source reviewed:** 2026-08-31
 
-Objectives: `MR-RECOVERY-06`.
+## LAB25-Q21 — D
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/site-recovery/site-recovery-manage-registration-and-protection).
+**Question:** The Azure-to-Azure disaster-recovery pilot rejects failover pilot exit status as proof it can replicate supported virtual-machine disks from one region to recovery resources in another. Which Azure-to-Azure disaster-recovery pilot result is valid evidence?
 
-## LAB25-Q22 — C
+- **A — Incorrect.** Query the protected disk's cache storage account ID and confirm region, kind, and network reachability.
+  Query the protected disk's cache storage account ID and confirm region, kind, and network reachability. In the Azure-to-Azure disaster-recovery pilot, this check observes cache storage accounts. Azure-to-Azure disaster-recovery pilot output covers cache storage accounts, not source and target regions; the source and target regions requirement to replicate supported virtual-machine disks from one region to recovery resources in another remains unverified.
+- **B — Incorrect.** Track the test-failover job, recovered VM network, application checks, and cleanup job.
+  Track the test-failover job, recovered VM network, application checks, and cleanup job. In the Azure-to-Azure disaster-recovery pilot, this check observes test failover isolation. Test failover isolation success in Azure-to-Azure disaster-recovery pilot cannot verify source and target regions; Azure-to-Azure disaster-recovery pilot cannot replicate supported virtual-machine disks from one region to recovery resources in another until source and target regions evidence exists.
+- **C — Incorrect.** Query activeLocation, allowedOperations, protectionState, and reverse-replication health after each phase.
+  Query activeLocation, allowedOperations, protectionState, and reverse-replication health after each phase. In the Azure-to-Azure disaster-recovery pilot, this check observes commit, reprotect, and failback. Azure-to-Azure disaster-recovery pilot reads commit, reprotect, and failback, leaving source and target regions unproved in Azure-to-Azure disaster-recovery pilot; Azure-to-Azure disaster-recovery pilot still has no source and target regions proof.
+- **D — Correct.** Query the protected item's source and target fabric, region, and replication health.
+  Query the protected item's source and target fabric, region, and replication health. For Azure-to-Azure disaster-recovery pilot, this source and target regions read confirms the service can replicate supported virtual-machine disks from one region to recovery resources in another.
 
-The lab's reviewed command path performs this bounded action: Create non-overlapping source and recovery VNets in the configured primary and secondary regions.
+**Objectives:** `MR-RECOVERY-05`
 
-- A: This choice skips independent evidence or relies on ambiguous resource identity.
-- B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- C: Correct. The lab's reviewed command path performs this bounded action: Create non-overlapping source and recovery VNets in the configured primary and secondary regions.
-- D: This choice changes or trusts a broader scope than the recorded lab boundary.
+**Remediation:** [Repeat the mapped guided task](../README.md#task-1) (`LAB25-CP01`).
 
-Objectives: `MR-RECOVERY-05`.
+**Microsoft Learn sources:**
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-powershell).
+- [Azure-to-Azure disaster recovery architecture](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-architecture)
 
-## LAB25-Q23 — D
+**Source reviewed:** 2026-08-31
 
-The independent validation path must prove Microsoft.Network/virtualNetworks for the exact recorded object.
+## LAB25-Q22 — B
 
-- A: This choice skips independent evidence or relies on ambiguous resource identity.
-- B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- C: This choice changes or trusts a broader scope than the recorded lab boundary.
-- D: Correct. The independent validation path must prove Microsoft.Network/virtualNetworks for the exact recorded object.
+**Question:** The failover pilot validator needs one Azure-to-Azure disaster-recovery pilot query after the change to place recovery orchestration outside the failure boundary it must survive. Which failover pilot property should the Azure-to-Azure disaster-recovery pilot validator inspect?
 
-Objectives: `MR-RECOVERY-06`.
+- **A — Incorrect.** Query target network and subnet IDs for each replicated NIC and validate DNS and security dependencies.
+  Query target network and subnet IDs for each replicated NIC and validate DNS and security dependencies. In the Azure-to-Azure disaster-recovery pilot, this check observes target network mapping. Target network mapping success in Azure-to-Azure disaster-recovery pilot cannot verify Site Recovery vault placement; Azure-to-Azure disaster-recovery pilot cannot place recovery orchestration outside the failure boundary it must survive until Site Recovery vault placement evidence exists.
+- **B — Correct.** Query vault location and confirm it differs from the protected workload's source region.
+  Query vault location and confirm it differs from the protected workload's source region. The Azure-to-Azure disaster-recovery pilot reads Site Recovery vault placement directly; that Site Recovery vault placement result proves the Azure-to-Azure disaster-recovery pilot can place recovery orchestration outside the failure boundary it must survive without another mutation.
+- **C — Incorrect.** Track shutdown, synchronization, failover job completion, active location, and recovery point.
+  Track shutdown, synchronization, failover job completion, active location, and recovery point. In the Azure-to-Azure disaster-recovery pilot, this check observes planned failover. Azure-to-Azure disaster-recovery pilot could pass planned failover while Site Recovery vault placement is wrong; Azure-to-Azure disaster-recovery pilot still lacks Site Recovery vault placement proof.
+- **D — Incorrect.** Query the protected item's source and target fabric, region, and replication health.
+  Query the protected item's source and target fabric, region, and replication health. In the Azure-to-Azure disaster-recovery pilot, this check observes source and target regions. Azure-to-Azure disaster-recovery pilot output covers source and target regions, not Site Recovery vault placement; the Site Recovery vault placement requirement to place recovery orchestration outside the failure boundary it must survive remains unverified.
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-dr-drill).
+**Objectives:** `MR-RECOVERY-05`
 
-## LAB25-Q24 — A
+**Remediation:** [Repeat the mapped guided task](../README.md#task-2) (`LAB25-CP02`).
 
-Unavailable live prerequisites remain skipped or partial; the documented gate is: This elevated lab requires two approved regions and explicit cost review before live execution; test failover must use an isolated network.
+**Microsoft Learn sources:**
 
-- A: Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: This elevated lab requires two approved regions and explicit cost review before live execution; test failover must use an isolated network.
-- B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- C: This choice changes or trusts a broader scope than the recorded lab boundary.
-- D: This choice skips independent evidence or relies on ambiguous resource identity.
+- [Azure-to-Azure disaster recovery architecture](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-architecture)
 
-Objectives: `MR-RECOVERY-05`.
+**Source reviewed:** 2026-08-31
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-failover-failback).
+## LAB25-Q23 — B
 
-## LAB25-Q25 — B
+**Question:** The disaster-recovery administrator piloting Azure-to-Azure replication must confirm the Azure-to-Azure disaster-recovery pilot, without mutation, can configure retention plus the cadence for application-aware recovery points. Which failover pilot check qualifies?
 
-Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
+- **A — Incorrect.** Query protectionState, replicationHealth, activeLocation, and latest recovery points.
+  Query protectionState, replicationHealth, activeLocation, and latest recovery points. In the Azure-to-Azure disaster-recovery pilot, this check observes replication health. Azure-to-Azure disaster-recovery pilot reads replication health, leaving replication policies unproved in Azure-to-Azure disaster-recovery pilot; Azure-to-Azure disaster-recovery pilot still has no replication policies proof.
+- **B — Correct.** Query recoveryPointRetentionInHours and appConsistentFrequencyInHours on the active policy.
+  For the Azure-to-Azure disaster-recovery pilot, this replication policies observation is decisive: query recoveryPointRetentionInHours and appConsistentFrequencyInHours on the active policy. It is Azure-to-Azure disaster-recovery pilot evidence that operators can configure retention plus the cadence for application-aware recovery points.
+- **C — Incorrect.** Query recovery-point type, job state, active location, and target VM health.
+  Query recovery-point type, job state, active location, and target VM health. In the Azure-to-Azure disaster-recovery pilot, this check observes unplanned failover. Azure-to-Azure disaster-recovery pilot output covers unplanned failover, not replication policies; the replication policies requirement to configure retention plus the cadence for application-aware recovery points remains unverified.
+- **D — Incorrect.** Query vault location and confirm it differs from the protected workload's source region.
+  Query vault location and confirm it differs from the protected workload's source region. In the Azure-to-Azure disaster-recovery pilot, this check observes Site Recovery vault placement. Site Recovery vault placement success in Azure-to-Azure disaster-recovery pilot cannot verify replication policies; Azure-to-Azure disaster-recovery pilot cannot configure retention plus the cadence for application-aware recovery points until replication policies evidence exists.
 
-- A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- B: Correct. Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
-- C: This choice changes or trusts a broader scope than the recorded lab boundary.
-- D: This choice skips independent evidence or relies on ambiguous resource identity.
+**Objectives:** `MR-RECOVERY-05`
 
-Objectives: `MR-RECOVERY-06`.
+**Remediation:** [Repeat the mapped guided task](../README.md#task-3) (`LAB25-CP03`).
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/site-recovery/site-recovery-manage-registration-and-protection).
+**Microsoft Learn sources:**
 
-## LAB25-Q26 — C
+- [Set up disaster recovery for an Azure VM](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-how-to-enable-replication)
 
-Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+**Source reviewed:** 2026-08-31
 
-- A: This choice skips independent evidence or relies on ambiguous resource identity.
-- B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- C: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
-- D: This choice changes or trusts a broader scope than the recorded lab boundary.
+## LAB25-Q24 — C
 
-Objectives: `MR-RECOVERY-06`.
+**Question:** The Azure-to-Azure disaster-recovery pilot configuration is complete; the failover pilot reviewers need evidence it can buffer replication changes in a supported source-region storage account. Which observation shows success?
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/site-recovery/site-recovery-manage-registration-and-protection).
+- **A — Incorrect.** Track the test-failover job, recovered VM network, application checks, and cleanup job.
+  Track the test-failover job, recovered VM network, application checks, and cleanup job. In the Azure-to-Azure disaster-recovery pilot, this check observes test failover isolation. Azure-to-Azure disaster-recovery pilot could pass test failover isolation while cache storage accounts is wrong; Azure-to-Azure disaster-recovery pilot still lacks cache storage accounts proof.
+- **B — Incorrect.** Query activeLocation, allowedOperations, protectionState, and reverse-replication health after each phase.
+  Query activeLocation, allowedOperations, protectionState, and reverse-replication health after each phase. In the Azure-to-Azure disaster-recovery pilot, this check observes commit, reprotect, and failback. Azure-to-Azure disaster-recovery pilot output covers commit, reprotect, and failback, not cache storage accounts; the cache storage accounts requirement to buffer replication changes in a supported source-region storage account remains unverified.
+- **C — Correct.** Query the protected disk's cache storage account ID and confirm region, kind, and network reachability.
+  Query the protected disk's cache storage account ID and confirm region, kind, and network reachability. Because the Azure-to-Azure disaster-recovery pilot check observes cache storage accounts, it independently verifies the requirement to buffer replication changes in a supported source-region storage account.
+- **D — Incorrect.** Query recoveryPointRetentionInHours and appConsistentFrequencyInHours on the active policy.
+  Query recoveryPointRetentionInHours and appConsistentFrequencyInHours on the active policy. In the Azure-to-Azure disaster-recovery pilot, this check observes replication policies. Azure-to-Azure disaster-recovery pilot reads replication policies, leaving cache storage accounts unproved in Azure-to-Azure disaster-recovery pilot; Azure-to-Azure disaster-recovery pilot still has no cache storage accounts proof.
+
+**Objectives:** `MR-RECOVERY-05`
+
+**Remediation:** [Repeat the mapped guided task](../README.md#task-4) (`LAB25-CP04`).
+
+**Microsoft Learn sources:**
+
+- [Azure-to-Azure disaster recovery architecture](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-architecture)
+
+**Source reviewed:** 2026-08-31
+
+## LAB25-Q25 — C
+
+**Question:** The failover pilot validation asks whether the Azure-to-Azure disaster-recovery pilot can connect recovered machines to the intended target network and subnet. Which observable state is strongest?
+
+- **A — Incorrect.** Track shutdown, synchronization, failover job completion, active location, and recovery point.
+  Track shutdown, synchronization, failover job completion, active location, and recovery point. In the Azure-to-Azure disaster-recovery pilot, this check observes planned failover. Azure-to-Azure disaster-recovery pilot output covers planned failover, not target network mapping; the target network mapping requirement to connect recovered machines to the intended target network and subnet remains unverified.
+- **B — Incorrect.** Query the protected item's source and target fabric, region, and replication health.
+  Query the protected item's source and target fabric, region, and replication health. In the Azure-to-Azure disaster-recovery pilot, this check observes source and target regions. Source and target regions success in Azure-to-Azure disaster-recovery pilot cannot verify target network mapping; Azure-to-Azure disaster-recovery pilot cannot connect recovered machines to the intended target network and subnet until target network mapping evidence exists.
+- **C — Correct.** Query target network and subnet IDs for each replicated NIC and validate DNS and security dependencies.
+  The Azure-to-Azure disaster-recovery pilot validator needs this target network mapping result: query target network and subnet IDs for each replicated NIC and validate DNS and security dependencies. It proves the outcome to connect recovered machines to the intended target network and subnet rather than an adjacent checkpoint.
+- **D — Incorrect.** Query the protected disk's cache storage account ID and confirm region, kind, and network reachability.
+  Query the protected disk's cache storage account ID and confirm region, kind, and network reachability. In the Azure-to-Azure disaster-recovery pilot, this check observes cache storage accounts. Azure-to-Azure disaster-recovery pilot could pass cache storage accounts while target network mapping is wrong; Azure-to-Azure disaster-recovery pilot still lacks target network mapping proof.
+
+**Objectives:** `MR-RECOVERY-05`
+
+**Remediation:** [Repeat the mapped guided task](../README.md#task-5) (`LAB25-CP05`).
+
+**Microsoft Learn sources:**
+
+- [Set up disaster recovery for an Azure VM](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-how-to-enable-replication)
+
+**Source reviewed:** 2026-08-31
+
+## LAB25-Q26 — B
+
+**Question:** An Azure-to-Azure disaster-recovery pilot review must prove the failover pilot ability to wait until initial synchronization completes and protection reports normal. Which check avoids an adjacent feature?
+
+- **A — Incorrect.** Query recovery-point type, job state, active location, and target VM health.
+  Query recovery-point type, job state, active location, and target VM health. In the Azure-to-Azure disaster-recovery pilot, this check observes unplanned failover. Unplanned failover success in Azure-to-Azure disaster-recovery pilot cannot verify replication health; Azure-to-Azure disaster-recovery pilot cannot wait until initial synchronization completes and protection reports normal until replication health evidence exists.
+- **B — Correct.** Query protectionState, replicationHealth, activeLocation, and latest recovery points.
+  Query protectionState, replicationHealth, activeLocation, and latest recovery points. This is independent replication health evidence for the Azure-to-Azure disaster-recovery pilot, even if Azure-to-Azure disaster-recovery pilot setup reports success before replication health becomes observable.
+- **C — Incorrect.** Query vault location and confirm it differs from the protected workload's source region.
+  Query vault location and confirm it differs from the protected workload's source region. In the Azure-to-Azure disaster-recovery pilot, this check observes Site Recovery vault placement. Azure-to-Azure disaster-recovery pilot could pass Site Recovery vault placement while replication health is wrong; Azure-to-Azure disaster-recovery pilot still lacks replication health proof.
+- **D — Incorrect.** Query target network and subnet IDs for each replicated NIC and validate DNS and security dependencies.
+  Query target network and subnet IDs for each replicated NIC and validate DNS and security dependencies. In the Azure-to-Azure disaster-recovery pilot, this check observes target network mapping. Azure-to-Azure disaster-recovery pilot output covers target network mapping, not replication health; the replication health requirement to wait until initial synchronization completes and protection reports normal remains unverified.
+
+**Objectives:** `MR-RECOVERY-05`
+
+**Remediation:** [Repeat the mapped guided task](../README.md#task-1) (`LAB25-CP01`).
+
+**Microsoft Learn sources:**
+
+- [Set up disaster recovery for an Azure VM](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-how-to-enable-replication)
+
+**Source reviewed:** 2026-08-31
 
 ## LAB25-Q27 — D
 
-The lab's reviewed command path performs this bounded action: Create non-overlapping source and recovery VNets in the configured primary and secondary regions.
+**Question:** The Azure-to-Azure disaster-recovery pilot evidence bundle needs a failover pilot result showing it can exercise recovery on an isolated network without disrupting production replication. Which result belongs in the checkpoint?
 
-- A: This choice changes or trusts a broader scope than the recorded lab boundary.
-- B: This choice skips independent evidence or relies on ambiguous resource identity.
-- C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- D: Correct. The lab's reviewed command path performs this bounded action: Create non-overlapping source and recovery VNets in the configured primary and secondary regions.
+- **A — Incorrect.** Query activeLocation, allowedOperations, protectionState, and reverse-replication health after each phase.
+  Query activeLocation, allowedOperations, protectionState, and reverse-replication health after each phase. In the Azure-to-Azure disaster-recovery pilot, this check observes commit, reprotect, and failback. Azure-to-Azure disaster-recovery pilot reads commit, reprotect, and failback, leaving test failover isolation unproved in Azure-to-Azure disaster-recovery pilot; Azure-to-Azure disaster-recovery pilot still has no test failover isolation proof.
+- **B — Incorrect.** Query recoveryPointRetentionInHours and appConsistentFrequencyInHours on the active policy.
+  Query recoveryPointRetentionInHours and appConsistentFrequencyInHours on the active policy. In the Azure-to-Azure disaster-recovery pilot, this check observes replication policies. Azure-to-Azure disaster-recovery pilot could pass replication policies while test failover isolation is wrong; Azure-to-Azure disaster-recovery pilot still lacks test failover isolation proof.
+- **C — Incorrect.** Query protectionState, replicationHealth, activeLocation, and latest recovery points.
+  Query protectionState, replicationHealth, activeLocation, and latest recovery points. In the Azure-to-Azure disaster-recovery pilot, this check observes replication health. Azure-to-Azure disaster-recovery pilot output covers replication health, not test failover isolation; the test failover isolation requirement to exercise recovery on an isolated network without disrupting production replication remains unverified.
+- **D — Correct.** Track the test-failover job, recovered VM network, application checks, and cleanup job.
+  Track the test-failover job, recovered VM network, application checks, and cleanup job. For Azure-to-Azure disaster-recovery pilot, this test failover isolation read confirms the service can exercise recovery on an isolated network without disrupting production replication.
 
-Objectives: `MR-RECOVERY-05`.
+**Objectives:** `MR-RECOVERY-06`
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-powershell).
+**Remediation:** [Repeat the mapped guided task](../README.md#task-2) (`LAB25-CP02`).
+
+**Microsoft Learn sources:**
+
+- [Run an Azure Site Recovery disaster recovery drill](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-dr-drill)
+
+**Source reviewed:** 2026-08-31
 
 ## LAB25-Q28 — A
 
-The independent validation path must prove Microsoft.Network/virtualNetworks for the exact recorded object.
+**Question:** Before Azure-to-Azure disaster-recovery pilot cleanup, the failover pilot team must reconfirm it can shut down the source and capture its latest changes for low-loss recovery. Which read-only inspection should run?
 
-- A: Correct. The independent validation path must prove Microsoft.Network/virtualNetworks for the exact recorded object.
-- B: This choice skips independent evidence or relies on ambiguous resource identity.
-- C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- D: This choice changes or trusts a broader scope than the recorded lab boundary.
+- **A — Correct.** Track shutdown, synchronization, failover job completion, active location, and recovery point.
+  Track shutdown, synchronization, failover job completion, active location, and recovery point. The Azure-to-Azure disaster-recovery pilot reads planned failover directly; that planned failover result proves the Azure-to-Azure disaster-recovery pilot can shut down the source and capture its latest changes for low-loss recovery without another mutation.
+- **B — Incorrect.** Query the protected item's source and target fabric, region, and replication health.
+  Query the protected item's source and target fabric, region, and replication health. In the Azure-to-Azure disaster-recovery pilot, this check observes source and target regions. Azure-to-Azure disaster-recovery pilot output covers source and target regions, not planned failover; the planned failover requirement to shut down the source and capture its latest changes for low-loss recovery remains unverified.
+- **C — Incorrect.** Query the protected disk's cache storage account ID and confirm region, kind, and network reachability.
+  Query the protected disk's cache storage account ID and confirm region, kind, and network reachability. In the Azure-to-Azure disaster-recovery pilot, this check observes cache storage accounts. Cache storage accounts success in Azure-to-Azure disaster-recovery pilot cannot verify planned failover; Azure-to-Azure disaster-recovery pilot cannot shut down the source and capture its latest changes for low-loss recovery until planned failover evidence exists.
+- **D — Incorrect.** Track the test-failover job, recovered VM network, application checks, and cleanup job.
+  Track the test-failover job, recovered VM network, application checks, and cleanup job. In the Azure-to-Azure disaster-recovery pilot, this check observes test failover isolation. Azure-to-Azure disaster-recovery pilot reads test failover isolation, leaving planned failover unproved in Azure-to-Azure disaster-recovery pilot; Azure-to-Azure disaster-recovery pilot still has no planned failover proof.
 
-Objectives: `MR-RECOVERY-06`.
+**Objectives:** `MR-RECOVERY-06`
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-dr-drill).
+**Remediation:** [Repeat the mapped guided task](../README.md#task-3) (`LAB25-CP03`).
+
+**Microsoft Learn sources:**
+
+- [Fail over and fail back Azure virtual machines](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-failover-failback)
+
+**Source reviewed:** 2026-08-31
 
 ## LAB25-Q29 — B
 
-Unavailable live prerequisites remain skipped or partial; the documented gate is: This elevated lab requires two approved regions and explicit cost review before live execution; test failover must use an isolated network.
+**Question:** The Azure-to-Azure disaster-recovery pilot setup reports success after the failover pilot attempt to start outage recovery from the most appropriate stored point. Which failover pilot read-only observation proves the Azure-to-Azure disaster-recovery pilot outcome?
 
-- A: This choice skips independent evidence or relies on ambiguous resource identity.
-- B: Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: This elevated lab requires two approved regions and explicit cost review before live execution; test failover must use an isolated network.
-- C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- D: This choice changes or trusts a broader scope than the recorded lab boundary.
+- **A — Incorrect.** Query vault location and confirm it differs from the protected workload's source region.
+  Query vault location and confirm it differs from the protected workload's source region. In the Azure-to-Azure disaster-recovery pilot, this check observes Site Recovery vault placement. Azure-to-Azure disaster-recovery pilot output covers Site Recovery vault placement, not unplanned failover; the unplanned failover requirement to start outage recovery from the most appropriate stored point remains unverified.
+- **B — Correct.** Query recovery-point type, job state, active location, and target VM health.
+  For the Azure-to-Azure disaster-recovery pilot, this unplanned failover observation is decisive: query recovery-point type, job state, active location, and target VM health. It is Azure-to-Azure disaster-recovery pilot evidence that operators can start outage recovery from the most appropriate stored point.
+- **C — Incorrect.** Query target network and subnet IDs for each replicated NIC and validate DNS and security dependencies.
+  Query target network and subnet IDs for each replicated NIC and validate DNS and security dependencies. In the Azure-to-Azure disaster-recovery pilot, this check observes target network mapping. Azure-to-Azure disaster-recovery pilot reads target network mapping, leaving unplanned failover unproved in Azure-to-Azure disaster-recovery pilot; Azure-to-Azure disaster-recovery pilot still has no unplanned failover proof.
+- **D — Incorrect.** Track shutdown, synchronization, failover job completion, active location, and recovery point.
+  Track shutdown, synchronization, failover job completion, active location, and recovery point. In the Azure-to-Azure disaster-recovery pilot, this check observes planned failover. Azure-to-Azure disaster-recovery pilot could pass planned failover while unplanned failover is wrong; Azure-to-Azure disaster-recovery pilot still lacks unplanned failover proof.
 
-Objectives: `MR-RECOVERY-05`.
+**Objectives:** `MR-RECOVERY-06`
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-failover-failback).
+**Remediation:** [Repeat the mapped guided task](../README.md#task-4) (`LAB25-CP04`).
+
+**Microsoft Learn sources:**
+
+- [Fail over and fail back Azure virtual machines](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-failover-failback)
+
+**Source reviewed:** 2026-08-31
 
 ## LAB25-Q30 — C
 
-Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
+**Question:** The failover pilot log says the Azure-to-Azure disaster-recovery pilot can now finalize recovery, reverse protection direction, and return service to the original region. Which failover pilot state should the Azure-to-Azure disaster-recovery pilot acceptance test retain?
 
-- A: This choice skips independent evidence or relies on ambiguous resource identity.
-- B: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- C: Correct. Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
-- D: This choice changes or trusts a broader scope than the recorded lab boundary.
+- **A — Incorrect.** Query recoveryPointRetentionInHours and appConsistentFrequencyInHours on the active policy.
+  Query recoveryPointRetentionInHours and appConsistentFrequencyInHours on the active policy. In the Azure-to-Azure disaster-recovery pilot, this check observes replication policies. Replication policies success in Azure-to-Azure disaster-recovery pilot cannot verify commit, reprotect, and failback; Azure-to-Azure disaster-recovery pilot cannot finalize recovery, reverse protection direction, and return service to the original region until commit, reprotect, and failback evidence exists.
+- **B — Incorrect.** Query protectionState, replicationHealth, activeLocation, and latest recovery points.
+  Query protectionState, replicationHealth, activeLocation, and latest recovery points. In the Azure-to-Azure disaster-recovery pilot, this check observes replication health. Azure-to-Azure disaster-recovery pilot reads replication health, leaving commit, reprotect, and failback unproved in Azure-to-Azure disaster-recovery pilot; Azure-to-Azure disaster-recovery pilot still has no commit, reprotect, and failback proof.
+- **C — Correct.** Query activeLocation, allowedOperations, protectionState, and reverse-replication health after each phase.
+  Query activeLocation, allowedOperations, protectionState, and reverse-replication health after each phase. Because the Azure-to-Azure disaster-recovery pilot check observes commit, reprotect, and failback, it independently verifies the requirement to finalize recovery, reverse protection direction, and return service to the original region.
+- **D — Incorrect.** Query recovery-point type, job state, active location, and target VM health.
+  Query recovery-point type, job state, active location, and target VM health. In the Azure-to-Azure disaster-recovery pilot, this check observes unplanned failover. Azure-to-Azure disaster-recovery pilot output covers unplanned failover, not commit, reprotect, and failback; the commit, reprotect, and failback requirement to finalize recovery, reverse protection direction, and return service to the original region remains unverified.
 
-Objectives: `MR-RECOVERY-06`.
+**Objectives:** `MR-RECOVERY-06`
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/site-recovery/site-recovery-manage-registration-and-protection).
+**Remediation:** [Repeat the mapped guided task](../README.md#task-5) (`LAB25-CP05`).
 
-## LAB25-Q31 — D
+**Microsoft Learn sources:**
 
-Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+- [Fail over and fail back Azure virtual machines](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-failover-failback)
 
-- A: This choice changes or trusts a broader scope than the recorded lab boundary.
-- B: This choice skips independent evidence or relies on ambiguous resource identity.
-- C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- D: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+**Source reviewed:** 2026-08-31
 
-Objectives: `MR-RECOVERY-06`.
+## LAB25-Q31 — B
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/site-recovery/site-recovery-manage-registration-and-protection).
+**Question:** A failover pilot break/fix in the Azure-to-Azure disaster-recovery pilot fails when operators try to replicate supported virtual-machine disks from one region to recovery resources in another. Which diagnosis fits?
 
-## LAB25-Q32 — A
+- **A — Incorrect.** The vault was created in the same region as the source VM it must orchestrate during regional recovery.
+  The vault was created in the same region as the source VM it must orchestrate during regional recovery. The Azure-to-Azure disaster-recovery pilot fault concerns Site Recovery vault placement. Azure-to-Azure disaster-recovery pilot has Site Recovery vault placement impact, but source and target regions is the Azure-to-Azure disaster-recovery pilot failed path; the Site Recovery vault placement state cannot produce source and target regions failure.
+- **B — Correct.** The target region does not support one of the source VM's required features.
+  The Azure-to-Azure disaster-recovery pilot cannot replicate supported virtual-machine disks from one region to recovery resources in another because of this source and target regions defect: the target region does not support one of the source VM's required features. The symptom and repair align.
+- **C — Incorrect.** Initial replication is still in progress when the test failover is started.
+  Initial replication is still in progress when the test failover is started. The Azure-to-Azure disaster-recovery pilot fault concerns replication health. Azure-to-Azure disaster-recovery pilot failed on source and target regions; this replication health finding redirects Azure-to-Azure disaster-recovery pilot remediation away from source and target regions.
+- **D — Incorrect.** The failover was committed before application owners validated the recovered workload.
+  The failover was committed before application owners validated the recovered workload. The Azure-to-Azure disaster-recovery pilot fault concerns commit, reprotect, and failback. Azure-to-Azure disaster-recovery pilot may fix commit, reprotect, and failback, yet source and target regions still fails; this Azure-to-Azure disaster-recovery pilot diagnosis of commit, reprotect, and failback is wrong for source and target regions.
 
-The lab's reviewed command path performs this bounded action: Create non-overlapping source and recovery VNets in the configured primary and secondary regions.
+**Objectives:** `MR-RECOVERY-05`
 
-- A: Correct. The lab's reviewed command path performs this bounded action: Create non-overlapping source and recovery VNets in the configured primary and secondary regions.
-- B: This choice changes or trusts a broader scope than the recorded lab boundary.
-- C: This choice skips independent evidence or relies on ambiguous resource identity.
-- D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+**Remediation:** [Repeat the mapped guided task](../README.md#task-1) (`LAB25-CP01`).
 
-Objectives: `MR-RECOVERY-05`.
+**Microsoft Learn sources:**
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-powershell).
+- [Azure-to-Azure disaster recovery architecture](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-architecture)
 
-## LAB25-Q33 — B
+**Source reviewed:** 2026-08-31
 
-The independent validation path must prove Microsoft.Network/virtualNetworks for the exact recorded object.
+## LAB25-Q32 — C
 
-- A: This choice changes or trusts a broader scope than the recorded lab boundary.
-- B: Correct. The independent validation path must prove Microsoft.Network/virtualNetworks for the exact recorded object.
-- C: This choice skips independent evidence or relies on ambiguous resource identity.
-- D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+**Question:** The Azure-to-Azure disaster-recovery pilot troubleshooting scope is the failover pilot need to place recovery orchestration outside the failure boundary it must survive. Which condition should be corrected first?
 
-Objectives: `MR-RECOVERY-06`.
+- **A — Incorrect.** The application requires app-consistent points more frequently than the policy creates them.
+  The application requires app-consistent points more frequently than the policy creates them. The Azure-to-Azure disaster-recovery pilot fault concerns replication policies. Azure-to-Azure disaster-recovery pilot could repair replication policies while Site Recovery vault placement stays broken in Azure-to-Azure disaster-recovery pilot; the Azure-to-Azure disaster-recovery pilot remains unable to place recovery orchestration outside the failure boundary it must survive.
+- **B — Incorrect.** The test VM connects to the production target network and creates duplicate service identities.
+  The test VM connects to the production target network and creates duplicate service identities. The Azure-to-Azure disaster-recovery pilot fault concerns test failover isolation. Azure-to-Azure disaster-recovery pilot failed on Site Recovery vault placement; this test failover isolation finding redirects Azure-to-Azure disaster-recovery pilot remediation away from Site Recovery vault placement.
+- **C — Correct.** The vault was created in the same region as the source VM it must orchestrate during regional recovery.
+  The vault was created in the same region as the source VM it must orchestrate during regional recovery. Removing this Site Recovery vault placement condition lets the Azure-to-Azure disaster-recovery pilot place recovery orchestration outside the failure boundary it must survive while leaving healthy controls unchanged.
+- **D — Incorrect.** The target region does not support one of the source VM's required features.
+  The target region does not support one of the source VM's required features. The Azure-to-Azure disaster-recovery pilot fault concerns source and target regions. Azure-to-Azure disaster-recovery pilot has source and target regions impact, but Site Recovery vault placement is the Azure-to-Azure disaster-recovery pilot failed path; the source and target regions state cannot produce Site Recovery vault placement failure.
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-dr-drill).
+**Objectives:** `MR-RECOVERY-05`
 
-## LAB25-Q34 — C
+**Remediation:** [Repeat the mapped guided task](../README.md#task-2) (`LAB25-CP02`).
 
-Unavailable live prerequisites remain skipped or partial; the documented gate is: This elevated lab requires two approved regions and explicit cost review before live execution; test failover must use an isolated network.
+**Microsoft Learn sources:**
 
-- A: This choice changes or trusts a broader scope than the recorded lab boundary.
-- B: This choice skips independent evidence or relies on ambiguous resource identity.
-- C: Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: This elevated lab requires two approved regions and explicit cost review before live execution; test failover must use an isolated network.
-- D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- [Azure-to-Azure disaster recovery architecture](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-architecture)
 
-Objectives: `MR-RECOVERY-05`.
+**Source reviewed:** 2026-08-31
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-failover-failback).
+## LAB25-Q33 — A
+
+**Question:** The Azure-to-Azure disaster-recovery pilot result is partial because the failover pilot cannot configure retention plus the cadence for application-aware recovery points. Which condition accounts for that result?
+
+- **A — Correct.** The application requires app-consistent points more frequently than the policy creates them.
+  The application requires app-consistent points more frequently than the policy creates them. In Azure-to-Azure disaster-recovery pilot, this replication policies cause matches the failure to configure retention plus the cadence for application-aware recovery points.
+- **B — Incorrect.** The chosen cache storage account is in the target region instead of the source region.
+  The chosen cache storage account is in the target region instead of the source region. The Azure-to-Azure disaster-recovery pilot fault concerns cache storage accounts. Azure-to-Azure disaster-recovery pilot may fix cache storage accounts, yet replication policies still fails; this Azure-to-Azure disaster-recovery pilot diagnosis of cache storage accounts is wrong for replication policies.
+- **C — Incorrect.** The source VM cannot be reached, so final planned synchronization cannot complete.
+  The source VM cannot be reached, so final planned synchronization cannot complete. The Azure-to-Azure disaster-recovery pilot fault concerns planned failover. Azure-to-Azure disaster-recovery pilot has planned failover impact, but replication policies is the Azure-to-Azure disaster-recovery pilot failed path; the planned failover state cannot produce replication policies failure.
+- **D — Incorrect.** The vault was created in the same region as the source VM it must orchestrate during regional recovery.
+  The vault was created in the same region as the source VM it must orchestrate during regional recovery. The Azure-to-Azure disaster-recovery pilot fault concerns Site Recovery vault placement. Azure-to-Azure disaster-recovery pilot could repair Site Recovery vault placement while replication policies stays broken in Azure-to-Azure disaster-recovery pilot; the Azure-to-Azure disaster-recovery pilot remains unable to configure retention plus the cadence for application-aware recovery points.
+
+**Objectives:** `MR-RECOVERY-05`
+
+**Remediation:** [Repeat the mapped guided task](../README.md#task-3) (`LAB25-CP03`).
+
+**Microsoft Learn sources:**
+
+- [Set up disaster recovery for an Azure VM](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-how-to-enable-replication)
+
+**Source reviewed:** 2026-08-31
+
+## LAB25-Q34 — A
+
+**Question:** The failover pilot evidence shows the Azure-to-Azure disaster-recovery pilot cannot buffer replication changes in a supported source-region storage account. Which root cause fits that evidence?
+
+- **A — Correct.** The chosen cache storage account is in the target region instead of the source region.
+  The chosen cache storage account is in the target region instead of the source region. This Azure-to-Azure disaster-recovery pilot condition breaks cache storage accounts, explaining why operators cannot buffer replication changes in a supported source-region storage account.
+- **B — Incorrect.** The mapped target subnet does not exist in the recovery virtual network.
+  The mapped target subnet does not exist in the recovery virtual network. The Azure-to-Azure disaster-recovery pilot fault concerns target network mapping. Azure-to-Azure disaster-recovery pilot has target network mapping impact, but cache storage accounts is the Azure-to-Azure disaster-recovery pilot failed path; the target network mapping state cannot produce cache storage accounts failure.
+- **C — Incorrect.** The latest processed recovery point does not meet the application's consistency requirement.
+  The latest processed recovery point does not meet the application's consistency requirement. The Azure-to-Azure disaster-recovery pilot fault concerns unplanned failover. Azure-to-Azure disaster-recovery pilot could repair unplanned failover while cache storage accounts stays broken in Azure-to-Azure disaster-recovery pilot; the Azure-to-Azure disaster-recovery pilot remains unable to buffer replication changes in a supported source-region storage account.
+- **D — Incorrect.** The application requires app-consistent points more frequently than the policy creates them.
+  The application requires app-consistent points more frequently than the policy creates them. The Azure-to-Azure disaster-recovery pilot fault concerns replication policies. Azure-to-Azure disaster-recovery pilot failed on cache storage accounts; this replication policies finding redirects Azure-to-Azure disaster-recovery pilot remediation away from cache storage accounts.
+
+**Objectives:** `MR-RECOVERY-05`
+
+**Remediation:** [Repeat the mapped guided task](../README.md#task-4) (`LAB25-CP04`).
+
+**Microsoft Learn sources:**
+
+- [Azure-to-Azure disaster recovery architecture](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-architecture)
+
+**Source reviewed:** 2026-08-31
 
 ## LAB25-Q35 — D
 
-Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
+**Question:** Although the Azure-to-Azure disaster-recovery pilot is meant to let the failover pilot connect recovered machines to the intended target network and subnet, its checkpoint fails. Which failover pilot defect explains the failure?
 
-- A: This choice changes or trusts a broader scope than the recorded lab boundary.
-- B: This choice skips independent evidence or relies on ambiguous resource identity.
-- C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- D: Correct. Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
+- **A — Incorrect.** Initial replication is still in progress when the test failover is started.
+  Initial replication is still in progress when the test failover is started. The Azure-to-Azure disaster-recovery pilot fault concerns replication health. Azure-to-Azure disaster-recovery pilot has replication health impact, but target network mapping is the Azure-to-Azure disaster-recovery pilot failed path; the replication health state cannot produce target network mapping failure.
+- **B — Incorrect.** The failover was committed before application owners validated the recovered workload.
+  The failover was committed before application owners validated the recovered workload. The Azure-to-Azure disaster-recovery pilot fault concerns commit, reprotect, and failback. Azure-to-Azure disaster-recovery pilot could repair commit, reprotect, and failback while target network mapping stays broken in Azure-to-Azure disaster-recovery pilot; the Azure-to-Azure disaster-recovery pilot remains unable to connect recovered machines to the intended target network and subnet.
+- **C — Incorrect.** The chosen cache storage account is in the target region instead of the source region.
+  The chosen cache storage account is in the target region instead of the source region. The Azure-to-Azure disaster-recovery pilot fault concerns cache storage accounts. Azure-to-Azure disaster-recovery pilot failed on target network mapping; this cache storage accounts finding redirects Azure-to-Azure disaster-recovery pilot remediation away from target network mapping.
+- **D — Correct.** The mapped target subnet does not exist in the recovery virtual network.
+  For the Azure-to-Azure disaster-recovery pilot, the target network mapping failure is causal: the mapped target subnet does not exist in the recovery virtual network. Correcting it restores the ability to connect recovered machines to the intended target network and subnet.
 
-Objectives: `MR-RECOVERY-06`.
+**Objectives:** `MR-RECOVERY-05`
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/site-recovery/site-recovery-manage-registration-and-protection).
+**Remediation:** [Repeat the mapped guided task](../README.md#task-5) (`LAB25-CP05`).
 
-## LAB25-Q36 — A
+**Microsoft Learn sources:**
 
-Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+- [Set up disaster recovery for an Azure VM](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-how-to-enable-replication)
 
-- A: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
-- B: This choice changes or trusts a broader scope than the recorded lab boundary.
-- C: This choice skips independent evidence or relies on ambiguous resource identity.
-- D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+**Source reviewed:** 2026-08-31
 
-Objectives: `MR-RECOVERY-06`.
+## LAB25-Q36 — D
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/site-recovery/site-recovery-manage-registration-and-protection).
+**Question:** The failover pilot support team isolated the Azure-to-Azure disaster-recovery pilot incident to the attempt to wait until initial synchronization completes and protection reports normal. Which condition prevents success?
 
-## LAB25-Q37 — B
+- **A — Incorrect.** The test VM connects to the production target network and creates duplicate service identities.
+  The test VM connects to the production target network and creates duplicate service identities. The Azure-to-Azure disaster-recovery pilot fault concerns test failover isolation. Azure-to-Azure disaster-recovery pilot could repair test failover isolation while replication health stays broken in Azure-to-Azure disaster-recovery pilot; the Azure-to-Azure disaster-recovery pilot remains unable to wait until initial synchronization completes and protection reports normal.
+- **B — Incorrect.** The target region does not support one of the source VM's required features.
+  The target region does not support one of the source VM's required features. The Azure-to-Azure disaster-recovery pilot fault concerns source and target regions. Azure-to-Azure disaster-recovery pilot failed on replication health; this source and target regions finding redirects Azure-to-Azure disaster-recovery pilot remediation away from replication health.
+- **C — Incorrect.** The mapped target subnet does not exist in the recovery virtual network.
+  The mapped target subnet does not exist in the recovery virtual network. The Azure-to-Azure disaster-recovery pilot fault concerns target network mapping. Azure-to-Azure disaster-recovery pilot may fix target network mapping, yet replication health still fails; this Azure-to-Azure disaster-recovery pilot diagnosis of target network mapping is wrong for replication health.
+- **D — Correct.** Initial replication is still in progress when the test failover is started.
+  Initial replication is still in progress when the test failover is started. The finding is specific to replication health in the Azure-to-Azure disaster-recovery pilot; repairing replication health restores the Azure-to-Azure disaster-recovery pilot ability to wait until initial synchronization completes and protection reports normal.
 
-The lab's reviewed command path performs this bounded action: Create non-overlapping source and recovery VNets in the configured primary and secondary regions.
+**Objectives:** `MR-RECOVERY-05`
 
-- A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- B: Correct. The lab's reviewed command path performs this bounded action: Create non-overlapping source and recovery VNets in the configured primary and secondary regions.
-- C: This choice changes or trusts a broader scope than the recorded lab boundary.
-- D: This choice skips independent evidence or relies on ambiguous resource identity.
+**Remediation:** [Repeat the mapped guided task](../README.md#task-1) (`LAB25-CP01`).
 
-Objectives: `MR-RECOVERY-05`.
+**Microsoft Learn sources:**
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-powershell).
+- [Set up disaster recovery for an Azure VM](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-how-to-enable-replication)
+
+**Source reviewed:** 2026-08-31
+
+## LAB25-Q37 — A
+
+**Question:** An Azure-to-Azure disaster-recovery pilot query surprises the disaster-recovery administrator piloting Azure-to-Azure replication during the failover pilot attempt to exercise recovery on an isolated network without disrupting production replication. Which finding explains it?
+
+- **A — Correct.** The test VM connects to the production target network and creates duplicate service identities.
+  The Azure-to-Azure disaster-recovery pilot cannot exercise recovery on an isolated network without disrupting production replication because of this test failover isolation defect: the test VM connects to the production target network and creates duplicate service identities. The symptom and repair align.
+- **B — Incorrect.** The source VM cannot be reached, so final planned synchronization cannot complete.
+  The source VM cannot be reached, so final planned synchronization cannot complete. The Azure-to-Azure disaster-recovery pilot fault concerns planned failover. Azure-to-Azure disaster-recovery pilot may fix planned failover, yet test failover isolation still fails; this Azure-to-Azure disaster-recovery pilot diagnosis of planned failover is wrong for test failover isolation.
+- **C — Incorrect.** The vault was created in the same region as the source VM it must orchestrate during regional recovery.
+  The vault was created in the same region as the source VM it must orchestrate during regional recovery. The Azure-to-Azure disaster-recovery pilot fault concerns Site Recovery vault placement. Azure-to-Azure disaster-recovery pilot has Site Recovery vault placement impact, but test failover isolation is the Azure-to-Azure disaster-recovery pilot failed path; the Site Recovery vault placement state cannot produce test failover isolation failure.
+- **D — Incorrect.** Initial replication is still in progress when the test failover is started.
+  Initial replication is still in progress when the test failover is started. The Azure-to-Azure disaster-recovery pilot fault concerns replication health. Azure-to-Azure disaster-recovery pilot could repair replication health while test failover isolation stays broken in Azure-to-Azure disaster-recovery pilot; the Azure-to-Azure disaster-recovery pilot remains unable to exercise recovery on an isolated network without disrupting production replication.
+
+**Objectives:** `MR-RECOVERY-06`
+
+**Remediation:** [Repeat the mapped guided task](../README.md#task-2) (`LAB25-CP02`).
+
+**Microsoft Learn sources:**
+
+- [Run an Azure Site Recovery disaster recovery drill](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-dr-drill)
+
+**Source reviewed:** 2026-08-31
 
 ## LAB25-Q38 — C
 
-The independent validation path must prove Microsoft.Network/virtualNetworks for the exact recorded object.
+**Question:** Other Azure-to-Azure disaster-recovery pilot components are healthy, but the failover pilot still cannot shut down the source and capture its latest changes for low-loss recovery. Which state causes the isolated failure?
 
-- A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- B: This choice changes or trusts a broader scope than the recorded lab boundary.
-- C: Correct. The independent validation path must prove Microsoft.Network/virtualNetworks for the exact recorded object.
-- D: This choice skips independent evidence or relies on ambiguous resource identity.
+- **A — Incorrect.** The latest processed recovery point does not meet the application's consistency requirement.
+  The latest processed recovery point does not meet the application's consistency requirement. The Azure-to-Azure disaster-recovery pilot fault concerns unplanned failover. Azure-to-Azure disaster-recovery pilot may fix unplanned failover, yet planned failover still fails; this Azure-to-Azure disaster-recovery pilot diagnosis of unplanned failover is wrong for planned failover.
+- **B — Incorrect.** The application requires app-consistent points more frequently than the policy creates them.
+  The application requires app-consistent points more frequently than the policy creates them. The Azure-to-Azure disaster-recovery pilot fault concerns replication policies. Azure-to-Azure disaster-recovery pilot has replication policies impact, but planned failover is the Azure-to-Azure disaster-recovery pilot failed path; the replication policies state cannot produce planned failover failure.
+- **C — Correct.** The source VM cannot be reached, so final planned synchronization cannot complete.
+  The source VM cannot be reached, so final planned synchronization cannot complete. Removing this planned failover condition lets the Azure-to-Azure disaster-recovery pilot shut down the source and capture its latest changes for low-loss recovery while leaving healthy controls unchanged.
+- **D — Incorrect.** The test VM connects to the production target network and creates duplicate service identities.
+  The test VM connects to the production target network and creates duplicate service identities. The Azure-to-Azure disaster-recovery pilot fault concerns test failover isolation. Azure-to-Azure disaster-recovery pilot failed on planned failover; this test failover isolation finding redirects Azure-to-Azure disaster-recovery pilot remediation away from planned failover.
 
-Objectives: `MR-RECOVERY-06`.
+**Objectives:** `MR-RECOVERY-06`
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-dr-drill).
+**Remediation:** [Repeat the mapped guided task](../README.md#task-3) (`LAB25-CP03`).
 
-## LAB25-Q39 — D
+**Microsoft Learn sources:**
 
-Unavailable live prerequisites remain skipped or partial; the documented gate is: This elevated lab requires two approved regions and explicit cost review before live execution; test failover must use an isolated network.
+- [Fail over and fail back Azure virtual machines](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-failover-failback)
 
-- A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- B: This choice changes or trusts a broader scope than the recorded lab boundary.
-- C: This choice skips independent evidence or relies on ambiguous resource identity.
-- D: Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: This elevated lab requires two approved regions and explicit cost review before live execution; test failover must use an isolated network.
+**Source reviewed:** 2026-08-31
 
-Objectives: `MR-RECOVERY-05`.
+## LAB25-Q39 — C
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-failover-failback).
+**Question:** During a failover pilot fault drill, the Azure-to-Azure disaster-recovery pilot does not start outage recovery from the most appropriate stored point. Which finding identifies the defect?
+
+- **A — Incorrect.** The failover was committed before application owners validated the recovered workload.
+  The failover was committed before application owners validated the recovered workload. The Azure-to-Azure disaster-recovery pilot fault concerns commit, reprotect, and failback. Azure-to-Azure disaster-recovery pilot has commit, reprotect, and failback impact, but unplanned failover is the Azure-to-Azure disaster-recovery pilot failed path; the commit, reprotect, and failback state cannot produce unplanned failover failure.
+- **B — Incorrect.** The chosen cache storage account is in the target region instead of the source region.
+  The chosen cache storage account is in the target region instead of the source region. The Azure-to-Azure disaster-recovery pilot fault concerns cache storage accounts. Azure-to-Azure disaster-recovery pilot could repair cache storage accounts while unplanned failover stays broken in Azure-to-Azure disaster-recovery pilot; the Azure-to-Azure disaster-recovery pilot remains unable to start outage recovery from the most appropriate stored point.
+- **C — Correct.** The latest processed recovery point does not meet the application's consistency requirement.
+  The latest processed recovery point does not meet the application's consistency requirement. In Azure-to-Azure disaster-recovery pilot, this unplanned failover cause matches the failure to start outage recovery from the most appropriate stored point.
+- **D — Incorrect.** The source VM cannot be reached, so final planned synchronization cannot complete.
+  The source VM cannot be reached, so final planned synchronization cannot complete. The Azure-to-Azure disaster-recovery pilot fault concerns planned failover. Azure-to-Azure disaster-recovery pilot may fix planned failover, yet unplanned failover still fails; this Azure-to-Azure disaster-recovery pilot diagnosis of planned failover is wrong for unplanned failover.
+
+**Objectives:** `MR-RECOVERY-06`
+
+**Remediation:** [Repeat the mapped guided task](../README.md#task-4) (`LAB25-CP04`).
+
+**Microsoft Learn sources:**
+
+- [Fail over and fail back Azure virtual machines](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-failover-failback)
+
+**Source reviewed:** 2026-08-31
 
 ## LAB25-Q40 — A
 
-Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
+**Question:** The Azure-to-Azure disaster-recovery pilot setup finishes, yet the failover pilot cannot finalize recovery, reverse protection direction, and return service to the original region. Which misconfiguration explains the mismatch?
 
-- A: Correct. Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
-- B: This choice changes or trusts a broader scope than the recorded lab boundary.
-- C: This choice skips independent evidence or relies on ambiguous resource identity.
-- D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+- **A — Correct.** The failover was committed before application owners validated the recovered workload.
+  The failover was committed before application owners validated the recovered workload. This Azure-to-Azure disaster-recovery pilot condition breaks commit, reprotect, and failback, explaining why operators cannot finalize recovery, reverse protection direction, and return service to the original region.
+- **B — Incorrect.** The target region does not support one of the source VM's required features.
+  The target region does not support one of the source VM's required features. The Azure-to-Azure disaster-recovery pilot fault concerns source and target regions. Azure-to-Azure disaster-recovery pilot failed on commit, reprotect, and failback; this source and target regions finding redirects Azure-to-Azure disaster-recovery pilot remediation away from commit, reprotect, and failback.
+- **C — Incorrect.** The mapped target subnet does not exist in the recovery virtual network.
+  The mapped target subnet does not exist in the recovery virtual network. The Azure-to-Azure disaster-recovery pilot fault concerns target network mapping. Azure-to-Azure disaster-recovery pilot may fix target network mapping, yet commit, reprotect, and failback still fails; this Azure-to-Azure disaster-recovery pilot diagnosis of target network mapping is wrong for commit, reprotect, and failback.
+- **D — Incorrect.** The latest processed recovery point does not meet the application's consistency requirement.
+  The latest processed recovery point does not meet the application's consistency requirement. The Azure-to-Azure disaster-recovery pilot fault concerns unplanned failover. Azure-to-Azure disaster-recovery pilot has unplanned failover impact, but commit, reprotect, and failback is the Azure-to-Azure disaster-recovery pilot failed path; the unplanned failover state cannot produce commit, reprotect, and failback failure.
 
-Objectives: `MR-RECOVERY-06`.
+**Objectives:** `MR-RECOVERY-06`
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/site-recovery/site-recovery-manage-registration-and-protection).
+**Remediation:** [Repeat the mapped guided task](../README.md#task-5) (`LAB25-CP05`).
 
-## LAB25-Q41 — B
+**Microsoft Learn sources:**
 
-Evidence-led repair preserves scope and makes the cause and correction auditable.
+- [Fail over and fail back Azure virtual machines](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-failover-failback)
 
-- A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- B: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
-- C: This choice changes or trusts a broader scope than the recorded lab boundary.
-- D: This choice skips independent evidence or relies on ambiguous resource identity.
+**Source reviewed:** 2026-08-31
 
-Objectives: `MR-RECOVERY-05`, `MR-RECOVERY-06`.
+## LAB25-Q41 — C
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-powershell).
+**Question:** The disaster-recovery administrator piloting Azure-to-Azure replication needs a safe Azure-to-Azure disaster-recovery pilot change to replicate supported virtual-machine disks from one region to recovery resources in another, followed by failover pilot evidence. Which pair merits approval?
+
+- **A — Incorrect.** First, Create or select a policy whose recovery-point objectives match the application requirements. Then, Query recoveryPointRetentionInHours and appConsistentFrequencyInHours on the active policy.
+  First, Create or select a policy whose recovery-point objectives match the application requirements. Then, Query recoveryPointRetentionInHours and appConsistentFrequencyInHours on the active policy. This Azure-to-Azure disaster-recovery pilot pair serves replication policies. Replication policies cannot replace source and target regions in Azure-to-Azure disaster-recovery pilot. Use this source and target regions pair instead: First, Choose a supported target region and validate VM, disk, network, quota, and feature compatibility. Then, Query the protected item's source and target fabric, region, and replication health.
+- **B — Incorrect.** First, Start test failover to an isolated target VNet and validate the recovered application before cleanup. Then, Track the test-failover job, recovered VM network, application checks, and cleanup job.
+  First, Start test failover to an isolated target VNet and validate the recovered application before cleanup. Then, Track the test-failover job, recovered VM network, application checks, and cleanup job. This Azure-to-Azure disaster-recovery pilot pair serves test failover isolation. Azure-to-Azure disaster-recovery pilot proves test failover isolation, but source and target regions lacks implementation in Azure-to-Azure disaster-recovery pilot and source and target regions proof; the source and target regions outcome to replicate supported virtual-machine disks from one region to recovery resources in another remains open.
+- **C — Correct.** First, Choose a supported target region and validate VM, disk, network, quota, and feature compatibility. Then, Query the protected item's source and target fabric, region, and replication health.
+  For the Azure-to-Azure disaster-recovery pilot, the safe source and target regions order is: first, Choose a supported target region and validate VM, disk, network, quota, and feature compatibility. Then, Query the protected item's source and target fabric, region, and replication health. The Azure-to-Azure disaster-recovery pilot records source and target regions proof after configuration.
+- **D — Incorrect.** First, Use planned failover for an intentional migration or outage when source coordination is possible. Then, Track shutdown, synchronization, failover job completion, active location, and recovery point.
+  First, Use planned failover for an intentional migration or outage when source coordination is possible. Then, Track shutdown, synchronization, failover job completion, active location, and recovery point. This Azure-to-Azure disaster-recovery pilot pair serves planned failover. Azure-to-Azure disaster-recovery pilot closes planned failover, not source and target regions; without the source and target regions workflow, it cannot replicate supported virtual-machine disks from one region to recovery resources in another.
+
+**Objectives:** `MR-RECOVERY-05`
+
+**Remediation:** [Repeat the mapped guided task](../README.md#task-1) (`LAB25-CP01`).
+
+**Microsoft Learn sources:**
+
+- [Azure-to-Azure disaster recovery architecture](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-architecture)
+
+**Source reviewed:** 2026-08-31
 
 ## LAB25-Q42 — C
 
-Accepted requests and offline checks do not prove the final live state.
+**Question:** The Azure-to-Azure disaster-recovery pilot has two failover pilot gates: place recovery orchestration outside the failure boundary it must survive, then prove the Azure-to-Azure disaster-recovery pilot state. Which failover pilot sequence works?
 
-- A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- B: This choice changes or trusts a broader scope than the recorded lab boundary.
-- C: Correct. Accepted requests and offline checks do not prove the final live state.
-- D: This choice skips independent evidence or relies on ambiguous resource identity.
+- **A — Incorrect.** First, Select a compatible cache account in the source region and avoid unsupported firewall or performance constraints. Then, Query the protected disk's cache storage account ID and confirm region, kind, and network reachability.
+  First, Select a compatible cache account in the source region and avoid unsupported firewall or performance constraints. Then, Query the protected disk's cache storage account ID and confirm region, kind, and network reachability. This Azure-to-Azure disaster-recovery pilot pair serves cache storage accounts. Azure-to-Azure disaster-recovery pilot proves cache storage accounts, but Site Recovery vault placement lacks implementation in Azure-to-Azure disaster-recovery pilot and Site Recovery vault placement proof; the Site Recovery vault placement outcome to place recovery orchestration outside the failure boundary it must survive remains open.
+- **B — Incorrect.** First, Use planned failover for an intentional migration or outage when source coordination is possible. Then, Track shutdown, synchronization, failover job completion, active location, and recovery point.
+  First, Use planned failover for an intentional migration or outage when source coordination is possible. Then, Track shutdown, synchronization, failover job completion, active location, and recovery point. This Azure-to-Azure disaster-recovery pilot pair serves planned failover. Azure-to-Azure disaster-recovery pilot uses planned failover for both steps; Site Recovery vault placement remains untouched in Azure-to-Azure disaster-recovery pilot, so its Site Recovery vault placement gate to place recovery orchestration outside the failure boundary it must survive fails.
+- **C — Correct.** First, Create or select the vault in the approved recovery region before enabling replication. Then, Query vault location and confirm it differs from the protected workload's source region.
+  First, Create or select the vault in the approved recovery region before enabling replication. Then, Query vault location and confirm it differs from the protected workload's source region. The Azure-to-Azure disaster-recovery pilot uses its Site Recovery vault placement mutation gate and Site Recovery vault placement verification gate before it can place recovery orchestration outside the failure boundary it must survive.
+- **D — Incorrect.** First, Choose the most suitable recovery point, start failover, and validate the application before commit. Then, Query recovery-point type, job state, active location, and target VM health.
+  First, Choose the most suitable recovery point, start failover, and validate the application before commit. Then, Query recovery-point type, job state, active location, and target VM health. This Azure-to-Azure disaster-recovery pilot pair serves unplanned failover. Unplanned failover cannot replace Site Recovery vault placement in Azure-to-Azure disaster-recovery pilot. Use this Site Recovery vault placement pair instead: First, Create or select the vault in the approved recovery region before enabling replication. Then, Query vault location and confirm it differs from the protected workload's source region.
 
-Objectives: `MR-RECOVERY-06`, `MR-RECOVERY-05`.
+**Objectives:** `MR-RECOVERY-05`
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-dr-drill).
+**Remediation:** [Repeat the mapped guided task](../README.md#task-2) (`LAB25-CP02`).
 
-## LAB25-Q43 — D
+**Microsoft Learn sources:**
 
-Evidence-led repair preserves scope and makes the cause and correction auditable.
+- [Azure-to-Azure disaster recovery architecture](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-architecture)
 
-- A: This choice changes or trusts a broader scope than the recorded lab boundary.
-- B: This choice skips independent evidence or relies on ambiguous resource identity.
-- C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- D: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+**Source reviewed:** 2026-08-31
 
-Objectives: `MR-RECOVERY-05`, `MR-RECOVERY-06`.
+## LAB25-Q43 — C
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-powershell).
+**Question:** Which failover pilot path makes the Azure-to-Azure disaster-recovery pilot able to configure retention plus the cadence for application-aware recovery points, then inspects the defining properties?
+
+- **A — Incorrect.** First, Prepare nonoverlapping target networking and map every protected NIC before failover. Then, Query target network and subnet IDs for each replicated NIC and validate DNS and security dependencies.
+  First, Prepare nonoverlapping target networking and map every protected NIC before failover. Then, Query target network and subnet IDs for each replicated NIC and validate DNS and security dependencies. This Azure-to-Azure disaster-recovery pilot pair serves target network mapping. Azure-to-Azure disaster-recovery pilot uses target network mapping for both steps; replication policies remains untouched in Azure-to-Azure disaster-recovery pilot, so its replication policies gate to configure retention plus the cadence for application-aware recovery points fails.
+- **B — Incorrect.** First, Choose the most suitable recovery point, start failover, and validate the application before commit. Then, Query recovery-point type, job state, active location, and target VM health.
+  First, Choose the most suitable recovery point, start failover, and validate the application before commit. Then, Query recovery-point type, job state, active location, and target VM health. This Azure-to-Azure disaster-recovery pilot pair serves unplanned failover. Azure-to-Azure disaster-recovery pilot closes unplanned failover, not replication policies; without the replication policies workflow, it cannot configure retention plus the cadence for application-aware recovery points.
+- **C — Correct.** First, Create or select a policy whose recovery-point objectives match the application requirements. Then, Query recoveryPointRetentionInHours and appConsistentFrequencyInHours on the active policy.
+  The Azure-to-Azure disaster-recovery pilot gets a complete replication policies sequence here: first, Create or select a policy whose recovery-point objectives match the application requirements. Then, Query recoveryPointRetentionInHours and appConsistentFrequencyInHours on the active policy. Read-back evidence follows the change.
+- **D — Incorrect.** First, Validate recovery, commit deliberately, reprotect to the original region, and plan failback as a separate controlled change. Then, Query activeLocation, allowedOperations, protectionState, and reverse-replication health after each phase.
+  First, Validate recovery, commit deliberately, reprotect to the original region, and plan failback as a separate controlled change. Then, Query activeLocation, allowedOperations, protectionState, and reverse-replication health after each phase. This Azure-to-Azure disaster-recovery pilot pair serves commit, reprotect, and failback. Azure-to-Azure disaster-recovery pilot proves commit, reprotect, and failback, but replication policies lacks implementation in Azure-to-Azure disaster-recovery pilot and replication policies proof; the replication policies outcome to configure retention plus the cadence for application-aware recovery points remains open.
+
+**Objectives:** `MR-RECOVERY-05`
+
+**Remediation:** [Repeat the mapped guided task](../README.md#task-3) (`LAB25-CP03`).
+
+**Microsoft Learn sources:**
+
+- [Set up disaster recovery for an Azure VM](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-how-to-enable-replication)
+
+**Source reviewed:** 2026-08-31
 
 ## LAB25-Q44 — A
 
-Accepted requests and offline checks do not prove the final live state.
+**Question:** At the Azure-to-Azure disaster-recovery pilot approval gate, operators must show that the failover pilot can buffer replication changes in a supported source-region storage account. Which failover pilot configure-and-check pair is defensible?
 
-- A: Correct. Accepted requests and offline checks do not prove the final live state.
-- B: This choice skips independent evidence or relies on ambiguous resource identity.
-- C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- D: This choice changes or trusts a broader scope than the recorded lab boundary.
+- **A — Correct.** First, Select a compatible cache account in the source region and avoid unsupported firewall or performance constraints. Then, Query the protected disk's cache storage account ID and confirm region, kind, and network reachability.
+  First, Select a compatible cache account in the source region and avoid unsupported firewall or performance constraints. Then, Query the protected disk's cache storage account ID and confirm region, kind, and network reachability. This ordered cache storage accounts workflow lets the Azure-to-Azure disaster-recovery pilot buffer replication changes in a supported source-region storage account and then verify the resulting state.
+- **B — Incorrect.** First, Monitor initial replication and resolve warnings or errors before scheduling the drill. Then, Query protectionState, replicationHealth, activeLocation, and latest recovery points.
+  First, Monitor initial replication and resolve warnings or errors before scheduling the drill. Then, Query protectionState, replicationHealth, activeLocation, and latest recovery points. This Azure-to-Azure disaster-recovery pilot pair serves replication health. Replication health cannot replace cache storage accounts in Azure-to-Azure disaster-recovery pilot. Use this cache storage accounts pair instead: First, Select a compatible cache account in the source region and avoid unsupported firewall or performance constraints. Then, Query the protected disk's cache storage account ID and confirm region, kind, and network reachability.
+- **C — Incorrect.** First, Validate recovery, commit deliberately, reprotect to the original region, and plan failback as a separate controlled change. Then, Query activeLocation, allowedOperations, protectionState, and reverse-replication health after each phase.
+  First, Validate recovery, commit deliberately, reprotect to the original region, and plan failback as a separate controlled change. Then, Query activeLocation, allowedOperations, protectionState, and reverse-replication health after each phase. This Azure-to-Azure disaster-recovery pilot pair serves commit, reprotect, and failback. Azure-to-Azure disaster-recovery pilot proves commit, reprotect, and failback, but cache storage accounts lacks implementation in Azure-to-Azure disaster-recovery pilot and cache storage accounts proof; the cache storage accounts outcome to buffer replication changes in a supported source-region storage account remains open.
+- **D — Incorrect.** First, Choose a supported target region and validate VM, disk, network, quota, and feature compatibility. Then, Query the protected item's source and target fabric, region, and replication health.
+  First, Choose a supported target region and validate VM, disk, network, quota, and feature compatibility. Then, Query the protected item's source and target fabric, region, and replication health. This Azure-to-Azure disaster-recovery pilot pair serves source and target regions. Azure-to-Azure disaster-recovery pilot uses source and target regions for both steps; cache storage accounts remains untouched in Azure-to-Azure disaster-recovery pilot, so its cache storage accounts gate to buffer replication changes in a supported source-region storage account fails.
 
-Objectives: `MR-RECOVERY-06`, `MR-RECOVERY-05`.
+**Objectives:** `MR-RECOVERY-05`
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-dr-drill).
+**Remediation:** [Repeat the mapped guided task](../README.md#task-4) (`LAB25-CP04`).
 
-## LAB25-Q45 — B
+**Microsoft Learn sources:**
 
-Evidence-led repair preserves scope and makes the cause and correction auditable.
+- [Azure-to-Azure disaster recovery architecture](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-architecture)
 
-- A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- B: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
-- C: This choice changes or trusts a broader scope than the recorded lab boundary.
-- D: This choice skips independent evidence or relies on ambiguous resource identity.
+**Source reviewed:** 2026-08-31
 
-Objectives: `MR-RECOVERY-05`, `MR-RECOVERY-06`.
+## LAB25-Q45 — C
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-powershell).
+**Question:** The Azure-to-Azure disaster-recovery pilot forbids a partial failover pilot result. Operators must first connect recovered machines to the intended target network and subnet and afterward confirm the Azure-to-Azure disaster-recovery pilot outcome. Which failover pilot sequence is complete?
+
+- **A — Incorrect.** First, Start test failover to an isolated target VNet and validate the recovered application before cleanup. Then, Track the test-failover job, recovered VM network, application checks, and cleanup job.
+  First, Start test failover to an isolated target VNet and validate the recovered application before cleanup. Then, Track the test-failover job, recovered VM network, application checks, and cleanup job. This Azure-to-Azure disaster-recovery pilot pair serves test failover isolation. Test failover isolation cannot replace target network mapping in Azure-to-Azure disaster-recovery pilot. Use this target network mapping pair instead: First, Prepare nonoverlapping target networking and map every protected NIC before failover. Then, Query target network and subnet IDs for each replicated NIC and validate DNS and security dependencies.
+- **B — Incorrect.** First, Choose a supported target region and validate VM, disk, network, quota, and feature compatibility. Then, Query the protected item's source and target fabric, region, and replication health.
+  First, Choose a supported target region and validate VM, disk, network, quota, and feature compatibility. Then, Query the protected item's source and target fabric, region, and replication health. This Azure-to-Azure disaster-recovery pilot pair serves source and target regions. Azure-to-Azure disaster-recovery pilot proves source and target regions, but target network mapping lacks implementation in Azure-to-Azure disaster-recovery pilot and target network mapping proof; the target network mapping outcome to connect recovered machines to the intended target network and subnet remains open.
+- **C — Correct.** First, Prepare nonoverlapping target networking and map every protected NIC before failover. Then, Query target network and subnet IDs for each replicated NIC and validate DNS and security dependencies.
+  First, Prepare nonoverlapping target networking and map every protected NIC before failover. Then, Query target network and subnet IDs for each replicated NIC and validate DNS and security dependencies. For Azure-to-Azure disaster-recovery pilot, the target network mapping operation precedes its target network mapping read-back check, allowing it to connect recovered machines to the intended target network and subnet.
+- **D — Incorrect.** First, Create or select the vault in the approved recovery region before enabling replication. Then, Query vault location and confirm it differs from the protected workload's source region.
+  First, Create or select the vault in the approved recovery region before enabling replication. Then, Query vault location and confirm it differs from the protected workload's source region. This Azure-to-Azure disaster-recovery pilot pair serves Site Recovery vault placement. Azure-to-Azure disaster-recovery pilot closes Site Recovery vault placement, not target network mapping; without the target network mapping workflow, it cannot connect recovered machines to the intended target network and subnet.
+
+**Objectives:** `MR-RECOVERY-05`
+
+**Remediation:** [Repeat the mapped guided task](../README.md#task-5) (`LAB25-CP05`).
+
+**Microsoft Learn sources:**
+
+- [Set up disaster recovery for an Azure VM](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-how-to-enable-replication)
+
+**Source reviewed:** 2026-08-31
 
 ## LAB25-Q46 — C
 
-Accepted requests and offline checks do not prove the final live state.
+**Question:** Only the Azure-to-Azure disaster-recovery pilot change needed to wait until initial synchronization completes and protection reports normal is allowed, and failover pilot proof is mandatory. Which pair fits?
 
-- A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- B: This choice changes or trusts a broader scope than the recorded lab boundary.
-- C: Correct. Accepted requests and offline checks do not prove the final live state.
-- D: This choice skips independent evidence or relies on ambiguous resource identity.
+- **A — Incorrect.** First, Use planned failover for an intentional migration or outage when source coordination is possible. Then, Track shutdown, synchronization, failover job completion, active location, and recovery point.
+  First, Use planned failover for an intentional migration or outage when source coordination is possible. Then, Track shutdown, synchronization, failover job completion, active location, and recovery point. This Azure-to-Azure disaster-recovery pilot pair serves planned failover. Azure-to-Azure disaster-recovery pilot proves planned failover, but replication health lacks implementation in Azure-to-Azure disaster-recovery pilot and replication health proof; the replication health outcome to wait until initial synchronization completes and protection reports normal remains open.
+- **B — Incorrect.** First, Create or select the vault in the approved recovery region before enabling replication. Then, Query vault location and confirm it differs from the protected workload's source region.
+  First, Create or select the vault in the approved recovery region before enabling replication. Then, Query vault location and confirm it differs from the protected workload's source region. This Azure-to-Azure disaster-recovery pilot pair serves Site Recovery vault placement. Azure-to-Azure disaster-recovery pilot uses Site Recovery vault placement for both steps; replication health remains untouched in Azure-to-Azure disaster-recovery pilot, so its replication health gate to wait until initial synchronization completes and protection reports normal fails.
+- **C — Correct.** First, Monitor initial replication and resolve warnings or errors before scheduling the drill. Then, Query protectionState, replicationHealth, activeLocation, and latest recovery points.
+  First, Monitor initial replication and resolve warnings or errors before scheduling the drill. Then, Query protectionState, replicationHealth, activeLocation, and latest recovery points. In the Azure-to-Azure disaster-recovery pilot, the first replication health step runs; the Azure-to-Azure disaster-recovery pilot then reads replication health state to prove it can wait until initial synchronization completes and protection reports normal.
+- **D — Incorrect.** First, Create or select a policy whose recovery-point objectives match the application requirements. Then, Query recoveryPointRetentionInHours and appConsistentFrequencyInHours on the active policy.
+  First, Create or select a policy whose recovery-point objectives match the application requirements. Then, Query recoveryPointRetentionInHours and appConsistentFrequencyInHours on the active policy. This Azure-to-Azure disaster-recovery pilot pair serves replication policies. Replication policies cannot replace replication health in Azure-to-Azure disaster-recovery pilot. Use this replication health pair instead: First, Monitor initial replication and resolve warnings or errors before scheduling the drill. Then, Query protectionState, replicationHealth, activeLocation, and latest recovery points.
 
-Objectives: `MR-RECOVERY-06`, `MR-RECOVERY-05`.
+**Objectives:** `MR-RECOVERY-05`
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-dr-drill).
+**Remediation:** [Repeat the mapped guided task](../README.md#task-1) (`LAB25-CP01`).
+
+**Microsoft Learn sources:**
+
+- [Set up disaster recovery for an Azure VM](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-how-to-enable-replication)
+
+**Source reviewed:** 2026-08-31
 
 ## LAB25-Q47 — D
 
-Evidence-led repair preserves scope and makes the cause and correction auditable.
+**Question:** The Azure-to-Azure disaster-recovery pilot runbook separates failover pilot mutation from validation while it must exercise recovery on an isolated network without disrupting production replication. Which sequence proves it cleanly?
 
-- A: This choice changes or trusts a broader scope than the recorded lab boundary.
-- B: This choice skips independent evidence or relies on ambiguous resource identity.
-- C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- D: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+- **A — Incorrect.** First, Choose the most suitable recovery point, start failover, and validate the application before commit. Then, Query recovery-point type, job state, active location, and target VM health.
+  First, Choose the most suitable recovery point, start failover, and validate the application before commit. Then, Query recovery-point type, job state, active location, and target VM health. This Azure-to-Azure disaster-recovery pilot pair serves unplanned failover. Azure-to-Azure disaster-recovery pilot uses unplanned failover for both steps; test failover isolation remains untouched in Azure-to-Azure disaster-recovery pilot, so its test failover isolation gate to exercise recovery on an isolated network without disrupting production replication fails.
+- **B — Incorrect.** First, Create or select a policy whose recovery-point objectives match the application requirements. Then, Query recoveryPointRetentionInHours and appConsistentFrequencyInHours on the active policy.
+  First, Create or select a policy whose recovery-point objectives match the application requirements. Then, Query recoveryPointRetentionInHours and appConsistentFrequencyInHours on the active policy. This Azure-to-Azure disaster-recovery pilot pair serves replication policies. Azure-to-Azure disaster-recovery pilot closes replication policies, not test failover isolation; without the test failover isolation workflow, it cannot exercise recovery on an isolated network without disrupting production replication.
+- **C — Incorrect.** First, Select a compatible cache account in the source region and avoid unsupported firewall or performance constraints. Then, Query the protected disk's cache storage account ID and confirm region, kind, and network reachability.
+  First, Select a compatible cache account in the source region and avoid unsupported firewall or performance constraints. Then, Query the protected disk's cache storage account ID and confirm region, kind, and network reachability. This Azure-to-Azure disaster-recovery pilot pair serves cache storage accounts. Cache storage accounts cannot replace test failover isolation in Azure-to-Azure disaster-recovery pilot. Use this test failover isolation pair instead: First, Start test failover to an isolated target VNet and validate the recovered application before cleanup. Then, Track the test-failover job, recovered VM network, application checks, and cleanup job.
+- **D — Correct.** First, Start test failover to an isolated target VNet and validate the recovered application before cleanup. Then, Track the test-failover job, recovered VM network, application checks, and cleanup job.
+  For the Azure-to-Azure disaster-recovery pilot, the safe test failover isolation order is: first, Start test failover to an isolated target VNet and validate the recovered application before cleanup. Then, Track the test-failover job, recovered VM network, application checks, and cleanup job. The Azure-to-Azure disaster-recovery pilot records test failover isolation proof after configuration.
 
-Objectives: `MR-RECOVERY-05`, `MR-RECOVERY-06`.
+**Objectives:** `MR-RECOVERY-06`
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-powershell).
+**Remediation:** [Repeat the mapped guided task](../README.md#task-2) (`LAB25-CP02`).
+
+**Microsoft Learn sources:**
+
+- [Run an Azure Site Recovery disaster recovery drill](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-dr-drill)
+
+**Source reviewed:** 2026-08-31
 
 ## LAB25-Q48 — A
 
-Accepted requests and offline checks do not prove the final live state.
+**Question:** The Azure-to-Azure disaster-recovery pilot checkpoint requires both this failover pilot outcome—shut down the source and capture its latest changes for low-loss recovery—and a read-only Azure-to-Azure disaster-recovery pilot state check. Which failover pilot response is complete?
 
-- A: Correct. Accepted requests and offline checks do not prove the final live state.
-- B: This choice skips independent evidence or relies on ambiguous resource identity.
-- C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- D: This choice changes or trusts a broader scope than the recorded lab boundary.
+- **A — Correct.** First, Use planned failover for an intentional migration or outage when source coordination is possible. Then, Track shutdown, synchronization, failover job completion, active location, and recovery point.
+  First, Use planned failover for an intentional migration or outage when source coordination is possible. Then, Track shutdown, synchronization, failover job completion, active location, and recovery point. The Azure-to-Azure disaster-recovery pilot uses its planned failover mutation gate and planned failover verification gate before it can shut down the source and capture its latest changes for low-loss recovery.
+- **B — Incorrect.** First, Validate recovery, commit deliberately, reprotect to the original region, and plan failback as a separate controlled change. Then, Query activeLocation, allowedOperations, protectionState, and reverse-replication health after each phase.
+  First, Validate recovery, commit deliberately, reprotect to the original region, and plan failback as a separate controlled change. Then, Query activeLocation, allowedOperations, protectionState, and reverse-replication health after each phase. This Azure-to-Azure disaster-recovery pilot pair serves commit, reprotect, and failback. Commit, reprotect, and failback cannot replace planned failover in Azure-to-Azure disaster-recovery pilot. Use this planned failover pair instead: First, Use planned failover for an intentional migration or outage when source coordination is possible. Then, Track shutdown, synchronization, failover job completion, active location, and recovery point.
+- **C — Incorrect.** First, Select a compatible cache account in the source region and avoid unsupported firewall or performance constraints. Then, Query the protected disk's cache storage account ID and confirm region, kind, and network reachability.
+  First, Select a compatible cache account in the source region and avoid unsupported firewall or performance constraints. Then, Query the protected disk's cache storage account ID and confirm region, kind, and network reachability. This Azure-to-Azure disaster-recovery pilot pair serves cache storage accounts. Azure-to-Azure disaster-recovery pilot proves cache storage accounts, but planned failover lacks implementation in Azure-to-Azure disaster-recovery pilot and planned failover proof; the planned failover outcome to shut down the source and capture its latest changes for low-loss recovery remains open.
+- **D — Incorrect.** First, Prepare nonoverlapping target networking and map every protected NIC before failover. Then, Query target network and subnet IDs for each replicated NIC and validate DNS and security dependencies.
+  First, Prepare nonoverlapping target networking and map every protected NIC before failover. Then, Query target network and subnet IDs for each replicated NIC and validate DNS and security dependencies. This Azure-to-Azure disaster-recovery pilot pair serves target network mapping. Azure-to-Azure disaster-recovery pilot uses target network mapping for both steps; planned failover remains untouched in Azure-to-Azure disaster-recovery pilot, so its planned failover gate to shut down the source and capture its latest changes for low-loss recovery fails.
 
-Objectives: `MR-RECOVERY-06`, `MR-RECOVERY-05`.
+**Objectives:** `MR-RECOVERY-06`
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-dr-drill).
+**Remediation:** [Repeat the mapped guided task](../README.md#task-3) (`LAB25-CP03`).
+
+**Microsoft Learn sources:**
+
+- [Fail over and fail back Azure virtual machines](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-failover-failback)
+
+**Source reviewed:** 2026-08-31
 
 ## LAB25-Q49 — B
 
-Evidence-led repair preserves scope and makes the cause and correction auditable.
+**Question:** The Azure-to-Azure disaster-recovery pilot runbook must start outage recovery from the most appropriate stored point, then retain failover pilot read-back evidence. Which Azure-to-Azure disaster-recovery pilot pair completes both duties?
 
-- A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- B: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
-- C: This choice changes or trusts a broader scope than the recorded lab boundary.
-- D: This choice skips independent evidence or relies on ambiguous resource identity.
+- **A — Incorrect.** First, Choose a supported target region and validate VM, disk, network, quota, and feature compatibility. Then, Query the protected item's source and target fabric, region, and replication health.
+  First, Choose a supported target region and validate VM, disk, network, quota, and feature compatibility. Then, Query the protected item's source and target fabric, region, and replication health. This Azure-to-Azure disaster-recovery pilot pair serves source and target regions. Source and target regions cannot replace unplanned failover in Azure-to-Azure disaster-recovery pilot. Use this unplanned failover pair instead: First, Choose the most suitable recovery point, start failover, and validate the application before commit. Then, Query recovery-point type, job state, active location, and target VM health.
+- **B — Correct.** First, Choose the most suitable recovery point, start failover, and validate the application before commit. Then, Query recovery-point type, job state, active location, and target VM health.
+  The Azure-to-Azure disaster-recovery pilot gets a complete unplanned failover sequence here: first, Choose the most suitable recovery point, start failover, and validate the application before commit. Then, Query recovery-point type, job state, active location, and target VM health. Read-back evidence follows the change.
+- **C — Incorrect.** First, Prepare nonoverlapping target networking and map every protected NIC before failover. Then, Query target network and subnet IDs for each replicated NIC and validate DNS and security dependencies.
+  First, Prepare nonoverlapping target networking and map every protected NIC before failover. Then, Query target network and subnet IDs for each replicated NIC and validate DNS and security dependencies. This Azure-to-Azure disaster-recovery pilot pair serves target network mapping. Azure-to-Azure disaster-recovery pilot uses target network mapping for both steps; unplanned failover remains untouched in Azure-to-Azure disaster-recovery pilot, so its unplanned failover gate to start outage recovery from the most appropriate stored point fails.
+- **D — Incorrect.** First, Monitor initial replication and resolve warnings or errors before scheduling the drill. Then, Query protectionState, replicationHealth, activeLocation, and latest recovery points.
+  First, Monitor initial replication and resolve warnings or errors before scheduling the drill. Then, Query protectionState, replicationHealth, activeLocation, and latest recovery points. This Azure-to-Azure disaster-recovery pilot pair serves replication health. Azure-to-Azure disaster-recovery pilot closes replication health, not unplanned failover; without the unplanned failover workflow, it cannot start outage recovery from the most appropriate stored point.
 
-Objectives: `MR-RECOVERY-05`, `MR-RECOVERY-06`.
+**Objectives:** `MR-RECOVERY-06`
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-powershell).
+**Remediation:** [Repeat the mapped guided task](../README.md#task-4) (`LAB25-CP04`).
 
-## LAB25-Q50 — C
+**Microsoft Learn sources:**
 
-Accepted requests and offline checks do not prove the final live state.
+- [Fail over and fail back Azure virtual machines](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-failover-failback)
 
-- A: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
-- B: This choice changes or trusts a broader scope than the recorded lab boundary.
-- C: Correct. Accepted requests and offline checks do not prove the final live state.
-- D: This choice skips independent evidence or relies on ambiguous resource identity.
+**Source reviewed:** 2026-08-31
 
-Objectives: `MR-RECOVERY-06`, `MR-RECOVERY-05`.
+## LAB25-Q50 — D
 
-Official sources: [Microsoft Learn](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-dr-drill).
+**Question:** To satisfy the failover pilot requirement, operators must change the Azure-to-Azure disaster-recovery pilot configuration and prove it can finalize recovery, reverse protection direction, and return service to the original region. Which sequence is coherent?
+
+- **A — Incorrect.** First, Create or select the vault in the approved recovery region before enabling replication. Then, Query vault location and confirm it differs from the protected workload's source region.
+  First, Create or select the vault in the approved recovery region before enabling replication. Then, Query vault location and confirm it differs from the protected workload's source region. This Azure-to-Azure disaster-recovery pilot pair serves Site Recovery vault placement. Azure-to-Azure disaster-recovery pilot proves Site Recovery vault placement, but commit, reprotect, and failback lacks implementation in Azure-to-Azure disaster-recovery pilot and commit, reprotect, and failback proof; the commit, reprotect, and failback outcome to finalize recovery, reverse protection direction, and return service to the original region remains open.
+- **B — Incorrect.** First, Monitor initial replication and resolve warnings or errors before scheduling the drill. Then, Query protectionState, replicationHealth, activeLocation, and latest recovery points.
+  First, Monitor initial replication and resolve warnings or errors before scheduling the drill. Then, Query protectionState, replicationHealth, activeLocation, and latest recovery points. This Azure-to-Azure disaster-recovery pilot pair serves replication health. Azure-to-Azure disaster-recovery pilot uses replication health for both steps; commit, reprotect, and failback remains untouched in Azure-to-Azure disaster-recovery pilot, so its commit, reprotect, and failback gate to finalize recovery, reverse protection direction, and return service to the original region fails.
+- **C — Incorrect.** First, Start test failover to an isolated target VNet and validate the recovered application before cleanup. Then, Track the test-failover job, recovered VM network, application checks, and cleanup job.
+  First, Start test failover to an isolated target VNet and validate the recovered application before cleanup. Then, Track the test-failover job, recovered VM network, application checks, and cleanup job. This Azure-to-Azure disaster-recovery pilot pair serves test failover isolation. Azure-to-Azure disaster-recovery pilot closes test failover isolation, not commit, reprotect, and failback; without the commit, reprotect, and failback workflow, it cannot finalize recovery, reverse protection direction, and return service to the original region.
+- **D — Correct.** First, Validate recovery, commit deliberately, reprotect to the original region, and plan failback as a separate controlled change. Then, Query activeLocation, allowedOperations, protectionState, and reverse-replication health after each phase.
+  First, Validate recovery, commit deliberately, reprotect to the original region, and plan failback as a separate controlled change. Then, Query activeLocation, allowedOperations, protectionState, and reverse-replication health after each phase. This ordered commit, reprotect, and failback workflow lets the Azure-to-Azure disaster-recovery pilot finalize recovery, reverse protection direction, and return service to the original region and then verify the resulting state.
+
+**Objectives:** `MR-RECOVERY-06`
+
+**Remediation:** [Repeat the mapped guided task](../README.md#task-5) (`LAB25-CP05`).
+
+**Microsoft Learn sources:**
+
+- [Fail over and fail back Azure virtual machines](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-failover-failback)
+
+**Source reviewed:** 2026-08-31

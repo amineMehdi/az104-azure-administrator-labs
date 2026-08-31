@@ -1,8 +1,11 @@
+
+# BEGIN GENERATED AZ104 V2
+schemaVersion: 2.0.0
 id: LAB-06
 slug: 06-storage-accounts-security
 title: Secure storage accounts, redundancy, encryption, and keys
 blueprintVersion: '2026-04-17'
-domain: Implement and manage storage
+domain: storage
 objectives:
 - ST-ACCESS-04
 - ST-ACCOUNTS-01
@@ -15,13 +18,27 @@ testedToolVersions:
   powershell: '>=7.4'
 estimatedMinutes: 90
 difficulty: foundational
+experience:
+  scenario: 'A storage administrator hardening a general-purpose account is responding to an operational request: Select supported
+    redundancy, create an infrastructure-encrypted account, authorize blob access with identity, and prove Shared Key denial.'
+  role: A storage administrator hardening a general-purpose account.
+  outcome: Select supported redundancy, create an infrastructure-encrypted account, authorize blob access with identity, and
+    prove Shared Key denial.
+  completionCriteria:
+  - All required checkpoints report pass.
+  - The deterministic break/fix is injected, diagnosed, and repaired.
+  - cleanup.json reports no active run-owned resources, with any retained item explicitly documented.
 cost:
   class: low
-  billableResources: &id001
+  billableResources:
   - resource group
   - StorageV2 account
   notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator before
     execution and clean up immediately.
+  pricingLinks:
+  - title: Azure Storage pricing
+    url: https://azure.microsoft.com/pricing/details/storage/
+  acknowledgementRequired: false
 permissions:
   azureRbacRoles:
   - Contributor on the lab resource group
@@ -34,40 +51,474 @@ prerequisites:
 - 'External gate review: None beyond the declared role and a disposable subscription.'
 - Azure CLI hosted in PowerShell 7.4 or later
 providers:
-  observed:
+  required:
   - Microsoft.Storage
+  optional: []
   registeredByLab: []
-regions:
-  applicable: true
-  primary: supplied at execution time
-  secondary: null
+inputs:
+- id: run-id
+  parameter: RunId
+  description: Unique lowercase run ownership identifier
+  required: true
+  secret: false
+  source: parameter
+  safeExample: az104l06-01
+  gateBehavior: block
+  checkpointIds:
+  - LAB06-CP01
+  - LAB06-CP02
+  - LAB06-CP03
+  - LAB06-CP04
+  - LAB06-CP05
+- id: subscription-id
+  parameter: SubscriptionId
+  environmentVariable: AZ104_SUBSCRIPTION_ID
+  description: Expected disposable subscription ID
+  required: true
+  secret: false
+  source: parameter-or-environment
+  safeExample: 00000000-0000-0000-0000-000000000000
+  gateBehavior: block
+  checkpointIds:
+  - LAB06-CP01
+  - LAB06-CP02
+  - LAB06-CP03
+  - LAB06-CP04
+  - LAB06-CP05
+- id: location
+  parameter: Location
+  environmentVariable: AZ104_LOCATION
+  description: Approved primary Azure region
+  required: true
+  secret: false
+  source: parameter-or-environment
+  safeExample: westeurope
+  gateBehavior: block
+  checkpointIds:
+  - LAB06-CP01
+  - LAB06-CP02
+  - LAB06-CP03
+  - LAB06-CP04
+  - LAB06-CP05
+acknowledgements:
+  cost:
+    required: false
+    parameter: AcknowledgeCost
+    message: I reviewed current pricing, quota, and the same-session cleanup plan.
+  tenantChange:
+    required: false
+    parameter: AcknowledgeTenantChange
+    message: I am authorized to create or change the declared tenant-scoped objects and will restore recorded settings.
 creates:
-  azureResources: *id001
+  azureResources:
+  - resource group
+  - StorageV2 account
   entraObjects: []
   localArtifacts:
   - .state/<run-id>/run.json
   - .state/<run-id>/validation.json
+  - .state/<run-id>/cleanup.json
 tenantScopedChanges: []
 externalRequirements: []
+preflightChecks:
+- id: preflight.context
+  type: context
+  required: true
+  description: Confirm active cloud, tenant, and subscription without changing them.
+  command: az account show --output json
+  expected: Active context matches the supplied subscription and disposable environment.
+- id: preflight.tools
+  type: tool
+  required: true
+  description: Confirm PowerShell, Azure CLI, and az bicep are available.
+  command: az version; az bicep version
+  expected: All required tools meet the versions declared by this lab.
+- id: preflight.inputs
+  type: input
+  required: true
+  description: Check required parameters and environment gates without printing secrets.
+  command: $PSBoundParameters.Keys; Get-ChildItem Env:AZ104_* | Select-Object Name
+  expected: Every required input is present and optional gates are explicitly reported.
+- id: preflight.providers
+  type: provider
+  required: true
+  description: Read registration state for required resource providers.
+  command: az provider show --namespace <provider> --query registrationState --output tsv
+  expected: Every required provider is Registered; preflight performs no registration.
+- id: preflight.region
+  type: region
+  required: true
+  description: Confirm the requested region is available to the subscription.
+  command: az account list-locations --query "[?name=='<location>'].name" --output tsv
+  expected: The supplied region appears in the subscription location inventory.
+- id: preflight.authored.lab06.identity-and-skus
+  type: capacity
+  required: true
+  description: Resolve an interactive learner identity and read regional Storage SKU restrictions.
+  command: '$learnerId = az ad signed-in-user show --query id --output tsv
+
+    if (-not $learnerId) { throw ''An interactive Entra user is required for the OAuth data lane.'' }
+
+    $skuUrl = "https://management.azure.com/subscriptions/$SubscriptionId/providers/Microsoft.Storage/skus?api-version=2023-05-01"
+
+    $skus = @(az rest --method get --url $skuUrl --output json | ConvertFrom-Json).value
+
+    if (@($skus | Where-Object { $Location -in $_.locations }).Count -eq 0) { throw ''No Storage SKU inventory was returned
+    for the selected region.'' }
+
+    '
+  expected: An interactive user and at least one regional Storage SKU resolve.
+- id: preflight.authored.lab06.storage-name
+  type: service
+  required: true
+  description: Confirm the hardened account name is globally available.
+  command: '$availability = az storage account check-name --name $storage --output json | ConvertFrom-Json
+
+    if (-not $availability.nameAvailable) { throw "Storage name unavailable: $($availability.reason)" }
+
+    '
+  expected: The deterministic account name is available.
+checkpoints:
+- id: LAB06-CP01
+  title: Select supported redundancy from regional SKU restrictions
+  purpose: Query the Storage resource provider and choose ZRS only when the subscription and region permit it.
+  objectiveIds:
+  - ST-ACCESS-04
+  required: true
+  expectedState: selected-redundancy is Standard_ZRS when unrestricted, otherwise Standard_LRS with fallbackUsed true.
+  scriptMarkers:
+    setup: LAB06-CP01
+    validate: LAB06-CP01
+    cleanup: LAB06-CP01
+  validation:
+    positive:
+      id: cp01.positive
+      description: Read the service properties for select supported redundancy from regional SKU restrictions by using exact
+        run-owned identifiers.
+      command: "$validationId='LAB06-CP01-positive'; $selectedRedundancy = [string]$state.inputs['selected-redundancy']\n\
+        $deployedRedundancy = az storage account show --resource-group $ResourceGroupName --name $storage --query sku.name\
+        \ --output tsv\nif ($selectedRedundancy -notin @('Standard_ZRS', 'Standard_LRS') -or $deployedRedundancy -ne $selectedRedundancy)\
+        \ {\n  throw 'The persisted redundancy selection does not match the deployed storage SKU.'\n}\n$deployedRedundancy\n"
+      expected: Exactly one supported selection is stored in run.json before account creation.
+    negative:
+      id: cp01.negative
+      description: Search for conflicting, unowned, or excessive state after select supported redundancy from regional SKU
+        restrictions.
+      command: '$validationId=''LAB06-CP01-negative''; $conflict = @(az storage account list --resource-group $ResourceGroupName
+        --output json | ConvertFrom-Json | Where-Object name -eq $storage)
+
+        if ($conflict.Count -ne 1 -or $conflict[0].tags.runId -ne $RunId) { throw ''Expected one run-owned deterministic storage
+        account after deployment.'' }
+
+        ''Run-owned deterministic storage accounts: 1''
+
+        '
+      expected: Exactly one account has the deterministic name and current run ownership tag after deployment.
+  cleanup:
+    dependsOn:
+    - LAB06-CP02
+    - LAB06-CP03
+    - LAB06-CP04
+    - LAB06-CP05
+    action: Remove only manifest-recorded objects owned by LAB06-CP01, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp01.residual
+      description: Prove no active managed object remains for LAB06-CP01.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-1
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Create an Azure storage account using Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/storage/common/storage-account-create
+- id: LAB06-CP02
+  title: Create the hardened account with the selected redundancy
+  purpose: Apply infrastructure encryption, TLS, HTTPS-only transport, public-access denial, Shared Key denial, and managed
+    identity at creation.
+  objectiveIds:
+  - ST-ACCOUNTS-01
+  required: true
+  expectedState: The account uses the persisted SKU, TLS1_2, HTTPS only, infrastructure encryption, no public blobs, no Shared
+    Key, and a system identity.
+  scriptMarkers:
+    setup: LAB06-CP02
+    validate: LAB06-CP02
+    cleanup: LAB06-CP02
+  validation:
+    positive:
+      id: cp02.positive
+      description: Read the service properties for create the hardened account with the selected redundancy by using exact
+        run-owned identifiers.
+      command: '$validationId=''LAB06-CP02-positive''; $account = az storage account show --resource-group $ResourceGroupName
+        --name $storage --output json | ConvertFrom-Json
+
+        if ($account.sku.name -ne $state.inputs[''selected-redundancy''] -or -not $account.encryption.requireInfrastructureEncryption
+        -or $account.allowSharedKeyAccess) { throw ''Storage hardening state mismatch.'' }
+
+        $account | Select-Object sku,minimumTlsVersion,enableHttpsTrafficOnly,allowSharedKeyAccess,encryption,identity
+
+        '
+      expected: Immutable and security properties match the design and the selected redundancy.
+    negative:
+      id: cp02.negative
+      description: Search for conflicting, unowned, or excessive state after create the hardened account with the selected
+        redundancy.
+      command: '$validationId=''LAB06-CP02-negative''; $account = az storage account show --resource-group $ResourceGroupName
+        --name $storage --output json | ConvertFrom-Json
+
+        if ($account.allowBlobPublicAccess -or -not $account.identity.principalId) { throw ''Public access is enabled or managed
+        identity is missing.'' }
+
+        ''Public blob access=False; managed identity present=True''
+
+        '
+      expected: Public blob access is disabled and the account identity exists.
+  cleanup:
+    dependsOn:
+    - LAB06-CP03
+    - LAB06-CP04
+    - LAB06-CP05
+    action: Remove only manifest-recorded objects owned by LAB06-CP02, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp02.residual
+      description: Prove no active managed object remains for LAB06-CP02.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-2
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Create an Azure storage account using Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/storage/common/storage-account-create
+- id: LAB06-CP03
+  title: Authorize and exercise identity-based blob access
+  purpose: Assign Storage Blob Data Contributor to the signed-in learner, create an encryption scope and private container,
+    and upload through OAuth.
+  objectiveIds:
+  - ST-ACCOUNTS-02
+  required: true
+  expectedState: The learner has one account-scoped blob data role and the private blob was written with login auth into the
+    infrastructure-encrypted scope.
+  scriptMarkers:
+    setup: LAB06-CP03
+    validate: LAB06-CP03
+    cleanup: LAB06-CP03
+  validation:
+    positive:
+      id: cp03.positive
+      description: Read the service properties for authorize and exercise identity-based blob access by using exact run-owned
+        identifiers.
+      command: '$validationId=''LAB06-CP03-positive''; $blob = az storage blob show --account-name $storage --container-name
+        private --name identity-authorized.txt --auth-mode login --output json | ConvertFrom-Json
+
+        if ($blob.properties.encryptionScope -ne ''confidential'') { throw ''Blob does not use the required encryption scope.''
+        }
+
+        $blob | Select-Object name,properties
+
+        '
+      expected: OAuth can read the sample blob and its encryptionScope is confidential.
+    negative:
+      id: cp03.negative
+      description: Search for conflicting, unowned, or excessive state after authorize and exercise identity-based blob access.
+      command: '$validationId=''LAB06-CP03-negative''; $assignments = @(az role assignment list --assignee-object-id $state.inputs[''learner-object-id'']
+        --scope $storageId --output json | ConvertFrom-Json | Where-Object roleDefinitionName -eq ''Storage Blob Data Contributor'')
+
+        if ($assignments.Count -ne 1) { throw ''Expected exactly one learner blob data assignment.'' }
+
+        ''Blob data assignments at account: 1''
+
+        '
+      expected: No duplicate blob data role assignment exists.
+  cleanup:
+    dependsOn:
+    - LAB06-CP04
+    - LAB06-CP05
+    action: Remove only manifest-recorded objects owned by LAB06-CP03, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp03.residual
+      description: Prove no active managed object remains for LAB06-CP03.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-3
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Create an Azure storage account using Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/storage/common/storage-account-create
+- id: LAB06-CP04
+  title: Prove that Shared Key authorization is denied
+  purpose: Keep one account key only in memory, attempt a key-signed data request, require a 403-style failure, and clear
+    the variable.
+  objectiveIds:
+  - ST-ACCOUNTS-04
+  required: true
+  expectedState: The key-signed container listing fails, no key appears in output or state, and the OAuth blob query remains
+    successful.
+  scriptMarkers:
+    setup: LAB06-CP04
+    validate: LAB06-CP04
+    cleanup: LAB06-CP04
+  validation:
+    positive:
+      id: cp04.positive
+      description: Read the service properties for prove that Shared Key authorization is denied by using exact run-owned
+        identifiers.
+      command: '$validationId=''LAB06-CP04-positive''; $oauthBlob = az storage blob exists --account-name $storage --container-name
+        private --name identity-authorized.txt --auth-mode login --query exists --output tsv
+
+        if ($oauthBlob -ne ''true'') { throw ''OAuth blob validation failed after Shared Key denial.'' }
+
+        ''OAuth blob exists=True''
+
+        '
+      expected: Identity authorization still reads the sample blob.
+    negative:
+      id: cp04.negative
+      description: Search for conflicting, unowned, or excessive state after prove that Shared Key authorization is denied.
+      command: '$validationId=''LAB06-CP04-negative''; $allowSharedKey = az storage account show --resource-group $ResourceGroupName
+        --name $storage --query allowSharedKeyAccess --output tsv
+
+        if ($allowSharedKey -ne ''false'') { throw ''allowSharedKeyAccess is not false.'' }
+
+        if (Select-String -Path (Join-Path $StateDir ''*.json'') -Pattern ''accountKey|AccountKey|AZURE_STORAGE_KEY'' -ErrorAction
+        SilentlyContinue) { throw ''A key-like field was persisted in state.'' }
+
+        ''Shared Key disabled; no key-like state fields found.''
+
+        '
+      expected: Shared Key remains disabled and no key material is persisted.
+  cleanup:
+    dependsOn:
+    - LAB06-CP05
+    action: Remove only manifest-recorded objects owned by LAB06-CP04, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp04.residual
+      description: Prove no active managed object remains for LAB06-CP04.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-4
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Create an Azure storage account using Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/storage/common/storage-account-create
+- id: LAB06-CP05
+  title: Rotate the secondary key and reconcile the hardened account
+  purpose: Renew the unused secondary key without returning it, then verify redundancy, encryption, transport, authorization,
+    and cleanup scope together.
+  objectiveIds:
+  - ST-ACCESS-04
+  - ST-ACCOUNTS-01
+  - ST-ACCOUNTS-02
+  - ST-ACCOUNTS-04
+  required: true
+  expectedState: All hardened properties remain intact after a non-disclosing secondary-key rotation and the OAuth blob path
+    still passes.
+  scriptMarkers:
+    setup: LAB06-CP05
+    validate: LAB06-CP05
+    cleanup: LAB06-CP05
+  validation:
+    positive:
+      id: cp05.positive
+      description: Read the service properties for rotate the secondary key and reconcile the hardened account by using exact
+        run-owned identifiers.
+      command: '$validationId=''LAB06-CP05-positive''; $account = az storage account show --resource-group $ResourceGroupName
+        --name $storage --output json | ConvertFrom-Json
+
+        $pass = $account.sku.name -eq $state.inputs[''selected-redundancy''] -and $account.minimumTlsVersion -eq ''TLS1_2''
+        -and $account.enableHttpsTrafficOnly -and -not $account.allowSharedKeyAccess -and -not $account.allowBlobPublicAccess
+        -and $account.encryption.requireInfrastructureEncryption
+
+        if (-not $pass) { throw ''One or more hardened account properties drifted.'' }
+
+        $account | Select-Object id,sku,minimumTlsVersion,enableHttpsTrafficOnly,allowSharedKeyAccess,allowBlobPublicAccess,encryption
+
+        '
+      expected: Every security and redundancy property matches the persisted design.
+    negative:
+      id: cp05.negative
+      description: Search for conflicting, unowned, or excessive state after rotate the secondary key and reconcile the hardened
+        account.
+      command: '$validationId=''LAB06-CP05-negative''; $accounts = @(az storage account list --resource-group $ResourceGroupName
+        --output json | ConvertFrom-Json)
+
+        if ($accounts.Count -ne 1 -or $accounts[0].name -ne $storage) { throw ''Unexpected storage-account inventory in the
+        lab group.'' }
+
+        ''Run-owned storage accounts: 1''
+
+        '
+      expected: The lab resource group contains only the intended account.
+  cleanup:
+    dependsOn: []
+    action: Remove only manifest-recorded objects owned by LAB06-CP05, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp05.residual
+      description: Prove no active managed object remains for LAB06-CP05.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-5
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Create an Azure storage account using Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/storage/common/storage-account-create
 validation:
-  commandLanes:
-  - scripts/cli/Validate.ps1
-  output: .state/<run-id>/validation.json
-  statuses:
-  - pass
-  - fail
-  - warning
-  - skipped
-  liveExecutionRequiredForLiveVerified: true
+  script: scripts/cli/Validate.ps1
+  artifact: .state/<run-id>/validation.json
+  modes:
+  - Deployment
+  - PostCleanup
+  resultPolicy:
+    requiredFailureResult: fail
+    optionalSkipResult: partial
+    allRequiredPassResult: pass
 cleanup:
-  azureDeletion: exact recorded resource-group ID after tag verification
-  entraDeletion: none
-  reportOnlyByDefault: true
+  script: scripts/cli/Cleanup.ps1
+  artifact: .state/<run-id>/cleanup.json
+  previewByDefault: true
   requiresExecuteFlag: true
-  residualAuditRequired: true
+  ownershipVerification:
+    manifestIdMatch: true
+    requiredTags:
+    - purpose
+    - labId
+    - runId
+  residualChecks:
+  - id: cp01.residual
+    description: Prove no active managed object remains for LAB06-CP01.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp02.residual
+    description: Prove no active managed object remains for LAB06-CP02.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp03.residual
+    description: Prove no active managed object remains for LAB06-CP03.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp04.residual
+    description: Prove no active managed object remains for LAB06-CP04.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp05.residual
+    description: Prove no active managed object remains for LAB06-CP05.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  retainedItemsAllowed: true
+  irreversiblePurge: never
 assessment:
   enabled: true
   questionCount: 50
   primaryDomain: storage
-lastOfflineValidated: '2026-08-30'
+lastOfflineValidated: '2026-08-31'
 lastLiveVerified: null
+# END GENERATED AZ104 V2

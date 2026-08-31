@@ -1,0 +1,15 @@
+schemaVersion: 1.0.0
+environment:
+  subscriptionId: ""
+  primaryLocation: westeurope
+  secondaryLocation: northeurope
+  runIdPrefix: az104
+safety:
+  maximumEstimatedCostEur: 10
+  requireNonProductionConfirmation: true
+  allowTenantScopedChanges: false
+privacy:
+  # Lifecycle scripts always persist managed object IDs in the ignored local
+  # run.json so cleanup can recover safely. This controls any additional export.
+  persistAzureIdentifiersOutsideRunState: false
+  persistCommandTokens: false

@@ -1,14 +1,13 @@
 flowchart LR
-    A["Operator<br/>Azure CLI"] --> P["Preview and preflight"]
-    P --> S["Recorded Lab 14 boundary"]
-    S --> R1["resource group"]
-    S --> R2["Log Analytics workspace"]
-    S --> R3["Container Apps environment"]
-    S --> R4["container app"]
-    S --> V["Independent validation"]
-    V --> E["Redacted command evidence"]
-    V --> C["Previewed cleanup"]
+    A["Operator and Azure CLI"] --> W["Log Analytics workspace"]
+    W --> E["Container Apps environment"]
+    E --> APP["Externally ingressed app"]
+    APP --> R1["Revision v1 at 90 percent"]
+    APP --> R2["Revision v2 at 10 percent"]
+    R1 --> V["Health, weights, and replica assertions"]
+    R2 --> V
+    V --> C["Environment-first cleanup"]
     classDef control fill:#e8f1ff,stroke:#2563eb,color:#102a43;
     classDef resource fill:#e9f8ef,stroke:#16803a,color:#102a43;
-    class A,P,S,V,E,C control;
-    class R1,R2,R3,R4 resource;
+    class A,V,C control;
+    class W,E,APP,R1,R2 resource;

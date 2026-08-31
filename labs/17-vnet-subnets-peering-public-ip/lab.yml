@@ -1,8 +1,11 @@
+
+# BEGIN GENERATED AZ104 V2
+schemaVersion: 2.0.0
 id: LAB-17
 slug: 17-vnet-subnets-peering-public-ip
 title: Create VNets, subnets, peerings, and public IPs
 blueprintVersion: '2026-04-17'
-domain: Implement and manage virtual networking
+domain: networking
 objectives:
 - NW-VNET-01
 - NW-VNET-02
@@ -13,10 +16,21 @@ testedToolVersions:
   azureCli: '>=2.88.0'
   powershell: '>=7.4'
 estimatedMinutes: 105
-difficulty: intermediate
+difficulty: applied
+experience:
+  scenario: 'You are a network administrator connecting hub and spoke address spaces. Build and prove this disposable service
+    path: Hub and spoke address spaces connect through reciprocal peerings, subnet inventory proves segmentation, and a separate
+    Standard static public IP demonstrates the controlled public-edge resource without attaching it to a workload.'
+  role: A network administrator connecting hub and spoke address spaces.
+  outcome: Use Azure CLI in PowerShell to create two segmented virtual networks, create reciprocal vnet peerings, and reconcile
+    prefixes, peerings, and public exposure, with recoverable state and deterministic cleanup.
+  completionCriteria:
+  - All required checkpoints report pass.
+  - The deterministic break/fix is injected, diagnosed, and repaired.
+  - cleanup.json reports no active run-owned resources, with any retained item explicitly documented.
 cost:
   class: low
-  billableResources: &id001
+  billableResources:
   - resource group
   - two virtual networks
   - four subnets
@@ -24,6 +38,10 @@ cost:
   - Standard public IP
   notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator before
     execution and clean up immediately.
+  pricingLinks:
+  - title: Azure Virtual Network pricing
+    url: https://azure.microsoft.com/pricing/details/virtual-network/
+  acknowledgementRequired: false
 permissions:
   azureRbacRoles:
   - Network Contributor on the lab resource group
@@ -36,40 +54,414 @@ prerequisites:
 - 'External gate review: None beyond the declared role and a disposable subscription.'
 - Azure CLI hosted in PowerShell 7.4 or later
 providers:
-  observed:
+  required:
   - Microsoft.Network
+  optional: []
   registeredByLab: []
-regions:
-  applicable: true
-  primary: supplied at execution time
-  secondary: null
+inputs:
+- id: run-id
+  parameter: RunId
+  description: Unique lowercase run ownership identifier
+  required: true
+  secret: false
+  source: parameter
+  safeExample: az104l17-01
+  gateBehavior: block
+  checkpointIds:
+  - LAB17-CP01
+  - LAB17-CP02
+  - LAB17-CP03
+  - LAB17-CP04
+  - LAB17-CP05
+- id: subscription-id
+  parameter: SubscriptionId
+  environmentVariable: AZ104_SUBSCRIPTION_ID
+  description: Expected disposable subscription ID
+  required: true
+  secret: false
+  source: parameter-or-environment
+  safeExample: 00000000-0000-0000-0000-000000000000
+  gateBehavior: block
+  checkpointIds:
+  - LAB17-CP01
+  - LAB17-CP02
+  - LAB17-CP03
+  - LAB17-CP04
+  - LAB17-CP05
+- id: location
+  parameter: Location
+  environmentVariable: AZ104_LOCATION
+  description: Approved primary Azure region
+  required: true
+  secret: false
+  source: parameter-or-environment
+  safeExample: westeurope
+  gateBehavior: block
+  checkpointIds:
+  - LAB17-CP01
+  - LAB17-CP02
+  - LAB17-CP03
+  - LAB17-CP04
+  - LAB17-CP05
+acknowledgements:
+  cost:
+    required: false
+    parameter: AcknowledgeCost
+    message: I reviewed current pricing, quota, and the same-session cleanup plan.
+  tenantChange:
+    required: false
+    parameter: AcknowledgeTenantChange
+    message: I am authorized to create or change the declared tenant-scoped objects and will restore recorded settings.
 creates:
-  azureResources: *id001
+  azureResources:
+  - resource group
+  - two virtual networks
+  - four subnets
+  - bidirectional peering
+  - Standard public IP
   entraObjects: []
   localArtifacts:
   - .state/<run-id>/run.json
   - .state/<run-id>/validation.json
+  - .state/<run-id>/cleanup.json
 tenantScopedChanges: []
 externalRequirements: []
+preflightChecks:
+- id: preflight.context
+  type: context
+  required: true
+  description: Confirm active cloud, tenant, and subscription without changing them.
+  command: az account show --output json
+  expected: Active context matches the supplied subscription and disposable environment.
+- id: preflight.tools
+  type: tool
+  required: true
+  description: Confirm PowerShell, Azure CLI, and az bicep are available.
+  command: az version; az bicep version
+  expected: All required tools meet the versions declared by this lab.
+- id: preflight.inputs
+  type: input
+  required: true
+  description: Check required parameters and environment gates without printing secrets.
+  command: $PSBoundParameters.Keys; Get-ChildItem Env:AZ104_* | Select-Object Name
+  expected: Every required input is present and optional gates are explicitly reported.
+- id: preflight.providers
+  type: provider
+  required: true
+  description: Read registration state for required resource providers.
+  command: az provider show --namespace <provider> --query registrationState --output tsv
+  expected: Every required provider is Registered; preflight performs no registration.
+- id: preflight.region
+  type: region
+  required: true
+  description: Confirm the requested region is available to the subscription.
+  command: az account list-locations --query "[?name=='<location>'].name" --output tsv
+  expected: The supplied region appears in the subscription location inventory.
+- id: preflight.authored.service
+  type: sku
+  required: true
+  description: Prove verify address-space and standard public-ip regional support with LAB-17's authored read-only provider,
+    feature, tool, region, and SKU queries.
+  command: '$registration = az provider show --namespace Microsoft.Network --query registrationState --output tsv
+
+    if ($registration -ne ''Registered'') { throw ''Microsoft.Network is not registered.'' }
+
+    $locationKnown = az account list-locations --query "[?name==''$Location''] | length(@)" --output tsv
+
+    if ([int]$locationKnown -ne 1) { throw ''The selected location is unavailable.'' }'
+  expected: Both planned CIDRs are non-overlapping and the region offers the Standard static public-IP SKU.
+checkpoints:
+- id: LAB17-CP01
+  title: Verify address-space and Standard public-IP regional support
+  purpose: Read the provider, region, SKU, feature, quota, and companion-tool signals needed for verify address-space and
+    standard public-ip regional support, without changing Azure state.
+  objectiveIds:
+  - NW-VNET-01
+  required: true
+  expectedState: Both planned CIDRs are non-overlapping and the region offers the Standard static public-IP SKU.
+  scriptMarkers:
+    setup: LAB17-CP01
+    validate: LAB17-CP01
+    cleanup: LAB17-CP01
+  validation:
+    positive:
+      id: cp01.positive
+      description: Read the service properties for verify address-space and Standard public-IP regional support by using exact
+        run-owned identifiers.
+      command: '$validationId=''LAB17-CP01-positive''; $registration = az provider show --namespace Microsoft.Network --query
+        registrationState --output tsv
+
+        if ($registration -ne ''Registered'') { throw ''Microsoft.Network is not registered.'' }'
+      expected: Both planned CIDRs are non-overlapping and the region offers the Standard static public-IP SKU.
+    negative:
+      id: cp01.negative
+      description: Search for conflicting, unowned, or excessive state after verify address-space and Standard public-IP regional
+        support.
+      command: '$validationId=''LAB17-CP01-negative''; $locationKnown = az account list-locations --query "[?name==''$Location'']
+        | length(@)" --output tsv
+
+        if ([int]$locationKnown -ne 1) { throw ''The selected location is unavailable.'' }'
+      expected: 'LAB17-CP01 negative boundary: The undesired state is absent; the negative assertion must not report: The
+        selected location is unavailable.'
+  cleanup:
+    dependsOn:
+    - LAB17-CP02
+    - LAB17-CP03
+    - LAB17-CP04
+    - LAB17-CP05
+    action: Remove only manifest-recorded objects owned by LAB17-CP01, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp01.residual
+      description: Prove no active managed object remains for LAB17-CP01.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-1
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Create a virtual network with Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/virtual-network/quick-create-cli
+- id: LAB17-CP02
+  title: Create two segmented virtual networks
+  purpose: Provision and immediately inventory the exact run-owned resources needed to create two segmented virtual networks,
+    so partial completion remains recoverable.
+  objectiveIds:
+  - NW-VNET-02
+  required: true
+  expectedState: Each VNet contains its run-specific subnet and exposes the expected non-overlapping address prefix.
+  scriptMarkers:
+    setup: LAB17-CP02
+    validate: LAB17-CP02
+    cleanup: LAB17-CP02
+  validation:
+    positive:
+      id: cp02.positive
+      description: Read the service properties for create two segmented virtual networks by using exact run-owned identifiers.
+      command: '$validationId=''LAB17-CP02-positive''; $vnetCount = az network vnet list --resource-group $ResourceGroupName
+        --query "[?name==''$hub'' || name==''$spoke''] | length(@)" --output tsv
+
+        if ([int]$vnetCount -ne 2) { throw "Expected two VNets; found $vnetCount." }'
+      expected: Each VNet contains its run-specific subnet and exposes the expected non-overlapping address prefix.
+    negative:
+      id: cp02.negative
+      description: Search for conflicting, unowned, or excessive state after create two segmented virtual networks.
+      command: '$validationId=''LAB17-CP02-negative''; $prefixes = @(az network vnet list --resource-group $ResourceGroupName
+        --query "[?name==''$hub'' || name==''$spoke''].addressSpace.addressPrefixes[0]" --output tsv)
+
+        if ($prefixes.Count -ne (@($prefixes | Select-Object -Unique)).Count) { throw ''The VNet address spaces overlap exactly.''
+        }'
+      expected: 'LAB17-CP02 negative boundary: The undesired state is absent; the negative assertion must not report: The
+        VNet address spaces overlap exactly.'
+  cleanup:
+    dependsOn:
+    - LAB17-CP03
+    - LAB17-CP04
+    - LAB17-CP05
+    action: Remove only manifest-recorded objects owned by LAB17-CP02, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp02.residual
+      description: Prove no active managed object remains for LAB17-CP02.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-2
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Create a virtual network with Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/virtual-network/quick-create-cli
+- id: LAB17-CP03
+  title: Create reciprocal VNet peerings
+  purpose: Configure and independently inspect the control-plane and data-path properties needed to create reciprocal vnet
+    peerings.
+  objectiveIds:
+  - NW-VNET-03
+  required: true
+  expectedState: Both peering directions report Connected and use the intended access and forwarding settings.
+  scriptMarkers:
+    setup: LAB17-CP03
+    validate: LAB17-CP03
+    cleanup: LAB17-CP03
+  validation:
+    positive:
+      id: cp03.positive
+      description: Read the service properties for create reciprocal VNet peerings by using exact run-owned identifiers.
+      command: '$validationId=''LAB17-CP03-positive''; $hubState = az network vnet peering show --resource-group $ResourceGroupName
+        --vnet-name $hub --name hub-to-spoke --query peeringState --output tsv
+
+        if ($hubState -ne ''Connected'') { throw "Hub peering state is $hubState." }'
+      expected: Both peering directions report Connected and use the intended access and forwarding settings.
+    negative:
+      id: cp03.negative
+      description: Search for conflicting, unowned, or excessive state after create reciprocal VNet peerings.
+      command: '$validationId=''LAB17-CP03-negative''; $spokeState = az network vnet peering show --resource-group $ResourceGroupName
+        --vnet-name $spoke --name spoke-to-hub --query peeringState --output tsv
+
+        if ($spokeState -ne ''Connected'') { throw "Spoke peering state is $spokeState." }'
+      expected: 'LAB17-CP03 negative boundary: The undesired state is absent; the negative assertion must not report: Spoke
+        peering state is reported spokeState.'
+  cleanup:
+    dependsOn:
+    - LAB17-CP04
+    - LAB17-CP05
+    action: Remove only manifest-recorded objects owned by LAB17-CP03, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp03.residual
+      description: Prove no active managed object remains for LAB17-CP03.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-3
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Create a virtual network with Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/virtual-network/quick-create-cli
+- id: LAB17-CP04
+  title: Provision a Standard static public IP
+  purpose: Exercise the deterministic operational or denied path needed to provision a standard static public ip, then retain
+    comparable before-and-after results.
+  objectiveIds:
+  - NW-VNET-01
+  required: true
+  expectedState: The public IP uses Standard SKU, static allocation, and a run-owned DNS label when one is supplied.
+  scriptMarkers:
+    setup: LAB17-CP04
+    validate: LAB17-CP04
+    cleanup: LAB17-CP04
+  validation:
+    positive:
+      id: cp04.positive
+      description: Read the service properties for provision a Standard static public IP by using exact run-owned identifiers.
+      command: '$validationId=''LAB17-CP04-positive''; $sku = az network public-ip show --resource-group $ResourceGroupName
+        --name $publicIp --query sku.name --output tsv
+
+        if ($sku -ne ''Standard'') { throw "Public IP SKU is $sku." }'
+      expected: The public IP uses Standard SKU, static allocation, and a run-owned DNS label when one is supplied.
+    negative:
+      id: cp04.negative
+      description: Search for conflicting, unowned, or excessive state after provision a Standard static public IP.
+      command: '$validationId=''LAB17-CP04-negative''; $allocation = az network public-ip show --resource-group $ResourceGroupName
+        --name $publicIp --query publicIPAllocationMethod --output tsv
+
+        if ($allocation -ne ''Static'') { throw "Public IP allocation is $allocation." }'
+      expected: 'LAB17-CP04 negative boundary: The undesired state is absent; the negative assertion must not report: Public
+        IP allocation is reported allocation.'
+  cleanup:
+    dependsOn:
+    - LAB17-CP05
+    action: Remove only manifest-recorded objects owned by LAB17-CP04, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp04.residual
+      description: Prove no active managed object remains for LAB17-CP04.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-4
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Create a virtual network with Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/virtual-network/quick-create-cli
+- id: LAB17-CP05
+  title: Reconcile prefixes, peerings, and public exposure
+  purpose: Reconcile live service properties, returned IDs, and dependency-aware removal needed to reconcile prefixes, peerings,
+    and public exposure before handoff.
+  objectiveIds:
+  - NW-VNET-01
+  - NW-VNET-02
+  - NW-VNET-03
+  required: true
+  expectedState: VNet prefixes, subnet boundaries, reciprocal peerings, and the exact public-IP SKU/allocation all match the
+    topology.
+  scriptMarkers:
+    setup: LAB17-CP05
+    validate: LAB17-CP05
+    cleanup: LAB17-CP05
+  validation:
+    positive:
+      id: cp05.positive
+      description: Read the service properties for reconcile prefixes, peerings, and public exposure by using exact run-owned
+        identifiers.
+      command: '$validationId=''LAB17-CP05-positive''; $subnets = az network vnet subnet list --resource-group $ResourceGroupName
+        --vnet-name $hub --query "length(@)" --output tsv
+
+        if ([int]$subnets -ne 2) { throw "Hub subnet count is $subnets." }'
+      expected: VNet prefixes, subnet boundaries, reciprocal peerings, and the exact public-IP SKU/allocation all match the
+        topology.
+    negative:
+      id: cp05.negative
+      description: Search for conflicting, unowned, or excessive state after reconcile prefixes, peerings, and public exposure.
+      command: '$validationId=''LAB17-CP05-negative''; $disconnected = az network vnet peering list --resource-group $ResourceGroupName
+        --vnet-name $hub --query "[?peeringState!=''Connected''] | length(@)" --output tsv
+
+        if ([int]$disconnected -ne 0) { throw ''A hub peering is not connected.'' }'
+      expected: 'LAB17-CP05 negative boundary: The undesired state is absent; the negative assertion must not report: A hub
+        peering is not connected.'
+  cleanup:
+    dependsOn: []
+    action: Remove only manifest-recorded objects owned by LAB17-CP05, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp05.residual
+      description: Prove no active managed object remains for LAB17-CP05.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-5
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Create a virtual network with Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/virtual-network/quick-create-cli
 validation:
-  commandLanes:
-  - scripts/cli/Validate.ps1
-  output: .state/<run-id>/validation.json
-  statuses:
-  - pass
-  - fail
-  - warning
-  - skipped
-  liveExecutionRequiredForLiveVerified: true
+  script: scripts/cli/Validate.ps1
+  artifact: .state/<run-id>/validation.json
+  modes:
+  - Deployment
+  - PostCleanup
+  resultPolicy:
+    requiredFailureResult: fail
+    optionalSkipResult: partial
+    allRequiredPassResult: pass
 cleanup:
-  azureDeletion: exact recorded resource-group ID after tag verification
-  entraDeletion: none
-  reportOnlyByDefault: true
+  script: scripts/cli/Cleanup.ps1
+  artifact: .state/<run-id>/cleanup.json
+  previewByDefault: true
   requiresExecuteFlag: true
-  residualAuditRequired: true
+  ownershipVerification:
+    manifestIdMatch: true
+    requiredTags:
+    - purpose
+    - labId
+    - runId
+  residualChecks:
+  - id: cp01.residual
+    description: Prove no active managed object remains for LAB17-CP01.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp02.residual
+    description: Prove no active managed object remains for LAB17-CP02.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp03.residual
+    description: Prove no active managed object remains for LAB17-CP03.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp04.residual
+    description: Prove no active managed object remains for LAB17-CP04.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp05.residual
+    description: Prove no active managed object remains for LAB17-CP05.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  retainedItemsAllowed: true
+  irreversiblePurge: never
 assessment:
   enabled: true
   questionCount: 50
   primaryDomain: networking
-lastOfflineValidated: '2026-08-30'
+lastOfflineValidated: '2026-08-31'
 lastLiveVerified: null
+# END GENERATED AZ104 V2

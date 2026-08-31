@@ -1,8 +1,11 @@
+
+# BEGIN GENERATED AZ104 V2
+schemaVersion: 2.0.0
 id: LAB-21
 slug: 21-load-balancer-network-watcher
 title: Load balance workloads and troubleshoot with Network Watcher
 blueprintVersion: '2026-04-17'
-domain: Implement and manage virtual networking / Monitor and maintain Azure resources
+domain: networking
 objectives:
 - NW-VNET-05
 - NW-DNSLB-02
@@ -14,10 +17,22 @@ testedToolVersions:
   azureCli: '>=2.88.0'
   powershell: '>=7.4'
 estimatedMinutes: 150
-difficulty: intermediate
+difficulty: applied
+experience:
+  scenario: 'You are a network operations administrator publishing a resilient http backend. Build and prove this disposable
+    service path: A Standard public frontend and outbound rule connect to two private backend NICs; probe and rule traffic
+    traverse the NSG, Network Watcher agents run on both VMs, and Connection Monitor measures the VM-to-VM TCP path.'
+  role: A network operations administrator publishing a resilient HTTP backend.
+  outcome: Use Azure CLI in PowerShell to create two private backends behind a standard load balancer, configure health probing
+    and balanced traffic, and reconcile frontend, backend health, and diagnostic evidence, with recoverable state and deterministic
+    cleanup.
+  completionCriteria:
+  - All required checkpoints report pass.
+  - The deterministic break/fix is injected, diagnosed, and repaired.
+  - cleanup.json reports no active run-owned resources, with any retained item explicitly documented.
 cost:
   class: elevated
-  billableResources: &id001
+  billableResources:
   - resource group
   - virtual network
   - two backend VMs
@@ -27,6 +42,10 @@ cost:
   - Network Watcher connection monitor
   notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator before
     execution and clean up immediately.
+  pricingLinks:
+  - title: Azure Virtual Network pricing
+    url: https://azure.microsoft.com/pricing/details/virtual-network/
+  acknowledgementRequired: true
 permissions:
   azureRbacRoles:
   - Network Contributor and Virtual Machine Contributor on the lab resource group
@@ -39,41 +58,427 @@ prerequisites:
 - 'External gate review: None beyond the declared role and a disposable subscription.'
 - Azure CLI hosted in PowerShell 7.4 or later
 providers:
-  observed:
+  required:
   - Microsoft.Compute
   - Microsoft.Network
+  optional: []
   registeredByLab: []
-regions:
-  applicable: true
-  primary: supplied at execution time
-  secondary: null
+inputs:
+- id: run-id
+  parameter: RunId
+  description: Unique lowercase run ownership identifier
+  required: true
+  secret: false
+  source: parameter
+  safeExample: az104l21-01
+  gateBehavior: block
+  checkpointIds:
+  - LAB21-CP01
+  - LAB21-CP02
+  - LAB21-CP03
+  - LAB21-CP04
+  - LAB21-CP05
+- id: subscription-id
+  parameter: SubscriptionId
+  environmentVariable: AZ104_SUBSCRIPTION_ID
+  description: Expected disposable subscription ID
+  required: true
+  secret: false
+  source: parameter-or-environment
+  safeExample: 00000000-0000-0000-0000-000000000000
+  gateBehavior: block
+  checkpointIds:
+  - LAB21-CP01
+  - LAB21-CP02
+  - LAB21-CP03
+  - LAB21-CP04
+  - LAB21-CP05
+- id: location
+  parameter: Location
+  environmentVariable: AZ104_LOCATION
+  description: Approved primary Azure region
+  required: true
+  secret: false
+  source: parameter-or-environment
+  safeExample: westeurope
+  gateBehavior: block
+  checkpointIds:
+  - LAB21-CP01
+  - LAB21-CP02
+  - LAB21-CP03
+  - LAB21-CP04
+  - LAB21-CP05
+acknowledgements:
+  cost:
+    required: true
+    parameter: AcknowledgeCost
+    message: I reviewed current pricing, quota, and the same-session cleanup plan.
+  tenantChange:
+    required: false
+    parameter: AcknowledgeTenantChange
+    message: I am authorized to create or change the declared tenant-scoped objects and will restore recorded settings.
 creates:
-  azureResources: *id001
+  azureResources:
+  - resource group
+  - virtual network
+  - two backend VMs
+  - Standard load balancer
+  - health probe
+  - load-balancing rule
+  - Network Watcher connection monitor
   entraObjects: []
   localArtifacts:
   - .state/<run-id>/run.json
   - .state/<run-id>/validation.json
+  - .state/<run-id>/cleanup.json
 tenantScopedChanges: []
 externalRequirements: []
+preflightChecks:
+- id: preflight.context
+  type: context
+  required: true
+  description: Confirm active cloud, tenant, and subscription without changing them.
+  command: az account show --output json
+  expected: Active context matches the supplied subscription and disposable environment.
+- id: preflight.tools
+  type: tool
+  required: true
+  description: Confirm PowerShell, Azure CLI, and az bicep are available.
+  command: az version; az bicep version
+  expected: All required tools meet the versions declared by this lab.
+- id: preflight.inputs
+  type: input
+  required: true
+  description: Check required parameters and environment gates without printing secrets.
+  command: $PSBoundParameters.Keys; Get-ChildItem Env:AZ104_* | Select-Object Name
+  expected: Every required input is present and optional gates are explicitly reported.
+- id: preflight.providers
+  type: provider
+  required: true
+  description: Read registration state for required resource providers.
+  command: az provider show --namespace <provider> --query registrationState --output tsv
+  expected: Every required provider is Registered; preflight performs no registration.
+- id: preflight.region
+  type: region
+  required: true
+  description: Confirm the requested region is available to the subscription.
+  command: az account list-locations --query "[?name=='<location>'].name" --output tsv
+  expected: The supplied region appears in the subscription location inventory.
+- id: preflight.authored.service
+  type: sku
+  required: true
+  description: Prove verify load-balancer and network watcher diagnostics support with LAB-21's authored read-only provider,
+    feature, tool, region, and SKU queries.
+  command: '$network = az provider show --namespace Microsoft.Network --query registrationState --output tsv
+
+    if ($network -ne ''Registered'') { throw ''Microsoft.Network is not registered.'' }
+
+    $watchers = az network watcher list --query "[?location==''$Location''] | length(@)" --output tsv
+
+    if ([int]$watchers -lt 1) { throw ''Network Watcher is not available in the selected region.'' }'
+  expected: The Standard load-balancer SKU and Network Watcher diagnostic commands are available in the selected region.
+checkpoints:
+- id: LAB21-CP01
+  title: Verify load-balancer and Network Watcher diagnostics support
+  purpose: Read the provider, region, SKU, feature, quota, and companion-tool signals needed for verify load-balancer and
+    network watcher diagnostics support, without changing Azure state.
+  objectiveIds:
+  - NW-VNET-05
+  required: true
+  expectedState: The Standard load-balancer SKU and Network Watcher diagnostic commands are available in the selected region.
+  scriptMarkers:
+    setup: LAB21-CP01
+    validate: LAB21-CP01
+    cleanup: LAB21-CP01
+  validation:
+    positive:
+      id: cp01.positive
+      description: Read the service properties for verify load-balancer and Network Watcher diagnostics support by using exact
+        run-owned identifiers.
+      command: '$validationId=''LAB21-CP01-positive''; $network = az provider show --namespace Microsoft.Network --query registrationState
+        --output tsv
+
+        if ($network -ne ''Registered'') { throw ''Microsoft.Network is not registered.'' }'
+      expected: The Standard load-balancer SKU and Network Watcher diagnostic commands are available in the selected region.
+    negative:
+      id: cp01.negative
+      description: Search for conflicting, unowned, or excessive state after verify load-balancer and Network Watcher diagnostics
+        support.
+      command: '$validationId=''LAB21-CP01-negative''; $watchers = az network watcher list --query "[?location==''$Location'']
+        | length(@)" --output tsv
+
+        if ([int]$watchers -lt 1) { throw ''Network Watcher is not available in the selected region.'' }'
+      expected: 'LAB21-CP01 negative boundary: The undesired state is absent; the negative assertion must not report: Network
+        Watcher is not available in the selected region.'
+  cleanup:
+    dependsOn:
+    - LAB21-CP02
+    - LAB21-CP03
+    - LAB21-CP04
+    - LAB21-CP05
+    action: Remove only manifest-recorded objects owned by LAB21-CP01, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp01.residual
+      description: Prove no active managed object remains for LAB21-CP01.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-1
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Create a public Standard Load Balancer with Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/load-balancer/quickstart-load-balancer-standard-public-cli
+- id: LAB21-CP02
+  title: Create two private backends behind a Standard load balancer
+  purpose: Provision and immediately inventory the exact run-owned resources needed to create two private backends behind
+    a standard load balancer, so partial completion remains recoverable.
+  objectiveIds:
+  - NW-DNSLB-02
+  required: true
+  expectedState: Both backend NICs join the pool and the frontend, health probe, and rule reference one consistent load-balancer
+    resource.
+  scriptMarkers:
+    setup: LAB21-CP02
+    validate: LAB21-CP02
+    cleanup: LAB21-CP02
+  validation:
+    positive:
+      id: cp02.positive
+      description: Read the service properties for create two private backends behind a Standard load balancer by using exact
+        run-owned identifiers.
+      command: '$validationId=''LAB21-CP02-positive''; $probePort = az network lb probe show --resource-group $ResourceGroupName
+        --lb-name $loadBalancer --name ssh --query port --output tsv
+
+        if ([int]$probePort -ne 22) { throw "Probe port is $probePort." }'
+      expected: Both backend NICs join the pool and the frontend, health probe, and rule reference one consistent load-balancer
+        resource.
+    negative:
+      id: cp02.negative
+      description: Search for conflicting, unowned, or excessive state after create two private backends behind a Standard
+        load balancer.
+      command: '$validationId=''LAB21-CP02-negative''; $frontendPort = az network lb rule show --resource-group $ResourceGroupName
+        --lb-name $loadBalancer --name ssh --query frontendPort --output tsv
+
+        if ([int]$frontendPort -ne 2222) { throw "Frontend port is $frontendPort." }'
+      expected: 'LAB21-CP02 negative boundary: The undesired state is absent; the negative assertion must not report: Frontend
+        port is reported frontendPort.'
+  cleanup:
+    dependsOn:
+    - LAB21-CP03
+    - LAB21-CP04
+    - LAB21-CP05
+    action: Remove only manifest-recorded objects owned by LAB21-CP02, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp02.residual
+      description: Prove no active managed object remains for LAB21-CP02.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-2
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Create a public Standard Load Balancer with Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/load-balancer/quickstart-load-balancer-standard-public-cli
+- id: LAB21-CP03
+  title: Configure health probing and balanced traffic
+  purpose: Configure and independently inspect the control-plane and data-path properties needed to configure health probing
+    and balanced traffic.
+  objectiveIds:
+  - NW-DNSLB-03
+  required: true
+  expectedState: The TCP probe and load-balancing rule share the intended ports, backend pool, and idle-timeout behavior.
+  scriptMarkers:
+    setup: LAB21-CP03
+    validate: LAB21-CP03
+    cleanup: LAB21-CP03
+  validation:
+    positive:
+      id: cp03.positive
+      description: Read the service properties for configure health probing and balanced traffic by using exact run-owned
+        identifiers.
+      command: '$validationId=''LAB21-CP03-positive''; $backends = az network lb address-pool show --resource-group $ResourceGroupName
+        --lb-name $loadBalancer --name backend --query "backendIPConfigurations | length(@)" --output tsv
+
+        if ([int]$backends -ne 2) { throw "Expected two LB backends; found $backends." }'
+      expected: The TCP probe and load-balancing rule share the intended ports, backend pool, and idle-timeout behavior.
+    negative:
+      id: cp03.negative
+      description: Search for conflicting, unowned, or excessive state after configure health probing and balanced traffic.
+      command: '$validationId=''LAB21-CP03-negative''; $publicIps = az vm list-ip-addresses --resource-group $ResourceGroupName
+        --query "[?virtualMachine.name==''$vm1'' || virtualMachine.name==''$vm2''].virtualMachine.network.publicIpAddresses[]
+        | length(@)" --output tsv
+
+        if ($publicIps -and [int]$publicIps -ne 0) { throw ''A backend VM has a direct public IP.'' }'
+      expected: 'LAB21-CP03 negative boundary: The undesired state is absent; the negative assertion must not report: A backend
+        VM has a direct public IP.'
+  cleanup:
+    dependsOn:
+    - LAB21-CP04
+    - LAB21-CP05
+    action: Remove only manifest-recorded objects owned by LAB21-CP03, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp03.residual
+      description: Prove no active managed object remains for LAB21-CP03.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-3
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Create a public Standard Load Balancer with Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/load-balancer/quickstart-load-balancer-standard-public-cli
+- id: LAB21-CP04
+  title: Run topology-compatible Network Watcher diagnostics
+  purpose: Exercise the deterministic operational or denied path needed to run topology-compatible network watcher diagnostics,
+    then retain comparable before-and-after results.
+  objectiveIds:
+  - MR-MONITOR-06
+  required: true
+  expectedState: IP-flow, next-hop, or connection-troubleshoot evidence identifies the effective network decision without
+    relying on an unavailable public path.
+  scriptMarkers:
+    setup: LAB21-CP04
+    validate: LAB21-CP04
+    cleanup: LAB21-CP04
+  validation:
+    positive:
+      id: cp04.positive
+      description: Read the service properties for run topology-compatible Network Watcher diagnostics by using exact run-owned
+        identifiers.
+      command: '$validationId=''LAB21-CP04-positive''; $monitorState = az network watcher connection-monitor show --location
+        $Location --name $state.inputs[''external-connection-monitor-name''] --query provisioningState --output tsv
+
+        if ($monitorState -ne ''Succeeded'') { throw "Connection Monitor provisioning state is $monitorState." }'
+      expected: IP-flow, next-hop, or connection-troubleshoot evidence identifies the effective network decision without relying
+        on an unavailable public path.
+    negative:
+      id: cp04.negative
+      description: Search for conflicting, unowned, or excessive state after run topology-compatible Network Watcher diagnostics.
+      command: "$validationId='LAB21-CP04-negative'; $agentCount = 0\nforeach ($vmName in @($vm1, $vm2)) {\n    $stateValue\
+        \ = az vm extension show --resource-group $ResourceGroupName --vm-name $vmName --name NetworkWatcherAgentLinux --query\
+        \ provisioningState --output tsv\n    if ($stateValue -eq 'Succeeded') { $agentCount++ }\n}\nif ($agentCount -ne 2)\
+        \ { throw \"Expected two healthy Network Watcher agents; found $agentCount.\" }"
+      expected: 'LAB21-CP04 negative boundary: The undesired state is absent; the negative assertion must not report: Expected
+        two healthy Network Watcher agents; found reported agentCount.'
+  cleanup:
+    dependsOn:
+    - LAB21-CP05
+    action: Remove only manifest-recorded objects owned by LAB21-CP04, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp04.residual
+      description: Prove no active managed object remains for LAB21-CP04.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-4
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Create a public Standard Load Balancer with Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/load-balancer/quickstart-load-balancer-standard-public-cli
+- id: LAB21-CP05
+  title: Reconcile frontend, backend health, and diagnostic evidence
+  purpose: Reconcile live service properties, returned IDs, and dependency-aware removal needed to reconcile frontend, backend
+    health, and diagnostic evidence before handoff.
+  objectiveIds:
+  - NW-VNET-05
+  - NW-DNSLB-02
+  - NW-DNSLB-03
+  - MR-MONITOR-06
+  required: true
+  expectedState: Frontend configuration, backend membership, probe/rule bindings, and diagnostic results all refer to the
+    same run-owned traffic path.
+  scriptMarkers:
+    setup: LAB21-CP05
+    validate: LAB21-CP05
+    cleanup: LAB21-CP05
+  validation:
+    positive:
+      id: cp05.positive
+      description: Read the service properties for reconcile frontend, backend health, and diagnostic evidence by using exact
+        run-owned identifiers.
+      command: '$validationId=''LAB21-CP05-positive''; $sku = az network lb show --resource-group $ResourceGroupName --name
+        $loadBalancer --query sku.name --output tsv
+
+        if ($sku -ne ''Standard'') { throw "Load Balancer SKU is $sku." }'
+      expected: Frontend configuration, backend membership, probe/rule bindings, and diagnostic results all refer to the same
+        run-owned traffic path.
+    negative:
+      id: cp05.negative
+      description: Search for conflicting, unowned, or excessive state after reconcile frontend, backend health, and diagnostic
+        evidence.
+      command: '$validationId=''LAB21-CP05-negative''; $faultRule = az network nsg rule list --resource-group $ResourceGroupName
+        --nsg-name $nsg --query "[?name==''DenyInjectedSsh''] | length(@)" --output tsv
+
+        if ([int]$faultRule -ne 0) { throw ''The injected deny rule still exists.'' }'
+      expected: 'LAB21-CP05 negative boundary: The undesired state is absent; the negative assertion must not report: The
+        injected deny rule still exists.'
+  cleanup:
+    dependsOn: []
+    action: Remove only manifest-recorded objects owned by LAB21-CP05, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp05.residual
+      description: Prove no active managed object remains for LAB21-CP05.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-5
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Create a public Standard Load Balancer with Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/load-balancer/quickstart-load-balancer-standard-public-cli
 validation:
-  commandLanes:
-  - scripts/cli/Validate.ps1
-  output: .state/<run-id>/validation.json
-  statuses:
-  - pass
-  - fail
-  - warning
-  - skipped
-  liveExecutionRequiredForLiveVerified: true
+  script: scripts/cli/Validate.ps1
+  artifact: .state/<run-id>/validation.json
+  modes:
+  - Deployment
+  - PostCleanup
+  resultPolicy:
+    requiredFailureResult: fail
+    optionalSkipResult: partial
+    allRequiredPassResult: pass
 cleanup:
-  azureDeletion: exact recorded resource-group ID after tag verification
-  entraDeletion: none
-  reportOnlyByDefault: true
+  script: scripts/cli/Cleanup.ps1
+  artifact: .state/<run-id>/cleanup.json
+  previewByDefault: true
   requiresExecuteFlag: true
-  residualAuditRequired: true
+  ownershipVerification:
+    manifestIdMatch: true
+    requiredTags:
+    - purpose
+    - labId
+    - runId
+  residualChecks:
+  - id: cp01.residual
+    description: Prove no active managed object remains for LAB21-CP01.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp02.residual
+    description: Prove no active managed object remains for LAB21-CP02.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp03.residual
+    description: Prove no active managed object remains for LAB21-CP03.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp04.residual
+    description: Prove no active managed object remains for LAB21-CP04.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp05.residual
+    description: Prove no active managed object remains for LAB21-CP05.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  retainedItemsAllowed: true
+  irreversiblePurge: never
 assessment:
   enabled: true
   questionCount: 50
   primaryDomain: networking
-lastOfflineValidated: '2026-08-30'
+lastOfflineValidated: '2026-08-31'
 lastLiveVerified: null
+# END GENERATED AZ104 V2

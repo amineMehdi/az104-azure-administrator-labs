@@ -1,18 +1,46 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="460" viewBox="0 0 1040 460" role="img" aria-labelledby="title desc">
-<title id="title">Lab 22 architecture</title>
-<desc id="desc">Preview-first operator workflow, a recorded lab boundary, intended resources, independent validation, redacted command evidence, and scoped cleanup.</desc>
-<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#46647f"/></marker></defs>
-<style>text{font-family:Segoe UI,Arial,sans-serif;font-size:14px;fill:#102a43} .control{fill:#e8f1ff;stroke:#2563eb;stroke-width:2} .resource{fill:#e9f8ef;stroke:#16803a;stroke-width:2} .arrow{fill:none;stroke:#46647f;stroke-width:2;marker-end:url(#arrow)}</style>
-<rect width="100%" height="100%" fill="#ffffff"/>
-<rect x="40" y="55" width="180" height="55" rx="8" class="control"/><text x="130" y="79" text-anchor="middle">Operator</text><text x="130" y="98" text-anchor="middle">Azure CLI and KQL</text>
-<rect x="275" y="55" width="180" height="55" rx="8" class="control"/><text x="365" y="79" text-anchor="middle">Preview and preflight</text><text x="365" y="98" text-anchor="middle">read-only context check</text>
-<path d="M220 82 L275 82" class="arrow"/>
-<rect x="275" y="130" width="180" height="50" rx="8" class="control"/><text x="365" y="151" text-anchor="middle">Recorded Lab 22</text><text x="365" y="170" text-anchor="middle">exact cleanup boundary</text>
-<path d="M365 110 L365 130" class="arrow"/>
-<rect x="500" y="110" width="470" height="40" rx="8" class="resource"/><text x="735" y="135" text-anchor="middle">resource group</text><rect x="500" y="168" width="470" height="40" rx="8" class="resource"/><text x="735" y="193" text-anchor="middle">Log Analytics workspace</text><rect x="500" y="226" width="470" height="40" rx="8" class="resource"/><text x="735" y="251" text-anchor="middle">storage account</text><rect x="500" y="284" width="470" height="40" rx="8" class="resource"/><text x="735" y="309" text-anchor="middle">diagnostic setting</text><rect x="500" y="342" width="470" height="40" rx="8" class="resource"/><text x="735" y="367" text-anchor="middle">optional data collection rule</text>
-<path d="M 455 155 L 500 130" class="arrow"/><path d="M 455 155 L 500 188" class="arrow"/><path d="M 455 155 L 500 246" class="arrow"/><path d="M 455 155 L 500 304" class="arrow"/><path d="M 455 155 L 500 362" class="arrow"/>
-<rect x="40" y="215" width="180" height="50" rx="8" class="control"/><text x="130" y="237" text-anchor="middle">Independent validation</text><text x="130" y="256" text-anchor="middle">positive + negative</text>
-<path d="M275 165 L220 230" class="arrow"/>
-<rect x="40" y="290" width="180" height="50" rx="8" class="control"/><text x="130" y="312" text-anchor="middle">Evidence + cleanup</text><text x="130" y="331" text-anchor="middle">redacted and scoped</text>
-<path d="M130 265 L130 290" class="arrow"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="3428" height="228" viewBox="0 0 3428 228" role="img" aria-labelledby="lab22-title lab22-desc">
+  <title id="lab22-title">LAB-22 architecture: Collect and analyze Azure Monitor metrics, logs, and Insights</title>
+  <desc id="lab22-desc">Left-to-right service topology with 9 components and 8 directed relationships. Components: Harmless Blob transaction, Storage account, Transactions metric, Diagnostic setting, Log Analytics workspace, Bounded KQL query, Assert row count above zero, Collection and destination assertions, Diagnostic before workspace cleanup. Relationships: Harmless Blob transaction to Storage account; Storage account to Transactions metric; Transactions metric to Diagnostic setting; Diagnostic setting to Log Analytics workspace; Log Analytics workspace to Bounded KQL query; Bounded KQL query to Assert row count above zero; Assert row count above zero to Collection and destination assertions; Collection and destination assertions to Diagnostic before workspace cleanup.</desc>
+  <metadata id="lab22-metadata">{&quot;renderer&quot;:&quot;az104-mermaid-flowchart-svg/1.0.0&quot;,&quot;source&quot;:&quot;architecture.mmd&quot;,&quot;sourceSha256&quot;:&quot;bb50640cad1b66ad86933d30a40cd388cbaf94743ab354d86c49641ae9ca52f7&quot;}</metadata>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M 0 0 L 10 4 L 0 8 z" fill="#57606a"/>
+    </marker>
+    <style>
+      .edge { fill: none; stroke: #57606a; stroke-width: 2; marker-end: url(#arrow); }
+      .edge-label-bg { fill: #ffffff; opacity: .94; }
+      .edge-label { fill: #57606a; font: 13px 'Segoe UI', Arial, sans-serif; text-anchor: middle; dominant-baseline: central; }
+      .node-label { font: 600 15px 'Segoe UI', Arial, sans-serif; text-anchor: middle; dominant-baseline: central; }
+    </style>
+  </defs>
+  <rect width="100%" height="100%" fill="#ffffff"/>
+  <g aria-hidden="true">
+    <path class="edge" d="M 324 114 C 384 114, 384 114, 444 114"/>
+    <path class="edge" d="M 704 114 C 764 114, 764 114, 824 114"/>
+    <path class="edge" d="M 1084 114 C 1144 114, 1144 114, 1204 114"/>
+    <path class="edge" d="M 1464 114 C 1524 114, 1524 114, 1584 114"/>
+    <path class="edge" d="M 1844 114 C 1904 114, 1904 114, 1964 114"/>
+    <path class="edge" d="M 2224 114 C 2284 114, 2284 114, 2344 114"/>
+    <path class="edge" d="M 2604 114 C 2664 114, 2664 114, 2724 114"/>
+    <path class="edge" d="M 2984 114 C 3044 114, 3044 114, 3104 114"/>
+    <rect x="64" y="80" width="260" height="68" rx="10" fill="#e8f1ff" stroke="#2563eb"/>
+    <text x="194" y="114" class="node-label" fill="#102a43">Harmless Blob transaction</text>
+    <rect x="444" y="80" width="260" height="68" rx="10" fill="#e9f8ef" stroke="#16803a"/>
+    <text x="574" y="114" class="node-label" fill="#102a43">Storage account</text>
+    <rect x="824" y="80" width="260" height="68" rx="10" fill="#e9f8ef" stroke="#16803a"/>
+    <text x="954" y="114" class="node-label" fill="#102a43">Transactions metric</text>
+    <rect x="1204" y="80" width="260" height="68" rx="10" fill="#e9f8ef" stroke="#16803a"/>
+    <text x="1334" y="114" class="node-label" fill="#102a43">Diagnostic setting</text>
+    <rect x="1584" y="80" width="260" height="68" rx="10" fill="#e9f8ef" stroke="#16803a"/>
+    <text x="1714" y="114" class="node-label" fill="#102a43">Log Analytics workspace</text>
+    <rect x="1964" y="80" width="260" height="68" rx="10" fill="#e8f1ff" stroke="#2563eb"/>
+    <text x="2094" y="114" class="node-label" fill="#102a43">Bounded KQL query</text>
+    <rect x="2344" y="80" width="260" height="68" rx="10" fill="#e8f1ff" stroke="#2563eb"/>
+    <text x="2474" y="114" class="node-label" fill="#102a43">Assert row count above zero</text>
+    <rect x="2724" y="80" width="260" height="68" rx="10" fill="#e8f1ff" stroke="#2563eb"/>
+    <text x="2854" y="114" class="node-label" fill="#102a43">Collection and destination assertions</text>
+    <rect x="3104" y="80" width="260" height="68" rx="10" fill="#e8f1ff" stroke="#2563eb"/>
+    <text x="3234" y="114" class="node-label" fill="#102a43">Diagnostic before workspace cleanup</text>
+  </g>
 </svg>

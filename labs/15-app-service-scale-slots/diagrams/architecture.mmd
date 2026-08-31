@@ -1,15 +1,15 @@
 flowchart LR
-    A["Operator<br/>Azure CLI"] --> P["Preview and preflight"]
-    P --> S["Recorded Lab 15 boundary"]
-    S --> R1["resource group"]
-    S --> R2["App Service plan"]
-    S --> R3["web app"]
-    S --> R4["deployment slot"]
-    S --> R5["autoscale setting"]
-    S --> V["Independent validation"]
-    V --> E["Redacted command evidence"]
-    V --> C["Previewed cleanup"]
+    A["Operator and Azure CLI"] --> P["Linux App Service plan"]
+    P --> PR["Production slot"]
+    P --> ST["Staging slot"]
+    AS["Autoscale profile"] --> P
+    ST --> SW["Reversible slot swap"]
+    SW --> PR
+    SS["Slot-sticky settings"] --> ST
+    PR --> V["Capacity, slot, and sticky assertions"]
+    ST --> V
+    V --> C["Slot before plan cleanup"]
     classDef control fill:#e8f1ff,stroke:#2563eb,color:#102a43;
     classDef resource fill:#e9f8ef,stroke:#16803a,color:#102a43;
-    class A,P,S,V,E,C control;
-    class R1,R2,R3,R4,R5 resource;
+    class A,SW,V,C control;
+    class P,PR,ST,AS,SS resource;

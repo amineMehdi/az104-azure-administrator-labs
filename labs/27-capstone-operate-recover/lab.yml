@@ -1,9 +1,11 @@
+
+# BEGIN GENERATED AZ104 V2
+schemaVersion: 2.0.0
 id: LAB-27
 slug: 27-capstone-operate-recover
 title: Capstone — Operate, troubleshoot, back up, and recover an Azure workload
 blueprintVersion: '2026-04-17'
-domain: Manage Azure identities and governance / Implement and manage virtual networking / Monitor and maintain
-  Azure resources
+domain: capstone
 objectives:
 - IG-ACCESS-03
 - IG-GOVERN-01
@@ -27,18 +29,32 @@ testedToolVersions:
   powershell: '>=7.4'
 estimatedMinutes: 180
 difficulty: advanced
+experience:
+  scenario: 'You are an on-call azure administrator operating and recovering a governed workload. Build and prove this disposable
+    service path: The private VM and storage workload emit deterministic telemetry to Log Analytics and a scoped alert; effective
+    NSG diagnosis repairs an injected outage, while Recovery Services backup and disk restore prove recoverability.'
+  role: An on-call Azure administrator operating and recovering a governed workload.
+  outcome: Use Azure CLI in PowerShell to create the private workload and telemetry foundation, generate telemetry and configure
+    an actionable alert, and back up, restore, and reconcile operational evidence, with recoverable state and deterministic
+    cleanup.
+  completionCriteria:
+  - All required checkpoints report pass.
+  - The deterministic break/fix is injected, diagnosed, and repaired.
+  - cleanup.json reports no active run-owned resources, with any retained item explicitly documented.
 cost:
   class: elevated
-  billableResources: &id001
-  - resource group
-  - test workload
-  - Log Analytics workspace
-  - alerts
-  - Recovery Services vault
-  - backup policy
-  - fault injection and recovery evidence
-  notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator
-    before execution and clean up immediately.
+  billableResources:
+  - one Standard_B1s VM
+  - Log Analytics ingestion
+  - metric alert
+  - Recovery Services protected instance
+  - backup and restore storage
+  notes: This capstone generates telemetry, protects a VM, and performs a restore. Cleanup stops protection and never purges
+    recoverable backup data.
+  pricingLinks:
+  - title: Azure pricing calculator
+    url: https://azure.microsoft.com/pricing/calculator/
+  acknowledgementRequired: true
 permissions:
   azureRbacRoles:
   - Contributor, Monitoring Contributor, Backup Contributor, and Network Contributor on the capstone resource group
@@ -47,52 +63,467 @@ permissions:
 prerequisites:
 - A disposable non-production Azure environment
 - An active context that matches the explicitly supplied tenant and subscription
-- 'Authorization boundary: Contributor, Monitoring Contributor, Backup Contributor, and Network Contributor on the
-  capstone resource group'
-- 'External gate review: The live recovery drill requires cost review and an isolated workload; production failover
-  or irreversible deletion is never inferred from this capstone.'
+- 'Authorization boundary: Contributor, Monitoring Contributor, Backup Contributor, and Network Contributor on the capstone
+  resource group'
+- 'External gate review: The live recovery drill requires cost review and an isolated workload; production failover or irreversible
+  deletion is never inferred from this capstone.'
 - Azure CLI hosted in PowerShell 7.4 or later
 providers:
-  observed:
+  required:
   - Microsoft.Authorization
   - Microsoft.Compute
   - Microsoft.Insights
   - Microsoft.Network
   - Microsoft.OperationalInsights
   - Microsoft.RecoveryServices
+  - Microsoft.Storage
+  optional: []
   registeredByLab: []
-regions:
-  applicable: true
-  primary: supplied at execution time
-  secondary: required only for multi-region checkpoints
+inputs:
+- id: run-id
+  parameter: RunId
+  description: Unique lowercase run ownership identifier
+  required: true
+  secret: false
+  source: parameter
+  safeExample: az104l27-01
+  gateBehavior: block
+  checkpointIds:
+  - LAB27-CP01
+  - LAB27-CP02
+  - LAB27-CP03
+  - LAB27-CP04
+  - LAB27-CP05
+- id: subscription-id
+  parameter: SubscriptionId
+  environmentVariable: AZ104_SUBSCRIPTION_ID
+  description: Expected disposable subscription ID
+  required: true
+  secret: false
+  source: parameter-or-environment
+  safeExample: 00000000-0000-0000-0000-000000000000
+  gateBehavior: block
+  checkpointIds:
+  - LAB27-CP01
+  - LAB27-CP02
+  - LAB27-CP03
+  - LAB27-CP04
+  - LAB27-CP05
+- id: location
+  parameter: Location
+  environmentVariable: AZ104_LOCATION
+  description: Approved primary Azure region
+  required: true
+  secret: false
+  source: parameter-or-environment
+  safeExample: westeurope
+  gateBehavior: block
+  checkpointIds:
+  - LAB27-CP01
+  - LAB27-CP02
+  - LAB27-CP03
+  - LAB27-CP04
+  - LAB27-CP05
+acknowledgements:
+  cost:
+    required: true
+    parameter: AcknowledgeCost
+    message: I reviewed current pricing, quota, and the same-session cleanup plan.
+  tenantChange:
+    required: false
+    parameter: AcknowledgeTenantChange
+    message: I am authorized to create or change the declared tenant-scoped objects and will restore recorded settings.
 creates:
-  azureResources: *id001
+  azureResources:
+  - resource group
+  - test workload
+  - Log Analytics workspace
+  - alerts
+  - Recovery Services vault
+  - backup policy
+  - fault injection and recovery evidence
   entraObjects: []
   localArtifacts:
   - .state/<run-id>/run.json
   - .state/<run-id>/validation.json
+  - .state/<run-id>/cleanup.json
 tenantScopedChanges: []
 externalRequirements:
-- The live recovery drill requires cost review and an isolated workload; production failover or irreversible deletion
-  is never inferred from this capstone.
+- The live recovery drill requires cost review and an isolated workload; production failover or irreversible deletion is never
+  inferred from this capstone.
+preflightChecks:
+- id: preflight.context
+  type: context
+  required: true
+  description: Confirm active cloud, tenant, and subscription without changing them.
+  command: az account show --output json
+  expected: Active context matches the supplied subscription and disposable environment.
+- id: preflight.tools
+  type: tool
+  required: true
+  description: Confirm PowerShell, Azure CLI, and az bicep are available.
+  command: az version; az bicep version
+  expected: All required tools meet the versions declared by this lab.
+- id: preflight.inputs
+  type: input
+  required: true
+  description: Check required parameters and environment gates without printing secrets.
+  command: $PSBoundParameters.Keys; Get-ChildItem Env:AZ104_* | Select-Object Name
+  expected: Every required input is present and optional gates are explicitly reported.
+- id: preflight.providers
+  type: provider
+  required: true
+  description: Read registration state for required resource providers.
+  command: az provider show --namespace <provider> --query registrationState --output tsv
+  expected: Every required provider is Registered; preflight performs no registration.
+- id: preflight.region
+  type: region
+  required: true
+  description: Confirm the requested region is available to the subscription.
+  command: az account list-locations --query "[?name=='<location>'].name" --output tsv
+  expected: The supplied region appears in the subscription location inventory.
+- id: preflight.quota
+  type: quota
+  required: true
+  description: Read regional compute usage before deployment.
+  command: az vm list-usage --location <location> --output table
+  expected: Required regional vCPU quota has safe headroom.
+- id: preflight.sku
+  type: sku
+  required: true
+  description: Read available VM or service SKUs in the selected region.
+  command: az vm list-skus --location <location> --all --output table
+  expected: The documented lab SKU has no blocking regional restriction.
+- id: preflight.authored.service
+  type: sku
+  required: true
+  description: Prove verify operations and recovery prerequisites with LAB-27's authored read-only provider, feature, tool,
+    region, and SKU queries.
+  command: '$insights = az provider show --namespace Microsoft.Insights --query registrationState --output tsv
+
+    if ($insights -ne ''Registered'') { throw ''Microsoft.Insights is not registered.'' }
+
+    $recovery = az provider show --namespace Microsoft.RecoveryServices --query registrationState --output tsv
+
+    if ($recovery -ne ''Registered'') { throw ''Microsoft.RecoveryServices is not registered.'' }'
+  expected: VM, Network Watcher, Monitor, Storage, and Recovery Services capabilities are available for the selected region
+    and SKU.
+checkpoints:
+- id: LAB27-CP01
+  title: Verify operations and recovery prerequisites
+  purpose: Read the provider, region, SKU, feature, quota, and companion-tool signals needed for verify operations and recovery
+    prerequisites, without changing Azure state.
+  objectiveIds:
+  - IG-ACCESS-03
+  required: true
+  expectedState: VM, Network Watcher, Monitor, Storage, and Recovery Services capabilities are available for the selected
+    region and SKU.
+  scriptMarkers:
+    setup: LAB27-CP01
+    validate: LAB27-CP01
+    cleanup: LAB27-CP01
+  validation:
+    positive:
+      id: cp01.positive
+      description: Read the service properties for verify operations and recovery prerequisites by using exact run-owned identifiers.
+      command: '$validationId=''LAB27-CP01-positive''; $insights = az provider show --namespace Microsoft.Insights --query
+        registrationState --output tsv
+
+        if ($insights -ne ''Registered'') { throw ''Microsoft.Insights is not registered.'' }'
+      expected: VM, Network Watcher, Monitor, Storage, and Recovery Services capabilities are available for the selected region
+        and SKU.
+    negative:
+      id: cp01.negative
+      description: Search for conflicting, unowned, or excessive state after verify operations and recovery prerequisites.
+      command: '$validationId=''LAB27-CP01-negative''; $recovery = az provider show --namespace Microsoft.RecoveryServices
+        --query registrationState --output tsv
+
+        if ($recovery -ne ''Registered'') { throw ''Microsoft.RecoveryServices is not registered.'' }'
+      expected: 'LAB27-CP01 negative boundary: The undesired state is absent; the negative assertion must not report: Microsoft.RecoveryServices
+        is not registered.'
+  cleanup:
+    dependsOn:
+    - LAB27-CP02
+    - LAB27-CP03
+    - LAB27-CP04
+    - LAB27-CP05
+    action: Remove only manifest-recorded objects owned by LAB27-CP01, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp01.residual
+      description: Prove no active managed object remains for LAB27-CP01.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-1
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Collect Azure resource logs with diagnostic settings
+      url: https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/diagnostic-settings
+- id: LAB27-CP02
+  title: Create the private workload and telemetry foundation
+  purpose: Provision and immediately inventory the exact run-owned resources needed to create the private workload and telemetry
+    foundation, so partial completion remains recoverable.
+  objectiveIds:
+  - IG-GOVERN-01
+  required: true
+  expectedState: The private VM, storage account, workspace, vault, and network-security boundary are recorded immediately
+    after creation.
+  scriptMarkers:
+    setup: LAB27-CP02
+    validate: LAB27-CP02
+    cleanup: LAB27-CP02
+  validation:
+    positive:
+      id: cp02.positive
+      description: Read the service properties for create the private workload and telemetry foundation by using exact run-owned
+        identifiers.
+      command: '$validationId=''LAB27-CP02-positive''; $running = az vm show --resource-group $ResourceGroupName --name $vm
+        --show-details --query powerState --output tsv
+
+        if ($running -notmatch ''running'') { throw "Workload VM power state is $running." }'
+      expected: The private VM, storage account, workspace, vault, and network-security boundary are recorded immediately
+        after creation.
+    negative:
+      id: cp02.negative
+      description: Search for conflicting, unowned, or excessive state after create the private workload and telemetry foundation.
+      command: '$validationId=''LAB27-CP02-negative''; $publicIp = az vm show --resource-group $ResourceGroupName --name $vm
+        --show-details --query publicIps --output tsv
+
+        if ($publicIp) { throw ''The operated VM unexpectedly has a public IP.'' }'
+      expected: 'LAB27-CP02 negative boundary: The undesired state is absent; the negative assertion must not report: The
+        operated VM unexpectedly has a public IP.'
+  cleanup:
+    dependsOn:
+    - LAB27-CP03
+    - LAB27-CP04
+    - LAB27-CP05
+    action: Remove only manifest-recorded objects owned by LAB27-CP02, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp02.residual
+      description: Prove no active managed object remains for LAB27-CP02.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-2
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Collect Azure resource logs with diagnostic settings
+      url: https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/diagnostic-settings
+- id: LAB27-CP03
+  title: Generate telemetry and configure an actionable alert
+  purpose: Configure and independently inspect the control-plane and data-path properties needed to generate telemetry and
+    configure an actionable alert.
+  objectiveIds:
+  - IG-GOVERN-02
+  required: true
+  expectedState: A deterministic storage transaction is routed to the workspace and the metric alert scopes the exact storage
+    resource.
+  scriptMarkers:
+    setup: LAB27-CP03
+    validate: LAB27-CP03
+    cleanup: LAB27-CP03
+  validation:
+    positive:
+      id: cp03.positive
+      description: Read the service properties for generate telemetry and configure an actionable alert by using exact run-owned
+        identifiers.
+      command: '$validationId=''LAB27-CP03-positive''; $enabled = az monitor metrics alert show --resource-group $ResourceGroupName
+        --name $alert --query enabled --output tsv
+
+        if ($enabled -ne ''true'') { throw ''The transaction metric alert is disabled.'' }'
+      expected: A deterministic storage transaction is routed to the workspace and the metric alert scopes the exact storage
+        resource.
+    negative:
+      id: cp03.negative
+      description: Search for conflicting, unowned, or excessive state after generate telemetry and configure an actionable
+        alert.
+      command: '$validationId=''LAB27-CP03-negative''; $diagnosticCount = az monitor diagnostic-settings list --resource $storageId
+        --query "value[?name==''diag-$RunId''] | length(@)" --output tsv
+
+        if ([int]$diagnosticCount -ne 1) { throw ''The storage diagnostic setting is absent or duplicated.'' }'
+      expected: 'LAB27-CP03 negative boundary: The undesired state is absent; the negative assertion must not report: The
+        storage diagnostic setting is absent or duplicated.'
+  cleanup:
+    dependsOn:
+    - LAB27-CP04
+    - LAB27-CP05
+    action: Remove only manifest-recorded objects owned by LAB27-CP03, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp03.residual
+      description: Prove no active managed object remains for LAB27-CP03.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-3
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Collect Azure resource logs with diagnostic settings
+      url: https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/diagnostic-settings
+- id: LAB27-CP04
+  title: Inject and repair a deterministic NSG outage
+  purpose: Exercise the deterministic operational or denied path needed to inject and repair a deterministic nsg outage, then
+    retain comparable before-and-after results.
+  objectiveIds:
+  - IG-GOVERN-04
+  required: true
+  expectedState: The deny rule produces the documented effective-security symptom, diagnosis identifies its priority, and
+    repair restores the prior path.
+  scriptMarkers:
+    setup: LAB27-CP04
+    validate: LAB27-CP04
+    cleanup: LAB27-CP04
+  validation:
+    positive:
+      id: cp04.positive
+      description: Read the service properties for inject and repair a deterministic NSG outage by using exact run-owned identifiers.
+      command: '$validationId=''LAB27-CP04-positive''; $restoreCount = az backup job list --resource-group $ResourceGroupName
+        --vault-name $vault --operation Restore --status Completed --query "[?properties.entityFriendlyName==''$vm''] | length(@)"
+        --output tsv
+
+        if ([int]$restoreCount -lt 1) { throw ''No completed capstone restore job exists.'' }'
+      expected: The deny rule produces the documented effective-security symptom, diagnosis identifies its priority, and repair
+        restores the prior path.
+    negative:
+      id: cp04.negative
+      description: Search for conflicting, unowned, or excessive state after inject and repair a deterministic NSG outage.
+      command: '$validationId=''LAB27-CP04-negative''; $failedJobs = az backup job list --resource-group $ResourceGroupName
+        --vault-name $vault --status Failed --query "length(@)" --output tsv
+
+        if ([int]$failedJobs -ne 0) { throw ''A capstone backup or restore job failed.'' }'
+      expected: 'LAB27-CP04 negative boundary: The undesired state is absent; the negative assertion must not report: A capstone
+        backup or restore job failed.'
+  cleanup:
+    dependsOn:
+    - LAB27-CP05
+    action: Remove only manifest-recorded objects owned by LAB27-CP04, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp04.residual
+      description: Prove no active managed object remains for LAB27-CP04.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-4
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Collect Azure resource logs with diagnostic settings
+      url: https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/diagnostic-settings
+- id: LAB27-CP05
+  title: Back up, restore, and reconcile operational evidence
+  purpose: Reconcile live service properties, returned IDs, and dependency-aware removal needed to back up, restore, and reconcile
+    operational evidence before handoff.
+  objectiveIds:
+  - IG-ACCESS-03
+  - IG-GOVERN-01
+  - IG-GOVERN-02
+  - IG-GOVERN-04
+  - IG-GOVERN-06
+  - NW-VNET-05
+  - NW-SECURE-02
+  - NW-DNSLB-03
+  - MR-MONITOR-03
+  - MR-MONITOR-04
+  - MR-MONITOR-05
+  - MR-MONITOR-06
+  - MR-RECOVERY-04
+  - MR-RECOVERY-06
+  - MR-RECOVERY-07
+  required: true
+  expectedState: The backup and disk-restore jobs complete, telemetry remains queryable, effective networking is healthy,
+    and cleanup honors soft-delete retention.
+  scriptMarkers:
+    setup: LAB27-CP05
+    validate: LAB27-CP05
+    cleanup: LAB27-CP05
+  validation:
+    positive:
+      id: cp05.positive
+      description: Read the service properties for back up, restore, and reconcile operational evidence by using exact run-owned
+        identifiers.
+      command: '$validationId=''LAB27-CP05-positive''; $workspaceCustomerId = az monitor log-analytics workspace show --resource-group
+        $ResourceGroupName --workspace-name $workspace --query customerId --output tsv
+
+        $metricRows = az monitor log-analytics query --workspace $workspaceCustomerId --analytics-query "AzureMetrics | where
+        TimeGenerated > ago(30m) | where ResourceId =~ ''$storageId'' | where MetricName == ''Transactions'' | count" --query
+        "tables[0].rows[0][0]" --output tsv
+
+        if ([int]$metricRows -lt 1) { throw ''AzureMetrics has no run-owned storage transaction row.'' }'
+      expected: The backup and disk-restore jobs complete, telemetry remains queryable, effective networking is healthy, and
+        cleanup honors soft-delete retention.
+    negative:
+      id: cp05.negative
+      description: Search for conflicting, unowned, or excessive state after back up, restore, and reconcile operational evidence.
+      command: '$validationId=''LAB27-CP05-negative''; $denyRules = az network nsg rule list --resource-group $ResourceGroupName
+        --nsg-name $nsg --query "[?name==''DenyInjectedOperations''] | length(@)" --output tsv
+
+        if ([int]$denyRules -ne 0) { throw ''The injected operations deny rule still exists.'' }'
+      expected: 'LAB27-CP05 negative boundary: The undesired state is absent; the negative assertion must not report: The
+        injected operations deny rule still exists.'
+  cleanup:
+    dependsOn: []
+    action: Remove only manifest-recorded objects owned by LAB27-CP05, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp05.residual
+      description: Prove no active managed object remains for LAB27-CP05.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-5
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Collect Azure resource logs with diagnostic settings
+      url: https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/diagnostic-settings
 validation:
-  commandLanes:
-  - scripts/cli/Validate.ps1
-  output: .state/<run-id>/validation.json
-  statuses:
-  - pass
-  - fail
-  - warning
-  - skipped
-  liveExecutionRequiredForLiveVerified: true
+  script: scripts/cli/Validate.ps1
+  artifact: .state/<run-id>/validation.json
+  modes:
+  - Deployment
+  - PostCleanup
+  resultPolicy:
+    requiredFailureResult: fail
+    optionalSkipResult: partial
+    allRequiredPassResult: pass
 cleanup:
-  azureDeletion: exact recorded resource-group ID after tag verification
-  entraDeletion: none
-  reportOnlyByDefault: true
+  script: scripts/cli/Cleanup.ps1
+  artifact: .state/<run-id>/cleanup.json
+  previewByDefault: true
   requiresExecuteFlag: true
-  residualAuditRequired: true
+  ownershipVerification:
+    manifestIdMatch: true
+    requiredTags:
+    - purpose
+    - labId
+    - runId
+  residualChecks:
+  - id: cp01.residual
+    description: Prove no active managed object remains for LAB27-CP01.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp02.residual
+    description: Prove no active managed object remains for LAB27-CP02.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp03.residual
+    description: Prove no active managed object remains for LAB27-CP03.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp04.residual
+    description: Prove no active managed object remains for LAB27-CP04.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp05.residual
+    description: Prove no active managed object remains for LAB27-CP05.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  retainedItemsAllowed: true
+  irreversiblePurge: never
 assessment:
   enabled: false
   questionCount: 0
-lastOfflineValidated: '2026-08-30'
+lastOfflineValidated: '2026-08-31'
 lastLiveVerified: null
+# END GENERATED AZ104 V2

@@ -1,8 +1,11 @@
+
+# BEGIN GENERATED AZ104 V2
+schemaVersion: 2.0.0
 id: LAB-08
 slug: 08-blob-lifecycle-replication
 title: Manage Blob lifecycle, tiers, versioning, replication, and AzCopy
 blueprintVersion: '2026-04-17'
-domain: Implement and manage storage
+domain: storage
 objectives:
 - ST-ACCOUNTS-03
 - ST-ACCOUNTS-05
@@ -18,9 +21,20 @@ testedToolVersions:
   powershell: '>=7.4'
 estimatedMinutes: 120
 difficulty: foundational
+experience:
+  scenario: 'A data-platform administrator managing blob retention and replication is responding to an operational request:
+    Configure versioning, soft delete, lifecycle tiering, a two-sided object-replication policy, and an Entra-authorized AzCopy
+    transfer.'
+  role: A data-platform administrator managing blob retention and replication.
+  outcome: Configure versioning, soft delete, lifecycle tiering, a two-sided object-replication policy, and an Entra-authorized
+    AzCopy transfer.
+  completionCriteria:
+  - All required checkpoints report pass.
+  - The deterministic break/fix is injected, diagnosed, and repaired.
+  - cleanup.json reports no active run-owned resources, with any retained item explicitly documented.
 cost:
   class: low
-  billableResources: &id001
+  billableResources:
   - resource group
   - two StorageV2 accounts
   - blob containers
@@ -28,6 +42,10 @@ cost:
   - object replication policy
   notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator before
     execution and clean up immediately.
+  pricingLinks:
+  - title: Azure Storage pricing
+    url: https://azure.microsoft.com/pricing/details/storage/
+  acknowledgementRequired: false
 permissions:
   azureRbacRoles:
   - Contributor and Storage Blob Data Contributor on the lab resource group
@@ -40,40 +58,462 @@ prerequisites:
 - 'External gate review: None beyond the declared role and a disposable subscription.'
 - Azure CLI hosted in PowerShell 7.4 or later
 providers:
-  observed:
+  required:
   - Microsoft.Storage
+  optional: []
   registeredByLab: []
-regions:
-  applicable: true
-  primary: supplied at execution time
-  secondary: required only for multi-region checkpoints
+inputs:
+- id: run-id
+  parameter: RunId
+  description: Unique lowercase run ownership identifier
+  required: true
+  secret: false
+  source: parameter
+  safeExample: az104l08-01
+  gateBehavior: block
+  checkpointIds:
+  - LAB08-CP01
+  - LAB08-CP02
+  - LAB08-CP03
+  - LAB08-CP04
+  - LAB08-CP05
+- id: subscription-id
+  parameter: SubscriptionId
+  environmentVariable: AZ104_SUBSCRIPTION_ID
+  description: Expected disposable subscription ID
+  required: true
+  secret: false
+  source: parameter-or-environment
+  safeExample: 00000000-0000-0000-0000-000000000000
+  gateBehavior: block
+  checkpointIds:
+  - LAB08-CP01
+  - LAB08-CP02
+  - LAB08-CP03
+  - LAB08-CP04
+  - LAB08-CP05
+- id: location
+  parameter: Location
+  environmentVariable: AZ104_LOCATION
+  description: Approved primary Azure region
+  required: true
+  secret: false
+  source: parameter-or-environment
+  safeExample: westeurope
+  gateBehavior: block
+  checkpointIds:
+  - LAB08-CP01
+  - LAB08-CP02
+  - LAB08-CP03
+  - LAB08-CP04
+  - LAB08-CP05
+acknowledgements:
+  cost:
+    required: false
+    parameter: AcknowledgeCost
+    message: I reviewed current pricing, quota, and the same-session cleanup plan.
+  tenantChange:
+    required: false
+    parameter: AcknowledgeTenantChange
+    message: I am authorized to create or change the declared tenant-scoped objects and will restore recorded settings.
 creates:
-  azureResources: *id001
+  azureResources:
+  - resource group
+  - two StorageV2 accounts
+  - blob containers
+  - lifecycle policy
+  - object replication policy
   entraObjects: []
   localArtifacts:
   - .state/<run-id>/run.json
   - .state/<run-id>/validation.json
+  - .state/<run-id>/cleanup.json
 tenantScopedChanges: []
 externalRequirements: []
+preflightChecks:
+- id: preflight.context
+  type: context
+  required: true
+  description: Confirm active cloud, tenant, and subscription without changing them.
+  command: az account show --output json
+  expected: Active context matches the supplied subscription and disposable environment.
+- id: preflight.tools
+  type: tool
+  required: true
+  description: Confirm PowerShell, Azure CLI, and az bicep are available.
+  command: az version; az bicep version
+  expected: All required tools meet the versions declared by this lab.
+- id: preflight.inputs
+  type: input
+  required: true
+  description: Check required parameters and environment gates without printing secrets.
+  command: $PSBoundParameters.Keys; Get-ChildItem Env:AZ104_* | Select-Object Name
+  expected: Every required input is present and optional gates are explicitly reported.
+- id: preflight.providers
+  type: provider
+  required: true
+  description: Read registration state for required resource providers.
+  command: az provider show --namespace <provider> --query registrationState --output tsv
+  expected: Every required provider is Registered; preflight performs no registration.
+- id: preflight.region
+  type: region
+  required: true
+  description: Confirm the requested region is available to the subscription.
+  command: az account list-locations --query "[?name=='<location>'].name" --output tsv
+  expected: The supplied region appears in the subscription location inventory.
+- id: preflight.authored.lab08.identity-and-names
+  type: service
+  required: true
+  description: Resolve the interactive AzCopy identity and prove both globally unique endpoint names are available.
+  command: "$learnerId = az ad signed-in-user show --query id --output tsv\nif (-not $learnerId) { throw 'An interactive Entra\
+    \ user is required for the AZCLI AzCopy lane.' }\nforeach ($account in @($source,$destination)) {\n    $availability =\
+    \ az storage account check-name --name $account --output json | ConvertFrom-Json\n    if (-not $availability.nameAvailable)\
+    \ { throw \"Storage name unavailable: $account ($($availability.reason))\" }\n}\n"
+  expected: The interactive identity resolves and both account names are globally available.
+checkpoints:
+- id: LAB08-CP01
+  title: Confirm AzCopy, identity, and object-replication prerequisites
+  purpose: Validate the local transfer tool, signed-in user, provider, and unique account names before creating endpoints.
+  objectiveIds:
+  - ST-ACCOUNTS-03
+  required: true
+  expectedState: AzCopy v10 and an interactive learner object ID are available before any storage account is created.
+  scriptMarkers:
+    setup: LAB08-CP01
+    validate: LAB08-CP01
+    cleanup: LAB08-CP01
+  validation:
+    positive:
+      id: cp01.positive
+      description: Read the service properties for confirm AzCopy, identity, and object-replication prerequisites by using
+        exact run-owned identifiers.
+      command: '$validationId=''LAB08-CP01-positive''; $accounts = @(az storage account list --resource-group $ResourceGroupName
+        --output json | ConvertFrom-Json)
+
+        if (@($accounts | Where-Object name -in @($source,$destination)).Count -ne 2) { throw ''Both replication accounts
+        must exist during validation.'' }
+
+        $accounts | Where-Object name -in @($source,$destination) | Select-Object id,name
+
+        '
+      expected: During deployment validation, both deterministic account IDs resolve.
+    negative:
+      id: cp01.negative
+      description: Search for conflicting, unowned, or excessive state after confirm AzCopy, identity, and object-replication
+        prerequisites.
+      command: "$validationId='LAB08-CP01-negative'; $unownedAccounts = @(az storage account list --resource-group $ResourceGroupName\
+        \ --output json | ConvertFrom-Json | Where-Object {\n  $_.name -in @($source, $destination) -and ($_.tags.labId -ne\
+        \ '08' -or $_.tags.runId -ne $RunId)\n})\nif ($unownedAccounts.Count -gt 0 -or -not $state.inputs['learner-object-id'])\
+        \ {\n  throw 'A replication account is unowned or the learner object ID was not persisted.'\n}\nif (Select-String\
+        \ -Path (Join-Path $StateDir '*.json') -Pattern 'sasToken|accountKey|AZCOPY_SPA_CLIENT_SECRET' -ErrorAction SilentlyContinue)\
+        \ {\n  throw 'Transfer credentials were persisted.'\n}\n'Owned replication accounts=2; learner ID recorded; transfer\
+        \ secrets recorded=0'\n"
+      expected: The non-secret learner ID is recorded and no transfer credential exists in state.
+  cleanup:
+    dependsOn:
+    - LAB08-CP02
+    - LAB08-CP03
+    - LAB08-CP04
+    - LAB08-CP05
+    action: Remove only manifest-recorded objects owned by LAB08-CP01, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp01.residual
+      description: Prove no active managed object remains for LAB08-CP01.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-1
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Azure Blob Storage lifecycle management overview
+      url: https://learn.microsoft.com/en-us/azure/storage/blobs/lifecycle-management-overview
+- id: LAB08-CP02
+  title: Create and protect the source and destination accounts
+  purpose: Persist each account immediately, configure soft delete and change feed, assign data roles, and install the source
+    lifecycle rule.
+  objectiveIds:
+  - ST-ACCOUNTS-05
+  required: true
+  expectedState: Both accounts have change feed and soft delete; source versioning is on, destination versioning is intentionally
+    off for the next break/fix, and lifecycle manages base blobs and versions.
+  scriptMarkers:
+    setup: LAB08-CP02
+    validate: LAB08-CP02
+    cleanup: LAB08-CP02
+  validation:
+    positive:
+      id: cp02.positive
+      description: Read the service properties for create and protect the source and destination accounts by using exact run-owned
+        identifiers.
+      command: '$validationId=''LAB08-CP02-positive''; $sourceProps = az storage account blob-service-properties show --resource-group
+        $ResourceGroupName --account-name $source --output json | ConvertFrom-Json
+
+        if (-not $sourceProps.changeFeed.enabled -or -not $sourceProps.isVersioningEnabled -or $sourceProps.deleteRetentionPolicy.days
+        -ne 7) { throw ''Source protection settings mismatch.'' }
+
+        $sourceProps
+
+        '
+      expected: Source change feed, versioning, and seven-day soft delete are enabled.
+    negative:
+      id: cp02.negative
+      description: Search for conflicting, unowned, or excessive state after create and protect the source and destination
+        accounts.
+      command: '$validationId=''LAB08-CP02-negative''; $destinationProps = az storage account blob-service-properties show
+        --resource-group $ResourceGroupName --account-name $destination --output json | ConvertFrom-Json
+
+        if (-not $destinationProps.changeFeed.enabled -or $destinationProps.isVersioningEnabled) { throw ''Destination must
+        have change feed on and versioning off before the injected failure.'' }
+
+        $destinationProps
+
+        '
+      expected: Destination versioning is deliberately false before the replication break/fix.
+  cleanup:
+    dependsOn:
+    - LAB08-CP03
+    - LAB08-CP04
+    - LAB08-CP05
+    action: Remove only manifest-recorded objects owned by LAB08-CP02, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp02.residual
+      description: Prove no active managed object remains for LAB08-CP02.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-2
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Azure Blob Storage lifecycle management overview
+      url: https://learn.microsoft.com/en-us/azure/storage/blobs/lifecycle-management-overview
+- id: LAB08-CP03
+  title: Inject the missing-versioning fault and build both policy copies
+  purpose: Require replication creation to fail while destination versioning is off, repair the prerequisite, then apply the
+    destination-generated policy to both endpoints.
+  objectiveIds:
+  - ST-DATA-02
+  required: true
+  expectedState: The pre-repair attempt fails, destination versioning becomes true, and the same policy ID with one rule exists
+    on both accounts.
+  scriptMarkers:
+    setup: LAB08-CP03
+    validate: LAB08-CP03
+    cleanup: LAB08-CP03
+  validation:
+    positive:
+      id: cp03.positive
+      description: Read the service properties for inject the missing-versioning fault and build both policy copies by using
+        exact run-owned identifiers.
+      command: '$validationId=''LAB08-CP03-positive''; $policyId = [string]$state.inputs[''object-replication-policy-id'']
+
+        $sourcePolicy = az storage account or-policy show --resource-group $ResourceGroupName --account-name $source --policy-id
+        $policyId --output json | ConvertFrom-Json
+
+        $destinationPolicy = az storage account or-policy show --resource-group $ResourceGroupName --account-name $destination
+        --policy-id $policyId --output json | ConvertFrom-Json
+
+        if ($sourcePolicy.policyId -ne $destinationPolicy.policyId -or @($sourcePolicy.rules).Count -ne 1 -or @($destinationPolicy.rules).Count
+        -ne 1) { throw ''Object-replication policy copies differ.'' }
+
+        [pscustomobject]@{ policyId = $policyId; sourceRules = $sourcePolicy.rules.Count; destinationRules = $destinationPolicy.rules.Count
+        }
+
+        '
+      expected: Both policy copies share one policy ID and one container rule.
+    negative:
+      id: cp03.negative
+      description: Search for conflicting, unowned, or excessive state after inject the missing-versioning fault and build
+        both policy copies.
+      command: "$validationId='LAB08-CP03-negative'; foreach ($account in @($source,$destination)) {\n    $properties = az\
+        \ storage account blob-service-properties show --resource-group $ResourceGroupName --account-name $account --output\
+        \ json | ConvertFrom-Json\n    if (-not $properties.isVersioningEnabled -or -not $properties.changeFeed.enabled) {\
+        \ throw \"Replication prerequisite missing on $account\" }\n}\n'Versioning and change feed enabled on both accounts.'\n"
+      expected: No endpoint remains without versioning or change feed after repair.
+  cleanup:
+    dependsOn:
+    - LAB08-CP04
+    - LAB08-CP05
+    action: Remove only manifest-recorded objects owned by LAB08-CP03, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp03.residual
+      description: Prove no active managed object remains for LAB08-CP03.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-3
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Azure Blob Storage lifecycle management overview
+      url: https://learn.microsoft.com/en-us/azure/storage/blobs/lifecycle-management-overview
+- id: LAB08-CP04
+  title: Transfer and version a blob with AzCopy using the Azure CLI token
+  purpose: Use AZCLI auto-login, upload two revisions, and place the current version in Cool tier without SAS or account keys.
+  objectiveIds:
+  - ST-DATA-03
+  required: true
+  expectedState: The source has a current Cool blob plus at least one prior version; eligible versions begin asynchronous
+    replication to destination.
+  scriptMarkers:
+    setup: LAB08-CP04
+    validate: LAB08-CP04
+    cleanup: LAB08-CP04
+  validation:
+    positive:
+      id: cp04.positive
+      description: Read the service properties for transfer and version a blob with AzCopy using the Azure CLI token by using
+        exact run-owned identifiers.
+      command: '$validationId=''LAB08-CP04-positive''; $versions = @(az storage blob list --account-name $source --container-name
+        source --include v --auth-mode login --output json | ConvertFrom-Json | Where-Object name -eq ''replication-sample.txt'')
+
+        if ($versions.Count -lt 2 -or @($versions | Where-Object properties.accessTier -eq ''Cool'').Count -lt 1) { throw
+        ''Expected multiple versions and a Cool current blob.'' }
+
+        $versions | Select-Object name,versionId,isCurrentVersion,properties
+
+        '
+      expected: At least two blob revisions are listed and the current blob is Cool.
+    negative:
+      id: cp04.negative
+      description: Search for conflicting, unowned, or excessive state after transfer and version a blob with AzCopy using
+        the Azure CLI token.
+      command: '$validationId=''LAB08-CP04-negative''; if (Test-Path Env:AZCOPY_AUTO_LOGIN_TYPE) { throw ''AzCopy auto-login
+        environment remained after transfer.'' }
+
+        if (Select-String -Path (Join-Path $StateDir ''*.json'') -Pattern ''sasToken|accountKey|clientSecret'' -ErrorAction
+        SilentlyContinue) { throw ''A transfer secret is persisted.'' }
+
+        ''AzCopy auth environment cleared; persisted transfer secrets=0''
+
+        '
+      expected: Temporary AzCopy environment variables are cleared and no transfer credential is stored.
+  cleanup:
+    dependsOn:
+    - LAB08-CP05
+    action: Remove only manifest-recorded objects owned by LAB08-CP04, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp04.residual
+      description: Prove no active managed object remains for LAB08-CP04.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-4
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Azure Blob Storage lifecycle management overview
+      url: https://learn.microsoft.com/en-us/azure/storage/blobs/lifecycle-management-overview
+- id: LAB08-CP05
+  title: Reconcile protection, policy, versions, and asynchronous replication state
+  purpose: Prove the lifecycle rule, recovery controls, two policy copies, source revisions, and observable replication status
+    without pretending asynchronous convergence is immediate.
+  objectiveIds:
+  - ST-ACCOUNTS-03
+  - ST-ACCOUNTS-05
+  - ST-DATA-02
+  - ST-DATA-03
+  - ST-DATA-04
+  - ST-DATA-06
+  - ST-DATA-07
+  required: true
+  expectedState: Both policy copies match, the lifecycle rule and source versions exist, and destination-copy count is reported
+    as an observation rather than a synchronous pass gate.
+  scriptMarkers:
+    setup: LAB08-CP05
+    validate: LAB08-CP05
+    cleanup: LAB08-CP05
+  validation:
+    positive:
+      id: cp05.positive
+      description: Read the service properties for reconcile protection, policy, versions, and asynchronous replication state
+        by using exact run-owned identifiers.
+      command: "$validationId='LAB08-CP05-positive'; $policyId = [string]$state.inputs['object-replication-policy-id']\nforeach\
+        \ ($account in @($source,$destination)) {\n    $policy = az storage account or-policy show --resource-group $ResourceGroupName\
+        \ --account-name $account --policy-id $policyId --output json | ConvertFrom-Json\n    if ($policy.policyId -ne $policyId\
+        \ -or @($policy.rules).Count -ne 1) { throw \"Incomplete replication policy on $account\" }\n}\n'Two matching object-replication\
+        \ policy copies are active.'\n"
+      expected: Source and destination each expose one rule under the recorded policy ID.
+    negative:
+      id: cp05.negative
+      description: Search for conflicting, unowned, or excessive state after reconcile protection, policy, versions, and asynchronous
+        replication state.
+      command: '$validationId=''LAB08-CP05-negative''; $unownedAccounts = @(az storage account list --resource-group $ResourceGroupName
+        --output json | ConvertFrom-Json | Where-Object { $_.name -in @($source,$destination) -and ($_.tags.labId -ne ''08''
+        -or $_.tags.runId -ne $RunId) })
+
+        if ($unownedAccounts.Count -ne 0) { throw ''A replication endpoint failed ownership validation.'' }
+
+        if (-not $state.inputs[''object-replication-policy-id'']) { throw ''Replication policy ID was not persisted.'' }
+
+        ''Unowned endpoints=0; policy cleanup target recorded=True''
+
+        '
+      expected: Neither endpoint has conflicting ownership and the exact policy cleanup target is recorded.
+  cleanup:
+    dependsOn: []
+    action: Remove only manifest-recorded objects owned by LAB08-CP05, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp05.residual
+      description: Prove no active managed object remains for LAB08-CP05.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-5
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Azure Blob Storage lifecycle management overview
+      url: https://learn.microsoft.com/en-us/azure/storage/blobs/lifecycle-management-overview
 validation:
-  commandLanes:
-  - scripts/cli/Validate.ps1
-  output: .state/<run-id>/validation.json
-  statuses:
-  - pass
-  - fail
-  - warning
-  - skipped
-  liveExecutionRequiredForLiveVerified: true
+  script: scripts/cli/Validate.ps1
+  artifact: .state/<run-id>/validation.json
+  modes:
+  - Deployment
+  - PostCleanup
+  resultPolicy:
+    requiredFailureResult: fail
+    optionalSkipResult: partial
+    allRequiredPassResult: pass
 cleanup:
-  azureDeletion: exact recorded resource-group ID after tag verification
-  entraDeletion: none
-  reportOnlyByDefault: true
+  script: scripts/cli/Cleanup.ps1
+  artifact: .state/<run-id>/cleanup.json
+  previewByDefault: true
   requiresExecuteFlag: true
-  residualAuditRequired: true
+  ownershipVerification:
+    manifestIdMatch: true
+    requiredTags:
+    - purpose
+    - labId
+    - runId
+  residualChecks:
+  - id: cp01.residual
+    description: Prove no active managed object remains for LAB08-CP01.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp02.residual
+    description: Prove no active managed object remains for LAB08-CP02.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp03.residual
+    description: Prove no active managed object remains for LAB08-CP03.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp04.residual
+    description: Prove no active managed object remains for LAB08-CP04.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp05.residual
+    description: Prove no active managed object remains for LAB08-CP05.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  retainedItemsAllowed: true
+  irreversiblePurge: never
 assessment:
   enabled: true
   questionCount: 50
   primaryDomain: storage
-lastOfflineValidated: '2026-08-30'
+lastOfflineValidated: '2026-08-31'
 lastLiveVerified: null
+# END GENERATED AZ104 V2

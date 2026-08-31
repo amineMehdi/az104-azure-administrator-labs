@@ -1,18 +1,52 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="460" viewBox="0 0 1040 460" role="img" aria-labelledby="title desc">
-<title id="title">Lab 20 architecture</title>
-<desc id="desc">Preview-first operator workflow, a recorded lab boundary, intended resources, independent validation, redacted command evidence, and scoped cleanup.</desc>
-<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#46647f"/></marker></defs>
-<style>text{font-family:Segoe UI,Arial,sans-serif;font-size:14px;fill:#102a43} .control{fill:#e8f1ff;stroke:#2563eb;stroke-width:2} .resource{fill:#e9f8ef;stroke:#16803a;stroke-width:2} .arrow{fill:none;stroke:#46647f;stroke-width:2;marker-end:url(#arrow)}</style>
-<rect width="100%" height="100%" fill="#ffffff"/>
-<rect x="40" y="55" width="180" height="55" rx="8" class="control"/><text x="130" y="79" text-anchor="middle">Operator</text><text x="130" y="98" text-anchor="middle">Azure CLI</text>
-<rect x="275" y="55" width="180" height="55" rx="8" class="control"/><text x="365" y="79" text-anchor="middle">Preview and preflight</text><text x="365" y="98" text-anchor="middle">read-only context check</text>
-<path d="M220 82 L275 82" class="arrow"/>
-<rect x="275" y="130" width="180" height="50" rx="8" class="control"/><text x="365" y="151" text-anchor="middle">Recorded Lab 20</text><text x="365" y="170" text-anchor="middle">exact cleanup boundary</text>
-<path d="M365 110 L365 130" class="arrow"/>
-<rect x="500" y="110" width="470" height="40" rx="8" class="resource"/><text x="735" y="135" text-anchor="middle">resource group</text><rect x="500" y="168" width="470" height="40" rx="8" class="resource"/><text x="735" y="193" text-anchor="middle">virtual network</text><rect x="500" y="226" width="470" height="40" rx="8" class="resource"/><text x="735" y="251" text-anchor="middle">AzureBastionSubnet</text><rect x="500" y="284" width="470" height="40" rx="8" class="resource"/><text x="735" y="309" text-anchor="middle">Standard public IP</text><rect x="500" y="342" width="470" height="40" rx="8" class="resource"/><text x="735" y="367" text-anchor="middle">Bastion host</text>
-<path d="M 455 155 L 500 130" class="arrow"/><path d="M 455 155 L 500 188" class="arrow"/><path d="M 455 155 L 500 246" class="arrow"/><path d="M 455 155 L 500 304" class="arrow"/><path d="M 455 155 L 500 362" class="arrow"/>
-<rect x="40" y="215" width="180" height="50" rx="8" class="control"/><text x="130" y="237" text-anchor="middle">Independent validation</text><text x="130" y="256" text-anchor="middle">positive + negative</text>
-<path d="M275 165 L220 230" class="arrow"/>
-<rect x="40" y="290" width="180" height="50" rx="8" class="control"/><text x="130" y="312" text-anchor="middle">Evidence + cleanup</text><text x="130" y="331" text-anchor="middle">redacted and scoped</text>
-<path d="M130 265 L130 290" class="arrow"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1528" height="432" viewBox="0 0 1528 432" role="img" aria-labelledby="lab20-title lab20-desc">
+  <title id="lab20-title">LAB-20 architecture: Configure Azure DNS and secure administration with Bastion</title>
+  <desc id="lab20-desc">Left-to-right service topology with 11 components and 10 directed relationships. Components: Administrator, Azure Bastion, Standard static public IP, AzureBastionSubnet, Private workload VNet, Verified Azure DNS parent, Gated child NS delegation, Child Azure DNS zone, A, CNAME, and TXT records, Bastion and DNS authority assertions, Delegation before child cleanup. Relationships: Administrator to Azure Bastion; Standard static public IP to Azure Bastion; Azure Bastion to AzureBastionSubnet; AzureBastionSubnet to Private workload VNet; Verified Azure DNS parent to Gated child NS delegation; Gated child NS delegation to Child Azure DNS zone; Child Azure DNS zone to A, CNAME, and TXT records; Azure Bastion to Bastion and DNS authority assertions; A, CNAME, and TXT records to Bastion and DNS authority assertions; Bastion and DNS authority assertions to Delegation before child cleanup.</desc>
+  <metadata id="lab20-metadata">{&quot;renderer&quot;:&quot;az104-mermaid-flowchart-svg/1.0.0&quot;,&quot;source&quot;:&quot;architecture.mmd&quot;,&quot;sourceSha256&quot;:&quot;e143b2e7dd3434685279fbf9666aa4b481be3a637b191a8958d09c07e4e8cc8a&quot;}</metadata>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M 0 0 L 10 4 L 0 8 z" fill="#57606a"/>
+    </marker>
+    <style>
+      .edge { fill: none; stroke: #57606a; stroke-width: 2; marker-end: url(#arrow); }
+      .edge-label-bg { fill: #ffffff; opacity: .94; }
+      .edge-label { fill: #57606a; font: 13px 'Segoe UI', Arial, sans-serif; text-anchor: middle; dominant-baseline: central; }
+      .node-label { font: 600 15px 'Segoe UI', Arial, sans-serif; text-anchor: middle; dominant-baseline: central; }
+    </style>
+  </defs>
+  <rect width="100%" height="100%" fill="#ffffff"/>
+  <g aria-hidden="true">
+    <path class="edge" d="M 324 114 C 384 114, 384 165, 444 165"/>
+    <path class="edge" d="M 324 216 C 384 216, 384 165, 444 165"/>
+    <path class="edge" d="M 704 165 C 764 165, 764 114, 824 114"/>
+    <path class="edge" d="M 1084 114 C 1144 114, 1144 114, 1204 114"/>
+    <path class="edge" d="M 324 318 C 384 318, 384 267, 444 267"/>
+    <path class="edge" d="M 704 267 C 764 267, 764 216, 824 216"/>
+    <path class="edge" d="M 1084 216 C 1144 216, 1144 216, 1204 216"/>
+    <path class="edge" d="M 704 165 C 764 165, 764 318, 824 318"/>
+    <path class="edge" d="M 1204 216 C 1154 410, 1134 410, 1084 318"/>
+    <path class="edge" d="M 1084 318 C 1144 318, 1144 318, 1204 318"/>
+    <rect x="64" y="80" width="260" height="68" rx="10" fill="#e8f1ff" stroke="#2563eb"/>
+    <text x="194" y="114" class="node-label" fill="#102a43">Administrator</text>
+    <rect x="444" y="131" width="260" height="68" rx="10" fill="#e9f8ef" stroke="#16803a"/>
+    <text x="574" y="165" class="node-label" fill="#102a43">Azure Bastion</text>
+    <rect x="64" y="182" width="260" height="68" rx="10" fill="#e9f8ef" stroke="#16803a"/>
+    <text x="194" y="216" class="node-label" fill="#102a43">Standard static public IP</text>
+    <rect x="824" y="80" width="260" height="68" rx="10" fill="#e9f8ef" stroke="#16803a"/>
+    <text x="954" y="114" class="node-label" fill="#102a43">AzureBastionSubnet</text>
+    <rect x="1204" y="80" width="260" height="68" rx="10" fill="#e9f8ef" stroke="#16803a"/>
+    <text x="1334" y="114" class="node-label" fill="#102a43">Private workload VNet</text>
+    <rect x="64" y="284" width="260" height="68" rx="10" fill="#e9f8ef" stroke="#16803a"/>
+    <text x="194" y="318" class="node-label" fill="#102a43">Verified Azure DNS parent</text>
+    <rect x="444" y="233" width="260" height="68" rx="10" fill="#e9f8ef" stroke="#16803a"/>
+    <text x="574" y="267" class="node-label" fill="#102a43">Gated child NS delegation</text>
+    <rect x="824" y="182" width="260" height="68" rx="10" fill="#e9f8ef" stroke="#16803a"/>
+    <text x="954" y="216" class="node-label" fill="#102a43">Child Azure DNS zone</text>
+    <rect x="1204" y="182" width="260" height="68" rx="10" fill="#e9f8ef" stroke="#16803a"/>
+    <text x="1334" y="216" class="node-label" fill="#102a43">A, CNAME, and TXT records</text>
+    <rect x="824" y="284" width="260" height="68" rx="10" fill="#e8f1ff" stroke="#2563eb"/>
+    <text x="954" y="318" class="node-label" fill="#102a43">Bastion and DNS authority assertions</text>
+    <rect x="1204" y="284" width="260" height="68" rx="10" fill="#e8f1ff" stroke="#2563eb"/>
+    <text x="1334" y="318" class="node-label" fill="#102a43">Delegation before child cleanup</text>
+  </g>
 </svg>

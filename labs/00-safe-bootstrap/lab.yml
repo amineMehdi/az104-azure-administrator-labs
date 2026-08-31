@@ -1,9 +1,11 @@
+
+# BEGIN GENERATED AZ104 V2
+schemaVersion: 2.0.0
 id: LAB-00
 slug: 00-safe-bootstrap
 title: Safe Azure lab bootstrap
 blueprintVersion: '2026-04-17'
-domain: Foundation
-objectiveCoverage: non-exam-foundation
+domain: foundation
 objectives:
 - FD-TOOLS-01
 - FD-CONTEXT-01
@@ -17,10 +19,25 @@ testedToolVersions:
   powershell: '>=7.4'
 estimatedMinutes: 60
 difficulty: foundational
+experience:
+  scenario: 'A new Azure administrator preparing a safe, repeatable workstation is responding to an operational request: Prove
+    workstation readiness, select Azure context deliberately, establish a safe run boundary, and rehearse cleanup before a
+    billable lab.'
+  role: A new Azure administrator preparing a safe, repeatable workstation.
+  outcome: Prove workstation readiness, select Azure context deliberately, establish a safe run boundary, and rehearse cleanup
+    before a billable lab.
+  completionCriteria:
+  - All required checkpoints report pass.
+  - The deterministic break/fix is injected, diagnosed, and repaired.
+  - cleanup.json reports no active run-owned resources, with any retained item explicitly documented.
 cost:
   class: none
   billableResources: []
   notes: This lab creates no Azure resources. Read-only Azure queries do not incur resource charges.
+  pricingLinks:
+  - title: Azure pricing calculator
+    url: https://azure.microsoft.com/pricing/calculator/
+  acknowledgementRequired: false
 permissions:
   azureRbacRoles:
   - Reader at the target subscription is recommended for all discovery checks
@@ -30,41 +47,393 @@ prerequisites:
 - A non-production Azure sandbox subscription
 - Azure CLI hosted in PowerShell 7.4 or later
 providers:
-  observed:
+  required:
   - Microsoft.Authorization
   - Microsoft.Compute
   - Microsoft.Insights
   - Microsoft.Network
   - Microsoft.RecoveryServices
   - Microsoft.Storage
+  optional: []
   registeredByLab: []
-regions:
-  defaultPrimary: westeurope
-  defaultSecondary: northeurope
-  configurable: true
+inputs:
+- id: run-id
+  parameter: RunId
+  description: Unique lowercase run ownership identifier
+  required: true
+  secret: false
+  source: parameter
+  safeExample: az104l00-01
+  gateBehavior: block
+  checkpointIds:
+  - LAB00-CP01
+  - LAB00-CP02
+  - LAB00-CP03
+  - LAB00-CP04
+  - LAB00-CP05
+- id: subscription-id
+  parameter: SubscriptionId
+  environmentVariable: AZ104_SUBSCRIPTION_ID
+  description: Expected disposable subscription ID
+  required: false
+  secret: false
+  source: parameter-or-environment
+  safeExample: 00000000-0000-0000-0000-000000000000
+  gateBehavior: block
+  checkpointIds:
+  - LAB00-CP01
+  - LAB00-CP02
+  - LAB00-CP03
+  - LAB00-CP04
+  - LAB00-CP05
+- id: location
+  parameter: Location
+  environmentVariable: AZ104_LOCATION
+  description: Approved primary Azure region
+  required: true
+  secret: false
+  source: parameter-or-environment
+  safeExample: westeurope
+  gateBehavior: block
+  checkpointIds:
+  - LAB00-CP01
+  - LAB00-CP02
+  - LAB00-CP03
+  - LAB00-CP04
+  - LAB00-CP05
+acknowledgements:
+  cost:
+    required: false
+    parameter: AcknowledgeCost
+    message: I reviewed current pricing, quota, and the same-session cleanup plan.
+  tenantChange:
+    required: false
+    parameter: AcknowledgeTenantChange
+    message: I am authorized to create or change the declared tenant-scoped objects and will restore recorded settings.
 creates:
   azureResources: []
   localArtifacts:
   - .state/<run-id>/run.json
   - .state/<run-id>/validation.json
+  - .state/<run-id>/cleanup.json
+  entraObjects: []
 tenantScopedChanges: []
 externalRequirements: []
+preflightChecks:
+- id: preflight.context
+  type: context
+  required: true
+  description: Confirm active cloud, tenant, and subscription without changing them.
+  command: az account show --output json
+  expected: Active context matches the supplied subscription and disposable environment.
+- id: preflight.tools
+  type: tool
+  required: true
+  description: Confirm PowerShell, Azure CLI, and az bicep are available.
+  command: az version; az bicep version
+  expected: All required tools meet the versions declared by this lab.
+- id: preflight.inputs
+  type: input
+  required: true
+  description: Check required parameters and environment gates without printing secrets.
+  command: $PSBoundParameters.Keys; Get-ChildItem Env:AZ104_* | Select-Object Name
+  expected: Every required input is present and optional gates are explicitly reported.
+- id: preflight.providers
+  type: provider
+  required: true
+  description: Read registration state for required resource providers.
+  command: az provider show --namespace <provider> --query registrationState --output tsv
+  expected: Every required provider is Registered; preflight performs no registration.
+- id: preflight.region
+  type: region
+  required: false
+  description: Confirm the requested region is available to the subscription.
+  command: az account list-locations --query "[?name=='<location>'].name" --output tsv
+  expected: The supplied region appears in the subscription location inventory.
+checkpoints:
+- id: LAB00-CP01
+  title: Confirm the local Azure CLI, PowerShell, Bicep, AzCopy, Python, and Node toolchain
+  purpose: Inventory every executable used by later labs and record its version without installing or changing software.
+  objectiveIds:
+  - FD-TOOLS-01
+  required: true
+  expectedState: PowerShell, Azure CLI, Bicep through Azure CLI, AzCopy, Python, and Node all return versions from the intended
+    PATH.
+  scriptMarkers:
+    setup: LAB00-CP01
+    validate: LAB00-CP01
+    cleanup: LAB00-CP01
+  validation:
+    positive:
+      id: cp01.positive
+      description: Read the service properties for confirm the local Azure CLI, PowerShell, Bicep, AzCopy, Python, and Node
+        toolchain by using exact run-owned identifiers.
+      command: "$validationId='LAB00-CP01-positive'; $azureCliVersion = az version --query '\"azure-cli\"' --output tsv\n\
+        $bicepVersion = (az bicep version) -join ''\nif (-not $azureCliVersion -or -not $bicepVersion) {\n  throw 'Azure CLI\
+        \ or the Bicep subcommand did not return a version.'\n}\n[pscustomobject]@{ azureCli = $azureCliVersion; bicep = $bicepVersion\
+        \ }\n"
+      expected: Azure CLI returns its version record and the Bicep subcommand returns a version without installation.
+    negative:
+      id: cp01.negative
+      description: Search for conflicting, unowned, or excessive state after confirm the local Azure CLI, PowerShell, Bicep,
+        AzCopy, Python, and Node toolchain.
+      command: "$validationId='LAB00-CP01-negative'; $missingTools = @('az', 'azcopy', 'python', 'node', 'pwsh') | Where-Object\
+        \ {\n  -not (Get-Command $_ -ErrorAction SilentlyContinue)\n}\nif (@($missingTools).Count -gt 0) {\n  throw \"Required\
+        \ tools are missing: $($missingTools -join ', ').\"\n}\n$missingTools\n"
+      expected: The missing-tool list is empty.
+  cleanup:
+    dependsOn:
+    - LAB00-CP02
+    - LAB00-CP03
+    - LAB00-CP04
+    - LAB00-CP05
+    action: Remove only manifest-recorded objects owned by LAB00-CP01, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp01.residual
+      description: Prove no active managed object remains for LAB00-CP01.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-1
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Get started with Azure CLI
+      url: https://learn.microsoft.com/en-us/cli/azure/get-started-with-azure-cli
+- id: LAB00-CP02
+  title: Sign in deliberately and confirm tenant, subscription, and cloud context
+  purpose: Compare the active Azure CLI context with the explicitly supplied sandbox subscription before any later mutation.
+  objectiveIds:
+  - FD-CONTEXT-01
+  required: true
+  expectedState: Exactly one active default context matches the supplied subscription and reports AzureCloud.
+  scriptMarkers:
+    setup: LAB00-CP02
+    validate: LAB00-CP02
+    cleanup: LAB00-CP02
+  validation:
+    positive:
+      id: cp02.positive
+      description: Read the service properties for sign in deliberately and confirm tenant, subscription, and cloud context
+        by using exact run-owned identifiers.
+      command: "$validationId='LAB00-CP02-positive'; $context = az account show --query '{cloud:environmentName,id:id,isDefault:isDefault}'\
+        \ --output json | ConvertFrom-Json\nif ($context.cloud -ne 'AzureCloud' -or -not $context.isDefault -or ($SubscriptionId\
+        \ -and $context.id -ne $SubscriptionId)) {\n  throw 'The active Azure CLI context does not match the approved default\
+        \ AzureCloud subscription.'\n}\n$context\n"
+      expected: The active context is AzureCloud, is the default, and has the expected redacted subscription ID.
+    negative:
+      id: cp02.negative
+      description: Search for conflicting, unowned, or excessive state after sign in deliberately and confirm tenant, subscription,
+        and cloud context.
+      command: "$validationId='LAB00-CP02-negative'; $mismatches = @(az account list --query \"[?isDefault && id!='$SubscriptionId'].{id:id,name:name}\"\
+        \ --output json | ConvertFrom-Json)\nif ($mismatches.Count -gt 0) {\n  throw 'A different subscription is still marked\
+        \ as the default context.'\n}\n$mismatches\n"
+      expected: The mismatched-default query returns an empty list.
+  cleanup:
+    dependsOn:
+    - LAB00-CP03
+    - LAB00-CP04
+    - LAB00-CP05
+    action: Remove only manifest-recorded objects owned by LAB00-CP02, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp02.residual
+      description: Prove no active managed object remains for LAB00-CP02.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-2
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Get started with Azure CLI
+      url: https://learn.microsoft.com/en-us/cli/azure/get-started-with-azure-cli
+- id: LAB00-CP03
+  title: Create a safe run ID, deterministic names, tags, and a local state boundary
+  purpose: Derive predictable names and ownership tags, then verify that the ignored manifest uniquely identifies this run.
+  objectiveIds:
+  - FD-SAFETY-01
+  required: true
+  expectedState: The name and tags contain the run ID, and `.state/<run-id>/run.json` already exists outside version control.
+  scriptMarkers:
+    setup: LAB00-CP03
+    validate: LAB00-CP03
+    cleanup: LAB00-CP03
+  validation:
+    positive:
+      id: cp03.positive
+      description: Read the service properties for create a safe run ID, deterministic names, tags, and a local state boundary
+        by using exact run-owned identifiers.
+      command: "$validationId='LAB00-CP03-positive'; if (-not (Test-Path -LiteralPath $Manifest)) {\n  throw 'The run manifest\
+        \ is missing.'\n}\n$runState = Get-Content -LiteralPath $Manifest -Raw | ConvertFrom-Json\nif ($runState.labId -ne\
+        \ 'LAB-00' -or $runState.runId -ne $RunId) {\n  throw 'The run manifest identity does not match this execution.'\n\
+        }\n$runState | Select-Object labId, runId, status\n"
+      expected: The manifest exists and its lab ID and run ID exactly match this execution.
+    negative:
+      id: cp03.negative
+      description: Search for conflicting, unowned, or excessive state after create a safe run ID, deterministic names, tags,
+        and a local state boundary.
+      command: "$validationId='LAB00-CP03-negative'; $unexpectedArtifacts = @(Get-ChildItem -LiteralPath $StateDir -Filter\
+        \ '*.json' | Where-Object {\n  $_.Name -notin @('run.json', 'validation.json', 'cleanup.json')\n})\nif ($unexpectedArtifacts.Count\
+        \ -gt 0) {\n  throw 'An unrecognized JSON artifact exists inside the run boundary.'\n}\n$unexpectedArtifacts\n"
+      expected: No unrecognized state artifact exists inside the run boundary.
+  cleanup:
+    dependsOn:
+    - LAB00-CP04
+    - LAB00-CP05
+    action: Remove only manifest-recorded objects owned by LAB00-CP03, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp03.residual
+      description: Prove no active managed object remains for LAB00-CP03.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-3
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Get started with Azure CLI
+      url: https://learn.microsoft.com/en-us/cli/azure/get-started-with-azure-cli
+- id: LAB00-CP04
+  title: Preview cost gates, ownership checks, cleanup, and residual queries
+  purpose: Verify region and provider readiness, inventory any matching lab resources, and review the exact residual query
+    before deployment.
+  objectiveIds:
+  - FD-COST-01
+  - FD-CLEANUP-01
+  required: true
+  expectedState: The region exists, required providers are observable, and no Azure resource is falsely claimed by this non-mutating
+    bootstrap run.
+  scriptMarkers:
+    setup: LAB00-CP04
+    validate: LAB00-CP04
+    cleanup: LAB00-CP04
+  validation:
+    positive:
+      id: cp04.positive
+      description: Read the service properties for preview cost gates, ownership checks, cleanup, and residual queries by
+        using exact run-owned identifiers.
+      command: "$validationId='LAB00-CP04-positive'; $selectedRegion = az account list-locations --query \"[?name=='$Location'].name\
+        \ | [0]\" --output tsv\nif ($selectedRegion -ne $Location) {\n  throw 'The selected region is not available in the\
+        \ active subscription.'\n}\n$selectedRegion\n"
+      expected: The selected region name is returned exactly once.
+    negative:
+      id: cp04.negative
+      description: Search for conflicting, unowned, or excessive state after preview cost gates, ownership checks, cleanup,
+        and residual queries.
+      command: "$validationId='LAB00-CP04-negative'; $unsafeGroups = @(az group list --tag runId=$RunId --query \"[?tags.purpose!='az104-lab'\
+        \ || tags.labId!='00'].id\" --output json | ConvertFrom-Json)\nif ($unsafeGroups.Count -gt 0) {\n  throw 'A resource\
+        \ group reuses the run ID without the complete Lab 00 ownership tags.'\n}\n$unsafeGroups\n"
+      expected: No group with this run ID violates the documented ownership tags.
+  cleanup:
+    dependsOn:
+    - LAB00-CP05
+    action: Remove only manifest-recorded objects owned by LAB00-CP04, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp04.residual
+      description: Prove no active managed object remains for LAB00-CP04.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-4
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Get started with Azure CLI
+      url: https://learn.microsoft.com/en-us/cli/azure/get-started-with-azure-cli
+- id: LAB00-CP05
+  title: Run the blocking readiness report and interpret every result
+  purpose: Run the repository readiness contract as one command and investigate any required check that does not pass.
+  objectiveIds:
+  - FD-TOOLS-01
+  - FD-CONTEXT-01
+  - FD-COST-01
+  - FD-SAFETY-01
+  - FD-CLEANUP-01
+  required: true
+  expectedState: Every required tool, Azure CLI sign-in, Bicep, extension, region, and Lab 00 prerequisite check passes.
+  scriptMarkers:
+    setup: LAB00-CP05
+    validate: LAB00-CP05
+    cleanup: LAB00-CP05
+  validation:
+    positive:
+      id: cp05.positive
+      description: Read the service properties for run the blocking readiness report and interpret every result by using exact
+        run-owned identifiers.
+      command: "$validationId='LAB00-CP05-positive'; $readinessPath = Join-Path $LabRoot '../../.state/readiness.json'\nif\
+        \ (-not (Test-Path -LiteralPath $readinessPath)) {\n  throw 'The readiness report is missing.'\n}\n$readiness = Get-Content\
+        \ -LiteralPath $readinessPath -Raw | ConvertFrom-Json\nif ($readiness.result -ne 'pass') {\n  throw 'The readiness\
+        \ report does not contain a pass result.'\n}\n$readiness | Select-Object result, generatedAt\n"
+      expected: The current readiness artifact reports `pass` and contains no tenant, subscription, user, or token value.
+    negative:
+      id: cp05.negative
+      description: Search for conflicting, unowned, or excessive state after run the blocking readiness report and interpret
+        every result.
+      command: "$validationId='LAB00-CP05-negative'; $readinessPath = Join-Path $LabRoot '../../.state/readiness.json'\nif\
+        \ (-not (Test-Path -LiteralPath $readinessPath)) {\n  throw 'The readiness report is missing.'\n}\n$blockingFailures\
+        \ = @((Get-Content -LiteralPath $readinessPath -Raw | ConvertFrom-Json).checks | Where-Object { $_.status -eq 'fail'\
+        \ })\nif ($blockingFailures.Count -gt 0) {\n  throw 'The readiness report still contains blocking failures.'\n}\n\
+        $blockingFailures\n"
+      expected: The blocking-failure list is empty.
+  cleanup:
+    dependsOn: []
+    action: Remove only manifest-recorded objects owned by LAB00-CP05, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp05.residual
+      description: Prove no active managed object remains for LAB00-CP05.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-5
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Get started with Azure CLI
+      url: https://learn.microsoft.com/en-us/cli/azure/get-started-with-azure-cli
 validation:
-  commandLanes:
-  - scripts/cli/Validate.ps1
-  output: .state/<run-id>/validation.json
-  statuses:
-  - pass
-  - fail
-  - warning
-  - skipped
+  script: scripts/cli/Validate.ps1
+  artifact: .state/<run-id>/validation.json
+  modes:
+  - Deployment
+  - PostCleanup
+  resultPolicy:
+    requiredFailureResult: fail
+    optionalSkipResult: partial
+    allRequiredPassResult: pass
 cleanup:
-  azureDeletion: none
-  localOnly: true
-  reportOnlyByDefault: true
+  script: scripts/cli/Cleanup.ps1
+  artifact: .state/<run-id>/cleanup.json
+  previewByDefault: true
   requiresExecuteFlag: true
+  ownershipVerification:
+    manifestIdMatch: true
+    requiredTags: []
+  residualChecks:
+  - id: cp01.residual
+    description: Prove no active managed object remains for LAB00-CP01.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp02.residual
+    description: Prove no active managed object remains for LAB00-CP02.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp03.residual
+    description: Prove no active managed object remains for LAB00-CP03.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp04.residual
+    description: Prove no active managed object remains for LAB00-CP04.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp05.residual
+    description: Prove no active managed object remains for LAB00-CP05.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  retainedItemsAllowed: true
+  irreversiblePurge: never
 assessment:
   enabled: false
   questionCount: 0
-lastOfflineValidated: '2026-08-30'
+lastOfflineValidated: '2026-08-31'
 lastLiveVerified: null
+# END GENERATED AZ104 V2

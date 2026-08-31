@@ -1,453 +1,459 @@
 # Lab 23 knowledge check
 
-Choose the single best answer for each question. Record your choices before opening `ANSWERS.md`.
+[Return to the guided lab](../README.md)
+
+Complete all 50 questions before opening the answer key. Allow about 50–60 minutes and choose the single best answer.
+
+Use the result as a learning signal: 85–100% indicates mastery, 70–84% calls for targeted review, and below 70% means repeat the mapped lab tasks before retrying.
 
 ## LAB23-Q01 — Foundational
 
-Which principle is most important when working on 'Set up alert rules, action groups, and alert processing rules in Azure Monitor' in Lab 23?
+The actionable alert-routing design acceptance criteria require operators to evaluate a numeric signal against a threshold over a defined window. Which service fact supports that requirement?
 
-- A. The shortest command is always correct even when it changes a broader scope.
-- B. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- C. A recognizable resource name removes the need for validation and scoped cleanup.
-- D. Alert rules evaluate signals, action groups deliver notifications or automation, and processing rules change action behavior without disabling signal evaluation.
+- A. An alert rule evaluates only the resources included in its configured scopes and supported regional model.
+- B. An alert processing rule can suppress actions for matching fired alerts without disabling alert evaluation.
+- C. A metric alert evaluates a metric, aggregation, operator, threshold, window, and frequency against one or more scopes.
+- D. A stateful metric alert fires when its condition is met and resolves after the signal no longer meets the rule's resolution logic.
 
 ## LAB23-Q02 — Foundational
 
-Which lab action directly supports the objective 'Set up alert rules, action groups, and alert processing rules in Azure Monitor'?
+An alert routing reviewer challenges whether the actionable alert-routing design can attach an alert rule to the resource that emits the monitored signal. Which response resolves the concern?
 
-- A. Create a metric alert with explicit scope, aggregation, threshold, frequency, and window.
-- B. Change the active tenant without displaying or confirming the resulting context.
-- C. Search the whole tenant for a similar display name and modify the first match.
-- D. Mark the objective complete after reading documentation without checking any state.
+- A. An action group defines reusable notification and automation receivers and must be linked to the alert rule to run.
+- B. Alert processing schedules use configured recurrence and time-zone rules to control when actions are applied.
+- C. An alert rule evaluates only the resources included in its configured scopes and supported regional model.
+- D. Dynamic-threshold metric alerts learn historical behavior and require enough suitable data before producing meaningful anomaly decisions.
 
 ## LAB23-Q03 — Foundational
 
-Which authorization approach is appropriate before practicing 'Set up alert rules, action groups, and alert processing rules in Azure Monitor'?
+The actionable alert-routing design handoff omits the alert routing rule needed to connect an alert rule to reusable notification and automation actions. Which statement should the team add?
 
-- A. Use a production subscription because its resources already exist.
-- B. Confirm the active context and use only the declared role boundary: Monitoring Contributor on the lab resource group
-- C. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
-- D. Skip role checks when the run ID contains the lab number.
+- A. Each action-group receiver type has its own address, authentication, regional, and rate-limit behavior.
+- B. An action group defines reusable notification and automation receivers and must be linked to the alert rule to run.
+- C. An activity log alert matches subscription-level control-plane events by category and selected conditions.
+- D. Azure Monitor severity is operator-defined classification from Sev0 through Sev4 and does not change the measured condition itself.
 
 ## LAB23-Q04 — Foundational
 
-Before making a change, a learner checks this core behavior: Which principle is most important when working on 'Set up alert rules, action groups, and alert processing rules in Azure Monitor' in Lab 23?
+An alert routing incident review of the actionable alert-routing design depends on the ability to route a fired alert to the intended email, webhook, or automation endpoint. Which platform description is reliable?
 
-- A. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- B. A recognizable resource name removes the need for validation and scoped cleanup.
-- C. Alert rules evaluate signals, action groups deliver notifications or automation, and processing rules change action behavior without disabling signal evaluation.
-- D. The shortest command is always correct even when it changes a broader scope.
+- A. An alert processing rule can suppress actions for matching fired alerts without disabling alert evaluation.
+- B. Each action-group receiver type has its own address, authentication, regional, and rate-limit behavior.
+- C. A stateful metric alert fires when its condition is met and resolves after the signal no longer meets the rule's resolution logic.
+- D. A metric alert evaluates a metric, aggregation, operator, threshold, window, and frequency against one or more scopes.
 
 ## LAB23-Q05 — Foundational
 
-During a design vocabulary review, the team evaluates this situation: Which lab action directly supports the objective 'Set up alert rules, action groups, and alert processing rules in Azure Monitor'?
+A monitoring administrator routing and suppressing actionable alerts is updating the alert routing runbook. The requirement is to change delivery of matching notifications while leaving detection intact. Which statement describes Azure behavior correctly?
 
-- A. Change the active tenant without displaying or confirming the resulting context.
-- B. Search the whole tenant for a similar display name and modify the first match.
-- C. Mark the objective complete after reading documentation without checking any state.
-- D. Create a metric alert with explicit scope, aggregation, threshold, frequency, and window.
+- A. An alert processing rule can suppress actions for matching fired alerts without disabling alert evaluation.
+- B. Alert processing schedules use configured recurrence and time-zone rules to control when actions are applied.
+- C. Dynamic-threshold metric alerts learn historical behavior and require enough suitable data before producing meaningful anomaly decisions.
+- D. An alert rule evaluates only the resources included in its configured scopes and supported regional model.
 
 ## LAB23-Q06 — Foundational
 
-In a command-planning session, an administrator asks this question: Which authorization approach is appropriate before practicing 'Set up alert rules, action groups, and alert processing rules in Azure Monitor'?
+An alert routing peer review asks how the actionable alert-routing design should handle this outcome: apply alert-routing behavior only during an approved maintenance window. Which explanation is accurate?
 
-- A. Confirm the active context and use only the declared role boundary: Monitoring Contributor on the lab resource group
-- B. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
-- C. Skip role checks when the run ID contains the lab number.
-- D. Use a production subscription because its resources already exist.
+- A. An activity log alert matches subscription-level control-plane events by category and selected conditions.
+- B. Azure Monitor severity is operator-defined classification from Sev0 through Sev4 and does not change the measured condition itself.
+- C. An action group defines reusable notification and automation receivers and must be linked to the alert rule to run.
+- D. Alert processing schedules use configured recurrence and time-zone rules to control when actions are applied.
 
 ## LAB23-Q07 — Foundational
 
-While preparing the lab, a learner verifies this platform rule: Which principle is most important when working on 'Set up alert rules, action groups, and alert processing rules in Azure Monitor' in Lab 23?
+For the actionable alert-routing design, the alert routing plan must trigger on a matching Activity Log record. Which statement about alert routing belongs in the actionable alert-routing design record?
 
-- A. A recognizable resource name removes the need for validation and scoped cleanup.
-- B. Alert rules evaluate signals, action groups deliver notifications or automation, and processing rules change action behavior without disabling signal evaluation.
-- C. The shortest command is always correct even when it changes a broader scope.
-- D. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+- A. An activity log alert matches subscription-level control-plane events by category and selected conditions.
+- B. A stateful metric alert fires when its condition is met and resolves after the signal no longer meets the rule's resolution logic.
+- C. A metric alert evaluates a metric, aggregation, operator, threshold, window, and frequency against one or more scopes.
+- D. Each action-group receiver type has its own address, authentication, regional, and rate-limit behavior.
 
 ## LAB23-Q08 — Foundational
 
-During peer review, the team must identify the accurate response to this scenario: Which lab action directly supports the objective 'Set up alert rules, action groups, and alert processing rules in Azure Monitor'?
+The alert routing review compares four claims for the actionable alert-routing design requirement to keep an alert fired until the measured condition has resolved. Which claim is technically sound?
 
-- A. Search the whole tenant for a similar display name and modify the first match.
-- B. Mark the objective complete after reading documentation without checking any state.
-- C. Create a metric alert with explicit scope, aggregation, threshold, frequency, and window.
-- D. Change the active tenant without displaying or confirming the resulting context.
+- A. Dynamic-threshold metric alerts learn historical behavior and require enough suitable data before producing meaningful anomaly decisions.
+- B. An alert rule evaluates only the resources included in its configured scopes and supported regional model.
+- C. An alert processing rule can suppress actions for matching fired alerts without disabling alert evaluation.
+- D. A stateful metric alert fires when its condition is met and resolves after the signal no longer meets the rule's resolution logic.
 
 ## LAB23-Q09 — Foundational
 
-In an operations briefing, a new team member receives this question: Which authorization approach is appropriate before practicing 'Set up alert rules, action groups, and alert processing rules in Azure Monitor'?
+The alert routing architecture note requires the actionable alert-routing design environment to let the service learn a changing baseline instead of using one static threshold. Which statement defines the relevant alert routing boundary?
 
-- A. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
-- B. Skip role checks when the run ID contains the lab number.
-- C. Use a production subscription because its resources already exist.
-- D. Confirm the active context and use only the declared role boundary: Monitoring Contributor on the lab resource group
+- A. Azure Monitor severity is operator-defined classification from Sev0 through Sev4 and does not change the measured condition itself.
+- B. An action group defines reusable notification and automation receivers and must be linked to the alert rule to run.
+- C. Alert processing schedules use configured recurrence and time-zone rules to control when actions are applied.
+- D. Dynamic-threshold metric alerts learn historical behavior and require enough suitable data before producing meaningful anomaly decisions.
 
 ## LAB23-Q10 — Foundational
 
-While building a support checklist, an engineer reviews this requirement: Which principle is most important when working on 'Set up alert rules, action groups, and alert processing rules in Azure Monitor' in Lab 23?
+A new alert routing operator must explain why the actionable alert-routing design can encode operational urgency independently of whether a rule fires. Which explanation is accurate?
 
-- A. Alert rules evaluate signals, action groups deliver notifications or automation, and processing rules change action behavior without disabling signal evaluation.
-- B. The shortest command is always correct even when it changes a broader scope.
-- C. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- D. A recognizable resource name removes the need for validation and scoped cleanup.
+- A. A metric alert evaluates a metric, aggregation, operator, threshold, window, and frequency against one or more scopes.
+- B. Each action-group receiver type has its own address, authentication, regional, and rate-limit behavior.
+- C. An activity log alert matches subscription-level control-plane events by category and selected conditions.
+- D. Azure Monitor severity is operator-defined classification from Sev0 through Sev4 and does not change the measured condition itself.
 
 ## LAB23-Q11 — Foundational
 
-During a readiness check, the administrator considers this behavior: Which lab action directly supports the objective 'Set up alert rules, action groups, and alert processing rules in Azure Monitor'?
+An actionable alert-routing design review finds alert routing drift from the need to evaluate a numeric signal against a threshold over a defined window. Which correction addresses that drift?
 
-- A. Mark the objective complete after reading documentation without checking any state.
-- B. Create a metric alert with explicit scope, aggregation, threshold, frequency, and window.
-- C. Change the active tenant without displaying or confirming the resulting context.
-- D. Search the whole tenant for a similar display name and modify the first match.
+- A. Create the action group and attach its resource ID to the alert rule actions.
+- B. Define the condition from the incident signal and use a window that avoids meaningless single-sample noise.
+- C. Define the maintenance recurrence and time zone explicitly and review its start and end boundaries.
+- D. Choose dynamic thresholds for seasonal signals with sufficient history and configure sensitivity and violation counts.
 
 ## LAB23-Q12 — Foundational
 
-In a service overview, the team discusses this scenario: Which authorization approach is appropriate before practicing 'Set up alert rules, action groups, and alert processing rules in Azure Monitor'?
+The actionable alert-routing design window permits only the alert routing change needed to attach an alert rule to the resource that emits the monitored signal. Which option respects the boundary?
 
-- A. Skip role checks when the run ID contains the lab number.
-- B. Use a production subscription because its resources already exist.
-- C. Confirm the active context and use only the declared role boundary: Monitoring Contributor on the lab resource group
-- D. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
+- A. Set scopes to the exact resources or common supported scope that must be monitored.
+- B. Configure only approved receiver types and validate each address without committing secrets.
+- C. Create conditions for the required operation, status, resource type, or caller and attach an action group.
+- D. Set severity from the organization's impact and response model and route actions accordingly.
 
 ## LAB23-Q13 — Foundational
 
-While reviewing official guidance, a learner must resolve this question: Which principle is most important when working on 'Set up alert rules, action groups, and alert processing rules in Azure Monitor' in Lab 23?
+The alert routing preflight has passed; the actionable alert-routing design must now connect an alert rule to reusable notification and automation actions. Which operation should run?
 
-- A. The shortest command is always correct even when it changes a broader scope.
-- B. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- C. A recognizable resource name removes the need for validation and scoped cleanup.
-- D. Alert rules evaluate signals, action groups deliver notifications or automation, and processing rules change action behavior without disabling signal evaluation.
+- A. Create a suppression rule scoped to the maintenance targets and leave the alert rule enabled.
+- B. Use stateful behavior when operators need one incident lifecycle rather than repeated stateless notifications.
+- C. Define the condition from the incident signal and use a window that avoids meaningless single-sample noise.
+- D. Create the action group and attach its resource ID to the alert rule actions.
 
 ## LAB23-Q14 — Foundational
 
-During a configuration walkthrough, the instructor asks about this situation: Which lab action directly supports the objective 'Set up alert rules, action groups, and alert processing rules in Azure Monitor'?
+The actionable alert-routing design plan must route a fired alert to the intended email, webhook, or automation endpoint while limiting the mutation scope to alert routing. Which action is appropriate?
 
-- A. Create a metric alert with explicit scope, aggregation, threshold, frequency, and window.
-- B. Change the active tenant without displaying or confirming the resulting context.
-- C. Search the whole tenant for a similar display name and modify the first match.
-- D. Mark the objective complete after reading documentation without checking any state.
+- A. Define the maintenance recurrence and time zone explicitly and review its start and end boundaries.
+- B. Choose dynamic thresholds for seasonal signals with sufficient history and configure sensitivity and violation counts.
+- C. Configure only approved receiver types and validate each address without committing secrets.
+- D. Set scopes to the exact resources or common supported scope that must be monitored.
 
 ## LAB23-Q15 — Foundational
 
-In a preflight knowledge check, the operator evaluates this requirement: Which authorization approach is appropriate before practicing 'Set up alert rules, action groups, and alert processing rules in Azure Monitor'?
+An alert routing ticket in the actionable alert-routing design says to change delivery of matching notifications while leaving detection intact. Which alert routing action completes the actionable alert-routing design request with minimal change?
 
-- A. Use a production subscription because its resources already exist.
-- B. Confirm the active context and use only the declared role boundary: Monitoring Contributor on the lab resource group
-- C. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
-- D. Skip role checks when the run ID contains the lab number.
+- A. Create a suppression rule scoped to the maintenance targets and leave the alert rule enabled.
+- B. Create conditions for the required operation, status, resource type, or caller and attach an action group.
+- C. Set severity from the organization's impact and response model and route actions accordingly.
+- D. Create the action group and attach its resource ID to the alert rule actions.
 
 ## LAB23-Q16 — Applied
 
-A learner previews the implementation for 'Set up alert rules, action groups, and alert processing rules in Azure Monitor'. What behavior is required?
+The approach for the actionable alert-routing design is approved, but the alert routing environment still cannot apply alert-routing behavior only during an approved maintenance window. Which implementation step closes the gap?
 
-- A. Create the baseline immediately and request approval only before cleanup.
-- B. Select the first accessible subscription and hide the resulting context.
-- C. Display the context, intended changes, cost and gated branches without mutating Azure.
-- D. Delete any older resource whose name resembles the new run ID.
+- A. Define the maintenance recurrence and time zone explicitly and review its start and end boundaries.
+- B. Use stateful behavior when operators need one incident lifecycle rather than repeated stateless notifications.
+- C. Define the condition from the incident signal and use a window that avoids meaningless single-sample noise.
+- D. Configure only approved receiver types and validate each address without committing secrets.
 
 ## LAB23-Q17 — Applied
 
-Which implementation step should the learner perform for 'Set up alert rules, action groups, and alert processing rules in Azure Monitor'?
+The monitoring administrator routing and suppressing actionable alerts may change the actionable alert-routing design only to trigger on a matching Activity Log record. Which alert routing action stays within that assignment?
 
-- A. Replace the lab action with a tenant-wide change that is easier to discover.
-- B. Copy resource identifiers from another run instead of recording returned IDs.
-- C. Skip the operation and edit validation.json to show a passing result.
-- D. Create an action group with a test email receiver only when AZ104_ALERT_EMAIL is supplied.
+- A. Choose dynamic thresholds for seasonal signals with sufficient history and configure sensitivity and violation counts.
+- B. Create conditions for the required operation, status, resource type, or caller and attach an action group.
+- C. Set scopes to the exact resources or common supported scope that must be monitored.
+- D. Create a suppression rule scoped to the maintenance targets and leave the alert rule enabled.
 
 ## LAB23-Q18 — Applied
 
-Which evidence most directly validates 'Set up alert rules, action groups, and alert processing rules in Azure Monitor' for alert processing rule?
+An alert routing dry run shows no actionable alert-routing design command will keep an alert fired until the measured condition has resolved. Which action belongs before execution?
 
-- A. Query the exact recorded scope and independently verify Microsoft.Insights/metricAlerts.
-- B. Treat the setup exit code as proof of every configuration and relationship.
-- C. List the entire subscription and assume similarly named resources belong to this run.
-- D. Record a credential so another learner can replay the authenticated session.
+- A. Set severity from the organization's impact and response model and route actions accordingly.
+- B. Create the action group and attach its resource ID to the alert rule actions.
+- C. Define the maintenance recurrence and time zone explicitly and review its start and end boundaries.
+- D. Use stateful behavior when operators need one incident lifecycle rather than repeated stateless notifications.
 
 ## LAB23-Q19 — Applied
 
-The 'Set up alert rules, action groups, and alert processing rules in Azure Monitor' checkpoint reaches an external prerequisite. What should happen?
+For the actionable alert-routing design, operators need to let the service learn a changing baseline instead of using one static threshold. Which change realizes that requirement?
 
-- A. Invent a domain, notification target, license, quota, or tenant value and continue.
-- B. Run the branch only when this documented gate is satisfied: Email delivery and action-group testing require AZ104_ALERT_EMAIL; otherwise a receiver-free action group is used for configuration practice.
-- C. Broaden permissions until the prerequisite can no longer block the operation.
-- D. Mark the branch passed because its command syntax was checked offline.
+- A. Define the condition from the incident signal and use a window that avoids meaningless single-sample noise.
+- B. Choose dynamic thresholds for seasonal signals with sufficient history and configure sensitivity and violation counts.
+- C. Configure only approved receiver types and validate each address without committing secrets.
+- D. Create conditions for the required operation, status, resource type, or caller and attach an action group.
 
 ## LAB23-Q20 — Applied
 
-What is the safest command-evidence practice after completing 'Set up alert rules, action groups, and alert processing rules in Azure Monitor'?
+Operators must automate the actionable alert-routing design change needed to encode operational urgency independently of whether a rule fires. Which alert routing operation belongs in the runbook?
 
-- A. Commit the complete account object so reviewers can identify the tenant.
-- B. Save tokens, keys, passwords, or SAS values beside the validation result.
-- C. Retain only redacted structured output from an independent query of the recorded run.
-- D. Reuse successful output from an earlier run with a similar resource name.
+- A. Set scopes to the exact resources or common supported scope that must be monitored.
+- B. Create a suppression rule scoped to the maintenance targets and leave the alert rule enabled.
+- C. Set severity from the organization's impact and response model and route actions accordingly.
+- D. Use stateful behavior when operators need one incident lifecycle rather than repeated stateless notifications.
 
 ## LAB23-Q21 — Applied
 
-While validating a configuration, the team evaluates this situation: A learner previews the implementation for 'Set up alert rules, action groups, and alert processing rules in Azure Monitor'. What behavior is required?
+The alert routing validation asks whether the actionable alert-routing design can evaluate a numeric signal against a threshold over a defined window. Which observable state is strongest?
 
-- A. Delete any older resource whose name resembles the new run ID.
-- B. Create the baseline immediately and request approval only before cleanup.
-- C. Select the first accessible subscription and hide the resulting context.
-- D. Display the context, intended changes, cost and gated branches without mutating Azure.
+- A. Query receiver collections and perform a controlled action-group test where supported.
+- B. Query criteria metricName, timeAggregation, operator, threshold, windowSize, and evaluationFrequency.
+- C. Query allOf conditions and generate a safe matching control-plane event.
+- D. Query severity, enabled state, description, and action groups on the rule.
 
 ## LAB23-Q22 — Applied
 
-A delegated administrator receives the following support request: Which implementation step should the learner perform for 'Set up alert rules, action groups, and alert processing rules in Azure Monitor'?
+An actionable alert-routing design review must prove the alert routing ability to attach an alert rule to the resource that emits the monitored signal. Which check avoids an adjacent feature?
 
-- A. Create an action group with a test email receiver only when AZ104_ALERT_EMAIL is supplied.
-- B. Replace the lab action with a tenant-wide change that is easier to discover.
-- C. Copy resource identifiers from another run instead of recording returned IDs.
-- D. Skip the operation and edit validation.json to show a passing result.
+- A. Query processing-rule scopes, filters, action type, enabled state, and schedule.
+- B. Query scopes and confirm each intended resource ID is represented.
+- C. Inspect fired and resolved timestamps and correlate them with the metric series.
+- D. Query criteria metricName, timeAggregation, operator, threshold, windowSize, and evaluationFrequency.
 
 ## LAB23-Q23 — Applied
 
-During a maintenance window, an engineer must decide how to respond: Which evidence most directly validates 'Set up alert rules, action groups, and alert processing rules in Azure Monitor' for alert processing rule?
+The actionable alert-routing design evidence bundle needs an alert routing result showing it can connect an alert rule to reusable notification and automation actions. Which result belongs in the checkpoint?
 
-- A. Record a credential so another learner can replay the authenticated session.
-- B. Query the exact recorded scope and independently verify Microsoft.Insights/metricAlerts.
-- C. Treat the setup exit code as proof of every configuration and relationship.
-- D. List the entire subscription and assume similarly named resources belong to this run.
+- A. Query schedule recurrence, timeZone, startDateTime, and endDateTime.
+- B. Query criterionType, alertSensitivity, failingPeriods, and ignoreDataBefore.
+- C. Query scopes and confirm each intended resource ID is represented.
+- D. Query the alert rule actions and resolve each referenced action group.
 
 ## LAB23-Q24 — Applied
 
-A deployment pipeline reaches this decision point: The 'Set up alert rules, action groups, and alert processing rules in Azure Monitor' checkpoint reaches an external prerequisite. What should happen?
+Before actionable alert-routing design cleanup, the alert routing team must reconfirm it can route a fired alert to the intended email, webhook, or automation endpoint. Which read-only inspection should run?
 
-- A. Mark the branch passed because its command syntax was checked offline.
-- B. Invent a domain, notification target, license, quota, or tenant value and continue.
-- C. Run the branch only when this documented gate is satisfied: Email delivery and action-group testing require AZ104_ALERT_EMAIL; otherwise a receiver-free action group is used for configuration practice.
-- D. Broaden permissions until the prerequisite can no longer block the operation.
+- A. Query receiver collections and perform a controlled action-group test where supported.
+- B. Query allOf conditions and generate a safe matching control-plane event.
+- C. Query severity, enabled state, description, and action groups on the rule.
+- D. Query the alert rule actions and resolve each referenced action group.
 
 ## LAB23-Q25 — Applied
 
-While applying least-privilege controls, the administrator reviews this scenario: What is the safest command-evidence practice after completing 'Set up alert rules, action groups, and alert processing rules in Azure Monitor'?
+The actionable alert-routing design setup reports success after the alert routing attempt to change delivery of matching notifications while leaving detection intact. Which alert routing read-only observation proves the actionable alert-routing design outcome?
 
-- A. Reuse successful output from an earlier run with a similar resource name.
-- B. Commit the complete account object so reviewers can identify the tenant.
-- C. Save tokens, keys, passwords, or SAS values beside the validation result.
-- D. Retain only redacted structured output from an independent query of the recorded run.
+- A. Inspect fired and resolved timestamps and correlate them with the metric series.
+- B. Query processing-rule scopes, filters, action type, enabled state, and schedule.
+- C. Query criteria metricName, timeAggregation, operator, threshold, windowSize, and evaluationFrequency.
+- D. Query receiver collections and perform a controlled action-group test where supported.
 
 ## LAB23-Q26 — Applied
 
-A repeatable Azure CLI workflow must address this requirement: A learner previews the implementation for 'Set up alert rules, action groups, and alert processing rules in Azure Monitor'. What behavior is required?
+The alert routing log says the actionable alert-routing design can now apply alert-routing behavior only during an approved maintenance window. Which alert routing state should the actionable alert-routing design acceptance test retain?
 
-- A. Display the context, intended changes, cost and gated branches without mutating Azure.
-- B. Delete any older resource whose name resembles the new run ID.
-- C. Create the baseline immediately and request approval only before cleanup.
-- D. Select the first accessible subscription and hide the resulting context.
+- A. Query criterionType, alertSensitivity, failingPeriods, and ignoreDataBefore.
+- B. Query scopes and confirm each intended resource ID is represented.
+- C. Query schedule recurrence, timeZone, startDateTime, and endDateTime.
+- D. Query processing-rule scopes, filters, action type, enabled state, and schedule.
 
 ## LAB23-Q27 — Applied
 
-During an environment handoff, the receiving team asks this question: Which implementation step should the learner perform for 'Set up alert rules, action groups, and alert processing rules in Azure Monitor'?
+The actionable alert-routing design rejects alert routing exit status as proof it can trigger on a matching Activity Log record. Which actionable alert-routing design result is valid evidence?
 
-- A. Skip the operation and edit validation.json to show a passing result.
-- B. Create an action group with a test email receiver only when AZ104_ALERT_EMAIL is supplied.
-- C. Replace the lab action with a tenant-wide change that is easier to discover.
-- D. Copy resource identifiers from another run instead of recording returned IDs.
+- A. Query severity, enabled state, description, and action groups on the rule.
+- B. Query the alert rule actions and resolve each referenced action group.
+- C. Query schedule recurrence, timeZone, startDateTime, and endDateTime.
+- D. Query allOf conditions and generate a safe matching control-plane event.
 
 ## LAB23-Q28 — Applied
 
-A configuration change produces the following operational choice: Which evidence most directly validates 'Set up alert rules, action groups, and alert processing rules in Azure Monitor' for alert processing rule?
+The alert routing validator needs one actionable alert-routing design query after the change to keep an alert fired until the measured condition has resolved. Which alert routing property should the actionable alert-routing design validator inspect?
 
-- A. List the entire subscription and assume similarly named resources belong to this run.
-- B. Record a credential so another learner can replay the authenticated session.
-- C. Query the exact recorded scope and independently verify Microsoft.Insights/metricAlerts.
-- D. Treat the setup exit code as proof of every configuration and relationship.
+- A. Inspect fired and resolved timestamps and correlate them with the metric series.
+- B. Query criteria metricName, timeAggregation, operator, threshold, windowSize, and evaluationFrequency.
+- C. Query receiver collections and perform a controlled action-group test where supported.
+- D. Query allOf conditions and generate a safe matching control-plane event.
 
 ## LAB23-Q29 — Applied
 
-While preparing independent validation, an engineer considers this scenario: The 'Set up alert rules, action groups, and alert processing rules in Azure Monitor' checkpoint reaches an external prerequisite. What should happen?
+The monitoring administrator routing and suppressing actionable alerts must confirm the actionable alert-routing design, without mutation, can let the service learn a changing baseline instead of using one static threshold. Which alert routing check qualifies?
 
-- A. Broaden permissions until the prerequisite can no longer block the operation.
-- B. Mark the branch passed because its command syntax was checked offline.
-- C. Invent a domain, notification target, license, quota, or tenant value and continue.
-- D. Run the branch only when this documented gate is satisfied: Email delivery and action-group testing require AZ104_ALERT_EMAIL; otherwise a receiver-free action group is used for configuration practice.
+- A. Query scopes and confirm each intended resource ID is represented.
+- B. Query criterionType, alertSensitivity, failingPeriods, and ignoreDataBefore.
+- C. Query processing-rule scopes, filters, action type, enabled state, and schedule.
+- D. Inspect fired and resolved timestamps and correlate them with the metric series.
 
 ## LAB23-Q30 — Applied
 
-A service owner asks the administrator to resolve this requirement: What is the safest command-evidence practice after completing 'Set up alert rules, action groups, and alert processing rules in Azure Monitor'?
+The actionable alert-routing design configuration is complete; the alert routing reviewers need evidence it can encode operational urgency independently of whether a rule fires. Which observation shows success?
 
-- A. Retain only redacted structured output from an independent query of the recorded run.
-- B. Reuse successful output from an earlier run with a similar resource name.
-- C. Commit the complete account object so reviewers can identify the tenant.
-- D. Save tokens, keys, passwords, or SAS values beside the validation result.
+- A. Query the alert rule actions and resolve each referenced action group.
+- B. Query severity, enabled state, description, and action groups on the rule.
+- C. Query schedule recurrence, timeZone, startDateTime, and endDateTime.
+- D. Query criterionType, alertSensitivity, failingPeriods, and ignoreDataBefore.
 
 ## LAB23-Q31 — Applied
 
-During a scoped cleanup review, the team evaluates this situation: A learner previews the implementation for 'Set up alert rules, action groups, and alert processing rules in Azure Monitor'. What behavior is required?
+Although the actionable alert-routing design is meant to let the alert routing evaluate a numeric signal against a threshold over a defined window, its checkpoint fails. Which alert routing defect explains the failure?
 
-- A. Select the first accessible subscription and hide the resulting context.
-- B. Display the context, intended changes, cost and gated branches without mutating Azure.
-- C. Delete any older resource whose name resembles the new run ID.
-- D. Create the baseline immediately and request approval only before cleanup.
+- A. The rule was created in the correct resource group but its scopes point to a different resource.
+- B. The schedule was authored in UTC while the maintenance window was interpreted as local time.
+- C. The rule uses Average when the requirement is to catch any maximum value above the limit.
+- D. The rule's severity conflicts with the incident-routing policy used by its action group.
 
 ## LAB23-Q32 — Applied
 
-An automation author must choose the correct response to this scenario: Which implementation step should the learner perform for 'Set up alert rules, action groups, and alert processing rules in Azure Monitor'?
+The alert routing support team isolated the actionable alert-routing design incident to the attempt to attach an alert rule to the resource that emits the monitored signal. Which condition prevents success?
 
-- A. Copy resource identifiers from another run instead of recording returned IDs.
-- B. Skip the operation and edit validation.json to show a passing result.
-- C. Create an action group with a test email receiver only when AZ104_ALERT_EMAIL is supplied.
-- D. Replace the lab action with a tenant-wide change that is easier to discover.
+- A. The action group exists but is not referenced by the enabled alert rule.
+- B. The condition filters on a data-plane operation that does not appear in the Azure Activity Log.
+- C. The rule uses Average when the requirement is to catch any maximum value above the limit.
+- D. The rule was created in the correct resource group but its scopes point to a different resource.
 
 ## LAB23-Q33 — Applied
 
-A lab run with a unique run ID reaches this decision: Which evidence most directly validates 'Set up alert rules, action groups, and alert processing rules in Azure Monitor' for alert processing rule?
+An actionable alert-routing design query surprises the monitoring administrator routing and suppressing actionable alerts during the alert routing attempt to connect an alert rule to reusable notification and automation actions. Which finding explains it?
 
-- A. Treat the setup exit code as proof of every configuration and relationship.
-- B. List the entire subscription and assume similarly named resources belong to this run.
-- C. Record a credential so another learner can replay the authenticated session.
-- D. Query the exact recorded scope and independently verify Microsoft.Insights/metricAlerts.
+- A. The email receiver address contains a typographical error.
+- B. The action group exists but is not referenced by the enabled alert rule.
+- C. The team expects a new notification at every evaluation while using a stateful alert.
+- D. The rule was created in the correct resource group but its scopes point to a different resource.
 
 ## LAB23-Q34 — Applied
 
-While comparing the intended and actual states, the operator asks this question: The 'Set up alert rules, action groups, and alert processing rules in Azure Monitor' checkpoint reaches an external prerequisite. What should happen?
+Other actionable alert-routing design components are healthy, but the alert routing still cannot route a fired alert to the intended email, webhook, or automation endpoint. Which state causes the isolated failure?
 
-- A. Run the branch only when this documented gate is satisfied: Email delivery and action-group testing require AZ104_ALERT_EMAIL; otherwise a receiver-free action group is used for configuration practice.
-- B. Broaden permissions until the prerequisite can no longer block the operation.
-- C. Mark the branch passed because its command syntax was checked offline.
-- D. Invent a domain, notification target, license, quota, or tenant value and continue.
+- A. The alert rule itself was disabled, eliminating evaluation evidence during maintenance.
+- B. The resource has too little historical metric data for the dynamic baseline.
+- C. The email receiver address contains a typographical error.
+- D. The action group exists but is not referenced by the enabled alert rule.
 
 ## LAB23-Q35 — Applied
 
-A peer reviewer examines the proposed implementation for this scenario: What is the safest command-evidence practice after completing 'Set up alert rules, action groups, and alert processing rules in Azure Monitor'?
+During an alert routing fault drill, the actionable alert-routing design does not change delivery of matching notifications while leaving detection intact. Which finding identifies the defect?
 
-- A. Save tokens, keys, passwords, or SAS values beside the validation result.
-- B. Retain only redacted structured output from an independent query of the recorded run.
-- C. Reuse successful output from an earlier run with a similar resource name.
-- D. Commit the complete account object so reviewers can identify the tenant.
+- A. The schedule was authored in UTC while the maintenance window was interpreted as local time.
+- B. The rule's severity conflicts with the incident-routing policy used by its action group.
+- C. The alert rule itself was disabled, eliminating evaluation evidence during maintenance.
+- D. The email receiver address contains a typographical error.
 
 ## LAB23-Q36 — Applied
 
-During a controlled rollout, the change team encounters this requirement: A learner previews the implementation for 'Set up alert rules, action groups, and alert processing rules in Azure Monitor'. What behavior is required?
+The actionable alert-routing design setup finishes, yet the alert routing cannot apply alert-routing behavior only during an approved maintenance window. Which misconfiguration explains the mismatch?
 
-- A. Create the baseline immediately and request approval only before cleanup.
-- B. Select the first accessible subscription and hide the resulting context.
-- C. Display the context, intended changes, cost and gated branches without mutating Azure.
-- D. Delete any older resource whose name resembles the new run ID.
+- A. The condition filters on a data-plane operation that does not appear in the Azure Activity Log.
+- B. The rule uses Average when the requirement is to catch any maximum value above the limit.
+- C. The alert rule itself was disabled, eliminating evaluation evidence during maintenance.
+- D. The schedule was authored in UTC while the maintenance window was interpreted as local time.
 
 ## LAB23-Q37 — Applied
 
-A support engineer reproduces the following situation in a test environment: Which implementation step should the learner perform for 'Set up alert rules, action groups, and alert processing rules in Azure Monitor'?
+An alert routing break/fix in the actionable alert-routing design fails when operators try to trigger on a matching Activity Log record. Which diagnosis fits?
 
-- A. Replace the lab action with a tenant-wide change that is easier to discover.
-- B. Copy resource identifiers from another run instead of recording returned IDs.
-- C. Skip the operation and edit validation.json to show a passing result.
-- D. Create an action group with a test email receiver only when AZ104_ALERT_EMAIL is supplied.
+- A. The team expects a new notification at every evaluation while using a stateful alert.
+- B. The rule was created in the correct resource group but its scopes point to a different resource.
+- C. The condition filters on a data-plane operation that does not appear in the Azure Activity Log.
+- D. The schedule was authored in UTC while the maintenance window was interpreted as local time.
 
 ## LAB23-Q38 — Applied
 
-While recording validation evidence, the administrator evaluates this question: Which evidence most directly validates 'Set up alert rules, action groups, and alert processing rules in Azure Monitor' for alert processing rule?
+The actionable alert-routing design troubleshooting scope is the alert routing need to keep an alert fired until the measured condition has resolved. Which condition should be corrected first?
 
-- A. Query the exact recorded scope and independently verify Microsoft.Insights/metricAlerts.
-- B. Treat the setup exit code as proof of every configuration and relationship.
-- C. List the entire subscription and assume similarly named resources belong to this run.
-- D. Record a credential so another learner can replay the authenticated session.
+- A. The team expects a new notification at every evaluation while using a stateful alert.
+- B. The resource has too little historical metric data for the dynamic baseline.
+- C. The action group exists but is not referenced by the enabled alert rule.
+- D. The condition filters on a data-plane operation that does not appear in the Azure Activity Log.
 
 ## LAB23-Q39 — Applied
 
-A configuration owner must approve one response to this scenario: The 'Set up alert rules, action groups, and alert processing rules in Azure Monitor' checkpoint reaches an external prerequisite. What should happen?
+The actionable alert-routing design result is partial because the alert routing cannot let the service learn a changing baseline instead of using one static threshold. Which condition accounts for that result?
 
-- A. Invent a domain, notification target, license, quota, or tenant value and continue.
-- B. Run the branch only when this documented gate is satisfied: Email delivery and action-group testing require AZ104_ALERT_EMAIL; otherwise a receiver-free action group is used for configuration practice.
-- C. Broaden permissions until the prerequisite can no longer block the operation.
-- D. Mark the branch passed because its command syntax was checked offline.
+- A. The rule's severity conflicts with the incident-routing policy used by its action group.
+- B. The email receiver address contains a typographical error.
+- C. The team expects a new notification at every evaluation while using a stateful alert.
+- D. The resource has too little historical metric data for the dynamic baseline.
 
 ## LAB23-Q40 — Applied
 
-During post-deployment verification, the team reviews this situation: What is the safest command-evidence practice after completing 'Set up alert rules, action groups, and alert processing rules in Azure Monitor'?
+The alert routing evidence shows the actionable alert-routing design cannot encode operational urgency independently of whether a rule fires. Which root cause fits that evidence?
 
-- A. Commit the complete account object so reviewers can identify the tenant.
-- B. Save tokens, keys, passwords, or SAS values beside the validation result.
-- C. Retain only redacted structured output from an independent query of the recorded run.
-- D. Reuse successful output from an earlier run with a similar resource name.
+- A. The rule uses Average when the requirement is to catch any maximum value above the limit.
+- B. The rule's severity conflicts with the incident-routing policy used by its action group.
+- C. The alert rule itself was disabled, eliminating evaluation evidence during maintenance.
+- D. The resource has too little historical metric data for the dynamic baseline.
 
 ## LAB23-Q41 — Advanced
 
-Validation for 'Set up alert rules, action groups, and alert processing rules in Azure Monitor' fails after setup. What is the best break/fix method?
+The actionable alert-routing design forbids a partial alert routing result. Operators must first evaluate a numeric signal against a threshold over a defined window and afterward confirm the actionable alert-routing design outcome. Which alert routing sequence is complete?
 
-- A. Rerun setup repeatedly with new names until one attempt appears successful.
-- B. Change validation.json directly so the failed result reads pass.
-- C. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- D. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+- A. First, Create the action group and attach its resource ID to the alert rule actions. Then, Query the alert rule actions and resolve each referenced action group.
+- B. First, Create conditions for the required operation, status, resource type, or caller and attach an action group. Then, Query allOf conditions and generate a safe matching control-plane event.
+- C. First, Define the condition from the incident signal and use a window that avoids meaningless single-sample noise. Then, Query criteria metricName, timeAggregation, operator, threshold, windowSize, and evaluationFrequency.
+- D. First, Use stateful behavior when operators need one incident lifecycle rather than repeated stateless notifications. Then, Inspect fired and resolved timestamps and correlate them with the metric series.
 
 ## LAB23-Q42 — Advanced
 
-The operation for 'Set up alert rules, action groups, and alert processing rules in Azure Monitor' is asynchronous or gated. How should completion be recorded?
+Only the actionable alert-routing design change needed to attach an alert rule to the resource that emits the monitored signal is allowed, and alert routing proof is mandatory. Which pair fits?
 
-- A. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
-- B. Record pass as soon as the request is accepted, regardless of its final state.
-- C. Fabricate expected output so the assessment and documentation appear complete.
-- D. Remove the check from validation whenever the service takes longer than expected.
+- A. First, Configure only approved receiver types and validate each address without committing secrets. Then, Query receiver collections and perform a controlled action-group test where supported.
+- B. First, Use stateful behavior when operators need one incident lifecycle rather than repeated stateless notifications. Then, Inspect fired and resolved timestamps and correlate them with the metric series.
+- C. First, Choose dynamic thresholds for seasonal signals with sufficient history and configure sensitivity and violation counts. Then, Query criterionType, alertSensitivity, failingPeriods, and ignoreDataBefore.
+- D. First, Set scopes to the exact resources or common supported scope that must be monitored. Then, Query scopes and confirm each intended resource ID is represented.
 
 ## LAB23-Q43 — Advanced
 
-A security and reliability review identifies this design decision: Validation for 'Set up alert rules, action groups, and alert processing rules in Azure Monitor' fails after setup. What is the best break/fix method?
+The actionable alert-routing design runbook separates alert routing mutation from validation while it must connect an alert rule to reusable notification and automation actions. Which sequence proves it cleanly?
 
-- A. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- B. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-- C. Rerun setup repeatedly with new names until one attempt appears successful.
-- D. Change validation.json directly so the failed result reads pass.
+- A. First, Create the action group and attach its resource ID to the alert rule actions. Then, Query the alert rule actions and resolve each referenced action group.
+- B. First, Create a suppression rule scoped to the maintenance targets and leave the alert rule enabled. Then, Query processing-rule scopes, filters, action type, enabled state, and schedule.
+- C. First, Choose dynamic thresholds for seasonal signals with sufficient history and configure sensitivity and violation counts. Then, Query criterionType, alertSensitivity, failingPeriods, and ignoreDataBefore.
+- D. First, Set severity from the organization's impact and response model and route actions accordingly. Then, Query severity, enabled state, description, and action groups on the rule.
 
 ## LAB23-Q44 — Advanced
 
-While diagnosing unexpected Azure behavior, the engineer considers this situation: The operation for 'Set up alert rules, action groups, and alert processing rules in Azure Monitor' is asynchronous or gated. How should completion be recorded?
+The actionable alert-routing design checkpoint requires both this alert routing outcome—route a fired alert to the intended email, webhook, or automation endpoint—and a read-only actionable alert-routing design state check. Which alert routing response is complete?
 
-- A. Fabricate expected output so the assessment and documentation appear complete.
-- B. Remove the check from validation whenever the service takes longer than expected.
-- C. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
-- D. Record pass as soon as the request is accepted, regardless of its final state.
+- A. First, Define the maintenance recurrence and time zone explicitly and review its start and end boundaries. Then, Query schedule recurrence, timeZone, startDateTime, and endDateTime.
+- B. First, Set severity from the organization's impact and response model and route actions accordingly. Then, Query severity, enabled state, description, and action groups on the rule.
+- C. First, Define the condition from the incident signal and use a window that avoids meaningless single-sample noise. Then, Query criteria metricName, timeAggregation, operator, threshold, windowSize, and evaluationFrequency.
+- D. First, Configure only approved receiver types and validate each address without committing secrets. Then, Query receiver collections and perform a controlled action-group test where supported.
 
 ## LAB23-Q45 — Advanced
 
-An architecture review requires the strongest response to this scenario: Validation for 'Set up alert rules, action groups, and alert processing rules in Azure Monitor' fails after setup. What is the best break/fix method?
+The actionable alert-routing design runbook must change delivery of matching notifications while leaving detection intact, then retain alert routing read-back evidence. Which actionable alert-routing design pair completes both duties?
 
-- A. Rerun setup repeatedly with new names until one attempt appears successful.
-- B. Change validation.json directly so the failed result reads pass.
-- C. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- D. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+- A. First, Create a suppression rule scoped to the maintenance targets and leave the alert rule enabled. Then, Query processing-rule scopes, filters, action type, enabled state, and schedule.
+- B. First, Create conditions for the required operation, status, resource type, or caller and attach an action group. Then, Query allOf conditions and generate a safe matching control-plane event.
+- C. First, Define the condition from the incident signal and use a window that avoids meaningless single-sample noise. Then, Query criteria metricName, timeAggregation, operator, threshold, windowSize, and evaluationFrequency.
+- D. First, Set scopes to the exact resources or common supported scope that must be monitored. Then, Query scopes and confirm each intended resource ID is represented.
 
 ## LAB23-Q46 — Advanced
 
-During break/fix validation, the operator encounters this question: The operation for 'Set up alert rules, action groups, and alert processing rules in Azure Monitor' is asynchronous or gated. How should completion be recorded?
+To satisfy the alert routing requirement, operators must change the actionable alert-routing design configuration and prove it can apply alert-routing behavior only during an approved maintenance window. Which sequence is coherent?
 
-- A. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
-- B. Record pass as soon as the request is accepted, regardless of its final state.
-- C. Fabricate expected output so the assessment and documentation appear complete.
-- D. Remove the check from validation whenever the service takes longer than expected.
+- A. First, Define the maintenance recurrence and time zone explicitly and review its start and end boundaries. Then, Query schedule recurrence, timeZone, startDateTime, and endDateTime.
+- B. First, Use stateful behavior when operators need one incident lifecycle rather than repeated stateless notifications. Then, Inspect fired and resolved timestamps and correlate them with the metric series.
+- C. First, Set scopes to the exact resources or common supported scope that must be monitored. Then, Query scopes and confirm each intended resource ID is represented.
+- D. First, Create the action group and attach its resource ID to the alert rule actions. Then, Query the alert rule actions and resolve each referenced action group.
 
 ## LAB23-Q47 — Advanced
 
-A complex support case depends on correctly interpreting this requirement: Validation for 'Set up alert rules, action groups, and alert processing rules in Azure Monitor' fails after setup. What is the best break/fix method?
+The monitoring administrator routing and suppressing actionable alerts needs a safe actionable alert-routing design change to trigger on a matching Activity Log record, followed by alert routing evidence. Which pair merits approval?
 
-- A. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- B. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-- C. Rerun setup repeatedly with new names until one attempt appears successful.
-- D. Change validation.json directly so the failed result reads pass.
+- A. First, Create conditions for the required operation, status, resource type, or caller and attach an action group. Then, Query allOf conditions and generate a safe matching control-plane event.
+- B. First, Choose dynamic thresholds for seasonal signals with sufficient history and configure sensitivity and violation counts. Then, Query criterionType, alertSensitivity, failingPeriods, and ignoreDataBefore.
+- C. First, Create the action group and attach its resource ID to the alert rule actions. Then, Query the alert rule actions and resolve each referenced action group.
+- D. First, Configure only approved receiver types and validate each address without committing secrets. Then, Query receiver collections and perform a controlled action-group test where supported.
 
 ## LAB23-Q48 — Advanced
 
-While correcting configuration drift, the team evaluates this scenario: The operation for 'Set up alert rules, action groups, and alert processing rules in Azure Monitor' is asynchronous or gated. How should completion be recorded?
+The actionable alert-routing design has two alert routing gates: keep an alert fired until the measured condition has resolved, then prove the actionable alert-routing design state. Which alert routing sequence works?
 
-- A. Fabricate expected output so the assessment and documentation appear complete.
-- B. Remove the check from validation whenever the service takes longer than expected.
-- C. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
-- D. Record pass as soon as the request is accepted, regardless of its final state.
+- A. First, Set severity from the organization's impact and response model and route actions accordingly. Then, Query severity, enabled state, description, and action groups on the rule.
+- B. First, Configure only approved receiver types and validate each address without committing secrets. Then, Query receiver collections and perform a controlled action-group test where supported.
+- C. First, Use stateful behavior when operators need one incident lifecycle rather than repeated stateless notifications. Then, Inspect fired and resolved timestamps and correlate them with the metric series.
+- D. First, Create a suppression rule scoped to the maintenance targets and leave the alert rule enabled. Then, Query processing-rule scopes, filters, action type, enabled state, and schedule.
 
 ## LAB23-Q49 — Advanced
 
-A recovery exercise exposes the following technical decision: Validation for 'Set up alert rules, action groups, and alert processing rules in Azure Monitor' fails after setup. What is the best break/fix method?
+Which alert routing path makes the actionable alert-routing design able to let the service learn a changing baseline instead of using one static threshold, then inspects the defining properties?
 
-- A. Rerun setup repeatedly with new names until one attempt appears successful.
-- B. Change validation.json directly so the failed result reads pass.
-- C. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- D. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+- A. First, Define the condition from the incident signal and use a window that avoids meaningless single-sample noise. Then, Query criteria metricName, timeAggregation, operator, threshold, windowSize, and evaluationFrequency.
+- B. First, Create a suppression rule scoped to the maintenance targets and leave the alert rule enabled. Then, Query processing-rule scopes, filters, action type, enabled state, and schedule.
+- C. First, Choose dynamic thresholds for seasonal signals with sufficient history and configure sensitivity and violation counts. Then, Query criterionType, alertSensitivity, failingPeriods, and ignoreDataBefore.
+- D. First, Define the maintenance recurrence and time zone explicitly and review its start and end boundaries. Then, Query schedule recurrence, timeZone, startDateTime, and endDateTime.
 
 ## LAB23-Q50 — Advanced
 
-During final design assurance, the reviewer must resolve this situation: The operation for 'Set up alert rules, action groups, and alert processing rules in Azure Monitor' is asynchronous or gated. How should completion be recorded?
+At the actionable alert-routing design approval gate, operators must show that the alert routing can encode operational urgency independently of whether a rule fires. Which alert routing configure-and-check pair is defensible?
 
-- A. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
-- B. Record pass as soon as the request is accepted, regardless of its final state.
-- C. Fabricate expected output so the assessment and documentation appear complete.
-- D. Remove the check from validation whenever the service takes longer than expected.
+- A. First, Set scopes to the exact resources or common supported scope that must be monitored. Then, Query scopes and confirm each intended resource ID is represented.
+- B. First, Define the maintenance recurrence and time zone explicitly and review its start and end boundaries. Then, Query schedule recurrence, timeZone, startDateTime, and endDateTime.
+- C. First, Set severity from the organization's impact and response model and route actions accordingly. Then, Query severity, enabled state, description, and action groups on the rule.
+- D. First, Create conditions for the required operation, status, resource type, or caller and attach an action group. Then, Query allOf conditions and generate a safe matching control-plane event.
+
+[Open the answer key](./ANSWERS.md)

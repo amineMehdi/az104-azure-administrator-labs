@@ -1,0 +1,130 @@
+{
+  "schemaVersion": "1.0.0",
+  "labId": "LAB-00",
+  "runId": "fixture-00",
+  "createdAt": "2026-08-31T10:00:00Z",
+  "updatedAt": "2026-08-31T10:00:00Z",
+  "status": "setup-complete",
+  "context": {
+    "cloud": "AzureCloud",
+    "tenantId": "22222222-2222-4222-8222-222222222222",
+    "subscriptionId": "11111111-1111-4111-8111-111111111111"
+  },
+  "acknowledgements": {
+    "cost": false,
+    "tenantChange": false
+  },
+  "inputs": {
+    "location": "westeurope"
+  },
+  "checkpointStates": [
+    {
+      "checkpointId": "LAB00-CP01",
+      "required": true,
+      "status": "pass",
+      "updatedAt": "2026-08-31T10:00:00Z",
+      "message": "Fixture checkpoint passed."
+    },
+    {
+      "checkpointId": "LAB00-CP02",
+      "required": true,
+      "status": "pass",
+      "updatedAt": "2026-08-31T10:00:00Z",
+      "message": "Fixture checkpoint passed."
+    },
+    {
+      "checkpointId": "LAB00-CP03",
+      "required": true,
+      "status": "pass",
+      "updatedAt": "2026-08-31T10:00:00Z",
+      "message": "Fixture checkpoint passed."
+    },
+    {
+      "checkpointId": "LAB00-CP04",
+      "required": true,
+      "status": "pass",
+      "updatedAt": "2026-08-31T10:00:00Z",
+      "message": "Fixture checkpoint passed."
+    },
+    {
+      "checkpointId": "LAB00-CP05",
+      "required": true,
+      "status": "pass",
+      "updatedAt": "2026-08-31T10:00:00Z",
+      "message": "Fixture checkpoint passed."
+    }
+  ],
+  "managedObjects": [
+    {
+      "checkpointId": "LAB00-CP01",
+      "kind": "local-artifact",
+      "id": ".state/fixture-00/artifact-1.json",
+      "name": "fixture-00-1",
+      "type": "local/state",
+      "scope": null,
+      "ownership": {
+        "method": "local-path",
+        "expectedTags": {}
+      },
+      "recordedAt": "2026-08-31T10:00:00Z",
+      "lifecycleStatus": "active"
+    },
+    {
+      "checkpointId": "LAB00-CP02",
+      "kind": "local-artifact",
+      "id": ".state/fixture-00/artifact-2.json",
+      "name": "fixture-00-2",
+      "type": "local/state",
+      "scope": null,
+      "ownership": {
+        "method": "local-path",
+        "expectedTags": {}
+      },
+      "recordedAt": "2026-08-31T10:00:00Z",
+      "lifecycleStatus": "active"
+    },
+    {
+      "checkpointId": "LAB00-CP03",
+      "kind": "local-artifact",
+      "id": ".state/fixture-00/artifact-3.json",
+      "name": "fixture-00-3",
+      "type": "local/state",
+      "scope": null,
+      "ownership": {
+        "method": "local-path",
+        "expectedTags": {}
+      },
+      "recordedAt": "2026-08-31T10:00:00Z",
+      "lifecycleStatus": "active"
+    },
+    {
+      "checkpointId": "LAB00-CP04",
+      "kind": "local-artifact",
+      "id": ".state/fixture-00/artifact-4.json",
+      "name": "fixture-00-4",
+      "type": "local/state",
+      "scope": null,
+      "ownership": {
+        "method": "local-path",
+        "expectedTags": {}
+      },
+      "recordedAt": "2026-08-31T10:00:00Z",
+      "lifecycleStatus": "active"
+    },
+    {
+      "checkpointId": "LAB00-CP05",
+      "kind": "local-artifact",
+      "id": ".state/fixture-00/artifact-5.json",
+      "name": "fixture-00-5",
+      "type": "local/state",
+      "scope": null,
+      "ownership": {
+        "method": "local-path",
+        "expectedTags": {}
+      },
+      "recordedAt": "2026-08-31T10:00:00Z",
+      "lifecycleStatus": "active"
+    }
+  ],
+  "originalSettings": []
+}

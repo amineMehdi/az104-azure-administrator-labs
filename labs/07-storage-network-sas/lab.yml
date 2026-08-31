@@ -1,8 +1,11 @@
+
+# BEGIN GENERATED AZ104 V2
+schemaVersion: 2.0.0
 id: LAB-07
 slug: 07-storage-network-sas
 title: Restrict storage networking and issue scoped SAS access
 blueprintVersion: '2026-04-17'
-domain: Implement and manage storage
+domain: storage
 objectives:
 - ST-ACCESS-01
 - ST-ACCESS-02
@@ -15,9 +18,20 @@ testedToolVersions:
   powershell: '>=7.4'
 estimatedMinutes: 105
 difficulty: foundational
+experience:
+  scenario: 'A storage security administrator restricting data-plane access is responding to an operational request: Build
+    a default-deny storage firewall with one service-endpoint subnet, issue a revocable service SAS, and prove network denial
+    precedes authorization.'
+  role: A storage security administrator restricting data-plane access.
+  outcome: Build a default-deny storage firewall with one service-endpoint subnet, issue a revocable service SAS, and prove
+    network denial precedes authorization.
+  completionCriteria:
+  - All required checkpoints report pass.
+  - The deterministic break/fix is injected, diagnosed, and repaired.
+  - cleanup.json reports no active run-owned resources, with any retained item explicitly documented.
 cost:
   class: low
-  billableResources: &id001
+  billableResources:
   - resource group
   - virtual network and subnet
   - storage account
@@ -25,6 +39,10 @@ cost:
   - stored access policy
   notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator before
     execution and clean up immediately.
+  pricingLinks:
+  - title: Azure Storage pricing
+    url: https://azure.microsoft.com/pricing/details/storage/
+  acknowledgementRequired: false
 permissions:
   azureRbacRoles:
   - Contributor plus Storage Account Contributor on the lab resource group
@@ -37,41 +55,460 @@ prerequisites:
 - 'External gate review: None beyond the declared role and a disposable subscription.'
 - Azure CLI hosted in PowerShell 7.4 or later
 providers:
-  observed:
+  required:
   - Microsoft.Network
   - Microsoft.Storage
+  optional: []
   registeredByLab: []
-regions:
-  applicable: true
-  primary: supplied at execution time
-  secondary: null
+inputs:
+- id: run-id
+  parameter: RunId
+  description: Unique lowercase run ownership identifier
+  required: true
+  secret: false
+  source: parameter
+  safeExample: az104l07-01
+  gateBehavior: block
+  checkpointIds:
+  - LAB07-CP01
+  - LAB07-CP02
+  - LAB07-CP03
+  - LAB07-CP04
+  - LAB07-CP05
+- id: subscription-id
+  parameter: SubscriptionId
+  environmentVariable: AZ104_SUBSCRIPTION_ID
+  description: Expected disposable subscription ID
+  required: true
+  secret: false
+  source: parameter-or-environment
+  safeExample: 00000000-0000-0000-0000-000000000000
+  gateBehavior: block
+  checkpointIds:
+  - LAB07-CP01
+  - LAB07-CP02
+  - LAB07-CP03
+  - LAB07-CP04
+  - LAB07-CP05
+- id: location
+  parameter: Location
+  environmentVariable: AZ104_LOCATION
+  description: Approved primary Azure region
+  required: true
+  secret: false
+  source: parameter-or-environment
+  safeExample: westeurope
+  gateBehavior: block
+  checkpointIds:
+  - LAB07-CP01
+  - LAB07-CP02
+  - LAB07-CP03
+  - LAB07-CP04
+  - LAB07-CP05
+acknowledgements:
+  cost:
+    required: false
+    parameter: AcknowledgeCost
+    message: I reviewed current pricing, quota, and the same-session cleanup plan.
+  tenantChange:
+    required: false
+    parameter: AcknowledgeTenantChange
+    message: I am authorized to create or change the declared tenant-scoped objects and will restore recorded settings.
 creates:
-  azureResources: *id001
+  azureResources:
+  - resource group
+  - virtual network and subnet
+  - storage account
+  - blob container
+  - stored access policy
   entraObjects: []
   localArtifacts:
   - .state/<run-id>/run.json
   - .state/<run-id>/validation.json
+  - .state/<run-id>/cleanup.json
 tenantScopedChanges: []
 externalRequirements: []
+preflightChecks:
+- id: preflight.context
+  type: context
+  required: true
+  description: Confirm active cloud, tenant, and subscription without changing them.
+  command: az account show --output json
+  expected: Active context matches the supplied subscription and disposable environment.
+- id: preflight.tools
+  type: tool
+  required: true
+  description: Confirm PowerShell, Azure CLI, and az bicep are available.
+  command: az version; az bicep version
+  expected: All required tools meet the versions declared by this lab.
+- id: preflight.inputs
+  type: input
+  required: true
+  description: Check required parameters and environment gates without printing secrets.
+  command: $PSBoundParameters.Keys; Get-ChildItem Env:AZ104_* | Select-Object Name
+  expected: Every required input is present and optional gates are explicitly reported.
+- id: preflight.providers
+  type: provider
+  required: true
+  description: Read registration state for required resource providers.
+  command: az provider show --namespace <provider> --query registrationState --output tsv
+  expected: Every required provider is Registered; preflight performs no registration.
+- id: preflight.region
+  type: region
+  required: true
+  description: Confirm the requested region is available to the subscription.
+  command: az account list-locations --query "[?name=='<location>'].name" --output tsv
+  expected: The supplied region appears in the subscription location inventory.
+- id: preflight.authored.lab07.endpoint-and-name
+  type: service
+  required: true
+  description: Confirm Microsoft.Storage service-endpoint availability and the deterministic account name without creating
+    a network.
+  command: '$endpoints = @(az network service-endpoint list --location $Location --output json | ConvertFrom-Json)
+
+    if (@($endpoints | Where-Object service -eq ''Microsoft.Storage'').Count -eq 0) { throw ''Microsoft.Storage service endpoint
+    is unavailable in the selected region.'' }
+
+    $availability = az storage account check-name --name $storage --output json | ConvertFrom-Json
+
+    if (-not $availability.nameAvailable) { throw "Storage name unavailable: $($availability.reason)" }
+
+    '
+  expected: Microsoft.Storage is a regional service endpoint and the account name is available.
+checkpoints:
+- id: LAB07-CP01
+  title: Establish the network and authorization test model
+  purpose: Confirm the provider and deterministic address space, and distinguish firewall origin checks from SAS permissions.
+  objectiveIds:
+  - ST-ACCESS-01
+  required: true
+  expectedState: Storage is registered and the plan contains one non-overlapping subnet and a default-deny target.
+  scriptMarkers:
+    setup: LAB07-CP01
+    validate: LAB07-CP01
+    cleanup: LAB07-CP01
+  validation:
+    positive:
+      id: cp01.positive
+      description: Read the service properties for establish the network and authorization test model by using exact run-owned
+        identifiers.
+      command: '$validationId=''LAB07-CP01-positive''; $location = az account list-locations --query "[?name==''$Location''].name
+        | [0]" --output tsv
+
+        if ($location -ne $Location) { throw ''Requested location is unavailable.'' }
+
+        $location
+
+        '
+      expected: The exact requested location is available.
+    negative:
+      id: cp01.negative
+      description: Search for conflicting, unowned, or excessive state after establish the network and authorization test
+        model.
+      command: '$validationId=''LAB07-CP01-negative''; $existing = @(az storage account list --resource-group $ResourceGroupName
+        --output json | ConvertFrom-Json | Where-Object name -eq "st07$suffix")
+
+        if ($existing.Count -ne 1 -or $existing[0].tags.runId -ne $RunId) { throw ''Expected one run-owned storage firewall
+        endpoint after deployment.'' }
+
+        ''Run-owned storage firewall endpoints: 1''
+
+        '
+      expected: Exactly one deterministic account exists and carries the current run ownership tag after deployment.
+  cleanup:
+    dependsOn:
+    - LAB07-CP02
+    - LAB07-CP03
+    - LAB07-CP04
+    - LAB07-CP05
+    action: Remove only manifest-recorded objects owned by LAB07-CP01, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp01.residual
+      description: Prove no active managed object remains for LAB07-CP01.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-1
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Configure Azure Storage firewalls and virtual networks
+      url: https://learn.microsoft.com/en-us/azure/storage/common/storage-network-security
+- id: LAB07-CP02
+  title: Build the service-endpoint subnet and private container
+  purpose: Create the account temporarily open for bootstrap, create the container and stored access policy, then close the
+    firewall to one subnet.
+  objectiveIds:
+  - ST-ACCESS-02
+  required: true
+  expectedState: The subnet exposes Microsoft.Storage, the account is default-deny with one VNet rule, and the private container
+    has one stored access policy.
+  scriptMarkers:
+    setup: LAB07-CP02
+    validate: LAB07-CP02
+    cleanup: LAB07-CP02
+  validation:
+    positive:
+      id: cp02.positive
+      description: Read the service properties for build the service-endpoint subnet and private container by using exact
+        run-owned identifiers.
+      command: '$validationId=''LAB07-CP02-positive''; $rules = az storage account network-rule list --resource-group $ResourceGroupName
+        --account-name $storage --output json | ConvertFrom-Json
+
+        if ($rules.defaultAction -ne ''Deny'' -or @($rules.virtualNetworkRules | Where-Object virtualNetworkResourceId -eq
+        $subnetId).Count -ne 1) { throw ''Firewall rule set mismatch.'' }
+
+        $rules
+
+        '
+      expected: DefaultAction is Deny and the exact subnet appears once.
+    negative:
+      id: cp02.negative
+      description: Search for conflicting, unowned, or excessive state after build the service-endpoint subnet and private
+        container.
+      command: '$validationId=''LAB07-CP02-negative''; $subnet = az network vnet subnet show --resource-group $ResourceGroupName
+        --vnet-name $vnet --name storage --output json | ConvertFrom-Json
+
+        if (''Microsoft.Storage'' -notin $subnet.serviceEndpoints.service) { throw ''Storage service endpoint is absent.''
+        }
+
+        if (@($subnet.serviceEndpoints).Count -ne 1) { throw ''Unexpected additional service endpoints are configured.'' }
+
+        $subnet.serviceEndpoints
+
+        '
+      expected: The subnet has only the intended Microsoft.Storage service endpoint.
+  cleanup:
+    dependsOn:
+    - LAB07-CP03
+    - LAB07-CP04
+    - LAB07-CP05
+    action: Remove only manifest-recorded objects owned by LAB07-CP02, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp02.residual
+      description: Prove no active managed object remains for LAB07-CP02.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-2
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Configure Azure Storage firewalls and virtual networks
+      url: https://learn.microsoft.com/en-us/azure/storage/common/storage-network-security
+- id: LAB07-CP03
+  title: Generate a short-lived service SAS from the stored policy
+  purpose: Sign a container SAS in memory, confirm its bounded lifetime and policy reference, and persist neither the key
+    nor token.
+  objectiveIds:
+  - ST-ACCESS-03
+  required: true
+  expectedState: A non-empty service SAS references policy az104 and is cleared without entering command output, state, or
+    evidence.
+  scriptMarkers:
+    setup: LAB07-CP03
+    validate: LAB07-CP03
+    cleanup: LAB07-CP03
+  validation:
+    positive:
+      id: cp03.positive
+      description: Read the service properties for generate a short-lived service SAS from the stored policy by using exact
+        run-owned identifiers.
+      command: '$validationId=''LAB07-CP03-positive''; $rules = az storage account network-rule list --resource-group $ResourceGroupName
+        --account-name $storage --output json | ConvertFrom-Json
+
+        if ($rules.defaultAction -ne ''Deny'' -or @($rules.virtualNetworkRules).Count -ne 1) { throw ''Firewall changed during
+        SAS generation.'' }
+
+        $rules
+
+        '
+      expected: The account still has defaultAction Deny and exactly one allowed subnet after SAS generation.
+    negative:
+      id: cp03.negative
+      description: Search for conflicting, unowned, or excessive state after generate a short-lived service SAS from the stored
+        policy.
+      command: "$validationId='LAB07-CP03-negative'; $accountRunId = az storage account show --resource-group $ResourceGroupName\
+        \ --name $storage --query tags.runId --output tsv\nif ($accountRunId -ne $RunId) {\n  throw 'The SAS endpoint does\
+        \ not retain this run ID ownership tag.'\n}\nif (Select-String -Path (Join-Path $StateDir '*.json') -Pattern 'sig=|sasToken|accountKey|AZURE_STORAGE_KEY'\
+        \ -ErrorAction SilentlyContinue) {\n  throw 'A SAS or key-like field was persisted.'\n}\n'Owned account=1; secret-like\
+        \ state fields=0'\n"
+      expected: No SAS or account-key field appears in state files.
+  cleanup:
+    dependsOn:
+    - LAB07-CP04
+    - LAB07-CP05
+    action: Remove only manifest-recorded objects owned by LAB07-CP03, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp03.residual
+      description: Prove no active managed object remains for LAB07-CP03.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-3
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Configure Azure Storage firewalls and virtual networks
+      url: https://learn.microsoft.com/en-us/azure/storage/common/storage-network-security
+- id: LAB07-CP04
+  title: Prove that a valid SAS is denied from an unapproved network
+  purpose: Use a freshly signed policy-bound SAS from the learner workstation and require the data-plane request to fail while
+    the firewall is Deny.
+  objectiveIds:
+  - ST-ACCESS-04
+  required: true
+  expectedState: SAS signing succeeds locally, the data-plane request fails from the unapproved origin, and no token is retained.
+  scriptMarkers:
+    setup: LAB07-CP04
+    validate: LAB07-CP04
+    cleanup: LAB07-CP04
+  validation:
+    positive:
+      id: cp04.positive
+      description: Read the service properties for prove that a valid SAS is denied from an unapproved network by using exact
+        run-owned identifiers.
+      command: '$validationId=''LAB07-CP04-positive''; $defaultAction = az storage account show --resource-group $ResourceGroupName
+        --name $storage --query networkRuleSet.defaultAction --output tsv
+
+        if ($defaultAction -ne ''Deny'') { throw ''Storage firewall is not default-deny.'' }
+
+        $defaultAction
+
+        '
+      expected: Management-plane state remains Deny.
+    negative:
+      id: cp04.negative
+      description: Search for conflicting, unowned, or excessive state after prove that a valid SAS is denied from an unapproved
+        network.
+      command: '$validationId=''LAB07-CP04-negative''; $rules = az storage account network-rule list --resource-group $ResourceGroupName
+        --account-name $storage --output json | ConvertFrom-Json
+
+        if (@($rules.ipRules).Count -gt 0) { throw ''An IP exception bypasses the intended denied-workstation path.'' }
+
+        ''IP firewall exceptions: 0''
+
+        '
+      expected: No IP rule authorizes the learner workstation.
+  cleanup:
+    dependsOn:
+    - LAB07-CP05
+    action: Remove only manifest-recorded objects owned by LAB07-CP04, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp04.residual
+      description: Prove no active managed object remains for LAB07-CP04.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-4
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Configure Azure Storage firewalls and virtual networks
+      url: https://learn.microsoft.com/en-us/azure/storage/common/storage-network-security
+- id: LAB07-CP05
+  title: Repair a removed subnet rule and revoke the stored policy
+  purpose: Remove and restore the exact VNet rule as a deterministic fault, then revoke future SAS use through the stored
+    access policy.
+  objectiveIds:
+  - ST-ACCESS-01
+  - ST-ACCESS-02
+  - ST-ACCESS-03
+  - ST-ACCESS-04
+  required: true
+  expectedState: The exact subnet rule is restored, defaultAction is Deny, and policy az104 is revoked before cleanup.
+  scriptMarkers:
+    setup: LAB07-CP05
+    validate: LAB07-CP05
+    cleanup: LAB07-CP05
+  validation:
+    positive:
+      id: cp05.positive
+      description: Read the service properties for repair a removed subnet rule and revoke the stored policy by using exact
+        run-owned identifiers.
+      command: '$validationId=''LAB07-CP05-positive''; $rules = az storage account network-rule list --resource-group $ResourceGroupName
+        --account-name $storage --output json | ConvertFrom-Json
+
+        if ($rules.defaultAction -ne ''Deny'' -or @($rules.virtualNetworkRules | Where-Object virtualNetworkResourceId -eq
+        $subnetId).Count -ne 1) { throw ''Firewall repair is incomplete.'' }
+
+        $rules
+
+        '
+      expected: Deny and the exact subnet rule are restored after the fault.
+    negative:
+      id: cp05.negative
+      description: Search for conflicting, unowned, or excessive state after repair a removed subnet rule and revoke the stored
+        policy.
+      command: "$validationId='LAB07-CP05-negative'; $defaultAction = az storage account show --resource-group $ResourceGroupName\
+        \ --name $storage --query networkRuleSet.defaultAction --output tsv\nif ($defaultAction -ne 'Deny') {\n  throw 'The\
+        \ storage firewall is not default-deny after policy revocation.'\n}\nif (Select-String -Path (Join-Path $StateDir\
+        \ '*.json') -Pattern 'sig=|sasToken|accountKey' -ErrorAction SilentlyContinue) {\n  throw 'Secret material is present\
+        \ in state.'\n}\n'Firewall=Deny; persisted SAS/key fields=0'\n"
+      expected: No SAS or account key remains in state after revocation.
+  cleanup:
+    dependsOn: []
+    action: Remove only manifest-recorded objects owned by LAB07-CP05, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp05.residual
+      description: Prove no active managed object remains for LAB07-CP05.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-5
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Configure Azure Storage firewalls and virtual networks
+      url: https://learn.microsoft.com/en-us/azure/storage/common/storage-network-security
 validation:
-  commandLanes:
-  - scripts/cli/Validate.ps1
-  output: .state/<run-id>/validation.json
-  statuses:
-  - pass
-  - fail
-  - warning
-  - skipped
-  liveExecutionRequiredForLiveVerified: true
+  script: scripts/cli/Validate.ps1
+  artifact: .state/<run-id>/validation.json
+  modes:
+  - Deployment
+  - PostCleanup
+  resultPolicy:
+    requiredFailureResult: fail
+    optionalSkipResult: partial
+    allRequiredPassResult: pass
 cleanup:
-  azureDeletion: exact recorded resource-group ID after tag verification
-  entraDeletion: none
-  reportOnlyByDefault: true
+  script: scripts/cli/Cleanup.ps1
+  artifact: .state/<run-id>/cleanup.json
+  previewByDefault: true
   requiresExecuteFlag: true
-  residualAuditRequired: true
+  ownershipVerification:
+    manifestIdMatch: true
+    requiredTags:
+    - purpose
+    - labId
+    - runId
+  residualChecks:
+  - id: cp01.residual
+    description: Prove no active managed object remains for LAB07-CP01.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp02.residual
+    description: Prove no active managed object remains for LAB07-CP02.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp03.residual
+    description: Prove no active managed object remains for LAB07-CP03.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp04.residual
+    description: Prove no active managed object remains for LAB07-CP04.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp05.residual
+    description: Prove no active managed object remains for LAB07-CP05.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  retainedItemsAllowed: true
+  irreversiblePurge: never
 assessment:
   enabled: true
   questionCount: 50
   primaryDomain: storage
-lastOfflineValidated: '2026-08-30'
+lastOfflineValidated: '2026-08-31'
 lastLiveVerified: null
+# END GENERATED AZ104 V2

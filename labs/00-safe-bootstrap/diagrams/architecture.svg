@@ -1,39 +1,62 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="520" viewBox="0 0 1120 520" role="img" aria-labelledby="title desc">
-  <title id="title">Safe bootstrap workflow</title>
-  <desc id="desc">A learner uses either Azure CLI hosted in PowerShell to read Azure account, location, provider, and quota information. Setup and validation write only to a lab-local state folder. Cleanup removes only that selected local run.</desc>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="2668" height="228" viewBox="0 0 2668 228" role="img" aria-labelledby="lab00-title lab00-desc">
+  <title id="lab00-title">LAB-00 architecture: Safe Azure lab bootstrap</title>
+  <desc id="lab00-desc">Left-to-right service topology with 7 components and 8 directed relationships. Components: Learner, Environment initializer, Version and dependency checks, Read-only Azure CLI context, Ignored run manifest, Setup and cleanup previews, Validation and residual audit. Relationships: Learner to Environment initializer (run one PowerShell command); Environment initializer to Version and dependency checks (inspect only); Version and dependency checks to Read-only Azure CLI context (required tools pass); Read-only Azure CLI context to Ignored run manifest (approved cloud and subscription); Ignored run manifest to Setup and cleanup previews (exact IDs, tags, and gates); Setup and cleanup previews to Validation and residual audit (no mutation in Lab 00); Validation and residual audit to Ignored run manifest (readiness and cleanup results); Ignored run manifest to Learner (safe boundary understood).</desc>
+  <metadata id="lab00-metadata">{&quot;renderer&quot;:&quot;az104-mermaid-flowchart-svg/1.0.0&quot;,&quot;source&quot;:&quot;architecture.mmd&quot;,&quot;sourceSha256&quot;:&quot;0b1aed881e472530657776b37c6b2c40299a7a3ac8edb94958a943f49755a803&quot;}</metadata>
   <defs>
-    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#57606a"/></marker>
+    <marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M 0 0 L 10 4 L 0 8 z" fill="#57606a"/>
+    </marker>
     <style>
-      .box{stroke-width:2;rx:14}.label{font:600 18px 'Segoe UI',Arial,sans-serif;fill:#24292f}.small{font:14px 'Segoe UI',Arial,sans-serif;fill:#57606a}.line{stroke:#57606a;stroke-width:2;fill:none;marker-end:url(#arrow)}
+      .edge { fill: none; stroke: #57606a; stroke-width: 2; marker-end: url(#arrow); }
+      .edge-label-bg { fill: #ffffff; opacity: .94; }
+      .edge-label { fill: #57606a; font: 13px 'Segoe UI', Arial, sans-serif; text-anchor: middle; dominant-baseline: central; }
+      .node-label { font: 600 15px 'Segoe UI', Arial, sans-serif; text-anchor: middle; dominant-baseline: central; }
     </style>
   </defs>
-  <rect width="1120" height="520" fill="#ffffff"/>
-  <text x="560" y="38" text-anchor="middle" class="label" font-size="24">Lab 00: safe, read-only Azure bootstrap</text>
-  <rect class="box" x="40" y="195" width="160" height="90" fill="#f6f8fa" stroke="#24292f"/>
-  <text x="120" y="235" text-anchor="middle" class="label">Learner</text>
-  <text x="120" y="260" text-anchor="middle" class="small">selects a lane</text>
-  <rect class="box" x="300" y="105" width="220" height="90" fill="#e7f3ff" stroke="#0969da"/>
-  <text x="410" y="145" text-anchor="middle" class="label">Azure CLI</text>
-  <text x="410" y="170" text-anchor="middle" class="small">preflight • setup • validate</text>
-  <rect class="box" x="300" y="285" width="220" height="90" fill="#e7f3ff" stroke="#0969da"/>
-  <text x="410" y="325" text-anchor="middle" class="label">Azure CLI</text>
-  <text x="410" y="350" text-anchor="middle" class="small">preflight • setup • validate</text>
-  <rect class="box" x="670" y="105" width="390" height="120" fill="#eaf5ea" stroke="#1a7f37"/>
-  <text x="865" y="145" text-anchor="middle" class="label">Azure control plane</text>
-  <text x="865" y="173" text-anchor="middle" class="small">account + tenant + subscription</text>
-  <text x="865" y="198" text-anchor="middle" class="small">regions + provider registration + compute quota</text>
-  <rect class="box" x="670" y="300" width="390" height="120" fill="#fff8c5" stroke="#9a6700"/>
-  <text x="865" y="340" text-anchor="middle" class="label">Local .state/&lt;run-id&gt;/</text>
-  <text x="865" y="368" text-anchor="middle" class="small">run.json + validation.json</text>
-  <text x="865" y="395" text-anchor="middle" class="small">no secrets • no Azure resources</text>
-  <path class="line" d="M200 225 L300 165"/>
-  <path class="line" d="M200 255 L300 315"/>
-  <path class="line" d="M520 150 L670 150"/>
-  <path class="line" d="M520 315 C600 315 600 200 670 190"/>
-  <path class="line" d="M520 175 C590 185 590 335 670 345"/>
-  <path class="line" d="M520 340 L670 375"/>
-  <text x="565" y="135" text-anchor="middle" class="small">read only</text>
-  <text x="600" y="392" text-anchor="middle" class="small">local writes only</text>
-  <rect x="40" y="455" width="1020" height="38" rx="8" fill="#fff1e5" stroke="#bc4c00"/>
-  <text x="550" y="480" text-anchor="middle" class="small">Safety boundary: this lab never registers providers, changes context, deploys resources, or alters tenant/subscription settings.</text>
+  <rect width="100%" height="100%" fill="#ffffff"/>
+  <g aria-hidden="true">
+    <path class="edge" d="M 324 114 C 384 114, 384 114, 444 114"/>
+    <path class="edge" d="M 704 114 C 764 114, 764 114, 824 114"/>
+    <path class="edge" d="M 1084 114 C 1144 114, 1144 114, 1204 114"/>
+    <path class="edge" d="M 1464 114 C 1524 114, 1524 114, 1584 114"/>
+    <path class="edge" d="M 1844 114 C 1904 114, 1904 114, 1964 114"/>
+    <path class="edge" d="M 2224 114 C 2284 114, 2284 114, 2344 114"/>
+    <path class="edge" d="M 2344 114 C 2294 178, 1894 178, 1844 114"/>
+    <path class="edge" d="M 1584 114 C 1534 192, 374 192, 324 114"/>
+    <rect class="edge-label-bg" x="286" y="103" width="196" height="22" rx="4"/>
+    <text class="edge-label" x="384" y="114">run one PowerShell command</text>
+    <rect class="edge-label-bg" x="715" y="103" width="98" height="22" rx="4"/>
+    <text class="edge-label" x="764" y="114">inspect only</text>
+    <rect class="edge-label-bg" x="1070.5" y="103" width="147" height="22" rx="4"/>
+    <text class="edge-label" x="1144" y="114">required tools pass</text>
+    <rect class="edge-label-bg" x="1408.5" y="103" width="231" height="22" rx="4"/>
+    <text class="edge-label" x="1524" y="114">approved cloud and subscription</text>
+    <rect class="edge-label-bg" x="1806" y="103" width="196" height="22" rx="4"/>
+    <text class="edge-label" x="1904" y="114">exact IDs, tags, and gates</text>
+    <rect class="edge-label-bg" x="2203.5" y="103" width="161" height="22" rx="4"/>
+    <text class="edge-label" x="2284" y="114">no mutation in Lab 00</text>
+    <rect class="edge-label-bg" x="1985.5" y="167" width="217" height="22" rx="4"/>
+    <text class="edge-label" x="2094" y="178">readiness and cleanup results</text>
+    <rect class="edge-label-bg" x="863" y="181" width="182" height="22" rx="4"/>
+    <text class="edge-label" x="954" y="192">safe boundary understood</text>
+    <rect x="64" y="80" width="260" height="68" rx="34" fill="#f6f8fa" stroke="#24292f"/>
+    <text x="194" y="114" class="node-label" fill="#24292f">Learner</text>
+    <rect x="444" y="80" width="260" height="68" rx="10" fill="#e7f3ff" stroke="#0969da"/>
+    <text x="574" y="114" class="node-label" fill="#0550ae">Environment initializer</text>
+    <rect x="824" y="80" width="260" height="68" rx="10" fill="#e7f3ff" stroke="#0969da"/>
+    <text x="954" y="114" class="node-label" fill="#0550ae">Version and dependency checks</text>
+    <rect x="1204" y="89" width="260" height="50" fill="#eaf5ea" stroke="#1a7f37"/>
+    <ellipse cx="1334" cy="89" rx="130" ry="9" fill="#eaf5ea" stroke="#1a7f37"/>
+    <path d="M 1204 139 a 130 9 0 0 0 260 0" fill="none" stroke="#1a7f37"/>
+    <text x="1334" y="114" class="node-label" fill="#116329">Read-only Azure CLI context</text>
+    <rect x="1584" y="89" width="260" height="50" fill="#fff8c5" stroke="#9a6700"/>
+    <ellipse cx="1714" cy="89" rx="130" ry="9" fill="#fff8c5" stroke="#9a6700"/>
+    <path d="M 1584 139 a 130 9 0 0 0 260 0" fill="none" stroke="#9a6700"/>
+    <text x="1714" y="114" class="node-label" fill="#633c01">Ignored run manifest</text>
+    <rect x="1964" y="80" width="260" height="68" rx="10" fill="#e7f3ff" stroke="#0969da"/>
+    <text x="2094" y="114" class="node-label" fill="#0550ae">Setup and cleanup previews</text>
+    <rect x="2344" y="80" width="260" height="68" rx="10" fill="#e7f3ff" stroke="#0969da"/>
+    <text x="2474" y="114" class="node-label" fill="#0550ae">Validation and residual audit</text>
+  </g>
 </svg>

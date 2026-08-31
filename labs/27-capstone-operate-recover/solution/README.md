@@ -1,6 +1,6 @@
 # Lab 27 solution and diagnostic notes
 
-Use this only after completing the lab and knowledge check. The solution is evidence-led: it does not replace the independent validator or silently repair live state.
+Use this only after completing the guided lab and recording your own diagnosis. The solution is evidence-led: it does not replace the independent validator or silently repair live state.
 
 ## Intended checkpoint sequence
 
@@ -8,6 +8,7 @@ Use this only after completing the lab and knowledge check. The solution is evid
 2. **Checkpoint 2:** Inject one bounded NSG or load-balancer fault, use effective rules and Network Watcher evidence to diagnose it, then repair only the identified cause.
 3. **Checkpoint 3:** Query metrics/logs, process an alert, and record the operational timeline and validation output.
 4. **Checkpoint 4:** Protect the test workload, run a restore or isolated recovery drill, verify recovered state, and remove protection/resources in dependency order.
+5. **Checkpoint 5:** Correlate service state with the run manifest, retain redacted validation evidence, and prove cleanup readiness.
 
 ## Diagnostic order
 
@@ -38,4 +39,4 @@ The live gate is: The live recovery drill requires cost review and an isolated w
 
 ## Completion evidence
 
-A defensible result includes a run manifest, independent validation report, redacted CLI or PowerShell evidence, and a cleanup/residual audit. Offline repository tests alone do not establish live verification.
+A defensible result includes a run manifest, independent validation report, redacted Azure CLI evidence captured from PowerShell, and a cleanup/residual audit. Offline repository tests alone do not establish live verification.

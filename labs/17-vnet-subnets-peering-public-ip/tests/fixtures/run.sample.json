@@ -1,0 +1,150 @@
+{
+  "schemaVersion": "1.0.0",
+  "labId": "LAB-17",
+  "runId": "fixture-17",
+  "createdAt": "2026-08-31T10:00:00Z",
+  "updatedAt": "2026-08-31T10:00:00Z",
+  "status": "setup-complete",
+  "context": {
+    "cloud": "AzureCloud",
+    "tenantId": "22222222-2222-4222-8222-222222222222",
+    "subscriptionId": "11111111-1111-4111-8111-111111111111"
+  },
+  "acknowledgements": {
+    "cost": false,
+    "tenantChange": false
+  },
+  "inputs": {
+    "location": "westeurope"
+  },
+  "checkpointStates": [
+    {
+      "checkpointId": "LAB17-CP01",
+      "required": true,
+      "status": "pass",
+      "updatedAt": "2026-08-31T10:00:00Z",
+      "message": "Fixture checkpoint passed."
+    },
+    {
+      "checkpointId": "LAB17-CP02",
+      "required": true,
+      "status": "pass",
+      "updatedAt": "2026-08-31T10:00:00Z",
+      "message": "Fixture checkpoint passed."
+    },
+    {
+      "checkpointId": "LAB17-CP03",
+      "required": true,
+      "status": "pass",
+      "updatedAt": "2026-08-31T10:00:00Z",
+      "message": "Fixture checkpoint passed."
+    },
+    {
+      "checkpointId": "LAB17-CP04",
+      "required": true,
+      "status": "pass",
+      "updatedAt": "2026-08-31T10:00:00Z",
+      "message": "Fixture checkpoint passed."
+    },
+    {
+      "checkpointId": "LAB17-CP05",
+      "required": true,
+      "status": "pass",
+      "updatedAt": "2026-08-31T10:00:00Z",
+      "message": "Fixture checkpoint passed."
+    }
+  ],
+  "managedObjects": [
+    {
+      "checkpointId": "LAB17-CP01",
+      "kind": "azure-resource",
+      "id": "/subscriptions/11111111-1111-4111-8111-111111111111/resourceGroups/rg-az104-l17-fixture-17/providers/Microsoft.Resources/deployments/cp1",
+      "name": "fixture-17-1",
+      "type": "Microsoft.Resources/deployments",
+      "scope": null,
+      "ownership": {
+        "method": "manifest-id-and-tags",
+        "expectedTags": {
+          "purpose": "az104-lab",
+          "labId": "17",
+          "runId": "fixture-17"
+        }
+      },
+      "recordedAt": "2026-08-31T10:00:00Z",
+      "lifecycleStatus": "active"
+    },
+    {
+      "checkpointId": "LAB17-CP02",
+      "kind": "azure-resource",
+      "id": "/subscriptions/11111111-1111-4111-8111-111111111111/resourceGroups/rg-az104-l17-fixture-17/providers/Microsoft.Resources/deployments/cp2",
+      "name": "fixture-17-2",
+      "type": "Microsoft.Resources/deployments",
+      "scope": null,
+      "ownership": {
+        "method": "manifest-id-and-tags",
+        "expectedTags": {
+          "purpose": "az104-lab",
+          "labId": "17",
+          "runId": "fixture-17"
+        }
+      },
+      "recordedAt": "2026-08-31T10:00:00Z",
+      "lifecycleStatus": "active"
+    },
+    {
+      "checkpointId": "LAB17-CP03",
+      "kind": "azure-resource",
+      "id": "/subscriptions/11111111-1111-4111-8111-111111111111/resourceGroups/rg-az104-l17-fixture-17/providers/Microsoft.Resources/deployments/cp3",
+      "name": "fixture-17-3",
+      "type": "Microsoft.Resources/deployments",
+      "scope": null,
+      "ownership": {
+        "method": "manifest-id-and-tags",
+        "expectedTags": {
+          "purpose": "az104-lab",
+          "labId": "17",
+          "runId": "fixture-17"
+        }
+      },
+      "recordedAt": "2026-08-31T10:00:00Z",
+      "lifecycleStatus": "active"
+    },
+    {
+      "checkpointId": "LAB17-CP04",
+      "kind": "azure-resource",
+      "id": "/subscriptions/11111111-1111-4111-8111-111111111111/resourceGroups/rg-az104-l17-fixture-17/providers/Microsoft.Resources/deployments/cp4",
+      "name": "fixture-17-4",
+      "type": "Microsoft.Resources/deployments",
+      "scope": null,
+      "ownership": {
+        "method": "manifest-id-and-tags",
+        "expectedTags": {
+          "purpose": "az104-lab",
+          "labId": "17",
+          "runId": "fixture-17"
+        }
+      },
+      "recordedAt": "2026-08-31T10:00:00Z",
+      "lifecycleStatus": "active"
+    },
+    {
+      "checkpointId": "LAB17-CP05",
+      "kind": "azure-resource",
+      "id": "/subscriptions/11111111-1111-4111-8111-111111111111/resourceGroups/rg-az104-l17-fixture-17/providers/Microsoft.Resources/deployments/cp5",
+      "name": "fixture-17-5",
+      "type": "Microsoft.Resources/deployments",
+      "scope": null,
+      "ownership": {
+        "method": "manifest-id-and-tags",
+        "expectedTags": {
+          "purpose": "az104-lab",
+          "labId": "17",
+          "runId": "fixture-17"
+        }
+      },
+      "recordedAt": "2026-08-31T10:00:00Z",
+      "lifecycleStatus": "active"
+    }
+  ],
+  "originalSettings": []
+}

@@ -1,18 +1,49 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="460" viewBox="0 0 1040 460" role="img" aria-labelledby="title desc">
-<title id="title">Lab 16 architecture</title>
-<desc id="desc">Preview-first operator workflow, a recorded lab boundary, intended resources, independent validation, redacted command evidence, and scoped cleanup.</desc>
-<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#46647f"/></marker></defs>
-<style>text{font-family:Segoe UI,Arial,sans-serif;font-size:14px;fill:#102a43} .control{fill:#e8f1ff;stroke:#2563eb;stroke-width:2} .resource{fill:#e9f8ef;stroke:#16803a;stroke-width:2} .arrow{fill:none;stroke:#46647f;stroke-width:2;marker-end:url(#arrow)}</style>
-<rect width="100%" height="100%" fill="#ffffff"/>
-<rect x="40" y="55" width="180" height="55" rx="8" class="control"/><text x="130" y="79" text-anchor="middle">Operator</text><text x="130" y="98" text-anchor="middle">Azure CLI</text>
-<rect x="275" y="55" width="180" height="55" rx="8" class="control"/><text x="365" y="79" text-anchor="middle">Preview and preflight</text><text x="365" y="98" text-anchor="middle">read-only context check</text>
-<path d="M220 82 L275 82" class="arrow"/>
-<rect x="275" y="130" width="180" height="50" rx="8" class="control"/><text x="365" y="151" text-anchor="middle">Recorded Lab 16</text><text x="365" y="170" text-anchor="middle">exact cleanup boundary</text>
-<path d="M365 110 L365 130" class="arrow"/>
-<rect x="500" y="110" width="470" height="40" rx="8" class="resource"/><text x="735" y="135" text-anchor="middle">resource group</text><rect x="500" y="168" width="470" height="40" rx="8" class="resource"/><text x="735" y="193" text-anchor="middle">App Service plan</text><rect x="500" y="226" width="470" height="40" rx="8" class="resource"/><text x="735" y="251" text-anchor="middle">web app</text><rect x="500" y="284" width="470" height="40" rx="8" class="resource"/><text x="735" y="309" text-anchor="middle">storage account</text><rect x="500" y="342" width="470" height="40" rx="8" class="resource"/><text x="735" y="367" text-anchor="middle">virtual network integration subnet</text>
-<path d="M 455 155 L 500 130" class="arrow"/><path d="M 455 155 L 500 188" class="arrow"/><path d="M 455 155 L 500 246" class="arrow"/><path d="M 455 155 L 500 304" class="arrow"/><path d="M 455 155 L 500 362" class="arrow"/>
-<rect x="40" y="215" width="180" height="50" rx="8" class="control"/><text x="130" y="237" text-anchor="middle">Independent validation</text><text x="130" y="256" text-anchor="middle">positive + negative</text>
-<path d="M275 165 L220 230" class="arrow"/>
-<rect x="40" y="290" width="180" height="50" rx="8" class="control"/><text x="130" y="312" text-anchor="middle">Evidence + cleanup</text><text x="130" y="331" text-anchor="middle">redacted and scoped</text>
-<path d="M130 265 L130 290" class="arrow"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1908" height="432" viewBox="0 0 1908 432" role="img" aria-labelledby="lab16-title lab16-desc">
+  <title id="lab16-title">LAB-16 architecture: Configure App Service TLS, DNS, backup, and networking</title>
+  <desc id="lab16-desc">Left-to-right service topology with 10 components and 9 directed relationships. Components: Operator and Azure CLI, HTTPS-only App Service, TLS and managed certificate, Delegated VNet subnet, Backup configuration, Transient redacted SAS, Private Blob container, Owned hostname gate, TLS, DNS, backup, and VNet assertions, Secret-free cleanup. Relationships: Operator and Azure CLI to HTTPS-only App Service; HTTPS-only App Service to TLS and managed certificate; HTTPS-only App Service to Delegated VNet subnet; HTTPS-only App Service to Backup configuration; Backup configuration to Transient redacted SAS; Transient redacted SAS to Private Blob container; Owned hostname gate to TLS and managed certificate; HTTPS-only App Service to TLS, DNS, backup, and VNet assertions; TLS, DNS, backup, and VNet assertions to Secret-free cleanup.</desc>
+  <metadata id="lab16-metadata">{&quot;renderer&quot;:&quot;az104-mermaid-flowchart-svg/1.0.0&quot;,&quot;source&quot;:&quot;architecture.mmd&quot;,&quot;sourceSha256&quot;:&quot;e02d81c139127fa42df74fbaf54886abf4e8b4df4b7a71d3180faba4a90f9dd6&quot;}</metadata>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M 0 0 L 10 4 L 0 8 z" fill="#57606a"/>
+    </marker>
+    <style>
+      .edge { fill: none; stroke: #57606a; stroke-width: 2; marker-end: url(#arrow); }
+      .edge-label-bg { fill: #ffffff; opacity: .94; }
+      .edge-label { fill: #57606a; font: 13px 'Segoe UI', Arial, sans-serif; text-anchor: middle; dominant-baseline: central; }
+      .node-label { font: 600 15px 'Segoe UI', Arial, sans-serif; text-anchor: middle; dominant-baseline: central; }
+    </style>
+  </defs>
+  <rect width="100%" height="100%" fill="#ffffff"/>
+  <g aria-hidden="true">
+    <path class="edge" d="M 324 165 C 384 165, 384 165, 444 165"/>
+    <path class="edge" d="M 574 199 C 608 216, 608 216, 574 233"/>
+    <path class="edge" d="M 704 165 C 764 165, 764 114, 824 114"/>
+    <path class="edge" d="M 704 165 C 764 165, 764 216, 824 216"/>
+    <path class="edge" d="M 1084 216 C 1144 216, 1144 165, 1204 165"/>
+    <path class="edge" d="M 1464 165 C 1524 165, 1524 216, 1584 216"/>
+    <path class="edge" d="M 324 267 C 384 267, 384 267, 444 267"/>
+    <path class="edge" d="M 704 165 C 764 165, 764 318, 824 318"/>
+    <path class="edge" d="M 1084 318 C 1144 318, 1144 267, 1204 267"/>
+    <rect x="64" y="131" width="260" height="68" rx="10" fill="#e8f1ff" stroke="#2563eb"/>
+    <text x="194" y="165" class="node-label" fill="#102a43">Operator and Azure CLI</text>
+    <rect x="444" y="131" width="260" height="68" rx="10" fill="#e9f8ef" stroke="#16803a"/>
+    <text x="574" y="165" class="node-label" fill="#102a43">HTTPS-only App Service</text>
+    <rect x="444" y="233" width="260" height="68" rx="10" fill="#e9f8ef" stroke="#16803a"/>
+    <text x="574" y="267" class="node-label" fill="#102a43">TLS and managed certificate</text>
+    <rect x="824" y="80" width="260" height="68" rx="10" fill="#e9f8ef" stroke="#16803a"/>
+    <text x="954" y="114" class="node-label" fill="#102a43">Delegated VNet subnet</text>
+    <rect x="824" y="182" width="260" height="68" rx="10" fill="#e9f8ef" stroke="#16803a"/>
+    <text x="954" y="216" class="node-label" fill="#102a43">Backup configuration</text>
+    <rect x="1204" y="131" width="260" height="68" rx="10" fill="#e8f1ff" stroke="#2563eb"/>
+    <text x="1334" y="165" class="node-label" fill="#102a43">Transient redacted SAS</text>
+    <rect x="1584" y="182" width="260" height="68" rx="10" fill="#e9f8ef" stroke="#16803a"/>
+    <text x="1714" y="216" class="node-label" fill="#102a43">Private Blob container</text>
+    <rect x="64" y="233" width="260" height="68" rx="10" fill="#e9f8ef" stroke="#16803a"/>
+    <text x="194" y="267" class="node-label" fill="#102a43">Owned hostname gate</text>
+    <rect x="824" y="284" width="260" height="68" rx="10" fill="#e8f1ff" stroke="#2563eb"/>
+    <text x="954" y="318" class="node-label" fill="#102a43">TLS, DNS, backup, and VNet assertions</text>
+    <rect x="1204" y="233" width="260" height="68" rx="10" fill="#e8f1ff" stroke="#2563eb"/>
+    <text x="1334" y="267" class="node-label" fill="#102a43">Secret-free cleanup</text>
+  </g>
 </svg>

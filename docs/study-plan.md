@@ -13,4 +13,4 @@ Use the labs in order for a first pass, then repeat weak domains using the quest
 | 7 | Monitoring/recovery Labs 22–25 |
 | 8 | Capstones, objective-map review, and timed question-bank revision |
 
-Do not count a lab as complete until validation and cleanup both pass. A score below 8/10 should trigger a review of the mapped objective links before moving on.
+Do not count a lab as complete until deployment validation and post-cleanup validation both pass. On each 50-question assessment, 43–50 indicates mastery, 35–42 requires targeted task review, and 0–34 means repeat the mapped guided work before retesting.

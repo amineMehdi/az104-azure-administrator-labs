@@ -1,453 +1,459 @@
 # Lab 01 knowledge check
 
-Choose the single best answer for each question. Record your choices before opening `ANSWERS.md`.
+[Return to the guided lab](../README.md)
+
+Complete all 50 questions before opening the answer key. Allow about 50–60 minutes and choose the single best answer.
+
+Use the result as a learning signal: 85–100% indicates mastery, 70–84% calls for targeted review, and below 70% means repeat the mapped lab tasks before retrying.
 
 ## LAB01-Q01 — Foundational
 
-An administrator is creating a cloud-only Microsoft Entra user. Which UPN requirement must be satisfied?
+An identity administrator onboarding a small operations team is updating the identity onboarding runbook. The requirement is to use a custom tenant suffix when creating an operations account. Which statement describes Azure behavior correctly?
 
-- A. The UPN must use the tenant's initial domain only.
-- B. The UPN suffix must be one of the tenant's verified domains.
-- C. The UPN must use the same name as an Azure subscription.
-- D. The UPN must match the administrator's email address.
+- A. A cloud-only user is a directory object and does not depend on an Azure subscription resource group.
+- B. A cloud user's UPN suffix must be a verified domain in the tenant.
+- C. A non-mail-enabled security group uses securityEnabled true and mailEnabled false.
+- D. The userType property distinguishes tenant members from business-to-business guest identities.
 
 ## LAB01-Q02 — Foundational
 
-You need a Microsoft Entra group for assigning access to Azure resources, without creating an email collaboration group. Which group properties fit the requirement?
+An identity onboarding peer review asks how the operations-team identity onboarding should handle this outcome: create a user whose identity exists only in this tenant. Which explanation is accurate?
 
-- A. securityEnabled=false and mailEnabled=false
-- B. securityEnabled=true and mailEnabled=true with dynamic membership
-- C. securityEnabled=true and mailEnabled=false
-- D. securityEnabled=false and mailEnabled=true
+- A. Properties such as department, job title, and usage location belong to the user directory object.
+- B. A group member receives access assigned to the group, whereas an owner only administers the group.
+- C. A cloud-only user is a directory object and does not depend on an Azure subscription resource group.
+- D. A soft-deleted Microsoft Entra user can normally be restored during the directory retention window.
 
 ## LAB01-Q03 — Foundational
 
-A learner is Owner of an Azure subscription but receives an authorization error when creating Microsoft Entra users. What is the best explanation?
+For the operations-team identity onboarding, the identity onboarding plan must capture organizational profile metadata on the directory object. Which statement about identity onboarding belongs in the operations-team identity onboarding record?
 
-- A. Cloud-only users can be created only by Microsoft Support.
-- B. The subscription must be moved to the same region as the tenant.
-- C. The Owner role works only after the Microsoft.Graph resource provider is registered.
-- D. Azure RBAC Owner does not grant Microsoft Entra directory-management permissions.
+- A. Properties such as department, job title, and usage location belong to the user directory object.
+- B. The accountEnabled property controls whether a Microsoft Entra user can authenticate.
+- C. Group owners can manage group membership but ownership does not itself make them members.
+- D. Object IDs remain the reliable automation key when display names or UPN values change.
 
 ## LAB01-Q04 — Foundational
 
-Before making a change, a learner checks this core behavior: An administrator is creating a cloud-only Microsoft Entra user. Which UPN requirement must be satisfied?
+The identity onboarding review compares four claims for the operations-team identity onboarding requirement to block one user from signing in without deleting the account. Which claim is technically sound?
 
-- A. The UPN suffix must be one of the tenant's verified domains.
-- B. The UPN must use the same name as an Azure subscription.
-- C. The UPN must match the administrator's email address.
-- D. The UPN must use the tenant's initial domain only.
+- A. A non-mail-enabled security group uses securityEnabled true and mailEnabled false.
+- B. The userType property distinguishes tenant members from business-to-business guest identities.
+- C. A cloud user's UPN suffix must be a verified domain in the tenant.
+- D. The accountEnabled property controls whether a Microsoft Entra user can authenticate.
 
 ## LAB01-Q05 — Foundational
 
-During a design vocabulary review, the team evaluates this situation: You need a Microsoft Entra group for assigning access to Azure resources, without creating an email collaboration group. Which group properties fit the requirement?
+The identity onboarding architecture note requires the operations-team identity onboarding environment to build a security-only group that has no email address. Which statement defines the relevant identity onboarding boundary?
 
-- A. securityEnabled=true and mailEnabled=true with dynamic membership
-- B. securityEnabled=true and mailEnabled=false
-- C. securityEnabled=false and mailEnabled=true
-- D. securityEnabled=false and mailEnabled=false
+- A. A group member receives access assigned to the group, whereas an owner only administers the group.
+- B. A non-mail-enabled security group uses securityEnabled true and mailEnabled false.
+- C. A soft-deleted Microsoft Entra user can normally be restored during the directory retention window.
+- D. A cloud-only user is a directory object and does not depend on an Azure subscription resource group.
 
 ## LAB01-Q06 — Foundational
 
-In a command-planning session, an administrator asks this question: A learner is Owner of an Azure subscription but receives an authorization error when creating Microsoft Entra users. What is the best explanation?
+A new identity onboarding operator must explain why the operations-team identity onboarding can give a user the access assigned to an operations group. Which explanation is accurate?
 
-- A. The subscription must be moved to the same region as the tenant.
-- B. The Owner role works only after the Microsoft.Graph resource provider is registered.
-- C. Azure RBAC Owner does not grant Microsoft Entra directory-management permissions.
-- D. Cloud-only users can be created only by Microsoft Support.
+- A. Group owners can manage group membership but ownership does not itself make them members.
+- B. A group member receives access assigned to the group, whereas an owner only administers the group.
+- C. Object IDs remain the reliable automation key when display names or UPN values change.
+- D. Properties such as department, job title, and usage location belong to the user directory object.
 
 ## LAB01-Q07 — Foundational
 
-While preparing the lab, a learner verifies this platform rule: An administrator is creating a cloud-only Microsoft Entra user. Which UPN requirement must be satisfied?
+The operations-team identity onboarding acceptance criteria require operators to let an administrator manage membership without receiving the group's access. Which service fact supports that requirement?
 
-- A. The UPN must use the same name as an Azure subscription.
-- B. The UPN must match the administrator's email address.
-- C. The UPN must use the tenant's initial domain only.
-- D. The UPN suffix must be one of the tenant's verified domains.
+- A. Group owners can manage group membership but ownership does not itself make them members.
+- B. The userType property distinguishes tenant members from business-to-business guest identities.
+- C. A cloud user's UPN suffix must be a verified domain in the tenant.
+- D. The accountEnabled property controls whether a Microsoft Entra user can authenticate.
 
 ## LAB01-Q08 — Foundational
 
-During peer review, the team must identify the accurate response to this scenario: You need a Microsoft Entra group for assigning access to Azure resources, without creating an email collaboration group. Which group properties fit the requirement?
+An identity onboarding reviewer challenges whether the operations-team identity onboarding can target automation to members while excluding external collaborators. Which response resolves the concern?
 
-- A. securityEnabled=true and mailEnabled=false
-- B. securityEnabled=false and mailEnabled=true
-- C. securityEnabled=false and mailEnabled=false
-- D. securityEnabled=true and mailEnabled=true with dynamic membership
+- A. A soft-deleted Microsoft Entra user can normally be restored during the directory retention window.
+- B. The userType property distinguishes tenant members from business-to-business guest identities.
+- C. A cloud-only user is a directory object and does not depend on an Azure subscription resource group.
+- D. A non-mail-enabled security group uses securityEnabled true and mailEnabled false.
 
 ## LAB01-Q09 — Foundational
 
-In an operations briefing, a new team member receives this question: A learner is Owner of an Azure subscription but receives an authorization error when creating Microsoft Entra users. What is the best explanation?
+The operations-team identity onboarding handoff omits the identity onboarding rule needed to recover a user that was deleted during the retention window. Which statement should the team add?
 
-- A. The Owner role works only after the Microsoft.Graph resource provider is registered.
-- B. Azure RBAC Owner does not grant Microsoft Entra directory-management permissions.
-- C. Cloud-only users can be created only by Microsoft Support.
-- D. The subscription must be moved to the same region as the tenant.
+- A. A soft-deleted Microsoft Entra user can normally be restored during the directory retention window.
+- B. Object IDs remain the reliable automation key when display names or UPN values change.
+- C. Properties such as department, job title, and usage location belong to the user directory object.
+- D. A group member receives access assigned to the group, whereas an owner only administers the group.
 
 ## LAB01-Q10 — Foundational
 
-While building a support checklist, an engineer reviews this requirement: An administrator is creating a cloud-only Microsoft Entra user. Which UPN requirement must be satisfied?
+An identity onboarding incident review of the operations-team identity onboarding depends on the ability to keep automation stable after a display name or sign-in name changes. Which platform description is reliable?
 
-- A. The UPN must match the administrator's email address.
-- B. The UPN must use the tenant's initial domain only.
-- C. The UPN suffix must be one of the tenant's verified domains.
-- D. The UPN must use the same name as an Azure subscription.
+- A. A cloud user's UPN suffix must be a verified domain in the tenant.
+- B. The accountEnabled property controls whether a Microsoft Entra user can authenticate.
+- C. Object IDs remain the reliable automation key when display names or UPN values change.
+- D. Group owners can manage group membership but ownership does not itself make them members.
 
 ## LAB01-Q11 — Foundational
 
-During a readiness check, the administrator considers this behavior: You need a Microsoft Entra group for assigning access to Azure resources, without creating an email collaboration group. Which group properties fit the requirement?
+An identity onboarding ticket in the operations-team identity onboarding says to use a custom tenant suffix when creating an operations account. Which identity onboarding action completes the operations-team identity onboarding request with minimal change?
 
-- A. securityEnabled=false and mailEnabled=true
-- B. securityEnabled=false and mailEnabled=false
-- C. securityEnabled=true and mailEnabled=true with dynamic membership
-- D. securityEnabled=true and mailEnabled=false
+- A. Patch the intended user object through Microsoft Graph by using its immutable object ID.
+- B. Read the tenant's verified domains before constructing the new userPrincipalName.
+- C. Add the user's object ID to the intended group's member collection.
+- D. Locate the deleted directory object and restore it before the retention window expires.
 
 ## LAB01-Q12 — Foundational
 
-In a service overview, the team discusses this scenario: A learner is Owner of an Azure subscription but receives an authorization error when creating Microsoft Entra users. What is the best explanation?
+The approach for the operations-team identity onboarding is approved, but the identity onboarding environment still cannot create a user whose identity exists only in this tenant. Which implementation step closes the gap?
 
-- A. Azure RBAC Owner does not grant Microsoft Entra directory-management permissions.
-- B. Cloud-only users can be created only by Microsoft Support.
-- C. The subscription must be moved to the same region as the tenant.
-- D. The Owner role works only after the Microsoft.Graph resource provider is registered.
+- A. Set accountEnabled on the target user while leaving its identity and group memberships intact.
+- B. Add the administrator's directory object ID to the group's owner collection.
+- C. Persist returned user and group object IDs immediately in the lab run-state record.
+- D. Create the user with a unique UPN, display name, and initial password through Azure CLI.
 
 ## LAB01-Q13 — Foundational
 
-While reviewing official guidance, a learner must resolve this question: An administrator is creating a cloud-only Microsoft Entra user. Which UPN requirement must be satisfied?
+The identity administrator onboarding a small operations team may change the operations-team identity onboarding only to capture organizational profile metadata on the directory object. Which identity onboarding action stays within that assignment?
 
-- A. The UPN must use the tenant's initial domain only.
-- B. The UPN suffix must be one of the tenant's verified domains.
-- C. The UPN must use the same name as an Azure subscription.
-- D. The UPN must match the administrator's email address.
+- A. Create a security group with a unique mail nickname and security capability enabled.
+- B. Read userType before applying automation that should target only member or only guest accounts.
+- C. Read the tenant's verified domains before constructing the new userPrincipalName.
+- D. Patch the intended user object through Microsoft Graph by using its immutable object ID.
 
 ## LAB01-Q14 — Foundational
 
-During a configuration walkthrough, the instructor asks about this situation: You need a Microsoft Entra group for assigning access to Azure resources, without creating an email collaboration group. Which group properties fit the requirement?
+An identity onboarding dry run shows no operations-team identity onboarding command will block one user from signing in without deleting the account. Which action belongs before execution?
 
-- A. securityEnabled=false and mailEnabled=false
-- B. securityEnabled=true and mailEnabled=true with dynamic membership
-- C. securityEnabled=true and mailEnabled=false
-- D. securityEnabled=false and mailEnabled=true
+- A. Add the user's object ID to the intended group's member collection.
+- B. Set accountEnabled on the target user while leaving its identity and group memberships intact.
+- C. Locate the deleted directory object and restore it before the retention window expires.
+- D. Create the user with a unique UPN, display name, and initial password through Azure CLI.
 
 ## LAB01-Q15 — Foundational
 
-In a preflight knowledge check, the operator evaluates this requirement: A learner is Owner of an Azure subscription but receives an authorization error when creating Microsoft Entra users. What is the best explanation?
+For the operations-team identity onboarding, operators need to build a security-only group that has no email address. Which change realizes that requirement?
 
-- A. Cloud-only users can be created only by Microsoft Support.
-- B. The subscription must be moved to the same region as the tenant.
-- C. The Owner role works only after the Microsoft.Graph resource provider is registered.
-- D. Azure RBAC Owner does not grant Microsoft Entra directory-management permissions.
+- A. Create a security group with a unique mail nickname and security capability enabled.
+- B. Add the administrator's directory object ID to the group's owner collection.
+- C. Persist returned user and group object IDs immediately in the lab run-state record.
+- D. Patch the intended user object through Microsoft Graph by using its immutable object ID.
 
 ## LAB01-Q16 — Applied
 
-You create a temporary cloud user for a lab. Which password-profile choice most directly reduces the risk of the bootstrap password remaining valid as the user's long-term secret?
+Operators must automate the operations-team identity onboarding change needed to give a user the access assigned to an operations group. Which identity onboarding operation belongs in the runbook?
 
-- A. Set forceChangePasswordNextSignIn to true and avoid persisting the password.
-- B. Store the password in the group's description for the owner.
-- C. Disable password expiration for the account.
-- D. Reuse the administrator's password and delete shell history.
+- A. Add the user's object ID to the intended group's member collection.
+- B. Read userType before applying automation that should target only member or only guest accounts.
+- C. Read the tenant's verified domains before constructing the new userPrincipalName.
+- D. Set accountEnabled on the target user while leaving its identity and group memberships intact.
 
 ## LAB01-Q17 — Applied
 
-A script has the exact object ID of a security group and the exact object ID of a user. Which Azure CLI operation creates the intended direct membership?
+An operations-team identity onboarding review finds identity onboarding drift from the need to let an administrator manage membership without receiving the group's access. Which correction addresses that drift?
 
-- A. az group update --name \<group-id\> --add members \<user-id\>
-- B. az ad group member add --group \<group-id\> --member-id \<user-id\>
-- C. az role assignment create --assignee \<group-id\> --scope \<user-id\>
-- D. az ad user update --id \<user-id\> --group \<group-id\>
+- A. Add the administrator's directory object ID to the group's owner collection.
+- B. Locate the deleted directory object and restore it before the retention window expires.
+- C. Create the user with a unique UPN, display name, and initial password through Azure CLI.
+- D. Create a security group with a unique mail nickname and security capability enabled.
 
 ## LAB01-Q18 — Applied
 
-The simplified az ad user update command does not expose the department and jobTitle properties you must change. What is the most appropriate command-first approach?
+The operations-team identity onboarding window permits only the identity onboarding change needed to target automation to members while excluding external collaborators. Which option respects the boundary?
 
-- A. Rename the Azure subscription so that its tags become user properties.
-- B. Create a second user with the desired properties and leave the first user active.
-- C. Send an authenticated Microsoft Graph PATCH request for the recorded user ID with az rest.
-- D. Edit the local Azure CLI token cache and repeat az ad user show.
+- A. Persist returned user and group object IDs immediately in the lab run-state record.
+- B. Patch the intended user object through Microsoft Graph by using its immutable object ID.
+- C. Read userType before applying automation that should target only member or only guest accounts.
+- D. Add the user's object ID to the intended group's member collection.
 
 ## LAB01-Q19 — Applied
 
-User B is added as an owner of a security group but is intentionally not added as a member. Which statement correctly describes the result?
+The identity onboarding preflight has passed; the operations-team identity onboarding must now recover a user that was deleted during the retention window. Which operation should run?
 
-- A. A group cannot have an owner unless that owner is also a direct member.
-- B. Ownership converts the security group into a Microsoft 365 group.
-- C. The owner is always treated as a transitive member for every access assignment.
-- D. Ownership and membership are separate relationships; ownership does not automatically grant member-based access.
+- A. Locate the deleted directory object and restore it before the retention window expires.
+- B. Read the tenant's verified domains before constructing the new userPrincipalName.
+- C. Set accountEnabled on the target user while leaving its identity and group memberships intact.
+- D. Add the administrator's directory object ID to the group's owner collection.
 
 ## LAB01-Q20 — Applied
 
-A tenant contains two groups with similar display names. Which value should an automated cleanup use to delete only the group created by its own run?
+The operations-team identity onboarding plan must keep automation stable after a display name or sign-in name changes while limiting the mutation scope to identity onboarding. Which action is appropriate?
 
-- A. The exact immutable group object ID recorded immediately after creation
-- B. The first group returned by a display-name prefix search
-- C. The group's position in the Microsoft Entra admin center list
-- D. The Azure subscription ID active when the group was created
+- A. Persist returned user and group object IDs immediately in the lab run-state record.
+- B. Create the user with a unique UPN, display name, and initial password through Azure CLI.
+- C. Create a security group with a unique mail nickname and security capability enabled.
+- D. Read userType before applying automation that should target only member or only guest accounts.
 
 ## LAB01-Q21 — Applied
 
-While validating a configuration, the team evaluates this situation: You create a temporary cloud user for a lab. Which password-profile choice most directly reduces the risk of the bootstrap password remaining valid as the user's long-term secret?
+The operations-team identity onboarding setup reports success after the identity onboarding attempt to use a custom tenant suffix when creating an operations account. Which identity onboarding read-only observation proves the operations-team identity onboarding outcome?
 
-- A. Reuse the administrator's password and delete shell history.
-- B. Set forceChangePasswordNextSignIn to true and avoid persisting the password.
-- C. Store the password in the group's description for the owner.
-- D. Disable password expiration for the account.
+- A. Read accountEnabled from Microsoft Graph and confirm it matches the intended sign-in state.
+- B. List group owners and confirm the administrator's immutable object ID is present.
+- C. Resolve each persisted ID directly and compare its current properties with the intended state.
+- D. Query the created user and confirm that userPrincipalName ends in the selected verified domain.
 
 ## LAB01-Q22 — Applied
 
-A delegated administrator receives the following support request: A script has the exact object ID of a security group and the exact object ID of a user. Which Azure CLI operation creates the intended direct membership?
+The identity onboarding log says the operations-team identity onboarding can now create a user whose identity exists only in this tenant. Which identity onboarding state should the operations-team identity onboarding acceptance test retain?
 
-- A. az ad user update --id \<user-id\> --group \<group-id\>
-- B. az group update --name \<group-id\> --add members \<user-id\>
-- C. az ad group member add --group \<group-id\> --member-id \<user-id\>
-- D. az role assignment create --assignee \<group-id\> --scope \<user-id\>
+- A. Query the group and confirm securityEnabled is true while mailEnabled is false.
+- B. Query userType and externalUserState for the exact directory object under review.
+- C. Query the created user and confirm that userPrincipalName ends in the selected verified domain.
+- D. Query the returned object ID and confirm the displayName, userPrincipalName, and accountEnabled values.
 
 ## LAB01-Q23 — Applied
 
-During a maintenance window, an engineer must decide how to respond: The simplified az ad user update command does not expose the department and jobTitle properties you must change. What is the most appropriate command-first approach?
+The operations-team identity onboarding rejects identity onboarding exit status as proof it can capture organizational profile metadata on the directory object. Which operations-team identity onboarding result is valid evidence?
 
-- A. Edit the local Azure CLI token cache and repeat az ad user show.
-- B. Rename the Azure subscription so that its tags become user properties.
-- C. Create a second user with the desired properties and leave the first user active.
-- D. Send an authenticated Microsoft Graph PATCH request for the recorded user ID with az rest.
+- A. Read the same object ID and project the updated department, jobTitle, and usageLocation properties.
+- B. List group members and match the exact user object ID rather than only its display name.
+- C. Query the restored object ID and verify that it has returned to the active users collection.
+- D. Query the returned object ID and confirm the displayName, userPrincipalName, and accountEnabled values.
 
 ## LAB01-Q24 — Applied
 
-A deployment pipeline reaches this decision point: User B is added as an owner of a security group but is intentionally not added as a member. Which statement correctly describes the result?
+The identity onboarding validator needs one operations-team identity onboarding query after the change to block one user from signing in without deleting the account. Which identity onboarding property should the operations-team identity onboarding validator inspect?
 
-- A. Ownership and membership are separate relationships; ownership does not automatically grant member-based access.
-- B. A group cannot have an owner unless that owner is also a direct member.
-- C. Ownership converts the security group into a Microsoft 365 group.
-- D. The owner is always treated as a transitive member for every access assignment.
+- A. List group owners and confirm the administrator's immutable object ID is present.
+- B. Read accountEnabled from Microsoft Graph and confirm it matches the intended sign-in state.
+- C. Resolve each persisted ID directly and compare its current properties with the intended state.
+- D. Read the same object ID and project the updated department, jobTitle, and usageLocation properties.
 
 ## LAB01-Q25 — Applied
 
-While applying least-privilege controls, the administrator reviews this scenario: A tenant contains two groups with similar display names. Which value should an automated cleanup use to delete only the group created by its own run?
+The identity administrator onboarding a small operations team must confirm the operations-team identity onboarding, without mutation, can build a security-only group that has no email address. Which identity onboarding check qualifies?
 
-- A. The Azure subscription ID active when the group was created
-- B. The exact immutable group object ID recorded immediately after creation
-- C. The first group returned by a display-name prefix search
-- D. The group's position in the Microsoft Entra admin center list
+- A. Query userType and externalUserState for the exact directory object under review.
+- B. Query the created user and confirm that userPrincipalName ends in the selected verified domain.
+- C. Read accountEnabled from Microsoft Graph and confirm it matches the intended sign-in state.
+- D. Query the group and confirm securityEnabled is true while mailEnabled is false.
 
 ## LAB01-Q26 — Applied
 
-A repeatable Azure CLI workflow must address this requirement: You create a temporary cloud user for a lab. Which password-profile choice most directly reduces the risk of the bootstrap password remaining valid as the user's long-term secret?
+The operations-team identity onboarding configuration is complete; the identity onboarding reviewers need evidence it can give a user the access assigned to an operations group. Which observation shows success?
 
-- A. Disable password expiration for the account.
-- B. Reuse the administrator's password and delete shell history.
-- C. Set forceChangePasswordNextSignIn to true and avoid persisting the password.
-- D. Store the password in the group's description for the owner.
+- A. List group members and match the exact user object ID rather than only its display name.
+- B. Query the restored object ID and verify that it has returned to the active users collection.
+- C. Query the returned object ID and confirm the displayName, userPrincipalName, and accountEnabled values.
+- D. Query the group and confirm securityEnabled is true while mailEnabled is false.
 
 ## LAB01-Q27 — Applied
 
-During an environment handoff, the receiving team asks this question: A script has the exact object ID of a security group and the exact object ID of a user. Which Azure CLI operation creates the intended direct membership?
+The identity onboarding validation asks whether the operations-team identity onboarding can let an administrator manage membership without receiving the group's access. Which observable state is strongest?
 
-- A. az role assignment create --assignee \<group-id\> --scope \<user-id\>
-- B. az ad user update --id \<user-id\> --group \<group-id\>
-- C. az group update --name \<group-id\> --add members \<user-id\>
-- D. az ad group member add --group \<group-id\> --member-id \<user-id\>
+- A. List group owners and confirm the administrator's immutable object ID is present.
+- B. Resolve each persisted ID directly and compare its current properties with the intended state.
+- C. Read the same object ID and project the updated department, jobTitle, and usageLocation properties.
+- D. List group members and match the exact user object ID rather than only its display name.
 
 ## LAB01-Q28 — Applied
 
-A configuration change produces the following operational choice: The simplified az ad user update command does not expose the department and jobTitle properties you must change. What is the most appropriate command-first approach?
+An operations-team identity onboarding review must prove the identity onboarding ability to target automation to members while excluding external collaborators. Which check avoids an adjacent feature?
 
-- A. Send an authenticated Microsoft Graph PATCH request for the recorded user ID with az rest.
-- B. Edit the local Azure CLI token cache and repeat az ad user show.
-- C. Rename the Azure subscription so that its tags become user properties.
-- D. Create a second user with the desired properties and leave the first user active.
+- A. Query the created user and confirm that userPrincipalName ends in the selected verified domain.
+- B. Read accountEnabled from Microsoft Graph and confirm it matches the intended sign-in state.
+- C. Query userType and externalUserState for the exact directory object under review.
+- D. List group owners and confirm the administrator's immutable object ID is present.
 
 ## LAB01-Q29 — Applied
 
-While preparing independent validation, an engineer considers this scenario: User B is added as an owner of a security group but is intentionally not added as a member. Which statement correctly describes the result?
+The operations-team identity onboarding evidence bundle needs an identity onboarding result showing it can recover a user that was deleted during the retention window. Which result belongs in the checkpoint?
 
-- A. The owner is always treated as a transitive member for every access assignment.
-- B. Ownership and membership are separate relationships; ownership does not automatically grant member-based access.
-- C. A group cannot have an owner unless that owner is also a direct member.
-- D. Ownership converts the security group into a Microsoft 365 group.
+- A. Query the returned object ID and confirm the displayName, userPrincipalName, and accountEnabled values.
+- B. Query the restored object ID and verify that it has returned to the active users collection.
+- C. Query the group and confirm securityEnabled is true while mailEnabled is false.
+- D. Query userType and externalUserState for the exact directory object under review.
 
 ## LAB01-Q30 — Applied
 
-A service owner asks the administrator to resolve this requirement: A tenant contains two groups with similar display names. Which value should an automated cleanup use to delete only the group created by its own run?
+Before operations-team identity onboarding cleanup, the identity onboarding team must reconfirm it can keep automation stable after a display name or sign-in name changes. Which read-only inspection should run?
 
-- A. The group's position in the Microsoft Entra admin center list
-- B. The Azure subscription ID active when the group was created
-- C. The exact immutable group object ID recorded immediately after creation
-- D. The first group returned by a display-name prefix search
+- A. Read the same object ID and project the updated department, jobTitle, and usageLocation properties.
+- B. List group members and match the exact user object ID rather than only its display name.
+- C. Query the restored object ID and verify that it has returned to the active users collection.
+- D. Resolve each persisted ID directly and compare its current properties with the intended state.
 
 ## LAB01-Q31 — Applied
 
-During a scoped cleanup review, the team evaluates this situation: You create a temporary cloud user for a lab. Which password-profile choice most directly reduces the risk of the bootstrap password remaining valid as the user's long-term secret?
+During an identity onboarding fault drill, the operations-team identity onboarding does not use a custom tenant suffix when creating an operations account. Which finding identifies the defect?
 
-- A. Store the password in the group's description for the owner.
-- B. Disable password expiration for the account.
-- C. Reuse the administrator's password and delete shell history.
-- D. Set forceChangePasswordNextSignIn to true and avoid persisting the password.
+- A. The runbook discarded the returned object ID and later queried a different user with a similar display name.
+- B. The user was added as an owner but never added to the member collection.
+- C. The requested UPN uses a domain that is not verified in the tenant.
+- D. Cleanup searched by a reused display name and found an unrelated directory object.
 
 ## LAB01-Q32 — Applied
 
-An automation author must choose the correct response to this scenario: A script has the exact object ID of a security group and the exact object ID of a user. Which Azure CLI operation creates the intended direct membership?
+The operations-team identity onboarding setup finishes, yet the identity onboarding cannot create a user whose identity exists only in this tenant. Which misconfiguration explains the mismatch?
 
-- A. az ad group member add --group \<group-id\> --member-id \<user-id\>
-- B. az role assignment create --assignee \<group-id\> --scope \<user-id\>
-- C. az ad user update --id \<user-id\> --group \<group-id\>
-- D. az group update --name \<group-id\> --add members \<user-id\>
+- A. The update targeted the user's display name instead of the immutable directory object ID.
+- B. The administrator appears only in the member list and therefore lacks group-owner responsibility.
+- C. The runbook discarded the returned object ID and later queried a different user with a similar display name.
+- D. The requested UPN uses a domain that is not verified in the tenant.
 
 ## LAB01-Q33 — Applied
 
-A lab run with a unique run ID reaches this decision: The simplified az ad user update command does not expose the department and jobTitle properties you must change. What is the most appropriate command-first approach?
+An identity onboarding break/fix in the operations-team identity onboarding fails when operators try to capture organizational profile metadata on the directory object. Which diagnosis fits?
 
-- A. Create a second user with the desired properties and leave the first user active.
-- B. Send an authenticated Microsoft Graph PATCH request for the recorded user ID with az rest.
-- C. Edit the local Azure CLI token cache and repeat az ad user show.
-- D. Rename the Azure subscription so that its tags become user properties.
+- A. The account remains disabled even though its group memberships were configured correctly.
+- B. The automation filtered on a UPN naming convention instead of the authoritative userType property.
+- C. The update targeted the user's display name instead of the immutable directory object ID.
+- D. The runbook discarded the returned object ID and later queried a different user with a similar display name.
 
 ## LAB01-Q34 — Applied
 
-While comparing the intended and actual states, the operator asks this question: User B is added as an owner of a security group but is intentionally not added as a member. Which statement correctly describes the result?
+The operations-team identity onboarding troubleshooting scope is the identity onboarding need to block one user from signing in without deleting the account. Which condition should be corrected first?
 
-- A. Ownership converts the security group into a Microsoft 365 group.
-- B. The owner is always treated as a transitive member for every access assignment.
-- C. Ownership and membership are separate relationships; ownership does not automatically grant member-based access.
-- D. A group cannot have an owner unless that owner is also a direct member.
+- A. The group was created as a non-security Microsoft 365 collaboration group.
+- B. The account remains disabled even though its group memberships were configured correctly.
+- C. The object was permanently deleted or its deleted-item retention window has expired.
+- D. The update targeted the user's display name instead of the immutable directory object ID.
 
 ## LAB01-Q35 — Applied
 
-A peer reviewer examines the proposed implementation for this scenario: A tenant contains two groups with similar display names. Which value should an automated cleanup use to delete only the group created by its own run?
+The operations-team identity onboarding result is partial because the identity onboarding cannot build a security-only group that has no email address. Which condition accounts for that result?
 
-- A. The first group returned by a display-name prefix search
-- B. The group's position in the Microsoft Entra admin center list
-- C. The Azure subscription ID active when the group was created
-- D. The exact immutable group object ID recorded immediately after creation
+- A. The user was added as an owner but never added to the member collection.
+- B. Cleanup searched by a reused display name and found an unrelated directory object.
+- C. The group was created as a non-security Microsoft 365 collaboration group.
+- D. The account remains disabled even though its group memberships were configured correctly.
 
 ## LAB01-Q36 — Applied
 
-During a controlled rollout, the change team encounters this requirement: You create a temporary cloud user for a lab. Which password-profile choice most directly reduces the risk of the bootstrap password remaining valid as the user's long-term secret?
+The identity onboarding evidence shows the operations-team identity onboarding cannot give a user the access assigned to an operations group. Which root cause fits that evidence?
 
-- A. Set forceChangePasswordNextSignIn to true and avoid persisting the password.
-- B. Store the password in the group's description for the owner.
-- C. Disable password expiration for the account.
-- D. Reuse the administrator's password and delete shell history.
+- A. The administrator appears only in the member list and therefore lacks group-owner responsibility.
+- B. The requested UPN uses a domain that is not verified in the tenant.
+- C. The user was added as an owner but never added to the member collection.
+- D. The group was created as a non-security Microsoft 365 collaboration group.
 
 ## LAB01-Q37 — Applied
 
-A support engineer reproduces the following situation in a test environment: A script has the exact object ID of a security group and the exact object ID of a user. Which Azure CLI operation creates the intended direct membership?
+Although the operations-team identity onboarding is meant to let the identity onboarding let an administrator manage membership without receiving the group's access, its checkpoint fails. Which identity onboarding defect explains the failure?
 
-- A. az group update --name \<group-id\> --add members \<user-id\>
-- B. az ad group member add --group \<group-id\> --member-id \<user-id\>
-- C. az role assignment create --assignee \<group-id\> --scope \<user-id\>
-- D. az ad user update --id \<user-id\> --group \<group-id\>
+- A. The automation filtered on a UPN naming convention instead of the authoritative userType property.
+- B. The runbook discarded the returned object ID and later queried a different user with a similar display name.
+- C. The user was added as an owner but never added to the member collection.
+- D. The administrator appears only in the member list and therefore lacks group-owner responsibility.
 
 ## LAB01-Q38 — Applied
 
-While recording validation evidence, the administrator evaluates this question: The simplified az ad user update command does not expose the department and jobTitle properties you must change. What is the most appropriate command-first approach?
+The identity onboarding support team isolated the operations-team identity onboarding incident to the attempt to target automation to members while excluding external collaborators. Which condition prevents success?
 
-- A. Rename the Azure subscription so that its tags become user properties.
-- B. Create a second user with the desired properties and leave the first user active.
-- C. Send an authenticated Microsoft Graph PATCH request for the recorded user ID with az rest.
-- D. Edit the local Azure CLI token cache and repeat az ad user show.
+- A. The object was permanently deleted or its deleted-item retention window has expired.
+- B. The automation filtered on a UPN naming convention instead of the authoritative userType property.
+- C. The update targeted the user's display name instead of the immutable directory object ID.
+- D. The administrator appears only in the member list and therefore lacks group-owner responsibility.
 
 ## LAB01-Q39 — Applied
 
-A configuration owner must approve one response to this scenario: User B is added as an owner of a security group but is intentionally not added as a member. Which statement correctly describes the result?
+An operations-team identity onboarding query surprises the identity administrator onboarding a small operations team during the identity onboarding attempt to recover a user that was deleted during the retention window. Which finding explains it?
 
-- A. A group cannot have an owner unless that owner is also a direct member.
-- B. Ownership converts the security group into a Microsoft 365 group.
-- C. The owner is always treated as a transitive member for every access assignment.
-- D. Ownership and membership are separate relationships; ownership does not automatically grant member-based access.
+- A. Cleanup searched by a reused display name and found an unrelated directory object.
+- B. The account remains disabled even though its group memberships were configured correctly.
+- C. The automation filtered on a UPN naming convention instead of the authoritative userType property.
+- D. The object was permanently deleted or its deleted-item retention window has expired.
 
 ## LAB01-Q40 — Applied
 
-During post-deployment verification, the team reviews this situation: A tenant contains two groups with similar display names. Which value should an automated cleanup use to delete only the group created by its own run?
+Other operations-team identity onboarding components are healthy, but the identity onboarding still cannot keep automation stable after a display name or sign-in name changes. Which state causes the isolated failure?
 
-- A. The exact immutable group object ID recorded immediately after creation
-- B. The first group returned by a display-name prefix search
-- C. The group's position in the Microsoft Entra admin center list
-- D. The Azure subscription ID active when the group was created
+- A. The requested UPN uses a domain that is not verified in the tenant.
+- B. The group was created as a non-security Microsoft 365 collaboration group.
+- C. Cleanup searched by a reused display name and found an unrelated directory object.
+- D. The object was permanently deleted or its deleted-item retention window has expired.
 
 ## LAB01-Q41 — Advanced
 
-Cleanup deletes the lab security group and both cloud users by exact ID. Validation can no longer read the active users, but they appear under Deleted users. How should this state be interpreted?
+The operations-team identity onboarding runbook must use a custom tenant suffix when creating an operations account, then retain identity onboarding read-back evidence. Which operations-team identity onboarding pair completes both duties?
 
-- A. Cleanup failed because user deletion is unsupported in Microsoft Entra ID.
-- B. Active cleanup succeeded; user deletion is recoverable until retention expires or an authorized permanent deletion occurs.
-- C. The users automatically became external guests and must be invited again.
-- D. The Azure subscription must be deleted to remove the user objects permanently.
+- A. First, Patch the intended user object through Microsoft Graph by using its immutable object ID. Then, Read the same object ID and project the updated department, jobTitle, and usageLocation properties.
+- B. First, Add the administrator's directory object ID to the group's owner collection. Then, List group owners and confirm the administrator's immutable object ID is present.
+- C. First, Read userType before applying automation that should target only member or only guest accounts. Then, Query userType and externalUserState for the exact directory object under review.
+- D. First, Read the tenant's verified domains before constructing the new userPrincipalName. Then, Query the created user and confirm that userPrincipalName ends in the selected verified domain.
 
 ## LAB01-Q42 — Advanced
 
-A validation report must prove the intended group relationships and detect accidental privilege expansion. Which pair of checks provides the strongest evidence for this lab design?
+To satisfy the identity onboarding requirement, operators must change the operations-team identity onboarding configuration and prove it can create a user whose identity exists only in this tenant. Which sequence is coherent?
 
-- A. Confirm both users exist and skip group relationship queries to reduce API calls.
-- B. Confirm user B is an owner and automatically add every owner as a member.
-- C. Confirm user A is a direct member and independently confirm user B is an owner but not a direct member.
-- D. Confirm the group display name starts with AZ104 and assume all relationships are correct.
+- A. First, Create the user with a unique UPN, display name, and initial password through Azure CLI. Then, Query the returned object ID and confirm the displayName, userPrincipalName, and accountEnabled values.
+- B. First, Set accountEnabled on the target user while leaving its identity and group memberships intact. Then, Read accountEnabled from Microsoft Graph and confirm it matches the intended sign-in state.
+- C. First, Read userType before applying automation that should target only member or only guest accounts. Then, Query userType and externalUserState for the exact directory object under review.
+- D. First, Locate the deleted directory object and restore it before the retention window expires. Then, Query the restored object ID and verify that it has returned to the active users collection.
 
 ## LAB01-Q43 — Advanced
 
-A security and reliability review identifies this design decision: Cleanup deletes the lab security group and both cloud users by exact ID. Validation can no longer read the active users, but they appear under Deleted users. How should this state be interpreted?
+The identity administrator onboarding a small operations team needs a safe operations-team identity onboarding change to capture organizational profile metadata on the directory object, followed by identity onboarding evidence. Which pair merits approval?
 
-- A. The users automatically became external guests and must be invited again.
-- B. The Azure subscription must be deleted to remove the user objects permanently.
-- C. Cleanup failed because user deletion is unsupported in Microsoft Entra ID.
-- D. Active cleanup succeeded; user deletion is recoverable until retention expires or an authorized permanent deletion occurs.
+- A. First, Create a security group with a unique mail nickname and security capability enabled. Then, Query the group and confirm securityEnabled is true while mailEnabled is false.
+- B. First, Patch the intended user object through Microsoft Graph by using its immutable object ID. Then, Read the same object ID and project the updated department, jobTitle, and usageLocation properties.
+- C. First, Locate the deleted directory object and restore it before the retention window expires. Then, Query the restored object ID and verify that it has returned to the active users collection.
+- D. First, Persist returned user and group object IDs immediately in the lab run-state record. Then, Resolve each persisted ID directly and compare its current properties with the intended state.
 
 ## LAB01-Q44 — Advanced
 
-While diagnosing unexpected Azure behavior, the engineer considers this situation: A validation report must prove the intended group relationships and detect accidental privilege expansion. Which pair of checks provides the strongest evidence for this lab design?
+The operations-team identity onboarding has two identity onboarding gates: block one user from signing in without deleting the account, then prove the operations-team identity onboarding state. Which identity onboarding sequence works?
 
-- A. Confirm user A is a direct member and independently confirm user B is an owner but not a direct member.
-- B. Confirm the group display name starts with AZ104 and assume all relationships are correct.
-- C. Confirm both users exist and skip group relationship queries to reduce API calls.
-- D. Confirm user B is an owner and automatically add every owner as a member.
+- A. First, Add the user's object ID to the intended group's member collection. Then, List group members and match the exact user object ID rather than only its display name.
+- B. First, Persist returned user and group object IDs immediately in the lab run-state record. Then, Resolve each persisted ID directly and compare its current properties with the intended state.
+- C. First, Read the tenant's verified domains before constructing the new userPrincipalName. Then, Query the created user and confirm that userPrincipalName ends in the selected verified domain.
+- D. First, Set accountEnabled on the target user while leaving its identity and group memberships intact. Then, Read accountEnabled from Microsoft Graph and confirm it matches the intended sign-in state.
 
 ## LAB01-Q45 — Advanced
 
-An architecture review requires the strongest response to this scenario: Cleanup deletes the lab security group and both cloud users by exact ID. Validation can no longer read the active users, but they appear under Deleted users. How should this state be interpreted?
+Which identity onboarding path makes the operations-team identity onboarding able to build a security-only group that has no email address, then inspects the defining properties?
 
-- A. Cleanup failed because user deletion is unsupported in Microsoft Entra ID.
-- B. Active cleanup succeeded; user deletion is recoverable until retention expires or an authorized permanent deletion occurs.
-- C. The users automatically became external guests and must be invited again.
-- D. The Azure subscription must be deleted to remove the user objects permanently.
+- A. First, Add the administrator's directory object ID to the group's owner collection. Then, List group owners and confirm the administrator's immutable object ID is present.
+- B. First, Read the tenant's verified domains before constructing the new userPrincipalName. Then, Query the created user and confirm that userPrincipalName ends in the selected verified domain.
+- C. First, Create a security group with a unique mail nickname and security capability enabled. Then, Query the group and confirm securityEnabled is true while mailEnabled is false.
+- D. First, Create the user with a unique UPN, display name, and initial password through Azure CLI. Then, Query the returned object ID and confirm the displayName, userPrincipalName, and accountEnabled values.
 
 ## LAB01-Q46 — Advanced
 
-During break/fix validation, the operator encounters this question: A validation report must prove the intended group relationships and detect accidental privilege expansion. Which pair of checks provides the strongest evidence for this lab design?
+At the operations-team identity onboarding approval gate, operators must show that the identity onboarding can give a user the access assigned to an operations group. Which identity onboarding configure-and-check pair is defensible?
 
-- A. Confirm both users exist and skip group relationship queries to reduce API calls.
-- B. Confirm user B is an owner and automatically add every owner as a member.
-- C. Confirm user A is a direct member and independently confirm user B is an owner but not a direct member.
-- D. Confirm the group display name starts with AZ104 and assume all relationships are correct.
+- A. First, Read userType before applying automation that should target only member or only guest accounts. Then, Query userType and externalUserState for the exact directory object under review.
+- B. First, Create the user with a unique UPN, display name, and initial password through Azure CLI. Then, Query the returned object ID and confirm the displayName, userPrincipalName, and accountEnabled values.
+- C. First, Add the user's object ID to the intended group's member collection. Then, List group members and match the exact user object ID rather than only its display name.
+- D. First, Patch the intended user object through Microsoft Graph by using its immutable object ID. Then, Read the same object ID and project the updated department, jobTitle, and usageLocation properties.
 
 ## LAB01-Q47 — Advanced
 
-A complex support case depends on correctly interpreting this requirement: Cleanup deletes the lab security group and both cloud users by exact ID. Validation can no longer read the active users, but they appear under Deleted users. How should this state be interpreted?
+The operations-team identity onboarding forbids a partial identity onboarding result. Operators must first let an administrator manage membership without receiving the group's access and afterward confirm the operations-team identity onboarding outcome. Which identity onboarding sequence is complete?
 
-- A. The users automatically became external guests and must be invited again.
-- B. The Azure subscription must be deleted to remove the user objects permanently.
-- C. Cleanup failed because user deletion is unsupported in Microsoft Entra ID.
-- D. Active cleanup succeeded; user deletion is recoverable until retention expires or an authorized permanent deletion occurs.
+- A. First, Locate the deleted directory object and restore it before the retention window expires. Then, Query the restored object ID and verify that it has returned to the active users collection.
+- B. First, Patch the intended user object through Microsoft Graph by using its immutable object ID. Then, Read the same object ID and project the updated department, jobTitle, and usageLocation properties.
+- C. First, Set accountEnabled on the target user while leaving its identity and group memberships intact. Then, Read accountEnabled from Microsoft Graph and confirm it matches the intended sign-in state.
+- D. First, Add the administrator's directory object ID to the group's owner collection. Then, List group owners and confirm the administrator's immutable object ID is present.
 
 ## LAB01-Q48 — Advanced
 
-While correcting configuration drift, the team evaluates this scenario: A validation report must prove the intended group relationships and detect accidental privilege expansion. Which pair of checks provides the strongest evidence for this lab design?
+Only the operations-team identity onboarding change needed to target automation to members while excluding external collaborators is allowed, and identity onboarding proof is mandatory. Which pair fits?
 
-- A. Confirm user A is a direct member and independently confirm user B is an owner but not a direct member.
-- B. Confirm the group display name starts with AZ104 and assume all relationships are correct.
-- C. Confirm both users exist and skip group relationship queries to reduce API calls.
-- D. Confirm user B is an owner and automatically add every owner as a member.
+- A. First, Read userType before applying automation that should target only member or only guest accounts. Then, Query userType and externalUserState for the exact directory object under review.
+- B. First, Persist returned user and group object IDs immediately in the lab run-state record. Then, Resolve each persisted ID directly and compare its current properties with the intended state.
+- C. First, Set accountEnabled on the target user while leaving its identity and group memberships intact. Then, Read accountEnabled from Microsoft Graph and confirm it matches the intended sign-in state.
+- D. First, Create a security group with a unique mail nickname and security capability enabled. Then, Query the group and confirm securityEnabled is true while mailEnabled is false.
 
 ## LAB01-Q49 — Advanced
 
-A recovery exercise exposes the following technical decision: Cleanup deletes the lab security group and both cloud users by exact ID. Validation can no longer read the active users, but they appear under Deleted users. How should this state be interpreted?
+The operations-team identity onboarding runbook separates identity onboarding mutation from validation while it must recover a user that was deleted during the retention window. Which sequence proves it cleanly?
 
-- A. Cleanup failed because user deletion is unsupported in Microsoft Entra ID.
-- B. Active cleanup succeeded; user deletion is recoverable until retention expires or an authorized permanent deletion occurs.
-- C. The users automatically became external guests and must be invited again.
-- D. The Azure subscription must be deleted to remove the user objects permanently.
+- A. First, Read the tenant's verified domains before constructing the new userPrincipalName. Then, Query the created user and confirm that userPrincipalName ends in the selected verified domain.
+- B. First, Locate the deleted directory object and restore it before the retention window expires. Then, Query the restored object ID and verify that it has returned to the active users collection.
+- C. First, Create a security group with a unique mail nickname and security capability enabled. Then, Query the group and confirm securityEnabled is true while mailEnabled is false.
+- D. First, Add the user's object ID to the intended group's member collection. Then, List group members and match the exact user object ID rather than only its display name.
 
 ## LAB01-Q50 — Advanced
 
-During final design assurance, the reviewer must resolve this situation: A validation report must prove the intended group relationships and detect accidental privilege expansion. Which pair of checks provides the strongest evidence for this lab design?
+The operations-team identity onboarding checkpoint requires both this identity onboarding outcome—keep automation stable after a display name or sign-in name changes—and a read-only operations-team identity onboarding state check. Which identity onboarding response is complete?
 
-- A. Confirm both users exist and skip group relationship queries to reduce API calls.
-- B. Confirm user B is an owner and automatically add every owner as a member.
-- C. Confirm user A is a direct member and independently confirm user B is an owner but not a direct member.
-- D. Confirm the group display name starts with AZ104 and assume all relationships are correct.
+- A. First, Create the user with a unique UPN, display name, and initial password through Azure CLI. Then, Query the returned object ID and confirm the displayName, userPrincipalName, and accountEnabled values.
+- B. First, Persist returned user and group object IDs immediately in the lab run-state record. Then, Resolve each persisted ID directly and compare its current properties with the intended state.
+- C. First, Add the user's object ID to the intended group's member collection. Then, List group members and match the exact user object ID rather than only its display name.
+- D. First, Add the administrator's directory object ID to the group's owner collection. Then, List group owners and confirm the administrator's immutable object ID is present.
+
+[Open the answer key](./ANSWERS.md)

@@ -1,8 +1,11 @@
+
+# BEGIN GENERATED AZ104 V2
+schemaVersion: 2.0.0
 id: LAB-03
 slug: 03-azure-rbac-scopes
 title: Assign and interpret Azure RBAC at multiple scopes
 blueprintVersion: '2026-04-17'
-domain: Manage Azure identities and governance
+domain: identity-governance
 objectives:
 - IG-ACCESS-01
 - IG-ACCESS-02
@@ -14,11 +17,26 @@ testedToolVersions:
   powershell: '>=7.4'
 estimatedMinutes: 90
 difficulty: foundational
+experience:
+  scenario: 'A platform administrator granting least-privilege access to a workload team is responding to an operational request:
+    Build and interpret direct and inherited Azure RBAC assignments across resource-group and resource scopes, including a
+    remediated over-privilege fault.'
+  role: A platform administrator granting least-privilege access to a workload team.
+  outcome: Build and interpret direct and inherited Azure RBAC assignments across resource-group and resource scopes, including
+    a remediated over-privilege fault.
+  completionCriteria:
+  - All required checkpoints report pass.
+  - The deterministic break/fix is injected, diagnosed, and repaired.
+  - cleanup.json reports no active run-owned resources, with any retained item explicitly documented.
 cost:
   class: none
   billableResources: []
   notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator before
     execution and clean up immediately.
+  pricingLinks:
+  - title: Microsoft Entra pricing
+    url: https://azure.microsoft.com/pricing/details/active-directory/
+  acknowledgementRequired: false
 permissions:
   azureRbacRoles:
   - User Access Administrator or Owner at the lab resource-group scope
@@ -31,14 +49,78 @@ prerequisites:
 - 'External gate review: Requires the object ID of a disposable principal in AZ104_PRINCIPAL_OBJECT_ID.'
 - Azure CLI hosted in PowerShell 7.4 or later
 providers:
-  observed:
+  required:
   - Microsoft.Authorization
   - Microsoft.Resources
+  optional: []
   registeredByLab: []
-regions:
-  applicable: true
-  primary: supplied at execution time
-  secondary: null
+inputs:
+- id: run-id
+  parameter: RunId
+  description: Unique lowercase run ownership identifier
+  required: true
+  secret: false
+  source: parameter
+  safeExample: az104l03-01
+  gateBehavior: block
+  checkpointIds:
+  - LAB03-CP01
+  - LAB03-CP02
+  - LAB03-CP03
+  - LAB03-CP04
+  - LAB03-CP05
+- id: subscription-id
+  parameter: SubscriptionId
+  environmentVariable: AZ104_SUBSCRIPTION_ID
+  description: Expected disposable subscription ID
+  required: true
+  secret: false
+  source: parameter-or-environment
+  safeExample: 00000000-0000-0000-0000-000000000000
+  gateBehavior: block
+  checkpointIds:
+  - LAB03-CP01
+  - LAB03-CP02
+  - LAB03-CP03
+  - LAB03-CP04
+  - LAB03-CP05
+- id: location
+  parameter: Location
+  environmentVariable: AZ104_LOCATION
+  description: Approved primary Azure region
+  required: true
+  secret: false
+  source: parameter-or-environment
+  safeExample: westeurope
+  gateBehavior: block
+  checkpointIds:
+  - LAB03-CP01
+  - LAB03-CP02
+  - LAB03-CP03
+  - LAB03-CP04
+  - LAB03-CP05
+- id: principal-object-id
+  environmentVariable: AZ104_PRINCIPAL_OBJECT_ID
+  description: Disposable principal object ID
+  required: true
+  secret: false
+  gateBehavior: block
+  safeExample: 00000000-0000-0000-0000-000000000000
+  checkpointIds:
+  - LAB03-CP02
+  - LAB03-CP03
+  - LAB03-CP04
+  parameter: PrincipalObjectId
+  source: environment
+acknowledgements:
+  cost:
+    required: false
+    parameter: AcknowledgeCost
+    message: I reviewed current pricing, quota, and the same-session cleanup plan.
+  tenantChange:
+    required: false
+    parameter: AcknowledgeTenantChange
+    message: I am authorized to create or change the declared tenant-scoped objects and will restore recorded settings.
 creates:
   azureResources:
   - resource group
@@ -47,28 +129,409 @@ creates:
   localArtifacts:
   - .state/<run-id>/run.json
   - .state/<run-id>/validation.json
+  - .state/<run-id>/cleanup.json
 tenantScopedChanges: []
 externalRequirements:
 - Requires the object ID of a disposable principal in AZ104_PRINCIPAL_OBJECT_ID.
+preflightChecks:
+- id: preflight.context
+  type: context
+  required: true
+  description: Confirm active cloud, tenant, and subscription without changing them.
+  command: az account show --output json
+  expected: Active context matches the supplied subscription and disposable environment.
+- id: preflight.tools
+  type: tool
+  required: true
+  description: Confirm PowerShell, Azure CLI, and az bicep are available.
+  command: az version; az bicep version
+  expected: All required tools meet the versions declared by this lab.
+- id: preflight.inputs
+  type: input
+  required: true
+  description: Check required parameters and environment gates without printing secrets.
+  command: $PSBoundParameters.Keys; Get-ChildItem Env:AZ104_* | Select-Object Name
+  expected: Every required input is present and optional gates are explicitly reported.
+- id: preflight.providers
+  type: provider
+  required: true
+  description: Read registration state for required resource providers.
+  command: az provider show --namespace <provider> --query registrationState --output tsv
+  expected: Every required provider is Registered; preflight performs no registration.
+- id: preflight.region
+  type: region
+  required: true
+  description: Confirm the requested region is available to the subscription.
+  command: az account list-locations --query "[?name=='<location>'].name" --output tsv
+  expected: The supplied region appears in the subscription location inventory.
+- id: preflight.authored.lab03.principal-and-roles
+  type: permission
+  required: true
+  description: Resolve the disposable principal and both built-in role definitions without assigning access.
+  command: "$principal = az rest --method get --url \"https://graph.microsoft.com/v1.0/directoryObjects/$principalObjectId?%24select=id\"\
+    \ --output json | ConvertFrom-Json\nif ($principal.id -ne $principalObjectId) { throw 'The supplied principal does not\
+    \ resolve in the active tenant.' }\nforeach ($role in @('Reader','Storage Blob Data Reader')) {\n    if (@(az role definition\
+    \ list --name $role --output json | ConvertFrom-Json).Count -ne 1) { throw \"Built-in role not resolved: $role\" }\n}\n"
+  expected: The principal and both exact built-in roles resolve once.
+- id: preflight.authored.lab03.storage-name
+  type: service
+  required: true
+  description: Confirm the deterministic storage-account name is available before role-scoped resource creation.
+  command: '$availability = az storage account check-name --name $storage --output json | ConvertFrom-Json
+
+    if (-not $availability.nameAvailable) { throw "Storage name unavailable: $($availability.reason)" }
+
+    '
+  expected: The deterministic account name is globally available.
+checkpoints:
+- id: LAB03-CP01
+  title: Resolve the principal and inspect existing scope inheritance
+  purpose: Verify the exact principal object, built-in roles, and pre-existing assignments before creating new access.
+  objectiveIds:
+  - IG-ACCESS-01
+  required: true
+  expectedState: The exact principal resolves, Reader exposes control-plane read actions and no blob dataActions, and inherited
+    baseline assignments are visible.
+  scriptMarkers:
+    setup: LAB03-CP01
+    validate: LAB03-CP01
+    cleanup: LAB03-CP01
+  validation:
+    positive:
+      id: cp01.positive
+      description: Read the service properties for resolve the principal and inspect existing scope inheritance by using exact
+        run-owned identifiers.
+      command: '$validationId=''LAB03-CP01-positive''; $reader = @(az role definition list --name Reader --output json | ConvertFrom-Json)
+
+        if ($reader.Count -ne 1 -or ''*/read'' -notin $reader[0].permissions.actions) { throw ''Built-in Reader definition
+        was not resolved as expected.'' }
+
+        $reader[0].permissions
+
+        '
+      expected: Exactly one built-in Reader role definition includes */read.
+    negative:
+      id: cp01.negative
+      description: Search for conflicting, unowned, or excessive state after resolve the principal and inspect existing scope
+        inheritance.
+      command: '$validationId=''LAB03-CP01-negative''; $baseline = @(az role assignment list --assignee-object-id $principalObjectId
+        --scope $scope --include-inherited --output json | ConvertFrom-Json)
+
+        $unexpected = @($baseline | Where-Object { $_.roleDefinitionName -in @(''Owner'',''User Access Administrator'') })
+
+        if ($unexpected.Count -gt 0) { throw ''The disposable principal already has elevated inherited access at the lab scope.''
+        }
+
+        $baseline | Select-Object roleDefinitionName,scope
+
+        '
+      expected: The disposable principal has no pre-existing Owner or User Access Administrator assignment effective at lab
+        scope.
+  cleanup:
+    dependsOn:
+    - LAB03-CP02
+    - LAB03-CP03
+    - LAB03-CP04
+    - LAB03-CP05
+    action: Remove only manifest-recorded objects owned by LAB03-CP01, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp01.residual
+      description: Prove no active managed object remains for LAB03-CP01.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-1
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Assign Azure roles using Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-cli
+- id: LAB03-CP02
+  title: Assign Reader at resource-group scope and persist the assignment ID
+  purpose: Create one least-privilege control-plane assignment at the workload lifecycle boundary.
+  objectiveIds:
+  - IG-ACCESS-02
+  required: true
+  expectedState: One direct Reader assignment exists at the exact resource-group scope and its ID is durable in run.json.
+  scriptMarkers:
+    setup: LAB03-CP02
+    validate: LAB03-CP02
+    cleanup: LAB03-CP02
+  validation:
+    positive:
+      id: cp02.positive
+      description: Read the service properties for assign Reader at resource-group scope and persist the assignment ID by
+        using exact run-owned identifiers.
+      command: '$validationId=''LAB03-CP02-positive''; $direct = @(az role assignment list --assignee-object-id $principalObjectId
+        --scope $scope --output json | ConvertFrom-Json | Where-Object { $_.roleDefinitionName -eq ''Reader'' -and $_.scope
+        -eq $scope })
+
+        if ($direct.Count -ne 1) { throw ''Expected one direct Reader assignment at resource-group scope.'' }
+
+        $direct | Select-Object id,roleDefinitionName,scope
+
+        '
+      expected: Exactly one direct Reader assignment matches the principal and exact scope.
+    negative:
+      id: cp02.negative
+      description: Search for conflicting, unowned, or excessive state after assign Reader at resource-group scope and persist
+        the assignment ID.
+      command: '$validationId=''LAB03-CP02-negative''; $directElevated = @(az role assignment list --assignee-object-id $principalObjectId
+        --scope $scope --output json | ConvertFrom-Json | Where-Object roleDefinitionName -in @(''Owner'',''Contributor'',''User
+        Access Administrator''))
+
+        if ($directElevated.Count -gt 0) { throw ''An elevated direct assignment is present at resource-group scope.'' }
+
+        ''No elevated direct assignment.''
+
+        '
+      expected: No direct Owner, Contributor, or User Access Administrator assignment exists at the resource group.
+  cleanup:
+    dependsOn:
+    - LAB03-CP03
+    - LAB03-CP04
+    - LAB03-CP05
+    action: Remove only manifest-recorded objects owned by LAB03-CP02, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp02.residual
+      description: Prove no active managed object remains for LAB03-CP02.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-2
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Assign Azure roles using Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-cli
+- id: LAB03-CP03
+  title: Add a resource-scoped blob data role
+  purpose: Create a tagged storage account and assign Storage Blob Data Reader only at that child resource.
+  objectiveIds:
+  - IG-ACCESS-03
+  required: true
+  expectedState: The storage account inherits Reader and has one direct Storage Blob Data Reader assignment for the principal.
+  scriptMarkers:
+    setup: LAB03-CP03
+    validate: LAB03-CP03
+    cleanup: LAB03-CP03
+  validation:
+    positive:
+      id: cp03.positive
+      description: Read the service properties for add a resource-scoped blob data role by using exact run-owned identifiers.
+      command: '$validationId=''LAB03-CP03-positive''; $storageId = az storage account show --name $storage --resource-group
+        $ResourceGroupName --query id --output tsv
+
+        $effective = @(az role assignment list --assignee-object-id $principalObjectId --scope $storageId --include-inherited
+        --output json | ConvertFrom-Json)
+
+        foreach ($role in @(''Reader'',''Storage Blob Data Reader'')) { if ($role -notin $effective.roleDefinitionName) {
+        throw "Missing effective role: $role" } }
+
+        $effective | Select-Object roleDefinitionName,scope
+
+        '
+      expected: Reader is inherited from the resource group and Storage Blob Data Reader is direct at the storage account.
+    negative:
+      id: cp03.negative
+      description: Search for conflicting, unowned, or excessive state after add a resource-scoped blob data role.
+      command: '$validationId=''LAB03-CP03-negative''; $dataRole = @(az role definition list --name ''Storage Blob Data Reader''
+        --output json | ConvertFrom-Json)
+
+        if (@($dataRole[0].permissions.dataActions).Count -eq 0) { throw ''Blob data role contains no dataActions.'' }
+
+        if (''Microsoft.Storage/storageAccounts/listKeys/action'' -in $dataRole[0].permissions.actions) { throw ''Data reader
+        unexpectedly permits key listing.'' }
+
+        $dataRole[0].permissions
+
+        '
+      expected: The data role has blob read dataActions but cannot list storage keys.
+  cleanup:
+    dependsOn:
+    - LAB03-CP04
+    - LAB03-CP05
+    action: Remove only manifest-recorded objects owned by LAB03-CP03, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp03.residual
+      description: Prove no active managed object remains for LAB03-CP03.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-3
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Assign Azure roles using Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-cli
+- id: LAB03-CP04
+  title: Inject, detect, and remove an over-privileged assignment
+  purpose: Create a temporary Contributor assignment, persist it before inspection, detect it by exact scope, and delete it
+    by exact ID.
+  objectiveIds:
+  - IG-ACCESS-01
+  required: true
+  expectedState: The Contributor fault is observed once, removed by assignment ID, and retained only as deleted lifecycle
+    evidence.
+  scriptMarkers:
+    setup: LAB03-CP04
+    validate: LAB03-CP04
+    cleanup: LAB03-CP04
+  validation:
+    positive:
+      id: cp04.positive
+      description: Read the service properties for inject, detect, and remove an over-privileged assignment by using exact
+        run-owned identifiers.
+      command: '$validationId=''LAB03-CP04-positive''; $remaining = @(az role assignment list --assignee-object-id $principalObjectId
+        --scope $scope --output json | ConvertFrom-Json | Where-Object roleDefinitionName -eq ''Reader'')
+
+        if ($remaining.Count -ne 1) { throw ''Least-privilege Reader assignment was damaged during remediation.'' }
+
+        $remaining
+
+        '
+      expected: The intended Reader assignment remains after remediation.
+    negative:
+      id: cp04.negative
+      description: Search for conflicting, unowned, or excessive state after inject, detect, and remove an over-privileged
+        assignment.
+      command: '$validationId=''LAB03-CP04-negative''; $excess = @(az role assignment list --assignee-object-id $principalObjectId
+        --scope $scope --output json | ConvertFrom-Json | Where-Object roleDefinitionName -eq ''Contributor'')
+
+        if ($excess.Count -ne 0) { throw ''Contributor remains after break/fix remediation.'' }
+
+        ''Contributor assignments at exact scope: 0''
+
+        '
+      expected: No direct Contributor assignment remains at resource-group scope.
+  cleanup:
+    dependsOn:
+    - LAB03-CP05
+    action: Remove only manifest-recorded objects owned by LAB03-CP04, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp04.residual
+      description: Prove no active managed object remains for LAB03-CP04.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-4
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Assign Azure roles using Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-cli
+- id: LAB03-CP05
+  title: Build the final direct-versus-inherited access matrix
+  purpose: Correlate role definitions, assignment scopes, inheritance, principal ID, and rollback IDs into one least-privilege
+    record.
+  objectiveIds:
+  - IG-ACCESS-01
+  - IG-ACCESS-02
+  - IG-ACCESS-03
+  required: true
+  expectedState: The final matrix shows only Reader inherited from the resource group and Storage Blob Data Reader direct
+    at storage.
+  scriptMarkers:
+    setup: LAB03-CP05
+    validate: LAB03-CP05
+    cleanup: LAB03-CP05
+  validation:
+    positive:
+      id: cp05.positive
+      description: Read the service properties for build the final direct-versus-inherited access matrix by using exact run-owned
+        identifiers.
+      command: '$validationId=''LAB03-CP05-positive''; $storageId = az storage account show --name $storage --resource-group
+        $ResourceGroupName --query id --output tsv
+
+        $matrix = @(az role assignment list --assignee-object-id $principalObjectId --scope $storageId --include-inherited
+        --output json | ConvertFrom-Json)
+
+        if (@($matrix | Where-Object roleDefinitionName -in @(''Reader'',''Storage Blob Data Reader'')).Count -ne 2) { throw
+        ''Final role matrix is incomplete.'' }
+
+        $matrix
+
+        '
+      expected: Both intended effective roles are present at their designed scopes.
+    negative:
+      id: cp05.negative
+      description: Search for conflicting, unowned, or excessive state after build the final direct-versus-inherited access
+        matrix.
+      command: '$validationId=''LAB03-CP05-negative''; $all = @(az role assignment list --assignee-object-id $principalObjectId
+        --all --output json | ConvertFrom-Json)
+
+        $labExcess = @($all | Where-Object { $_.scope -like "$scope*" -and $_.roleDefinitionName -in @(''Owner'',''Contributor'',''User
+        Access Administrator'') })
+
+        if ($labExcess.Count -gt 0) { throw ''Elevated access remains inside the lab boundary.'' }
+
+        ''Elevated lab-scope assignments: 0''
+
+        '
+      expected: No elevated role remains at or below the lab resource-group scope.
+  cleanup:
+    dependsOn: []
+    action: Remove only manifest-recorded objects owned by LAB03-CP05, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp05.residual
+      description: Prove no active managed object remains for LAB03-CP05.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-5
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Assign Azure roles using Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-cli
 validation:
-  commandLanes:
-  - scripts/cli/Validate.ps1
-  output: .state/<run-id>/validation.json
-  statuses:
-  - pass
-  - fail
-  - warning
-  - skipped
-  liveExecutionRequiredForLiveVerified: true
+  script: scripts/cli/Validate.ps1
+  artifact: .state/<run-id>/validation.json
+  modes:
+  - Deployment
+  - PostCleanup
+  resultPolicy:
+    requiredFailureResult: fail
+    optionalSkipResult: partial
+    allRequiredPassResult: pass
 cleanup:
-  azureDeletion: exact recorded resource-group ID after tag verification
-  entraDeletion: none
-  reportOnlyByDefault: true
+  script: scripts/cli/Cleanup.ps1
+  artifact: .state/<run-id>/cleanup.json
+  previewByDefault: true
   requiresExecuteFlag: true
-  residualAuditRequired: true
+  ownershipVerification:
+    manifestIdMatch: true
+    requiredTags:
+    - purpose
+    - labId
+    - runId
+  residualChecks:
+  - id: cp01.residual
+    description: Prove no active managed object remains for LAB03-CP01.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp02.residual
+    description: Prove no active managed object remains for LAB03-CP02.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp03.residual
+    description: Prove no active managed object remains for LAB03-CP03.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp04.residual
+    description: Prove no active managed object remains for LAB03-CP04.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp05.residual
+    description: Prove no active managed object remains for LAB03-CP05.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  retainedItemsAllowed: true
+  irreversiblePurge: never
 assessment:
   enabled: true
   questionCount: 50
   primaryDomain: identity-governance
-lastOfflineValidated: '2026-08-30'
+lastOfflineValidated: '2026-08-31'
 lastLiveVerified: null
+# END GENERATED AZ104 V2

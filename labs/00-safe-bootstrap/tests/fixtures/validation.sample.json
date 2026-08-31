@@ -1,19 +1,166 @@
 {
-  "schemaVersion": "1.0",
+  "schemaVersion": "1.0.0",
   "labId": "LAB-00",
-  "runId": "az10400-sample",
-  "generatedAt": "2026-08-30T00:00:00Z",
-  "result": "partial",
+  "runId": "fixture-00",
+  "mode": "Deployment",
+  "generatedAt": "2026-08-31T10:00:00Z",
+  "result": "pass",
+  "summary": {
+    "required": 10,
+    "passed": 10,
+    "failed": 0,
+    "skipped": 0
+  },
   "checks": [
     {
-      "id": "state.identity",
+      "id": "lab00-cp01.positive",
+      "checkpointId": "LAB00-CP01",
+      "kind": "positive",
+      "required": true,
       "status": "pass",
-      "message": "The local run manifest belongs to the selected lab run."
+      "message": "Fixture expected state observed.",
+      "evidence": {
+        "command": "fixture positive read-only query",
+        "expected": "expected fixture state",
+        "actual": "observed fixture state",
+        "capturedAt": "2026-08-31T10:00:00Z",
+        "redacted": true
+      }
     },
     {
-      "id": "azure.compute-quota",
-      "status": "warning",
-      "message": "Quota could not be read in the offline fixture."
+      "id": "lab00-cp01.negative",
+      "checkpointId": "LAB00-CP01",
+      "kind": "negative",
+      "required": true,
+      "status": "pass",
+      "message": "Fixture expected state observed.",
+      "evidence": {
+        "command": "fixture negative read-only query",
+        "expected": "expected fixture state",
+        "actual": "observed fixture state",
+        "capturedAt": "2026-08-31T10:00:00Z",
+        "redacted": true
+      }
+    },
+    {
+      "id": "lab00-cp02.positive",
+      "checkpointId": "LAB00-CP02",
+      "kind": "positive",
+      "required": true,
+      "status": "pass",
+      "message": "Fixture expected state observed.",
+      "evidence": {
+        "command": "fixture positive read-only query",
+        "expected": "expected fixture state",
+        "actual": "observed fixture state",
+        "capturedAt": "2026-08-31T10:00:00Z",
+        "redacted": true
+      }
+    },
+    {
+      "id": "lab00-cp02.negative",
+      "checkpointId": "LAB00-CP02",
+      "kind": "negative",
+      "required": true,
+      "status": "pass",
+      "message": "Fixture expected state observed.",
+      "evidence": {
+        "command": "fixture negative read-only query",
+        "expected": "expected fixture state",
+        "actual": "observed fixture state",
+        "capturedAt": "2026-08-31T10:00:00Z",
+        "redacted": true
+      }
+    },
+    {
+      "id": "lab00-cp03.positive",
+      "checkpointId": "LAB00-CP03",
+      "kind": "positive",
+      "required": true,
+      "status": "pass",
+      "message": "Fixture expected state observed.",
+      "evidence": {
+        "command": "fixture positive read-only query",
+        "expected": "expected fixture state",
+        "actual": "observed fixture state",
+        "capturedAt": "2026-08-31T10:00:00Z",
+        "redacted": true
+      }
+    },
+    {
+      "id": "lab00-cp03.negative",
+      "checkpointId": "LAB00-CP03",
+      "kind": "negative",
+      "required": true,
+      "status": "pass",
+      "message": "Fixture expected state observed.",
+      "evidence": {
+        "command": "fixture negative read-only query",
+        "expected": "expected fixture state",
+        "actual": "observed fixture state",
+        "capturedAt": "2026-08-31T10:00:00Z",
+        "redacted": true
+      }
+    },
+    {
+      "id": "lab00-cp04.positive",
+      "checkpointId": "LAB00-CP04",
+      "kind": "positive",
+      "required": true,
+      "status": "pass",
+      "message": "Fixture expected state observed.",
+      "evidence": {
+        "command": "fixture positive read-only query",
+        "expected": "expected fixture state",
+        "actual": "observed fixture state",
+        "capturedAt": "2026-08-31T10:00:00Z",
+        "redacted": true
+      }
+    },
+    {
+      "id": "lab00-cp04.negative",
+      "checkpointId": "LAB00-CP04",
+      "kind": "negative",
+      "required": true,
+      "status": "pass",
+      "message": "Fixture expected state observed.",
+      "evidence": {
+        "command": "fixture negative read-only query",
+        "expected": "expected fixture state",
+        "actual": "observed fixture state",
+        "capturedAt": "2026-08-31T10:00:00Z",
+        "redacted": true
+      }
+    },
+    {
+      "id": "lab00-cp05.positive",
+      "checkpointId": "LAB00-CP05",
+      "kind": "positive",
+      "required": true,
+      "status": "pass",
+      "message": "Fixture expected state observed.",
+      "evidence": {
+        "command": "fixture positive read-only query",
+        "expected": "expected fixture state",
+        "actual": "observed fixture state",
+        "capturedAt": "2026-08-31T10:00:00Z",
+        "redacted": true
+      }
+    },
+    {
+      "id": "lab00-cp05.negative",
+      "checkpointId": "LAB00-CP05",
+      "kind": "negative",
+      "required": true,
+      "status": "pass",
+      "message": "Fixture expected state observed.",
+      "evidence": {
+        "command": "fixture negative read-only query",
+        "expected": "expected fixture state",
+        "actual": "observed fixture state",
+        "capturedAt": "2026-08-31T10:00:00Z",
+        "redacted": true
+      }
     }
   ]
 }

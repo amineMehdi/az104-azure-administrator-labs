@@ -1,6 +1,6 @@
 # Lab 11 solution and diagnostic notes
 
-Use this only after completing the lab and knowledge check. The solution is evidence-led: it does not replace the independent validator or silently repair live state.
+Use this only after completing the guided lab. In Labs 01–25, complete the knowledge check before reading these notes. The solution is evidence-led: it does not replace the independent validator or silently repair live state.
 
 ## Intended checkpoint sequence
 
@@ -8,6 +8,7 @@ Use this only after completing the lab and knowledge check. The solution is evid
 2. **Checkpoint 2:** Enable encryption at host only after the subscription feature and selected VM size are confirmed.
 3. **Checkpoint 3:** Create, attach, detach, and reattach a managed data disk using its exact resource ID.
 4. **Checkpoint 4:** Deallocate and resize the VM to a validated alternative SKU, then return it to the intended state.
+5. **Checkpoint 5:** Correlate service state with the run manifest, retain redacted validation evidence, and prove cleanup readiness.
 
 ## Diagnostic order
 
@@ -38,4 +39,4 @@ The live gate is: None beyond the declared role and a disposable subscription.
 
 ## Completion evidence
 
-A defensible result includes a run manifest, independent validation report, redacted CLI or PowerShell evidence, and a cleanup/residual audit. Offline repository tests alone do not establish live verification.
+A defensible result includes a run manifest, independent validation report, redacted Azure CLI evidence captured from PowerShell, and a cleanup/residual audit. Offline repository tests alone do not establish live verification.

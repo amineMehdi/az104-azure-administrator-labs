@@ -1,18 +1,73 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="402" viewBox="0 0 1040 402" role="img" aria-labelledby="title desc">
-<title id="title">Lab 02 architecture</title>
-<desc id="desc">Preview-first operator workflow, a recorded lab boundary, intended resources, independent validation, redacted command evidence, and scoped cleanup.</desc>
-<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#46647f"/></marker></defs>
-<style>text{font-family:Segoe UI,Arial,sans-serif;font-size:14px;fill:#102a43} .control{fill:#e8f1ff;stroke:#2563eb;stroke-width:2} .resource{fill:#e9f8ef;stroke:#16803a;stroke-width:2} .arrow{fill:none;stroke:#46647f;stroke-width:2;marker-end:url(#arrow)}</style>
-<rect width="100%" height="100%" fill="#ffffff"/>
-<rect x="40" y="55" width="180" height="55" rx="8" class="control"/><text x="130" y="79" text-anchor="middle">Operator</text><text x="130" y="98" text-anchor="middle">Azure CLI with az rest</text>
-<rect x="275" y="55" width="180" height="55" rx="8" class="control"/><text x="365" y="79" text-anchor="middle">Preview and preflight</text><text x="365" y="98" text-anchor="middle">read-only context check</text>
-<path d="M220 82 L275 82" class="arrow"/>
-<rect x="275" y="130" width="180" height="50" rx="8" class="control"/><text x="365" y="151" text-anchor="middle">Recorded Lab 02</text><text x="365" y="170" text-anchor="middle">exact cleanup boundary</text>
-<path d="M365 110 L365 130" class="arrow"/>
-<rect x="500" y="110" width="470" height="40" rx="8" class="resource"/><text x="735" y="135" text-anchor="middle">security group</text><rect x="500" y="168" width="470" height="40" rx="8" class="resource"/><text x="735" y="193" text-anchor="middle">invited guest user</text><rect x="500" y="226" width="470" height="40" rx="8" class="resource"/><text x="735" y="251" text-anchor="middle">optional license assignment</text><rect x="500" y="284" width="470" height="40" rx="8" class="resource"/><text x="735" y="309" text-anchor="middle">optional SSPR scope</text>
-<path d="M 455 155 L 500 130" class="arrow"/><path d="M 455 155 L 500 188" class="arrow"/><path d="M 455 155 L 500 246" class="arrow"/><path d="M 455 155 L 500 304" class="arrow"/>
-<rect x="40" y="215" width="180" height="50" rx="8" class="control"/><text x="130" y="237" text-anchor="middle">Independent validation</text><text x="130" y="256" text-anchor="middle">positive + negative</text>
-<path d="M275 165 L220 230" class="arrow"/>
-<rect x="40" y="290" width="180" height="50" rx="8" class="control"/><text x="130" y="312" text-anchor="middle">Evidence + cleanup</text><text x="130" y="331" text-anchor="middle">redacted and scoped</text>
-<path d="M130 265 L130 290" class="arrow"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1148" height="554" viewBox="0 0 1148 554" role="img" aria-labelledby="lab02-title lab02-desc">
+  <title id="lab02-title">LAB-02 architecture: Manage Entra licenses, guests, and self-service password reset</title>
+  <desc id="lab02-desc">Left-to-right service topology with 10 components and 10 directed relationships. Components: Identity administrator, Microsoft Graph, SSPR pilot security group, Guest user, Subscribed SKU capacity, Authorization policy administrator SSPR, Registration report actual capability, run.json, Policy restore, License removal then object cleanup. Relationships: Identity administrator to Microsoft Graph (az rest); Microsoft Graph to SSPR pilot security group (required create); Microsoft Graph to Guest user (optional invitation); Guest user to SSPR pilot security group (direct membership); Subscribed SKU capacity to Guest user (optional exact SKU); Microsoft Graph to Authorization policy administrator SSPR (read and gated PATCH); Microsoft Graph to Registration report actual capability (read only); run.json to Policy restore (original Boolean); Policy restore to Authorization policy administrator SSPR; run.json to License removal then object cleanup (exact guest and group IDs).</desc>
+  <metadata id="lab02-metadata">{&quot;renderer&quot;:&quot;az104-mermaid-flowchart-svg/1.0.0&quot;,&quot;source&quot;:&quot;architecture.mmd&quot;,&quot;sourceSha256&quot;:&quot;f7449ec6fd8930579479cc7baed201333e547df1ea15bff674a8c7e603567764&quot;}</metadata>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M 0 0 L 10 4 L 0 8 z" fill="#57606a"/>
+    </marker>
+    <style>
+      .edge { fill: none; stroke: #57606a; stroke-width: 2; marker-end: url(#arrow); }
+      .edge-label-bg { fill: #ffffff; opacity: .94; }
+      .edge-label { fill: #57606a; font: 13px 'Segoe UI', Arial, sans-serif; text-anchor: middle; dominant-baseline: central; }
+      .node-label { font: 600 15px 'Segoe UI', Arial, sans-serif; text-anchor: middle; dominant-baseline: central; }
+    </style>
+  </defs>
+  <rect width="100%" height="100%" fill="#ffffff"/>
+  <g aria-hidden="true">
+    <path class="edge" d="M 324 165 C 384 165, 384 114, 444 114"/>
+    <path class="edge" d="M 704 114 C 764 114, 764 155, 824 155"/>
+    <path class="edge" d="M 574 148 C 618 165, 618 165, 574 182"/>
+    <path class="edge" d="M 704 216 C 764 216, 764 155, 824 155"/>
+    <path class="edge" d="M 324 277 C 384 277, 384 216, 444 216"/>
+    <path class="edge" d="M 704 114 C 764 114, 764 277, 824 277"/>
+    <path class="edge" d="M 704 114 C 764 114, 764 399, 824 399"/>
+    <path class="edge" d="M 324 389 C 384 389, 384 318, 444 318"/>
+    <path class="edge" d="M 704 318 C 764 318, 764 277, 824 277"/>
+    <path class="edge" d="M 324 389 C 384 389, 384 430, 444 430"/>
+    <rect class="edge-label-bg" x="352.5" y="128.5" width="63" height="22" rx="4"/>
+    <text class="edge-label" x="384" y="139.5">az rest</text>
+    <rect class="edge-label-bg" x="704.5" y="123.5" width="119" height="22" rx="4"/>
+    <text class="edge-label" x="764" y="134.5">required create</text>
+    <rect class="edge-label-bg" x="544.5" y="154" width="147" height="22" rx="4"/>
+    <text class="edge-label" x="618" y="165">optional invitation</text>
+    <rect class="edge-label-bg" x="697.5" y="174.5" width="133" height="22" rx="4"/>
+    <text class="edge-label" x="764" y="185.5">direct membership</text>
+    <rect class="edge-label-bg" x="314" y="235.5" width="140" height="22" rx="4"/>
+    <text class="edge-label" x="384" y="246.5">optional exact SKU</text>
+    <rect class="edge-label-bg" x="687" y="184.5" width="154" height="22" rx="4"/>
+    <text class="edge-label" x="764" y="195.5">read and gated PATCH</text>
+    <rect class="edge-label-bg" x="725.5" y="245.5" width="77" height="22" rx="4"/>
+    <text class="edge-label" x="764" y="256.5">read only</text>
+    <rect class="edge-label-bg" x="321" y="342.5" width="126" height="22" rx="4"/>
+    <text class="edge-label" x="384" y="353.5">original Boolean</text>
+    <rect class="edge-label-bg" x="289.5" y="398.5" width="189" height="22" rx="4"/>
+    <text class="edge-label" x="384" y="409.5">exact guest and group IDs</text>
+    <rect x="64" y="131" width="260" height="68" rx="10" fill="#e8f1ff" stroke="#2563eb"/>
+    <text x="194" y="165" class="node-label" fill="#102a43">Identity administrator</text>
+    <rect x="444" y="80" width="260" height="68" rx="10" fill="#e8f1ff" stroke="#2563eb"/>
+    <text x="574" y="114" class="node-label" fill="#102a43">Microsoft Graph</text>
+    <rect x="824" y="111" width="260" height="88" rx="10" fill="#e9f8ef" stroke="#16803a"/>
+    <text x="954" y="145" class="node-label" fill="#102a43">SSPR pilot</text>
+    <text x="954" y="165" class="node-label" fill="#102a43">security group</text>
+    <rect x="444" y="182" width="260" height="68" rx="10" fill="#e9f8ef" stroke="#16803a"/>
+    <text x="574" y="216" class="node-label" fill="#102a43">Guest user</text>
+    <rect x="64" y="233" width="260" height="88" rx="10" fill="#e9f8ef" stroke="#16803a"/>
+    <text x="194" y="267" class="node-label" fill="#102a43">Subscribed SKU</text>
+    <text x="194" y="287" class="node-label" fill="#102a43">capacity</text>
+    <rect x="824" y="233" width="260" height="88" rx="10" fill="#e9f8ef" stroke="#16803a"/>
+    <text x="954" y="267" class="node-label" fill="#102a43">Authorization policy</text>
+    <text x="954" y="287" class="node-label" fill="#102a43">administrator SSPR</text>
+    <rect x="824" y="355" width="260" height="88" rx="10" fill="#e9f8ef" stroke="#16803a"/>
+    <text x="954" y="389" class="node-label" fill="#102a43">Registration report</text>
+    <text x="954" y="409" class="node-label" fill="#102a43">actual capability</text>
+    <rect x="64" y="355" width="260" height="68" rx="10" fill="#e8f1ff" stroke="#2563eb"/>
+    <text x="194" y="389" class="node-label" fill="#102a43">run.json</text>
+    <rect x="444" y="284" width="260" height="68" rx="10" fill="#e8f1ff" stroke="#2563eb"/>
+    <text x="574" y="318" class="node-label" fill="#102a43">Policy restore</text>
+    <rect x="444" y="386" width="260" height="88" rx="10" fill="#e8f1ff" stroke="#2563eb"/>
+    <text x="574" y="420" class="node-label" fill="#102a43">License removal</text>
+    <text x="574" y="440" class="node-label" fill="#102a43">then object cleanup</text>
+  </g>
 </svg>

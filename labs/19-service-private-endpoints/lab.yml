@@ -1,8 +1,11 @@
+
+# BEGIN GENERATED AZ104 V2
+schemaVersion: 2.0.0
 id: LAB-19
 slug: 19-service-private-endpoints
 title: Compare service endpoints and private endpoints
 blueprintVersion: '2026-04-17'
-domain: Implement and manage storage / Deploy and manage Azure compute resources / Implement and manage virtual networking
+domain: networking
 objectives:
 - ST-ACCESS-01
 - CP-APP-07
@@ -14,10 +17,22 @@ testedToolVersions:
   azureCli: '>=2.88.0'
   powershell: '>=7.4'
 estimatedMinutes: 120
-difficulty: intermediate
+difficulty: applied
+experience:
+  scenario: 'You are a network administrator comparing storage service and private endpoints. Build and prove this disposable
+    service path: The storage account denies public access while a blob private endpoint receives an IP from the private subnet;
+    its zone group writes records into the linked private DNS zone so VNet clients resolve the private service path.'
+  role: A network administrator comparing Storage service and private endpoints.
+  outcome: Use Azure CLI in PowerShell to create a locked-down storage service and endpoint subnet, create the blob private
+    endpoint and dns zone group, and reconcile endpoint approval, dns records, and network policy, with recoverable state
+    and deterministic cleanup.
+  completionCriteria:
+  - All required checkpoints report pass.
+  - The deterministic break/fix is injected, diagnosed, and repaired.
+  - cleanup.json reports no active run-owned resources, with any retained item explicitly documented.
 cost:
   class: moderate
-  billableResources: &id001
+  billableResources:
   - resource group
   - virtual network
   - service-endpoint subnet
@@ -27,6 +42,10 @@ cost:
   - private DNS zone
   notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator before
     execution and clean up immediately.
+  pricingLinks:
+  - title: Azure Virtual Network pricing
+    url: https://azure.microsoft.com/pricing/details/virtual-network/
+  acknowledgementRequired: true
 permissions:
   azureRbacRoles:
   - Network Contributor and Storage Account Contributor on the lab resource group
@@ -39,41 +58,436 @@ prerequisites:
 - 'External gate review: None beyond the declared role and a disposable subscription.'
 - Azure CLI hosted in PowerShell 7.4 or later
 providers:
-  observed:
+  required:
   - Microsoft.Network
   - Microsoft.Storage
+  optional: []
   registeredByLab: []
-regions:
-  applicable: true
-  primary: supplied at execution time
-  secondary: null
+inputs:
+- id: run-id
+  parameter: RunId
+  description: Unique lowercase run ownership identifier
+  required: true
+  secret: false
+  source: parameter
+  safeExample: az104l19-01
+  gateBehavior: block
+  checkpointIds:
+  - LAB19-CP01
+  - LAB19-CP02
+  - LAB19-CP03
+  - LAB19-CP04
+  - LAB19-CP05
+- id: subscription-id
+  parameter: SubscriptionId
+  environmentVariable: AZ104_SUBSCRIPTION_ID
+  description: Expected disposable subscription ID
+  required: true
+  secret: false
+  source: parameter-or-environment
+  safeExample: 00000000-0000-0000-0000-000000000000
+  gateBehavior: block
+  checkpointIds:
+  - LAB19-CP01
+  - LAB19-CP02
+  - LAB19-CP03
+  - LAB19-CP04
+  - LAB19-CP05
+- id: location
+  parameter: Location
+  environmentVariable: AZ104_LOCATION
+  description: Approved primary Azure region
+  required: true
+  secret: false
+  source: parameter-or-environment
+  safeExample: westeurope
+  gateBehavior: block
+  checkpointIds:
+  - LAB19-CP01
+  - LAB19-CP02
+  - LAB19-CP03
+  - LAB19-CP04
+  - LAB19-CP05
+acknowledgements:
+  cost:
+    required: true
+    parameter: AcknowledgeCost
+    message: I reviewed current pricing, quota, and the same-session cleanup plan.
+  tenantChange:
+    required: false
+    parameter: AcknowledgeTenantChange
+    message: I am authorized to create or change the declared tenant-scoped objects and will restore recorded settings.
 creates:
-  azureResources: *id001
+  azureResources:
+  - resource group
+  - virtual network
+  - service-endpoint subnet
+  - private-endpoint subnet
+  - storage account
+  - private endpoint
+  - private DNS zone
   entraObjects: []
   localArtifacts:
   - .state/<run-id>/run.json
   - .state/<run-id>/validation.json
+  - .state/<run-id>/cleanup.json
 tenantScopedChanges: []
 externalRequirements: []
+preflightChecks:
+- id: preflight.context
+  type: context
+  required: true
+  description: Confirm active cloud, tenant, and subscription without changing them.
+  command: az account show --output json
+  expected: Active context matches the supplied subscription and disposable environment.
+- id: preflight.tools
+  type: tool
+  required: true
+  description: Confirm PowerShell, Azure CLI, and az bicep are available.
+  command: az version; az bicep version
+  expected: All required tools meet the versions declared by this lab.
+- id: preflight.inputs
+  type: input
+  required: true
+  description: Check required parameters and environment gates without printing secrets.
+  command: $PSBoundParameters.Keys; Get-ChildItem Env:AZ104_* | Select-Object Name
+  expected: Every required input is present and optional gates are explicitly reported.
+- id: preflight.providers
+  type: provider
+  required: true
+  description: Read registration state for required resource providers.
+  command: az provider show --namespace <provider> --query registrationState --output tsv
+  expected: Every required provider is Registered; preflight performs no registration.
+- id: preflight.region
+  type: region
+  required: true
+  description: Confirm the requested region is available to the subscription.
+  command: az account list-locations --query "[?name=='<location>'].name" --output tsv
+  expected: The supplied region appears in the subscription location inventory.
+- id: preflight.authored.service
+  type: sku
+  required: true
+  description: Prove verify private-link and private-dns regional support with LAB-19's authored read-only provider, feature,
+    tool, region, and SKU queries.
+  command: '$network = az provider show --namespace Microsoft.Network --query registrationState --output tsv
+
+    if ($network -ne ''Registered'') { throw ''Microsoft.Network is not registered.'' }
+
+    $storageProvider = az provider show --namespace Microsoft.Storage --query registrationState --output tsv
+
+    if ($storageProvider -ne ''Registered'') { throw ''Microsoft.Storage is not registered.'' }'
+  expected: The storage private-link resource exposes the blob group ID and the selected region accepts private endpoints.
+checkpoints:
+- id: LAB19-CP01
+  title: Verify private-link and private-DNS regional support
+  purpose: Read the provider, region, SKU, feature, quota, and companion-tool signals needed for verify private-link and private-dns
+    regional support, without changing Azure state.
+  objectiveIds:
+  - ST-ACCESS-01
+  required: true
+  expectedState: The storage private-link resource exposes the blob group ID and the selected region accepts private endpoints.
+  scriptMarkers:
+    setup: LAB19-CP01
+    validate: LAB19-CP01
+    cleanup: LAB19-CP01
+  validation:
+    positive:
+      id: cp01.positive
+      description: Read the service properties for verify private-link and private-DNS regional support by using exact run-owned
+        identifiers.
+      command: '$validationId=''LAB19-CP01-positive''; $network = az provider show --namespace Microsoft.Network --query registrationState
+        --output tsv
+
+        if ($network -ne ''Registered'') { throw ''Microsoft.Network is not registered.'' }'
+      expected: The storage private-link resource exposes the blob group ID and the selected region accepts private endpoints.
+    negative:
+      id: cp01.negative
+      description: Search for conflicting, unowned, or excessive state after verify private-link and private-DNS regional
+        support.
+      command: '$validationId=''LAB19-CP01-negative''; $storageProvider = az provider show --namespace Microsoft.Storage --query
+        registrationState --output tsv
+
+        if ($storageProvider -ne ''Registered'') { throw ''Microsoft.Storage is not registered.'' }'
+      expected: 'LAB19-CP01 negative boundary: The undesired state is absent; the negative assertion must not report: Microsoft.Storage
+        is not registered.'
+  cleanup:
+    dependsOn:
+    - LAB19-CP02
+    - LAB19-CP03
+    - LAB19-CP04
+    - LAB19-CP05
+    action: Remove only manifest-recorded objects owned by LAB19-CP01, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp01.residual
+      description: Prove no active managed object remains for LAB19-CP01.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-1
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Virtual network service endpoints
+      url: https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-service-endpoints-overview
+- id: LAB19-CP02
+  title: Create a locked-down storage service and endpoint subnet
+  purpose: Provision and immediately inventory the exact run-owned resources needed to create a locked-down storage service
+    and endpoint subnet, so partial completion remains recoverable.
+  objectiveIds:
+  - CP-APP-07
+  required: true
+  expectedState: The storage account denies public network access and the endpoint subnet has private-endpoint policies configured
+    for the design.
+  scriptMarkers:
+    setup: LAB19-CP02
+    validate: LAB19-CP02
+    cleanup: LAB19-CP02
+  validation:
+    positive:
+      id: cp02.positive
+      description: Read the service properties for create a locked-down storage service and endpoint subnet by using exact
+        run-owned identifiers.
+      command: '$validationId=''LAB19-CP02-positive''; $serviceEndpoint = az network vnet subnet show --resource-group $ResourceGroupName
+        --vnet-name $vnet --name service --query "serviceEndpoints[?service==''Microsoft.Storage''] | length(@)" --output
+        tsv
+
+        if ([int]$serviceEndpoint -ne 1) { throw ''The Storage service endpoint is absent.'' }'
+      expected: The storage account denies public network access and the endpoint subnet has private-endpoint policies configured
+        for the design.
+    negative:
+      id: cp02.negative
+      description: Search for conflicting, unowned, or excessive state after create a locked-down storage service and endpoint
+        subnet.
+      command: '$validationId=''LAB19-CP02-negative''; $defaultAction = az storage account show --resource-group $ResourceGroupName
+        --name $storage --query networkRuleSet.defaultAction --output tsv
+
+        if ($defaultAction -ne ''Deny'') { throw "Storage default network action is $defaultAction." }'
+      expected: 'LAB19-CP02 negative boundary: The undesired state is absent; the negative assertion must not report: Storage
+        default network action is reported defaultAction.'
+  cleanup:
+    dependsOn:
+    - LAB19-CP03
+    - LAB19-CP04
+    - LAB19-CP05
+    action: Remove only manifest-recorded objects owned by LAB19-CP02, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp02.residual
+      description: Prove no active managed object remains for LAB19-CP02.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-2
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Virtual network service endpoints
+      url: https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-service-endpoints-overview
+- id: LAB19-CP03
+  title: Create the blob private endpoint and DNS zone group
+  purpose: Configure and independently inspect the control-plane and data-path properties needed to create the blob private
+    endpoint and dns zone group.
+  objectiveIds:
+  - NW-SECURE-04
+  required: true
+  expectedState: The private endpoint connection is Approved and its zone group links privatelink.blob.core.windows.net to
+    the VNet.
+  scriptMarkers:
+    setup: LAB19-CP03
+    validate: LAB19-CP03
+    cleanup: LAB19-CP03
+  validation:
+    positive:
+      id: cp03.positive
+      description: Read the service properties for create the blob private endpoint and DNS zone group by using exact run-owned
+        identifiers.
+      command: '$validationId=''LAB19-CP03-positive''; $connection = az network private-endpoint show --resource-group $ResourceGroupName
+        --name $endpoint --query "privateLinkServiceConnections[0].privateLinkServiceConnectionState.status" --output tsv
+
+        if ($connection -ne ''Approved'') { throw "Private endpoint connection is $connection." }'
+      expected: The private endpoint connection is Approved and its zone group links privatelink.blob.core.windows.net to
+        the VNet.
+    negative:
+      id: cp03.negative
+      description: Search for conflicting, unowned, or excessive state after create the blob private endpoint and DNS zone
+        group.
+      command: '$validationId=''LAB19-CP03-negative''; $policies = az network vnet subnet show --resource-group $ResourceGroupName
+        --vnet-name $vnet --name private --query privateEndpointNetworkPolicies --output tsv
+
+        if ($policies -notin @(''Disabled'',''NetworkSecurityGroupEnabled'',''RouteTableEnabled'')) { throw "Unexpected private
+        endpoint policy state: $policies" }'
+      expected: 'LAB19-CP03 negative boundary: The undesired state is absent; the negative assertion must not report: Unexpected
+        private endpoint policy state: reported policies.'
+  cleanup:
+    dependsOn:
+    - LAB19-CP04
+    - LAB19-CP05
+    action: Remove only manifest-recorded objects owned by LAB19-CP03, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp03.residual
+      description: Prove no active managed object remains for LAB19-CP03.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-3
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Virtual network service endpoints
+      url: https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-service-endpoints-overview
+- id: LAB19-CP04
+  title: Prove private DNS integration and public denial
+  purpose: Exercise the deterministic operational or denied path needed to prove private dns integration and public denial,
+    then retain comparable before-and-after results.
+  objectiveIds:
+  - NW-SECURE-05
+  required: true
+  expectedState: The endpoint NIC owns a private address, private DNS records reference it, and the public-network property
+    remains Disabled.
+  scriptMarkers:
+    setup: LAB19-CP04
+    validate: LAB19-CP04
+    cleanup: LAB19-CP04
+  validation:
+    positive:
+      id: cp04.positive
+      description: Read the service properties for prove private DNS integration and public denial by using exact run-owned
+        identifiers.
+      command: '$validationId=''LAB19-CP04-positive''; $zoneGroups = az network private-endpoint dns-zone-group list --resource-group
+        $ResourceGroupName --endpoint-name $endpoint --query "length(@)" --output tsv
+
+        if ([int]$zoneGroups -ne 1) { throw "Expected one DNS zone group; found $zoneGroups." }'
+      expected: The endpoint NIC owns a private address, private DNS records reference it, and the public-network property
+        remains Disabled.
+    negative:
+      id: cp04.negative
+      description: Search for conflicting, unowned, or excessive state after prove private DNS integration and public denial.
+      command: '$validationId=''LAB19-CP04-negative''; $links = az network private-dns link vnet list --resource-group $ResourceGroupName
+        --zone-name $zone --query "[?virtualNetwork.id!=null] | length(@)" --output tsv
+
+        if ([int]$links -ne 1) { throw "Expected one VNet link; found $links." }'
+      expected: 'LAB19-CP04 negative boundary: The undesired state is absent; the negative assertion must not report: Expected
+        one VNet link; found reported links.'
+  cleanup:
+    dependsOn:
+    - LAB19-CP05
+    action: Remove only manifest-recorded objects owned by LAB19-CP04, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp04.residual
+      description: Prove no active managed object remains for LAB19-CP04.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-4
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Virtual network service endpoints
+      url: https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-service-endpoints-overview
+- id: LAB19-CP05
+  title: Reconcile endpoint approval, DNS records, and network policy
+  purpose: Reconcile live service properties, returned IDs, and dependency-aware removal needed to reconcile endpoint approval,
+    dns records, and network policy before handoff.
+  objectiveIds:
+  - ST-ACCESS-01
+  - CP-APP-07
+  - NW-SECURE-04
+  - NW-SECURE-05
+  required: true
+  expectedState: Connection status, endpoint IP, zone link, record set, and storage publicNetworkAccess jointly prove the
+    private service path.
+  scriptMarkers:
+    setup: LAB19-CP05
+    validate: LAB19-CP05
+    cleanup: LAB19-CP05
+  validation:
+    positive:
+      id: cp05.positive
+      description: Read the service properties for reconcile endpoint approval, DNS records, and network policy by using exact
+        run-owned identifiers.
+      command: '$validationId=''LAB19-CP05-positive''; $records = az network private-dns record-set a list --resource-group
+        $ResourceGroupName --zone-name $zone --query "length(@)" --output tsv
+
+        if ([int]$records -lt 1) { throw ''The private DNS A record is absent.'' }'
+      expected: Connection status, endpoint IP, zone link, record set, and storage publicNetworkAccess jointly prove the private
+        service path.
+    negative:
+      id: cp05.negative
+      description: Search for conflicting, unowned, or excessive state after reconcile endpoint approval, DNS records, and
+        network policy.
+      command: '$validationId=''LAB19-CP05-negative''; $publicAccess = az storage account show --resource-group $ResourceGroupName
+        --name $storage --query publicNetworkAccess --output tsv
+
+        if ($publicAccess -eq ''Disabled'') { return }
+
+        $defaultAction = az storage account show --resource-group $ResourceGroupName --name $storage --query networkRuleSet.defaultAction
+        --output tsv
+
+        if ($defaultAction -ne ''Deny'') { throw ''The storage public network boundary is permissive.'' }'
+      expected: 'LAB19-CP05 negative boundary: The undesired state is absent; the negative assertion must not report: The
+        storage public network boundary is permissive.'
+  cleanup:
+    dependsOn: []
+    action: Remove only manifest-recorded objects owned by LAB19-CP05, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp05.residual
+      description: Prove no active managed object remains for LAB19-CP05.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-5
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Virtual network service endpoints
+      url: https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-service-endpoints-overview
 validation:
-  commandLanes:
-  - scripts/cli/Validate.ps1
-  output: .state/<run-id>/validation.json
-  statuses:
-  - pass
-  - fail
-  - warning
-  - skipped
-  liveExecutionRequiredForLiveVerified: true
+  script: scripts/cli/Validate.ps1
+  artifact: .state/<run-id>/validation.json
+  modes:
+  - Deployment
+  - PostCleanup
+  resultPolicy:
+    requiredFailureResult: fail
+    optionalSkipResult: partial
+    allRequiredPassResult: pass
 cleanup:
-  azureDeletion: exact recorded resource-group ID after tag verification
-  entraDeletion: none
-  reportOnlyByDefault: true
+  script: scripts/cli/Cleanup.ps1
+  artifact: .state/<run-id>/cleanup.json
+  previewByDefault: true
   requiresExecuteFlag: true
-  residualAuditRequired: true
+  ownershipVerification:
+    manifestIdMatch: true
+    requiredTags:
+    - purpose
+    - labId
+    - runId
+  residualChecks:
+  - id: cp01.residual
+    description: Prove no active managed object remains for LAB19-CP01.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp02.residual
+    description: Prove no active managed object remains for LAB19-CP02.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp03.residual
+    description: Prove no active managed object remains for LAB19-CP03.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp04.residual
+    description: Prove no active managed object remains for LAB19-CP04.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp05.residual
+    description: Prove no active managed object remains for LAB19-CP05.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  retainedItemsAllowed: true
+  irreversiblePurge: never
 assessment:
   enabled: true
   questionCount: 50
   primaryDomain: networking
-lastOfflineValidated: '2026-08-30'
+lastOfflineValidated: '2026-08-31'
 lastLiveVerified: null
+# END GENERATED AZ104 V2

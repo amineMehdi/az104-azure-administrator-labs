@@ -1,0 +1,96 @@
+{
+  "schemaVersion": "1.0.0",
+  "labId": "LAB-02",
+  "runId": "fixture-02",
+  "createdAt": "2026-08-31T10:00:00Z",
+  "updatedAt": "2026-08-31T10:00:00Z",
+  "status": "partial",
+  "context": {
+    "cloud": "AzureCloud",
+    "tenantId": "22222222-2222-4222-8222-222222222222",
+    "subscriptionId": "11111111-1111-4111-8111-111111111111"
+  },
+  "acknowledgements": {
+    "cost": false,
+    "tenantChange": true
+  },
+  "inputs": {
+    "location": "westeurope"
+  },
+  "checkpointStates": [
+    {
+      "checkpointId": "LAB02-CP01",
+      "required": true,
+      "status": "pass",
+      "updatedAt": "2026-08-31T10:00:00Z",
+      "message": "Fixture checkpoint passed."
+    },
+    {
+      "checkpointId": "LAB02-CP02",
+      "required": true,
+      "status": "pass",
+      "updatedAt": "2026-08-31T10:00:00Z",
+      "message": "Fixture checkpoint passed."
+    },
+    {
+      "checkpointId": "LAB02-CP03",
+      "required": false,
+      "status": "skipped",
+      "updatedAt": "2026-08-31T10:00:00Z",
+      "message": "Fixture optional gate skipped."
+    },
+    {
+      "checkpointId": "LAB02-CP04",
+      "required": false,
+      "status": "skipped",
+      "updatedAt": "2026-08-31T10:00:00Z",
+      "message": "Fixture optional gate skipped."
+    },
+    {
+      "checkpointId": "LAB02-CP05",
+      "required": false,
+      "status": "skipped",
+      "updatedAt": "2026-08-31T10:00:00Z",
+      "message": "Fixture optional gate skipped."
+    }
+  ],
+  "managedObjects": [
+    {
+      "checkpointId": "LAB02-CP01",
+      "kind": "entra-object",
+      "id": "33333333-3333-4333-8333-333333333301",
+      "name": "fixture-02-1",
+      "type": "Microsoft.Graph/directoryObject",
+      "scope": null,
+      "ownership": {
+        "method": "manifest-id",
+        "expectedTags": {}
+      },
+      "recordedAt": "2026-08-31T10:00:00Z",
+      "lifecycleStatus": "active"
+    },
+    {
+      "checkpointId": "LAB02-CP02",
+      "kind": "entra-object",
+      "id": "33333333-3333-4333-8333-333333333302",
+      "name": "fixture-02-2",
+      "type": "Microsoft.Graph/directoryObject",
+      "scope": null,
+      "ownership": {
+        "method": "manifest-id",
+        "expectedTags": {}
+      },
+      "recordedAt": "2026-08-31T10:00:00Z",
+      "lifecycleStatus": "active"
+    }
+  ],
+  "originalSettings": [
+    {
+      "checkpointId": "LAB02-CP01",
+      "targetId": "22222222-2222-4222-8222-222222222222",
+      "property": "tenant-change-baseline",
+      "value": "recorded-before-mutation",
+      "recordedAt": "2026-08-31T10:00:00Z"
+    }
+  ]
+}

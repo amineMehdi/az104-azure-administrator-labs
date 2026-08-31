@@ -1,18 +1,62 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="402" viewBox="0 0 1040 402" role="img" aria-labelledby="title desc">
-<title id="title">Lab 09 architecture</title>
-<desc id="desc">Preview-first operator workflow, a recorded lab boundary, intended resources, independent validation, redacted command evidence, and scoped cleanup.</desc>
-<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#46647f"/></marker></defs>
-<style>text{font-family:Segoe UI,Arial,sans-serif;font-size:14px;fill:#102a43} .control{fill:#e8f1ff;stroke:#2563eb;stroke-width:2} .resource{fill:#e9f8ef;stroke:#16803a;stroke-width:2} .arrow{fill:none;stroke:#46647f;stroke-width:2;marker-end:url(#arrow)}</style>
-<rect width="100%" height="100%" fill="#ffffff"/>
-<rect x="40" y="55" width="180" height="55" rx="8" class="control"/><text x="130" y="79" text-anchor="middle">Operator</text><text x="130" y="98" text-anchor="middle">Azure CLI</text>
-<rect x="275" y="55" width="180" height="55" rx="8" class="control"/><text x="365" y="79" text-anchor="middle">Preview and preflight</text><text x="365" y="98" text-anchor="middle">read-only context check</text>
-<path d="M220 82 L275 82" class="arrow"/>
-<rect x="275" y="130" width="180" height="50" rx="8" class="control"/><text x="365" y="151" text-anchor="middle">Recorded Lab 09</text><text x="365" y="170" text-anchor="middle">exact cleanup boundary</text>
-<path d="M365 110 L365 130" class="arrow"/>
-<rect x="500" y="110" width="470" height="40" rx="8" class="resource"/><text x="735" y="135" text-anchor="middle">resource group</text><rect x="500" y="168" width="470" height="40" rx="8" class="resource"/><text x="735" y="193" text-anchor="middle">storage account</text><rect x="500" y="226" width="470" height="40" rx="8" class="resource"/><text x="735" y="251" text-anchor="middle">Azure file share</text><rect x="500" y="284" width="470" height="40" rx="8" class="resource"/><text x="735" y="309" text-anchor="middle">share snapshot</text>
-<path d="M 455 155 L 500 130" class="arrow"/><path d="M 455 155 L 500 188" class="arrow"/><path d="M 455 155 L 500 246" class="arrow"/><path d="M 455 155 L 500 304" class="arrow"/>
-<rect x="40" y="215" width="180" height="50" rx="8" class="control"/><text x="130" y="237" text-anchor="middle">Independent validation</text><text x="130" y="256" text-anchor="middle">positive + negative</text>
-<path d="M275 165 L220 230" class="arrow"/>
-<rect x="40" y="290" width="180" height="50" rx="8" class="control"/><text x="130" y="312" text-anchor="middle">Evidence + cleanup</text><text x="130" y="331" text-anchor="middle">redacted and scoped</text>
-<path d="M130 265 L130 290" class="arrow"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1148" height="818" viewBox="0 0 1148 818" role="img" aria-labelledby="lab09-title lab09-desc">
+  <title id="lab09-title">LAB-09 architecture: Configure Azure Files, snapshots, soft delete, and identity access</title>
+  <desc id="lab09-desc">Left-to-right service topology with 10 components and 9 directed relationships. Components: Azure CLI control plane, StorageV2 account, Bounded SMB file share, Account key memory only, Share snapshot after content, Seven-day soft delete, Approved Entra principal, Azure Files SMB endpoint, SMB Share Contributor exact share scope, Tenant consent, CA, client and ACL gates. Relationships: Azure CLI control plane to StorageV2 account; StorageV2 account to Bounded SMB file share; Account key memory only to Bounded SMB file share (bootstrap sample); Bounded SMB file share to Share snapshot after content; Seven-day soft delete to Bounded SMB file share (delete and restore); Approved Entra principal to Azure Files SMB endpoint (Kerberos ticket); Azure Files SMB endpoint to Bounded SMB file share; SMB Share Contributor exact share scope to Bounded SMB file share (authorizes principal); Tenant consent, CA, client and ACL gates to Azure Files SMB endpoint.</desc>
+  <metadata id="lab09-metadata">{&quot;renderer&quot;:&quot;az104-mermaid-flowchart-svg/1.0.0&quot;,&quot;source&quot;:&quot;architecture.mmd&quot;,&quot;sourceSha256&quot;:&quot;5eecce8dd507972b5abb663a1e041203debc30e558fc0db8a73d5354aeb5f95a&quot;}</metadata>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M 0 0 L 10 4 L 0 8 z" fill="#57606a"/>
+    </marker>
+    <style>
+      .edge { fill: none; stroke: #57606a; stroke-width: 2; marker-end: url(#arrow); }
+      .edge-label-bg { fill: #ffffff; opacity: .94; }
+      .edge-label { fill: #57606a; font: 13px 'Segoe UI', Arial, sans-serif; text-anchor: middle; dominant-baseline: central; }
+      .node-label { font: 600 15px 'Segoe UI', Arial, sans-serif; text-anchor: middle; dominant-baseline: central; }
+    </style>
+  </defs>
+  <rect width="100%" height="100%" fill="#ffffff"/>
+  <g aria-hidden="true">
+    <path class="edge" d="M 324 124 C 384 124, 384 307, 444 307"/>
+    <path class="edge" d="M 574 341 C 608 358, 608 358, 574 375"/>
+    <path class="edge" d="M 324 246 C 384 246, 384 409, 444 409"/>
+    <path class="edge" d="M 704 409 C 764 409, 764 409, 824 409"/>
+    <path class="edge" d="M 324 358 C 384 358, 384 409, 444 409"/>
+    <path class="edge" d="M 324 460 C 384 460, 384 511, 444 511"/>
+    <path class="edge" d="M 574 545 C 598 460, 598 460, 574 375"/>
+    <path class="edge" d="M 324 572 C 384 572, 384 409, 444 409"/>
+    <path class="edge" d="M 324 694 C 384 694, 384 511, 444 511"/>
+    <rect class="edge-label-bg" x="321" y="316.5" width="126" height="22" rx="4"/>
+    <text class="edge-label" x="384" y="327.5">bootstrap sample</text>
+    <rect class="edge-label-bg" x="314" y="372.5" width="140" height="22" rx="4"/>
+    <text class="edge-label" x="384" y="383.5">delete and restore</text>
+    <rect class="edge-label-bg" x="324.5" y="474.5" width="119" height="22" rx="4"/>
+    <text class="edge-label" x="384" y="485.5">Kerberos ticket</text>
+    <rect class="edge-label-bg" x="307" y="479.5" width="154" height="22" rx="4"/>
+    <text class="edge-label" x="384" y="490.5">authorizes principal</text>
+    <rect x="64" y="80" width="260" height="88" rx="10" fill="#e8f1ff" stroke="#2563eb"/>
+    <text x="194" y="114" class="node-label" fill="#102a43">Azure CLI</text>
+    <text x="194" y="134" class="node-label" fill="#102a43">control plane</text>
+    <rect x="444" y="273" width="260" height="68" rx="10" fill="#e9f8ef" stroke="#16803a"/>
+    <text x="574" y="307" class="node-label" fill="#102a43">StorageV2 account</text>
+    <rect x="444" y="375" width="260" height="68" rx="10" fill="#e9f8ef" stroke="#16803a"/>
+    <text x="574" y="409" class="node-label" fill="#102a43">Bounded SMB file share</text>
+    <rect x="64" y="202" width="260" height="88" rx="10" fill="#e8f1ff" stroke="#2563eb"/>
+    <text x="194" y="236" class="node-label" fill="#102a43">Account key</text>
+    <text x="194" y="256" class="node-label" fill="#102a43">memory only</text>
+    <rect x="824" y="365" width="260" height="88" rx="10" fill="#e9f8ef" stroke="#16803a"/>
+    <text x="954" y="399" class="node-label" fill="#102a43">Share snapshot</text>
+    <text x="954" y="419" class="node-label" fill="#102a43">after content</text>
+    <rect x="64" y="324" width="260" height="68" rx="10" fill="#e9f8ef" stroke="#16803a"/>
+    <text x="194" y="358" class="node-label" fill="#102a43">Seven-day soft delete</text>
+    <rect x="64" y="426" width="260" height="68" rx="10" fill="#e8f1ff" stroke="#2563eb"/>
+    <text x="194" y="460" class="node-label" fill="#102a43">Approved Entra principal</text>
+    <rect x="444" y="477" width="260" height="68" rx="10" fill="#e9f8ef" stroke="#16803a"/>
+    <text x="574" y="511" class="node-label" fill="#102a43">Azure Files SMB endpoint</text>
+    <rect x="64" y="528" width="260" height="88" rx="10" fill="#e8f1ff" stroke="#2563eb"/>
+    <text x="194" y="562" class="node-label" fill="#102a43">SMB Share Contributor</text>
+    <text x="194" y="582" class="node-label" fill="#102a43">exact share scope</text>
+    <rect x="64" y="650" width="260" height="88" rx="10" fill="#e8f1ff" stroke="#2563eb"/>
+    <text x="194" y="684" class="node-label" fill="#102a43">Tenant consent, CA,</text>
+    <text x="194" y="704" class="node-label" fill="#102a43">client and ACL gates</text>
+  </g>
 </svg>

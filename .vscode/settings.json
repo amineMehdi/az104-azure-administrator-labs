@@ -1,0 +1,30 @@
+{
+  "files.eol": "\n",
+  "files.trimTrailingWhitespace": true,
+  "markdown.validate.enabled": true,
+  "powershell.codeFormatting.preset": "OTBS",
+  "powershell.scriptAnalysis.enable": true,
+  "yaml.schemas": {
+    "./curriculum/lab-schema.json": "labs/*/lab.yml",
+    "./curriculum/question-schema.json": "labs/*/assessment/questions.yml",
+    "./curriculum/catalog-schema.json": "labs/catalog.yml"
+  },
+  "json.schemas": [
+    {
+      "fileMatch": ["/.state/progress.json"],
+      "url": "./curriculum/progress-schema.json"
+    },
+    {
+      "fileMatch": ["/labs/*/.state/*/run.json"],
+      "url": "./curriculum/run-manifest-schema.json"
+    },
+    {
+      "fileMatch": ["/labs/*/.state/*/validation.json"],
+      "url": "./curriculum/validation-schema.json"
+    },
+    {
+      "fileMatch": ["/labs/*/.state/*/cleanup.json"],
+      "url": "./curriculum/cleanup-schema.json"
+    }
+  ]
+}

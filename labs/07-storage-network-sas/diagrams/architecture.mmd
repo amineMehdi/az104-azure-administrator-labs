@@ -1,15 +1,13 @@
 flowchart LR
-    A["Operator<br/>Azure CLI"] --> P["Preview and preflight"]
-    P --> S["Recorded Lab 07 boundary"]
-    S --> R1["resource group"]
-    S --> R2["virtual network and subnet"]
-    S --> R3["storage account"]
-    S --> R4["blob container"]
-    S --> R5["stored access policy"]
-    S --> V["Independent validation"]
-    V --> E["Redacted command evidence"]
-    V --> C["Previewed cleanup"]
+    subnet[Authorized workload subnet] -->|Microsoft.Storage<br/>service endpoint| firewall[Storage firewall<br/>default deny]
+    public[Public storage endpoint] --> firewall
+    firewall -->|allowed subnet only| container[Private blob container]
+    policy[Stored access policy<br/>revocation point] --> sas[Short-lived service SAS]
+    sas -->|authorization proof| container
+    workstation[Unapproved learner<br/>workstation] -->|SAS request| firewall
+    firewall -->|network denial| denied[Denied data request]
+    repair[Break and restore<br/>subnet rule] --> firewall
     classDef control fill:#e8f1ff,stroke:#2563eb,color:#102a43;
     classDef resource fill:#e9f8ef,stroke:#16803a,color:#102a43;
-    class A,P,S,V,E,C control;
-    class R1,R2,R3,R4,R5 resource;
+    class policy,sas,workstation,repair,denied control;
+    class subnet,public,firewall,container resource;

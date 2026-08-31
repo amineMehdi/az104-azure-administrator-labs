@@ -1,453 +1,459 @@
 # Lab 03 knowledge check
 
-Choose the single best answer for each question. Record your choices before opening `ANSWERS.md`.
+[Return to the guided lab](../README.md)
+
+Complete all 50 questions before opening the answer key. Allow about 50–60 minutes and choose the single best answer.
+
+Use the result as a learning signal: 85–100% indicates mastery, 70–84% calls for targeted review, and below 70% means repeat the mapped lab tasks before retrying.
 
 ## LAB03-Q01 — Foundational
 
-Which principle is most important when working on 'Manage built-in Azure roles' in Lab 03?
+The least-privilege workload delegation acceptance criteria require operators to separate a role's permissions from the principal and scope that receive them. Which service fact supports that requirement?
 
-- A. The shortest command is always correct even when it changes a broader scope.
-- B. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- C. A recognizable resource name removes the need for validation and scoped cleanup.
-- D. A role definition describes allowed actions; a role assignment binds that definition to a principal at a scope, with inheritance flowing downward.
+- A. Reader can view control-plane resources but cannot change them or automatically read protected data-plane content.
+- B. Least privilege chooses the narrowest role whose actions satisfy the required work.
+- C. Assigning a role to a group lets eligible members receive access through group membership.
+- D. A role definition lists permitted actions, while a role assignment binds that definition to a principal at a scope.
 
 ## LAB03-Q02 — Foundational
 
-Which lab action directly supports the objective 'Assign roles at different scopes'?
+An access delegation reviewer challenges whether the least-privilege workload delegation can let an auditor inspect configuration without changing it. Which response resolves the concern?
 
-- A. Resolve Reader and Contributor built-in role definitions without creating custom roles.
-- B. Search the whole tenant for a similar display name and modify the first match.
-- C. Mark the objective complete after reading documentation without checking any state.
-- D. Change the active tenant without displaying or confirming the resulting context.
+- A. Contributor can manage resources but cannot grant Azure RBAC access to other principals.
+- B. Reader can view control-plane resources but cannot change them or automatically read protected data-plane content.
+- C. An assignment at a parent scope is inherited by child resource groups and resources unless another control denies access.
+- D. Effective access combines direct assignments, group assignments, and assignments inherited from parent scopes.
 
 ## LAB03-Q03 — Foundational
 
-Which authorization approach is appropriate before practicing 'Interpret access assignments'?
+The least-privilege workload delegation handoff omits the access delegation rule needed to let an operator manage resources without granting access to other principals. Which statement should the team add?
 
-- A. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
-- B. Confirm the active context and use only the declared role boundary: User Access Administrator or Owner at the lab resource-group scope
-- C. Skip role checks when the run ID contains the lab number.
-- D. Use a production subscription because its resources already exist.
+- A. Contributor can manage resources but cannot grant Azure RBAC access to other principals.
+- B. User Access Administrator manages access assignments without granting general resource-management permissions.
+- C. A resource-level role assignment limits the authorization boundary to one resource.
+- D. A deny assignment can block an operation even when a role assignment otherwise allows that action.
 
 ## LAB03-Q04 — Foundational
 
-Before making a change, a learner checks this core behavior: Which principle is most important when working on 'Manage built-in Azure roles' in Lab 03?
+An access delegation incident review of the least-privilege workload delegation depends on the ability to delegate role-assignment administration without granting broad resource changes. Which platform description is reliable?
 
-- A. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- B. A recognizable resource name removes the need for validation and scoped cleanup.
-- C. A role definition describes allowed actions; a role assignment binds that definition to a principal at a scope, with inheritance flowing downward.
-- D. The shortest command is always correct even when it changes a broader scope.
+- A. Least privilege chooses the narrowest role whose actions satisfy the required work.
+- B. Assigning a role to a group lets eligible members receive access through group membership.
+- C. A role definition lists permitted actions, while a role assignment binds that definition to a principal at a scope.
+- D. User Access Administrator manages access assignments without granting general resource-management permissions.
 
 ## LAB03-Q05 — Foundational
 
-During a design vocabulary review, the team evaluates this situation: Which lab action directly supports the objective 'Assign roles at different scopes'?
+A platform administrator granting least-privilege access to a workload team is updating the access delegation runbook. The requirement is to grant only the permissions and scope needed for the stated job. Which statement describes Azure behavior correctly?
 
-- A. Search the whole tenant for a similar display name and modify the first match.
-- B. Mark the objective complete after reading documentation without checking any state.
-- C. Change the active tenant without displaying or confirming the resulting context.
-- D. Resolve Reader and Contributor built-in role definitions without creating custom roles.
+- A. An assignment at a parent scope is inherited by child resource groups and resources unless another control denies access.
+- B. Effective access combines direct assignments, group assignments, and assignments inherited from parent scopes.
+- C. Least privilege chooses the narrowest role whose actions satisfy the required work.
+- D. Reader can view control-plane resources but cannot change them or automatically read protected data-plane content.
 
 ## LAB03-Q06 — Foundational
 
-In a command-planning session, an administrator asks this question: Which authorization approach is appropriate before practicing 'Interpret access assignments'?
+An access delegation peer review asks how the least-privilege workload delegation should handle this outcome: predict access inherited from a parent management boundary. Which explanation is accurate?
 
-- A. Confirm the active context and use only the declared role boundary: User Access Administrator or Owner at the lab resource-group scope
-- B. Skip role checks when the run ID contains the lab number.
-- C. Use a production subscription because its resources already exist.
-- D. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
+- A. An assignment at a parent scope is inherited by child resource groups and resources unless another control denies access.
+- B. A resource-level role assignment limits the authorization boundary to one resource.
+- C. A deny assignment can block an operation even when a role assignment otherwise allows that action.
+- D. Contributor can manage resources but cannot grant Azure RBAC access to other principals.
 
 ## LAB03-Q07 — Foundational
 
-While preparing the lab, a learner verifies this platform rule: Which principle is most important when working on 'Manage built-in Azure roles' in Lab 03?
+For the least-privilege workload delegation, the access delegation plan must limit an assignment to one named resource. Which statement about access delegation belongs in the least-privilege workload delegation record?
 
-- A. A recognizable resource name removes the need for validation and scoped cleanup.
-- B. A role definition describes allowed actions; a role assignment binds that definition to a principal at a scope, with inheritance flowing downward.
-- C. The shortest command is always correct even when it changes a broader scope.
-- D. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+- A. A resource-level role assignment limits the authorization boundary to one resource.
+- B. Assigning a role to a group lets eligible members receive access through group membership.
+- C. A role definition lists permitted actions, while a role assignment binds that definition to a principal at a scope.
+- D. User Access Administrator manages access assignments without granting general resource-management permissions.
 
 ## LAB03-Q08 — Foundational
 
-During peer review, the team must identify the accurate response to this scenario: Which lab action directly supports the objective 'Assign roles at different scopes'?
+The access delegation review compares four claims for the least-privilege workload delegation requirement to delegate the same access to a team through one directory group. Which claim is technically sound?
 
-- A. Mark the objective complete after reading documentation without checking any state.
-- B. Change the active tenant without displaying or confirming the resulting context.
-- C. Resolve Reader and Contributor built-in role definitions without creating custom roles.
-- D. Search the whole tenant for a similar display name and modify the first match.
+- A. Effective access combines direct assignments, group assignments, and assignments inherited from parent scopes.
+- B. Reader can view control-plane resources but cannot change them or automatically read protected data-plane content.
+- C. Assigning a role to a group lets eligible members receive access through group membership.
+- D. Least privilege chooses the narrowest role whose actions satisfy the required work.
 
 ## LAB03-Q09 — Foundational
 
-In an operations briefing, a new team member receives this question: Which authorization approach is appropriate before practicing 'Interpret access assignments'?
+The access delegation architecture note requires the least-privilege workload delegation environment to explain a principal's final permissions after all applicable assignments are combined. Which statement defines the relevant access delegation boundary?
 
-- A. Skip role checks when the run ID contains the lab number.
-- B. Use a production subscription because its resources already exist.
-- C. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
-- D. Confirm the active context and use only the declared role boundary: User Access Administrator or Owner at the lab resource-group scope
+- A. A deny assignment can block an operation even when a role assignment otherwise allows that action.
+- B. Effective access combines direct assignments, group assignments, and assignments inherited from parent scopes.
+- C. Contributor can manage resources but cannot grant Azure RBAC access to other principals.
+- D. An assignment at a parent scope is inherited by child resource groups and resources unless another control denies access.
 
 ## LAB03-Q10 — Foundational
 
-While building a support checklist, an engineer reviews this requirement: Which principle is most important when working on 'Manage built-in Azure roles' in Lab 03?
+A new access delegation operator must explain why the least-privilege workload delegation can explain why an allow assignment does not overcome an explicit platform block. Which explanation is accurate?
 
-- A. A role definition describes allowed actions; a role assignment binds that definition to a principal at a scope, with inheritance flowing downward.
-- B. The shortest command is always correct even when it changes a broader scope.
-- C. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- D. A recognizable resource name removes the need for validation and scoped cleanup.
+- A. A role definition lists permitted actions, while a role assignment binds that definition to a principal at a scope.
+- B. A deny assignment can block an operation even when a role assignment otherwise allows that action.
+- C. User Access Administrator manages access assignments without granting general resource-management permissions.
+- D. A resource-level role assignment limits the authorization boundary to one resource.
 
 ## LAB03-Q11 — Foundational
 
-During a readiness check, the administrator considers this behavior: Which lab action directly supports the objective 'Assign roles at different scopes'?
+A least-privilege workload delegation review finds access delegation drift from the need to separate a role's permissions from the principal and scope that receive them. Which correction addresses that drift?
 
-- A. Change the active tenant without displaying or confirming the resulting context.
-- B. Resolve Reader and Contributor built-in role definitions without creating custom roles.
-- C. Search the whole tenant for a similar display name and modify the first match.
-- D. Mark the objective complete after reading documentation without checking any state.
+- A. Select a built-in role definition and create a separate assignment for the intended principal and scope.
+- B. Assign Contributor for resource administration that excludes access delegation.
+- C. Place an assignment at the common parent only when every child should inherit it.
+- D. Enumerate all assignments for the principal with inheritance and group expansion considered.
 
 ## LAB03-Q12 — Foundational
 
-In a service overview, the team discusses this scenario: Which authorization approach is appropriate before practicing 'Interpret access assignments'?
+The least-privilege workload delegation window permits only the access delegation change needed to let an auditor inspect configuration without changing it. Which option respects the boundary?
 
-- A. Use a production subscription because its resources already exist.
-- B. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
-- C. Confirm the active context and use only the declared role boundary: User Access Administrator or Owner at the lab resource-group scope
-- D. Skip role checks when the run ID contains the lab number.
+- A. Use User Access Administrator at the narrowest scope that needs delegated RBAC management.
+- B. Assign Reader when a principal needs observation without resource modification.
+- C. Assign the required role directly on the single resource when broader inheritance is unnecessary.
+- D. Inspect applicable deny assignments when an apparently authorized action is rejected.
 
 ## LAB03-Q13 — Foundational
 
-While reviewing official guidance, a learner must resolve this question: Which principle is most important when working on 'Manage built-in Azure roles' in Lab 03?
+The access delegation preflight has passed; the least-privilege workload delegation must now let an operator manage resources without granting access to other principals. Which operation should run?
 
-- A. The shortest command is always correct even when it changes a broader scope.
-- B. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- C. A recognizable resource name removes the need for validation and scoped cleanup.
-- D. A role definition describes allowed actions; a role assignment binds that definition to a principal at a scope, with inheritance flowing downward.
+- A. Compare required operations with built-in role actions before creating an assignment.
+- B. Bind the role to the group's object ID and manage authorized users through membership.
+- C. Select a built-in role definition and create a separate assignment for the intended principal and scope.
+- D. Assign Contributor for resource administration that excludes access delegation.
 
 ## LAB03-Q14 — Foundational
 
-During a configuration walkthrough, the instructor asks about this situation: Which lab action directly supports the objective 'Assign roles at different scopes'?
+The least-privilege workload delegation plan must delegate role-assignment administration without granting broad resource changes while limiting the mutation scope to access delegation. Which action is appropriate?
 
-- A. Resolve Reader and Contributor built-in role definitions without creating custom roles.
-- B. Search the whole tenant for a similar display name and modify the first match.
-- C. Mark the objective complete after reading documentation without checking any state.
-- D. Change the active tenant without displaying or confirming the resulting context.
+- A. Place an assignment at the common parent only when every child should inherit it.
+- B. Use User Access Administrator at the narrowest scope that needs delegated RBAC management.
+- C. Enumerate all assignments for the principal with inheritance and group expansion considered.
+- D. Assign Reader when a principal needs observation without resource modification.
 
 ## LAB03-Q15 — Foundational
 
-In a preflight knowledge check, the operator evaluates this requirement: Which authorization approach is appropriate before practicing 'Interpret access assignments'?
+An access delegation ticket in the least-privilege workload delegation says to grant only the permissions and scope needed for the stated job. Which access delegation action completes the least-privilege workload delegation request with minimal change?
 
-- A. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
-- B. Confirm the active context and use only the declared role boundary: User Access Administrator or Owner at the lab resource-group scope
-- C. Skip role checks when the run ID contains the lab number.
-- D. Use a production subscription because its resources already exist.
+- A. Compare required operations with built-in role actions before creating an assignment.
+- B. Assign the required role directly on the single resource when broader inheritance is unnecessary.
+- C. Inspect applicable deny assignments when an apparently authorized action is rejected.
+- D. Assign Contributor for resource administration that excludes access delegation.
 
 ## LAB03-Q16 — Applied
 
-A learner previews the implementation for 'Manage built-in Azure roles'. What behavior is required?
+The approach for the least-privilege workload delegation is approved, but the access delegation environment still cannot predict access inherited from a parent management boundary. Which implementation step closes the gap?
 
-- A. Select the first accessible subscription and hide the resulting context.
-- B. Delete any older resource whose name resembles the new run ID.
-- C. Display the context, intended changes, cost and gated branches without mutating Azure.
-- D. Create the baseline immediately and request approval only before cleanup.
+- A. Bind the role to the group's object ID and manage authorized users through membership.
+- B. Place an assignment at the common parent only when every child should inherit it.
+- C. Select a built-in role definition and create a separate assignment for the intended principal and scope.
+- D. Use User Access Administrator at the narrowest scope that needs delegated RBAC management.
 
 ## LAB03-Q17 — Applied
 
-Which implementation step should the learner perform for 'Assign roles at different scopes'?
+The platform administrator granting least-privilege access to a workload team may change the least-privilege workload delegation only to limit an assignment to one named resource. Which access delegation action stays within that assignment?
 
-- A. Replace the lab action with a tenant-wide change that is easier to discover.
-- B. Copy resource identifiers from another run instead of recording returned IDs.
-- C. Skip the operation and edit validation.json to show a passing result.
-- D. Create the dedicated tagged resource group.
+- A. Enumerate all assignments for the principal with inheritance and group expansion considered.
+- B. Assign Reader when a principal needs observation without resource modification.
+- C. Compare required operations with built-in role actions before creating an assignment.
+- D. Assign the required role directly on the single resource when broader inheritance is unnecessary.
 
 ## LAB03-Q18 — Applied
 
-Which evidence most directly validates 'Interpret access assignments' for resource-group-scoped role assignment?
+An access delegation dry run shows no least-privilege workload delegation command will delegate the same access to a team through one directory group. Which action belongs before execution?
 
-- A. Query the exact recorded scope and independently verify the intended recorded state.
-- B. List the entire subscription and assume similarly named resources belong to this run.
-- C. Record a credential so another learner can replay the authenticated session.
-- D. Treat the setup exit code as proof of every configuration and relationship.
+- A. Inspect applicable deny assignments when an apparently authorized action is rejected.
+- B. Assign Contributor for resource administration that excludes access delegation.
+- C. Place an assignment at the common parent only when every child should inherit it.
+- D. Bind the role to the group's object ID and manage authorized users through membership.
 
 ## LAB03-Q19 — Applied
 
-The 'Manage built-in Azure roles' checkpoint reaches an external prerequisite. What should happen?
+For the least-privilege workload delegation, operators need to explain a principal's final permissions after all applicable assignments are combined. Which change realizes that requirement?
 
-- A. Broaden permissions until the prerequisite can no longer block the operation.
-- B. Run the branch only when this documented gate is satisfied: Requires the object ID of a disposable principal in AZ104_PRINCIPAL_OBJECT_ID.
-- C. Mark the branch passed because its command syntax was checked offline.
-- D. Invent a domain, notification target, license, quota, or tenant value and continue.
+- A. Select a built-in role definition and create a separate assignment for the intended principal and scope.
+- B. Use User Access Administrator at the narrowest scope that needs delegated RBAC management.
+- C. Assign the required role directly on the single resource when broader inheritance is unnecessary.
+- D. Enumerate all assignments for the principal with inheritance and group expansion considered.
 
 ## LAB03-Q20 — Applied
 
-What is the safest command-evidence practice after completing 'Assign roles at different scopes'?
+Operators must automate the least-privilege workload delegation change needed to explain why an allow assignment does not overcome an explicit platform block. Which access delegation operation belongs in the runbook?
 
-- A. Save tokens, keys, passwords, or SAS values beside the validation result.
-- B. Reuse successful output from an earlier run with a similar resource name.
-- C. Retain only redacted structured output from an independent query of the recorded run.
-- D. Commit the complete account object so reviewers can identify the tenant.
+- A. Inspect applicable deny assignments when an apparently authorized action is rejected.
+- B. Assign Reader when a principal needs observation without resource modification.
+- C. Compare required operations with built-in role actions before creating an assignment.
+- D. Bind the role to the group's object ID and manage authorized users through membership.
 
 ## LAB03-Q21 — Applied
 
-While validating a configuration, the team evaluates this situation: A learner previews the implementation for 'Manage built-in Azure roles'. What behavior is required?
+The access delegation validation asks whether the least-privilege workload delegation can separate a role's permissions from the principal and scope that receive them. Which observable state is strongest?
 
-- A. Create the baseline immediately and request approval only before cleanup.
-- B. Select the first accessible subscription and hide the resulting context.
-- C. Delete any older resource whose name resembles the new run ID.
-- D. Display the context, intended changes, cost and gated branches without mutating Azure.
+- A. Confirm role-assignment operations succeed while unrelated resource updates remain outside the role.
+- B. Read the assignment and confirm its principal ID, role definition ID, and scope independently.
+- C. Query assignments at the resource and verify that the scope equals the resource ID.
+- D. Query deny assignments at the target and parent scopes and compare their excluded principals and actions.
 
 ## LAB03-Q22 — Applied
 
-A delegated administrator receives the following support request: Which implementation step should the learner perform for 'Assign roles at different scopes'?
+A least-privilege workload delegation review must prove the access delegation ability to let an auditor inspect configuration without changing it. Which check avoids an adjacent feature?
 
-- A. Create the dedicated tagged resource group.
-- B. Replace the lab action with a tenant-wide change that is easier to discover.
-- C. Copy resource identifiers from another run instead of recording returned IDs.
-- D. Skip the operation and edit validation.json to show a passing result.
+- A. Inspect the chosen role definition and show that its allowed actions cover the task without broad wildcard access.
+- B. List effective assignments and test a read operation separately from a write operation.
+- C. Show both the group role assignment and the user's transitive membership in that group.
+- D. Read the assignment and confirm its principal ID, role definition ID, and scope independently.
 
 ## LAB03-Q23 — Applied
 
-During a maintenance window, an engineer must decide how to respond: Which evidence most directly validates 'Interpret access assignments' for resource-group-scoped role assignment?
+The least-privilege workload delegation evidence bundle needs an access delegation result showing it can let an operator manage resources without granting access to other principals. Which result belongs in the checkpoint?
 
-- A. Treat the setup exit code as proof of every configuration and relationship.
-- B. Query the exact recorded scope and independently verify the intended recorded state.
-- C. List the entire subscription and assume similarly named resources belong to this run.
-- D. Record a credential so another learner can replay the authenticated session.
+- A. Confirm resource writes succeed and role-assignment creation remains unauthorized.
+- B. List assignments with inherited entries at the target resource and identify the parent scope.
+- C. Compare direct and inherited assignment records and trace each role to its originating scope.
+- D. List effective assignments and test a read operation separately from a write operation.
 
 ## LAB03-Q24 — Applied
 
-A deployment pipeline reaches this decision point: The 'Manage built-in Azure roles' checkpoint reaches an external prerequisite. What should happen?
+Before least-privilege workload delegation cleanup, the access delegation team must reconfirm it can delegate role-assignment administration without granting broad resource changes. Which read-only inspection should run?
 
-- A. Invent a domain, notification target, license, quota, or tenant value and continue.
-- B. Broaden permissions until the prerequisite can no longer block the operation.
-- C. Run the branch only when this documented gate is satisfied: Requires the object ID of a disposable principal in AZ104_PRINCIPAL_OBJECT_ID.
-- D. Mark the branch passed because its command syntax was checked offline.
+- A. Confirm role-assignment operations succeed while unrelated resource updates remain outside the role.
+- B. Query assignments at the resource and verify that the scope equals the resource ID.
+- C. Query deny assignments at the target and parent scopes and compare their excluded principals and actions.
+- D. Confirm resource writes succeed and role-assignment creation remains unauthorized.
 
 ## LAB03-Q25 — Applied
 
-While applying least-privilege controls, the administrator reviews this scenario: What is the safest command-evidence practice after completing 'Assign roles at different scopes'?
+The least-privilege workload delegation setup reports success after the access delegation attempt to grant only the permissions and scope needed for the stated job. Which access delegation read-only observation proves the least-privilege workload delegation outcome?
 
-- A. Commit the complete account object so reviewers can identify the tenant.
-- B. Save tokens, keys, passwords, or SAS values beside the validation result.
-- C. Reuse successful output from an earlier run with a similar resource name.
-- D. Retain only redacted structured output from an independent query of the recorded run.
+- A. Show both the group role assignment and the user's transitive membership in that group.
+- B. Read the assignment and confirm its principal ID, role definition ID, and scope independently.
+- C. Inspect the chosen role definition and show that its allowed actions cover the task without broad wildcard access.
+- D. Confirm role-assignment operations succeed while unrelated resource updates remain outside the role.
 
 ## LAB03-Q26 — Applied
 
-A repeatable Azure CLI workflow must address this requirement: A learner previews the implementation for 'Manage built-in Azure roles'. What behavior is required?
+The access delegation log says the least-privilege workload delegation can now predict access inherited from a parent management boundary. Which access delegation state should the least-privilege workload delegation acceptance test retain?
 
-- A. Display the context, intended changes, cost and gated branches without mutating Azure.
-- B. Create the baseline immediately and request approval only before cleanup.
-- C. Select the first accessible subscription and hide the resulting context.
-- D. Delete any older resource whose name resembles the new run ID.
+- A. List assignments with inherited entries at the target resource and identify the parent scope.
+- B. Compare direct and inherited assignment records and trace each role to its originating scope.
+- C. List effective assignments and test a read operation separately from a write operation.
+- D. Inspect the chosen role definition and show that its allowed actions cover the task without broad wildcard access.
 
 ## LAB03-Q27 — Applied
 
-During an environment handoff, the receiving team asks this question: Which implementation step should the learner perform for 'Assign roles at different scopes'?
+The least-privilege workload delegation rejects access delegation exit status as proof it can limit an assignment to one named resource. Which least-privilege workload delegation result is valid evidence?
 
-- A. Skip the operation and edit validation.json to show a passing result.
-- B. Create the dedicated tagged resource group.
-- C. Replace the lab action with a tenant-wide change that is easier to discover.
-- D. Copy resource identifiers from another run instead of recording returned IDs.
+- A. Query deny assignments at the target and parent scopes and compare their excluded principals and actions.
+- B. Confirm resource writes succeed and role-assignment creation remains unauthorized.
+- C. List assignments with inherited entries at the target resource and identify the parent scope.
+- D. Query assignments at the resource and verify that the scope equals the resource ID.
 
 ## LAB03-Q28 — Applied
 
-A configuration change produces the following operational choice: Which evidence most directly validates 'Interpret access assignments' for resource-group-scoped role assignment?
+The access delegation validator needs one least-privilege workload delegation query after the change to delegate the same access to a team through one directory group. Which access delegation property should the least-privilege workload delegation validator inspect?
 
-- A. Record a credential so another learner can replay the authenticated session.
-- B. Treat the setup exit code as proof of every configuration and relationship.
-- C. Query the exact recorded scope and independently verify the intended recorded state.
-- D. List the entire subscription and assume similarly named resources belong to this run.
+- A. Read the assignment and confirm its principal ID, role definition ID, and scope independently.
+- B. Confirm role-assignment operations succeed while unrelated resource updates remain outside the role.
+- C. Show both the group role assignment and the user's transitive membership in that group.
+- D. Query assignments at the resource and verify that the scope equals the resource ID.
 
 ## LAB03-Q29 — Applied
 
-While preparing independent validation, an engineer considers this scenario: The 'Manage built-in Azure roles' checkpoint reaches an external prerequisite. What should happen?
+The platform administrator granting least-privilege access to a workload team must confirm the least-privilege workload delegation, without mutation, can explain a principal's final permissions after all applicable assignments are combined. Which access delegation check qualifies?
 
-- A. Mark the branch passed because its command syntax was checked offline.
-- B. Invent a domain, notification target, license, quota, or tenant value and continue.
-- C. Broaden permissions until the prerequisite can no longer block the operation.
-- D. Run the branch only when this documented gate is satisfied: Requires the object ID of a disposable principal in AZ104_PRINCIPAL_OBJECT_ID.
+- A. List effective assignments and test a read operation separately from a write operation.
+- B. Compare direct and inherited assignment records and trace each role to its originating scope.
+- C. Inspect the chosen role definition and show that its allowed actions cover the task without broad wildcard access.
+- D. Show both the group role assignment and the user's transitive membership in that group.
 
 ## LAB03-Q30 — Applied
 
-A service owner asks the administrator to resolve this requirement: What is the safest command-evidence practice after completing 'Assign roles at different scopes'?
+The least-privilege workload delegation configuration is complete; the access delegation reviewers need evidence it can explain why an allow assignment does not overcome an explicit platform block. Which observation shows success?
 
-- A. Retain only redacted structured output from an independent query of the recorded run.
-- B. Commit the complete account object so reviewers can identify the tenant.
-- C. Save tokens, keys, passwords, or SAS values beside the validation result.
-- D. Reuse successful output from an earlier run with a similar resource name.
+- A. Confirm resource writes succeed and role-assignment creation remains unauthorized.
+- B. List assignments with inherited entries at the target resource and identify the parent scope.
+- C. Compare direct and inherited assignment records and trace each role to its originating scope.
+- D. Query deny assignments at the target and parent scopes and compare their excluded principals and actions.
 
 ## LAB03-Q31 — Applied
 
-During a scoped cleanup review, the team evaluates this situation: A learner previews the implementation for 'Manage built-in Azure roles'. What behavior is required?
+Although the least-privilege workload delegation is meant to let the access delegation separate a role's permissions from the principal and scope that receive them, its checkpoint fails. Which access delegation defect explains the failure?
 
-- A. Delete any older resource whose name resembles the new run ID.
-- B. Display the context, intended changes, cost and gated branches without mutating Azure.
-- C. Create the baseline immediately and request approval only before cleanup.
-- D. Select the first accessible subscription and hide the resulting context.
+- A. The principal was given Contributor, which permits resource changes beyond the requirement.
+- B. Validation listed only assignments created directly on the resource and omitted inherited access.
+- C. A role definition was inspected, but no role assignment was created for the principal.
+- D. Troubleshooting kept adding broader allow roles without checking an applicable deny assignment.
 
 ## LAB03-Q32 — Applied
 
-An automation author must choose the correct response to this scenario: Which implementation step should the learner perform for 'Assign roles at different scopes'?
+The access delegation support team isolated the least-privilege workload delegation incident to the attempt to let an auditor inspect configuration without changing it. Which condition prevents success?
 
-- A. Copy resource identifiers from another run instead of recording returned IDs.
-- B. Skip the operation and edit validation.json to show a passing result.
-- C. Create the dedicated tagged resource group.
-- D. Replace the lab action with a tenant-wide change that is easier to discover.
+- A. The workflow expects Contributor to create role assignments for another user.
+- B. The assignment scope is the resource group, exposing sibling resources unnecessarily.
+- C. The principal was given Contributor, which permits resource changes beyond the requirement.
+- D. A role definition was inspected, but no role assignment was created for the principal.
 
 ## LAB03-Q33 — Applied
 
-A lab run with a unique run ID reaches this decision: Which evidence most directly validates 'Interpret access assignments' for resource-group-scoped role assignment?
+A least-privilege workload delegation query surprises the platform administrator granting least-privilege access to a workload team during the access delegation attempt to let an operator manage resources without granting access to other principals. Which finding explains it?
 
-- A. List the entire subscription and assume similarly named resources belong to this run.
-- B. Record a credential so another learner can replay the authenticated session.
-- C. Treat the setup exit code as proof of every configuration and relationship.
-- D. Query the exact recorded scope and independently verify the intended recorded state.
+- A. The workflow expects Contributor to create role assignments for another user.
+- B. The role was assigned at subscription scope even though delegation was needed for one resource group.
+- C. The user's object ID was assigned directly, bypassing the required group-based model.
+- D. The principal was given Contributor, which permits resource changes beyond the requirement.
 
 ## LAB03-Q34 — Applied
 
-While comparing the intended and actual states, the operator asks this question: The 'Manage built-in Azure roles' checkpoint reaches an external prerequisite. What should happen?
+Other least-privilege workload delegation components are healthy, but the access delegation still cannot delegate role-assignment administration without granting broad resource changes. Which state causes the isolated failure?
 
-- A. Run the branch only when this documented gate is satisfied: Requires the object ID of a disposable principal in AZ104_PRINCIPAL_OBJECT_ID.
-- B. Mark the branch passed because its command syntax was checked offline.
-- C. Invent a domain, notification target, license, quota, or tenant value and continue.
-- D. Broaden permissions until the prerequisite can no longer block the operation.
+- A. Owner was selected merely to avoid identifying the required built-in role.
+- B. The review considered only assignments whose principal ID exactly matched the user and missed group-derived access.
+- C. The workflow expects Contributor to create role assignments for another user.
+- D. The role was assigned at subscription scope even though delegation was needed for one resource group.
 
 ## LAB03-Q35 — Applied
 
-A peer reviewer examines the proposed implementation for this scenario: What is the safest command-evidence practice after completing 'Assign roles at different scopes'?
+During an access delegation fault drill, the least-privilege workload delegation does not grant only the permissions and scope needed for the stated job. Which finding identifies the defect?
 
-- A. Reuse successful output from an earlier run with a similar resource name.
-- B. Retain only redacted structured output from an independent query of the recorded run.
-- C. Commit the complete account object so reviewers can identify the tenant.
-- D. Save tokens, keys, passwords, or SAS values beside the validation result.
+- A. Validation listed only assignments created directly on the resource and omitted inherited access.
+- B. Troubleshooting kept adding broader allow roles without checking an applicable deny assignment.
+- C. Owner was selected merely to avoid identifying the required built-in role.
+- D. The role was assigned at subscription scope even though delegation was needed for one resource group.
 
 ## LAB03-Q36 — Applied
 
-During a controlled rollout, the change team encounters this requirement: A learner previews the implementation for 'Manage built-in Azure roles'. What behavior is required?
+The least-privilege workload delegation setup finishes, yet the access delegation cannot predict access inherited from a parent management boundary. Which misconfiguration explains the mismatch?
 
-- A. Select the first accessible subscription and hide the resulting context.
-- B. Delete any older resource whose name resembles the new run ID.
-- C. Display the context, intended changes, cost and gated branches without mutating Azure.
-- D. Create the baseline immediately and request approval only before cleanup.
+- A. Validation listed only assignments created directly on the resource and omitted inherited access.
+- B. The assignment scope is the resource group, exposing sibling resources unnecessarily.
+- C. A role definition was inspected, but no role assignment was created for the principal.
+- D. Owner was selected merely to avoid identifying the required built-in role.
 
 ## LAB03-Q37 — Applied
 
-A support engineer reproduces the following situation in a test environment: Which implementation step should the learner perform for 'Assign roles at different scopes'?
+An access delegation break/fix in the least-privilege workload delegation fails when operators try to limit an assignment to one named resource. Which diagnosis fits?
 
-- A. Replace the lab action with a tenant-wide change that is easier to discover.
-- B. Copy resource identifiers from another run instead of recording returned IDs.
-- C. Skip the operation and edit validation.json to show a passing result.
-- D. Create the dedicated tagged resource group.
+- A. The user's object ID was assigned directly, bypassing the required group-based model.
+- B. The principal was given Contributor, which permits resource changes beyond the requirement.
+- C. The assignment scope is the resource group, exposing sibling resources unnecessarily.
+- D. Validation listed only assignments created directly on the resource and omitted inherited access.
 
 ## LAB03-Q38 — Applied
 
-While recording validation evidence, the administrator evaluates this question: Which evidence most directly validates 'Interpret access assignments' for resource-group-scoped role assignment?
+The least-privilege workload delegation troubleshooting scope is the access delegation need to delegate the same access to a team through one directory group. Which condition should be corrected first?
 
-- A. Query the exact recorded scope and independently verify the intended recorded state.
-- B. List the entire subscription and assume similarly named resources belong to this run.
-- C. Record a credential so another learner can replay the authenticated session.
-- D. Treat the setup exit code as proof of every configuration and relationship.
+- A. The review considered only assignments whose principal ID exactly matched the user and missed group-derived access.
+- B. The workflow expects Contributor to create role assignments for another user.
+- C. The user's object ID was assigned directly, bypassing the required group-based model.
+- D. The assignment scope is the resource group, exposing sibling resources unnecessarily.
 
 ## LAB03-Q39 — Applied
 
-A configuration owner must approve one response to this scenario: The 'Manage built-in Azure roles' checkpoint reaches an external prerequisite. What should happen?
+The least-privilege workload delegation result is partial because the access delegation cannot explain a principal's final permissions after all applicable assignments are combined. Which condition accounts for that result?
 
-- A. Broaden permissions until the prerequisite can no longer block the operation.
-- B. Run the branch only when this documented gate is satisfied: Requires the object ID of a disposable principal in AZ104_PRINCIPAL_OBJECT_ID.
-- C. Mark the branch passed because its command syntax was checked offline.
-- D. Invent a domain, notification target, license, quota, or tenant value and continue.
+- A. Troubleshooting kept adding broader allow roles without checking an applicable deny assignment.
+- B. The role was assigned at subscription scope even though delegation was needed for one resource group.
+- C. The user's object ID was assigned directly, bypassing the required group-based model.
+- D. The review considered only assignments whose principal ID exactly matched the user and missed group-derived access.
 
 ## LAB03-Q40 — Applied
 
-During post-deployment verification, the team reviews this situation: What is the safest command-evidence practice after completing 'Assign roles at different scopes'?
+The access delegation evidence shows the least-privilege workload delegation cannot explain why an allow assignment does not overcome an explicit platform block. Which root cause fits that evidence?
 
-- A. Save tokens, keys, passwords, or SAS values beside the validation result.
-- B. Reuse successful output from an earlier run with a similar resource name.
-- C. Retain only redacted structured output from an independent query of the recorded run.
-- D. Commit the complete account object so reviewers can identify the tenant.
+- A. Troubleshooting kept adding broader allow roles without checking an applicable deny assignment.
+- B. A role definition was inspected, but no role assignment was created for the principal.
+- C. Owner was selected merely to avoid identifying the required built-in role.
+- D. The review considered only assignments whose principal ID exactly matched the user and missed group-derived access.
 
 ## LAB03-Q41 — Advanced
 
-Validation for 'Interpret access assignments' fails after setup. What is the best break/fix method?
+The least-privilege workload delegation forbids a partial access delegation result. Operators must first separate a role's permissions from the principal and scope that receive them and afterward confirm the least-privilege workload delegation outcome. Which access delegation sequence is complete?
 
-- A. Rerun setup repeatedly with new names until one attempt appears successful.
-- B. Change validation.json directly so the failed result reads pass.
-- C. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- D. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+- A. First, Assign Contributor for resource administration that excludes access delegation. Then, Confirm resource writes succeed and role-assignment creation remains unauthorized.
+- B. First, Assign the required role directly on the single resource when broader inheritance is unnecessary. Then, Query assignments at the resource and verify that the scope equals the resource ID.
+- C. First, Bind the role to the group's object ID and manage authorized users through membership. Then, Show both the group role assignment and the user's transitive membership in that group.
+- D. First, Select a built-in role definition and create a separate assignment for the intended principal and scope. Then, Read the assignment and confirm its principal ID, role definition ID, and scope independently.
 
 ## LAB03-Q42 — Advanced
 
-The operation for 'Manage built-in Azure roles' is asynchronous or gated. How should completion be recorded?
+Only the least-privilege workload delegation change needed to let an auditor inspect configuration without changing it is allowed, and access delegation proof is mandatory. Which pair fits?
 
-- A. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
-- B. Fabricate expected output so the assessment and documentation appear complete.
-- C. Remove the check from validation whenever the service takes longer than expected.
-- D. Record pass as soon as the request is accepted, regardless of its final state.
+- A. First, Use User Access Administrator at the narrowest scope that needs delegated RBAC management. Then, Confirm role-assignment operations succeed while unrelated resource updates remain outside the role.
+- B. First, Bind the role to the group's object ID and manage authorized users through membership. Then, Show both the group role assignment and the user's transitive membership in that group.
+- C. First, Enumerate all assignments for the principal with inheritance and group expansion considered. Then, Compare direct and inherited assignment records and trace each role to its originating scope.
+- D. First, Assign Reader when a principal needs observation without resource modification. Then, List effective assignments and test a read operation separately from a write operation.
 
 ## LAB03-Q43 — Advanced
 
-A security and reliability review identifies this design decision: Validation for 'Interpret access assignments' fails after setup. What is the best break/fix method?
+The least-privilege workload delegation runbook separates access delegation mutation from validation while it must let an operator manage resources without granting access to other principals. Which sequence proves it cleanly?
 
-- A. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- B. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-- C. Rerun setup repeatedly with new names until one attempt appears successful.
-- D. Change validation.json directly so the failed result reads pass.
+- A. First, Compare required operations with built-in role actions before creating an assignment. Then, Inspect the chosen role definition and show that its allowed actions cover the task without broad wildcard access.
+- B. First, Enumerate all assignments for the principal with inheritance and group expansion considered. Then, Compare direct and inherited assignment records and trace each role to its originating scope.
+- C. First, Assign Contributor for resource administration that excludes access delegation. Then, Confirm resource writes succeed and role-assignment creation remains unauthorized.
+- D. First, Inspect applicable deny assignments when an apparently authorized action is rejected. Then, Query deny assignments at the target and parent scopes and compare their excluded principals and actions.
 
 ## LAB03-Q44 — Advanced
 
-While diagnosing unexpected Azure behavior, the engineer considers this situation: The operation for 'Manage built-in Azure roles' is asynchronous or gated. How should completion be recorded?
+The least-privilege workload delegation checkpoint requires both this access delegation outcome—delegate role-assignment administration without granting broad resource changes—and a read-only least-privilege workload delegation state check. Which access delegation response is complete?
 
-- A. Remove the check from validation whenever the service takes longer than expected.
-- B. Record pass as soon as the request is accepted, regardless of its final state.
-- C. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
-- D. Fabricate expected output so the assessment and documentation appear complete.
+- A. First, Place an assignment at the common parent only when every child should inherit it. Then, List assignments with inherited entries at the target resource and identify the parent scope.
+- B. First, Use User Access Administrator at the narrowest scope that needs delegated RBAC management. Then, Confirm role-assignment operations succeed while unrelated resource updates remain outside the role.
+- C. First, Inspect applicable deny assignments when an apparently authorized action is rejected. Then, Query deny assignments at the target and parent scopes and compare their excluded principals and actions.
+- D. First, Select a built-in role definition and create a separate assignment for the intended principal and scope. Then, Read the assignment and confirm its principal ID, role definition ID, and scope independently.
 
 ## LAB03-Q45 — Advanced
 
-An architecture review requires the strongest response to this scenario: Validation for 'Interpret access assignments' fails after setup. What is the best break/fix method?
+The least-privilege workload delegation runbook must grant only the permissions and scope needed for the stated job, then retain access delegation read-back evidence. Which least-privilege workload delegation pair completes both duties?
 
-- A. Rerun setup repeatedly with new names until one attempt appears successful.
-- B. Change validation.json directly so the failed result reads pass.
-- C. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- D. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+- A. First, Assign the required role directly on the single resource when broader inheritance is unnecessary. Then, Query assignments at the resource and verify that the scope equals the resource ID.
+- B. First, Select a built-in role definition and create a separate assignment for the intended principal and scope. Then, Read the assignment and confirm its principal ID, role definition ID, and scope independently.
+- C. First, Compare required operations with built-in role actions before creating an assignment. Then, Inspect the chosen role definition and show that its allowed actions cover the task without broad wildcard access.
+- D. First, Assign Reader when a principal needs observation without resource modification. Then, List effective assignments and test a read operation separately from a write operation.
 
 ## LAB03-Q46 — Advanced
 
-During break/fix validation, the operator encounters this question: The operation for 'Manage built-in Azure roles' is asynchronous or gated. How should completion be recorded?
+To satisfy the access delegation requirement, operators must change the least-privilege workload delegation configuration and prove it can predict access inherited from a parent management boundary. Which sequence is coherent?
 
-- A. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
-- B. Fabricate expected output so the assessment and documentation appear complete.
-- C. Remove the check from validation whenever the service takes longer than expected.
-- D. Record pass as soon as the request is accepted, regardless of its final state.
+- A. First, Bind the role to the group's object ID and manage authorized users through membership. Then, Show both the group role assignment and the user's transitive membership in that group.
+- B. First, Place an assignment at the common parent only when every child should inherit it. Then, List assignments with inherited entries at the target resource and identify the parent scope.
+- C. First, Assign Reader when a principal needs observation without resource modification. Then, List effective assignments and test a read operation separately from a write operation.
+- D. First, Assign Contributor for resource administration that excludes access delegation. Then, Confirm resource writes succeed and role-assignment creation remains unauthorized.
 
 ## LAB03-Q47 — Advanced
 
-A complex support case depends on correctly interpreting this requirement: Validation for 'Interpret access assignments' fails after setup. What is the best break/fix method?
+The platform administrator granting least-privilege access to a workload team needs a safe least-privilege workload delegation change to limit an assignment to one named resource, followed by access delegation evidence. Which pair merits approval?
 
-- A. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- B. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-- C. Rerun setup repeatedly with new names until one attempt appears successful.
-- D. Change validation.json directly so the failed result reads pass.
+- A. First, Enumerate all assignments for the principal with inheritance and group expansion considered. Then, Compare direct and inherited assignment records and trace each role to its originating scope.
+- B. First, Assign the required role directly on the single resource when broader inheritance is unnecessary. Then, Query assignments at the resource and verify that the scope equals the resource ID.
+- C. First, Assign Contributor for resource administration that excludes access delegation. Then, Confirm resource writes succeed and role-assignment creation remains unauthorized.
+- D. First, Use User Access Administrator at the narrowest scope that needs delegated RBAC management. Then, Confirm role-assignment operations succeed while unrelated resource updates remain outside the role.
 
 ## LAB03-Q48 — Advanced
 
-While correcting configuration drift, the team evaluates this scenario: The operation for 'Manage built-in Azure roles' is asynchronous or gated. How should completion be recorded?
+The least-privilege workload delegation has two access delegation gates: delegate the same access to a team through one directory group, then prove the least-privilege workload delegation state. Which access delegation sequence works?
 
-- A. Remove the check from validation whenever the service takes longer than expected.
-- B. Record pass as soon as the request is accepted, regardless of its final state.
-- C. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
-- D. Fabricate expected output so the assessment and documentation appear complete.
+- A. First, Inspect applicable deny assignments when an apparently authorized action is rejected. Then, Query deny assignments at the target and parent scopes and compare their excluded principals and actions.
+- B. First, Use User Access Administrator at the narrowest scope that needs delegated RBAC management. Then, Confirm role-assignment operations succeed while unrelated resource updates remain outside the role.
+- C. First, Bind the role to the group's object ID and manage authorized users through membership. Then, Show both the group role assignment and the user's transitive membership in that group.
+- D. First, Compare required operations with built-in role actions before creating an assignment. Then, Inspect the chosen role definition and show that its allowed actions cover the task without broad wildcard access.
 
 ## LAB03-Q49 — Advanced
 
-A recovery exercise exposes the following technical decision: Validation for 'Interpret access assignments' fails after setup. What is the best break/fix method?
+Which access delegation path makes the least-privilege workload delegation able to explain a principal's final permissions after all applicable assignments are combined, then inspects the defining properties?
 
-- A. Rerun setup repeatedly with new names until one attempt appears successful.
-- B. Change validation.json directly so the failed result reads pass.
-- C. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- D. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+- A. First, Select a built-in role definition and create a separate assignment for the intended principal and scope. Then, Read the assignment and confirm its principal ID, role definition ID, and scope independently.
+- B. First, Compare required operations with built-in role actions before creating an assignment. Then, Inspect the chosen role definition and show that its allowed actions cover the task without broad wildcard access.
+- C. First, Enumerate all assignments for the principal with inheritance and group expansion considered. Then, Compare direct and inherited assignment records and trace each role to its originating scope.
+- D. First, Place an assignment at the common parent only when every child should inherit it. Then, List assignments with inherited entries at the target resource and identify the parent scope.
 
 ## LAB03-Q50 — Advanced
 
-During final design assurance, the reviewer must resolve this situation: The operation for 'Manage built-in Azure roles' is asynchronous or gated. How should completion be recorded?
+At the least-privilege workload delegation approval gate, operators must show that the access delegation can explain why an allow assignment does not overcome an explicit platform block. Which access delegation configure-and-check pair is defensible?
 
-- A. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
-- B. Fabricate expected output so the assessment and documentation appear complete.
-- C. Remove the check from validation whenever the service takes longer than expected.
-- D. Record pass as soon as the request is accepted, regardless of its final state.
+- A. First, Inspect applicable deny assignments when an apparently authorized action is rejected. Then, Query deny assignments at the target and parent scopes and compare their excluded principals and actions.
+- B. First, Assign Reader when a principal needs observation without resource modification. Then, List effective assignments and test a read operation separately from a write operation.
+- C. First, Place an assignment at the common parent only when every child should inherit it. Then, List assignments with inherited entries at the target resource and identify the parent scope.
+- D. First, Assign the required role directly on the single resource when broader inheritance is unnecessary. Then, Query assignments at the resource and verify that the scope equals the resource ID.
+
+[Open the answer key](./ANSWERS.md)

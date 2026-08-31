@@ -1,0 +1,105 @@
+{
+  "schemaVersion": "1.0.0",
+  "labId": "LAB-17",
+  "runId": "fixture-17",
+  "generatedAt": "2026-08-31T10:00:00Z",
+  "executionMode": "execute",
+  "result": "pass",
+  "ownershipVerified": true,
+  "actions": [
+    {
+      "checkpointId": "LAB17-CP01",
+      "targetId": "/subscriptions/11111111-1111-4111-8111-111111111111/resourceGroups/rg-az104-l17-fixture-17/providers/Microsoft.Resources/deployments/cp1",
+      "targetType": "Microsoft.Resources/deployments",
+      "ownership": {
+        "method": "manifest-id-and-tags",
+        "verified": true
+      },
+      "status": "deleted",
+      "message": "Fixture target removed after ownership verification."
+    },
+    {
+      "checkpointId": "LAB17-CP02",
+      "targetId": "/subscriptions/11111111-1111-4111-8111-111111111111/resourceGroups/rg-az104-l17-fixture-17/providers/Microsoft.Resources/deployments/cp2",
+      "targetType": "Microsoft.Resources/deployments",
+      "ownership": {
+        "method": "manifest-id-and-tags",
+        "verified": true
+      },
+      "status": "deleted",
+      "message": "Fixture target removed after ownership verification."
+    },
+    {
+      "checkpointId": "LAB17-CP03",
+      "targetId": "/subscriptions/11111111-1111-4111-8111-111111111111/resourceGroups/rg-az104-l17-fixture-17/providers/Microsoft.Resources/deployments/cp3",
+      "targetType": "Microsoft.Resources/deployments",
+      "ownership": {
+        "method": "manifest-id-and-tags",
+        "verified": true
+      },
+      "status": "deleted",
+      "message": "Fixture target removed after ownership verification."
+    },
+    {
+      "checkpointId": "LAB17-CP04",
+      "targetId": "/subscriptions/11111111-1111-4111-8111-111111111111/resourceGroups/rg-az104-l17-fixture-17/providers/Microsoft.Resources/deployments/cp4",
+      "targetType": "Microsoft.Resources/deployments",
+      "ownership": {
+        "method": "manifest-id-and-tags",
+        "verified": true
+      },
+      "status": "deleted",
+      "message": "Fixture target removed after ownership verification."
+    },
+    {
+      "checkpointId": "LAB17-CP05",
+      "targetId": "/subscriptions/11111111-1111-4111-8111-111111111111/resourceGroups/rg-az104-l17-fixture-17/providers/Microsoft.Resources/deployments/cp5",
+      "targetType": "Microsoft.Resources/deployments",
+      "ownership": {
+        "method": "manifest-id-and-tags",
+        "verified": true
+      },
+      "status": "deleted",
+      "message": "Fixture target removed after ownership verification."
+    }
+  ],
+  "residualChecks": [
+    {
+      "id": "cp01.residual",
+      "command": "query fixture IDs for LAB17-CP01 after cleanup",
+      "expected": "zero active objects",
+      "actual": "active=0",
+      "status": "pass"
+    },
+    {
+      "id": "cp02.residual",
+      "command": "query fixture IDs for LAB17-CP02 after cleanup",
+      "expected": "zero active objects",
+      "actual": "active=0",
+      "status": "pass"
+    },
+    {
+      "id": "cp03.residual",
+      "command": "query fixture IDs for LAB17-CP03 after cleanup",
+      "expected": "zero active objects",
+      "actual": "active=0",
+      "status": "pass"
+    },
+    {
+      "id": "cp04.residual",
+      "command": "query fixture IDs for LAB17-CP04 after cleanup",
+      "expected": "zero active objects",
+      "actual": "active=0",
+      "status": "pass"
+    },
+    {
+      "id": "cp05.residual",
+      "command": "query fixture IDs for LAB17-CP05 after cleanup",
+      "expected": "zero active objects",
+      "actual": "active=0",
+      "status": "pass"
+    }
+  ],
+  "activeManagedObjects": [],
+  "retainedItems": []
+}

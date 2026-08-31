@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "1.0.0",
+  "labId": "LAB-02",
+  "runId": "fixture-02",
+  "generatedAt": "2026-08-31T10:00:00Z",
+  "executionMode": "execute",
+  "result": "pass",
+  "ownershipVerified": true,
+  "actions": [
+    {
+      "checkpointId": "LAB02-CP01",
+      "targetId": "33333333-3333-4333-8333-333333333301",
+      "targetType": "Microsoft.Graph/directoryObject",
+      "ownership": {
+        "method": "manifest-id",
+        "verified": true
+      },
+      "status": "deleted",
+      "message": "Fixture target removed after ownership verification."
+    },
+    {
+      "checkpointId": "LAB02-CP02",
+      "targetId": "33333333-3333-4333-8333-333333333302",
+      "targetType": "Microsoft.Graph/directoryObject",
+      "ownership": {
+        "method": "manifest-id",
+        "verified": true
+      },
+      "status": "deleted",
+      "message": "Fixture target removed after ownership verification."
+    }
+  ],
+  "residualChecks": [
+    {
+      "id": "cp01.residual",
+      "command": "query fixture IDs for LAB02-CP01 after cleanup",
+      "expected": "zero active objects",
+      "actual": "active=0",
+      "status": "pass"
+    },
+    {
+      "id": "cp02.residual",
+      "command": "query fixture IDs for LAB02-CP02 after cleanup",
+      "expected": "zero active objects",
+      "actual": "active=0",
+      "status": "pass"
+    },
+    {
+      "id": "cp03.residual",
+      "command": "query fixture IDs for LAB02-CP03 after cleanup",
+      "expected": "zero active objects",
+      "actual": "active=0",
+      "status": "pass"
+    },
+    {
+      "id": "cp04.residual",
+      "command": "query fixture IDs for LAB02-CP04 after cleanup",
+      "expected": "zero active objects",
+      "actual": "active=0",
+      "status": "pass"
+    },
+    {
+      "id": "cp05.residual",
+      "command": "query fixture IDs for LAB02-CP05 after cleanup",
+      "expected": "zero active objects",
+      "actual": "active=0",
+      "status": "pass"
+    }
+  ],
+  "activeManagedObjects": [],
+  "retainedItems": []
+}

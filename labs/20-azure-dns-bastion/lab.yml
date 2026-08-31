@@ -1,8 +1,11 @@
+
+# BEGIN GENERATED AZ104 V2
+schemaVersion: 2.0.0
 id: LAB-20
 slug: 20-azure-dns-bastion
 title: Configure Azure DNS and secure administration with Bastion
 blueprintVersion: '2026-04-17'
-domain: Implement and manage virtual networking
+domain: networking
 objectives:
 - NW-SECURE-03
 - NW-DNSLB-01
@@ -12,10 +15,23 @@ testedToolVersions:
   azureCli: '>=2.88.0'
   powershell: '>=7.4'
 estimatedMinutes: 120
-difficulty: intermediate
+difficulty: applied
+experience:
+  scenario: 'You are a network administrator providing secure management and authoritative DNS. Build and prove this disposable
+    service path: Azure Bastion consumes the dedicated AzureBastionSubnet and Standard public IP while workload access stays
+    private; the child Azure DNS zone hosts A/CNAME/TXT records and, only behind an exact gate, its NS set is delegated from
+    a verified Azure DNS parent.'
+  role: A network administrator providing secure management and authoritative DNS.
+  outcome: Use Azure CLI in PowerShell to create the VNet, AzureBastionSubnet, and DNS zone, publish and resolve run-owned
+    DNS records, and reconcile DNS authority, records, and secure administration, with recoverable state and deterministic
+    cleanup.
+  completionCriteria:
+  - All required checkpoints report pass.
+  - The deterministic break/fix is injected, diagnosed, and repaired.
+  - cleanup.json reports no active run-owned resources, with any retained item explicitly documented.
 cost:
   class: elevated
-  billableResources: &id001
+  billableResources:
   - resource group
   - virtual network
   - AzureBastionSubnet
@@ -24,6 +40,10 @@ cost:
   - public DNS zone and recordsets
   notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator before
     execution and clean up immediately.
+  pricingLinks:
+  - title: Azure Virtual Network pricing
+    url: https://azure.microsoft.com/pricing/details/virtual-network/
+  acknowledgementRequired: true
 permissions:
   azureRbacRoles:
   - Network Contributor; DNS Zone Contributor for an owned zone
@@ -37,42 +57,479 @@ prerequisites:
   isolated zone path is always available.'
 - Azure CLI hosted in PowerShell 7.4 or later
 providers:
-  observed:
+  required:
   - Microsoft.Network
+  optional: []
   registeredByLab: []
-regions:
-  applicable: true
-  primary: supplied at execution time
-  secondary: null
+inputs:
+- id: run-id
+  parameter: RunId
+  description: Unique lowercase run ownership identifier
+  required: true
+  secret: false
+  source: parameter
+  safeExample: az104l20-01
+  gateBehavior: block
+  checkpointIds:
+  - LAB20-CP01
+  - LAB20-CP02
+  - LAB20-CP03
+  - LAB20-CP04
+  - LAB20-CP05
+- id: subscription-id
+  parameter: SubscriptionId
+  environmentVariable: AZ104_SUBSCRIPTION_ID
+  description: Expected disposable subscription ID
+  required: true
+  secret: false
+  source: parameter-or-environment
+  safeExample: 00000000-0000-0000-0000-000000000000
+  gateBehavior: block
+  checkpointIds:
+  - LAB20-CP01
+  - LAB20-CP02
+  - LAB20-CP03
+  - LAB20-CP04
+  - LAB20-CP05
+- id: location
+  parameter: Location
+  environmentVariable: AZ104_LOCATION
+  description: Approved primary Azure region
+  required: true
+  secret: false
+  source: parameter-or-environment
+  safeExample: westeurope
+  gateBehavior: block
+  checkpointIds:
+  - LAB20-CP01
+  - LAB20-CP02
+  - LAB20-CP03
+  - LAB20-CP04
+  - LAB20-CP05
+- id: dns-parent-zone
+  environmentVariable: AZ104_DNS_PARENT_ZONE
+  description: Existing Azure DNS parent zone that the learner is authorized to change
+  required: false
+  secret: false
+  gateBehavior: skip-checkpoint
+  safeExample: lab.example.com
+  checkpointIds:
+  - LAB20-CP04
+  parameter: DnsParentZone
+  source: environment
+- id: dns-parent-resource-group
+  environmentVariable: AZ104_DNS_PARENT_RESOURCE_GROUP
+  description: Resource group containing the authorized parent zone
+  required: false
+  secret: false
+  gateBehavior: skip-checkpoint
+  safeExample: rg-dns-authority
+  checkpointIds:
+  - LAB20-CP04
+  parameter: DnsParentResourceGroup
+  source: environment
+- id: dns-parent-zone-id
+  environmentVariable: AZ104_DNS_PARENT_ZONE_ID
+  description: Exact ARM ID used to prove the supplied parent-zone boundary
+  required: false
+  secret: false
+  gateBehavior: skip-checkpoint
+  safeExample: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-dns-authority/providers/Microsoft.Network/dnsZones/lab.example.com
+  checkpointIds:
+  - LAB20-CP04
+  parameter: DnsParentZoneId
+  source: environment
+- id: authorize-dns-delegation
+  environmentVariable: AZ104_AUTHORIZE_DNS_DELEGATION
+  description: Exact YES authorization to add the run-owned child NS set to the verified parent
+  required: false
+  secret: false
+  gateBehavior: skip-checkpoint
+  safeExample: 'YES'
+  checkpointIds:
+  - LAB20-CP04
+  parameter: AuthorizeDnsDelegation
+  source: environment
+acknowledgements:
+  cost:
+    required: true
+    parameter: AcknowledgeCost
+    message: I reviewed current pricing, quota, and the same-session cleanup plan.
+  tenantChange:
+    required: true
+    parameter: AcknowledgeTenantChange
+    message: I am authorized to create or change the declared tenant-scoped objects and will restore recorded settings.
 creates:
-  azureResources: *id001
+  azureResources:
+  - resource group
+  - virtual network
+  - AzureBastionSubnet
+  - Standard public IP
+  - Bastion host
+  - public DNS zone and recordsets
   entraObjects: []
   localArtifacts:
   - .state/<run-id>/run.json
   - .state/<run-id>/validation.json
-tenantScopedChanges: []
+  - .state/<run-id>/cleanup.json
+tenantScopedChanges:
+- Optional run-owned child NS delegation record in an explicitly authorized existing Azure DNS parent zone
 externalRequirements:
 - Real public DNS delegation requires AZ104_OWNED_DNS_ZONE and control of the parent registrar; the isolated zone path is
   always available.
+preflightChecks:
+- id: preflight.context
+  type: context
+  required: true
+  description: Confirm active cloud, tenant, and subscription without changing them.
+  command: az account show --output json
+  expected: Active context matches the supplied subscription and disposable environment.
+- id: preflight.tools
+  type: tool
+  required: true
+  description: Confirm PowerShell, Azure CLI, and az bicep are available.
+  command: az version; az bicep version
+  expected: All required tools meet the versions declared by this lab.
+- id: preflight.inputs
+  type: input
+  required: true
+  description: Check required parameters and environment gates without printing secrets.
+  command: $PSBoundParameters.Keys; Get-ChildItem Env:AZ104_* | Select-Object Name
+  expected: Every required input is present and optional gates are explicitly reported.
+- id: preflight.providers
+  type: provider
+  required: true
+  description: Read registration state for required resource providers.
+  command: az provider show --namespace <provider> --query registrationState --output tsv
+  expected: Every required provider is Registered; preflight performs no registration.
+- id: preflight.region
+  type: region
+  required: true
+  description: Confirm the requested region is available to the subscription.
+  command: az account list-locations --query "[?name=='<location>'].name" --output tsv
+  expected: The supplied region appears in the subscription location inventory.
+- id: preflight.authored.service
+  type: sku
+  required: true
+  description: Prove verify dns-zone authority and bastion regional support with LAB-20's authored read-only provider, feature,
+    tool, region, and SKU queries.
+  command: '$registration = az provider show --namespace Microsoft.Network --query registrationState --output tsv
+
+    if ($registration -ne ''Registered'') { throw ''Microsoft.Network is not registered.'' }
+
+    $locationKnown = az account list-locations --query "[?name==''$Location''] | length(@)" --output tsv
+
+    if ([int]$locationKnown -ne 1) { throw ''The selected location is unavailable.'' }'
+  expected: The region supports Azure Bastion and the DNS exercise uses either example.invalid or an explicitly owned parent-zone
+    gate.
+checkpoints:
+- id: LAB20-CP01
+  title: Verify DNS-zone authority and Bastion regional support
+  purpose: Read the provider, region, SKU, feature, quota, and companion-tool signals needed for verify dns-zone authority
+    and bastion regional support, without changing Azure state.
+  objectiveIds:
+  - NW-SECURE-03
+  required: true
+  expectedState: The region supports Azure Bastion and the DNS exercise uses either example.invalid or an explicitly owned
+    parent-zone gate.
+  scriptMarkers:
+    setup: LAB20-CP01
+    validate: LAB20-CP01
+    cleanup: LAB20-CP01
+  validation:
+    positive:
+      id: cp01.positive
+      description: Read the service properties for verify DNS-zone authority and Bastion regional support by using exact run-owned
+        identifiers.
+      command: '$validationId=''LAB20-CP01-positive''; $registration = az provider show --namespace Microsoft.Network --query
+        registrationState --output tsv
+
+        if ($registration -ne ''Registered'') { throw ''Microsoft.Network is not registered.'' }'
+      expected: The region supports Azure Bastion and the DNS exercise uses either example.invalid or an explicitly owned
+        parent-zone gate.
+    negative:
+      id: cp01.negative
+      description: Search for conflicting, unowned, or excessive state after verify DNS-zone authority and Bastion regional
+        support.
+      command: '$validationId=''LAB20-CP01-negative''; $locationKnown = az account list-locations --query "[?name==''$Location'']
+        | length(@)" --output tsv
+
+        if ([int]$locationKnown -ne 1) { throw ''The selected location is unavailable.'' }'
+      expected: 'LAB20-CP01 negative boundary: The undesired state is absent; the negative assertion must not report: The
+        selected location is unavailable.'
+  cleanup:
+    dependsOn:
+    - LAB20-CP02
+    - LAB20-CP03
+    - LAB20-CP04
+    - LAB20-CP05
+    action: Remove only manifest-recorded objects owned by LAB20-CP01, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp01.residual
+      description: Prove no active managed object remains for LAB20-CP01.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-1
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Create Azure Bastion with Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/bastion/tutorial-create-host-cli
+- id: LAB20-CP02
+  title: Create the VNet, AzureBastionSubnet, and DNS zone
+  purpose: Provision and immediately inventory the exact run-owned resources needed to create the VNet, AzureBastionSubnet,
+    and DNS zone, so partial completion remains recoverable.
+  objectiveIds:
+  - NW-DNSLB-01
+  required: true
+  expectedState: The Bastion subnet uses the required name and prefix, while the run-owned DNS zone exposes authoritative
+    name servers.
+  scriptMarkers:
+    setup: LAB20-CP02
+    validate: LAB20-CP02
+    cleanup: LAB20-CP02
+  validation:
+    positive:
+      id: cp02.positive
+      description: Read the service properties for create the VNet, AzureBastionSubnet, and DNS zone by using exact run-owned
+        identifiers.
+      command: '$validationId=''LAB20-CP02-positive''; $bastionState = az network bastion show --resource-group $ResourceGroupName
+        --name $bastion --query provisioningState --output tsv
+
+        if ($bastionState -ne ''Succeeded'') { throw "Bastion state is $bastionState." }'
+      expected: The Bastion subnet uses the required name and prefix, while the run-owned DNS zone exposes authoritative name
+        servers.
+    negative:
+      id: cp02.negative
+      description: Search for conflicting, unowned, or excessive state after create the VNet, AzureBastionSubnet, and DNS
+        zone.
+      command: '$validationId=''LAB20-CP02-negative''; $prefix = az network vnet subnet show --resource-group $ResourceGroupName
+        --vnet-name $vnet --name AzureBastionSubnet --query addressPrefix --output tsv
+
+        if ($prefix -ne ''10.20.0.0/26'') { throw "Bastion subnet prefix is $prefix." }'
+      expected: 'LAB20-CP02 negative boundary: The undesired state is absent; the negative assertion must not report: Bastion
+        subnet prefix is reported prefix.'
+  cleanup:
+    dependsOn:
+    - LAB20-CP03
+    - LAB20-CP04
+    - LAB20-CP05
+    action: Remove only manifest-recorded objects owned by LAB20-CP02, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp02.residual
+      description: Prove no active managed object remains for LAB20-CP02.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-2
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Create Azure Bastion with Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/bastion/tutorial-create-host-cli
+- id: LAB20-CP03
+  title: Publish and resolve run-owned DNS records
+  purpose: Configure and independently inspect the control-plane and data-path properties needed to publish and resolve run-owned
+    dns records.
+  objectiveIds:
+  - NW-SECURE-03
+  required: true
+  expectedState: The A and CNAME records return the documented values and no record is added to an unverified parent zone.
+  scriptMarkers:
+    setup: LAB20-CP03
+    validate: LAB20-CP03
+    cleanup: LAB20-CP03
+  validation:
+    positive:
+      id: cp03.positive
+      description: Read the service properties for publish and resolve run-owned DNS records by using exact run-owned identifiers.
+      command: '$validationId=''LAB20-CP03-positive''; $cname = az network dns record-set cname show --resource-group $ResourceGroupName
+        --zone-name $zone --name www --query CNAMERecord.cname --output tsv
+
+        if ($cname -ne "app.$zone") { throw "CNAME target is $cname." }'
+      expected: The A and CNAME records return the documented values and no record is added to an unverified parent zone.
+    negative:
+      id: cp03.negative
+      description: Search for conflicting, unowned, or excessive state after publish and resolve run-owned DNS records.
+      command: '$validationId=''LAB20-CP03-negative''; $nameServerCount = az network dns zone show --resource-group $ResourceGroupName
+        --name $zone --query "nameServers | length(@)" --output tsv
+
+        if ([int]$nameServerCount -lt 4) { throw "Only $nameServerCount authoritative name servers were returned." }'
+      expected: 'LAB20-CP03 negative boundary: The undesired state is absent; the negative assertion must not report: Only
+        reported nameServerCount authoritative name servers were returned.'
+  cleanup:
+    dependsOn:
+    - LAB20-CP04
+    - LAB20-CP05
+    action: Remove only manifest-recorded objects owned by LAB20-CP03, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp03.residual
+      description: Prove no active managed object remains for LAB20-CP03.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-3
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Create Azure Bastion with Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/bastion/tutorial-create-host-cli
+- id: LAB20-CP04
+  title: Delegate the run-owned child zone from a verified Azure DNS parent
+  purpose: Exercise the deterministic operational or denied path needed to delegate the run-owned child zone from a verified
+    azure dns parent, then retain comparable before-and-after results.
+  objectiveIds:
+  - NW-DNSLB-01
+  required: false
+  expectedState: The optional parent NS record contains exactly the child zone's authoritative name servers and its exact
+    returned ID is recorded for cleanup.
+  scriptMarkers:
+    setup: LAB20-CP04
+    validate: LAB20-CP04
+    cleanup: LAB20-CP04
+  validation:
+    positive:
+      id: cp04.positive
+      description: Read the service properties for delegate the run-owned child zone from a verified Azure DNS parent by using
+        exact run-owned identifiers.
+      command: '$validationId=''LAB20-CP04-positive''; $delegatedServers = @(az network dns record-set ns show --resource-group
+        $state.inputs[''external-parent-zone-resource-group''] --zone-name $state.inputs[''external-parent-zone-name''] --name
+        $state.inputs[''external-delegation-record-name''] --query "NSRecords[].nsdname" --output tsv)
+
+        $childServers = @(az network dns zone show --resource-group $ResourceGroupName --name $zone --query nameServers --output
+        tsv)
+
+        if (@($childServers | Where-Object { $_ -notin $delegatedServers }).Count -ne 0) { throw ''The parent delegation omits
+        a child authoritative server.'' }'
+      expected: The optional parent NS record contains exactly the child zone's authoritative name servers and its exact returned
+        ID is recorded for cleanup.
+    negative:
+      id: cp04.negative
+      description: Search for conflicting, unowned, or excessive state after delegate the run-owned child zone from a verified
+        Azure DNS parent.
+      command: '$validationId=''LAB20-CP04-negative''; $liveDelegationId = az network dns record-set ns show --resource-group
+        $state.inputs[''external-parent-zone-resource-group''] --zone-name $state.inputs[''external-parent-zone-name''] --name
+        $state.inputs[''external-delegation-record-name''] --query id --output tsv
+
+        if (-not [string]::Equals($liveDelegationId, $state.inputs[''external-delegation-record-id''], [StringComparison]::OrdinalIgnoreCase))
+        { throw ''The parent NS record is outside the recorded boundary.'' }'
+      expected: 'LAB20-CP04 negative boundary: The undesired state is absent; the negative assertion must not report: The
+        parent NS record is outside the recorded boundary.'
+  cleanup:
+    dependsOn:
+    - LAB20-CP05
+    action: Remove only manifest-recorded objects owned by LAB20-CP04, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp04.residual
+      description: Prove no active managed object remains for LAB20-CP04.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-4
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Create Azure Bastion with Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/bastion/tutorial-create-host-cli
+- id: LAB20-CP05
+  title: Reconcile DNS authority, records, and secure administration
+  purpose: Reconcile live service properties, returned IDs, and dependency-aware removal needed to reconcile dns authority,
+    records, and secure administration before handoff.
+  objectiveIds:
+  - NW-SECURE-03
+  - NW-DNSLB-01
+  required: true
+  expectedState: Zone name servers, record answers, Bastion provisioning state, and subnet/public-IP placement match the intended
+    topology.
+  scriptMarkers:
+    setup: LAB20-CP05
+    validate: LAB20-CP05
+    cleanup: LAB20-CP05
+  validation:
+    positive:
+      id: cp05.positive
+      description: Read the service properties for reconcile DNS authority, records, and secure administration by using exact
+        run-owned identifiers.
+      command: '$validationId=''LAB20-CP05-positive''; $allocation = az network public-ip show --resource-group $ResourceGroupName
+        --name $publicIp --query publicIPAllocationMethod --output tsv
+
+        if ($allocation -ne ''Static'') { throw "Bastion public IP allocation is $allocation." }'
+      expected: Zone name servers, record answers, Bastion provisioning state, and subnet/public-IP placement match the intended
+        topology.
+    negative:
+      id: cp05.negative
+      description: Search for conflicting, unowned, or excessive state after reconcile DNS authority, records, and secure
+        administration.
+      command: '$validationId=''LAB20-CP05-negative''; $wrongTarget = az network dns record-set cname show --resource-group
+        $ResourceGroupName --zone-name $zone --name www --query CNAMERecord.cname --output tsv
+
+        if ($wrongTarget -ne "app.$zone") { throw ''The CNAME target does not match the application label.'' }'
+      expected: 'LAB20-CP05 negative boundary: The undesired state is absent; the negative assertion must not report: The
+        CNAME target does not match the application label.'
+  cleanup:
+    dependsOn: []
+    action: Remove only manifest-recorded objects owned by LAB20-CP05, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp05.residual
+      description: Prove no active managed object remains for LAB20-CP05.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-5
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Create Azure Bastion with Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/bastion/tutorial-create-host-cli
 validation:
-  commandLanes:
-  - scripts/cli/Validate.ps1
-  output: .state/<run-id>/validation.json
-  statuses:
-  - pass
-  - fail
-  - warning
-  - skipped
-  liveExecutionRequiredForLiveVerified: true
+  script: scripts/cli/Validate.ps1
+  artifact: .state/<run-id>/validation.json
+  modes:
+  - Deployment
+  - PostCleanup
+  resultPolicy:
+    requiredFailureResult: fail
+    optionalSkipResult: partial
+    allRequiredPassResult: pass
 cleanup:
-  azureDeletion: exact recorded resource-group ID after tag verification
-  entraDeletion: none
-  reportOnlyByDefault: true
+  script: scripts/cli/Cleanup.ps1
+  artifact: .state/<run-id>/cleanup.json
+  previewByDefault: true
   requiresExecuteFlag: true
-  residualAuditRequired: true
+  ownershipVerification:
+    manifestIdMatch: true
+    requiredTags:
+    - purpose
+    - labId
+    - runId
+  residualChecks:
+  - id: cp01.residual
+    description: Prove no active managed object remains for LAB20-CP01.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp02.residual
+    description: Prove no active managed object remains for LAB20-CP02.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp03.residual
+    description: Prove no active managed object remains for LAB20-CP03.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp04.residual
+    description: Prove no active managed object remains for LAB20-CP04.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp05.residual
+    description: Prove no active managed object remains for LAB20-CP05.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  retainedItemsAllowed: true
+  irreversiblePurge: never
 assessment:
   enabled: true
   questionCount: 50
   primaryDomain: networking
-lastOfflineValidated: '2026-08-30'
+lastOfflineValidated: '2026-08-31'
 lastLiveVerified: null
+# END GENERATED AZ104 V2

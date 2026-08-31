@@ -1,27 +1,26 @@
 flowchart LR
     learner([Learner])
-    cli[Azure CLI lane]
-    ps[Azure CLI lane]
-    control[(Azure control plane)]
-    state[(Local .state/run-id)]
+    initializer[Environment initializer]
+    tools[Version and dependency checks]
+    context[(Read-only Azure CLI context)]
+    manifest[(Ignored run manifest)]
+    preview[Setup and cleanup previews]
+    audit[Validation and residual audit]
 
-    learner -->|choose one or compare both| cli
-    learner -->|choose one or compare both| ps
-    cli -->|read account, locations, providers, quota| control
-    ps -->|read context, locations, providers, quota| control
-    cli -->|setup writes run.json| state
-    ps -->|setup writes run.json| state
-    control -->|read-only observations| cli
-    control -->|read-only observations| ps
-    cli -->|validate writes validation.json| state
-    ps -->|validate writes validation.json| state
-    state -->|scoped local cleanup| learner
+    learner -->|run one PowerShell command| initializer
+    initializer -->|inspect only| tools
+    tools -->|required tools pass| context
+    context -->|approved cloud and subscription| manifest
+    manifest -->|exact IDs, tags, and gates| preview
+    preview -->|no mutation in Lab 00| audit
+    audit -->|readiness and cleanup results| manifest
+    manifest -->|safe boundary understood| learner
 
     classDef person fill:#f6f8fa,stroke:#24292f,color:#24292f
     classDef tool fill:#e7f3ff,stroke:#0969da,color:#0550ae
     classDef azure fill:#eaf5ea,stroke:#1a7f37,color:#116329
     classDef local fill:#fff8c5,stroke:#9a6700,color:#633c01
     class learner person
-    class cli,ps tool
-    class control azure
-    class state local
+    class initializer,tools,preview,audit tool
+    class context azure
+    class manifest local

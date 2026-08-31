@@ -1,8 +1,11 @@
+
+# BEGIN GENERATED AZ104 V2
+schemaVersion: 2.0.0
 id: LAB-13
 slug: 13-acr-aci
 title: Publish images with ACR and run Azure Container Instances
 blueprintVersion: '2026-04-17'
-domain: Deploy and manage Azure compute resources
+domain: compute
 objectives:
 - CP-CONTAINERS-01
 - CP-CONTAINERS-02
@@ -13,15 +16,30 @@ testedToolVersions:
   azureCli: '>=2.88.0'
   powershell: '>=7.4'
 estimatedMinutes: 105
-difficulty: intermediate
+difficulty: applied
+experience:
+  scenario: 'You are a container administrator publishing an approved image and running it in aci. Build and prove this disposable
+    service path: An ACR build produces the run-tagged image, a user-assigned identity receives AcrPull at registry scope,
+    and ACI uses that identity to pull and run the image without registry passwords.'
+  role: A container administrator publishing an approved image and running it in ACI.
+  outcome: Use Azure CLI in PowerShell to create the private-admin acr registry, publish and identify the run-owned container
+    image, and reconcile image provenance, identity, and container state, with recoverable state and deterministic cleanup.
+  completionCriteria:
+  - All required checkpoints report pass.
+  - The deterministic break/fix is injected, diagnosed, and repaired.
+  - cleanup.json reports no active run-owned resources, with any retained item explicitly documented.
 cost:
   class: low
-  billableResources: &id001
+  billableResources:
   - resource group
   - Basic container registry
   - container group
   notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator before
     execution and clean up immediately.
+  pricingLinks:
+  - title: Azure compute pricing
+    url: https://azure.microsoft.com/pricing/details/virtual-machines/
+  acknowledgementRequired: false
 permissions:
   azureRbacRoles:
   - Contributor on the lab resource group
@@ -34,41 +52,425 @@ prerequisites:
 - 'External gate review: None beyond the declared role and a disposable subscription.'
 - Azure CLI hosted in PowerShell 7.4 or later
 providers:
-  observed:
+  required:
   - Microsoft.ContainerInstance
   - Microsoft.ContainerRegistry
+  optional: []
   registeredByLab: []
-regions:
-  applicable: true
-  primary: supplied at execution time
-  secondary: null
+inputs:
+- id: run-id
+  parameter: RunId
+  description: Unique lowercase run ownership identifier
+  required: true
+  secret: false
+  source: parameter
+  safeExample: az104l13-01
+  gateBehavior: block
+  checkpointIds:
+  - LAB13-CP01
+  - LAB13-CP02
+  - LAB13-CP03
+  - LAB13-CP04
+  - LAB13-CP05
+- id: subscription-id
+  parameter: SubscriptionId
+  environmentVariable: AZ104_SUBSCRIPTION_ID
+  description: Expected disposable subscription ID
+  required: true
+  secret: false
+  source: parameter-or-environment
+  safeExample: 00000000-0000-0000-0000-000000000000
+  gateBehavior: block
+  checkpointIds:
+  - LAB13-CP01
+  - LAB13-CP02
+  - LAB13-CP03
+  - LAB13-CP04
+  - LAB13-CP05
+- id: location
+  parameter: Location
+  environmentVariable: AZ104_LOCATION
+  description: Approved primary Azure region
+  required: true
+  secret: false
+  source: parameter-or-environment
+  safeExample: westeurope
+  gateBehavior: block
+  checkpointIds:
+  - LAB13-CP01
+  - LAB13-CP02
+  - LAB13-CP03
+  - LAB13-CP04
+  - LAB13-CP05
+acknowledgements:
+  cost:
+    required: false
+    parameter: AcknowledgeCost
+    message: I reviewed current pricing, quota, and the same-session cleanup plan.
+  tenantChange:
+    required: false
+    parameter: AcknowledgeTenantChange
+    message: I am authorized to create or change the declared tenant-scoped objects and will restore recorded settings.
 creates:
-  azureResources: *id001
+  azureResources:
+  - resource group
+  - Basic container registry
+  - container group
   entraObjects: []
   localArtifacts:
   - .state/<run-id>/run.json
   - .state/<run-id>/validation.json
+  - .state/<run-id>/cleanup.json
 tenantScopedChanges: []
 externalRequirements: []
+preflightChecks:
+- id: preflight.context
+  type: context
+  required: true
+  description: Confirm active cloud, tenant, and subscription without changing them.
+  command: az account show --output json
+  expected: Active context matches the supplied subscription and disposable environment.
+- id: preflight.tools
+  type: tool
+  required: true
+  description: Confirm PowerShell, Azure CLI, and az bicep are available.
+  command: az version; az bicep version
+  expected: All required tools meet the versions declared by this lab.
+- id: preflight.inputs
+  type: input
+  required: true
+  description: Check required parameters and environment gates without printing secrets.
+  command: $PSBoundParameters.Keys; Get-ChildItem Env:AZ104_* | Select-Object Name
+  expected: Every required input is present and optional gates are explicitly reported.
+- id: preflight.providers
+  type: provider
+  required: true
+  description: Read registration state for required resource providers.
+  command: az provider show --namespace <provider> --query registrationState --output tsv
+  expected: Every required provider is Registered; preflight performs no registration.
+- id: preflight.region
+  type: region
+  required: true
+  description: Confirm the requested region is available to the subscription.
+  command: az account list-locations --query "[?name=='<location>'].name" --output tsv
+  expected: The supplied region appears in the subscription location inventory.
+- id: preflight.quota
+  type: quota
+  required: false
+  description: Read regional compute usage before deployment.
+  command: az vm list-usage --location <location> --output table
+  expected: Required regional vCPU quota has safe headroom.
+- id: preflight.sku
+  type: sku
+  required: false
+  description: Read available VM or service SKUs in the selected region.
+  command: az vm list-skus --location <location> --all --output table
+  expected: The documented lab SKU has no blocking regional restriction.
+- id: preflight.authored.service
+  type: sku
+  required: true
+  description: Prove verify acr and aci regional capability with LAB-13's authored read-only provider, feature, tool, region,
+    and SKU queries.
+  command: '$registration = az provider show --namespace Microsoft.ContainerRegistry --query registrationState --output tsv
+
+    if ($registration -ne ''Registered'') { throw ''Microsoft.ContainerRegistry is not registered.'' }
+
+    $registration = az provider show --namespace Microsoft.ContainerInstance --query registrationState --output tsv
+
+    if ($registration -ne ''Registered'') { throw ''Microsoft.ContainerInstance is not registered.'' }'
+  expected: The selected region accepts registry and container-group discovery, and required providers are registered.
+checkpoints:
+- id: LAB13-CP01
+  title: Verify ACR and ACI regional capability
+  purpose: Read the provider, region, SKU, feature, quota, and companion-tool signals needed for verify acr and aci regional
+    capability, without changing Azure state.
+  objectiveIds:
+  - CP-CONTAINERS-01
+  required: true
+  expectedState: The selected region accepts registry and container-group discovery, and required providers are registered.
+  scriptMarkers:
+    setup: LAB13-CP01
+    validate: LAB13-CP01
+    cleanup: LAB13-CP01
+  validation:
+    positive:
+      id: cp01.positive
+      description: Read the service properties for verify ACR and ACI regional capability by using exact run-owned identifiers.
+      command: '$validationId=''LAB13-CP01-positive''; $registration = az provider show --namespace Microsoft.ContainerRegistry
+        --query registrationState --output tsv
+
+        if ($registration -ne ''Registered'') { throw ''Microsoft.ContainerRegistry is not registered.'' }'
+      expected: The selected region accepts registry and container-group discovery, and required providers are registered.
+    negative:
+      id: cp01.negative
+      description: Search for conflicting, unowned, or excessive state after verify ACR and ACI regional capability.
+      command: '$validationId=''LAB13-CP01-negative''; $registration = az provider show --namespace Microsoft.ContainerInstance
+        --query registrationState --output tsv
+
+        if ($registration -ne ''Registered'') { throw ''Microsoft.ContainerInstance is not registered.'' }'
+      expected: 'LAB13-CP01 negative boundary: The undesired state is absent; the negative assertion must not report: Microsoft.ContainerInstance
+        is not registered.'
+  cleanup:
+    dependsOn:
+    - LAB13-CP02
+    - LAB13-CP03
+    - LAB13-CP04
+    - LAB13-CP05
+    action: Remove only manifest-recorded objects owned by LAB13-CP01, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp01.residual
+      description: Prove no active managed object remains for LAB13-CP01.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-1
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Create an Azure container registry with Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/container-registry/container-registry-get-started-azure-cli
+- id: LAB13-CP02
+  title: Create the private-admin ACR registry
+  purpose: Provision and immediately inventory the exact run-owned resources needed to create the private-admin acr registry,
+    so partial completion remains recoverable.
+  objectiveIds:
+  - CP-CONTAINERS-02
+  required: true
+  expectedState: The Basic registry is ready, admin credentials remain disabled, and its exact login server is recorded.
+  scriptMarkers:
+    setup: LAB13-CP02
+    validate: LAB13-CP02
+    cleanup: LAB13-CP02
+  validation:
+    positive:
+      id: cp02.positive
+      description: Read the service properties for create the private-admin ACR registry by using exact run-owned identifiers.
+      command: '$validationId=''LAB13-CP02-positive''; $tag = az acr repository show-tags --name $registry --repository az104/hello
+        --query "[?@==''v1''] | [0]" --output tsv
+
+        if ($tag -ne ''v1'') { throw ''The v1 image tag is missing.'' }'
+      expected: The Basic registry is ready, admin credentials remain disabled, and its exact login server is recorded.
+    negative:
+      id: cp02.negative
+      description: Search for conflicting, unowned, or excessive state after create the private-admin ACR registry.
+      command: '$validationId=''LAB13-CP02-negative''; $admin = az acr show --resource-group $ResourceGroupName --name $registry
+        --query adminUserEnabled --output tsv
+
+        if ($admin -ne ''false'') { throw ''The ACR admin account is enabled.'' }'
+      expected: 'LAB13-CP02 negative boundary: The undesired state is absent; the negative assertion must not report: The
+        ACR admin account is enabled.'
+  cleanup:
+    dependsOn:
+    - LAB13-CP03
+    - LAB13-CP04
+    - LAB13-CP05
+    action: Remove only manifest-recorded objects owned by LAB13-CP02, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp02.residual
+      description: Prove no active managed object remains for LAB13-CP02.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-2
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Create an Azure container registry with Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/container-registry/container-registry-get-started-azure-cli
+- id: LAB13-CP03
+  title: Publish and identify the run-owned container image
+  purpose: Configure and independently inspect the control-plane and data-path properties needed to publish and identify the
+    run-owned container image.
+  objectiveIds:
+  - CP-CONTAINERS-04
+  required: true
+  expectedState: The tagged image manifest exists in ACR and is addressable by the immutable run-specific repository tag.
+  scriptMarkers:
+    setup: LAB13-CP03
+    validate: LAB13-CP03
+    cleanup: LAB13-CP03
+  validation:
+    positive:
+      id: cp03.positive
+      description: Read the service properties for publish and identify the run-owned container image by using exact run-owned
+        identifiers.
+      command: '$validationId=''LAB13-CP03-positive''; $image = az container show --resource-group $ResourceGroupName --name
+        $container --query "containers[0].image" --output tsv
+
+        if ($image -ne "$registry.azurecr.io/az104/hello:v1") { throw "Unexpected image: $image" }'
+      expected: The tagged image manifest exists in ACR and is addressable by the immutable run-specific repository tag.
+    negative:
+      id: cp03.negative
+      description: Search for conflicting, unowned, or excessive state after publish and identify the run-owned container
+        image.
+      command: '$validationId=''LAB13-CP03-negative''; $admin = az acr show --resource-group $ResourceGroupName --name $registry
+        --query adminUserEnabled --output tsv
+
+        if ($admin -ne ''false'') { throw ''The ACR admin account is enabled.'' }'
+      expected: 'LAB13-CP03 negative boundary: The undesired state is absent; the negative assertion must not report: The
+        ACR admin account is enabled.'
+  cleanup:
+    dependsOn:
+    - LAB13-CP04
+    - LAB13-CP05
+    action: Remove only manifest-recorded objects owned by LAB13-CP03, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp03.residual
+      description: Prove no active managed object remains for LAB13-CP03.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-3
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Create an Azure container registry with Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/container-registry/container-registry-get-started-azure-cli
+- id: LAB13-CP04
+  title: Run ACI with managed identity image access
+  purpose: Exercise the deterministic operational or denied path needed to run aci with managed identity image access, then
+    retain comparable before-and-after results.
+  objectiveIds:
+  - CP-CONTAINERS-01
+  required: true
+  expectedState: The container group reaches Succeeded with a managed identity and an AcrPull assignment scoped to the registry.
+  scriptMarkers:
+    setup: LAB13-CP04
+    validate: LAB13-CP04
+    cleanup: LAB13-CP04
+  validation:
+    positive:
+      id: cp04.positive
+      description: Read the service properties for run ACI with managed identity image access by using exact run-owned identifiers.
+      command: '$validationId=''LAB13-CP04-positive''; $stateValue = az container show --resource-group $ResourceGroupName
+        --name $container --query "containers[0].instanceView.currentState.state" --output tsv
+
+        if ($stateValue -notin @(''Running'',''Terminated'')) { throw "Container state is $stateValue." }'
+      expected: The container group reaches Succeeded with a managed identity and an AcrPull assignment scoped to the registry.
+    negative:
+      id: cp04.negative
+      description: Search for conflicting, unowned, or excessive state after run ACI with managed identity image access.
+      command: '$validationId=''LAB13-CP04-negative''; $previous = az container show --resource-group $ResourceGroupName --name
+        $container --query "containers[0].instanceView.previousState.state" --output tsv
+
+        if ($previous -eq ''Failed'') { throw ''The previous container state failed.'' }'
+      expected: 'LAB13-CP04 negative boundary: The undesired state is absent; the negative assertion must not report: The
+        previous container state failed.'
+  cleanup:
+    dependsOn:
+    - LAB13-CP05
+    action: Remove only manifest-recorded objects owned by LAB13-CP04, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp04.residual
+      description: Prove no active managed object remains for LAB13-CP04.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-4
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Create an Azure container registry with Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/container-registry/container-registry-get-started-azure-cli
+- id: LAB13-CP05
+  title: Reconcile image provenance, identity, and container state
+  purpose: Reconcile live service properties, returned IDs, and dependency-aware removal needed to reconcile image provenance,
+    identity, and container state before handoff.
+  objectiveIds:
+  - CP-CONTAINERS-01
+  - CP-CONTAINERS-02
+  - CP-CONTAINERS-04
+  required: true
+  expectedState: The ACI image reference points to the run-owned registry, admin is disabled, and the container instance reports
+    Running or Succeeded.
+  scriptMarkers:
+    setup: LAB13-CP05
+    validate: LAB13-CP05
+    cleanup: LAB13-CP05
+  validation:
+    positive:
+      id: cp05.positive
+      description: Read the service properties for reconcile image provenance, identity, and container state by using exact
+        run-owned identifiers.
+      command: '$validationId=''LAB13-CP05-positive''; $provisioning = az container show --resource-group $ResourceGroupName
+        --name $container --query provisioningState --output tsv
+
+        if ($provisioning -ne ''Succeeded'') { throw "ACI provisioning state is $provisioning." }'
+      expected: The ACI image reference points to the run-owned registry, admin is disabled, and the container instance reports
+        Running or Succeeded.
+    negative:
+      id: cp05.negative
+      description: Search for conflicting, unowned, or excessive state after reconcile image provenance, identity, and container
+        state.
+      command: '$validationId=''LAB13-CP05-negative''; $restartCount = az container show --resource-group $ResourceGroupName
+        --name $container --query "containers[0].instanceView.restartCount" --output tsv
+
+        if ($restartCount -and [int]$restartCount -gt 3) { throw "Container restarted $restartCount times." }'
+      expected: 'LAB13-CP05 negative boundary: The undesired state is absent; the negative assertion must not report: Container
+        restarted reported restartCount times.'
+  cleanup:
+    dependsOn: []
+    action: Remove only manifest-recorded objects owned by LAB13-CP05, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp05.residual
+      description: Prove no active managed object remains for LAB13-CP05.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-5
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Create an Azure container registry with Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/container-registry/container-registry-get-started-azure-cli
 validation:
-  commandLanes:
-  - scripts/cli/Validate.ps1
-  output: .state/<run-id>/validation.json
-  statuses:
-  - pass
-  - fail
-  - warning
-  - skipped
-  liveExecutionRequiredForLiveVerified: true
+  script: scripts/cli/Validate.ps1
+  artifact: .state/<run-id>/validation.json
+  modes:
+  - Deployment
+  - PostCleanup
+  resultPolicy:
+    requiredFailureResult: fail
+    optionalSkipResult: partial
+    allRequiredPassResult: pass
 cleanup:
-  azureDeletion: exact recorded resource-group ID after tag verification
-  entraDeletion: none
-  reportOnlyByDefault: true
+  script: scripts/cli/Cleanup.ps1
+  artifact: .state/<run-id>/cleanup.json
+  previewByDefault: true
   requiresExecuteFlag: true
-  residualAuditRequired: true
+  ownershipVerification:
+    manifestIdMatch: true
+    requiredTags:
+    - purpose
+    - labId
+    - runId
+  residualChecks:
+  - id: cp01.residual
+    description: Prove no active managed object remains for LAB13-CP01.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp02.residual
+    description: Prove no active managed object remains for LAB13-CP02.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp03.residual
+    description: Prove no active managed object remains for LAB13-CP03.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp04.residual
+    description: Prove no active managed object remains for LAB13-CP04.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp05.residual
+    description: Prove no active managed object remains for LAB13-CP05.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  retainedItemsAllowed: true
+  irreversiblePurge: never
 assessment:
   enabled: true
   questionCount: 50
   primaryDomain: compute
-lastOfflineValidated: '2026-08-30'
+lastOfflineValidated: '2026-08-31'
 lastLiveVerified: null
+# END GENERATED AZ104 V2

@@ -1,120 +1,101 @@
-# AZ-104 Azure Administrator Labs
+# AZ-104 Complete Learning Environment
 
-![AZ-104 Azure Administrator Labs cover](docs/visuals/az104-lab-cover.png)
+A command-first path from Azure fundamentals to job-ready administration, aligned with the Microsoft AZ-104 skills measured as of **April 17, 2026**.
 
-A command-first, self-paced lab curriculum for the Microsoft Certified: Azure Administrator Associate exam. The repository follows the official skills measured as of **April 17, 2026** and is designed around Azure CLI, Az/Graph PowerShell, real validation, safe cleanup, and architecture diagrams.
+All learner Azure operations use Azure CLI (`az` and `az rest`), Bicep, AzCopy, or KQL from PowerShell 7. There are no browser-based lab steps, screenshots, or screenshot-evidence requirements. Architecture diagrams are the only instructional visuals.
 
 > [!IMPORTANT]
-> This is an independent learning project, not an official Microsoft course. Azure resources can incur charges. Use a disposable sandbox subscription, read each cost notice, and complete cleanup before leaving a lab.
+> This independent project is not an official Microsoft course. Azure resources can incur charges. Use an approved disposable subscription, review each lab's cost and permission gates, and complete its residual-resource audit.
 
-## Current milestone
+## Choose a pathway
 
-All 28 labs are implemented and offline-validated. Live Azure execution remains pending for each lab and must use a disposable environment with the declared permissions, cost gates, validation, and cleanup boundary.
+| Pathway | Best for | Route |
+|---|---|---|
+| Quick start | New learners who want a safe first deployment | Readiness → Lab 00 → Labs 01, 06, 10, 17, and 22 |
+| Full exam preparation | Learners covering every official objective | Labs 00–25 in order → all 1,250 questions → Capstones 26–27 |
+| Job ready | Learners practising operational ownership | Labs 00–25 → every break/fix and job-style challenge → both capstones |
 
-## Exam coverage
+The searchable documentation site adds generated domain navigation, a glossary, cost guidance, and private browser-local progress. From PowerShell, stage and preview the site with:
 
-| Domain | Exam weight | Labs |
-|---|---:|---:|
-| Manage Azure identities and governance | 20–25% | 5 |
-| Implement and manage storage | 15–20% | 4 |
-| Deploy and manage Azure compute resources | 20–25% | 7 |
-| Implement and manage virtual networking | 15–20% | 5 |
-| Monitor and maintain Azure resources | 10–15% | 4 |
-| Foundation and capstones | — | 3 |
-
-```mermaid
-flowchart LR
-    F[00 Safe bootstrap] --> I[01–05 Identity and governance]
-    I --> S[06–09 Storage]
-    S --> C[10–16 Compute]
-    C --> N[17–21 Networking]
-    N --> M[22–25 Monitor and recovery]
-    M --> X[26–27 Capstones]
+```powershell
+python -m pip install -r requirements-dev.txt -r requirements-docs.txt
+python tools/build_docs_site.py
+python -m mkdocs serve --strict
 ```
 
-The verified blueprint contains **82 official objective bullets**. The curriculum adds five clearly marked foundation objectives for tooling, context, cost control, safe state, and cleanup.
+The Pages workflow builds on pull requests and deploys only from `main`. Before
+the first deployment, the repository owner must enable GitHub Pages with
+**GitHub Actions** as its publishing source; the workflow does not change that
+repository setting.
 
-## Learning model
+## Start safely
 
-Each lab follows the same loop:
+1. Install or open PowerShell 7.4 or later.
+2. Run `./tools/Initialize-LabEnvironment.ps1` for the blocking readiness report.
+3. Review [prerequisites](docs/prerequisites.md) and [cost and cleanup safety](docs/cost-and-cleanup.md).
+4. Complete [Lab 00: Safe bootstrap](labs/00-safe-bootstrap/README.md).
+5. Choose a pathway above or continue through the [lab catalog](labs/README.md).
 
-1. Observe the starting state and predict the outcome.
-2. Implement with one complete Azure CLI or PowerShell lane.
-3. Test both expected and denied/failure behavior where relevant.
-4. Validate using read-only commands and machine-readable results.
-5. Record redacted Azure CLI or PowerShell validation evidence.
-6. Clean up and audit for residual resources.
-7. Complete ten original multiple-choice questions using the separate answer key.
+The initializer checks Azure CLI, `az bicep`, AzCopy, Python, Node, required extensions, local configuration, and lab-specific prerequisites. It does not authenticate, install dependencies silently, register providers, or deploy Azure resources.
 
-Every lab is self-contained under `labs/<number>-<slug>/`. It does not import runtime files from another lab.
+## What every lab provides
 
-## Curriculum
+Each of the 28 standalone lab folders includes:
 
-| Lab | Topic | Primary surface | Status |
-|---:|---|---|---|
-| 00 | Safe bootstrap | CLI + PowerShell | Offline-validated |
-| 01 | Entra users and groups | Azure CLI/Graph | Offline-validated |
-| 02 | Entra licenses, guests, and SSPR | Graph/Entra PowerShell | Offline-validated |
-| 03 | Azure RBAC scopes | Azure CLI | Offline-validated |
-| 04 | Resource hierarchy, tags, and locks | Azure CLI | Offline-validated |
-| 05 | Policy, costs, and Advisor | Azure CLI | Offline-validated |
-| 06 | Storage accounts and security | Azure CLI | Offline-validated |
-| 07 | Storage networking and SAS | Azure CLI | Offline-validated |
-| 08 | Blob lifecycle and replication | Azure CLI | Offline-validated |
-| 09 | Azure Files identity | Azure CLI | Offline-validated |
-| 10 | ARM and Bicep lifecycle | Azure CLI + Bicep | Offline-validated |
-| 11 | VM lifecycle, disks, and host encryption | Azure CLI | Offline-validated |
-| 12 | VM resilience, scale, and mobility | Azure CLI | Offline-validated |
-| 13 | ACR and ACI | Azure CLI | Offline-validated |
-| 14 | Azure Container Apps | Azure CLI | Offline-validated |
-| 15 | App Service scaling and slots | Azure CLI | Offline-validated |
-| 16 | App Service TLS, DNS, backup, and networking | Azure CLI | Offline-validated |
-| 17 | VNets, subnets, peering, and public IPs | Azure CLI | Offline-validated |
-| 18 | Routing, NSGs, and ASGs | Azure CLI | Offline-validated |
-| 19 | Service and private endpoints | Azure CLI | Offline-validated |
-| 20 | Azure DNS and Bastion | Azure CLI | Offline-validated |
-| 21 | Load Balancer and Network Watcher | Azure CLI | Offline-validated |
-| 22 | Azure Monitor logs and Insights | Azure CLI + KQL | Offline-validated |
-| 23 | Monitor alerts and actions | Azure CLI | Offline-validated |
-| 24 | Azure Backup and restore | Azure CLI | Offline-validated |
-| 25 | Site Recovery and failover | Azure CLI | Offline-validated |
-| 26 | Capstone: build | Azure CLI + Bicep | Offline-validated |
-| 27 | Capstone: operate and recover | Azure CLI + KQL | Offline-validated |
+- a real-world scenario, learner role, outcome, completion criteria, and objective-to-checkpoint map;
+- an accessible architecture diagram and service-topology walkthrough;
+- explicit inputs, permissions, cost gates, and read-only preflight checks;
+- direct Azure CLI commands in PowerShell blocks for every guided checkpoint;
+- expected output, positive and negative checks, safe retry guidance, and evidence to retain;
+- deterministic break/fix, troubleshooting, service-specific validation, and optional job challenge;
+- dependency-aware cleanup, ownership refusal, and residual-resource checks;
+- synchronized `Preflight.ps1`, `Setup.ps1`, `Validate.ps1`, and `Cleanup.ps1` automation;
+- 50 original assessment questions in Labs 01–25, each mapped back to a task and official objective.
 
-## Start here
+`Setup.ps1` and `Cleanup.ps1` preview by default. Mutations require `-Execute`; moderate or elevated cost requires `-AcknowledgeCost`; tenant-wide changes require `-AcknowledgeTenantChange`. Lab 00 and Capstones 26–27 are hands-on only.
 
-1. Read [prerequisites](docs/prerequisites.md).
-2. Read [cost and cleanup safety](docs/cost-and-cleanup.md).
-3. Complete [Lab 00: Safe bootstrap](labs/00-safe-bootstrap/README.md).
-4. In an authorized disposable tenant, complete [Lab 01: Entra users and groups](labs/01-entra-users-groups/README.md).
-5. Follow the generated [lab catalog](labs/catalog.yml) and [objective map](docs/objective-map.md).
+## Coverage
 
-Labs can be run locally, in GitHub Codespaces, or in Azure Cloud Shell. Tool versions and permissions are checked by each lab rather than assumed.
+| Official AZ-104 domain | Labs | Questions |
+|---|---|---:|
+| Manage Azure identities and governance | 01–05 | 250 |
+| Implement and manage storage | 06–09 | 200 |
+| Deploy and manage Azure compute resources | 10–16 | 350 |
+| Implement and manage virtual networking | 17–21 | 250 |
+| Monitor and maintain Azure resources | 22–25 | 200 |
+| Foundation and capstones | 00, 26–27 | Hands-on only |
 
-## Important documentation
+All 82 official objective bullets are covered. Every assessment-enabled lab contains exactly 50 questions with a 15 foundational / 25 applied / 10 advanced mix, for **1,250 questions total**.
 
-- [Official blueprint research](docs/research/az-104-blueprint.md)
+## Learning and safety model
+
+Use a different run ID for the guided and automated lanes. A successful run follows this loop:
+
+1. Confirm tools, context, region, quota, SKU, permissions, and inputs without changing Azure.
+2. Preview the setup and review the exact ownership boundary.
+3. Build each checkpoint with Azure CLI hosted in PowerShell.
+4. Prove both the expected state and a denied, absent, or misconfigured state.
+5. Diagnose and repair the deterministic break/fix condition.
+6. Save redacted command evidence and machine-readable validation results.
+7. Preview cleanup, execute it only when ready, and prove no active managed resource remains.
+8. Use the assessment's remediation links to repeat weak tasks.
+
+A deployment is a pass only when every required checkpoint passes. Skipped optional gates produce a partial result. Cleanup passes only when no active managed resources remain; deliberately retained or soft-deleted items must be listed in `cleanup.json`.
+
+## Repository interfaces
+
+- [Lab catalog](labs/README.md)
 - [Objective map](docs/objective-map.md)
 - [Permissions matrix](docs/permissions-matrix.md)
 - [Study plan](docs/study-plan.md)
 - [Troubleshooting](docs/troubleshooting.md)
 - [Command cheat sheet](docs/command-cheatsheet.md)
-- [CLI and PowerShell evidence handling](docs/evidence-handling.md)
-- [Assessment authoring guide](docs/assessment-guide.md)
-- [Question bank index](docs/question-bank-index.md)
-- [Implementation status](docs/implementation-status.md)
-- [Project mega prompt](AZ-104-GITHUB-LABS-MEGA-PROMPT.md)
+- [Evidence handling](docs/evidence-handling.md)
+- [Assessment guide](docs/assessment-guide.md)
+- [Assessment dashboard](docs/question-bank-index.md)
+- [Generated lab dashboard](docs/implementation-status.md)
 
-## Safety defaults
-
-- Default primary region: `westeurope`; secondary: `northeurope`, subject to availability.
-- Default live-test budget: no spending without approval; authorized batches are capped at €10.
-- Preflight and validation are read-only.
-- Cleanup is idempotent and limited to the recorded run ID.
-- Pull-request CI never authenticates to Azure.
-- Live verification is based on redacted Azure CLI or PowerShell validation output and cleanup evidence.
-- Mermaid and SVG architecture diagrams are the repository's only instructional visuals.
-- Every assessment-enabled lab (Labs 01–25) contains exactly 50 questions, for 1,250 questions total.
+Repository authoring and automated validation are performed offline. No lab is labeled live-verified until a separately approved disposable-environment run completes the inline path, break/fix, validation, cleanup, and residual audit.
 
 ## License
 

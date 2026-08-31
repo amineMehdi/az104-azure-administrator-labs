@@ -1,6 +1,6 @@
 # Lab 12 solution and diagnostic notes
 
-Use this only after completing the lab and knowledge check. The solution is evidence-led: it does not replace the independent validator or silently repair live state.
+Use this only after completing the guided lab. In Labs 01–25, complete the knowledge check before reading these notes. The solution is evidence-led: it does not replace the independent validator or silently repair live state.
 
 ## Intended checkpoint sequence
 
@@ -8,6 +8,7 @@ Use this only after completing the lab and knowledge check. The solution is evid
 2. **Checkpoint 2:** Deploy a small flexible orchestration VM scale set with an explicit instance count and upgrade policy.
 3. **Checkpoint 3:** Configure bounded autoscale rules and inspect instance protection and health behavior.
 4. **Checkpoint 4:** Use move validation for a destination resource group and document the different process required for another region or subscription.
+5. **Checkpoint 5:** Correlate service state with the run manifest, retain redacted validation evidence, and prove cleanup readiness.
 
 ## Diagnostic order
 
@@ -38,4 +39,4 @@ The live gate is: None beyond the declared role and a disposable subscription.
 
 ## Completion evidence
 
-A defensible result includes a run manifest, independent validation report, redacted CLI or PowerShell evidence, and a cleanup/residual audit. Offline repository tests alone do not establish live verification.
+A defensible result includes a run manifest, independent validation report, redacted Azure CLI evidence captured from PowerShell, and a cleanup/residual audit. Offline repository tests alone do not establish live verification.

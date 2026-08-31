@@ -1,8 +1,11 @@
+
+# BEGIN GENERATED AZ104 V2
+schemaVersion: 2.0.0
 id: LAB-10
 slug: 10-arm-bicep-lifecycle
 title: Interpret, modify, deploy, export, and decompile ARM and Bicep
 blueprintVersion: '2026-04-17'
-domain: Deploy and manage Azure compute resources
+domain: compute
 objectives:
 - CP-IAC-01
 - CP-IAC-02
@@ -15,12 +18,27 @@ testedToolVersions:
   azureCli: '>=2.88.0'
   powershell: '>=7.4'
 estimatedMinutes: 120
-difficulty: intermediate
+difficulty: applied
+experience:
+  scenario: 'You are an infrastructure administrator reviewing and deploying bicep safely. Build and prove this disposable
+    service path: Bicep source is built locally, previewed with ARM what-if, deployed into the tagged resource group, and
+    then exported/decompiled for comparison; deployment outputs and the storage ID flow into manifest validation and cleanup.'
+  role: An infrastructure administrator reviewing and deploying Bicep safely.
+  outcome: Use Azure CLI in PowerShell to build and lint the versioned bicep template, preview and deploy the arm change set,
+    and reconcile deployment output, tags, and ownership state, with recoverable state and deterministic cleanup.
+  completionCriteria:
+  - All required checkpoints report pass.
+  - The deterministic break/fix is injected, diagnosed, and repaired.
+  - cleanup.json reports no active run-owned resources, with any retained item explicitly documented.
 cost:
   class: none
   billableResources: []
   notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator before
     execution and clean up immediately.
+  pricingLinks:
+  - title: Azure compute pricing
+    url: https://azure.microsoft.com/pricing/details/virtual-machines/
+  acknowledgementRequired: false
 permissions:
   azureRbacRoles:
   - Contributor on the lab resource group
@@ -33,14 +51,65 @@ prerequisites:
 - 'External gate review: None beyond the declared role and a disposable subscription.'
 - Azure CLI hosted in PowerShell 7.4 or later
 providers:
-  observed:
+  required:
   - Microsoft.Resources
   - Microsoft.Storage
+  optional: []
   registeredByLab: []
-regions:
-  applicable: true
-  primary: supplied at execution time
-  secondary: null
+inputs:
+- id: run-id
+  parameter: RunId
+  description: Unique lowercase run ownership identifier
+  required: true
+  secret: false
+  source: parameter
+  safeExample: az104l10-01
+  gateBehavior: block
+  checkpointIds:
+  - LAB10-CP01
+  - LAB10-CP02
+  - LAB10-CP03
+  - LAB10-CP04
+  - LAB10-CP05
+- id: subscription-id
+  parameter: SubscriptionId
+  environmentVariable: AZ104_SUBSCRIPTION_ID
+  description: Expected disposable subscription ID
+  required: true
+  secret: false
+  source: parameter-or-environment
+  safeExample: 00000000-0000-0000-0000-000000000000
+  gateBehavior: block
+  checkpointIds:
+  - LAB10-CP01
+  - LAB10-CP02
+  - LAB10-CP03
+  - LAB10-CP04
+  - LAB10-CP05
+- id: location
+  parameter: Location
+  environmentVariable: AZ104_LOCATION
+  description: Approved primary Azure region
+  required: true
+  secret: false
+  source: parameter-or-environment
+  safeExample: westeurope
+  gateBehavior: block
+  checkpointIds:
+  - LAB10-CP01
+  - LAB10-CP02
+  - LAB10-CP03
+  - LAB10-CP04
+  - LAB10-CP05
+acknowledgements:
+  cost:
+    required: false
+    parameter: AcknowledgeCost
+    message: I reviewed current pricing, quota, and the same-session cleanup plan.
+  tenantChange:
+    required: false
+    parameter: AcknowledgeTenantChange
+    message: I am authorized to create or change the declared tenant-scoped objects and will restore recorded settings.
 creates:
   azureResources:
   - resource group
@@ -51,27 +120,368 @@ creates:
   localArtifacts:
   - .state/<run-id>/run.json
   - .state/<run-id>/validation.json
+  - .state/<run-id>/cleanup.json
 tenantScopedChanges: []
 externalRequirements: []
+preflightChecks:
+- id: preflight.context
+  type: context
+  required: true
+  description: Confirm active cloud, tenant, and subscription without changing them.
+  command: az account show --output json
+  expected: Active context matches the supplied subscription and disposable environment.
+- id: preflight.tools
+  type: tool
+  required: true
+  description: Confirm PowerShell, Azure CLI, and az bicep are available.
+  command: az version; az bicep version
+  expected: All required tools meet the versions declared by this lab.
+- id: preflight.inputs
+  type: input
+  required: true
+  description: Check required parameters and environment gates without printing secrets.
+  command: $PSBoundParameters.Keys; Get-ChildItem Env:AZ104_* | Select-Object Name
+  expected: Every required input is present and optional gates are explicitly reported.
+- id: preflight.providers
+  type: provider
+  required: true
+  description: Read registration state for required resource providers.
+  command: az provider show --namespace <provider> --query registrationState --output tsv
+  expected: Every required provider is Registered; preflight performs no registration.
+- id: preflight.region
+  type: region
+  required: true
+  description: Confirm the requested region is available to the subscription.
+  command: az account list-locations --query "[?name=='<location>'].name" --output tsv
+  expected: The supplied region appears in the subscription location inventory.
+- id: preflight.quota
+  type: quota
+  required: false
+  description: Read regional compute usage before deployment.
+  command: az vm list-usage --location <location> --output table
+  expected: Required regional vCPU quota has safe headroom.
+- id: preflight.sku
+  type: sku
+  required: false
+  description: Read available VM or service SKUs in the selected region.
+  command: az vm list-skus --location <location> --all --output table
+  expected: The documented lab SKU has no blocking regional restriction.
+- id: preflight.authored.service
+  type: sku
+  required: true
+  description: Prove prove bicep tooling and deployment-scope readiness with LAB-10's authored read-only provider, feature,
+    tool, region, and SKU queries.
+  command: '$registration = az provider show --namespace Microsoft.Resources --query registrationState --output tsv
+
+    if ($registration -ne ''Registered'') { throw ''Microsoft.Resources is not registered.'' }
+
+    $registration = az provider show --namespace Microsoft.Storage --query registrationState --output tsv
+
+    if ($registration -ne ''Registered'') { throw ''Microsoft.Storage is not registered.'' }'
+  expected: az bicep can build the local template and the target resource group accepts subscription-scoped deployment queries
+    without mutation.
+checkpoints:
+- id: LAB10-CP01
+  title: Prove Bicep tooling and deployment-scope readiness
+  purpose: Read the provider, region, SKU, feature, quota, and companion-tool signals needed for prove bicep tooling and deployment-scope
+    readiness, without changing Azure state.
+  objectiveIds:
+  - CP-IAC-01
+  required: true
+  expectedState: az bicep can build the local template and the target resource group accepts subscription-scoped deployment
+    queries without mutation.
+  scriptMarkers:
+    setup: LAB10-CP01
+    validate: LAB10-CP01
+    cleanup: LAB10-CP01
+  validation:
+    positive:
+      id: cp01.positive
+      description: Read the service properties for prove Bicep tooling and deployment-scope readiness by using exact run-owned
+        identifiers.
+      command: '$validationId=''LAB10-CP01-positive''; $registration = az provider show --namespace Microsoft.Resources --query
+        registrationState --output tsv
+
+        if ($registration -ne ''Registered'') { throw ''Microsoft.Resources is not registered.'' }'
+      expected: az bicep can build the local template and the target resource group accepts subscription-scoped deployment
+        queries without mutation.
+    negative:
+      id: cp01.negative
+      description: Search for conflicting, unowned, or excessive state after prove Bicep tooling and deployment-scope readiness.
+      command: '$validationId=''LAB10-CP01-negative''; $registration = az provider show --namespace Microsoft.Storage --query
+        registrationState --output tsv
+
+        if ($registration -ne ''Registered'') { throw ''Microsoft.Storage is not registered.'' }'
+      expected: 'LAB10-CP01 negative boundary: The undesired state is absent; the negative assertion must not report: Microsoft.Storage
+        is not registered.'
+  cleanup:
+    dependsOn:
+    - LAB10-CP02
+    - LAB10-CP03
+    - LAB10-CP04
+    - LAB10-CP05
+    action: Remove only manifest-recorded objects owned by LAB10-CP01, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp01.residual
+      description: Prove no active managed object remains for LAB10-CP01.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-1
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: What is Bicep?
+      url: https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/overview
+- id: LAB10-CP02
+  title: Build and lint the versioned Bicep template
+  purpose: Provision and immediately inventory the exact run-owned resources needed to build and lint the versioned bicep
+    template, so partial completion remains recoverable.
+  objectiveIds:
+  - CP-IAC-02
+  required: true
+  expectedState: The compiled ARM JSON contains the tagged storage account and the source template remains the authoritative
+    artifact.
+  scriptMarkers:
+    setup: LAB10-CP02
+    validate: LAB10-CP02
+    cleanup: LAB10-CP02
+  validation:
+    positive:
+      id: cp02.positive
+      description: Read the service properties for build and lint the versioned Bicep template by using exact run-owned identifiers.
+      command: '$validationId=''LAB10-CP02-positive''; $provisioning = az deployment group show --resource-group $ResourceGroupName
+        --name "deploy-$RunId" --query properties.provisioningState --output tsv
+
+        if ($provisioning -ne ''Succeeded'') { throw "Deployment state is $provisioning." }'
+      expected: The compiled ARM JSON contains the tagged storage account and the source template remains the authoritative
+        artifact.
+    negative:
+      id: cp02.negative
+      description: Search for conflicting, unowned, or excessive state after build and lint the versioned Bicep template.
+      command: '$validationId=''LAB10-CP02-negative''; $failedOperations = az deployment operation group list --resource-group
+        $ResourceGroupName --name "deploy-$RunId" --query "[?properties.provisioningState==''Failed''] | length(@)" --output
+        tsv
+
+        if ([int]$failedOperations -ne 0) { throw ''The deployment contains failed operations.'' }'
+      expected: 'LAB10-CP02 negative boundary: The undesired state is absent; the negative assertion must not report: The
+        deployment contains failed operations.'
+  cleanup:
+    dependsOn:
+    - LAB10-CP03
+    - LAB10-CP04
+    - LAB10-CP05
+    action: Remove only manifest-recorded objects owned by LAB10-CP02, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp02.residual
+      description: Prove no active managed object remains for LAB10-CP02.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-2
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: What is Bicep?
+      url: https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/overview
+- id: LAB10-CP03
+  title: Preview and deploy the ARM change set
+  purpose: Configure and independently inspect the control-plane and data-path properties needed to preview and deploy the
+    arm change set.
+  objectiveIds:
+  - CP-IAC-03
+  required: true
+  expectedState: The what-if result is reviewed and the completed deployment returns the exact storage account ID recorded
+    for this run.
+  scriptMarkers:
+    setup: LAB10-CP03
+    validate: LAB10-CP03
+    cleanup: LAB10-CP03
+  validation:
+    positive:
+      id: cp03.positive
+      description: Read the service properties for preview and deploy the ARM change set by using exact run-owned identifiers.
+      command: '$validationId=''LAB10-CP03-positive''; $storageState = az storage account show --resource-group $ResourceGroupName
+        --name $storage --query provisioningState --output tsv
+
+        if ($storageState -ne ''Succeeded'') { throw "Storage state is $storageState." }'
+      expected: The what-if result is reviewed and the completed deployment returns the exact storage account ID recorded
+        for this run.
+    negative:
+      id: cp03.negative
+      description: Search for conflicting, unowned, or excessive state after preview and deploy the ARM change set.
+      command: '$validationId=''LAB10-CP03-negative''; $publicAccess = az storage account show --resource-group $ResourceGroupName
+        --name $storage --query allowBlobPublicAccess --output tsv
+
+        if ($publicAccess -ne ''false'') { throw ''Blob public access is not disabled.'' }'
+      expected: 'LAB10-CP03 negative boundary: The undesired state is absent; the negative assertion must not report: Blob
+        public access is not disabled.'
+  cleanup:
+    dependsOn:
+    - LAB10-CP04
+    - LAB10-CP05
+    action: Remove only manifest-recorded objects owned by LAB10-CP03, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp03.residual
+      description: Prove no active managed object remains for LAB10-CP03.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-3
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: What is Bicep?
+      url: https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/overview
+- id: LAB10-CP04
+  title: Export and decompile the deployed template
+  purpose: Exercise the deterministic operational or denied path needed to export and decompile the deployed template, then
+    retain comparable before-and-after results.
+  objectiveIds:
+  - CP-IAC-04
+  required: true
+  expectedState: The exported resource-group template and decompiled Bicep are local review artifacts; neither is silently
+    treated as the original source.
+  scriptMarkers:
+    setup: LAB10-CP04
+    validate: LAB10-CP04
+    cleanup: LAB10-CP04
+  validation:
+    positive:
+      id: cp04.positive
+      description: Read the service properties for export and decompile the deployed template by using exact run-owned identifiers.
+      command: '$validationId=''LAB10-CP04-positive''; $tls = az storage account show --resource-group $ResourceGroupName
+        --name $storage --query minimumTlsVersion --output tsv
+
+        if ($tls -ne ''TLS1_2'') { throw "Minimum TLS is $tls." }'
+      expected: The exported resource-group template and decompiled Bicep are local review artifacts; neither is silently
+        treated as the original source.
+    negative:
+      id: cp04.negative
+      description: Search for conflicting, unowned, or excessive state after export and decompile the deployed template.
+      command: '$validationId=''LAB10-CP04-negative''; $unexpected = az resource list --resource-group $ResourceGroupName
+        --query "[?type!=''Microsoft.Storage/storageAccounts''] | length(@)" --output tsv
+
+        if ([int]$unexpected -ne 0) { throw ''Unexpected resource types exist in the deployment.'' }'
+      expected: 'LAB10-CP04 negative boundary: The undesired state is absent; the negative assertion must not report: Unexpected
+        resource types exist in the deployment.'
+  cleanup:
+    dependsOn:
+    - LAB10-CP05
+    action: Remove only manifest-recorded objects owned by LAB10-CP04, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp04.residual
+      description: Prove no active managed object remains for LAB10-CP04.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-4
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: What is Bicep?
+      url: https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/overview
+- id: LAB10-CP05
+  title: Reconcile deployment output, tags, and ownership state
+  purpose: Reconcile live service properties, returned IDs, and dependency-aware removal needed to reconcile deployment output,
+    tags, and ownership state before handoff.
+  objectiveIds:
+  - CP-IAC-01
+  - CP-IAC-02
+  - CP-IAC-03
+  - CP-IAC-04
+  - CP-IAC-05
+  required: true
+  expectedState: Deployment provisioningState is Succeeded, the storage ID matches run.json, and no unexpected resource exists
+    in the run-owned group.
+  scriptMarkers:
+    setup: LAB10-CP05
+    validate: LAB10-CP05
+    cleanup: LAB10-CP05
+  validation:
+    positive:
+      id: cp05.positive
+      description: Read the service properties for reconcile deployment output, tags, and ownership state by using exact run-owned
+        identifiers.
+      command: '$validationId=''LAB10-CP05-positive''; $count = az resource list --resource-group $ResourceGroupName --query
+        "[?type==''Microsoft.Storage/storageAccounts''] | length(@)" --output tsv
+
+        if ([int]$count -ne 1) { throw "Expected one storage account; found $count." }'
+      expected: Deployment provisioningState is Succeeded, the storage ID matches run.json, and no unexpected resource exists
+        in the run-owned group.
+    negative:
+      id: cp05.negative
+      description: Search for conflicting, unowned, or excessive state after reconcile deployment output, tags, and ownership
+        state.
+      command: '$validationId=''LAB10-CP05-negative''; $insecure = az storage account list --resource-group $ResourceGroupName
+        --query ''[?enableHttpsTrafficOnly!=`true`] | length(@)'' --output tsv
+
+        if ([int]$insecure -ne 0) { throw ''A storage account permits non-HTTPS traffic.'' }'
+      expected: 'LAB10-CP05 negative boundary: The undesired state is absent; the negative assertion must not report: A storage
+        account permits non-HTTPS traffic.'
+  cleanup:
+    dependsOn: []
+    action: Remove only manifest-recorded objects owned by LAB10-CP05, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp05.residual
+      description: Prove no active managed object remains for LAB10-CP05.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-5
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: What is Bicep?
+      url: https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/overview
 validation:
-  commandLanes:
-  - scripts/cli/Validate.ps1
-  output: .state/<run-id>/validation.json
-  statuses:
-  - pass
-  - fail
-  - warning
-  - skipped
-  liveExecutionRequiredForLiveVerified: true
+  script: scripts/cli/Validate.ps1
+  artifact: .state/<run-id>/validation.json
+  modes:
+  - Deployment
+  - PostCleanup
+  resultPolicy:
+    requiredFailureResult: fail
+    optionalSkipResult: partial
+    allRequiredPassResult: pass
 cleanup:
-  azureDeletion: exact recorded resource-group ID after tag verification
-  entraDeletion: none
-  reportOnlyByDefault: true
+  script: scripts/cli/Cleanup.ps1
+  artifact: .state/<run-id>/cleanup.json
+  previewByDefault: true
   requiresExecuteFlag: true
-  residualAuditRequired: true
+  ownershipVerification:
+    manifestIdMatch: true
+    requiredTags:
+    - purpose
+    - labId
+    - runId
+  residualChecks:
+  - id: cp01.residual
+    description: Prove no active managed object remains for LAB10-CP01.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp02.residual
+    description: Prove no active managed object remains for LAB10-CP02.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp03.residual
+    description: Prove no active managed object remains for LAB10-CP03.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp04.residual
+    description: Prove no active managed object remains for LAB10-CP04.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp05.residual
+    description: Prove no active managed object remains for LAB10-CP05.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  retainedItemsAllowed: true
+  irreversiblePurge: never
 assessment:
   enabled: true
   questionCount: 50
   primaryDomain: compute
-lastOfflineValidated: '2026-08-30'
+lastOfflineValidated: '2026-08-31'
 lastLiveVerified: null
+# END GENERATED AZ104 V2

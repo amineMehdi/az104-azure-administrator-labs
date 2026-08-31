@@ -1,0 +1,145 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "AZ-104: Initialize environment",
+      "type": "process",
+      "command": "pwsh",
+      "args": [
+        "-NoLogo",
+        "-NoProfile",
+        "-File",
+        "tools/Initialize-LabEnvironment.ps1"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "AZ-104: Check readiness (offline)",
+      "type": "process",
+      "command": "pwsh",
+      "args": [
+        "-NoLogo",
+        "-NoProfile",
+        "-File",
+        "tools/Test-LabEnvironment.ps1",
+        "-OfflineOnly"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "AZ-104: Validate repository",
+      "type": "process",
+      "command": "python",
+      "args": [
+        "tools/validate_repository.py",
+        "--release"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "AZ-104: Run Pester contracts",
+      "type": "process",
+      "command": "pwsh",
+      "args": [
+        "-NoLogo",
+        "-NoProfile",
+        "-Command",
+        "$result = Invoke-Pester -Path labs -Output Detailed -PassThru; if ($result.FailedCount -gt 0) { exit 1 }"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "AZ-104: Stage documentation site",
+      "type": "process",
+      "command": "python",
+      "args": [
+        "tools/build_docs_site.py"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "AZ-104: Preview documentation site",
+      "type": "process",
+      "command": "python",
+      "args": [
+        "-m",
+        "mkdocs",
+        "serve",
+        "--strict"
+      ],
+      "dependsOrder": "sequence",
+      "dependsOn": "AZ-104: Stage documentation site",
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "AZ-104: Build documentation site (strict)",
+      "type": "process",
+      "command": "python",
+      "args": [
+        "-m",
+        "mkdocs",
+        "build",
+        "--strict",
+        "--clean"
+      ],
+      "dependsOrder": "sequence",
+      "dependsOn": "AZ-104: Stage documentation site",
+      "problemMatcher": []
+    },
+    {
+      "label": "AZ-104: Verify built documentation site",
+      "type": "process",
+      "command": "python",
+      "args": [
+        "tools/build_docs_site.py",
+        "--check-built-site",
+        "site"
+      ],
+      "dependsOrder": "sequence",
+      "dependsOn": "AZ-104: Build documentation site (strict)",
+      "problemMatcher": []
+    },
+    {
+      "label": "AZ-104: Show local progress",
+      "type": "process",
+      "command": "pwsh",
+      "args": [
+        "-NoLogo",
+        "-NoProfile",
+        "-File",
+        "tools/Update-LearnerProgress.ps1",
+        "-Show"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "AZ-104: Preview a lab cleanup",
+      "type": "process",
+      "command": "pwsh",
+      "args": [
+        "-NoLogo",
+        "-NoProfile",
+        "-File",
+        "${input:labFolder}/scripts/cli/Cleanup.ps1",
+        "-RunId",
+        "${input:runId}"
+      ],
+      "problemMatcher": []
+    }
+  ],
+  "inputs": [
+    {
+      "id": "labFolder",
+      "type": "promptString",
+      "description": "Lab folder, for example labs/06-storage-accounts-security",
+      "default": "labs/00-safe-bootstrap"
+    },
+    {
+      "id": "runId",
+      "type": "promptString",
+      "description": "Existing run ID whose cleanup plan you want to preview",
+      "default": "demo01"
+    }
+  ]
+}

@@ -1,8 +1,11 @@
+
+# BEGIN GENERATED AZ104 V2
+schemaVersion: 2.0.0
 id: LAB-01
 slug: 01-entra-users-groups
 title: Create and manage Microsoft Entra users and groups
 blueprintVersion: '2026-04-17'
-domain: Manage Azure identities and governance
+domain: identity-governance
 objectives:
 - IG-USERS-01
 - IG-USERS-02
@@ -13,10 +16,25 @@ testedToolVersions:
   powershell: '>=7.4'
 estimatedMinutes: 75
 difficulty: foundational
+experience:
+  scenario: 'An identity administrator onboarding a small operations team is responding to an operational request: Create,
+    operate, validate, and retire two cloud-only users and their member and owner relationships by using Microsoft Graph through
+    Azure CLI.'
+  role: An identity administrator onboarding a small operations team.
+  outcome: Create, operate, validate, and retire two cloud-only users and their member and owner relationships by using Microsoft
+    Graph through Azure CLI.
+  completionCriteria:
+  - All required checkpoints report pass.
+  - The deterministic break/fix is injected, diagnosed, and repaired.
+  - cleanup.json reports no active run-owned resources, with any retained item explicitly documented.
 cost:
   class: none
   billableResources: []
   notes: Basic cloud-only users and a security group do not create Azure resource charges.
+  pricingLinks:
+  - title: Microsoft Entra pricing
+    url: https://azure.microsoft.com/pricing/details/active-directory/
+  acknowledgementRequired: false
 permissions:
   azureRbacRoles: []
   entraRoles:
@@ -31,10 +49,86 @@ prerequisites:
 - A verified tenant domain that can be used for cloud-only user principal names
 - Azure CLI hosted in PowerShell 7.4 or later
 providers:
-  observed: []
+  required: []
+  optional: []
   registeredByLab: []
-regions:
-  applicable: false
+inputs:
+- id: run-id
+  parameter: RunId
+  description: Unique lowercase run ownership identifier
+  required: true
+  secret: false
+  source: parameter
+  safeExample: az104l01-01
+  gateBehavior: block
+  checkpointIds:
+  - LAB01-CP01
+  - LAB01-CP02
+  - LAB01-CP03
+  - LAB01-CP04
+  - LAB01-CP05
+- id: subscription-id
+  parameter: SubscriptionId
+  environmentVariable: AZ104_SUBSCRIPTION_ID
+  description: Expected disposable subscription ID
+  required: true
+  secret: false
+  source: parameter-or-environment
+  safeExample: 00000000-0000-0000-0000-000000000000
+  gateBehavior: block
+  checkpointIds:
+  - LAB01-CP01
+  - LAB01-CP02
+  - LAB01-CP03
+  - LAB01-CP04
+  - LAB01-CP05
+- id: location
+  parameter: Location
+  environmentVariable: AZ104_LOCATION
+  description: Approved primary Azure region
+  required: true
+  secret: false
+  source: parameter-or-environment
+  safeExample: westeurope
+  gateBehavior: block
+  checkpointIds:
+  - LAB01-CP01
+  - LAB01-CP02
+  - LAB01-CP03
+  - LAB01-CP04
+  - LAB01-CP05
+- id: tenant-domain
+  environmentVariable: AZ104_TENANT_DOMAIN
+  description: Verified disposable tenant domain
+  required: true
+  secret: false
+  gateBehavior: block
+  safeExample: contoso-lab.onmicrosoft.com
+  checkpointIds:
+  - LAB01-CP01
+  - LAB01-CP02
+  parameter: TenantDomain
+  source: environment
+- id: initial-password
+  environmentVariable: AZ104_LAB_INITIAL_PASSWORD
+  description: Temporary policy-compliant initial password
+  required: true
+  secret: true
+  gateBehavior: block
+  safeExample: <secret>
+  checkpointIds:
+  - LAB01-CP02
+  parameter: InitialPassword
+  source: environment
+acknowledgements:
+  cost:
+    required: false
+    parameter: AcknowledgeCost
+    message: I reviewed current pricing, quota, and the same-session cleanup plan.
+  tenantChange:
+    required: true
+    parameter: AcknowledgeTenantChange
+    message: I am authorized to create or change the declared tenant-scoped objects and will restore recorded settings.
 creates:
   azureResources: []
   entraObjects:
@@ -45,28 +139,409 @@ creates:
   localArtifacts:
   - .state/<run-id>/run.json
   - .state/<run-id>/validation.json
+  - .state/<run-id>/cleanup.json
 tenantScopedChanges:
 - Microsoft Entra user objects
 - Microsoft Entra security group, membership, and ownership
 externalRequirements: []
+preflightChecks:
+- id: preflight.context
+  type: context
+  required: true
+  description: Confirm active cloud, tenant, and subscription without changing them.
+  command: az account show --output json
+  expected: Active context matches the supplied subscription and disposable environment.
+- id: preflight.tools
+  type: tool
+  required: true
+  description: Confirm PowerShell, Azure CLI, and az bicep are available.
+  command: az version; az bicep version
+  expected: All required tools meet the versions declared by this lab.
+- id: preflight.inputs
+  type: input
+  required: true
+  description: Check required parameters and environment gates without printing secrets.
+  command: $PSBoundParameters.Keys; Get-ChildItem Env:AZ104_* | Select-Object Name
+  expected: Every required input is present and optional gates are explicitly reported.
+- id: preflight.providers
+  type: provider
+  required: false
+  description: Read registration state for required resource providers.
+  command: az provider show --namespace <provider> --query registrationState --output tsv
+  expected: Every required provider is Registered; preflight performs no registration.
+- id: preflight.region
+  type: region
+  required: true
+  description: Confirm the requested region is available to the subscription.
+  command: az account list-locations --query "[?name=='<location>'].name" --output tsv
+  expected: The supplied region appears in the subscription location inventory.
+- id: preflight.authored.lab01.graph-domain
+  type: permission
+  required: true
+  description: Resolve the supplied UPN suffix as one verified domain through Microsoft Graph.
+  command: '$domains = @(az rest --method get --url ''https://graph.microsoft.com/v1.0/domains?$select=id,isVerified'' --output
+    json | ConvertFrom-Json).value
+
+    if (@($domains | Where-Object { $_.id -eq $tenantDomain -and $_.isVerified }).Count -ne 1) { throw ''The supplied tenant
+    domain is not verified in the active tenant.'' }
+
+    '
+  expected: Exactly one verified Graph domain matches AZ104_TENANT_DOMAIN.
+- id: preflight.authored.lab01.password-policy
+  type: input
+  required: true
+  description: Validate the secret locally without printing or persisting it.
+  command: 'if (-not (Test-Path Env:AZ104_LAB_INITIAL_PASSWORD) -or [string]::IsNullOrWhiteSpace($initialPassword) -or $initialPassword.Length
+    -lt 12) { throw ''The temporary password must contain at least 12 characters.'' }
+
+    '
+  expected: The secret is present and meets the lab's minimum local length check; its value remains redacted.
+checkpoints:
+- id: LAB01-CP01
+  title: Prove Graph access and validate the verified UPN domain
+  purpose: Confirm the active tenant, enumerate only verified domains, and stop if the supplied domain cannot host a cloud-only
+    user.
+  objectiveIds:
+  - IG-USERS-01
+  required: true
+  expectedState: The supplied domain appears exactly once with isVerified true, and the Graph request succeeds in the active
+    tenant.
+  scriptMarkers:
+    setup: LAB01-CP01
+    validate: LAB01-CP01
+    cleanup: LAB01-CP01
+  validation:
+    positive:
+      id: cp01.positive
+      description: Read the service properties for prove Graph access and validate the verified UPN domain by using exact
+        run-owned identifiers.
+      command: '$validationId=''LAB01-CP01-positive''; $domain = az rest --method get --url "https://graph.microsoft.com/v1.0/domains/$($env:AZ104_TENANT_DOMAIN)?%24select=id,isVerified"
+        --output json | ConvertFrom-Json
+
+        if ($domain.id -ne $env:AZ104_TENANT_DOMAIN -or -not $domain.isVerified) { throw ''Selected UPN domain is not verified.''
+        }
+
+        $domain
+
+        '
+      expected: The selected domain exists and is verified.
+    negative:
+      id: cp01.negative
+      description: Search for conflicting, unowned, or excessive state after prove Graph access and validate the verified
+        UPN domain.
+      command: '$validationId=''LAB01-CP01-negative''; $users = @(az rest --method get --url "https://graph.microsoft.com/v1.0/users?%24filter=startswith(displayName,''AZ104-L01-$RunId-'')&%24select=id"
+        --output json | ConvertFrom-Json).value
+
+        $unexpected = @($users | Where-Object id -notin $external.userIds)
+
+        if ($users.Count -ne 2 -or $unexpected.Count -ne 0) { throw ''Run-specific user inventory contains a missing or unowned
+        object.'' }
+
+        ''Run-specific users=2; unowned users=0''
+
+        '
+      expected: During deployment, exactly the two manifest IDs exist and no third run-specific user is present.
+  cleanup:
+    dependsOn:
+    - LAB01-CP02
+    - LAB01-CP03
+    - LAB01-CP04
+    - LAB01-CP05
+    action: Remove only manifest-recorded objects owned by LAB01-CP01, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp01.residual
+      description: Prove no active managed object remains for LAB01-CP01.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-1
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Microsoft Graph user resource type
+      url: https://learn.microsoft.com/en-us/graph/api/resources/user
+- id: LAB01-CP02
+  title: Create two cloud-only users and persist each ID immediately
+  purpose: Create Alex and Blair one at a time, recording each immutable object ID before attempting the next user.
+  objectiveIds:
+  - IG-USERS-02
+  required: true
+  expectedState: Two enabled cloud-only users exist with unique UPNs, Operations department, and IDs already present in run.json.
+  scriptMarkers:
+    setup: LAB01-CP02
+    validate: LAB01-CP02
+    cleanup: LAB01-CP02
+  validation:
+    positive:
+      id: cp02.positive
+      description: Read the service properties for create two cloud-only users and persist each ID immediately by using exact
+        run-owned identifiers.
+      command: '$validationId=''LAB01-CP02-positive''; $users = @(az rest --method get --url "https://graph.microsoft.com/v1.0/users?%24filter=startswith(displayName,''AZ104-L01-$RunId-'')&%24select=id,displayName,accountEnabled,department"
+        --output json | ConvertFrom-Json).value
+
+        if ($users.Count -ne 2 -or @($users | Where-Object { -not $_.accountEnabled -or $_.department -ne ''Operations'' }).Count
+        -ne 0) { throw ''Created-user state mismatch.'' }
+
+        $users
+
+        '
+      expected: Exactly two run-specific users are enabled and assigned to Operations.
+    negative:
+      id: cp02.negative
+      description: Search for conflicting, unowned, or excessive state after create two cloud-only users and persist each
+        ID immediately.
+      command: '$validationId=''LAB01-CP02-negative''; $users = @(az rest --method get --url "https://graph.microsoft.com/v1.0/users?%24filter=startswith(displayName,''AZ104-L01-$RunId-'')&%24select=id,userType"
+        --output json | ConvertFrom-Json).value
+
+        if ($users.Count -ne 2 -or @($users | Where-Object userType -ne ''Member'').Count -ne 0) { throw ''Expected exactly
+        two member users.'' }
+
+        $users
+
+        '
+      expected: The inventory contains no third run-specific user and each created object has userType Member.
+  cleanup:
+    dependsOn:
+    - LAB01-CP03
+    - LAB01-CP04
+    - LAB01-CP05
+    action: Remove only manifest-recorded objects owned by LAB01-CP02, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp02.residual
+      description: Prove no active managed object remains for LAB01-CP02.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-2
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Microsoft Graph user resource type
+      url: https://learn.microsoft.com/en-us/graph/api/resources/user
+- id: LAB01-CP03
+  title: Create the security group and add Alex as a member
+  purpose: Establish a reusable authorization boundary and add only the first recorded user through an object-ID reference.
+  objectiveIds:
+  - IG-USERS-01
+  required: true
+  expectedState: One security-enabled group exists and its direct members collection contains Alex but not Blair.
+  scriptMarkers:
+    setup: LAB01-CP03
+    validate: LAB01-CP03
+    cleanup: LAB01-CP03
+  validation:
+    positive:
+      id: cp03.positive
+      description: Read the service properties for create the security group and add Alex as a member by using exact run-owned
+        identifiers.
+      command: '$validationId=''LAB01-CP03-positive''; $members = @(az rest --method get --url "https://graph.microsoft.com/v1.0/groups/$($external.groupId)/members?%24select=id,displayName"
+        --output json | ConvertFrom-Json).value
+
+        if ($members.Count -ne 1 -or $members[0].id -ne $external.userIds[0]) { throw ''Alex is not the sole direct member.''
+        }
+
+        $members
+
+        '
+      expected: The member list contains only Alex's recorded object ID.
+    negative:
+      id: cp03.negative
+      description: Search for conflicting, unowned, or excessive state after create the security group and add Alex as a member.
+      command: '$validationId=''LAB01-CP03-negative''; $members = @(az rest --method get --url "https://graph.microsoft.com/v1.0/groups/$($external.groupId)/members?%24select=id"
+        --output json | ConvertFrom-Json).value
+
+        if ($external.userIds[1] -in @($members.id)) { throw ''Blair received unintended membership.'' }
+
+        ''Blair direct membership=False''
+
+        '
+      expected: Blair's owner candidate ID is absent from direct membership.
+  cleanup:
+    dependsOn:
+    - LAB01-CP04
+    - LAB01-CP05
+    action: Remove only manifest-recorded objects owned by LAB01-CP03, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp03.residual
+      description: Prove no active managed object remains for LAB01-CP03.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-3
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Microsoft Graph user resource type
+      url: https://learn.microsoft.com/en-us/graph/api/resources/user
+- id: LAB01-CP04
+  title: Assign Blair as owner without making Blair a member
+  purpose: Add the second user to the owners reference and prove that ownership does not imply membership.
+  objectiveIds:
+  - IG-USERS-02
+  required: true
+  expectedState: Blair is the sole explicit owner, Alex is the sole member, and the two object-ID sets do not overlap.
+  scriptMarkers:
+    setup: LAB01-CP04
+    validate: LAB01-CP04
+    cleanup: LAB01-CP04
+  validation:
+    positive:
+      id: cp04.positive
+      description: Read the service properties for assign Blair as owner without making Blair a member by using exact run-owned
+        identifiers.
+      command: '$validationId=''LAB01-CP04-positive''; $owners = @(az rest --method get --url "https://graph.microsoft.com/v1.0/groups/$($external.groupId)/owners?%24select=id,displayName"
+        --output json | ConvertFrom-Json).value
+
+        if ($owners.Count -ne 1 -or $owners[0].id -ne $external.userIds[1]) { throw ''Blair is not the sole explicit owner.''
+        }
+
+        $owners
+
+        '
+      expected: The owners collection contains Blair's recorded object ID.
+    negative:
+      id: cp04.negative
+      description: Search for conflicting, unowned, or excessive state after assign Blair as owner without making Blair a
+        member.
+      command: '$validationId=''LAB01-CP04-negative''; $members = @(az rest --method get --url "https://graph.microsoft.com/v1.0/groups/$($external.groupId)/members?%24select=id"
+        --output json | ConvertFrom-Json).value
+
+        if ($external.userIds[1] -in @($members.id)) { throw ''Ownership leaked into membership.'' }
+
+        ''Owner/member overlap=0''
+
+        '
+      expected: Blair's owner ID is absent from the direct members collection.
+  cleanup:
+    dependsOn:
+    - LAB01-CP05
+    action: Remove only manifest-recorded objects owned by LAB01-CP04, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp04.residual
+      description: Prove no active managed object remains for LAB01-CP04.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-4
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Microsoft Graph user resource type
+      url: https://learn.microsoft.com/en-us/graph/api/resources/user
+- id: LAB01-CP05
+  title: Operate the user lifecycle and reconcile the final identity inventory
+  purpose: Update Alex's job title, disable and re-enable Blair, then reconcile users, membership, ownership, and run.json
+    by immutable ID.
+  objectiveIds:
+  - IG-USERS-01
+  - IG-USERS-02
+  required: true
+  expectedState: Alex has the new job title, Blair is enabled again, and the final relationship inventory still has one distinct
+    member and owner.
+  scriptMarkers:
+    setup: LAB01-CP05
+    validate: LAB01-CP05
+    cleanup: LAB01-CP05
+  validation:
+    positive:
+      id: cp05.positive
+      description: Read the service properties for operate the user lifecycle and reconcile the final identity inventory by
+        using exact run-owned identifiers.
+      command: '$validationId=''LAB01-CP05-positive''; $alex = az rest --method get --url "https://graph.microsoft.com/v1.0/users/$($external.userIds[0])?%24select=id,jobTitle,department,accountEnabled"
+        --output json | ConvertFrom-Json
+
+        if ($alex.id -ne $external.userIds[0] -or $alex.jobTitle -ne ''Cloud Operations Analyst'' -or $alex.department -ne
+        ''Operations'' -or -not $alex.accountEnabled) { throw ''Alex lifecycle state mismatch.'' }
+
+        $alex
+
+        '
+      expected: Alex is enabled with the expected job title and department.
+    negative:
+      id: cp05.negative
+      description: Search for conflicting, unowned, or excessive state after operate the user lifecycle and reconcile the
+        final identity inventory.
+      command: '$validationId=''LAB01-CP05-negative''; $group = az rest --method get --url "https://graph.microsoft.com/v1.0/groups/$($external.groupId)?%24select=id,deletedDateTime"
+        --output json | ConvertFrom-Json
+
+        $members = @(az rest --method get --url "https://graph.microsoft.com/v1.0/groups/$($external.groupId)/members?%24select=id"
+        --output json | ConvertFrom-Json).value
+
+        $owners = @(az rest --method get --url "https://graph.microsoft.com/v1.0/groups/$($external.groupId)/owners?%24select=id"
+        --output json | ConvertFrom-Json).value
+
+        if ($group.id -ne $external.groupId -or $group.deletedDateTime) { throw ''Group is missing or deleted.'' }
+
+        if ($members.Count -ne 1 -or $members[0].id -ne $external.userIds[0] -or $owners.Count -ne 1 -or $owners[0].id -ne
+        $external.userIds[1]) { throw ''Final member/owner reconciliation failed.'' }
+
+        if (@($state.managedObjects | Where-Object { $_.type -in @(''Microsoft.Graph/user'',''Microsoft.Graph/group'') -and
+        $_.lifecycleStatus -eq ''active'' }).Count -ne 3) { throw ''Manifest identity inventory is incomplete.'' }
+
+        ''Final users=2; groups=1; members=1; owners=1''
+
+        '
+      expected: The group is active, has no deletedDateTime, and every run-owned ID is represented once in run.json.
+  cleanup:
+    dependsOn: []
+    action: Remove only manifest-recorded objects owned by LAB01-CP05, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp05.residual
+      description: Prove no active managed object remains for LAB01-CP05.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-5
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Microsoft Graph user resource type
+      url: https://learn.microsoft.com/en-us/graph/api/resources/user
 validation:
-  commandLanes:
-  - scripts/cli/Validate.ps1
-  output: .state/<run-id>/validation.json
-  statuses:
-  - pass
-  - fail
-  - warning
-  - skipped
+  script: scripts/cli/Validate.ps1
+  artifact: .state/<run-id>/validation.json
+  modes:
+  - Deployment
+  - PostCleanup
+  resultPolicy:
+    requiredFailureResult: fail
+    optionalSkipResult: partial
+    allRequiredPassResult: pass
 cleanup:
-  azureDeletion: none
-  entraDeletion: exact recorded object IDs only
-  reportOnlyByDefault: true
+  script: scripts/cli/Cleanup.ps1
+  artifact: .state/<run-id>/cleanup.json
+  previewByDefault: true
   requiresExecuteFlag: true
-  softDeleteNote: User deletion is recoverable until deleted-item retention expires unless explicitly purged.
+  ownershipVerification:
+    manifestIdMatch: true
+    requiredTags: []
+  residualChecks:
+  - id: cp01.residual
+    description: Prove no active managed object remains for LAB01-CP01.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp02.residual
+    description: Prove no active managed object remains for LAB01-CP02.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp03.residual
+    description: Prove no active managed object remains for LAB01-CP03.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp04.residual
+    description: Prove no active managed object remains for LAB01-CP04.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp05.residual
+    description: Prove no active managed object remains for LAB01-CP05.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  retainedItemsAllowed: true
+  irreversiblePurge: never
 assessment:
   enabled: true
   questionCount: 50
   primaryDomain: identity-governance
-lastOfflineValidated: '2026-08-30'
+lastOfflineValidated: '2026-08-31'
 lastLiveVerified: null
+# END GENERATED AZ104 V2

@@ -1,13 +1,17 @@
+
+# BEGIN GENERATED AZ104 V2
 #requires -Version 7.4
 [CmdletBinding()]
 [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingWriteHost', '', Justification = 'Interactive lab progress is intentionally written to the host.')]
-[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSReviewUnusedParameter', '', Justification = 'Lifecycle scripts keep one consistent interface across all labs.')]
-[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseDeclaredVarsMoreThanAssignments', '', Justification = 'Shared safe-naming variables are retained for a consistent learner path.')]
+[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSReviewUnusedParameter', '', Justification = 'All lifecycle scripts expose a stable cross-lab interface.')]
+[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseDeclaredVarsMoreThanAssignments', '', Justification = 'Generated task variables are intentionally shared across checkpoint blocks.')]
 param(
-    [string]$SubscriptionId = $env:AZURE_SUBSCRIPTION_ID,
-    [Parameter(Mandatory)][ValidatePattern('^[a-z0-9-]+$')][string]$RunId,
-    [Parameter(Mandatory)][ValidatePattern('^[a-z0-9-]+$')][string]$Location,
-    [string]$SecondaryLocation = $env:AZURE_SECONDARY_LOCATION,
+    [string]$SubscriptionId = $env:AZ104_SUBSCRIPTION_ID,
+    [Parameter(Mandatory)][ValidatePattern('^[a-z0-9](?:[a-z0-9-]{0,30}[a-z0-9])?$')][string]$RunId,
+    [Parameter(Mandatory)][ValidatePattern('^[a-z0-9]+$')][string]$Location,
+    [string]$SecondaryLocation = $env:AZ104_SECONDARY_LOCATION,
+    [switch]$AcknowledgeCost,
+    [switch]$AcknowledgeTenantChange,
     [switch]$Execute
 )
 
@@ -16,65 +20,341 @@ $ErrorActionPreference = 'Stop'
 $PSNativeCommandUseErrorActionPreference = $true
 
 if (-not (Get-Command az -ErrorAction SilentlyContinue)) {
-    throw 'Azure CLI is required. Install it, run az login deliberately, and retry.'
+    throw 'Azure CLI is required. Run the repository readiness initializer, then retry.'
 }
 
 $LabRoot = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
 $StateDir = Join-Path $LabRoot ".state/$RunId"
 $Manifest = Join-Path $StateDir 'run.json'
-$ResourceGroupName = "rg-az104-l12-$RunId"
+$ResourceGroupName = $(if ('12' -in @('00', '01', '02')) { $null } else { "rg-az104-l12-$RunId" })
 $suffix = (($RunId -replace '[^a-z0-9]', '') + '000000000000').Substring(0, 12)
 
-Write-Host 'LAB-12 plan'
+Write-Host 'LAB-12 execution plan'
 Write-Host "  subscription: $SubscriptionId"
 Write-Host "  location: $Location"
-Write-Host '  scope: subscription'
-Write-Host '  cost class: elevated'
-Write-Host '  resources: resource group, availability set, zonal VM metadata, flexible VM scale set, autoscale setting'
+Write-Host '  command surface: Azure CLI hosted in PowerShell'
+Write-Host '  state: run.json, validation.json, cleanup.json'
 if (-not $Execute) {
-    Write-Host 'Preview only. Re-run with -Execute after approving context, permissions, cost, and gates.'
+    Write-Host 'Preview only. Review context, inputs, cost, tenant scope, and cleanup before using -Execute.'
     return
 }
+if ($true -and -not $AcknowledgeCost) { throw 'This lab requires -AcknowledgeCost before execution.' }
+if ($false -and -not $AcknowledgeTenantChange) { throw 'This lab requires -AcknowledgeTenantChange before execution.' }
 
-& (Join-Path $PSScriptRoot 'Preflight.ps1') -SubscriptionId $SubscriptionId -Location $Location
-if (Test-Path -LiteralPath $Manifest) { throw "State already exists at $Manifest; choose a new run ID." }
+& (Join-Path $PSScriptRoot 'Preflight.ps1') -SubscriptionId $SubscriptionId -RunId $RunId -Location $Location -SecondaryLocation $SecondaryLocation
+if (Test-Path -LiteralPath $Manifest) { throw "State already exists at $Manifest. Choose a new run ID." }
 New-Item -ItemType Directory -Path $StateDir -Force | Out-Null
 $account = az account show --output json | ConvertFrom-Json
 if (-not $SubscriptionId) { $SubscriptionId = [string]$account.id }
-$state = [ordered]@{
+$now = (Get-Date).ToUniversalTime().ToString('o')
+$state = @{
+    schemaVersion = '1.0.0'
     labId = 'LAB-12'
     runId = $RunId
-    tenantId = [string]$account.tenantId
-    subscriptionId = $SubscriptionId
-    location = $Location
-    createdAt = (Get-Date).ToUniversalTime().ToString('o')
-    status = 'recorded-before-mutation'
-    resourceGroup = [ordered]@{ name = $null; id = $null }
-    resources = @()
-    external = [ordered]@{}
+    createdAt = $now
+    updatedAt = $now
+    status = 'initialized'
+    context = @{ cloud = [string]$account.environmentName; tenantId = [string]$account.tenantId; subscriptionId = [string]$SubscriptionId }
+    acknowledgements = @{ cost = [bool]$AcknowledgeCost; tenantChange = [bool]$AcknowledgeTenantChange }
+    inputs = @{ 'location' = $Location; 'secondary-location' = $SecondaryLocation }
+    checkpointStates = @(
+        @{ checkpointId = 'LAB12-CP01'; required = $true; status = 'pending'; updatedAt = $now; message = 'Not started.' }
+        @{ checkpointId = 'LAB12-CP02'; required = $true; status = 'pending'; updatedAt = $now; message = 'Not started.' }
+        @{ checkpointId = 'LAB12-CP03'; required = $true; status = 'pending'; updatedAt = $now; message = 'Not started.' }
+        @{ checkpointId = 'LAB12-CP04'; required = $true; status = 'pending'; updatedAt = $now; message = 'Not started.' }
+        @{ checkpointId = 'LAB12-CP05'; required = $true; status = 'pending'; updatedAt = $now; message = 'Not started.' }
+    )
+    managedObjects = @()
+    originalSettings = @()
 }
-$state | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath $Manifest -Encoding utf8
+$external = @{}
 
-if ('subscription' -eq 'subscription') {
-    $expiresOn = (Get-Date).ToUniversalTime().AddDays(1).ToString('yyyy-MM-dd')
+function Save-RunState {
+    $state.updatedAt = (Get-Date).ToUniversalTime().ToString('o')
+    $state | ConvertTo-Json -Depth 30 | Set-Content -LiteralPath $Manifest -Encoding utf8
+}
+
+function Save-ExternalState {
+    foreach ($key in @($external.Keys)) {
+        $value = $external[$key]
+        if ($null -eq $value -or $value -is [string] -or $value -is [ValueType]) {
+            $inputKey = 'external-' + (([string]$key -creplace '([a-z0-9])([A-Z])', '$1-$2') -replace '[^a-zA-Z0-9-]', '-').ToLowerInvariant()
+            $state.inputs[$inputKey] = $value
+        }
+    }
+    Save-RunState
+}
+
+function Write-CheckpointState {
+    param([string]$CheckpointId, [string]$Status, [string]$Message)
+    $entry = @($state.checkpointStates | Where-Object { $_.checkpointId -eq $CheckpointId })[0]
+    $entry.status = $Status
+    $entry.updatedAt = (Get-Date).ToUniversalTime().ToString('o')
+    $entry.message = $Message
+}
+
+function Add-ManagedObject {
+    param([string]$CheckpointId, [string]$Kind, [string]$Id, [string]$Name, [string]$Type, [string]$Scope, [string]$OwnershipMethod)
+    if ([string]::IsNullOrWhiteSpace($Id)) { return }
+    $existing = @($state.managedObjects | Where-Object { $_.id -eq $Id })
+    if ($existing.Count -gt 0) { return }
+    $expectedTags = @{}
+    if ($OwnershipMethod -eq 'manifest-id-and-tags') {
+        $expectedTags = @{ purpose = 'az104-lab'; labId = '12'; runId = $RunId }
+    }
+    $state.managedObjects += @{
+        checkpointId = $CheckpointId
+        kind = $Kind
+        id = $Id
+        name = $Name
+        type = $Type
+        scope = $Scope
+        ownership = @{ method = $OwnershipMethod; expectedTags = $expectedTags }
+        recordedAt = (Get-Date).ToUniversalTime().ToString('o')
+        lifecycleStatus = 'active'
+    }
+    Save-RunState
+}
+
+function Sync-ManagedResource {
+    param([string]$CheckpointId)
+    # The entire recovery inventory is best effort so a state-helper or Azure
+    # query failure cannot mask the original mutation error. Every object that
+    # can be recovered is still persisted immediately as it is discovered.
+    $nativePreference = $PSNativeCommandUseErrorActionPreference
+    $PSNativeCommandUseErrorActionPreference = $false
+    try {
+        Save-ExternalState
+        $resourceGroupNames = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
+        if ($ResourceGroupName) { $null = $resourceGroupNames.Add([string]$ResourceGroupName) }
+        foreach ($key in @($external.Keys | Where-Object { [string]$_ -match '(?i)ResourceGroupName$' })) {
+            if ($external[$key]) { $null = $resourceGroupNames.Add([string]$external[$key]) }
+        }
+        foreach ($groupName in $resourceGroupNames) {
+            $groupJson = az group show --subscription $SubscriptionId --name $groupName --output json 2>$null
+            $group = $(if ($LASTEXITCODE -eq 0 -and $groupJson) { $groupJson | ConvertFrom-Json } else { $null })
+            if ($group) {
+                $groupCheckpoint = $(if ([string]$group.name -eq [string]$ResourceGroupName) { 'LAB12-CP01' } else { $CheckpointId })
+                Add-ManagedObject -CheckpointId $groupCheckpoint -Kind 'azure-resource' -Id ([string]$group.id) -Name ([string]$group.name) -Type 'Microsoft.Resources/resourceGroups' -Scope "/subscriptions/$SubscriptionId" -OwnershipMethod 'manifest-id-and-tags'
+                $resourcesJson = az resource list --subscription $SubscriptionId --resource-group $groupName --output json 2>$null
+                $resources = @($(if ($LASTEXITCODE -eq 0 -and $resourcesJson) { $resourcesJson | ConvertFrom-Json } else { @() }))
+                foreach ($resource in $resources) {
+                    Add-ManagedObject -CheckpointId $CheckpointId -Kind 'azure-resource' -Id ([string]$resource.id) -Name ([string]$resource.name) -Type ([string]$resource.type) -Scope ([string]$group.id) -OwnershipMethod 'manifest-id-and-tags'
+                }
+            }
+        }
+        if ($external.ContainsKey('groupId') -and $external.groupId) { Add-ManagedObject -CheckpointId $CheckpointId -Kind 'entra-object' -Id ([string]$external.groupId) -Name 'lab-group' -Type 'Microsoft.Graph/group' -Scope $state.context.tenantId -OwnershipMethod 'manifest-id' }
+        if ($external.ContainsKey('guestUserId') -and $external.guestUserId) { Add-ManagedObject -CheckpointId $CheckpointId -Kind 'entra-object' -Id ([string]$external.guestUserId) -Name 'guest-user' -Type 'Microsoft.Graph/user' -Scope $state.context.tenantId -OwnershipMethod 'manifest-id' }
+        if ($external.ContainsKey('userIds')) {
+            foreach ($userId in @($external.userIds)) { Add-ManagedObject -CheckpointId $CheckpointId -Kind 'entra-object' -Id ([string]$userId) -Name 'lab-user' -Type 'Microsoft.Graph/user' -Scope $state.context.tenantId -OwnershipMethod 'manifest-id' }
+        }
+        if ($external.ContainsKey('delegationRecordId') -and $external.delegationRecordId) {
+            Add-ManagedObject -CheckpointId $CheckpointId -Kind 'azure-resource' -Id ([string]$external.delegationRecordId) -Name ([string]$external.delegationRecordName) -Type 'Microsoft.Network/dnsZones/NS' -Scope ([string]$external.parentZoneId) -OwnershipMethod 'manifest-id'
+        }
+        if ($external.ContainsKey('connectionMonitorId') -and $external.connectionMonitorId) {
+            Add-ManagedObject -CheckpointId $CheckpointId -Kind 'azure-resource' -Id ([string]$external.connectionMonitorId) -Name ([string]$external.connectionMonitorName) -Type 'Microsoft.Network/networkWatchers/connectionMonitors' -Scope ([string]$external.networkWatcherId) -OwnershipMethod 'manifest-id'
+        }
+    } catch {
+        Write-Warning "Recovery inventory for $CheckpointId was incomplete: $($_.Exception.Message)"
+    } finally {
+        $PSNativeCommandUseErrorActionPreference = $nativePreference
+    }
+}
+
+# The manifest exists before the first Azure mutation.
+Save-RunState
+$state.status = 'setup-in-progress'
+Save-RunState
+
+$expiresOn = (Get-Date).ToUniversalTime().AddDays(1).ToString('yyyy-MM-dd')
+try {
     az group create --subscription $SubscriptionId --name $ResourceGroupName --location $Location --tags purpose=az104-lab labId=12 runId=$RunId expiresOn=$expiresOn --output none
-    $state.resourceGroup.name = $ResourceGroupName
-    $state.resourceGroup.id = az group show --subscription $SubscriptionId --name $ResourceGroupName --query id --output tsv
-    $state.status = 'baseline-created'
-    $state | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath $Manifest -Encoding utf8
+} catch {
+    Write-CheckpointState -CheckpointId 'LAB12-CP01' -Status 'fail' -Message "Resource-group boundary creation failed: $($_.Exception.GetType().Name)"
+    $state.status = 'failed'
+    Save-RunState
+    throw
+} finally {
+    Sync-ManagedResource -CheckpointId 'LAB12-CP01'
 }
 
-$availabilitySet = "avset-$suffix"; $vnet = "vnet-$suffix"; $vmss = "vmss-$suffix"
-az vm availability-set create --resource-group $ResourceGroupName --name $availabilitySet --location $Location --platform-fault-domain-count 2 --platform-update-domain-count 5 --output none
-az network vnet create --resource-group $ResourceGroupName --name $vnet --address-prefixes 10.12.0.0/16 --subnet-name vmss --subnet-prefixes 10.12.1.0/24 --output none
-az vmss create --resource-group $ResourceGroupName --name $vmss --image Ubuntu2204 --vm-sku Standard_B1s --instance-count 1 --upgrade-policy-mode Manual --admin-username azureadmin --generate-ssh-keys --vnet-name $vnet --subnet vmss --output none
+# CHECKPOINT LAB12-CP01 BEGIN
+try {
+    Write-CheckpointState -CheckpointId 'LAB12-CP01' -Status 'in-progress' -Message 'Checkpoint execution started.'
+    $activeCheckpointId = 'LAB12-CP01'
+    Save-RunState
 
-if ('subscription' -eq 'subscription') {
-    $state.resources = @(az resource list --subscription $SubscriptionId --resource-group $ResourceGroupName --output json | ConvertFrom-Json | ForEach-Object {
-        [ordered]@{ id = $_.id; name = $_.name; type = $_.type; location = $_.location }
-    })
+    az provider show --namespace Microsoft.Compute --query registrationState --output tsv
+    az provider show --namespace Microsoft.Insights --query registrationState --output tsv
+    az vm list-skus --location $Location --size Standard_B1s --all --query '[?restrictions==null || length(restrictions)==`0`].name' --output tsv
+    az vm list-skus --location $Location --size Standard_B1s --zone --all --query "[?name=='Standard_B1s'].name" --output tsv
+    if (-not (Get-Command ssh-keygen -ErrorAction SilentlyContinue)) { throw 'ssh-keygen is required to create the disposable key in the run state directory.' }
+
+    Sync-ManagedResource -CheckpointId 'LAB12-CP01'
+    Write-CheckpointState -CheckpointId 'LAB12-CP01' -Status 'pass' -Message 'The selected region exposes the documented VM SKU plus the placement capabilities required by the availability-set and scale-set designs.'
+    Save-RunState
+} catch {
+    Sync-ManagedResource -CheckpointId 'LAB12-CP01'
+    Write-CheckpointState -CheckpointId 'LAB12-CP01' -Status 'fail' -Message "Checkpoint failed: $($_.Exception.GetType().Name)"
+    $state.status = 'failed'
+    Save-RunState
+    throw
 }
-$state.status = 'setup-complete'
-$state | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath $Manifest -Encoding utf8
-Write-Host "Setup complete. State: $Manifest"
-Write-Host 'Run Validate.ps1 before recording command evidence.'
+# CHECKPOINT LAB12-CP01 END
+
+# CHECKPOINT LAB12-CP02 BEGIN
+try {
+    Write-CheckpointState -CheckpointId 'LAB12-CP02' -Status 'in-progress' -Message 'Checkpoint execution started.'
+    $activeCheckpointId = 'LAB12-CP02'
+    Save-RunState
+
+    $availabilitySet = "avset-$suffix"; $vnet = "vnet-$suffix"; $vmss = "vmss-$suffix"; $autoscale = "autoscale-$suffix"
+    $availabilityVnet = "av-vnet-$suffix"; $availabilityNic = "av-nic-$suffix"; $availabilityVm = "av-vm-$suffix"; $moveResourceGroup = "rg-az104-l12-move-$RunId"
+    $keyPath = Join-Path $StateDir 'id_ed25519'
+    ssh-keygen -t ed25519 -N '' -f $keyPath | Out-Null
+    try {
+        az vm availability-set create --resource-group $ResourceGroupName --name $availabilitySet --location $Location --platform-fault-domain-count 2 --platform-update-domain-count 5 --output none
+    } finally {
+        Sync-ManagedResource -CheckpointId 'LAB12-CP02'
+    }
+    try {
+        az network vnet create --resource-group $ResourceGroupName --name $availabilityVnet --address-prefixes 10.12.16.0/20 --subnet-name workload --subnet-prefixes 10.12.16.0/24 --output none
+    } finally {
+        Sync-ManagedResource -CheckpointId 'LAB12-CP02'
+    }
+    try {
+        az network nic create --resource-group $ResourceGroupName --name $availabilityNic --vnet-name $availabilityVnet --subnet workload --output none
+    } finally {
+        Sync-ManagedResource -CheckpointId 'LAB12-CP02'
+    }
+    try {
+        az vm create --resource-group $ResourceGroupName --name $availabilityVm --image Ubuntu2204 --size Standard_B1s --admin-username azureadmin --ssh-key-values "$keyPath.pub" --nics $availabilityNic --availability-set $availabilitySet --output none
+    } finally {
+        Sync-ManagedResource -CheckpointId 'LAB12-CP02'
+    }
+    try {
+        az network vnet create --resource-group $ResourceGroupName --name $vnet --address-prefixes 10.12.0.0/16 --subnet-name vmss --subnet-prefixes 10.12.1.0/24 --output none
+    } finally {
+        Sync-ManagedResource -CheckpointId 'LAB12-CP02'
+    }
+    try {
+        az vmss create --resource-group $ResourceGroupName --name $vmss --image Ubuntu2204 --vm-sku Standard_B1s --instance-count 1 --upgrade-policy-mode Manual --admin-username azureadmin --ssh-key-values "$keyPath.pub" --vnet-name $vnet --subnet vmss --output none
+    } finally {
+        Sync-ManagedResource -CheckpointId 'LAB12-CP02'
+    }
+
+    Sync-ManagedResource -CheckpointId 'LAB12-CP02'
+    Write-CheckpointState -CheckpointId 'LAB12-CP02' -Status 'pass' -Message 'The VM resource references the created availability set and its private NIC remains inside the source resource group.'
+    Save-RunState
+} catch {
+    Sync-ManagedResource -CheckpointId 'LAB12-CP02'
+    Write-CheckpointState -CheckpointId 'LAB12-CP02' -Status 'fail' -Message "Checkpoint failed: $($_.Exception.GetType().Name)"
+    $state.status = 'failed'
+    Save-RunState
+    throw
+}
+# CHECKPOINT LAB12-CP02 END
+
+# CHECKPOINT LAB12-CP03 BEGIN
+try {
+    Write-CheckpointState -CheckpointId 'LAB12-CP03' -Status 'in-progress' -Message 'Checkpoint execution started.'
+    $activeCheckpointId = 'LAB12-CP03'
+    Save-RunState
+
+    $vmssId = az vmss show --resource-group $ResourceGroupName --name $vmss --query id --output tsv
+    try {
+        az monitor autoscale create --resource-group $ResourceGroupName --name $autoscale --resource $vmssId --resource-type Microsoft.Compute/virtualMachineScaleSets --min-count 1 --max-count 3 --count 1 --output none
+    } finally {
+        Sync-ManagedResource -CheckpointId 'LAB12-CP03'
+    }
+    try {
+        az monitor autoscale rule create --resource-group $ResourceGroupName --autoscale-name $autoscale --condition 'Percentage CPU > 70 avg 10m' --scale out 1 --cooldown 5 --output none
+    } finally {
+        Sync-ManagedResource -CheckpointId 'LAB12-CP03'
+    }
+    try {
+        az monitor autoscale rule create --resource-group $ResourceGroupName --autoscale-name $autoscale --condition 'Percentage CPU < 30 avg 10m' --scale in 1 --cooldown 5 --output none
+    } finally {
+        Sync-ManagedResource -CheckpointId 'LAB12-CP03'
+    }
+
+    Sync-ManagedResource -CheckpointId 'LAB12-CP03'
+    Write-CheckpointState -CheckpointId 'LAB12-CP03' -Status 'pass' -Message 'The VMSS has the requested capacity and the autoscale profile contains bounded minimum, default, and maximum instance counts.'
+    Save-RunState
+} catch {
+    Sync-ManagedResource -CheckpointId 'LAB12-CP03'
+    Write-CheckpointState -CheckpointId 'LAB12-CP03' -Status 'fail' -Message "Checkpoint failed: $($_.Exception.GetType().Name)"
+    $state.status = 'failed'
+    Save-RunState
+    throw
+}
+# CHECKPOINT LAB12-CP03 END
+
+# CHECKPOINT LAB12-CP04 BEGIN
+try {
+    Write-CheckpointState -CheckpointId 'LAB12-CP04' -Status 'in-progress' -Message 'Checkpoint execution started.'
+    $activeCheckpointId = 'LAB12-CP04'
+    Save-RunState
+
+    $external['moveResourceGroupName'] = $moveResourceGroup
+    Save-ExternalState
+    try {
+        az group create --subscription $SubscriptionId --name $moveResourceGroup --location $Location --tags purpose=az104-lab labId=12 runId=$RunId --output none
+    } finally {
+        Sync-ManagedResource -CheckpointId 'LAB12-CP04'
+    }
+    az vm deallocate --resource-group $ResourceGroupName --name $availabilityVm --output none
+    $availabilityVmId = az vm show --resource-group $ResourceGroupName --name $availabilityVm --query id --output tsv
+    $availabilityNicId = az network nic show --resource-group $ResourceGroupName --name $availabilityNic --query id --output tsv
+    $availabilityDiskId = az vm show --resource-group $ResourceGroupName --name $availabilityVm --query storageProfile.osDisk.managedDisk.id --output tsv
+    $availabilitySetId = az vm availability-set show --resource-group $ResourceGroupName --name $availabilitySet --query id --output tsv
+    $availabilityVnetId = az network vnet show --resource-group $ResourceGroupName --name $availabilityVnet --query id --output tsv
+    az resource move --destination-group $moveResourceGroup --ids $availabilityVmId $availabilityNicId $availabilityDiskId $availabilitySetId $availabilityVnetId --output none
+    az vm start --resource-group $moveResourceGroup --name $availabilityVm --output none
+    az vmss get-instance-view --resource-group $ResourceGroupName --name $vmss --output json
+    az monitor autoscale show --resource-group $ResourceGroupName --name $autoscale --query "profiles[0].rules[].{direction:scaleAction.direction,threshold:metricTrigger.threshold}" --output table
+
+    Sync-ManagedResource -CheckpointId 'LAB12-CP04'
+    Write-CheckpointState -CheckpointId 'LAB12-CP04' -Status 'pass' -Message 'The selected VM and dependent NIC/disk IDs resolve only in the tagged destination group recorded in run.json.'
+    Save-RunState
+} catch {
+    Sync-ManagedResource -CheckpointId 'LAB12-CP04'
+    Write-CheckpointState -CheckpointId 'LAB12-CP04' -Status 'fail' -Message "Checkpoint failed: $($_.Exception.GetType().Name)"
+    $state.status = 'failed'
+    Save-RunState
+    throw
+}
+# CHECKPOINT LAB12-CP04 END
+
+# CHECKPOINT LAB12-CP05 BEGIN
+try {
+    Write-CheckpointState -CheckpointId 'LAB12-CP05' -Status 'in-progress' -Message 'Checkpoint execution started.'
+    $activeCheckpointId = 'LAB12-CP05'
+    Save-RunState
+
+    az vmss show --resource-group $ResourceGroupName --name $vmss --query "{capacity:sku.capacity,upgrade:upgradePolicy.mode,provisioning:provisioningState}" --output json
+
+    Sync-ManagedResource -CheckpointId 'LAB12-CP05'
+    Write-CheckpointState -CheckpointId 'LAB12-CP05' -Status 'pass' -Message 'Availability-set membership, VMSS capacity/autoscale, and source/destination group inventories all match the manifest.'
+    Save-RunState
+} catch {
+    Sync-ManagedResource -CheckpointId 'LAB12-CP05'
+    Write-CheckpointState -CheckpointId 'LAB12-CP05' -Status 'fail' -Message "Checkpoint failed: $($_.Exception.GetType().Name)"
+    $state.status = 'failed'
+    Save-RunState
+    throw
+}
+# CHECKPOINT LAB12-CP05 END
+
+$skippedRequired = @($state.checkpointStates | Where-Object { $_.required -and $_.status -eq 'skipped' })
+if ($skippedRequired.Count -gt 0) {
+    $state.status = 'failed'
+    Save-RunState
+    throw "Required checkpoints were skipped: $($skippedRequired.checkpointId -join ', ')"
+}
+$skippedOptional = @($state.checkpointStates | Where-Object { -not $_.required -and $_.status -eq 'skipped' })
+$state.status = $(if ($skippedOptional.Count -gt 0) { 'partial' } else { 'setup-complete' })
+Save-RunState
+Write-Host "Setup result: $($state.status). State: $Manifest"
+Write-Host "Next: ./Validate.ps1 -RunId $RunId -Mode Deployment"
+# END GENERATED AZ104 V2

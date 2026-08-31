@@ -4,12 +4,15 @@ Describe the learner-visible outcome and the mapped AZ-104 objectives.
 
 ## Validation
 
-- [ ] `python tools/validate_repository.py`
-- [ ] Relevant CLI/PowerShell/Bicep static checks
+- [ ] `python tools/validate_repository.py --release`
+- [ ] `python tools/render_diagrams.py --check`
+- [ ] Relevant PowerShell-hosted Azure CLI and Bicep static checks
+- [ ] `python tools/validate_assessments.py` and rendered assessment drift checks
+- [ ] Strict documentation-site build if learner-facing content changed
 - [ ] Lab folder portability check
 - [ ] Cleanup reviewed for exact scope and idempotency
 - [ ] Question and answer explanations reviewed
-- [ ] Architecture diagram and alt-text review, if visuals changed
+- [ ] Mermaid source, generated SVG, title, description, and alt text reviewed if visuals changed
 
 ## Azure impact
 

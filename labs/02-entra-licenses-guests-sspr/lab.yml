@@ -1,8 +1,11 @@
+
+# BEGIN GENERATED AZ104 V2
+schemaVersion: 2.0.0
 id: LAB-02
 slug: 02-entra-licenses-guests-sspr
 title: Manage Entra licenses, guests, and self-service password reset
 blueprintVersion: '2026-04-17'
-domain: Manage Azure identities and governance
+domain: identity-governance
 objectives:
 - IG-USERS-03
 - IG-USERS-04
@@ -14,10 +17,25 @@ testedToolVersions:
   powershell: '>=7.4'
 estimatedMinutes: 105
 difficulty: foundational
+experience:
+  scenario: 'An identity administrator preparing a controlled external-collaboration and SSPR pilot is responding to an operational
+    request: Build a reversible guest and licensing pilot, assess supported SSPR readiness, and preserve every tenant setting
+    required for recovery.'
+  role: An identity administrator preparing a controlled external-collaboration and SSPR pilot.
+  outcome: Build a reversible guest and licensing pilot, assess supported SSPR readiness, and preserve every tenant setting
+    required for recovery.
+  completionCriteria:
+  - All required checkpoints report pass.
+  - The deterministic break/fix is injected, diagnosed, and repaired.
+  - cleanup.json reports no active run-owned resources, with any retained item explicitly documented.
 cost:
   class: none
   billableResources: []
   notes: No Azure resource charge is expected, but tenant licensing can still gate features.
+  pricingLinks:
+  - title: Microsoft Entra pricing
+    url: https://azure.microsoft.com/pricing/details/active-directory/
+  acknowledgementRequired: false
 permissions:
   azureRbacRoles: []
   entraRoles:
@@ -37,15 +55,111 @@ prerequisites:
   an authorized tenant policy change for SSPR.'
 - Azure CLI hosted in PowerShell 7.4 or later
 providers:
-  observed: []
+  required: []
+  optional: []
   registeredByLab: []
-regions:
-  applicable: false
-  primary: null
-  secondary: null
+inputs:
+- id: run-id
+  parameter: RunId
+  description: Unique lowercase run ownership identifier
+  required: true
+  secret: false
+  source: parameter
+  safeExample: az104l02-01
+  gateBehavior: block
+  checkpointIds:
+  - LAB02-CP01
+  - LAB02-CP02
+  - LAB02-CP03
+  - LAB02-CP04
+  - LAB02-CP05
+- id: subscription-id
+  parameter: SubscriptionId
+  environmentVariable: AZ104_SUBSCRIPTION_ID
+  description: Expected disposable subscription ID
+  required: true
+  secret: false
+  source: parameter-or-environment
+  safeExample: 00000000-0000-0000-0000-000000000000
+  gateBehavior: block
+  checkpointIds:
+  - LAB02-CP01
+  - LAB02-CP02
+  - LAB02-CP03
+  - LAB02-CP04
+  - LAB02-CP05
+- id: location
+  parameter: Location
+  environmentVariable: AZ104_LOCATION
+  description: Approved primary Azure region
+  required: true
+  secret: false
+  source: parameter-or-environment
+  safeExample: westeurope
+  gateBehavior: block
+  checkpointIds:
+  - LAB02-CP01
+  - LAB02-CP02
+  - LAB02-CP03
+  - LAB02-CP04
+  - LAB02-CP05
+- id: guest-email
+  environmentVariable: AZ104_GUEST_EMAIL
+  description: Disposable external invitation address
+  required: false
+  secret: false
+  gateBehavior: skip-checkpoint
+  safeExample: learner@example.test
+  checkpointIds:
+  - LAB02-CP03
+  - LAB02-CP04
+  parameter: GuestEmail
+  source: environment
+- id: license-sku-id
+  environmentVariable: AZ104_LICENSE_SKU_ID
+  description: Approved subscribed license SKU ID
+  required: false
+  secret: false
+  gateBehavior: skip-checkpoint
+  safeExample: 00000000-0000-0000-0000-000000000000
+  checkpointIds:
+  - LAB02-CP04
+  parameter: LicenseSkuId
+  source: environment
+- id: usage-location
+  environmentVariable: AZ104_USAGE_LOCATION
+  description: Two-letter usage location required for the optional license assignment
+  required: false
+  secret: false
+  gateBehavior: skip-checkpoint
+  safeExample: DE
+  checkpointIds:
+  - LAB02-CP04
+  parameter: UsageLocation
+  source: environment
+- id: allow-sspr-policy-change
+  environmentVariable: AZ104_ALLOW_SSPR_POLICY_CHANGE
+  description: Explicit YES gate for the authorized SSPR change
+  required: false
+  secret: false
+  gateBehavior: skip-checkpoint
+  safeExample: 'YES'
+  checkpointIds:
+  - LAB02-CP05
+  parameter: AllowSsprPolicyChange
+  source: environment
+acknowledgements:
+  cost:
+    required: false
+    parameter: AcknowledgeCost
+    message: I reviewed current pricing, quota, and the same-session cleanup plan.
+  tenantChange:
+    required: true
+    parameter: AcknowledgeTenantChange
+    message: I am authorized to create or change the declared tenant-scoped objects and will restore recorded settings.
 creates:
   azureResources: []
-  entraObjects: &id001
+  entraObjects:
   - security group
   - invited guest user
   - optional license assignment
@@ -53,29 +167,432 @@ creates:
   localArtifacts:
   - .state/<run-id>/run.json
   - .state/<run-id>/validation.json
-tenantScopedChanges: *id001
+  - .state/<run-id>/cleanup.json
+tenantScopedChanges:
+- security group
+- invited guest user
+- optional license assignment
+- optional SSPR scope
 externalRequirements:
 - Requires a real disposable guest email for invitation, an available SKU for license assignment, and an authorized tenant
   policy change for SSPR.
+preflightChecks:
+- id: preflight.context
+  type: context
+  required: true
+  description: Confirm active cloud, tenant, and subscription without changing them.
+  command: az account show --output json
+  expected: Active context matches the supplied subscription and disposable environment.
+- id: preflight.tools
+  type: tool
+  required: true
+  description: Confirm PowerShell, Azure CLI, and az bicep are available.
+  command: az version; az bicep version
+  expected: All required tools meet the versions declared by this lab.
+- id: preflight.inputs
+  type: input
+  required: true
+  description: Check required parameters and environment gates without printing secrets.
+  command: $PSBoundParameters.Keys; Get-ChildItem Env:AZ104_* | Select-Object Name
+  expected: Every required input is present and optional gates are explicitly reported.
+- id: preflight.providers
+  type: provider
+  required: false
+  description: Read registration state for required resource providers.
+  command: az provider show --namespace <provider> --query registrationState --output tsv
+  expected: Every required provider is Registered; preflight performs no registration.
+- id: preflight.region
+  type: region
+  required: true
+  description: Confirm the requested region is available to the subscription.
+  command: az account list-locations --query "[?name=='<location>'].name" --output tsv
+  expected: The supplied region appears in the subscription location inventory.
+- id: preflight.authored.lab02.graph-surfaces
+  type: permission
+  required: true
+  description: Read invitation policy and subscribed-license inventory without changing the tenant.
+  command: '$policy = az rest --method get --url ''https://graph.microsoft.com/v1.0/policies/authorizationPolicy?$select=allowInvitesFrom,allowedToUseSSPR''
+    --output json | ConvertFrom-Json
+
+    $skus = az rest --method get --url ''https://graph.microsoft.com/v1.0/subscribedSkus?$select=id,consumedUnits,prepaidUnits''
+    --output json | ConvertFrom-Json
+
+    if (-not $policy.id -or $null -eq $skus.value) { throw ''Required Graph policy or SKU inventory is unavailable.'' }
+
+    '
+  expected: Authorization policy and subscribed SKU collection are readable.
+- id: preflight.authored.lab02.guest-gate
+  type: permission
+  required: false
+  description: When a guest email is supplied, prove tenant invitation policy is not disabled.
+  command: "if ($guestEmail) {\n    $policy = az rest --method get --url 'https://graph.microsoft.com/v1.0/policies/authorizationPolicy?$select=allowInvitesFrom'\
+    \ --output json | ConvertFrom-Json\n    if ($policy.allowInvitesFrom -eq 'none') { throw 'Tenant invitation policy disables\
+    \ the requested guest lane.' }\n}\n"
+  expected: The guest lane is absent or tenant invitation policy allows an authorized inviter.
+- id: preflight.authored.lab02.license-gate
+  type: capacity
+  required: false
+  description: When any license input is supplied, require the complete tuple and an available unit for the exact SKU ID.
+  command: "if ($guestEmail -or $usageLocation -or $licenseSkuId) {\n    if (-not $guestEmail -or -not $licenseSkuId -or $usageLocation\
+    \ -notmatch '^[A-Za-z]{2}$') { throw 'Guest email, exact SKU ID, and two-letter usage location must be supplied together\
+    \ for licensing.' }\n    $skus = @(az rest --method get --url 'https://graph.microsoft.com/v1.0/subscribedSkus' --output\
+    \ json | ConvertFrom-Json).value\n    $selected = @($skus | Where-Object id -eq $licenseSkuId)\n    if ($selected.Count\
+    \ -ne 1 -or ($selected[0].prepaidUnits.enabled - $selected[0].consumedUnits) -lt 1) { throw 'The exact license SKU is\
+    \ absent or has no enabled unit available.' }\n}\n"
+  expected: The license lane is absent or all dependent inputs and one available unit are present.
+- id: preflight.authored.lab02.sspr-gate
+  type: permission
+  required: false
+  description: For an exact YES authorization, prove the supported administrator SSPR property is readable before mutation.
+  command: "if ($ssprAuthorization -eq 'YES') {\n    $policy = az rest --method get --url 'https://graph.microsoft.com/v1.0/policies/authorizationPolicy?$select=id,allowedToUseSSPR'\
+    \ --output json | ConvertFrom-Json\n    if (-not $policy.id -or $null -eq $policy.allowedToUseSSPR) { throw 'allowedToUseSSPR\
+    \ cannot be read for recovery.' }\n}\n"
+  expected: The SSPR lane is absent or its exact recoverable Boolean is readable.
+checkpoints:
+- id: LAB02-CP01
+  title: Inventory invitation policy, license capacity, and SSPR reporting access
+  purpose: Read the three independent service surfaces before deciding which optional gates can execute.
+  objectiveIds:
+  - IG-USERS-03
+  required: true
+  expectedState: Invitation policy and subscribed SKUs are readable; registration-report access is explicitly true or recorded
+    as an optional unavailable gate.
+  scriptMarkers:
+    setup: LAB02-CP01
+    validate: LAB02-CP01
+    cleanup: LAB02-CP01
+  validation:
+    positive:
+      id: cp01.positive
+      description: Read the service properties for inventory invitation policy, license capacity, and SSPR reporting access
+        by using exact run-owned identifiers.
+      command: '$validationId=''LAB02-CP01-positive''; $skuResult = az rest --method get --url ''https://graph.microsoft.com/v1.0/subscribedSkus?$select=id,skuPartNumber,consumedUnits,prepaidUnits''
+        --output json | ConvertFrom-Json
+
+        if ($null -eq $skuResult.value) { throw ''subscribedSkus did not return a value collection.'' }
+
+        $skuResult.value | Select-Object id,skuPartNumber,consumedUnits,prepaidUnits
+
+        '
+      expected: A value collection is returned; it may be empty in an unlicensed tenant but every item exposes capacity fields.
+    negative:
+      id: cp01.negative
+      description: Search for conflicting, unowned, or excessive state after inventory invitation policy, license capacity,
+        and SSPR reporting access.
+      command: '$validationId=''LAB02-CP01-negative''; $policyResult = az rest --method get --url ''https://graph.microsoft.com/v1.0/policies/authorizationPolicy?$select=allowInvitesFrom,allowedToUseSSPR''
+        --output json | ConvertFrom-Json
+
+        if ($policyResult.allowInvitesFrom -notin @(''none'',''adminsAndGuestInviters'',''adminsGuestInvitersAndAllMembers'',''everyone''))
+        { throw ''Invitation policy returned an unknown state.'' }
+
+        $policyResult | Select-Object allowInvitesFrom,allowedToUseSSPR
+
+        '
+      expected: A known invitation-policy state is observed without changing it.
+  cleanup:
+    dependsOn:
+    - LAB02-CP02
+    - LAB02-CP03
+    - LAB02-CP04
+    - LAB02-CP05
+    action: Remove only manifest-recorded objects owned by LAB02-CP01, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp01.residual
+      description: Prove no active managed object remains for LAB02-CP01.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-1
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Add or update a user's profile information in Microsoft Entra ID
+      url: https://learn.microsoft.com/en-us/entra/fundamentals/how-to-manage-user-profile-info
+- id: LAB02-CP02
+  title: Create and persist the required pilot group
+  purpose: Create the security group independently of every optional gate and persist its concrete Graph collection and ID
+    immediately.
+  objectiveIds:
+  - IG-USERS-04
+  required: true
+  expectedState: Exactly one run-specific security group exists and its ID is manifest-recorded as Microsoft.Graph/group before
+    any optional task.
+  scriptMarkers:
+    setup: LAB02-CP02
+    validate: LAB02-CP02
+    cleanup: LAB02-CP02
+  validation:
+    positive:
+      id: cp02.positive
+      description: Read the service properties for create and persist the required pilot group by using exact run-owned identifiers.
+      command: '$validationId=''LAB02-CP02-positive''; $groupResult = az rest --method get --url "https://graph.microsoft.com/v1.0/groups/$($external.groupId)?`$select=id,displayName,securityEnabled"
+        --output json | ConvertFrom-Json
+
+        if ($groupResult.id -ne $external.groupId -or -not $groupResult.securityEnabled) { throw ''Pilot group does not match
+        the manifest.'' }
+
+        $groupResult
+
+        '
+      expected: The exact manifest-recorded group exists and is security-enabled.
+    negative:
+      id: cp02.negative
+      description: Search for conflicting, unowned, or excessive state after create and persist the required pilot group.
+      command: '$validationId=''LAB02-CP02-negative''; $groupResult = az rest --method get --url "https://graph.microsoft.com/v1.0/groups?`$filter=startswith(displayName,''AZ104-L02-$RunId-'')&`$select=id"
+        --output json | ConvertFrom-Json
+
+        if (@($groupResult.value).Count -ne 1) { throw ''Expected exactly one run-specific pilot group.'' }
+
+        $groupResult.value
+
+        '
+      expected: Exactly one run-specific pilot group exists; no retry-created duplicate is present.
+  cleanup:
+    dependsOn:
+    - LAB02-CP03
+    - LAB02-CP04
+    - LAB02-CP05
+    action: Remove only manifest-recorded objects owned by LAB02-CP02, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp02.residual
+      description: Prove no active managed object remains for LAB02-CP02.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-2
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Add or update a user's profile information in Microsoft Entra ID
+      url: https://learn.microsoft.com/en-us/entra/fundamentals/how-to-manage-user-profile-info
+- id: LAB02-CP03
+  title: Invite and directly link the optional guest
+  purpose: Invite one supplied address without sending mail, persist the returned concrete user ID immediately, and add that
+    exact object to the pilot group.
+  objectiveIds:
+  - IG-USERS-04
+  required: false
+  expectedState: One manifest-recorded userType Guest exists and is a direct member of the exact pilot group.
+  scriptMarkers:
+    setup: LAB02-CP03
+    validate: LAB02-CP03
+    cleanup: LAB02-CP03
+  validation:
+    positive:
+      id: cp03.positive
+      description: Read the service properties for invite and directly link the optional guest by using exact run-owned identifiers.
+      command: '$validationId=''LAB02-CP03-positive''; $guestResult = az rest --method get --url "https://graph.microsoft.com/v1.0/users/$($external.guestUserId)?`$select=id,userType,mail"
+        --output json | ConvertFrom-Json
+
+        $memberResult = az rest --method get --url "https://graph.microsoft.com/v1.0/groups/$($external.groupId)/members?`$select=id"
+        --output json | ConvertFrom-Json
+
+        if ($guestResult.userType -ne ''Guest'' -or $guestResult.id -notin @($memberResult.value.id)) { throw ''Guest type
+        or direct membership mismatch.'' }
+
+        [pscustomobject]@{ guestId = $guestResult.id; userType = $guestResult.userType; directMember = $true }
+
+        '
+      expected: The exact recorded object is userType Guest and appears in the group's direct members collection.
+    negative:
+      id: cp03.negative
+      description: Search for conflicting, unowned, or excessive state after invite and directly link the optional guest.
+      command: "$validationId='LAB02-CP03-negative'; $guestObjectId = az rest --method get --url \"https://graph.microsoft.com/v1.0/users/$($external.guestUserId)?%24select=id\"\
+        \ --query id --output tsv\n$guestRecords = @($state.managedObjects | Where-Object {\n  $_.type -eq 'Microsoft.Graph/user'\
+        \ -and $_.lifecycleStatus -eq 'active'\n})\nif ($guestObjectId -ne $external.guestUserId -or $guestRecords.Count -ne\
+        \ 1 -or $guestRecords[0].id -ne $external.guestUserId) {\n  throw 'The live guest and manifest guest inventory do\
+        \ not identify one exact object.'\n}\n'Active live and manifest-recorded guest objects: 1'\n"
+      expected: The manifest contains exactly one active concrete Graph user ID for the optional guest lane.
+  cleanup:
+    dependsOn:
+    - LAB02-CP04
+    - LAB02-CP05
+    action: Remove only manifest-recorded objects owned by LAB02-CP03, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp03.residual
+      description: Prove no active managed object remains for LAB02-CP03.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-3
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Add or update a user's profile information in Microsoft Entra ID
+      url: https://learn.microsoft.com/en-us/entra/fundamentals/how-to-manage-user-profile-info
+- id: LAB02-CP04
+  title: Inject a license denial, then set usage location and assign the approved SKU
+  purpose: Prove an invalid SKU is denied without mutation, normalize the guest's two-letter usage location, validate exact
+    capacity, and assign only the approved SKU.
+  objectiveIds:
+  - IG-USERS-05
+  required: false
+  expectedState: The impossible SKU is denied, usageLocation is uppercase and persisted, and exactly the approved subscribed
+    SKU is assigned.
+  scriptMarkers:
+    setup: LAB02-CP04
+    validate: LAB02-CP04
+    cleanup: LAB02-CP04
+  validation:
+    positive:
+      id: cp04.positive
+      description: Read the service properties for inject a license denial, then set usage location and assign the approved
+        SKU by using exact run-owned identifiers.
+      command: '$validationId=''LAB02-CP04-positive''; $licenseResult = az rest --method get --url "https://graph.microsoft.com/v1.0/users/$($external.guestUserId)/licenseDetails?`$select=skuId,skuPartNumber"
+        --output json | ConvertFrom-Json
+
+        if (@($licenseResult.value | Where-Object skuId -eq $state.inputs[''license-sku-id'']).Count -ne 1) { throw ''The
+        approved SKU is not assigned exactly once.'' }
+
+        $licenseResult.value
+
+        '
+      expected: licenseDetails contains the exact recorded SKU once.
+    negative:
+      id: cp04.negative
+      description: Search for conflicting, unowned, or excessive state after inject a license denial, then set usage location
+        and assign the approved SKU.
+      command: '$validationId=''LAB02-CP04-negative''; $guestResult = az rest --method get --url "https://graph.microsoft.com/v1.0/users/$($external.guestUserId)?`$select=usageLocation,assignedLicenses"
+        --output json | ConvertFrom-Json
+
+        if ($guestResult.usageLocation -ne $state.inputs[''usage-location'']) { throw ''Guest usageLocation does not match
+        the recorded value.'' }
+
+        $unexpected = @($guestResult.assignedLicenses | Where-Object skuId -ne $state.inputs[''license-sku-id''])
+
+        if ($unexpected.Count -ne 0) { throw ''An unapproved SKU is assigned to the lab-created guest.'' }
+
+        [pscustomobject]@{ usageLocation = $guestResult.usageLocation; unexpectedSkus = $unexpected.Count }
+
+        '
+      expected: The guest has a usageLocation and no unapproved license SKU.
+  cleanup:
+    dependsOn:
+    - LAB02-CP05
+    action: Remove only manifest-recorded objects owned by LAB02-CP04, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp04.residual
+      description: Prove no active managed object remains for LAB02-CP04.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-4
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Add or update a user's profile information in Microsoft Entra ID
+      url: https://learn.microsoft.com/en-us/entra/fundamentals/how-to-manage-user-profile-info
+- id: LAB02-CP05
+  title: Record, exercise, and reconcile the supported administrator SSPR gate
+  purpose: Persist allowedToUseSSPR before an exact-authorized PATCH, then reconcile policy, group, guest, license, and registration
+    evidence without claiming selected-group SSPR configuration.
+  objectiveIds:
+  - IG-USERS-03
+  - IG-USERS-04
+  - IG-USERS-05
+  required: false
+  expectedState: The supported administrator property is true, exactly one prior Boolean is durable, and reconciliation explicitly
+    reports that no selected-group scope endpoint was mutated.
+  scriptMarkers:
+    setup: LAB02-CP05
+    validate: LAB02-CP05
+    cleanup: LAB02-CP05
+  validation:
+    positive:
+      id: cp05.positive
+      description: Read the service properties for record, exercise, and reconcile the supported administrator SSPR gate by
+        using exact run-owned identifiers.
+      command: '$validationId=''LAB02-CP05-positive''; $ssprResult = az rest --method get --url ''https://graph.microsoft.com/v1.0/policies/authorizationPolicy?$select=id,allowedToUseSSPR''
+        --output json | ConvertFrom-Json
+
+        $baseline = @($state.originalSettings | Where-Object property -eq ''allowedToUseSSPR'')
+
+        if (-not $ssprResult.allowedToUseSSPR -or $baseline.Count -ne 1) { throw ''Administrator SSPR or its recovery baseline
+        is incomplete.'' }
+
+        [pscustomobject]@{ allowedToUseSSPR = $ssprResult.allowedToUseSSPR; recoverableBaselines = $baseline.Count }
+
+        '
+      expected: allowedToUseSSPR is true and exactly one original Boolean remains available for cleanup.
+    negative:
+      id: cp05.negative
+      description: Search for conflicting, unowned, or excessive state after record, exercise, and reconcile the supported
+        administrator SSPR gate.
+      command: '$validationId=''LAB02-CP05-negative''; $pilot = az rest --method get --url "https://graph.microsoft.com/v1.0/groups/$($external.groupId)?`$select=id,securityEnabled"
+        --output json | ConvertFrom-Json
+
+        if ($pilot.id -ne $external.groupId -or -not $pilot.securityEnabled) { throw ''Pilot group no longer matches the manifest.''
+        }
+
+        $guestObjects = @($state.managedObjects | Where-Object { $_.type -eq ''Microsoft.Graph/user'' -and $_.lifecycleStatus
+        -eq ''active'' })
+
+        if ($guestObjects.Count -gt 1) { throw ''More than one guest object is owned by the run.'' }
+
+        [pscustomobject]@{ selectedGroupScopeMutation = $false; activeGuestObjects = $guestObjects.Count }
+
+        '
+      expected: No unsupported selected-group mutation is claimed and at most the one intended guest is manifest-owned.
+  cleanup:
+    dependsOn: []
+    action: Remove only manifest-recorded objects owned by LAB02-CP05, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp05.residual
+      description: Prove no active managed object remains for LAB02-CP05.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-5
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Add or update a user's profile information in Microsoft Entra ID
+      url: https://learn.microsoft.com/en-us/entra/fundamentals/how-to-manage-user-profile-info
 validation:
-  commandLanes:
-  - scripts/cli/Validate.ps1
-  output: .state/<run-id>/validation.json
-  statuses:
-  - pass
-  - fail
-  - warning
-  - skipped
-  liveExecutionRequiredForLiveVerified: true
+  script: scripts/cli/Validate.ps1
+  artifact: .state/<run-id>/validation.json
+  modes:
+  - Deployment
+  - PostCleanup
+  resultPolicy:
+    requiredFailureResult: fail
+    optionalSkipResult: partial
+    allRequiredPassResult: pass
 cleanup:
-  azureDeletion: none
-  entraDeletion: exact recorded object IDs only
-  reportOnlyByDefault: true
+  script: scripts/cli/Cleanup.ps1
+  artifact: .state/<run-id>/cleanup.json
+  previewByDefault: true
   requiresExecuteFlag: true
-  residualAuditRequired: true
+  ownershipVerification:
+    manifestIdMatch: true
+    requiredTags: []
+  residualChecks:
+  - id: cp01.residual
+    description: Prove no active managed object remains for LAB02-CP01.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp02.residual
+    description: Prove no active managed object remains for LAB02-CP02.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp03.residual
+    description: Prove no active managed object remains for LAB02-CP03.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp04.residual
+    description: Prove no active managed object remains for LAB02-CP04.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp05.residual
+    description: Prove no active managed object remains for LAB02-CP05.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  retainedItemsAllowed: true
+  irreversiblePurge: never
 assessment:
   enabled: true
   questionCount: 50
   primaryDomain: identity-governance
-lastOfflineValidated: '2026-08-30'
+lastOfflineValidated: '2026-08-31'
 lastLiveVerified: null
+# END GENERATED AZ104 V2

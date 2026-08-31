@@ -1,18 +1,55 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="460" viewBox="0 0 1040 460" role="img" aria-labelledby="title desc">
-<title id="title">Lab 21 architecture</title>
-<desc id="desc">Preview-first operator workflow, a recorded lab boundary, intended resources, independent validation, redacted command evidence, and scoped cleanup.</desc>
-<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#46647f"/></marker></defs>
-<style>text{font-family:Segoe UI,Arial,sans-serif;font-size:14px;fill:#102a43} .control{fill:#e8f1ff;stroke:#2563eb;stroke-width:2} .resource{fill:#e9f8ef;stroke:#16803a;stroke-width:2} .arrow{fill:none;stroke:#46647f;stroke-width:2;marker-end:url(#arrow)}</style>
-<rect width="100%" height="100%" fill="#ffffff"/>
-<rect x="40" y="55" width="180" height="55" rx="8" class="control"/><text x="130" y="79" text-anchor="middle">Operator</text><text x="130" y="98" text-anchor="middle">Azure CLI</text>
-<rect x="275" y="55" width="180" height="55" rx="8" class="control"/><text x="365" y="79" text-anchor="middle">Preview and preflight</text><text x="365" y="98" text-anchor="middle">read-only context check</text>
-<path d="M220 82 L275 82" class="arrow"/>
-<rect x="275" y="130" width="180" height="50" rx="8" class="control"/><text x="365" y="151" text-anchor="middle">Recorded Lab 21</text><text x="365" y="170" text-anchor="middle">exact cleanup boundary</text>
-<path d="M365 110 L365 130" class="arrow"/>
-<rect x="500" y="110" width="470" height="40" rx="8" class="resource"/><text x="735" y="135" text-anchor="middle">resource group</text><rect x="500" y="168" width="470" height="40" rx="8" class="resource"/><text x="735" y="193" text-anchor="middle">virtual network</text><rect x="500" y="226" width="470" height="40" rx="8" class="resource"/><text x="735" y="251" text-anchor="middle">two backend VMs</text><rect x="500" y="284" width="470" height="40" rx="8" class="resource"/><text x="735" y="309" text-anchor="middle">Standard load balancer</text><rect x="500" y="342" width="470" height="40" rx="8" class="resource"/><text x="735" y="367" text-anchor="middle">health probe</text>
-<path d="M 455 155 L 500 130" class="arrow"/><path d="M 455 155 L 500 188" class="arrow"/><path d="M 455 155 L 500 246" class="arrow"/><path d="M 455 155 L 500 304" class="arrow"/><path d="M 455 155 L 500 362" class="arrow"/>
-<rect x="40" y="215" width="180" height="50" rx="8" class="control"/><text x="130" y="237" text-anchor="middle">Independent validation</text><text x="130" y="256" text-anchor="middle">positive + negative</text>
-<path d="M275 165 L220 230" class="arrow"/>
-<rect x="40" y="290" width="180" height="50" rx="8" class="control"/><text x="130" y="312" text-anchor="middle">Evidence + cleanup</text><text x="130" y="331" text-anchor="middle">redacted and scoped</text>
-<path d="M130 265 L130 290" class="arrow"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="2288" height="432" viewBox="0 0 2288 432" role="img" aria-labelledby="lab21-title lab21-desc">
+  <title id="lab21-title">LAB-21 architecture: Load balance workloads and troubleshoot with Network Watcher</title>
+  <desc id="lab21-desc">Left-to-right service topology with 11 components and 13 directed relationships. Components: Internet client, Standard public frontend, TCP load-balancing rule, TCP health probe, Backend pool, Private VM 1 and agent, Private VM 2 and agent, Outbound rule, Connection Monitor TCP test, Health and path assertions, Monitor before workload cleanup. Relationships: Internet client to Standard public frontend; Standard public frontend to TCP load-balancing rule; TCP health probe to Backend pool; TCP load-balancing rule to Backend pool; Backend pool to Private VM 1 and agent; Backend pool to Private VM 2 and agent; Outbound rule to Standard public frontend; Private VM 1 and agent to Outbound rule; Private VM 2 and agent to Outbound rule; Private VM 1 and agent to Connection Monitor TCP test; Connection Monitor TCP test to Private VM 2 and agent; Connection Monitor TCP test to Health and path assertions; Health and path assertions to Monitor before workload cleanup.</desc>
+  <metadata id="lab21-metadata">{&quot;renderer&quot;:&quot;az104-mermaid-flowchart-svg/1.0.0&quot;,&quot;source&quot;:&quot;architecture.mmd&quot;,&quot;sourceSha256&quot;:&quot;0eb049d29f77dda4c1146be77b7a15b099c46925781a410590b04a52094488e0&quot;}</metadata>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M 0 0 L 10 4 L 0 8 z" fill="#57606a"/>
+    </marker>
+    <style>
+      .edge { fill: none; stroke: #57606a; stroke-width: 2; marker-end: url(#arrow); }
+      .edge-label-bg { fill: #ffffff; opacity: .94; }
+      .edge-label { fill: #57606a; font: 13px 'Segoe UI', Arial, sans-serif; text-anchor: middle; dominant-baseline: central; }
+      .node-label { font: 600 15px 'Segoe UI', Arial, sans-serif; text-anchor: middle; dominant-baseline: central; }
+    </style>
+  </defs>
+  <rect width="100%" height="100%" fill="#ffffff"/>
+  <g aria-hidden="true">
+    <path class="edge" d="M 324 165 C 384 165, 384 165, 444 165"/>
+    <path class="edge" d="M 704 165 C 764 165, 764 114, 824 114"/>
+    <path class="edge" d="M 324 267 C 384 267, 384 267, 444 267"/>
+    <path class="edge" d="M 824 114 C 774 331, 754 331, 704 267"/>
+    <path class="edge" d="M 704 267 C 764 267, 764 216, 824 216"/>
+    <path class="edge" d="M 704 267 C 764 267, 764 318, 824 318"/>
+    <path class="edge" d="M 1204 165 C 1154 229, 754 229, 704 165"/>
+    <path class="edge" d="M 1084 216 C 1144 216, 1144 165, 1204 165"/>
+    <path class="edge" d="M 1084 318 C 1144 318, 1144 165, 1204 165"/>
+    <path class="edge" d="M 1084 216 C 1144 216, 1144 267, 1204 267"/>
+    <path class="edge" d="M 1204 267 C 1154 396, 1134 396, 1084 318"/>
+    <path class="edge" d="M 1464 267 C 1524 267, 1524 216, 1584 216"/>
+    <path class="edge" d="M 1844 216 C 1904 216, 1904 216, 1964 216"/>
+    <rect x="64" y="131" width="260" height="68" rx="10" fill="#e8f1ff" stroke="#2563eb"/>
+    <text x="194" y="165" class="node-label" fill="#102a43">Internet client</text>
+    <rect x="444" y="131" width="260" height="68" rx="10" fill="#e9f8ef" stroke="#16803a"/>
+    <text x="574" y="165" class="node-label" fill="#102a43">Standard public frontend</text>
+    <rect x="824" y="80" width="260" height="68" rx="10" fill="#e9f8ef" stroke="#16803a"/>
+    <text x="954" y="114" class="node-label" fill="#102a43">TCP load-balancing rule</text>
+    <rect x="64" y="233" width="260" height="68" rx="10" fill="#e8f1ff" stroke="#2563eb"/>
+    <text x="194" y="267" class="node-label" fill="#102a43">TCP health probe</text>
+    <rect x="444" y="233" width="260" height="68" rx="10" fill="#e9f8ef" stroke="#16803a"/>
+    <text x="574" y="267" class="node-label" fill="#102a43">Backend pool</text>
+    <rect x="824" y="182" width="260" height="68" rx="10" fill="#e9f8ef" stroke="#16803a"/>
+    <text x="954" y="216" class="node-label" fill="#102a43">Private VM 1 and agent</text>
+    <rect x="824" y="284" width="260" height="68" rx="10" fill="#e9f8ef" stroke="#16803a"/>
+    <text x="954" y="318" class="node-label" fill="#102a43">Private VM 2 and agent</text>
+    <rect x="1204" y="131" width="260" height="68" rx="10" fill="#e9f8ef" stroke="#16803a"/>
+    <text x="1334" y="165" class="node-label" fill="#102a43">Outbound rule</text>
+    <rect x="1204" y="233" width="260" height="68" rx="10" fill="#e8f1ff" stroke="#2563eb"/>
+    <text x="1334" y="267" class="node-label" fill="#102a43">Connection Monitor TCP test</text>
+    <rect x="1584" y="182" width="260" height="68" rx="10" fill="#e8f1ff" stroke="#2563eb"/>
+    <text x="1714" y="216" class="node-label" fill="#102a43">Health and path assertions</text>
+    <rect x="1964" y="182" width="260" height="68" rx="10" fill="#e8f1ff" stroke="#2563eb"/>
+    <text x="2094" y="216" class="node-label" fill="#102a43">Monitor before workload cleanup</text>
+  </g>
 </svg>

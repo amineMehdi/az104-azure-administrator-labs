@@ -1,18 +1,65 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="390" viewBox="0 0 1040 390" role="img" aria-labelledby="title desc">
-<title id="title">Lab 04 architecture</title>
-<desc id="desc">Preview-first operator workflow, a recorded lab boundary, intended resources, independent validation, redacted command evidence, and scoped cleanup.</desc>
-<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#46647f"/></marker></defs>
-<style>text{font-family:Segoe UI,Arial,sans-serif;font-size:14px;fill:#102a43} .control{fill:#e8f1ff;stroke:#2563eb;stroke-width:2} .resource{fill:#e9f8ef;stroke:#16803a;stroke-width:2} .arrow{fill:none;stroke:#46647f;stroke-width:2;marker-end:url(#arrow)}</style>
-<rect width="100%" height="100%" fill="#ffffff"/>
-<rect x="40" y="55" width="180" height="55" rx="8" class="control"/><text x="130" y="79" text-anchor="middle">Operator</text><text x="130" y="98" text-anchor="middle">Azure CLI</text>
-<rect x="275" y="55" width="180" height="55" rx="8" class="control"/><text x="365" y="79" text-anchor="middle">Preview and preflight</text><text x="365" y="98" text-anchor="middle">read-only context check</text>
-<path d="M220 82 L275 82" class="arrow"/>
-<rect x="275" y="130" width="180" height="50" rx="8" class="control"/><text x="365" y="151" text-anchor="middle">Recorded Lab 04</text><text x="365" y="170" text-anchor="middle">exact cleanup boundary</text>
-<path d="M365 110 L365 130" class="arrow"/>
-<rect x="500" y="110" width="470" height="40" rx="8" class="resource"/><text x="735" y="135" text-anchor="middle">resource group</text><rect x="500" y="168" width="470" height="40" rx="8" class="resource"/><text x="735" y="193" text-anchor="middle">resource lock</text><rect x="500" y="226" width="470" height="40" rx="8" class="resource"/><text x="735" y="251" text-anchor="middle">optional management group</text>
-<path d="M 455 155 L 500 130" class="arrow"/><path d="M 455 155 L 500 188" class="arrow"/><path d="M 455 155 L 500 246" class="arrow"/>
-<rect x="40" y="215" width="180" height="50" rx="8" class="control"/><text x="130" y="237" text-anchor="middle">Independent validation</text><text x="130" y="256" text-anchor="middle">positive + negative</text>
-<path d="M275 165 L220 230" class="arrow"/>
-<rect x="40" y="290" width="180" height="50" rx="8" class="control"/><text x="130" y="312" text-anchor="middle">Evidence + cleanup</text><text x="130" y="331" text-anchor="middle">redacted and scoped</text>
-<path d="M130 265 L130 290" class="arrow"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="768" height="656" viewBox="0 0 768 656" role="img" aria-labelledby="lab04-title lab04-desc">
+  <title id="lab04-title">LAB-04 architecture: Manage hierarchy, resource groups, tags, and locks</title>
+  <desc id="lab04-desc">Left-to-right service topology with 8 components and 8 directed relationships. Components: Tenant root management group, Subscription, Empty lab management group, Tagged resource group, Virtual network, Governance and ownership tags, CanNotDelete lock, Dependency-aware cleanup. Relationships: Tenant root management group to Subscription (existing hierarchy); Tenant root management group to Empty lab management group (optional exact-YES gate); Subscription to Tagged resource group (contains); Tagged resource group to Virtual network (contains); Governance and ownership tags to Tagged resource group (merge); Governance and ownership tags to Virtual network (explicit apply
+no inheritance); CanNotDelete lock to Tagged resource group (protects control plane); Dependency-aware cleanup to CanNotDelete lock (remove exact lock first).</desc>
+  <metadata id="lab04-metadata">{&quot;renderer&quot;:&quot;az104-mermaid-flowchart-svg/1.0.0&quot;,&quot;source&quot;:&quot;architecture.mmd&quot;,&quot;sourceSha256&quot;:&quot;280fd82cd512b0ad6d74efd8f22ce078b54dbbe0054f88e1a0503b9851cef24e&quot;}</metadata>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M 0 0 L 10 4 L 0 8 z" fill="#57606a"/>
+    </marker>
+    <style>
+      .edge { fill: none; stroke: #57606a; stroke-width: 2; marker-end: url(#arrow); }
+      .edge-label-bg { fill: #ffffff; opacity: .94; }
+      .edge-label { fill: #57606a; font: 13px 'Segoe UI', Arial, sans-serif; text-anchor: middle; dominant-baseline: central; }
+      .node-label { font: 600 15px 'Segoe UI', Arial, sans-serif; text-anchor: middle; dominant-baseline: central; }
+    </style>
+  </defs>
+  <rect width="100%" height="100%" fill="#ffffff"/>
+  <g aria-hidden="true">
+    <path class="edge" d="M 324 216 C 384 216, 384 114, 444 114"/>
+    <path class="edge" d="M 324 216 C 384 216, 384 226, 444 226"/>
+    <path class="edge" d="M 574 148 C 618 226, 618 226, 574 304"/>
+    <path class="edge" d="M 574 372 C 598 389, 598 389, 574 406"/>
+    <path class="edge" d="M 324 338 C 384 338, 384 338, 444 338"/>
+    <path class="edge" d="M 324 338 C 384 338, 384 440, 444 440"/>
+    <path class="edge" d="M 574 576 C 598 440, 598 440, 574 304"/>
+    <path class="edge" d="M 324 450 C 384 450, 384 542, 444 542"/>
+    <rect class="edge-label-bg" x="314" y="154" width="140" height="22" rx="4"/>
+    <text class="edge-label" x="384" y="165">existing hierarchy</text>
+    <rect class="edge-label-bg" x="296.5" y="210" width="175" height="22" rx="4"/>
+    <text class="edge-label" x="384" y="221">optional exact-YES gate</text>
+    <rect class="edge-label-bg" x="583" y="215" width="70" height="22" rx="4"/>
+    <text class="edge-label" x="618" y="226">contains</text>
+    <rect class="edge-label-bg" x="563" y="378" width="70" height="22" rx="4"/>
+    <text class="edge-label" x="598" y="389">contains</text>
+    <rect class="edge-label-bg" x="359" y="327" width="50" height="22" rx="4"/>
+    <text class="edge-label" x="384" y="338">merge</text>
+    <rect class="edge-label-bg" x="275.5" y="378" width="217" height="22" rx="4"/>
+    <text class="edge-label" x="384" y="389">explicit apply
+no inheritance</text>
+    <rect class="edge-label-bg" x="514" y="429" width="168" height="22" rx="4"/>
+    <text class="edge-label" x="598" y="440">protects control plane</text>
+    <rect class="edge-label-bg" x="296.5" y="485" width="175" height="22" rx="4"/>
+    <text class="edge-label" x="384" y="496">remove exact lock first</text>
+    <rect x="64" y="172" width="260" height="88" rx="10" fill="#e9f8ef" stroke="#16803a"/>
+    <text x="194" y="206" class="node-label" fill="#102a43">Tenant root</text>
+    <text x="194" y="226" class="node-label" fill="#102a43">management group</text>
+    <rect x="444" y="80" width="260" height="68" rx="10" fill="#e9f8ef" stroke="#16803a"/>
+    <text x="574" y="114" class="node-label" fill="#102a43">Subscription</text>
+    <rect x="444" y="182" width="260" height="88" rx="10" fill="#e9f8ef" stroke="#16803a"/>
+    <text x="574" y="216" class="node-label" fill="#102a43">Empty lab</text>
+    <text x="574" y="236" class="node-label" fill="#102a43">management group</text>
+    <rect x="444" y="304" width="260" height="68" rx="10" fill="#e9f8ef" stroke="#16803a"/>
+    <text x="574" y="338" class="node-label" fill="#102a43">Tagged resource group</text>
+    <rect x="444" y="406" width="260" height="68" rx="10" fill="#e9f8ef" stroke="#16803a"/>
+    <text x="574" y="440" class="node-label" fill="#102a43">Virtual network</text>
+    <rect x="64" y="294" width="260" height="88" rx="10" fill="#e8f1ff" stroke="#2563eb"/>
+    <text x="194" y="328" class="node-label" fill="#102a43">Governance and</text>
+    <text x="194" y="348" class="node-label" fill="#102a43">ownership tags</text>
+    <rect x="444" y="508" width="260" height="68" rx="10" fill="#e9f8ef" stroke="#16803a"/>
+    <text x="574" y="542" class="node-label" fill="#102a43">CanNotDelete lock</text>
+    <rect x="64" y="416" width="260" height="68" rx="10" fill="#e8f1ff" stroke="#2563eb"/>
+    <text x="194" y="450" class="node-label" fill="#102a43">Dependency-aware cleanup</text>
+  </g>
 </svg>

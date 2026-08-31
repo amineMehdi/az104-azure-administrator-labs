@@ -3,6 +3,11 @@
   "globs": ["**/*.md"],
   "ignores": [
     "node_modules/**",
+    ".packages/**",
+    ".site-docs/**",
+    ".site-docs.tmp/**",
+    ".venv/**",
+    "site/**",
     ".github/PULL_REQUEST_TEMPLATE.md",
     "AZ-104-GITHUB-LABS-MEGA-PROMPT.md"
   ]

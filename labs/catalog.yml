@@ -1,201 +1,581 @@
-schemaVersion: 1.0.0
+schemaVersion: 2.0.0
 blueprintVersion: '2026-04-17'
 expectedLabCount: 28
 generatedFrom: lab.yml
 labs:
 - id: '00'
+  labId: LAB-00
   slug: safe-bootstrap
+  folder: 00-safe-bootstrap
+  title: Safe Azure lab bootstrap
   domain: foundation
   track: azure-cli
   status: offline-validated
+  difficulty: foundational
   estimatedMinutes: 60
-  assessmentQuestionCount: 0
+  costClass: none
+  questionCount: 0
+  objectiveIds:
+  - FD-TOOLS-01
+  - FD-CONTEXT-01
+  - FD-COST-01
+  - FD-SAFETY-01
+  - FD-CLEANUP-01
+  path: labs/00-safe-bootstrap/README.md
+  previousLabId: null
+  nextLabId: LAB-01
 - id: '01'
+  labId: LAB-01
   slug: entra-users-groups
+  folder: 01-entra-users-groups
+  title: Create and manage Microsoft Entra users and groups
   domain: identity-governance
   track: azure-cli
   status: offline-validated
+  difficulty: foundational
   estimatedMinutes: 75
-  assessmentQuestionCount: 50
+  costClass: none
+  questionCount: 50
+  objectiveIds:
+  - IG-USERS-01
+  - IG-USERS-02
+  path: labs/01-entra-users-groups/README.md
+  previousLabId: LAB-00
+  nextLabId: LAB-02
 - id: '02'
+  labId: LAB-02
   slug: entra-licenses-guests-sspr
+  folder: 02-entra-licenses-guests-sspr
+  title: Manage Entra licenses, guests, and self-service password reset
   domain: identity-governance
   track: azure-cli
   status: offline-validated
+  difficulty: foundational
   estimatedMinutes: 105
-  assessmentQuestionCount: 50
+  costClass: none
+  questionCount: 50
+  objectiveIds:
+  - IG-USERS-03
+  - IG-USERS-04
+  - IG-USERS-05
+  path: labs/02-entra-licenses-guests-sspr/README.md
+  previousLabId: LAB-01
+  nextLabId: LAB-03
 - id: '03'
+  labId: LAB-03
   slug: azure-rbac-scopes
+  folder: 03-azure-rbac-scopes
+  title: Assign and interpret Azure RBAC at multiple scopes
   domain: identity-governance
   track: azure-cli
   status: offline-validated
+  difficulty: foundational
   estimatedMinutes: 90
-  assessmentQuestionCount: 50
+  costClass: none
+  questionCount: 50
+  objectiveIds:
+  - IG-ACCESS-01
+  - IG-ACCESS-02
+  - IG-ACCESS-03
+  path: labs/03-azure-rbac-scopes/README.md
+  previousLabId: LAB-02
+  nextLabId: LAB-04
 - id: '04'
+  labId: LAB-04
   slug: resource-hierarchy-tags-locks
+  folder: 04-resource-hierarchy-tags-locks
+  title: Manage hierarchy, resource groups, tags, and locks
   domain: identity-governance
   track: azure-cli
   status: offline-validated
+  difficulty: foundational
   estimatedMinutes: 90
-  assessmentQuestionCount: 50
+  costClass: none
+  questionCount: 50
+  objectiveIds:
+  - IG-GOVERN-02
+  - IG-GOVERN-03
+  - IG-GOVERN-04
+  - IG-GOVERN-05
+  - IG-GOVERN-07
+  path: labs/04-resource-hierarchy-tags-locks/README.md
+  previousLabId: LAB-03
+  nextLabId: LAB-05
 - id: '05'
+  labId: LAB-05
   slug: policy-costs-advisor
+  folder: 05-policy-costs-advisor
+  title: Enforce policy and manage costs with budgets and Advisor
   domain: identity-governance
   track: azure-cli
   status: offline-validated
+  difficulty: foundational
   estimatedMinutes: 120
-  assessmentQuestionCount: 50
+  costClass: none
+  questionCount: 50
+  objectiveIds:
+  - IG-GOVERN-01
+  - IG-GOVERN-06
+  - IG-GOVERN-07
+  path: labs/05-policy-costs-advisor/README.md
+  previousLabId: LAB-04
+  nextLabId: LAB-06
 - id: '06'
+  labId: LAB-06
   slug: storage-accounts-security
+  folder: 06-storage-accounts-security
+  title: Secure storage accounts, redundancy, encryption, and keys
   domain: storage
   track: azure-cli
   status: offline-validated
+  difficulty: foundational
   estimatedMinutes: 90
-  assessmentQuestionCount: 50
+  costClass: low
+  questionCount: 50
+  objectiveIds:
+  - ST-ACCESS-04
+  - ST-ACCOUNTS-01
+  - ST-ACCOUNTS-02
+  - ST-ACCOUNTS-04
+  path: labs/06-storage-accounts-security/README.md
+  previousLabId: LAB-05
+  nextLabId: LAB-07
 - id: '07'
+  labId: LAB-07
   slug: storage-network-sas
+  folder: 07-storage-network-sas
+  title: Restrict storage networking and issue scoped SAS access
   domain: storage
   track: azure-cli
   status: offline-validated
+  difficulty: foundational
   estimatedMinutes: 105
-  assessmentQuestionCount: 50
+  costClass: low
+  questionCount: 50
+  objectiveIds:
+  - ST-ACCESS-01
+  - ST-ACCESS-02
+  - ST-ACCESS-03
+  - ST-ACCESS-04
+  path: labs/07-storage-network-sas/README.md
+  previousLabId: LAB-06
+  nextLabId: LAB-08
 - id: 08
+  labId: LAB-08
   slug: blob-lifecycle-replication
+  folder: 08-blob-lifecycle-replication
+  title: Manage Blob lifecycle, tiers, versioning, replication, and AzCopy
   domain: storage
   track: azure-cli
   status: offline-validated
+  difficulty: foundational
   estimatedMinutes: 120
-  assessmentQuestionCount: 50
+  costClass: low
+  questionCount: 50
+  objectiveIds:
+  - ST-ACCOUNTS-03
+  - ST-ACCOUNTS-05
+  - ST-DATA-02
+  - ST-DATA-03
+  - ST-DATA-04
+  - ST-DATA-06
+  - ST-DATA-07
+  path: labs/08-blob-lifecycle-replication/README.md
+  previousLabId: LAB-07
+  nextLabId: LAB-09
 - id: 09
+  labId: LAB-09
   slug: azure-files-identity
+  folder: 09-azure-files-identity
+  title: Configure Azure Files, snapshots, soft delete, and identity access
   domain: storage
   track: azure-cli
   status: offline-validated
+  difficulty: foundational
   estimatedMinutes: 135
-  assessmentQuestionCount: 50
+  costClass: low
+  questionCount: 50
+  objectiveIds:
+  - ST-ACCESS-05
+  - ST-ACCOUNTS-05
+  - ST-DATA-01
+  - ST-DATA-05
+  path: labs/09-azure-files-identity/README.md
+  previousLabId: LAB-08
+  nextLabId: LAB-10
 - id: '10'
+  labId: LAB-10
   slug: arm-bicep-lifecycle
+  folder: 10-arm-bicep-lifecycle
+  title: Interpret, modify, deploy, export, and decompile ARM and Bicep
   domain: compute
   track: azure-cli-bicep
   status: offline-validated
+  difficulty: applied
   estimatedMinutes: 120
-  assessmentQuestionCount: 50
+  costClass: none
+  questionCount: 50
+  objectiveIds:
+  - CP-IAC-01
+  - CP-IAC-02
+  - CP-IAC-03
+  - CP-IAC-04
+  - CP-IAC-05
+  path: labs/10-arm-bicep-lifecycle/README.md
+  previousLabId: LAB-09
+  nextLabId: LAB-11
 - id: '11'
+  labId: LAB-11
   slug: vm-lifecycle-disks-encryption
+  folder: 11-vm-lifecycle-disks-encryption
+  title: Manage VM lifecycle, size, disks, and host encryption
   domain: compute
   track: azure-cli
   status: offline-validated
+  difficulty: applied
   estimatedMinutes: 120
-  assessmentQuestionCount: 50
+  costClass: moderate
+  questionCount: 50
+  objectiveIds:
+  - CP-VM-01
+  - CP-VM-02
+  - CP-VM-04
+  - CP-VM-05
+  path: labs/11-vm-lifecycle-disks-encryption/README.md
+  previousLabId: LAB-10
+  nextLabId: LAB-12
 - id: '12'
+  labId: LAB-12
   slug: vm-resilience-scale-mobility
+  folder: 12-vm-resilience-scale-mobility
+  title: Design VM resilience, scale sets, and mobility
   domain: compute
   track: azure-cli
   status: offline-validated
+  difficulty: applied
   estimatedMinutes: 150
-  assessmentQuestionCount: 50
+  costClass: elevated
+  questionCount: 50
+  objectiveIds:
+  - CP-VM-03
+  - CP-VM-04
+  - CP-VM-06
+  - CP-VM-07
+  path: labs/12-vm-resilience-scale-mobility/README.md
+  previousLabId: LAB-11
+  nextLabId: LAB-13
 - id: '13'
+  labId: LAB-13
   slug: acr-aci
+  folder: 13-acr-aci
+  title: Publish images with ACR and run Azure Container Instances
   domain: compute
   track: azure-cli
   status: offline-validated
+  difficulty: applied
   estimatedMinutes: 105
-  assessmentQuestionCount: 50
+  costClass: low
+  questionCount: 50
+  objectiveIds:
+  - CP-CONTAINERS-01
+  - CP-CONTAINERS-02
+  - CP-CONTAINERS-04
+  path: labs/13-acr-aci/README.md
+  previousLabId: LAB-12
+  nextLabId: LAB-14
 - id: '14'
+  labId: LAB-14
   slug: container-apps
+  folder: 14-container-apps
+  title: Deploy and scale Azure Container Apps
   domain: compute
   track: azure-cli
   status: offline-validated
+  difficulty: applied
   estimatedMinutes: 120
-  assessmentQuestionCount: 50
+  costClass: low
+  questionCount: 50
+  objectiveIds:
+  - CP-CONTAINERS-03
+  - CP-CONTAINERS-04
+  path: labs/14-container-apps/README.md
+  previousLabId: LAB-13
+  nextLabId: LAB-15
 - id: '15'
+  labId: LAB-15
   slug: app-service-scale-slots
+  folder: 15-app-service-scale-slots
+  title: Scale App Service and operate deployment slots
   domain: compute
   track: azure-cli
   status: offline-validated
+  difficulty: applied
   estimatedMinutes: 120
-  assessmentQuestionCount: 50
+  costClass: moderate
+  questionCount: 50
+  objectiveIds:
+  - CP-APP-01
+  - CP-APP-02
+  - CP-APP-03
+  - CP-APP-08
+  path: labs/15-app-service-scale-slots/README.md
+  previousLabId: LAB-14
+  nextLabId: LAB-16
 - id: '16'
+  labId: LAB-16
   slug: app-service-tls-dns-backup-network
+  folder: 16-app-service-tls-dns-backup-network
+  title: Configure App Service TLS, DNS, backup, and networking
   domain: compute
   track: azure-cli
   status: offline-validated
+  difficulty: applied
   estimatedMinutes: 150
-  assessmentQuestionCount: 50
+  costClass: moderate
+  questionCount: 50
+  objectiveIds:
+  - CP-APP-04
+  - CP-APP-05
+  - CP-APP-06
+  - CP-APP-07
+  - NW-DNSLB-01
+  path: labs/16-app-service-tls-dns-backup-network/README.md
+  previousLabId: LAB-15
+  nextLabId: LAB-17
 - id: '17'
+  labId: LAB-17
   slug: vnet-subnets-peering-public-ip
+  folder: 17-vnet-subnets-peering-public-ip
+  title: Create VNets, subnets, peerings, and public IPs
   domain: networking
   track: azure-cli
   status: offline-validated
+  difficulty: applied
   estimatedMinutes: 105
-  assessmentQuestionCount: 50
+  costClass: low
+  questionCount: 50
+  objectiveIds:
+  - NW-VNET-01
+  - NW-VNET-02
+  - NW-VNET-03
+  path: labs/17-vnet-subnets-peering-public-ip/README.md
+  previousLabId: LAB-16
+  nextLabId: LAB-18
 - id: '18'
+  labId: LAB-18
   slug: routing-nsg-asg
+  folder: 18-routing-nsg-asg
+  title: Control traffic with routes, NSGs, ASGs, and effective rules
   domain: networking
   track: azure-cli
   status: offline-validated
+  difficulty: applied
   estimatedMinutes: 120
-  assessmentQuestionCount: 50
+  costClass: moderate
+  questionCount: 50
+  objectiveIds:
+  - NW-VNET-04
+  - NW-VNET-05
+  - NW-SECURE-01
+  - NW-SECURE-02
+  path: labs/18-routing-nsg-asg/README.md
+  previousLabId: LAB-17
+  nextLabId: LAB-19
 - id: '19'
+  labId: LAB-19
   slug: service-private-endpoints
+  folder: 19-service-private-endpoints
+  title: Compare service endpoints and private endpoints
   domain: networking
   track: azure-cli
   status: offline-validated
+  difficulty: applied
   estimatedMinutes: 120
-  assessmentQuestionCount: 50
+  costClass: moderate
+  questionCount: 50
+  objectiveIds:
+  - ST-ACCESS-01
+  - CP-APP-07
+  - NW-SECURE-04
+  - NW-SECURE-05
+  path: labs/19-service-private-endpoints/README.md
+  previousLabId: LAB-18
+  nextLabId: LAB-20
 - id: '20'
+  labId: LAB-20
   slug: azure-dns-bastion
+  folder: 20-azure-dns-bastion
+  title: Configure Azure DNS and secure administration with Bastion
   domain: networking
   track: azure-cli
   status: offline-validated
+  difficulty: applied
   estimatedMinutes: 120
-  assessmentQuestionCount: 50
+  costClass: elevated
+  questionCount: 50
+  objectiveIds:
+  - NW-SECURE-03
+  - NW-DNSLB-01
+  path: labs/20-azure-dns-bastion/README.md
+  previousLabId: LAB-19
+  nextLabId: LAB-21
 - id: '21'
+  labId: LAB-21
   slug: load-balancer-network-watcher
+  folder: 21-load-balancer-network-watcher
+  title: Load balance workloads and troubleshoot with Network Watcher
   domain: networking
   track: azure-cli
   status: offline-validated
+  difficulty: applied
   estimatedMinutes: 150
-  assessmentQuestionCount: 50
+  costClass: elevated
+  questionCount: 50
+  objectiveIds:
+  - NW-VNET-05
+  - NW-DNSLB-02
+  - NW-DNSLB-03
+  - MR-MONITOR-06
+  path: labs/21-load-balancer-network-watcher/README.md
+  previousLabId: LAB-20
+  nextLabId: LAB-22
 - id: '22'
+  labId: LAB-22
   slug: azure-monitor-logs-insights
+  folder: 22-azure-monitor-logs-insights
+  title: Collect and analyze Azure Monitor metrics, logs, and Insights
   domain: monitor-recovery
   track: azure-cli
   status: offline-validated
+  difficulty: applied
   estimatedMinutes: 135
-  assessmentQuestionCount: 50
+  costClass: moderate
+  questionCount: 50
+  objectiveIds:
+  - MR-MONITOR-01
+  - MR-MONITOR-02
+  - MR-MONITOR-03
+  - MR-MONITOR-05
+  - MR-MONITOR-06
+  path: labs/22-azure-monitor-logs-insights/README.md
+  previousLabId: LAB-21
+  nextLabId: LAB-23
 - id: '23'
+  labId: LAB-23
   slug: monitor-alerts-actions
+  folder: 23-monitor-alerts-actions
+  title: Build Azure Monitor alerts, action groups, and processing rules
   domain: monitor-recovery
   track: azure-cli
   status: offline-validated
+  difficulty: applied
   estimatedMinutes: 105
-  assessmentQuestionCount: 50
+  costClass: low
+  questionCount: 50
+  objectiveIds:
+  - MR-MONITOR-04
+  path: labs/23-monitor-alerts-actions/README.md
+  previousLabId: LAB-22
+  nextLabId: LAB-24
 - id: '24'
+  labId: LAB-24
   slug: azure-backup-restore
+  folder: 24-azure-backup-restore
+  title: Configure Azure Backup policies, protection, restore, reports, and alerts
   domain: monitor-recovery
   track: azure-cli
   status: offline-validated
+  difficulty: advanced
   estimatedMinutes: 150
-  assessmentQuestionCount: 50
+  costClass: elevated
+  questionCount: 50
+  objectiveIds:
+  - MR-RECOVERY-01
+  - MR-RECOVERY-02
+  - MR-RECOVERY-03
+  - MR-RECOVERY-04
+  - MR-RECOVERY-07
+  path: labs/24-azure-backup-restore/README.md
+  previousLabId: LAB-23
+  nextLabId: LAB-25
 - id: '25'
+  labId: LAB-25
   slug: site-recovery-failover
+  folder: 25-site-recovery-failover
+  title: Replicate and fail over an Azure VM with Site Recovery
   domain: monitor-recovery
   track: azure-cli
   status: offline-validated
+  difficulty: advanced
   estimatedMinutes: 180
-  assessmentQuestionCount: 50
+  costClass: elevated
+  questionCount: 50
+  objectiveIds:
+  - MR-RECOVERY-05
+  - MR-RECOVERY-06
+  path: labs/25-site-recovery-failover/README.md
+  previousLabId: LAB-24
+  nextLabId: LAB-26
 - id: '26'
+  labId: LAB-26
   slug: capstone-build
+  folder: 26-capstone-build
+  title: Capstone — Build a governed, secure, observable Azure workload
   domain: capstone
   track: azure-cli-bicep
   status: offline-validated
+  difficulty: advanced
   estimatedMinutes: 180
-  assessmentQuestionCount: 0
+  costClass: elevated
+  questionCount: 0
+  objectiveIds:
+  - IG-ACCESS-01
+  - IG-ACCESS-02
+  - IG-GOVERN-01
+  - IG-GOVERN-03
+  - IG-GOVERN-04
+  - ST-ACCOUNTS-01
+  - CP-IAC-04
+  - CP-VM-01
+  - CP-VM-06
+  - CP-VM-07
+  - NW-VNET-01
+  - NW-SECURE-01
+  - NW-SECURE-05
+  - NW-DNSLB-02
+  - MR-MONITOR-02
+  - MR-MONITOR-04
+  path: labs/26-capstone-build/README.md
+  previousLabId: LAB-25
+  nextLabId: LAB-27
 - id: '27'
+  labId: LAB-27
   slug: capstone-operate-recover
+  folder: 27-capstone-operate-recover
+  title: Capstone — Operate, troubleshoot, back up, and recover an Azure workload
   domain: capstone
   track: azure-cli
   status: offline-validated
+  difficulty: advanced
   estimatedMinutes: 180
-  assessmentQuestionCount: 0
+  costClass: elevated
+  questionCount: 0
+  objectiveIds:
+  - IG-ACCESS-03
+  - IG-GOVERN-01
+  - IG-GOVERN-02
+  - IG-GOVERN-04
+  - IG-GOVERN-06
+  - NW-VNET-05
+  - NW-SECURE-02
+  - NW-DNSLB-03
+  - MR-MONITOR-03
+  - MR-MONITOR-04
+  - MR-MONITOR-05
+  - MR-MONITOR-06
+  - MR-RECOVERY-04
+  - MR-RECOVERY-06
+  - MR-RECOVERY-07
+  path: labs/27-capstone-operate-recover/README.md
+  previousLabId: LAB-26
+  nextLabId: null

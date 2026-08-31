@@ -1,28 +1,115 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.invalid/az104/validation-schema.json",
+  "$id": "https://jamonygr.github.io/az104-azure-administrator-labs/schemas/validation-schema.json",
   "title": "AZ-104 lab validation result",
   "type": "object",
-  "required": ["labId", "runId", "generatedAt", "result", "checks"],
+  "required": ["schemaVersion", "labId", "runId", "mode", "generatedAt", "result", "summary", "checks"],
   "properties": {
+    "schemaVersion": { "const": "1.0.0" },
     "labId": { "type": "string", "pattern": "^LAB-[0-9]{2}$" },
-    "runId": { "type": "string", "minLength": 3 },
+    "runId": { "type": "string", "pattern": "^[a-z0-9](?:[a-z0-9-]{0,30}[a-z0-9])?$" },
+    "mode": { "enum": ["Deployment", "PostCleanup"] },
     "generatedAt": { "type": "string", "format": "date-time" },
-    "result": { "enum": ["pass", "fail", "partial", "skipped"] },
+    "result": { "enum": ["pass", "fail", "partial"] },
+    "summary": {
+      "type": "object",
+      "required": ["required", "passed", "failed", "skipped"],
+      "properties": {
+        "required": { "type": "integer", "minimum": 0 },
+        "passed": { "type": "integer", "minimum": 0 },
+        "failed": { "type": "integer", "minimum": 0 },
+        "skipped": { "type": "integer", "minimum": 0 }
+      },
+      "additionalProperties": false
+    },
     "checks": {
       "type": "array",
       "minItems": 1,
       "items": {
         "type": "object",
-        "required": ["id", "status", "message"],
+        "required": [
+          "id",
+          "checkpointId",
+          "kind",
+          "required",
+          "status",
+          "message",
+          "evidence"
+        ],
         "properties": {
-          "id": { "type": "string" },
-          "status": { "enum": ["pass", "fail", "warning", "skipped"] },
-          "message": { "type": "string" }
+          "id": { "type": "string", "pattern": "^[a-z][a-z0-9-]*(?:\\.[a-z0-9-]+)+$" },
+          "checkpointId": { "type": "string", "pattern": "^LAB[0-9]{2}-CP0[1-5]$" },
+          "kind": { "enum": ["context", "positive", "negative", "residual"] },
+          "required": { "type": "boolean" },
+          "status": { "enum": ["pass", "fail", "skipped"] },
+          "message": { "type": "string", "minLength": 5 },
+          "evidence": {
+            "type": "object",
+            "required": ["command", "expected", "actual", "capturedAt", "redacted"],
+            "properties": {
+              "command": { "type": "string", "minLength": 3 },
+              "expected": { "type": "string", "minLength": 3 },
+              "actual": { "type": "string" },
+              "capturedAt": { "type": "string", "format": "date-time" },
+              "redacted": { "const": true }
+            },
+            "additionalProperties": false
+          }
         },
-        "additionalProperties": true
+        "additionalProperties": false
       }
     }
   },
-  "additionalProperties": true
+  "allOf": [
+    {
+      "if": { "properties": { "result": { "const": "pass" } }, "required": ["result"] },
+      "then": {
+        "properties": {
+          "checks": {
+            "items": { "properties": { "status": { "const": "pass" } } }
+          }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "result": { "const": "fail" } }, "required": ["result"] },
+      "then": {
+        "properties": {
+          "checks": {
+            "anyOf": [
+              { "contains": { "properties": { "status": { "const": "fail" } }, "required": ["status"] } },
+              {
+                "contains": {
+                  "properties": { "status": { "const": "skipped" }, "required": { "const": true } },
+                  "required": ["status", "required"]
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "result": { "const": "partial" } }, "required": ["result"] },
+      "then": {
+        "properties": {
+          "checks": {
+            "contains": { "properties": { "status": { "const": "skipped" } }, "required": ["status"] },
+            "allOf": [
+              { "not": { "contains": { "properties": { "status": { "const": "fail" } }, "required": ["status"] } } },
+              {
+                "not": {
+                  "contains": {
+                    "properties": { "status": { "const": "skipped" }, "required": { "const": true } },
+                    "required": ["status", "required"]
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "additionalProperties": false
 }

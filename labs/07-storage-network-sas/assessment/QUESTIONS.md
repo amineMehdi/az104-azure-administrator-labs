@@ -1,453 +1,459 @@
 # Lab 07 knowledge check
 
-Choose the single best answer for each question. Record your choices before opening `ANSWERS.md`.
+[Return to the guided lab](../README.md)
+
+Complete all 50 questions before opening the answer key. Allow about 50–60 minutes and choose the single best answer.
+
+Use the result as a learning signal: 85–100% indicates mastery, 70–84% calls for targeted review, and below 70% means repeat the mapped lab tasks before retrying.
 
 ## LAB07-Q01 — Foundational
 
-Which principle is most important when working on 'Configure Azure Storage firewalls and virtual networks' in Lab 07?
+The restricted storage data-plane design handoff omits the network perimeter rule needed to deny public-endpoint traffic unless an explicit network exception allows it. Which statement should the team add?
 
-- A. The shortest command is always correct even when it changes a broader scope.
-- B. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- C. A recognizable resource name removes the need for validation and scoped cleanup.
-- D. A stored access policy can revoke or change a service SAS, while account SAS and access keys have broader authority and require stricter handling.
+- A. An IP network rule permits public-endpoint requests originating from a listed public IPv4 address or CIDR range.
+- B. A service SAS delegates access to one storage service, whereas an account SAS can cover multiple services and resource types.
+- C. A default action of Deny restricts the public endpoint to explicitly allowed networks and exceptions.
+- D. A stored access policy on a container or share can supply constraints for service SAS tokens that reference its identifier.
 
 ## LAB07-Q02 — Foundational
 
-Which lab action directly supports the objective 'Create and use shared access signature (SAS) tokens'?
+A network perimeter incident review of the restricted storage data-plane design depends on the ability to permit traffic at the public service address only from an approved IPv4 range. Which platform description is reliable?
 
-- A. Create a secure StorageV2 account and change the network default action to Deny.
-- B. Search the whole tenant for a similar display name and modify the first match.
-- C. Mark the objective complete after reading documentation without checking any state.
-- D. Change the active tenant without displaying or confirming the resulting context.
+- A. A Microsoft.Storage service endpoint lets a selected subnet identity be authorized on a storage firewall while traffic reaches the service public endpoint.
+- B. A user delegation SAS for Blob Storage is signed with a Microsoft Entra user delegation key rather than an account key.
+- C. An IP network rule permits public-endpoint requests originating from a listed public IPv4 address or CIDR range.
+- D. Changing or deleting a stored access policy can revoke service SAS tokens associated with that policy after propagation.
 
 ## LAB07-Q03 — Foundational
 
-Which authorization approach is appropriate before practicing 'Configure stored access policies'?
+A storage security administrator restricting data-plane access is updating the network perimeter runbook. The requirement is to authorize one subnet on the service firewall while retaining the public endpoint. Which statement describes Azure behavior correctly?
 
-- A. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
-- B. Confirm the active context and use only the declared role boundary: Contributor plus Storage Account Contributor on the lab resource group
-- C. Skip role checks when the run ID contains the lab number.
-- D. Use a production subscription because its resources already exist.
+- A. A trusted-services bypass is a specific exception and does not allow every Azure resource to bypass the firewall.
+- B. A Microsoft.Storage service endpoint lets a selected subnet identity be authorized on a storage firewall while traffic reaches the service public endpoint.
+- C. A SAS is valid only within its signed time window, subject to clock skew and service interpretation.
+- D. Anyone holding a storage account key can authorize broad shared-key operations permitted by the service.
 
 ## LAB07-Q04 — Foundational
 
-Which resource or object belongs inside the recorded boundary for 'Manage access keys'?
+A network perimeter peer review asks how the restricted storage data-plane design should handle this outcome: allow only the limited platform services supported by the firewall bypass. Which explanation is accurate?
 
-- A. Use an unrelated shared resource without recording its immutable ID.
-- B. Use a production object when the sandbox prerequisite is unavailable.
-- C. Use the exact recorded identity and scope for blob container.
-- D. Use whichever similarly named object appears first in a broad search.
+- A. A trusted-services bypass is a specific exception and does not allow every Azure resource to bypass the firewall.
+- B. A service SAS delegates access to one storage service, whereas an account SAS can cover multiple services and resource types.
+- C. A stored access policy on a container or share can supply constraints for service SAS tokens that reference its identifier.
+- D. A default action of Deny restricts the public endpoint to explicitly allowed networks and exceptions.
 
 ## LAB07-Q05 — Foundational
 
-During a design vocabulary review, the team evaluates this situation: Which principle is most important when working on 'Configure Azure Storage firewalls and virtual networks' in Lab 07?
+For the restricted storage data-plane design, the network perimeter plan must choose whether delegated access covers one service or several account services. Which statement about network perimeter belongs in the restricted storage data-plane design record?
 
-- A. The shortest command is always correct even when it changes a broader scope.
-- B. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- C. A recognizable resource name removes the need for validation and scoped cleanup.
-- D. A stored access policy can revoke or change a service SAS, while account SAS and access keys have broader authority and require stricter handling.
+- A. A service SAS delegates access to one storage service, whereas an account SAS can cover multiple services and resource types.
+- B. A user delegation SAS for Blob Storage is signed with a Microsoft Entra user delegation key rather than an account key.
+- C. Changing or deleting a stored access policy can revoke service SAS tokens associated with that policy after propagation.
+- D. An IP network rule permits public-endpoint requests originating from a listed public IPv4 address or CIDR range.
 
 ## LAB07-Q06 — Foundational
 
-In a command-planning session, an administrator asks this question: Which lab action directly supports the objective 'Create and use shared access signature (SAS) tokens'?
+The network perimeter review compares four claims for the restricted storage data-plane design requirement to have a Microsoft Entra principal sign temporary Blob access instead of an account credential. Which claim is technically sound?
 
-- A. Create a secure StorageV2 account and change the network default action to Deny.
-- B. Search the whole tenant for a similar display name and modify the first match.
-- C. Mark the objective complete after reading documentation without checking any state.
-- D. Change the active tenant without displaying or confirming the resulting context.
+- A. A SAS is valid only within its signed time window, subject to clock skew and service interpretation.
+- B. A user delegation SAS for Blob Storage is signed with a Microsoft Entra user delegation key rather than an account key.
+- C. Anyone holding a storage account key can authorize broad shared-key operations permitted by the service.
+- D. A Microsoft.Storage service endpoint lets a selected subnet identity be authorized on a storage firewall while traffic reaches the service public endpoint.
 
 ## LAB07-Q07 — Foundational
 
-While preparing the lab, a learner verifies this platform rule: Which authorization approach is appropriate before practicing 'Configure stored access policies'?
+The network perimeter architecture note requires the restricted storage data-plane design environment to bound delegated access to an intentional start and expiry window. Which statement defines the relevant network perimeter boundary?
 
-- A. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
-- B. Confirm the active context and use only the declared role boundary: Contributor plus Storage Account Contributor on the lab resource group
-- C. Skip role checks when the run ID contains the lab number.
-- D. Use a production subscription because its resources already exist.
+- A. A stored access policy on a container or share can supply constraints for service SAS tokens that reference its identifier.
+- B. A default action of Deny restricts the public endpoint to explicitly allowed networks and exceptions.
+- C. A SAS is valid only within its signed time window, subject to clock skew and service interpretation.
+- D. A trusted-services bypass is a specific exception and does not allow every Azure resource to bypass the firewall.
 
 ## LAB07-Q08 — Foundational
 
-During peer review, the team must identify the accurate response to this scenario: Which resource or object belongs inside the recorded boundary for 'Manage access keys'?
+A new network perimeter operator must explain why the restricted storage data-plane design can attach revocable constraints to service-level delegated tokens. Which explanation is accurate?
 
-- A. Use an unrelated shared resource without recording its immutable ID.
-- B. Use a production object when the sandbox prerequisite is unavailable.
-- C. Use the exact recorded identity and scope for blob container.
-- D. Use whichever similarly named object appears first in a broad search.
+- A. Changing or deleting a stored access policy can revoke service SAS tokens associated with that policy after propagation.
+- B. An IP network rule permits public-endpoint requests originating from a listed public IPv4 address or CIDR range.
+- C. A stored access policy on a container or share can supply constraints for service SAS tokens that reference its identifier.
+- D. A service SAS delegates access to one storage service, whereas an account SAS can cover multiple services and resource types.
 
 ## LAB07-Q09 — Foundational
 
-In an operations briefing, a new team member receives this question: Which principle is most important when working on 'Configure Azure Storage firewalls and virtual networks' in Lab 07?
+The restricted storage data-plane design acceptance criteria require operators to invalidate tokens that refer to a named server-side access policy. Which service fact supports that requirement?
 
-- A. The shortest command is always correct even when it changes a broader scope.
-- B. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- C. A recognizable resource name removes the need for validation and scoped cleanup.
-- D. A stored access policy can revoke or change a service SAS, while account SAS and access keys have broader authority and require stricter handling.
+- A. Anyone holding a storage account key can authorize broad shared-key operations permitted by the service.
+- B. A Microsoft.Storage service endpoint lets a selected subnet identity be authorized on a storage firewall while traffic reaches the service public endpoint.
+- C. Changing or deleting a stored access policy can revoke service SAS tokens associated with that policy after propagation.
+- D. A user delegation SAS for Blob Storage is signed with a Microsoft Entra user delegation key rather than an account key.
 
 ## LAB07-Q10 — Foundational
 
-While building a support checklist, an engineer reviews this requirement: Which lab action directly supports the objective 'Create and use shared access signature (SAS) tokens'?
+A network perimeter reviewer challenges whether the restricted storage data-plane design can avoid exposing a credential that grants broad authority over the account. Which response resolves the concern?
 
-- A. Create a secure StorageV2 account and change the network default action to Deny.
-- B. Search the whole tenant for a similar display name and modify the first match.
-- C. Mark the objective complete after reading documentation without checking any state.
-- D. Change the active tenant without displaying or confirming the resulting context.
+- A. A default action of Deny restricts the public endpoint to explicitly allowed networks and exceptions.
+- B. A trusted-services bypass is a specific exception and does not allow every Azure resource to bypass the firewall.
+- C. A SAS is valid only within its signed time window, subject to clock skew and service interpretation.
+- D. Anyone holding a storage account key can authorize broad shared-key operations permitted by the service.
 
 ## LAB07-Q11 — Foundational
 
-During a readiness check, the administrator considers this behavior: Which authorization approach is appropriate before practicing 'Configure stored access policies'?
+The network perimeter preflight has passed; the restricted storage data-plane design must now deny public-endpoint traffic unless an explicit network exception allows it. Which operation should run?
 
-- A. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
-- B. Confirm the active context and use only the declared role boundary: Contributor plus Storage Account Contributor on the lab resource group
-- C. Skip role checks when the run ID contains the lab number.
-- D. Use a production subscription because its resources already exist.
+- A. Enable the Microsoft.Storage endpoint on the subnet and add that subnet resource ID to the storage network rules.
+- B. Set the storage network rule default action to Deny after adding the administrator's approved access path.
+- C. Authenticate with Microsoft Entra ID and request a user delegation key before generating the blob SAS.
+- D. Revoke delegated access by changing or removing the referenced stored access policy.
 
 ## LAB07-Q12 — Foundational
 
-In a service overview, the team discusses this scenario: Which resource or object belongs inside the recorded boundary for 'Manage access keys'?
+The restricted storage data-plane design plan must permit traffic at the public service address only from an approved IPv4 range while limiting the mutation scope to network perimeter. Which action is appropriate?
 
-- A. Use an unrelated shared resource without recording its immutable ID.
-- B. Use a production object when the sandbox prerequisite is unavailable.
-- C. Use the exact recorded identity and scope for blob container.
-- D. Use whichever similarly named object appears first in a broad search.
+- A. Enable only the documented trusted-service bypass required by the workload.
+- B. Use a short expiry and omit or backdate the start slightly when clock skew could block immediate use.
+- C. Keep account keys out of learner output and prefer Microsoft Entra authorization or narrowly scoped SAS tokens.
+- D. Add only the approved public egress address to the account network rules.
 
 ## LAB07-Q13 — Foundational
 
-While reviewing official guidance, a learner must resolve this question: Which principle is most important when working on 'Configure Azure Storage firewalls and virtual networks' in Lab 07?
+A network perimeter ticket in the restricted storage data-plane design says to authorize one subnet on the service firewall while retaining the public endpoint. Which network perimeter action completes the restricted storage data-plane design request with minimal change?
 
-- A. The shortest command is always correct even when it changes a broader scope.
-- B. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- C. A recognizable resource name removes the need for validation and scoped cleanup.
-- D. A stored access policy can revoke or change a service SAS, while account SAS and access keys have broader authority and require stricter handling.
+- A. Choose the narrowest SAS type whose services, resource types, and permissions satisfy the request.
+- B. Create a named stored access policy and generate the service SAS with that policy identifier.
+- C. Set the storage network rule default action to Deny after adding the administrator's approved access path.
+- D. Enable the Microsoft.Storage endpoint on the subnet and add that subnet resource ID to the storage network rules.
 
 ## LAB07-Q14 — Foundational
 
-During a configuration walkthrough, the instructor asks about this situation: Which lab action directly supports the objective 'Create and use shared access signature (SAS) tokens'?
+The approach for the restricted storage data-plane design is approved, but the network perimeter environment still cannot allow only the limited platform services supported by the firewall bypass. Which implementation step closes the gap?
 
-- A. Create a secure StorageV2 account and change the network default action to Deny.
-- B. Search the whole tenant for a similar display name and modify the first match.
-- C. Mark the objective complete after reading documentation without checking any state.
-- D. Change the active tenant without displaying or confirming the resulting context.
+- A. Authenticate with Microsoft Entra ID and request a user delegation key before generating the blob SAS.
+- B. Enable only the documented trusted-service bypass required by the workload.
+- C. Revoke delegated access by changing or removing the referenced stored access policy.
+- D. Add only the approved public egress address to the account network rules.
 
 ## LAB07-Q15 — Foundational
 
-In a preflight knowledge check, the operator evaluates this requirement: Which authorization approach is appropriate before practicing 'Configure stored access policies'?
+The storage security administrator restricting data-plane access may change the restricted storage data-plane design only to choose whether delegated access covers one service or several account services. Which network perimeter action stays within that assignment?
 
-- A. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
-- B. Confirm the active context and use only the declared role boundary: Contributor plus Storage Account Contributor on the lab resource group
-- C. Skip role checks when the run ID contains the lab number.
-- D. Use a production subscription because its resources already exist.
+- A. Use a short expiry and omit or backdate the start slightly when clock skew could block immediate use.
+- B. Choose the narrowest SAS type whose services, resource types, and permissions satisfy the request.
+- C. Keep account keys out of learner output and prefer Microsoft Entra authorization or narrowly scoped SAS tokens.
+- D. Enable the Microsoft.Storage endpoint on the subnet and add that subnet resource ID to the storage network rules.
 
 ## LAB07-Q16 — Applied
 
-A learner previews the implementation for 'Configure Azure Storage firewalls and virtual networks'. What behavior is required?
+A network perimeter dry run shows no restricted storage data-plane design command will have a Microsoft Entra principal sign temporary Blob access instead of an account credential. Which action belongs before execution?
 
-- A. Select the first accessible subscription and hide the resulting context.
-- B. Delete any older resource whose name resembles the new run ID.
-- C. Display the context, intended changes, cost and gated branches without mutating Azure.
-- D. Create the baseline immediately and request approval only before cleanup.
+- A. Authenticate with Microsoft Entra ID and request a user delegation key before generating the blob SAS.
+- B. Create a named stored access policy and generate the service SAS with that policy identifier.
+- C. Set the storage network rule default action to Deny after adding the administrator's approved access path.
+- D. Enable only the documented trusted-service bypass required by the workload.
 
 ## LAB07-Q17 — Applied
 
-Which implementation step should the learner perform for 'Create and use shared access signature (SAS) tokens'?
+For the restricted storage data-plane design, operators need to bound delegated access to an intentional start and expiry window. Which change realizes that requirement?
 
-- A. Copy resource identifiers from another run instead of recording returned IDs.
-- B. Skip the operation and edit validation.json to show a passing result.
-- C. Replace the lab action with a tenant-wide change that is easier to discover.
-- D. Create a secure StorageV2 account and change the network default action to Deny.
+- A. Use a short expiry and omit or backdate the start slightly when clock skew could block immediate use.
+- B. Revoke delegated access by changing or removing the referenced stored access policy.
+- C. Add only the approved public egress address to the account network rules.
+- D. Choose the narrowest SAS type whose services, resource types, and permissions satisfy the request.
 
 ## LAB07-Q18 — Applied
 
-Which evidence most directly validates 'Configure stored access policies' for virtual network and subnet?
+Operators must automate the restricted storage data-plane design change needed to attach revocable constraints to service-level delegated tokens. Which network perimeter operation belongs in the runbook?
 
-- A. Query the exact recorded scope and independently verify Microsoft.Network/virtualNetworks.
-- B. Record a credential so another learner can replay the authenticated session.
-- C. Treat the setup exit code as proof of every configuration and relationship.
-- D. List the entire subscription and assume similarly named resources belong to this run.
+- A. Keep account keys out of learner output and prefer Microsoft Entra authorization or narrowly scoped SAS tokens.
+- B. Enable the Microsoft.Storage endpoint on the subnet and add that subnet resource ID to the storage network rules.
+- C. Authenticate with Microsoft Entra ID and request a user delegation key before generating the blob SAS.
+- D. Create a named stored access policy and generate the service SAS with that policy identifier.
 
 ## LAB07-Q19 — Applied
 
-The 'Manage access keys' checkpoint reaches an external prerequisite. What should happen?
+A restricted storage data-plane design review finds network perimeter drift from the need to invalidate tokens that refer to a named server-side access policy. Which correction addresses that drift?
 
-- A. Mark the branch passed because its command syntax was checked offline.
-- B. Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.
-- C. Invent a domain, notification target, license, quota, or tenant value and continue.
-- D. Broaden permissions until the prerequisite can no longer block the operation.
+- A. Set the storage network rule default action to Deny after adding the administrator's approved access path.
+- B. Enable only the documented trusted-service bypass required by the workload.
+- C. Use a short expiry and omit or backdate the start slightly when clock skew could block immediate use.
+- D. Revoke delegated access by changing or removing the referenced stored access policy.
 
 ## LAB07-Q20 — Applied
 
-What is the safest command-evidence practice after completing 'Configure Azure Storage firewalls and virtual networks'?
+The restricted storage data-plane design window permits only the network perimeter change needed to avoid exposing a credential that grants broad authority over the account. Which option respects the boundary?
 
-- A. Save tokens, keys, passwords, or SAS values beside the validation result.
-- B. Reuse successful output from an earlier run with a similar resource name.
-- C. Retain only redacted structured output from an independent query of the recorded run.
-- D. Commit the complete account object so reviewers can identify the tenant.
+- A. Add only the approved public egress address to the account network rules.
+- B. Choose the narrowest SAS type whose services, resource types, and permissions satisfy the request.
+- C. Keep account keys out of learner output and prefer Microsoft Entra authorization or narrowly scoped SAS tokens.
+- D. Create a named stored access policy and generate the service SAS with that policy identifier.
 
 ## LAB07-Q21 — Applied
 
-Which negative check strengthens validation of 'Create and use shared access signature (SAS) tokens'?
+The restricted storage data-plane design evidence bundle needs a network perimeter result showing it can deny public-endpoint traffic unless an explicit network exception allows it. Which result belongs in the checkpoint?
 
-- A. Repair every warning automatically before recording what caused it.
-- B. Ignore denied queries and record them as passing checks.
-- C. Check only that at least one resource exists in the subscription.
-- D. Confirm the intended state and also prove that broader, anonymous, or unintended access was not introduced.
+- A. Query networkRuleSet.bypass and compare it with the approved exception list.
+- B. Inspect st and se values and test the minimum required operation before distribution.
+- C. Scan evidence for secrets and verify data commands use login-based authorization where supported.
+- D. Query networkRuleSet.defaultAction and enumerate every IP and virtual-network rule.
 
 ## LAB07-Q22 — Applied
 
-A delegated administrator receives the following support request: A learner previews the implementation for 'Configure Azure Storage firewalls and virtual networks'. What behavior is required?
+Before restricted storage data-plane design cleanup, the network perimeter team must reconfirm it can permit traffic at the public service address only from an approved IPv4 range. Which read-only inspection should run?
 
-- A. Display the context, intended changes, cost and gated branches without mutating Azure.
-- B. Create the baseline immediately and request approval only before cleanup.
-- C. Select the first accessible subscription and hide the resulting context.
-- D. Delete any older resource whose name resembles the new run ID.
+- A. Query ipRules and match the normalized CIDR value and Allow action.
+- B. Decode or inspect the SAS fields and confirm services, resource types, permissions, and expiry.
+- C. List signed identifiers on the resource and confirm the SAS si field names the expected policy.
+- D. Query networkRuleSet.defaultAction and enumerate every IP and virtual-network rule.
 
 ## LAB07-Q23 — Applied
 
-During a maintenance window, an engineer must decide how to respond: Which implementation step should the learner perform for 'Create and use shared access signature (SAS) tokens'?
+The restricted storage data-plane design setup reports success after the network perimeter attempt to authorize one subnet on the service firewall while retaining the public endpoint. Which network perimeter read-only observation proves the restricted storage data-plane design outcome?
 
-- A. Replace the lab action with a tenant-wide change that is easier to discover.
-- B. Create a secure StorageV2 account and change the network default action to Deny.
-- C. Copy resource identifiers from another run instead of recording returned IDs.
-- D. Skip the operation and edit validation.json to show a passing result.
+- A. Inspect the SAS fields and confirm user-delegation identifiers are present with the intended permissions.
+- B. List the signed identifiers and retest the previously issued SAS until the policy change is effective.
+- C. Query both subnet serviceEndpoints and the account virtualNetworkRules collection.
+- D. Query ipRules and match the normalized CIDR value and Allow action.
 
 ## LAB07-Q24 — Applied
 
-A deployment pipeline reaches this decision point: Which evidence most directly validates 'Configure stored access policies' for virtual network and subnet?
+The network perimeter log says the restricted storage data-plane design can now allow only the limited platform services supported by the firewall bypass. Which network perimeter state should the restricted storage data-plane design acceptance test retain?
 
-- A. Treat the setup exit code as proof of every configuration and relationship.
-- B. List the entire subscription and assume similarly named resources belong to this run.
-- C. Query the exact recorded scope and independently verify Microsoft.Network/virtualNetworks.
-- D. Record a credential so another learner can replay the authenticated session.
+- A. Inspect st and se values and test the minimum required operation before distribution.
+- B. Query networkRuleSet.bypass and compare it with the approved exception list.
+- C. Scan evidence for secrets and verify data commands use login-based authorization where supported.
+- D. Query both subnet serviceEndpoints and the account virtualNetworkRules collection.
 
 ## LAB07-Q25 — Applied
 
-While applying least-privilege controls, the administrator reviews this scenario: The 'Manage access keys' checkpoint reaches an external prerequisite. What should happen?
+The restricted storage data-plane design rejects network perimeter exit status as proof it can choose whether delegated access covers one service or several account services. Which restricted storage data-plane design result is valid evidence?
 
-- A. Invent a domain, notification target, license, quota, or tenant value and continue.
-- B. Broaden permissions until the prerequisite can no longer block the operation.
-- C. Mark the branch passed because its command syntax was checked offline.
-- D. Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.
+- A. Decode or inspect the SAS fields and confirm services, resource types, permissions, and expiry.
+- B. List signed identifiers on the resource and confirm the SAS si field names the expected policy.
+- C. Query networkRuleSet.defaultAction and enumerate every IP and virtual-network rule.
+- D. Query networkRuleSet.bypass and compare it with the approved exception list.
 
 ## LAB07-Q26 — Applied
 
-A repeatable Azure CLI workflow must address this requirement: What is the safest command-evidence practice after completing 'Configure Azure Storage firewalls and virtual networks'?
+The network perimeter validator needs one restricted storage data-plane design query after the change to have a Microsoft Entra principal sign temporary Blob access instead of an account credential. Which network perimeter property should the restricted storage data-plane design validator inspect?
 
-- A. Retain only redacted structured output from an independent query of the recorded run.
-- B. Commit the complete account object so reviewers can identify the tenant.
-- C. Save tokens, keys, passwords, or SAS values beside the validation result.
-- D. Reuse successful output from an earlier run with a similar resource name.
+- A. Inspect the SAS fields and confirm user-delegation identifiers are present with the intended permissions.
+- B. List the signed identifiers and retest the previously issued SAS until the policy change is effective.
+- C. Query ipRules and match the normalized CIDR value and Allow action.
+- D. Decode or inspect the SAS fields and confirm services, resource types, permissions, and expiry.
 
 ## LAB07-Q27 — Applied
 
-During an environment handoff, the receiving team asks this question: Which negative check strengthens validation of 'Create and use shared access signature (SAS) tokens'?
+The storage security administrator restricting data-plane access must confirm the restricted storage data-plane design, without mutation, can bound delegated access to an intentional start and expiry window. Which network perimeter check qualifies?
 
-- A. Check only that at least one resource exists in the subscription.
-- B. Confirm the intended state and also prove that broader, anonymous, or unintended access was not introduced.
-- C. Repair every warning automatically before recording what caused it.
-- D. Ignore denied queries and record them as passing checks.
+- A. Scan evidence for secrets and verify data commands use login-based authorization where supported.
+- B. Query both subnet serviceEndpoints and the account virtualNetworkRules collection.
+- C. Inspect the SAS fields and confirm user-delegation identifiers are present with the intended permissions.
+- D. Inspect st and se values and test the minimum required operation before distribution.
 
 ## LAB07-Q28 — Applied
 
-A configuration change produces the following operational choice: A learner previews the implementation for 'Configure Azure Storage firewalls and virtual networks'. What behavior is required?
+The restricted storage data-plane design configuration is complete; the network perimeter reviewers need evidence it can attach revocable constraints to service-level delegated tokens. Which observation shows success?
 
-- A. Select the first accessible subscription and hide the resulting context.
-- B. Delete any older resource whose name resembles the new run ID.
-- C. Display the context, intended changes, cost and gated branches without mutating Azure.
-- D. Create the baseline immediately and request approval only before cleanup.
+- A. Query networkRuleSet.defaultAction and enumerate every IP and virtual-network rule.
+- B. List signed identifiers on the resource and confirm the SAS si field names the expected policy.
+- C. Query networkRuleSet.bypass and compare it with the approved exception list.
+- D. Inspect st and se values and test the minimum required operation before distribution.
 
 ## LAB07-Q29 — Applied
 
-While preparing independent validation, an engineer considers this scenario: Which implementation step should the learner perform for 'Create and use shared access signature (SAS) tokens'?
+The network perimeter validation asks whether the restricted storage data-plane design can invalidate tokens that refer to a named server-side access policy. Which observable state is strongest?
 
-- A. Copy resource identifiers from another run instead of recording returned IDs.
-- B. Skip the operation and edit validation.json to show a passing result.
-- C. Replace the lab action with a tenant-wide change that is easier to discover.
-- D. Create a secure StorageV2 account and change the network default action to Deny.
+- A. List the signed identifiers and retest the previously issued SAS until the policy change is effective.
+- B. Query ipRules and match the normalized CIDR value and Allow action.
+- C. Decode or inspect the SAS fields and confirm services, resource types, permissions, and expiry.
+- D. List signed identifiers on the resource and confirm the SAS si field names the expected policy.
 
 ## LAB07-Q30 — Applied
 
-A service owner asks the administrator to resolve this requirement: Which evidence most directly validates 'Configure stored access policies' for virtual network and subnet?
+A restricted storage data-plane design review must prove the network perimeter ability to avoid exposing a credential that grants broad authority over the account. Which check avoids an adjacent feature?
 
-- A. Query the exact recorded scope and independently verify Microsoft.Network/virtualNetworks.
-- B. Record a credential so another learner can replay the authenticated session.
-- C. Treat the setup exit code as proof of every configuration and relationship.
-- D. List the entire subscription and assume similarly named resources belong to this run.
+- A. Query both subnet serviceEndpoints and the account virtualNetworkRules collection.
+- B. Inspect the SAS fields and confirm user-delegation identifiers are present with the intended permissions.
+- C. List the signed identifiers and retest the previously issued SAS until the policy change is effective.
+- D. Scan evidence for secrets and verify data commands use login-based authorization where supported.
 
 ## LAB07-Q31 — Applied
 
-During a scoped cleanup review, the team evaluates this situation: The 'Manage access keys' checkpoint reaches an external prerequisite. What should happen?
+A restricted storage data-plane design query surprises the storage security administrator restricting data-plane access during the network perimeter attempt to deny public-endpoint traffic unless an explicit network exception allows it. Which finding explains it?
 
-- A. Mark the branch passed because its command syntax was checked offline.
-- B. Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.
-- C. Invent a domain, notification target, license, quota, or tenant value and continue.
-- D. Broaden permissions until the prerequisite can no longer block the operation.
+- A. The rule contains a private client address rather than the client's public egress address.
+- B. DefaultAction remains Allow, so traffic from unlisted public networks is accepted.
+- C. The caller lacks the data action needed to request a user delegation key.
+- D. A full account key was copied into a committed command transcript.
 
 ## LAB07-Q32 — Applied
 
-An automation author must choose the correct response to this scenario: What is the safest command-evidence practice after completing 'Configure Azure Storage firewalls and virtual networks'?
+Other restricted storage data-plane design components are healthy, but the network perimeter still cannot permit traffic at the public service address only from an approved IPv4 range. Which state causes the isolated failure?
 
-- A. Save tokens, keys, passwords, or SAS values beside the validation result.
-- B. Reuse successful output from an earlier run with a similar resource name.
-- C. Retain only redacted structured output from an independent query of the recorded run.
-- D. Commit the complete account object so reviewers can identify the tenant.
+- A. The subnet is listed in the firewall but does not have the Microsoft.Storage service endpoint enabled.
+- B. The rule contains a private client address rather than the client's public egress address.
+- C. The SAS start time is later than the client's current clock, so authorization is not yet valid.
+- D. DefaultAction remains Allow, so traffic from unlisted public networks is accepted.
 
 ## LAB07-Q33 — Applied
 
-A lab run with a unique run ID reaches this decision: Which negative check strengthens validation of 'Create and use shared access signature (SAS) tokens'?
+During a network perimeter fault drill, the restricted storage data-plane design does not authorize one subnet on the service firewall while retaining the public endpoint. Which finding identifies the defect?
 
-- A. Repair every warning automatically before recording what caused it.
-- B. Ignore denied queries and record them as passing checks.
-- C. Check only that at least one resource exists in the subscription.
-- D. Confirm the intended state and also prove that broader, anonymous, or unintended access was not introduced.
+- A. The design assumes the AzureServices bypass grants access to any workload hosted in Azure.
+- B. The SAS embeds ad hoc permissions and does not reference the stored policy identifier.
+- C. The rule contains a private client address rather than the client's public egress address.
+- D. The subnet is listed in the firewall but does not have the Microsoft.Storage service endpoint enabled.
 
 ## LAB07-Q34 — Applied
 
-While comparing the intended and actual states, the operator asks this question: A learner previews the implementation for 'Configure Azure Storage firewalls and virtual networks'. What behavior is required?
+The restricted storage data-plane design setup finishes, yet the network perimeter cannot allow only the limited platform services supported by the firewall bypass. Which misconfiguration explains the mismatch?
 
-- A. Display the context, intended changes, cost and gated branches without mutating Azure.
-- B. Create the baseline immediately and request approval only before cleanup.
-- C. Select the first accessible subscription and hide the resulting context.
-- D. Delete any older resource whose name resembles the new run ID.
+- A. An account SAS grants Queue and Table access even though the consumer needs only one blob container.
+- B. The token is an ad hoc SAS, so deleting an unrelated stored access policy does not revoke it.
+- C. The subnet is listed in the firewall but does not have the Microsoft.Storage service endpoint enabled.
+- D. The design assumes the AzureServices bypass grants access to any workload hosted in Azure.
 
 ## LAB07-Q35 — Applied
 
-A peer reviewer examines the proposed implementation for this scenario: Which implementation step should the learner perform for 'Create and use shared access signature (SAS) tokens'?
+A network perimeter break/fix in the restricted storage data-plane design fails when operators try to choose whether delegated access covers one service or several account services. Which diagnosis fits?
 
-- A. Replace the lab action with a tenant-wide change that is easier to discover.
-- B. Create a secure StorageV2 account and change the network default action to Deny.
-- C. Copy resource identifiers from another run instead of recording returned IDs.
-- D. Skip the operation and edit validation.json to show a passing result.
+- A. An account SAS grants Queue and Table access even though the consumer needs only one blob container.
+- B. The caller lacks the data action needed to request a user delegation key.
+- C. A full account key was copied into a committed command transcript.
+- D. The design assumes the AzureServices bypass grants access to any workload hosted in Azure.
 
 ## LAB07-Q36 — Applied
 
-During a controlled rollout, the change team encounters this requirement: Which evidence most directly validates 'Configure stored access policies' for virtual network and subnet?
+The restricted storage data-plane design troubleshooting scope is the network perimeter need to have a Microsoft Entra principal sign temporary Blob access instead of an account credential. Which condition should be corrected first?
 
-- A. Treat the setup exit code as proof of every configuration and relationship.
-- B. List the entire subscription and assume similarly named resources belong to this run.
-- C. Query the exact recorded scope and independently verify Microsoft.Network/virtualNetworks.
-- D. Record a credential so another learner can replay the authenticated session.
+- A. The SAS start time is later than the client's current clock, so authorization is not yet valid.
+- B. DefaultAction remains Allow, so traffic from unlisted public networks is accepted.
+- C. An account SAS grants Queue and Table access even though the consumer needs only one blob container.
+- D. The caller lacks the data action needed to request a user delegation key.
 
 ## LAB07-Q37 — Applied
 
-A support engineer reproduces the following situation in a test environment: The 'Manage access keys' checkpoint reaches an external prerequisite. What should happen?
+The restricted storage data-plane design result is partial because the network perimeter cannot bound delegated access to an intentional start and expiry window. Which condition accounts for that result?
 
-- A. Invent a domain, notification target, license, quota, or tenant value and continue.
-- B. Broaden permissions until the prerequisite can no longer block the operation.
-- C. Mark the branch passed because its command syntax was checked offline.
-- D. Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.
+- A. The SAS start time is later than the client's current clock, so authorization is not yet valid.
+- B. The SAS embeds ad hoc permissions and does not reference the stored policy identifier.
+- C. The rule contains a private client address rather than the client's public egress address.
+- D. The caller lacks the data action needed to request a user delegation key.
 
 ## LAB07-Q38 — Applied
 
-While recording validation evidence, the administrator evaluates this question: What is the safest command-evidence practice after completing 'Configure Azure Storage firewalls and virtual networks'?
+The network perimeter evidence shows the restricted storage data-plane design cannot attach revocable constraints to service-level delegated tokens. Which root cause fits that evidence?
 
-- A. Retain only redacted structured output from an independent query of the recorded run.
-- B. Commit the complete account object so reviewers can identify the tenant.
-- C. Save tokens, keys, passwords, or SAS values beside the validation result.
-- D. Reuse successful output from an earlier run with a similar resource name.
+- A. The token is an ad hoc SAS, so deleting an unrelated stored access policy does not revoke it.
+- B. The SAS embeds ad hoc permissions and does not reference the stored policy identifier.
+- C. The subnet is listed in the firewall but does not have the Microsoft.Storage service endpoint enabled.
+- D. The SAS start time is later than the client's current clock, so authorization is not yet valid.
 
 ## LAB07-Q39 — Applied
 
-A configuration owner must approve one response to this scenario: Which negative check strengthens validation of 'Create and use shared access signature (SAS) tokens'?
+Although the restricted storage data-plane design is meant to let the network perimeter invalidate tokens that refer to a named server-side access policy, its checkpoint fails. Which network perimeter defect explains the failure?
 
-- A. Check only that at least one resource exists in the subscription.
-- B. Confirm the intended state and also prove that broader, anonymous, or unintended access was not introduced.
-- C. Repair every warning automatically before recording what caused it.
-- D. Ignore denied queries and record them as passing checks.
+- A. A full account key was copied into a committed command transcript.
+- B. The design assumes the AzureServices bypass grants access to any workload hosted in Azure.
+- C. The token is an ad hoc SAS, so deleting an unrelated stored access policy does not revoke it.
+- D. The SAS embeds ad hoc permissions and does not reference the stored policy identifier.
 
 ## LAB07-Q40 — Applied
 
-During post-deployment verification, the team reviews this situation: A learner previews the implementation for 'Configure Azure Storage firewalls and virtual networks'. What behavior is required?
+The network perimeter support team isolated the restricted storage data-plane design incident to the attempt to avoid exposing a credential that grants broad authority over the account. Which condition prevents success?
 
-- A. Select the first accessible subscription and hide the resulting context.
-- B. Delete any older resource whose name resembles the new run ID.
-- C. Display the context, intended changes, cost and gated branches without mutating Azure.
-- D. Create the baseline immediately and request approval only before cleanup.
+- A. DefaultAction remains Allow, so traffic from unlisted public networks is accepted.
+- B. An account SAS grants Queue and Table access even though the consumer needs only one blob container.
+- C. The token is an ad hoc SAS, so deleting an unrelated stored access policy does not revoke it.
+- D. A full account key was copied into a committed command transcript.
 
 ## LAB07-Q41 — Advanced
 
-Validation for 'Configure stored access policies' fails after setup. What is the best break/fix method?
+The restricted storage data-plane design runbook separates network perimeter mutation from validation while it must deny public-endpoint traffic unless an explicit network exception allows it. Which sequence proves it cleanly?
 
-- A. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- B. Rerun setup repeatedly with new names until one attempt appears successful.
-- C. Change validation.json directly so the failed result reads pass.
-- D. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+- A. First, Enable the Microsoft.Storage endpoint on the subnet and add that subnet resource ID to the storage network rules. Then, Query both subnet serviceEndpoints and the account virtualNetworkRules collection.
+- B. First, Use a short expiry and omit or backdate the start slightly when clock skew could block immediate use. Then, Inspect st and se values and test the minimum required operation before distribution.
+- C. First, Set the storage network rule default action to Deny after adding the administrator's approved access path. Then, Query networkRuleSet.defaultAction and enumerate every IP and virtual-network rule.
+- D. First, Create a named stored access policy and generate the service SAS with that policy identifier. Then, List signed identifiers on the resource and confirm the SAS si field names the expected policy.
 
 ## LAB07-Q42 — Advanced
 
-The operation for 'Manage access keys' is asynchronous or gated. How should completion be recorded?
+The restricted storage data-plane design checkpoint requires both this network perimeter outcome—permit traffic at the public service address only from an approved IPv4 range—and a read-only restricted storage data-plane design state check. Which network perimeter response is complete?
 
-- A. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
-- B. Record pass as soon as the request is accepted, regardless of its final state.
-- C. Fabricate expected output so the assessment and documentation appear complete.
-- D. Remove the check from validation whenever the service takes longer than expected.
+- A. First, Enable only the documented trusted-service bypass required by the workload. Then, Query networkRuleSet.bypass and compare it with the approved exception list.
+- B. First, Add only the approved public egress address to the account network rules. Then, Query ipRules and match the normalized CIDR value and Allow action.
+- C. First, Create a named stored access policy and generate the service SAS with that policy identifier. Then, List signed identifiers on the resource and confirm the SAS si field names the expected policy.
+- D. First, Revoke delegated access by changing or removing the referenced stored access policy. Then, List the signed identifiers and retest the previously issued SAS until the policy change is effective.
 
 ## LAB07-Q43 — Advanced
 
-A security and reliability review identifies this design decision: Validation for 'Configure stored access policies' fails after setup. What is the best break/fix method?
+The restricted storage data-plane design runbook must authorize one subnet on the service firewall while retaining the public endpoint, then retain network perimeter read-back evidence. Which restricted storage data-plane design pair completes both duties?
 
-- A. Change validation.json directly so the failed result reads pass.
-- B. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-- C. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- D. Rerun setup repeatedly with new names until one attempt appears successful.
+- A. First, Choose the narrowest SAS type whose services, resource types, and permissions satisfy the request. Then, Decode or inspect the SAS fields and confirm services, resource types, permissions, and expiry.
+- B. First, Revoke delegated access by changing or removing the referenced stored access policy. Then, List the signed identifiers and retest the previously issued SAS until the policy change is effective.
+- C. First, Enable the Microsoft.Storage endpoint on the subnet and add that subnet resource ID to the storage network rules. Then, Query both subnet serviceEndpoints and the account virtualNetworkRules collection.
+- D. First, Keep account keys out of learner output and prefer Microsoft Entra authorization or narrowly scoped SAS tokens. Then, Scan evidence for secrets and verify data commands use login-based authorization where supported.
 
 ## LAB07-Q44 — Advanced
 
-While diagnosing unexpected Azure behavior, the engineer considers this situation: The operation for 'Manage access keys' is asynchronous or gated. How should completion be recorded?
+To satisfy the network perimeter requirement, operators must change the restricted storage data-plane design configuration and prove it can allow only the limited platform services supported by the firewall bypass. Which sequence is coherent?
 
-- A. Fabricate expected output so the assessment and documentation appear complete.
-- B. Remove the check from validation whenever the service takes longer than expected.
-- C. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
-- D. Record pass as soon as the request is accepted, regardless of its final state.
+- A. First, Authenticate with Microsoft Entra ID and request a user delegation key before generating the blob SAS. Then, Inspect the SAS fields and confirm user-delegation identifiers are present with the intended permissions.
+- B. First, Keep account keys out of learner output and prefer Microsoft Entra authorization or narrowly scoped SAS tokens. Then, Scan evidence for secrets and verify data commands use login-based authorization where supported.
+- C. First, Enable only the documented trusted-service bypass required by the workload. Then, Query networkRuleSet.bypass and compare it with the approved exception list.
+- D. First, Set the storage network rule default action to Deny after adding the administrator's approved access path. Then, Query networkRuleSet.defaultAction and enumerate every IP and virtual-network rule.
 
 ## LAB07-Q45 — Advanced
 
-An architecture review requires the strongest response to this scenario: Validation for 'Configure stored access policies' fails after setup. What is the best break/fix method?
+The storage security administrator restricting data-plane access needs a safe restricted storage data-plane design change to choose whether delegated access covers one service or several account services, followed by network perimeter evidence. Which pair merits approval?
 
-- A. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- B. Rerun setup repeatedly with new names until one attempt appears successful.
-- C. Change validation.json directly so the failed result reads pass.
-- D. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+- A. First, Use a short expiry and omit or backdate the start slightly when clock skew could block immediate use. Then, Inspect st and se values and test the minimum required operation before distribution.
+- B. First, Set the storage network rule default action to Deny after adding the administrator's approved access path. Then, Query networkRuleSet.defaultAction and enumerate every IP and virtual-network rule.
+- C. First, Choose the narrowest SAS type whose services, resource types, and permissions satisfy the request. Then, Decode or inspect the SAS fields and confirm services, resource types, permissions, and expiry.
+- D. First, Add only the approved public egress address to the account network rules. Then, Query ipRules and match the normalized CIDR value and Allow action.
 
 ## LAB07-Q46 — Advanced
 
-During break/fix validation, the operator encounters this question: The operation for 'Manage access keys' is asynchronous or gated. How should completion be recorded?
+The restricted storage data-plane design has two network perimeter gates: have a Microsoft Entra principal sign temporary Blob access instead of an account credential, then prove the restricted storage data-plane design state. Which network perimeter sequence works?
 
-- A. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
-- B. Record pass as soon as the request is accepted, regardless of its final state.
-- C. Fabricate expected output so the assessment and documentation appear complete.
-- D. Remove the check from validation whenever the service takes longer than expected.
+- A. First, Create a named stored access policy and generate the service SAS with that policy identifier. Then, List signed identifiers on the resource and confirm the SAS si field names the expected policy.
+- B. First, Authenticate with Microsoft Entra ID and request a user delegation key before generating the blob SAS. Then, Inspect the SAS fields and confirm user-delegation identifiers are present with the intended permissions.
+- C. First, Add only the approved public egress address to the account network rules. Then, Query ipRules and match the normalized CIDR value and Allow action.
+- D. First, Enable the Microsoft.Storage endpoint on the subnet and add that subnet resource ID to the storage network rules. Then, Query both subnet serviceEndpoints and the account virtualNetworkRules collection.
 
 ## LAB07-Q47 — Advanced
 
-A complex support case depends on correctly interpreting this requirement: Validation for 'Configure stored access policies' fails after setup. What is the best break/fix method?
+Which network perimeter path makes the restricted storage data-plane design able to bound delegated access to an intentional start and expiry window, then inspects the defining properties?
 
-- A. Change validation.json directly so the failed result reads pass.
-- B. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-- C. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- D. Rerun setup repeatedly with new names until one attempt appears successful.
+- A. First, Use a short expiry and omit or backdate the start slightly when clock skew could block immediate use. Then, Inspect st and se values and test the minimum required operation before distribution.
+- B. First, Revoke delegated access by changing or removing the referenced stored access policy. Then, List the signed identifiers and retest the previously issued SAS until the policy change is effective.
+- C. First, Enable the Microsoft.Storage endpoint on the subnet and add that subnet resource ID to the storage network rules. Then, Query both subnet serviceEndpoints and the account virtualNetworkRules collection.
+- D. First, Enable only the documented trusted-service bypass required by the workload. Then, Query networkRuleSet.bypass and compare it with the approved exception list.
 
 ## LAB07-Q48 — Advanced
 
-While correcting configuration drift, the team evaluates this scenario: The operation for 'Manage access keys' is asynchronous or gated. How should completion be recorded?
+At the restricted storage data-plane design approval gate, operators must show that the network perimeter can attach revocable constraints to service-level delegated tokens. Which network perimeter configure-and-check pair is defensible?
 
-- A. Fabricate expected output so the assessment and documentation appear complete.
-- B. Remove the check from validation whenever the service takes longer than expected.
-- C. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
-- D. Record pass as soon as the request is accepted, regardless of its final state.
+- A. First, Create a named stored access policy and generate the service SAS with that policy identifier. Then, List signed identifiers on the resource and confirm the SAS si field names the expected policy.
+- B. First, Keep account keys out of learner output and prefer Microsoft Entra authorization or narrowly scoped SAS tokens. Then, Scan evidence for secrets and verify data commands use login-based authorization where supported.
+- C. First, Enable only the documented trusted-service bypass required by the workload. Then, Query networkRuleSet.bypass and compare it with the approved exception list.
+- D. First, Choose the narrowest SAS type whose services, resource types, and permissions satisfy the request. Then, Decode or inspect the SAS fields and confirm services, resource types, permissions, and expiry.
 
 ## LAB07-Q49 — Advanced
 
-A recovery exercise exposes the following technical decision: Validation for 'Configure stored access policies' fails after setup. What is the best break/fix method?
+The restricted storage data-plane design forbids a partial network perimeter result. Operators must first invalidate tokens that refer to a named server-side access policy and afterward confirm the restricted storage data-plane design outcome. Which network perimeter sequence is complete?
 
-- A. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- B. Rerun setup repeatedly with new names until one attempt appears successful.
-- C. Change validation.json directly so the failed result reads pass.
-- D. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+- A. First, Set the storage network rule default action to Deny after adding the administrator's approved access path. Then, Query networkRuleSet.defaultAction and enumerate every IP and virtual-network rule.
+- B. First, Choose the narrowest SAS type whose services, resource types, and permissions satisfy the request. Then, Decode or inspect the SAS fields and confirm services, resource types, permissions, and expiry.
+- C. First, Revoke delegated access by changing or removing the referenced stored access policy. Then, List the signed identifiers and retest the previously issued SAS until the policy change is effective.
+- D. First, Authenticate with Microsoft Entra ID and request a user delegation key before generating the blob SAS. Then, Inspect the SAS fields and confirm user-delegation identifiers are present with the intended permissions.
 
 ## LAB07-Q50 — Advanced
 
-During final design assurance, the reviewer must resolve this situation: The operation for 'Manage access keys' is asynchronous or gated. How should completion be recorded?
+Only the restricted storage data-plane design change needed to avoid exposing a credential that grants broad authority over the account is allowed, and network perimeter proof is mandatory. Which pair fits?
 
-- A. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
-- B. Record pass as soon as the request is accepted, regardless of its final state.
-- C. Fabricate expected output so the assessment and documentation appear complete.
-- D. Remove the check from validation whenever the service takes longer than expected.
+- A. First, Add only the approved public egress address to the account network rules. Then, Query ipRules and match the normalized CIDR value and Allow action.
+- B. First, Authenticate with Microsoft Entra ID and request a user delegation key before generating the blob SAS. Then, Inspect the SAS fields and confirm user-delegation identifiers are present with the intended permissions.
+- C. First, Use a short expiry and omit or backdate the start slightly when clock skew could block immediate use. Then, Inspect st and se values and test the minimum required operation before distribution.
+- D. First, Keep account keys out of learner output and prefer Microsoft Entra authorization or narrowly scoped SAS tokens. Then, Scan evidence for secrets and verify data commands use login-based authorization where supported.
+
+[Open the answer key](./ANSWERS.md)

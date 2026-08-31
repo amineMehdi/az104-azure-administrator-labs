@@ -4,7 +4,7 @@ Blueprint effective date: **2026-04-17**
 Research date: **2026-08-30**
 Source of objective text: [Microsoft's official AZ-104 study guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104)
 
-This map assigns every official objective to at least one of the 28 lab folders. The first listed lab is normally the primary teaching lab; capstones and cross-domain labs reinforce or validate the same skill. Mappings are implementation targets until a lab's metadata reports `offline-validated`, `live-verified`, `partial`, or `blocked`.
+This map assigns every official objective to at least one of the 28 lab folders. The first listed lab is normally the primary teaching lab; capstones and cross-domain labs reinforce or validate the same skill. Live verification is tracked separately from this objective-to-lab teaching map.
 
 ## Coverage summary
 

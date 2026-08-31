@@ -1,8 +1,11 @@
+
+# BEGIN GENERATED AZ104 V2
+schemaVersion: 2.0.0
 id: LAB-15
 slug: 15-app-service-scale-slots
 title: Scale App Service and operate deployment slots
 blueprintVersion: '2026-04-17'
-domain: Deploy and manage Azure compute resources
+domain: compute
 objectives:
 - CP-APP-01
 - CP-APP-02
@@ -14,17 +17,30 @@ testedToolVersions:
   azureCli: '>=2.88.0'
   powershell: '>=7.4'
 estimatedMinutes: 120
-difficulty: intermediate
+difficulty: applied
+experience:
+  scenario: 'You are an application-platform administrator operating app service capacity and releases. Build and prove this
+    disposable service path: A Linux App Service plan hosts production and staging slots; plan autoscale changes worker capacity,
+    sticky settings remain slot-scoped, and the staging release flows through a reversible swap into production.'
+  role: An application-platform administrator operating App Service capacity and releases.
+  outcome: Use Azure CLI in PowerShell to create the production web app and deployment slot, configure scale-out and slot-sticky
+    settings, and reconcile worker count, slot state, and configuration scope, with recoverable state and deterministic cleanup.
+  completionCriteria:
+  - All required checkpoints report pass.
+  - The deterministic break/fix is injected, diagnosed, and repaired.
+  - cleanup.json reports no active run-owned resources, with any retained item explicitly documented.
 cost:
-  class: low
-  billableResources: &id001
-  - resource group
-  - App Service plan
-  - web app
+  class: moderate
+  billableResources:
+  - Standard App Service plan
   - deployment slot
-  - autoscale setting
+  - Azure Monitor autoscale setting
   notes: Pricing, free allowances, quotas, and regional availability can change. Review the Azure pricing calculator before
     execution and clean up immediately.
+  pricingLinks:
+  - title: Azure compute pricing
+    url: https://azure.microsoft.com/pricing/details/virtual-machines/
+  acknowledgementRequired: true
 permissions:
   azureRbacRoles:
   - Website Contributor and Monitoring Contributor on the lab resource group
@@ -37,41 +53,435 @@ prerequisites:
 - 'External gate review: None beyond the declared role and a disposable subscription.'
 - Azure CLI hosted in PowerShell 7.4 or later
 providers:
-  observed:
+  required:
   - Microsoft.Insights
   - Microsoft.Web
+  optional: []
   registeredByLab: []
-regions:
-  applicable: true
-  primary: supplied at execution time
-  secondary: null
+inputs:
+- id: run-id
+  parameter: RunId
+  description: Unique lowercase run ownership identifier
+  required: true
+  secret: false
+  source: parameter
+  safeExample: az104l15-01
+  gateBehavior: block
+  checkpointIds:
+  - LAB15-CP01
+  - LAB15-CP02
+  - LAB15-CP03
+  - LAB15-CP04
+  - LAB15-CP05
+- id: subscription-id
+  parameter: SubscriptionId
+  environmentVariable: AZ104_SUBSCRIPTION_ID
+  description: Expected disposable subscription ID
+  required: true
+  secret: false
+  source: parameter-or-environment
+  safeExample: 00000000-0000-0000-0000-000000000000
+  gateBehavior: block
+  checkpointIds:
+  - LAB15-CP01
+  - LAB15-CP02
+  - LAB15-CP03
+  - LAB15-CP04
+  - LAB15-CP05
+- id: location
+  parameter: Location
+  environmentVariable: AZ104_LOCATION
+  description: Approved primary Azure region
+  required: true
+  secret: false
+  source: parameter-or-environment
+  safeExample: westeurope
+  gateBehavior: block
+  checkpointIds:
+  - LAB15-CP01
+  - LAB15-CP02
+  - LAB15-CP03
+  - LAB15-CP04
+  - LAB15-CP05
+acknowledgements:
+  cost:
+    required: true
+    parameter: AcknowledgeCost
+    message: I reviewed current pricing, quota, and the same-session cleanup plan.
+  tenantChange:
+    required: false
+    parameter: AcknowledgeTenantChange
+    message: I am authorized to create or change the declared tenant-scoped objects and will restore recorded settings.
 creates:
-  azureResources: *id001
+  azureResources:
+  - resource group
+  - App Service plan
+  - web app
+  - deployment slot
+  - autoscale setting
   entraObjects: []
   localArtifacts:
   - .state/<run-id>/run.json
   - .state/<run-id>/validation.json
+  - .state/<run-id>/cleanup.json
 tenantScopedChanges: []
 externalRequirements: []
+preflightChecks:
+- id: preflight.context
+  type: context
+  required: true
+  description: Confirm active cloud, tenant, and subscription without changing them.
+  command: az account show --output json
+  expected: Active context matches the supplied subscription and disposable environment.
+- id: preflight.tools
+  type: tool
+  required: true
+  description: Confirm PowerShell, Azure CLI, and az bicep are available.
+  command: az version; az bicep version
+  expected: All required tools meet the versions declared by this lab.
+- id: preflight.inputs
+  type: input
+  required: true
+  description: Check required parameters and environment gates without printing secrets.
+  command: $PSBoundParameters.Keys; Get-ChildItem Env:AZ104_* | Select-Object Name
+  expected: Every required input is present and optional gates are explicitly reported.
+- id: preflight.providers
+  type: provider
+  required: true
+  description: Read registration state for required resource providers.
+  command: az provider show --namespace <provider> --query registrationState --output tsv
+  expected: Every required provider is Registered; preflight performs no registration.
+- id: preflight.region
+  type: region
+  required: true
+  description: Confirm the requested region is available to the subscription.
+  command: az account list-locations --query "[?name=='<location>'].name" --output tsv
+  expected: The supplied region appears in the subscription location inventory.
+- id: preflight.quota
+  type: quota
+  required: true
+  description: Read regional compute usage before deployment.
+  command: az vm list-usage --location <location> --output table
+  expected: Required regional vCPU quota has safe headroom.
+- id: preflight.sku
+  type: sku
+  required: true
+  description: Read available VM or service SKUs in the selected region.
+  command: az vm list-skus --location <location> --all --output table
+  expected: The documented lab SKU has no blocking regional restriction.
+- id: preflight.authored.service
+  type: sku
+  required: true
+  description: Prove verify app service plan and slot capacity with LAB-15's authored read-only provider, feature, tool, region,
+    and SKU queries.
+  command: '$registration = az provider show --namespace Microsoft.Web --query registrationState --output tsv
+
+    if ($registration -ne ''Registered'') { throw ''Microsoft.Web is not registered.'' }
+
+    $supported = az appservice list-locations --sku S1 --linux-workers-enabled --query "[?name==''$Location''] | length(@)"
+    --output tsv
+
+    if ([int]$supported -eq 0) { throw ''Linux S1 is unavailable in the selected region.'' }'
+  expected: The selected region supports the documented Linux plan SKU and the subscription can enumerate web-app deployment
+    slots.
+checkpoints:
+- id: LAB15-CP01
+  title: Verify App Service plan and slot capacity
+  purpose: Read the provider, region, SKU, feature, quota, and companion-tool signals needed for verify app service plan and
+    slot capacity, without changing Azure state.
+  objectiveIds:
+  - CP-APP-01
+  required: true
+  expectedState: The selected region supports the documented Linux plan SKU and the subscription can enumerate web-app deployment
+    slots.
+  scriptMarkers:
+    setup: LAB15-CP01
+    validate: LAB15-CP01
+    cleanup: LAB15-CP01
+  validation:
+    positive:
+      id: cp01.positive
+      description: Read the service properties for verify App Service plan and slot capacity by using exact run-owned identifiers.
+      command: '$validationId=''LAB15-CP01-positive''; $registration = az provider show --namespace Microsoft.Web --query
+        registrationState --output tsv
+
+        if ($registration -ne ''Registered'') { throw ''Microsoft.Web is not registered.'' }'
+      expected: The selected region supports the documented Linux plan SKU and the subscription can enumerate web-app deployment
+        slots.
+    negative:
+      id: cp01.negative
+      description: Search for conflicting, unowned, or excessive state after verify App Service plan and slot capacity.
+      command: '$validationId=''LAB15-CP01-negative''; $supported = az appservice list-locations --sku S1 --linux-workers-enabled
+        --query "[?name==''$Location''] | length(@)" --output tsv
+
+        if ([int]$supported -eq 0) { throw ''Linux S1 is unavailable in the selected region.'' }'
+      expected: 'LAB15-CP01 negative boundary: The undesired state is absent; the negative assertion must not report: Linux
+        S1 is unavailable in the selected region.'
+  cleanup:
+    dependsOn:
+    - LAB15-CP02
+    - LAB15-CP03
+    - LAB15-CP04
+    - LAB15-CP05
+    action: Remove only manifest-recorded objects owned by LAB15-CP01, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp01.residual
+      description: Prove no active managed object remains for LAB15-CP01.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-1
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Create an App Service app with Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/app-service/quickstart-cli
+- id: LAB15-CP02
+  title: Create the production web app and deployment slot
+  purpose: Provision and immediately inventory the exact run-owned resources needed to create the production web app and deployment
+    slot, so partial completion remains recoverable.
+  objectiveIds:
+  - CP-APP-02
+  required: true
+  expectedState: The production app and staging slot share the run-owned plan and each endpoint reports a healthy hostname.
+  scriptMarkers:
+    setup: LAB15-CP02
+    validate: LAB15-CP02
+    cleanup: LAB15-CP02
+  validation:
+    positive:
+      id: cp02.positive
+      description: Read the service properties for create the production web app and deployment slot by using exact run-owned
+        identifiers.
+      command: '$validationId=''LAB15-CP02-positive''; $slotCount = az webapp deployment slot list --resource-group $ResourceGroupName
+        --name $app --query "[?name==''$app/staging''] | length(@)" --output tsv
+
+        if ([int]$slotCount -ne 1) { throw ''The staging slot does not exist exactly once.'' }'
+      expected: The production app and staging slot share the run-owned plan and each endpoint reports a healthy hostname.
+    negative:
+      id: cp02.negative
+      description: Search for conflicting, unowned, or excessive state after create the production web app and deployment
+        slot.
+      command: '$validationId=''LAB15-CP02-negative''; $stateValue = az webapp show --resource-group $ResourceGroupName --name
+        $app --query state --output tsv
+
+        if ($stateValue -ne ''Running'') { throw "Web app state is $stateValue." }'
+      expected: 'LAB15-CP02 negative boundary: The undesired state is absent; the negative assertion must not report: Web
+        app state is reported stateValue.'
+  cleanup:
+    dependsOn:
+    - LAB15-CP03
+    - LAB15-CP04
+    - LAB15-CP05
+    action: Remove only manifest-recorded objects owned by LAB15-CP02, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp02.residual
+      description: Prove no active managed object remains for LAB15-CP02.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-2
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Create an App Service app with Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/app-service/quickstart-cli
+- id: LAB15-CP03
+  title: Configure scale-out and slot-sticky settings
+  purpose: Configure and independently inspect the control-plane and data-path properties needed to configure scale-out and
+    slot-sticky settings.
+  objectiveIds:
+  - CP-APP-03
+  required: true
+  expectedState: The plan worker count matches the target and the designated application setting remains sticky to the slot.
+  scriptMarkers:
+    setup: LAB15-CP03
+    validate: LAB15-CP03
+    cleanup: LAB15-CP03
+  validation:
+    positive:
+      id: cp03.positive
+      description: Read the service properties for configure scale-out and slot-sticky settings by using exact run-owned identifiers.
+      command: '$validationId=''LAB15-CP03-positive''; $sku = az appservice plan show --resource-group $ResourceGroupName
+        --name $plan --query sku.name --output tsv
+
+        if ($sku -ne ''S2'') { throw "App Service plan SKU is $sku." }'
+      expected: The plan worker count matches the target and the designated application setting remains sticky to the slot.
+    negative:
+      id: cp03.negative
+      description: Search for conflicting, unowned, or excessive state after configure scale-out and slot-sticky settings.
+      command: '$validationId=''LAB15-CP03-negative''; $maximum = az monitor autoscale show --resource-group $ResourceGroupName
+        --name $autoscale --query "profiles[0].capacity.maximum" --output tsv
+
+        if ([int]$maximum -ne 3) { throw "Autoscale maximum is $maximum." }'
+      expected: 'LAB15-CP03 negative boundary: The undesired state is absent; the negative assertion must not report: Autoscale
+        maximum is reported maximum.'
+  cleanup:
+    dependsOn:
+    - LAB15-CP04
+    - LAB15-CP05
+    action: Remove only manifest-recorded objects owned by LAB15-CP03, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp03.residual
+      description: Prove no active managed object remains for LAB15-CP03.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-3
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Create an App Service app with Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/app-service/quickstart-cli
+- id: LAB15-CP04
+  title: Swap staging into production with a recoverable path
+  purpose: Exercise the deterministic operational or denied path needed to swap staging into production with a recoverable
+    path, then retain comparable before-and-after results.
+  objectiveIds:
+  - CP-APP-08
+  required: true
+  expectedState: The swap completes, both slots remain provisioned, and the sticky value stays with its intended slot.
+  scriptMarkers:
+    setup: LAB15-CP04
+    validate: LAB15-CP04
+    cleanup: LAB15-CP04
+  validation:
+    positive:
+      id: cp04.positive
+      description: Read the service properties for swap staging into production with a recoverable path by using exact run-owned
+        identifiers.
+      command: '$validationId=''LAB15-CP04-positive''; $appId = az webapp show --resource-group $ResourceGroupName --name
+        $app --query id --output tsv
+
+        $sticky = az resource show --ids "$appId/config/slotConfigNames" --api-version 2023-12-01 --query "contains(properties.appSettingNames,
+        ''LAB_STAGE'')" --output tsv
+
+        if ($sticky -ne ''true'') { throw ''LAB_STAGE is not slot-sticky.'' }'
+      expected: The swap completes, both slots remain provisioned, and the sticky value stays with its intended slot.
+    negative:
+      id: cp04.negative
+      description: Search for conflicting, unowned, or excessive state after swap staging into production with a recoverable
+        path.
+      command: '$validationId=''LAB15-CP04-negative''; $failedSlots = az webapp deployment slot list --resource-group $ResourceGroupName
+        --name $app --query "[?state!=''Running''] | length(@)" --output tsv
+
+        if ([int]$failedSlots -ne 0) { throw ''A deployment slot is not running.'' }'
+      expected: 'LAB15-CP04 negative boundary: The undesired state is absent; the negative assertion must not report: A deployment
+        slot is not running.'
+  cleanup:
+    dependsOn:
+    - LAB15-CP05
+    action: Remove only manifest-recorded objects owned by LAB15-CP04, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp04.residual
+      description: Prove no active managed object remains for LAB15-CP04.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-4
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Create an App Service app with Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/app-service/quickstart-cli
+- id: LAB15-CP05
+  title: Reconcile worker count, slot state, and configuration scope
+  purpose: Reconcile live service properties, returned IDs, and dependency-aware removal needed to reconcile worker count,
+    slot state, and configuration scope before handoff.
+  objectiveIds:
+  - CP-APP-01
+  - CP-APP-02
+  - CP-APP-03
+  - CP-APP-08
+  required: true
+  expectedState: Plan capacity, production/slot hostnames, and slotConfigNames prove the intended scaled release boundary.
+  scriptMarkers:
+    setup: LAB15-CP05
+    validate: LAB15-CP05
+    cleanup: LAB15-CP05
+  validation:
+    positive:
+      id: cp05.positive
+      description: Read the service properties for reconcile worker count, slot state, and configuration scope by using exact
+        run-owned identifiers.
+      command: '$validationId=''LAB15-CP05-positive''; $planState = az appservice plan show --resource-group $ResourceGroupName
+        --name $plan --query status --output tsv
+
+        if ($planState -ne ''Ready'') { throw "Plan status is $planState." }'
+      expected: Plan capacity, production/slot hostnames, and slotConfigNames prove the intended scaled release boundary.
+    negative:
+      id: cp05.negative
+      description: Search for conflicting, unowned, or excessive state after reconcile worker count, slot state, and configuration
+        scope.
+      command: '$validationId=''LAB15-CP05-negative''; $disabled = az monitor autoscale show --resource-group $ResourceGroupName
+        --name $autoscale --query enabled --output tsv
+
+        if ($disabled -ne ''true'') { throw ''Autoscale is disabled.'' }'
+      expected: 'LAB15-CP05 negative boundary: The undesired state is absent; the negative assertion must not report: Autoscale
+        is disabled.'
+  cleanup:
+    dependsOn: []
+    action: Remove only manifest-recorded objects owned by LAB15-CP05, after dependent checkpoints are clear.
+    residualCheck:
+      id: cp05.residual
+      description: Prove no active managed object remains for LAB15-CP05.
+      command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+      expected: No active manifest-managed object remains for this checkpoint.
+  remediation:
+    anchor: task-5
+    links:
+    - title: Microsoft AZ-104 study guide
+      url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+    - title: Create an App Service app with Azure CLI
+      url: https://learn.microsoft.com/en-us/azure/app-service/quickstart-cli
 validation:
-  commandLanes:
-  - scripts/cli/Validate.ps1
-  output: .state/<run-id>/validation.json
-  statuses:
-  - pass
-  - fail
-  - warning
-  - skipped
-  liveExecutionRequiredForLiveVerified: true
+  script: scripts/cli/Validate.ps1
+  artifact: .state/<run-id>/validation.json
+  modes:
+  - Deployment
+  - PostCleanup
+  resultPolicy:
+    requiredFailureResult: fail
+    optionalSkipResult: partial
+    allRequiredPassResult: pass
 cleanup:
-  azureDeletion: exact recorded resource-group ID after tag verification
-  entraDeletion: none
-  reportOnlyByDefault: true
+  script: scripts/cli/Cleanup.ps1
+  artifact: .state/<run-id>/cleanup.json
+  previewByDefault: true
   requiresExecuteFlag: true
-  residualAuditRequired: true
+  ownershipVerification:
+    manifestIdMatch: true
+    requiredTags:
+    - purpose
+    - labId
+    - runId
+  residualChecks:
+  - id: cp01.residual
+    description: Prove no active managed object remains for LAB15-CP01.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp02.residual
+    description: Prove no active managed object remains for LAB15-CP02.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp03.residual
+    description: Prove no active managed object remains for LAB15-CP03.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp04.residual
+    description: Prove no active managed object remains for LAB15-CP04.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  - id: cp05.residual
+    description: Prove no active managed object remains for LAB15-CP05.
+    command: az resource list --resource-group $ResourceGroupName --query '[].id' --output tsv
+    expected: No active manifest-managed object remains for this checkpoint.
+  retainedItemsAllowed: true
+  irreversiblePurge: never
 assessment:
   enabled: true
   questionCount: 50
   primaryDomain: compute
-lastOfflineValidated: '2026-08-30'
+lastOfflineValidated: '2026-08-31'
 lastLiveVerified: null
+# END GENERATED AZ104 V2

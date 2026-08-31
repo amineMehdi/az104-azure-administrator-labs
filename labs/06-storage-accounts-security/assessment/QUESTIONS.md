@@ -1,453 +1,459 @@
 # Lab 06 knowledge check
 
-Choose the single best answer for each question. Record your choices before opening `ANSWERS.md`.
+[Return to the guided lab](../README.md)
+
+Complete all 50 questions before opening the answer key. Allow about 50–60 minutes and choose the single best answer.
+
+Use the result as a learning signal: 85–100% indicates mastery, 70–84% calls for targeted review, and below 70% means repeat the mapped lab tasks before retrying.
 
 ## LAB06-Q01 — Foundational
 
-Which principle is most important when working on 'Manage access keys' in Lab 06?
+A new storage hardening operator must explain why the hardened general-purpose storage account can create the general-purpose account type that supports current storage services. Which explanation is accurate?
 
-- A. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- B. A recognizable resource name removes the need for validation and scoped cleanup.
-- C. Redundancy protects copies of data, encryption protects data at rest, and access keys are broad secrets that must be rotated without entering state or command evidence.
-- D. The shortest command is always correct even when it changes a broader scope.
+- A. A storage account name is globally unique, 3–24 characters, and contains only lowercase letters and numbers.
+- B. A StorageV2 account supports current Blob, Files, Queue, and Table capabilities and access-tier features.
+- C. RA-GRS adds a readable secondary endpoint to geo-redundant replication, while GRS does not expose secondary reads normally.
+- D. Disabling shared-key authorization forces supported data operations to use Microsoft Entra authorization or another approved mechanism.
 
 ## LAB06-Q02 — Foundational
 
-Which lab action directly supports the objective 'Create and configure storage accounts'?
+The hardened general-purpose storage account acceptance criteria require operators to produce a globally unique lowercase account name with no punctuation. Which service fact supports that requirement?
 
-- A. Search the whole tenant for a similar display name and modify the first match.
-- B. Mark the objective complete after reading documentation without checking any state.
-- C. Change the active tenant without displaying or confirming the resulting context.
-- D. Require HTTPS, TLS 1.2, and disabled anonymous blob access.
+- A. LRS keeps three synchronous copies within one physical location in the primary region.
+- B. Secure transfer required rejects supported storage requests made over unencrypted HTTP.
+- C. Rotating one storage key at a time preserves a second valid key for applications during rollover.
+- D. A storage account name is globally unique, 3–24 characters, and contains only lowercase letters and numbers.
 
 ## LAB06-Q03 — Foundational
 
-Which authorization approach is appropriate before practicing 'Configure Azure Storage redundancy'?
+A storage hardening reviewer challenges whether the hardened general-purpose storage account can replicate data synchronously three ways at a single site. Which response resolves the concern?
 
-- A. Confirm the active context and use only the declared role boundary: Contributor on the lab resource group
-- B. Skip role checks when the run ID contains the lab number.
-- C. Use a production subscription because its resources already exist.
-- D. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
+- A. LRS keeps three synchronous copies within one physical location in the primary region.
+- B. ZRS synchronously replicates data across availability zones in the primary region.
+- C. The minimum TLS setting rejects client connections that negotiate an older protocol version.
+- D. Azure Storage encrypts persisted data by default and can use Microsoft-managed or customer-managed keys.
 
 ## LAB06-Q04 — Foundational
 
-Which resource or object belongs inside the recorded boundary for 'Configure storage account encryption'?
+The hardened general-purpose storage account handoff omits the storage hardening rule needed to survive a single availability-zone failure within the primary region. Which statement should the team add?
 
-- A. Use a production object when the sandbox prerequisite is unavailable.
-- B. Use the exact recorded identity and scope for StorageV2 account.
-- C. Use whichever similarly named object appears first in a broad search.
-- D. Use an unrelated shared resource without recording its immutable ID.
+- A. RA-GRS adds a readable secondary endpoint to geo-redundant replication, while GRS does not expose secondary reads normally.
+- B. ZRS synchronously replicates data across availability zones in the primary region.
+- C. Disabling shared-key authorization forces supported data operations to use Microsoft Entra authorization or another approved mechanism.
+- D. A StorageV2 account supports current Blob, Files, Queue, and Table capabilities and access-tier features.
 
 ## LAB06-Q05 — Foundational
 
-During a design vocabulary review, the team evaluates this situation: Which principle is most important when working on 'Manage access keys' in Lab 06?
+A storage hardening incident review of the hardened general-purpose storage account depends on the ability to allow reads from the secondary region when geo-replicated data is available. Which platform description is reliable?
 
-- A. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- B. A recognizable resource name removes the need for validation and scoped cleanup.
-- C. Redundancy protects copies of data, encryption protects data at rest, and access keys are broad secrets that must be rotated without entering state or command evidence.
-- D. The shortest command is always correct even when it changes a broader scope.
+- A. Secure transfer required rejects supported storage requests made over unencrypted HTTP.
+- B. Rotating one storage key at a time preserves a second valid key for applications during rollover.
+- C. RA-GRS adds a readable secondary endpoint to geo-redundant replication, while GRS does not expose secondary reads normally.
+- D. A storage account name is globally unique, 3–24 characters, and contains only lowercase letters and numbers.
 
 ## LAB06-Q06 — Foundational
 
-In a command-planning session, an administrator asks this question: Which lab action directly supports the objective 'Create and configure storage accounts'?
+A storage administrator hardening a general-purpose account is updating the storage hardening runbook. The requirement is to reject storage requests that do not use an encrypted transport. Which statement describes Azure behavior correctly?
 
-- A. Search the whole tenant for a similar display name and modify the first match.
-- B. Mark the objective complete after reading documentation without checking any state.
-- C. Change the active tenant without displaying or confirming the resulting context.
-- D. Require HTTPS, TLS 1.2, and disabled anonymous blob access.
+- A. The minimum TLS setting rejects client connections that negotiate an older protocol version.
+- B. Azure Storage encrypts persisted data by default and can use Microsoft-managed or customer-managed keys.
+- C. Secure transfer required rejects supported storage requests made over unencrypted HTTP.
+- D. LRS keeps three synchronous copies within one physical location in the primary region.
 
 ## LAB06-Q07 — Foundational
 
-While preparing the lab, a learner verifies this platform rule: Which authorization approach is appropriate before practicing 'Configure Azure Storage redundancy'?
+A storage hardening peer review asks how the hardened general-purpose storage account should handle this outcome: refuse clients that negotiate an obsolete transport protocol. Which explanation is accurate?
 
-- A. Confirm the active context and use only the declared role boundary: Contributor on the lab resource group
-- B. Skip role checks when the run ID contains the lab number.
-- C. Use a production subscription because its resources already exist.
-- D. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
+- A. Disabling shared-key authorization forces supported data operations to use Microsoft Entra authorization or another approved mechanism.
+- B. The minimum TLS setting rejects client connections that negotiate an older protocol version.
+- C. A StorageV2 account supports current Blob, Files, Queue, and Table capabilities and access-tier features.
+- D. ZRS synchronously replicates data across availability zones in the primary region.
 
 ## LAB06-Q08 — Foundational
 
-During peer review, the team must identify the accurate response to this scenario: Which resource or object belongs inside the recorded boundary for 'Configure storage account encryption'?
+For the hardened general-purpose storage account, the storage hardening plan must accept only Microsoft Entra credentials for data access. Which statement about storage hardening belongs in the hardened general-purpose storage account record?
 
-- A. Use a production object when the sandbox prerequisite is unavailable.
-- B. Use the exact recorded identity and scope for StorageV2 account.
-- C. Use whichever similarly named object appears first in a broad search.
-- D. Use an unrelated shared resource without recording its immutable ID.
+- A. Rotating one storage key at a time preserves a second valid key for applications during rollover.
+- B. A storage account name is globally unique, 3–24 characters, and contains only lowercase letters and numbers.
+- C. Disabling shared-key authorization forces supported data operations to use Microsoft Entra authorization or another approved mechanism.
+- D. RA-GRS adds a readable secondary endpoint to geo-redundant replication, while GRS does not expose secondary reads normally.
 
 ## LAB06-Q09 — Foundational
 
-In an operations briefing, a new team member receives this question: Which principle is most important when working on 'Manage access keys' in Lab 06?
+The storage hardening review compares four claims for the hardened general-purpose storage account requirement to replace a compromised credential without losing the second recovery credential. Which claim is technically sound?
 
-- A. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- B. A recognizable resource name removes the need for validation and scoped cleanup.
-- C. Redundancy protects copies of data, encryption protects data at rest, and access keys are broad secrets that must be rotated without entering state or command evidence.
-- D. The shortest command is always correct even when it changes a broader scope.
+- A. Azure Storage encrypts persisted data by default and can use Microsoft-managed or customer-managed keys.
+- B. Rotating one storage key at a time preserves a second valid key for applications during rollover.
+- C. LRS keeps three synchronous copies within one physical location in the primary region.
+- D. Secure transfer required rejects supported storage requests made over unencrypted HTTP.
 
 ## LAB06-Q10 — Foundational
 
-While building a support checklist, an engineer reviews this requirement: Which lab action directly supports the objective 'Create and configure storage accounts'?
+The storage hardening architecture note requires the hardened general-purpose storage account environment to confirm that stored service data is encrypted without an application change. Which statement defines the relevant storage hardening boundary?
 
-- A. Search the whole tenant for a similar display name and modify the first match.
-- B. Mark the objective complete after reading documentation without checking any state.
-- C. Change the active tenant without displaying or confirming the resulting context.
-- D. Require HTTPS, TLS 1.2, and disabled anonymous blob access.
+- A. A StorageV2 account supports current Blob, Files, Queue, and Table capabilities and access-tier features.
+- B. ZRS synchronously replicates data across availability zones in the primary region.
+- C. The minimum TLS setting rejects client connections that negotiate an older protocol version.
+- D. Azure Storage encrypts persisted data by default and can use Microsoft-managed or customer-managed keys.
 
 ## LAB06-Q11 — Foundational
 
-During a readiness check, the administrator considers this behavior: Which authorization approach is appropriate before practicing 'Configure Azure Storage redundancy'?
+Operators must automate the hardened general-purpose storage account change needed to create the general-purpose account type that supports current storage services. Which storage hardening operation belongs in the runbook?
 
-- A. Confirm the active context and use only the declared role boundary: Contributor on the lab resource group
-- B. Skip role checks when the run ID contains the lab number.
-- C. Use a production subscription because its resources already exist.
-- D. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
+- A. Create a standard StorageV2 account unless a workload-specific account kind is required.
+- B. Choose Standard_LRS when lowest redundancy cost is accepted and zone failure protection is not required.
+- C. Enable supportsHttpsTrafficOnly on every account unless a documented legacy exception exists.
+- D. Move clients to the secondary key, regenerate the primary key, and then complete the inverse rotation.
 
 ## LAB06-Q12 — Foundational
 
-In a service overview, the team discusses this scenario: Which resource or object belongs inside the recorded boundary for 'Configure storage account encryption'?
+A hardened general-purpose storage account review finds storage hardening drift from the need to produce a globally unique lowercase account name with no punctuation. Which correction addresses that drift?
 
-- A. Use a production object when the sandbox prerequisite is unavailable.
-- B. Use the exact recorded identity and scope for StorageV2 account.
-- C. Use whichever similarly named object appears first in a broad search.
-- D. Use an unrelated shared resource without recording its immutable ID.
+- A. Choose Standard_ZRS when the workload must tolerate a zonal failure without regional replication.
+- B. Set minimumTlsVersion to TLS1_2 or the approved stronger baseline.
+- C. Select the approved key source and, for customer-managed keys, grant the account identity access to the key vault key.
+- D. Generate a deterministic lowercase name and check global availability before deployment.
 
 ## LAB06-Q13 — Foundational
 
-While reviewing official guidance, a learner must resolve this question: Which principle is most important when working on 'Manage access keys' in Lab 06?
+The hardened general-purpose storage account window permits only the storage hardening change needed to replicate data synchronously three ways at a single site. Which option respects the boundary?
 
-- A. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- B. A recognizable resource name removes the need for validation and scoped cleanup.
-- C. Redundancy protects copies of data, encryption protects data at rest, and access keys are broad secrets that must be rotated without entering state or command evidence.
-- D. The shortest command is always correct even when it changes a broader scope.
+- A. Choose an RA geo-redundant SKU only when the application needs read access to the secondary region.
+- B. Disable allowSharedKeyAccess after confirming every required workload supports identity-based authorization.
+- C. Create a standard StorageV2 account unless a workload-specific account kind is required.
+- D. Choose Standard_LRS when lowest redundancy cost is accepted and zone failure protection is not required.
 
 ## LAB06-Q14 — Foundational
 
-During a configuration walkthrough, the instructor asks about this situation: Which lab action directly supports the objective 'Create and configure storage accounts'?
+The storage hardening preflight has passed; the hardened general-purpose storage account must now survive a single availability-zone failure within the primary region. Which operation should run?
 
-- A. Search the whole tenant for a similar display name and modify the first match.
-- B. Mark the objective complete after reading documentation without checking any state.
-- C. Change the active tenant without displaying or confirming the resulting context.
-- D. Require HTTPS, TLS 1.2, and disabled anonymous blob access.
+- A. Enable supportsHttpsTrafficOnly on every account unless a documented legacy exception exists.
+- B. Move clients to the secondary key, regenerate the primary key, and then complete the inverse rotation.
+- C. Generate a deterministic lowercase name and check global availability before deployment.
+- D. Choose Standard_ZRS when the workload must tolerate a zonal failure without regional replication.
 
 ## LAB06-Q15 — Foundational
 
-In a preflight knowledge check, the operator evaluates this requirement: Which authorization approach is appropriate before practicing 'Configure Azure Storage redundancy'?
+The hardened general-purpose storage account plan must allow reads from the secondary region when geo-replicated data is available while limiting the mutation scope to storage hardening. Which action is appropriate?
 
-- A. Confirm the active context and use only the declared role boundary: Contributor on the lab resource group
-- B. Skip role checks when the run ID contains the lab number.
-- C. Use a production subscription because its resources already exist.
-- D. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
+- A. Set minimumTlsVersion to TLS1_2 or the approved stronger baseline.
+- B. Select the approved key source and, for customer-managed keys, grant the account identity access to the key vault key.
+- C. Choose an RA geo-redundant SKU only when the application needs read access to the secondary region.
+- D. Choose Standard_LRS when lowest redundancy cost is accepted and zone failure protection is not required.
 
 ## LAB06-Q16 — Applied
 
-A learner previews the implementation for 'Manage access keys'. What behavior is required?
+A storage hardening ticket in the hardened general-purpose storage account says to reject storage requests that do not use an encrypted transport. Which storage hardening action completes the hardened general-purpose storage account request with minimal change?
 
-- A. Delete any older resource whose name resembles the new run ID.
-- B. Display the context, intended changes, cost and gated branches without mutating Azure.
-- C. Create the baseline immediately and request approval only before cleanup.
-- D. Select the first accessible subscription and hide the resulting context.
+- A. Disable allowSharedKeyAccess after confirming every required workload supports identity-based authorization.
+- B. Create a standard StorageV2 account unless a workload-specific account kind is required.
+- C. Enable supportsHttpsTrafficOnly on every account unless a documented legacy exception exists.
+- D. Choose Standard_ZRS when the workload must tolerate a zonal failure without regional replication.
 
 ## LAB06-Q17 — Applied
 
-Which implementation step should the learner perform for 'Create and configure storage accounts'?
+The approach for the hardened general-purpose storage account is approved, but the storage hardening environment still cannot refuse clients that negotiate an obsolete transport protocol. Which implementation step closes the gap?
 
-- A. Skip the operation and edit validation.json to show a passing result.
-- B. Replace the lab action with a tenant-wide change that is easier to discover.
-- C. Require HTTPS, TLS 1.2, and disabled anonymous blob access.
-- D. Copy resource identifiers from another run instead of recording returned IDs.
+- A. Move clients to the secondary key, regenerate the primary key, and then complete the inverse rotation.
+- B. Generate a deterministic lowercase name and check global availability before deployment.
+- C. Choose an RA geo-redundant SKU only when the application needs read access to the secondary region.
+- D. Set minimumTlsVersion to TLS1_2 or the approved stronger baseline.
 
 ## LAB06-Q18 — Applied
 
-Which evidence most directly validates 'Configure Azure Storage redundancy' for resource group?
+The storage administrator hardening a general-purpose account may change the hardened general-purpose storage account only to accept only Microsoft Entra credentials for data access. Which storage hardening action stays within that assignment?
 
-- A. Record a credential so another learner can replay the authenticated session.
-- B. Treat the setup exit code as proof of every configuration and relationship.
-- C. List the entire subscription and assume similarly named resources belong to this run.
-- D. Query the exact recorded scope and independently verify Microsoft.Storage/storageAccounts.
+- A. Select the approved key source and, for customer-managed keys, grant the account identity access to the key vault key.
+- B. Choose Standard_LRS when lowest redundancy cost is accepted and zone failure protection is not required.
+- C. Disable allowSharedKeyAccess after confirming every required workload supports identity-based authorization.
+- D. Enable supportsHttpsTrafficOnly on every account unless a documented legacy exception exists.
 
 ## LAB06-Q19 — Applied
 
-The 'Configure storage account encryption' checkpoint reaches an external prerequisite. What should happen?
+A storage hardening dry run shows no hardened general-purpose storage account command will replace a compromised credential without losing the second recovery credential. Which action belongs before execution?
 
-- A. Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.
-- B. Invent a domain, notification target, license, quota, or tenant value and continue.
-- C. Broaden permissions until the prerequisite can no longer block the operation.
-- D. Mark the branch passed because its command syntax was checked offline.
+- A. Move clients to the secondary key, regenerate the primary key, and then complete the inverse rotation.
+- B. Create a standard StorageV2 account unless a workload-specific account kind is required.
+- C. Choose Standard_ZRS when the workload must tolerate a zonal failure without regional replication.
+- D. Set minimumTlsVersion to TLS1_2 or the approved stronger baseline.
 
 ## LAB06-Q20 — Applied
 
-What is the safest command-evidence practice after completing 'Manage access keys'?
+For the hardened general-purpose storage account, operators need to confirm that stored service data is encrypted without an application change. Which change realizes that requirement?
 
-- A. Reuse successful output from an earlier run with a similar resource name.
-- B. Retain only redacted structured output from an independent query of the recorded run.
-- C. Commit the complete account object so reviewers can identify the tenant.
-- D. Save tokens, keys, passwords, or SAS values beside the validation result.
+- A. Generate a deterministic lowercase name and check global availability before deployment.
+- B. Choose an RA geo-redundant SKU only when the application needs read access to the secondary region.
+- C. Select the approved key source and, for customer-managed keys, grant the account identity access to the key vault key.
+- D. Disable allowSharedKeyAccess after confirming every required workload supports identity-based authorization.
 
 ## LAB06-Q21 — Applied
 
-Which negative check strengthens validation of 'Create and configure storage accounts'?
+The hardened general-purpose storage account configuration is complete; the storage hardening reviewers need evidence it can create the general-purpose account type that supports current storage services. Which observation shows success?
 
-- A. Ignore denied queries and record them as passing checks.
-- B. Check only that at least one resource exists in the subscription.
-- C. Confirm the intended state and also prove that broader, anonymous, or unintended access was not introduced.
-- D. Repair every warning automatically before recording what caused it.
+- A. Query kind, sku, primaryEndpoints, and provisioningState for the created account.
+- B. Query the account SKU and verify Standard_ZRS is supported in the selected region.
+- C. Query minimumTlsVersion and compare it with the security standard.
+- D. Query encryption keySource and service encryption settings for Blob and Files.
 
 ## LAB06-Q22 — Applied
 
-A delegated administrator receives the following support request: A learner previews the implementation for 'Manage access keys'. What behavior is required?
+The storage hardening validation asks whether the hardened general-purpose storage account can produce a globally unique lowercase account name with no punctuation. Which observable state is strongest?
 
-- A. Create the baseline immediately and request approval only before cleanup.
-- B. Select the first accessible subscription and hide the resulting context.
-- C. Delete any older resource whose name resembles the new run ID.
-- D. Display the context, intended changes, cost and gated branches without mutating Azure.
+- A. Use the name-availability API and confirm nameAvailable is true before creation.
+- B. Query secondary endpoints and the account SKU to confirm read-access geo-redundancy.
+- C. Query allowSharedKeyAccess and test a Microsoft Entra data-plane request independently.
+- D. Query kind, sku, primaryEndpoints, and provisioningState for the created account.
 
 ## LAB06-Q23 — Applied
 
-During a maintenance window, an engineer must decide how to respond: Which implementation step should the learner perform for 'Create and configure storage accounts'?
+A hardened general-purpose storage account review must prove the storage hardening ability to replicate data synchronously three ways at a single site. Which check avoids an adjacent feature?
 
-- A. Require HTTPS, TLS 1.2, and disabled anonymous blob access.
-- B. Copy resource identifiers from another run instead of recording returned IDs.
-- C. Skip the operation and edit validation.json to show a passing result.
-- D. Replace the lab action with a tenant-wide change that is easier to discover.
+- A. Query enableHttpsTrafficOnly and confirm it is true.
+- B. Query the account SKU and confirm its name is Standard_LRS.
+- C. List key creation times and verify applications no longer use the key scheduled for regeneration.
+- D. Use the name-availability API and confirm nameAvailable is true before creation.
 
 ## LAB06-Q24 — Applied
 
-A deployment pipeline reaches this decision point: Which evidence most directly validates 'Configure Azure Storage redundancy' for resource group?
+The hardened general-purpose storage account evidence bundle needs a storage hardening result showing it can survive a single availability-zone failure within the primary region. Which result belongs in the checkpoint?
 
-- A. List the entire subscription and assume similarly named resources belong to this run.
-- B. Query the exact recorded scope and independently verify Microsoft.Storage/storageAccounts.
-- C. Record a credential so another learner can replay the authenticated session.
-- D. Treat the setup exit code as proof of every configuration and relationship.
+- A. Query the account SKU and verify Standard_ZRS is supported in the selected region.
+- B. Query minimumTlsVersion and compare it with the security standard.
+- C. Query encryption keySource and service encryption settings for Blob and Files.
+- D. Query the account SKU and confirm its name is Standard_LRS.
 
 ## LAB06-Q25 — Applied
 
-While applying least-privilege controls, the administrator reviews this scenario: The 'Configure storage account encryption' checkpoint reaches an external prerequisite. What should happen?
+Before hardened general-purpose storage account cleanup, the storage hardening team must reconfirm it can allow reads from the secondary region when geo-replicated data is available. Which read-only inspection should run?
 
-- A. Broaden permissions until the prerequisite can no longer block the operation.
-- B. Mark the branch passed because its command syntax was checked offline.
-- C. Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.
-- D. Invent a domain, notification target, license, quota, or tenant value and continue.
+- A. Query allowSharedKeyAccess and test a Microsoft Entra data-plane request independently.
+- B. Query kind, sku, primaryEndpoints, and provisioningState for the created account.
+- C. Query secondary endpoints and the account SKU to confirm read-access geo-redundancy.
+- D. Query the account SKU and verify Standard_ZRS is supported in the selected region.
 
 ## LAB06-Q26 — Applied
 
-A repeatable Azure CLI workflow must address this requirement: What is the safest command-evidence practice after completing 'Manage access keys'?
+The hardened general-purpose storage account setup reports success after the storage hardening attempt to reject storage requests that do not use an encrypted transport. Which storage hardening read-only observation proves the hardened general-purpose storage account outcome?
 
-- A. Commit the complete account object so reviewers can identify the tenant.
-- B. Save tokens, keys, passwords, or SAS values beside the validation result.
-- C. Reuse successful output from an earlier run with a similar resource name.
-- D. Retain only redacted structured output from an independent query of the recorded run.
+- A. List key creation times and verify applications no longer use the key scheduled for regeneration.
+- B. Use the name-availability API and confirm nameAvailable is true before creation.
+- C. Query secondary endpoints and the account SKU to confirm read-access geo-redundancy.
+- D. Query enableHttpsTrafficOnly and confirm it is true.
 
 ## LAB06-Q27 — Applied
 
-During an environment handoff, the receiving team asks this question: Which negative check strengthens validation of 'Create and configure storage accounts'?
+The storage hardening log says the hardened general-purpose storage account can now refuse clients that negotiate an obsolete transport protocol. Which storage hardening state should the hardened general-purpose storage account acceptance test retain?
 
-- A. Confirm the intended state and also prove that broader, anonymous, or unintended access was not introduced.
-- B. Repair every warning automatically before recording what caused it.
-- C. Ignore denied queries and record them as passing checks.
-- D. Check only that at least one resource exists in the subscription.
+- A. Query encryption keySource and service encryption settings for Blob and Files.
+- B. Query the account SKU and confirm its name is Standard_LRS.
+- C. Query minimumTlsVersion and compare it with the security standard.
+- D. Query enableHttpsTrafficOnly and confirm it is true.
 
 ## LAB06-Q28 — Applied
 
-A configuration change produces the following operational choice: A learner previews the implementation for 'Manage access keys'. What behavior is required?
+The hardened general-purpose storage account rejects storage hardening exit status as proof it can accept only Microsoft Entra credentials for data access. Which hardened general-purpose storage account result is valid evidence?
 
-- A. Delete any older resource whose name resembles the new run ID.
-- B. Display the context, intended changes, cost and gated branches without mutating Azure.
-- C. Create the baseline immediately and request approval only before cleanup.
-- D. Select the first accessible subscription and hide the resulting context.
+- A. Query kind, sku, primaryEndpoints, and provisioningState for the created account.
+- B. Query the account SKU and verify Standard_ZRS is supported in the selected region.
+- C. Query allowSharedKeyAccess and test a Microsoft Entra data-plane request independently.
+- D. Query minimumTlsVersion and compare it with the security standard.
 
 ## LAB06-Q29 — Applied
 
-While preparing independent validation, an engineer considers this scenario: Which implementation step should the learner perform for 'Create and configure storage accounts'?
+The storage hardening validator needs one hardened general-purpose storage account query after the change to replace a compromised credential without losing the second recovery credential. Which storage hardening property should the hardened general-purpose storage account validator inspect?
 
-- A. Skip the operation and edit validation.json to show a passing result.
-- B. Replace the lab action with a tenant-wide change that is easier to discover.
-- C. Require HTTPS, TLS 1.2, and disabled anonymous blob access.
-- D. Copy resource identifiers from another run instead of recording returned IDs.
+- A. Use the name-availability API and confirm nameAvailable is true before creation.
+- B. Query secondary endpoints and the account SKU to confirm read-access geo-redundancy.
+- C. Query allowSharedKeyAccess and test a Microsoft Entra data-plane request independently.
+- D. List key creation times and verify applications no longer use the key scheduled for regeneration.
 
 ## LAB06-Q30 — Applied
 
-A service owner asks the administrator to resolve this requirement: Which evidence most directly validates 'Configure Azure Storage redundancy' for resource group?
+The storage administrator hardening a general-purpose account must confirm the hardened general-purpose storage account, without mutation, can confirm that stored service data is encrypted without an application change. Which storage hardening check qualifies?
 
-- A. Record a credential so another learner can replay the authenticated session.
-- B. Treat the setup exit code as proof of every configuration and relationship.
-- C. List the entire subscription and assume similarly named resources belong to this run.
-- D. Query the exact recorded scope and independently verify Microsoft.Storage/storageAccounts.
+- A. Query the account SKU and confirm its name is Standard_LRS.
+- B. Query encryption keySource and service encryption settings for Blob and Files.
+- C. Query enableHttpsTrafficOnly and confirm it is true.
+- D. List key creation times and verify applications no longer use the key scheduled for regeneration.
 
 ## LAB06-Q31 — Applied
 
-During a scoped cleanup review, the team evaluates this situation: The 'Configure storage account encryption' checkpoint reaches an external prerequisite. What should happen?
+The storage hardening evidence shows the hardened general-purpose storage account cannot create the general-purpose account type that supports current storage services. Which root cause fits that evidence?
 
-- A. Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.
-- B. Invent a domain, notification target, license, quota, or tenant value and continue.
-- C. Broaden permissions until the prerequisite can no longer block the operation.
-- D. Mark the branch passed because its command syntax was checked offline.
+- A. The account uses a legacy kind that does not support the requested modern storage capability.
+- B. The proposed account name contains a hyphen and therefore violates the naming rules.
+- C. Secure transfer was disabled to accommodate an obsolete HTTP client.
+- D. Customer-managed encryption cannot unwrap the key because the storage account identity lacks key permissions.
 
 ## LAB06-Q32 — Applied
 
-An automation author must choose the correct response to this scenario: What is the safest command-evidence practice after completing 'Manage access keys'?
+Although the hardened general-purpose storage account is meant to let the storage hardening produce a globally unique lowercase account name with no punctuation, its checkpoint fails. Which storage hardening defect explains the failure?
 
-- A. Reuse successful output from an earlier run with a similar resource name.
-- B. Retain only redacted structured output from an independent query of the recorded run.
-- C. Commit the complete account object so reviewers can identify the tenant.
-- D. Save tokens, keys, passwords, or SAS values beside the validation result.
+- A. The proposed account name contains a hyphen and therefore violates the naming rules.
+- B. The design requires zone-level resilience that LRS does not provide.
+- C. The client only supports a TLS version lower than the account's configured minimum.
+- D. The account uses a legacy kind that does not support the requested modern storage capability.
 
 ## LAB06-Q33 — Applied
 
-A lab run with a unique run ID reaches this decision: Which negative check strengthens validation of 'Create and configure storage accounts'?
+The storage hardening support team isolated the hardened general-purpose storage account incident to the attempt to replicate data synchronously three ways at a single site. Which condition prevents success?
 
-- A. Ignore denied queries and record them as passing checks.
-- B. Check only that at least one resource exists in the subscription.
-- C. Confirm the intended state and also prove that broader, anonymous, or unintended access was not introduced.
-- D. Repair every warning automatically before recording what caused it.
+- A. The selected region or account feature does not support the requested ZRS combination.
+- B. The workload still depends on an account key after shared-key authorization was disabled.
+- C. The proposed account name contains a hyphen and therefore violates the naming rules.
+- D. The design requires zone-level resilience that LRS does not provide.
 
 ## LAB06-Q34 — Applied
 
-While comparing the intended and actual states, the operator asks this question: A learner previews the implementation for 'Manage access keys'. What behavior is required?
+A hardened general-purpose storage account query surprises the storage administrator hardening a general-purpose account during the storage hardening attempt to survive a single availability-zone failure within the primary region. Which finding explains it?
 
-- A. Create the baseline immediately and request approval only before cleanup.
-- B. Select the first accessible subscription and hide the resulting context.
-- C. Delete any older resource whose name resembles the new run ID.
-- D. Display the context, intended changes, cost and gated branches without mutating Azure.
+- A. The selected region or account feature does not support the requested ZRS combination.
+- B. The account uses GRS, so applications cannot normally read from the secondary endpoint.
+- C. The active key was regenerated before dependent applications switched to the alternate key.
+- D. The design requires zone-level resilience that LRS does not provide.
 
 ## LAB06-Q35 — Applied
 
-A peer reviewer examines the proposed implementation for this scenario: Which implementation step should the learner perform for 'Create and configure storage accounts'?
+Other hardened general-purpose storage account components are healthy, but the storage hardening still cannot allow reads from the secondary region when geo-replicated data is available. Which state causes the isolated failure?
 
-- A. Require HTTPS, TLS 1.2, and disabled anonymous blob access.
-- B. Copy resource identifiers from another run instead of recording returned IDs.
-- C. Skip the operation and edit validation.json to show a passing result.
-- D. Replace the lab action with a tenant-wide change that is easier to discover.
+- A. The account uses GRS, so applications cannot normally read from the secondary endpoint.
+- B. Secure transfer was disabled to accommodate an obsolete HTTP client.
+- C. Customer-managed encryption cannot unwrap the key because the storage account identity lacks key permissions.
+- D. The selected region or account feature does not support the requested ZRS combination.
 
 ## LAB06-Q36 — Applied
 
-During a controlled rollout, the change team encounters this requirement: Which evidence most directly validates 'Configure Azure Storage redundancy' for resource group?
+During a storage hardening fault drill, the hardened general-purpose storage account does not reject storage requests that do not use an encrypted transport. Which finding identifies the defect?
 
-- A. List the entire subscription and assume similarly named resources belong to this run.
-- B. Query the exact recorded scope and independently verify Microsoft.Storage/storageAccounts.
-- C. Record a credential so another learner can replay the authenticated session.
-- D. Treat the setup exit code as proof of every configuration and relationship.
+- A. The client only supports a TLS version lower than the account's configured minimum.
+- B. The account uses a legacy kind that does not support the requested modern storage capability.
+- C. The account uses GRS, so applications cannot normally read from the secondary endpoint.
+- D. Secure transfer was disabled to accommodate an obsolete HTTP client.
 
 ## LAB06-Q37 — Applied
 
-A support engineer reproduces the following situation in a test environment: The 'Configure storage account encryption' checkpoint reaches an external prerequisite. What should happen?
+The hardened general-purpose storage account setup finishes, yet the storage hardening cannot refuse clients that negotiate an obsolete transport protocol. Which misconfiguration explains the mismatch?
 
-- A. Broaden permissions until the prerequisite can no longer block the operation.
-- B. Mark the branch passed because its command syntax was checked offline.
-- C. Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.
-- D. Invent a domain, notification target, license, quota, or tenant value and continue.
+- A. The workload still depends on an account key after shared-key authorization was disabled.
+- B. The proposed account name contains a hyphen and therefore violates the naming rules.
+- C. The client only supports a TLS version lower than the account's configured minimum.
+- D. Secure transfer was disabled to accommodate an obsolete HTTP client.
 
 ## LAB06-Q38 — Applied
 
-While recording validation evidence, the administrator evaluates this question: What is the safest command-evidence practice after completing 'Manage access keys'?
+A storage hardening break/fix in the hardened general-purpose storage account fails when operators try to accept only Microsoft Entra credentials for data access. Which diagnosis fits?
 
-- A. Commit the complete account object so reviewers can identify the tenant.
-- B. Save tokens, keys, passwords, or SAS values beside the validation result.
-- C. Reuse successful output from an earlier run with a similar resource name.
-- D. Retain only redacted structured output from an independent query of the recorded run.
+- A. The active key was regenerated before dependent applications switched to the alternate key.
+- B. The workload still depends on an account key after shared-key authorization was disabled.
+- C. The design requires zone-level resilience that LRS does not provide.
+- D. The client only supports a TLS version lower than the account's configured minimum.
 
 ## LAB06-Q39 — Applied
 
-A configuration owner must approve one response to this scenario: Which negative check strengthens validation of 'Create and configure storage accounts'?
+The hardened general-purpose storage account troubleshooting scope is the storage hardening need to replace a compromised credential without losing the second recovery credential. Which condition should be corrected first?
 
-- A. Confirm the intended state and also prove that broader, anonymous, or unintended access was not introduced.
-- B. Repair every warning automatically before recording what caused it.
-- C. Ignore denied queries and record them as passing checks.
-- D. Check only that at least one resource exists in the subscription.
+- A. The active key was regenerated before dependent applications switched to the alternate key.
+- B. Customer-managed encryption cannot unwrap the key because the storage account identity lacks key permissions.
+- C. The selected region or account feature does not support the requested ZRS combination.
+- D. The workload still depends on an account key after shared-key authorization was disabled.
 
 ## LAB06-Q40 — Applied
 
-During post-deployment verification, the team reviews this situation: A learner previews the implementation for 'Manage access keys'. What behavior is required?
+The hardened general-purpose storage account result is partial because the storage hardening cannot confirm that stored service data is encrypted without an application change. Which condition accounts for that result?
 
-- A. Delete any older resource whose name resembles the new run ID.
-- B. Display the context, intended changes, cost and gated branches without mutating Azure.
-- C. Create the baseline immediately and request approval only before cleanup.
-- D. Select the first accessible subscription and hide the resulting context.
+- A. The account uses a legacy kind that does not support the requested modern storage capability.
+- B. Customer-managed encryption cannot unwrap the key because the storage account identity lacks key permissions.
+- C. The account uses GRS, so applications cannot normally read from the secondary endpoint.
+- D. The active key was regenerated before dependent applications switched to the alternate key.
 
 ## LAB06-Q41 — Advanced
 
-Validation for 'Configure Azure Storage redundancy' fails after setup. What is the best break/fix method?
+At the hardened general-purpose storage account approval gate, operators must show that the storage hardening can create the general-purpose account type that supports current storage services. Which storage hardening configure-and-check pair is defensible?
 
-- A. Rerun setup repeatedly with new names until one attempt appears successful.
-- B. Change validation.json directly so the failed result reads pass.
-- C. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-- D. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+- A. First, Choose Standard_LRS when lowest redundancy cost is accepted and zone failure protection is not required. Then, Query the account SKU and confirm its name is Standard_LRS.
+- B. First, Set minimumTlsVersion to TLS1_2 or the approved stronger baseline. Then, Query minimumTlsVersion and compare it with the security standard.
+- C. First, Disable allowSharedKeyAccess after confirming every required workload supports identity-based authorization. Then, Query allowSharedKeyAccess and test a Microsoft Entra data-plane request independently.
+- D. First, Create a standard StorageV2 account unless a workload-specific account kind is required. Then, Query kind, sku, primaryEndpoints, and provisioningState for the created account.
 
 ## LAB06-Q42 — Advanced
 
-The operation for 'Configure storage account encryption' is asynchronous or gated. How should completion be recorded?
+The hardened general-purpose storage account forbids a partial storage hardening result. Operators must first produce a globally unique lowercase account name with no punctuation and afterward confirm the hardened general-purpose storage account outcome. Which storage hardening sequence is complete?
 
-- A. Record pass as soon as the request is accepted, regardless of its final state.
-- B. Fabricate expected output so the assessment and documentation appear complete.
-- C. Remove the check from validation whenever the service takes longer than expected.
-- D. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
+- A. First, Choose Standard_ZRS when the workload must tolerate a zonal failure without regional replication. Then, Query the account SKU and verify Standard_ZRS is supported in the selected region.
+- B. First, Disable allowSharedKeyAccess after confirming every required workload supports identity-based authorization. Then, Query allowSharedKeyAccess and test a Microsoft Entra data-plane request independently.
+- C. First, Generate a deterministic lowercase name and check global availability before deployment. Then, Use the name-availability API and confirm nameAvailable is true before creation.
+- D. First, Move clients to the secondary key, regenerate the primary key, and then complete the inverse rotation. Then, List key creation times and verify applications no longer use the key scheduled for regeneration.
 
 ## LAB06-Q43 — Advanced
 
-A security and reliability review identifies this design decision: Validation for 'Configure Azure Storage redundancy' fails after setup. What is the best break/fix method?
+Only the hardened general-purpose storage account change needed to replicate data synchronously three ways at a single site is allowed, and storage hardening proof is mandatory. Which pair fits?
 
-- A. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-- B. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- C. Rerun setup repeatedly with new names until one attempt appears successful.
-- D. Change validation.json directly so the failed result reads pass.
+- A. First, Choose Standard_LRS when lowest redundancy cost is accepted and zone failure protection is not required. Then, Query the account SKU and confirm its name is Standard_LRS.
+- B. First, Choose an RA geo-redundant SKU only when the application needs read access to the secondary region. Then, Query secondary endpoints and the account SKU to confirm read-access geo-redundancy.
+- C. First, Move clients to the secondary key, regenerate the primary key, and then complete the inverse rotation. Then, List key creation times and verify applications no longer use the key scheduled for regeneration.
+- D. First, Select the approved key source and, for customer-managed keys, grant the account identity access to the key vault key. Then, Query encryption keySource and service encryption settings for Blob and Files.
 
 ## LAB06-Q44 — Advanced
 
-While diagnosing unexpected Azure behavior, the engineer considers this situation: The operation for 'Configure storage account encryption' is asynchronous or gated. How should completion be recorded?
+The hardened general-purpose storage account runbook separates storage hardening mutation from validation while it must survive a single availability-zone failure within the primary region. Which sequence proves it cleanly?
 
-- A. Remove the check from validation whenever the service takes longer than expected.
-- B. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
-- C. Record pass as soon as the request is accepted, regardless of its final state.
-- D. Fabricate expected output so the assessment and documentation appear complete.
+- A. First, Enable supportsHttpsTrafficOnly on every account unless a documented legacy exception exists. Then, Query enableHttpsTrafficOnly and confirm it is true.
+- B. First, Choose Standard_ZRS when the workload must tolerate a zonal failure without regional replication. Then, Query the account SKU and verify Standard_ZRS is supported in the selected region.
+- C. First, Select the approved key source and, for customer-managed keys, grant the account identity access to the key vault key. Then, Query encryption keySource and service encryption settings for Blob and Files.
+- D. First, Create a standard StorageV2 account unless a workload-specific account kind is required. Then, Query kind, sku, primaryEndpoints, and provisioningState for the created account.
 
 ## LAB06-Q45 — Advanced
 
-An architecture review requires the strongest response to this scenario: Validation for 'Configure Azure Storage redundancy' fails after setup. What is the best break/fix method?
+The hardened general-purpose storage account checkpoint requires both this storage hardening outcome—allow reads from the secondary region when geo-replicated data is available—and a read-only hardened general-purpose storage account state check. Which storage hardening response is complete?
 
-- A. Rerun setup repeatedly with new names until one attempt appears successful.
-- B. Change validation.json directly so the failed result reads pass.
-- C. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-- D. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+- A. First, Set minimumTlsVersion to TLS1_2 or the approved stronger baseline. Then, Query minimumTlsVersion and compare it with the security standard.
+- B. First, Choose an RA geo-redundant SKU only when the application needs read access to the secondary region. Then, Query secondary endpoints and the account SKU to confirm read-access geo-redundancy.
+- C. First, Create a standard StorageV2 account unless a workload-specific account kind is required. Then, Query kind, sku, primaryEndpoints, and provisioningState for the created account.
+- D. First, Generate a deterministic lowercase name and check global availability before deployment. Then, Use the name-availability API and confirm nameAvailable is true before creation.
 
 ## LAB06-Q46 — Advanced
 
-During break/fix validation, the operator encounters this question: The operation for 'Configure storage account encryption' is asynchronous or gated. How should completion be recorded?
+The hardened general-purpose storage account runbook must reject storage requests that do not use an encrypted transport, then retain storage hardening read-back evidence. Which hardened general-purpose storage account pair completes both duties?
 
-- A. Record pass as soon as the request is accepted, regardless of its final state.
-- B. Fabricate expected output so the assessment and documentation appear complete.
-- C. Remove the check from validation whenever the service takes longer than expected.
-- D. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
+- A. First, Enable supportsHttpsTrafficOnly on every account unless a documented legacy exception exists. Then, Query enableHttpsTrafficOnly and confirm it is true.
+- B. First, Disable allowSharedKeyAccess after confirming every required workload supports identity-based authorization. Then, Query allowSharedKeyAccess and test a Microsoft Entra data-plane request independently.
+- C. First, Generate a deterministic lowercase name and check global availability before deployment. Then, Use the name-availability API and confirm nameAvailable is true before creation.
+- D. First, Choose Standard_LRS when lowest redundancy cost is accepted and zone failure protection is not required. Then, Query the account SKU and confirm its name is Standard_LRS.
 
 ## LAB06-Q47 — Advanced
 
-A complex support case depends on correctly interpreting this requirement: Validation for 'Configure Azure Storage redundancy' fails after setup. What is the best break/fix method?
+To satisfy the storage hardening requirement, operators must change the hardened general-purpose storage account configuration and prove it can refuse clients that negotiate an obsolete transport protocol. Which sequence is coherent?
 
-- A. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-- B. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- C. Rerun setup repeatedly with new names until one attempt appears successful.
-- D. Change validation.json directly so the failed result reads pass.
+- A. First, Move clients to the secondary key, regenerate the primary key, and then complete the inverse rotation. Then, List key creation times and verify applications no longer use the key scheduled for regeneration.
+- B. First, Set minimumTlsVersion to TLS1_2 or the approved stronger baseline. Then, Query minimumTlsVersion and compare it with the security standard.
+- C. First, Choose Standard_LRS when lowest redundancy cost is accepted and zone failure protection is not required. Then, Query the account SKU and confirm its name is Standard_LRS.
+- D. First, Choose Standard_ZRS when the workload must tolerate a zonal failure without regional replication. Then, Query the account SKU and verify Standard_ZRS is supported in the selected region.
 
 ## LAB06-Q48 — Advanced
 
-While correcting configuration drift, the team evaluates this scenario: The operation for 'Configure storage account encryption' is asynchronous or gated. How should completion be recorded?
+The storage administrator hardening a general-purpose account needs a safe hardened general-purpose storage account change to accept only Microsoft Entra credentials for data access, followed by storage hardening evidence. Which pair merits approval?
 
-- A. Remove the check from validation whenever the service takes longer than expected.
-- B. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
-- C. Record pass as soon as the request is accepted, regardless of its final state.
-- D. Fabricate expected output so the assessment and documentation appear complete.
+- A. First, Select the approved key source and, for customer-managed keys, grant the account identity access to the key vault key. Then, Query encryption keySource and service encryption settings for Blob and Files.
+- B. First, Disable allowSharedKeyAccess after confirming every required workload supports identity-based authorization. Then, Query allowSharedKeyAccess and test a Microsoft Entra data-plane request independently.
+- C. First, Choose Standard_ZRS when the workload must tolerate a zonal failure without regional replication. Then, Query the account SKU and verify Standard_ZRS is supported in the selected region.
+- D. First, Choose an RA geo-redundant SKU only when the application needs read access to the secondary region. Then, Query secondary endpoints and the account SKU to confirm read-access geo-redundancy.
 
 ## LAB06-Q49 — Advanced
 
-A recovery exercise exposes the following technical decision: Validation for 'Configure Azure Storage redundancy' fails after setup. What is the best break/fix method?
+The hardened general-purpose storage account has two storage hardening gates: replace a compromised credential without losing the second recovery credential, then prove the hardened general-purpose storage account state. Which storage hardening sequence works?
 
-- A. Rerun setup repeatedly with new names until one attempt appears successful.
-- B. Change validation.json directly so the failed result reads pass.
-- C. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-- D. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+- A. First, Create a standard StorageV2 account unless a workload-specific account kind is required. Then, Query kind, sku, primaryEndpoints, and provisioningState for the created account.
+- B. First, Move clients to the secondary key, regenerate the primary key, and then complete the inverse rotation. Then, List key creation times and verify applications no longer use the key scheduled for regeneration.
+- C. First, Choose an RA geo-redundant SKU only when the application needs read access to the secondary region. Then, Query secondary endpoints and the account SKU to confirm read-access geo-redundancy.
+- D. First, Enable supportsHttpsTrafficOnly on every account unless a documented legacy exception exists. Then, Query enableHttpsTrafficOnly and confirm it is true.
 
 ## LAB06-Q50 — Advanced
 
-During final design assurance, the reviewer must resolve this situation: The operation for 'Configure storage account encryption' is asynchronous or gated. How should completion be recorded?
+Which storage hardening path makes the hardened general-purpose storage account able to confirm that stored service data is encrypted without an application change, then inspects the defining properties?
 
-- A. Record pass as soon as the request is accepted, regardless of its final state.
-- B. Fabricate expected output so the assessment and documentation appear complete.
-- C. Remove the check from validation whenever the service takes longer than expected.
-- D. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
+- A. First, Generate a deterministic lowercase name and check global availability before deployment. Then, Use the name-availability API and confirm nameAvailable is true before creation.
+- B. First, Enable supportsHttpsTrafficOnly on every account unless a documented legacy exception exists. Then, Query enableHttpsTrafficOnly and confirm it is true.
+- C. First, Set minimumTlsVersion to TLS1_2 or the approved stronger baseline. Then, Query minimumTlsVersion and compare it with the security standard.
+- D. First, Select the approved key source and, for customer-managed keys, grant the account identity access to the key vault key. Then, Query encryption keySource and service encryption settings for Blob and Files.
+
+[Open the answer key](./ANSWERS.md)

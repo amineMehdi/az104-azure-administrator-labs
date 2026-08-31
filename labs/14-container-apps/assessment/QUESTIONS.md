@@ -1,453 +1,459 @@
 # Lab 14 knowledge check
 
-Choose the single best answer for each question. Record your choices before opening `ANSWERS.md`.
+[Return to the guided lab](../README.md)
+
+Complete all 50 questions before opening the answer key. Allow about 50–60 minutes and choose the single best answer.
+
+Use the result as a learning signal: 85–100% indicates mastery, 70–84% calls for targeted review, and below 70% means repeat the mapped lab tasks before retrying.
 
 ## LAB14-Q01 — Foundational
 
-Which principle is most important when working on 'Provision a container by using Azure Container Apps' in Lab 14?
+A revision rollout incident review of the revisioned serverless container release depends on the ability to place related apps inside one networking and logging boundary. Which platform description is reliable?
 
-- A. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- B. A recognizable resource name removes the need for validation and scoped cleanup.
-- C. Container Apps revisions are immutable deployment snapshots, while replicas scale within an active revision according to minimum, maximum, and event rules.
-- D. The shortest command is always correct even when it changes a broader scope.
+- A. A revision is an immutable snapshot of an app version, and revision-scope changes create a new revision.
+- B. Traffic weights route percentages to revisions or labels and must total 100 percent.
+- C. A Container Apps environment is the secure boundary for apps that share networking and logging integration.
+- D. Minimum replicas control warm capacity and scale-to-zero, while maximum replicas cap horizontal scale.
 
 ## LAB14-Q02 — Foundational
 
-While documenting the service baseline, an engineer considers this question: Which principle is most important when working on 'Provision a container by using Azure Container Apps' in Lab 14?
+A platform administrator releasing a revisioned serverless container app is updating the revision rollout runbook. The requirement is to preserve an immutable snapshot whenever revision-scoped configuration changes. Which statement describes Azure behavior correctly?
 
-- A. The shortest command is always correct even when it changes a broader scope.
-- B. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- C. A recognizable resource name removes the need for validation and scoped cleanup.
-- D. Container Apps revisions are immutable deployment snapshots, while replicas scale within an active revision according to minimum, maximum, and event rules.
+- A. A revision is an immutable snapshot of an app version, and revision-scope changes create a new revision.
+- B. Single revision mode sends traffic to the latest ready revision and deactivates the previous active revision after a successful update.
+- C. The ingress target port must match the port on which the container process listens.
+- D. Container Apps scale rules translate HTTP concurrency, KEDA events, or custom metrics into desired replica counts.
 
 ## LAB14-Q03 — Foundational
 
-In a fundamentals workshop, the instructor presents this requirement: Which principle is most important when working on 'Provision a container by using Azure Container Apps' in Lab 14?
+A revision rollout peer review asks how the revisioned serverless container release should handle this outcome: move production to the newest ready version and retire the preceding active version. Which explanation is accurate?
 
-- A. Container Apps revisions are immutable deployment snapshots, while replicas scale within an active revision according to minimum, maximum, and event rules.
-- B. The shortest command is always correct even when it changes a broader scope.
-- C. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- D. A recognizable resource name removes the need for validation and scoped cleanup.
+- A. Multiple revision mode can keep several revisions active and divide traffic between them.
+- B. External ingress exposes the app through the environment endpoint, while internal ingress limits reachability to the environment network path.
+- C. Single revision mode sends traffic to the latest ready revision and deactivates the previous active revision after a successful update.
+- D. Container Apps secrets are referenced by configuration and environment variables without placing the secret value directly in the image.
 
 ## LAB14-Q04 — Foundational
 
-Before making a change, a learner checks this core behavior: Which principle is most important when working on 'Provision a container by using Azure Container Apps' in Lab 14?
+For the revisioned serverless container release, the revision rollout plan must keep several versions active at the same time. Which statement about revision rollout belongs in the revisioned serverless container release record?
 
-- A. A recognizable resource name removes the need for validation and scoped cleanup.
-- B. Container Apps revisions are immutable deployment snapshots, while replicas scale within an active revision according to minimum, maximum, and event rules.
-- C. The shortest command is always correct even when it changes a broader scope.
-- D. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+- A. Traffic weights route percentages to revisions or labels and must total 100 percent.
+- B. Multiple revision mode can keep several revisions active and divide traffic between them.
+- C. Minimum replicas control warm capacity and scale-to-zero, while maximum replicas cap horizontal scale.
+- D. A Container Apps environment is the secure boundary for apps that share networking and logging integration.
 
 ## LAB14-Q05 — Foundational
 
-During a design vocabulary review, the team evaluates this situation: Which principle is most important when working on 'Provision a container by using Azure Container Apps' in Lab 14?
+The revision rollout review compares four claims for the revisioned serverless container release requirement to send controlled percentages of requests to two active versions. Which claim is technically sound?
 
-- A. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- B. A recognizable resource name removes the need for validation and scoped cleanup.
-- C. Container Apps revisions are immutable deployment snapshots, while replicas scale within an active revision according to minimum, maximum, and event rules.
-- D. The shortest command is always correct even when it changes a broader scope.
+- A. The ingress target port must match the port on which the container process listens.
+- B. Traffic weights route percentages to revisions or labels and must total 100 percent.
+- C. Container Apps scale rules translate HTTP concurrency, KEDA events, or custom metrics into desired replica counts.
+- D. A revision is an immutable snapshot of an app version, and revision-scope changes create a new revision.
 
 ## LAB14-Q06 — Foundational
 
-In a command-planning session, an administrator asks this question: Which principle is most important when working on 'Provision a container by using Azure Container Apps' in Lab 14?
+The revision rollout architecture note requires the revisioned serverless container release environment to route ingress to the port on which the container process actually listens. Which statement defines the relevant revision rollout boundary?
 
-- A. The shortest command is always correct even when it changes a broader scope.
-- B. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- C. A recognizable resource name removes the need for validation and scoped cleanup.
-- D. Container Apps revisions are immutable deployment snapshots, while replicas scale within an active revision according to minimum, maximum, and event rules.
+- A. External ingress exposes the app through the environment endpoint, while internal ingress limits reachability to the environment network path.
+- B. Container Apps secrets are referenced by configuration and environment variables without placing the secret value directly in the image.
+- C. The ingress target port must match the port on which the container process listens.
+- D. Single revision mode sends traffic to the latest ready revision and deactivates the previous active revision after a successful update.
 
 ## LAB14-Q07 — Foundational
 
-While preparing the lab, a learner verifies this platform rule: Which principle is most important when working on 'Provision a container by using Azure Container Apps' in Lab 14?
+A new revision rollout operator must explain why the revisioned serverless container release can choose whether the application endpoint is externally reachable or environment-internal. Which explanation is accurate?
 
-- A. Container Apps revisions are immutable deployment snapshots, while replicas scale within an active revision according to minimum, maximum, and event rules.
-- B. The shortest command is always correct even when it changes a broader scope.
-- C. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- D. A recognizable resource name removes the need for validation and scoped cleanup.
+- A. Minimum replicas control warm capacity and scale-to-zero, while maximum replicas cap horizontal scale.
+- B. External ingress exposes the app through the environment endpoint, while internal ingress limits reachability to the environment network path.
+- C. A Container Apps environment is the secure boundary for apps that share networking and logging integration.
+- D. Multiple revision mode can keep several revisions active and divide traffic between them.
 
 ## LAB14-Q08 — Foundational
 
-During peer review, the team must identify the accurate response to this scenario: Which principle is most important when working on 'Provision a container by using Azure Container Apps' in Lab 14?
+The revisioned serverless container release acceptance criteria require operators to keep required warm capacity while setting an upper scale limit. Which service fact supports that requirement?
 
-- A. A recognizable resource name removes the need for validation and scoped cleanup.
-- B. Container Apps revisions are immutable deployment snapshots, while replicas scale within an active revision according to minimum, maximum, and event rules.
-- C. The shortest command is always correct even when it changes a broader scope.
-- D. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+- A. Container Apps scale rules translate HTTP concurrency, KEDA events, or custom metrics into desired replica counts.
+- B. A revision is an immutable snapshot of an app version, and revision-scope changes create a new revision.
+- C. Traffic weights route percentages to revisions or labels and must total 100 percent.
+- D. Minimum replicas control warm capacity and scale-to-zero, while maximum replicas cap horizontal scale.
 
 ## LAB14-Q09 — Foundational
 
-In an operations briefing, a new team member receives this question: Which principle is most important when working on 'Provision a container by using Azure Container Apps' in Lab 14?
+A revision rollout reviewer challenges whether the revisioned serverless container release can translate HTTP or event demand into a desired replica count. Which response resolves the concern?
 
-- A. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- B. A recognizable resource name removes the need for validation and scoped cleanup.
-- C. Container Apps revisions are immutable deployment snapshots, while replicas scale within an active revision according to minimum, maximum, and event rules.
-- D. The shortest command is always correct even when it changes a broader scope.
+- A. Container Apps secrets are referenced by configuration and environment variables without placing the secret value directly in the image.
+- B. Single revision mode sends traffic to the latest ready revision and deactivates the previous active revision after a successful update.
+- C. The ingress target port must match the port on which the container process listens.
+- D. Container Apps scale rules translate HTTP concurrency, KEDA events, or custom metrics into desired replica counts.
 
 ## LAB14-Q10 — Foundational
 
-While building a support checklist, an engineer reviews this requirement: Which principle is most important when working on 'Provision a container by using Azure Container Apps' in Lab 14?
+The revisioned serverless container release handoff omits the revision rollout rule needed to reference sensitive configuration without placing the clear value in ordinary settings. Which statement should the team add?
 
-- A. The shortest command is always correct even when it changes a broader scope.
-- B. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- C. A recognizable resource name removes the need for validation and scoped cleanup.
-- D. Container Apps revisions are immutable deployment snapshots, while replicas scale within an active revision according to minimum, maximum, and event rules.
+- A. A Container Apps environment is the secure boundary for apps that share networking and logging integration.
+- B. Multiple revision mode can keep several revisions active and divide traffic between them.
+- C. Container Apps secrets are referenced by configuration and environment variables without placing the secret value directly in the image.
+- D. External ingress exposes the app through the environment endpoint, while internal ingress limits reachability to the environment network path.
 
 ## LAB14-Q11 — Foundational
 
-During a readiness check, the administrator considers this behavior: Which principle is most important when working on 'Provision a container by using Azure Container Apps' in Lab 14?
+The revisioned serverless container release plan must place related apps inside one networking and logging boundary while limiting the mutation scope to revision rollout. Which action is appropriate?
 
-- A. Container Apps revisions are immutable deployment snapshots, while replicas scale within an active revision according to minimum, maximum, and event rules.
-- B. The shortest command is always correct even when it changes a broader scope.
-- C. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- D. A recognizable resource name removes the need for validation and scoped cleanup.
+- A. Use single mode for straightforward replacement without simultaneous version traffic.
+- B. Enable ingress with a target port that matches the application's listener.
+- C. Create or select the managed environment before deploying the container app into it.
+- D. Configure a rule with the correct type, metadata, authentication references, and scale bounds.
 
 ## LAB14-Q12 — Foundational
 
-In a service overview, the team discusses this scenario: Which principle is most important when working on 'Provision a container by using Azure Container Apps' in Lab 14?
+A revision rollout ticket in the revisioned serverless container release says to preserve an immutable snapshot whenever revision-scoped configuration changes. Which revision rollout action completes the revisioned serverless container release request with minimal change?
 
-- A. A recognizable resource name removes the need for validation and scoped cleanup.
-- B. Container Apps revisions are immutable deployment snapshots, while replicas scale within an active revision according to minimum, maximum, and event rules.
-- C. The shortest command is always correct even when it changes a broader scope.
-- D. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+- A. Deploy the updated image or revision-scope settings and retain the resulting revision name.
+- B. Enable multiple mode before configuring canary or blue-green traffic weights.
+- C. Choose internal or external ingress from the approved client reachability requirement.
+- D. Create the secret through a secure input path and reference its name from the container configuration.
 
 ## LAB14-Q13 — Foundational
 
-While reviewing official guidance, a learner must resolve this question: Which principle is most important when working on 'Provision a container by using Azure Container Apps' in Lab 14?
+The approach for the revisioned serverless container release is approved, but the revision rollout environment still cannot move production to the newest ready version and retire the preceding active version. Which implementation step closes the gap?
 
-- A. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- B. A recognizable resource name removes the need for validation and scoped cleanup.
-- C. Container Apps revisions are immutable deployment snapshots, while replicas scale within an active revision according to minimum, maximum, and event rules.
-- D. The shortest command is always correct even when it changes a broader scope.
+- A. Assign an explicit small canary weight and keep the stable revision at the remaining percentage.
+- B. Use single mode for straightforward replacement without simultaneous version traffic.
+- C. Set minReplicas and maxReplicas from availability, cold-start, cost, and capacity constraints.
+- D. Create or select the managed environment before deploying the container app into it.
 
 ## LAB14-Q14 — Foundational
 
-During a configuration walkthrough, the instructor asks about this situation: Which principle is most important when working on 'Provision a container by using Azure Container Apps' in Lab 14?
+The platform administrator releasing a revisioned serverless container app may change the revisioned serverless container release only to keep several versions active at the same time. Which revision rollout action stays within that assignment?
 
-- A. The shortest command is always correct even when it changes a broader scope.
-- B. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- C. A recognizable resource name removes the need for validation and scoped cleanup.
-- D. Container Apps revisions are immutable deployment snapshots, while replicas scale within an active revision according to minimum, maximum, and event rules.
+- A. Enable ingress with a target port that matches the application's listener.
+- B. Configure a rule with the correct type, metadata, authentication references, and scale bounds.
+- C. Enable multiple mode before configuring canary or blue-green traffic weights.
+- D. Deploy the updated image or revision-scope settings and retain the resulting revision name.
 
 ## LAB14-Q15 — Foundational
 
-In a preflight knowledge check, the operator evaluates this requirement: Which principle is most important when working on 'Provision a container by using Azure Container Apps' in Lab 14?
+A revision rollout dry run shows no revisioned serverless container release command will send controlled percentages of requests to two active versions. Which action belongs before execution?
 
-- A. Container Apps revisions are immutable deployment snapshots, while replicas scale within an active revision according to minimum, maximum, and event rules.
-- B. The shortest command is always correct even when it changes a broader scope.
-- C. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
-- D. A recognizable resource name removes the need for validation and scoped cleanup.
+- A. Choose internal or external ingress from the approved client reachability requirement.
+- B. Create the secret through a secure input path and reference its name from the container configuration.
+- C. Use single mode for straightforward replacement without simultaneous version traffic.
+- D. Assign an explicit small canary weight and keep the stable revision at the remaining percentage.
 
 ## LAB14-Q16 — Applied
 
-Within Lab 14, the team evaluates this scenario: A learner previews the implementation for 'Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps'. What behavior is required?
+For the revisioned serverless container release, operators need to route ingress to the port on which the container process actually listens. Which change realizes that requirement?
 
-- A. Create the baseline immediately and request approval only before cleanup.
-- B. Display the context, intended changes, cost and gated branches without mutating Azure.
-- C. Select the first accessible subscription and hide the resulting context.
-- D. Delete any older resource whose name resembles the new run ID.
+- A. Set minReplicas and maxReplicas from availability, cold-start, cost, and capacity constraints.
+- B. Create or select the managed environment before deploying the container app into it.
+- C. Enable multiple mode before configuring canary or blue-green traffic weights.
+- D. Enable ingress with a target port that matches the application's listener.
 
 ## LAB14-Q17 — Applied
 
-Which implementation step should the learner perform for 'Provision a container by using Azure Container Apps'?
+Operators must automate the revisioned serverless container release change needed to choose whether the application endpoint is externally reachable or environment-internal. Which revision rollout operation belongs in the runbook?
 
-- A. Replace the lab action with a tenant-wide change that is easier to discover.
-- B. Copy resource identifiers from another run instead of recording returned IDs.
-- C. Create a new revision by changing an environment variable and split traffic deliberately.
-- D. Skip the operation and edit validation.json to show a passing result.
+- A. Choose internal or external ingress from the approved client reachability requirement.
+- B. Configure a rule with the correct type, metadata, authentication references, and scale bounds.
+- C. Deploy the updated image or revision-scope settings and retain the resulting revision name.
+- D. Assign an explicit small canary weight and keep the stable revision at the remaining percentage.
 
 ## LAB14-Q18 — Applied
 
-While automating the lab, an engineer must answer this question: A learner previews the implementation for 'Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps'. What behavior is required?
+A revisioned serverless container release review finds revision rollout drift from the need to keep required warm capacity while setting an upper scale limit. Which correction addresses that drift?
 
-- A. Select the first accessible subscription and hide the resulting context.
-- B. Delete any older resource whose name resembles the new run ID.
-- C. Create the baseline immediately and request approval only before cleanup.
-- D. Display the context, intended changes, cost and gated branches without mutating Azure.
+- A. Create the secret through a secure input path and reference its name from the container configuration.
+- B. Use single mode for straightforward replacement without simultaneous version traffic.
+- C. Enable ingress with a target port that matches the application's listener.
+- D. Set minReplicas and maxReplicas from availability, cold-start, cost, and capacity constraints.
 
 ## LAB14-Q19 — Applied
 
-During an implementation review, the operator considers this requirement: Which implementation step should the learner perform for 'Provision a container by using Azure Container Apps'?
+The revisioned serverless container release window permits only the revision rollout change needed to translate HTTP or event demand into a desired replica count. Which option respects the boundary?
 
-- A. Create a new revision by changing an environment variable and split traffic deliberately.
-- B. Skip the operation and edit validation.json to show a passing result.
-- C. Replace the lab action with a tenant-wide change that is easier to discover.
-- D. Copy resource identifiers from another run instead of recording returned IDs.
+- A. Create or select the managed environment before deploying the container app into it.
+- B. Enable multiple mode before configuring canary or blue-green traffic weights.
+- C. Choose internal or external ingress from the approved client reachability requirement.
+- D. Configure a rule with the correct type, metadata, authentication references, and scale bounds.
 
 ## LAB14-Q20 — Applied
 
-A production runbook must correctly handle this scenario: A learner previews the implementation for 'Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps'. What behavior is required?
+The revision rollout preflight has passed; the revisioned serverless container release must now reference sensitive configuration without placing the clear value in ordinary settings. Which operation should run?
 
-- A. Create the baseline immediately and request approval only before cleanup.
-- B. Display the context, intended changes, cost and gated branches without mutating Azure.
-- C. Select the first accessible subscription and hide the resulting context.
-- D. Delete any older resource whose name resembles the new run ID.
+- A. Deploy the updated image or revision-scope settings and retain the resulting revision name.
+- B. Assign an explicit small canary weight and keep the stable revision at the remaining percentage.
+- C. Set minReplicas and maxReplicas from availability, cold-start, cost, and capacity constraints.
+- D. Create the secret through a secure input path and reference its name from the container configuration.
 
 ## LAB14-Q21 — Applied
 
-While validating a configuration, the team evaluates this situation: Which implementation step should the learner perform for 'Provision a container by using Azure Container Apps'?
+Before revisioned serverless container release cleanup, the revision rollout team must reconfirm it can place related apps inside one networking and logging boundary. Which read-only inspection should run?
 
-- A. Replace the lab action with a tenant-wide change that is easier to discover.
-- B. Copy resource identifiers from another run instead of recording returned IDs.
-- C. Create a new revision by changing an environment variable and split traffic deliberately.
-- D. Skip the operation and edit validation.json to show a passing result.
+- A. List active revisions and confirm their combined traffic percentages equal 100.
+- B. Query managedEnvironmentId, provisioningState, defaultDomain, and logging configuration.
+- C. Query ingress.external, fqdn, transport, and targetPort, then test from an appropriate network location.
+- D. Query secret references and confirm command output does not reveal the stored secret value.
 
 ## LAB14-Q22 — Applied
 
-Within Lab 14, the team evaluates this scenario: A delegated administrator receives the following support request: A learner previews the implementation for 'Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps'. What behavior is required?
+The revisioned serverless container release setup reports success after the revision rollout attempt to preserve an immutable snapshot whenever revision-scoped configuration changes. Which revision rollout read-only observation proves the revisioned serverless container release outcome?
 
-- A. Select the first accessible subscription and hide the resulting context.
-- B. Delete any older resource whose name resembles the new run ID.
-- C. Create the baseline immediately and request approval only before cleanup.
-- D. Display the context, intended changes, cost and gated branches without mutating Azure.
+- A. Query ingress.traffic and match revision names, labels, and exact weights.
+- B. Query the active revision template scale bounds and current replica count.
+- C. List revisions and compare image, createdTime, active state, health, and traffic weight.
+- D. Query managedEnvironmentId, provisioningState, defaultDomain, and logging configuration.
 
 ## LAB14-Q23 — Applied
 
-During a maintenance window, an engineer must decide how to respond: Which implementation step should the learner perform for 'Provision a container by using Azure Container Apps'?
+The revision rollout log says the revisioned serverless container release can now move production to the newest ready version and retire the preceding active version. Which revision rollout state should the revisioned serverless container release acceptance test retain?
 
-- A. Create a new revision by changing an environment variable and split traffic deliberately.
-- B. Skip the operation and edit validation.json to show a passing result.
-- C. Replace the lab action with a tenant-wide change that is easier to discover.
-- D. Copy resource identifiers from another run instead of recording returned IDs.
+- A. Query ingress.targetPort and compare it with container startup logs and probe configuration.
+- B. Query the revision's scale rules and inspect replica changes while generating controlled demand.
+- C. List revisions and compare image, createdTime, active state, health, and traffic weight.
+- D. Query activeRevisionsMode and confirm exactly the intended latest revision is active.
 
 ## LAB14-Q24 — Applied
 
-A deployment pipeline reaches this decision point: A learner previews the implementation for 'Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps'. What behavior is required?
+The revisioned serverless container release rejects revision rollout exit status as proof it can keep several versions active at the same time. Which revisioned serverless container release result is valid evidence?
 
-- A. Create the baseline immediately and request approval only before cleanup.
-- B. Display the context, intended changes, cost and gated branches without mutating Azure.
-- C. Select the first accessible subscription and hide the resulting context.
-- D. Delete any older resource whose name resembles the new run ID.
+- A. Query ingress.external, fqdn, transport, and targetPort, then test from an appropriate network location.
+- B. Query secret references and confirm command output does not reveal the stored secret value.
+- C. List active revisions and confirm their combined traffic percentages equal 100.
+- D. Query activeRevisionsMode and confirm exactly the intended latest revision is active.
 
 ## LAB14-Q25 — Applied
 
-While applying least-privilege controls, the administrator reviews this scenario: Which implementation step should the learner perform for 'Provision a container by using Azure Container Apps'?
+The revision rollout validator needs one revisioned serverless container release query after the change to send controlled percentages of requests to two active versions. Which revision rollout property should the revisioned serverless container release validator inspect?
 
-- A. Replace the lab action with a tenant-wide change that is easier to discover.
-- B. Copy resource identifiers from another run instead of recording returned IDs.
-- C. Create a new revision by changing an environment variable and split traffic deliberately.
-- D. Skip the operation and edit validation.json to show a passing result.
+- A. Query ingress.traffic and match revision names, labels, and exact weights.
+- B. Query the active revision template scale bounds and current replica count.
+- C. Query managedEnvironmentId, provisioningState, defaultDomain, and logging configuration.
+- D. List active revisions and confirm their combined traffic percentages equal 100.
 
 ## LAB14-Q26 — Applied
 
-A repeatable Azure CLI workflow must address this requirement: A learner previews the implementation for 'Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps'. What behavior is required?
+The platform administrator releasing a revisioned serverless container app must confirm the revisioned serverless container release, without mutation, can route ingress to the port on which the container process actually listens. Which revision rollout check qualifies?
 
-- A. Select the first accessible subscription and hide the resulting context.
-- B. Delete any older resource whose name resembles the new run ID.
-- C. Create the baseline immediately and request approval only before cleanup.
-- D. Display the context, intended changes, cost and gated branches without mutating Azure.
+- A. Query the revision's scale rules and inspect replica changes while generating controlled demand.
+- B. List revisions and compare image, createdTime, active state, health, and traffic weight.
+- C. Query ingress.traffic and match revision names, labels, and exact weights.
+- D. Query ingress.targetPort and compare it with container startup logs and probe configuration.
 
 ## LAB14-Q27 — Applied
 
-During an environment handoff, the receiving team asks this question: Which implementation step should the learner perform for 'Provision a container by using Azure Container Apps'?
+The revisioned serverless container release configuration is complete; the revision rollout reviewers need evidence it can choose whether the application endpoint is externally reachable or environment-internal. Which observation shows success?
 
-- A. Create a new revision by changing an environment variable and split traffic deliberately.
-- B. Skip the operation and edit validation.json to show a passing result.
-- C. Replace the lab action with a tenant-wide change that is easier to discover.
-- D. Copy resource identifiers from another run instead of recording returned IDs.
+- A. Query secret references and confirm command output does not reveal the stored secret value.
+- B. Query ingress.external, fqdn, transport, and targetPort, then test from an appropriate network location.
+- C. Query activeRevisionsMode and confirm exactly the intended latest revision is active.
+- D. Query ingress.targetPort and compare it with container startup logs and probe configuration.
 
 ## LAB14-Q28 — Applied
 
-Within Lab 14, the team evaluates this scenario: A configuration change produces the following operational choice: A learner previews the implementation for 'Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps'. What behavior is required?
+The revision rollout validation asks whether the revisioned serverless container release can keep required warm capacity while setting an upper scale limit. Which observable state is strongest?
 
-- A. Create the baseline immediately and request approval only before cleanup.
-- B. Display the context, intended changes, cost and gated branches without mutating Azure.
-- C. Select the first accessible subscription and hide the resulting context.
-- D. Delete any older resource whose name resembles the new run ID.
+- A. Query the active revision template scale bounds and current replica count.
+- B. Query managedEnvironmentId, provisioningState, defaultDomain, and logging configuration.
+- C. List active revisions and confirm their combined traffic percentages equal 100.
+- D. Query ingress.external, fqdn, transport, and targetPort, then test from an appropriate network location.
 
 ## LAB14-Q29 — Applied
 
-While preparing independent validation, an engineer considers this scenario: Which implementation step should the learner perform for 'Provision a container by using Azure Container Apps'?
+A revisioned serverless container release review must prove the revision rollout ability to translate HTTP or event demand into a desired replica count. Which check avoids an adjacent feature?
 
-- A. Replace the lab action with a tenant-wide change that is easier to discover.
-- B. Copy resource identifiers from another run instead of recording returned IDs.
-- C. Create a new revision by changing an environment variable and split traffic deliberately.
-- D. Skip the operation and edit validation.json to show a passing result.
+- A. Query the revision's scale rules and inspect replica changes while generating controlled demand.
+- B. List revisions and compare image, createdTime, active state, health, and traffic weight.
+- C. Query ingress.traffic and match revision names, labels, and exact weights.
+- D. Query the active revision template scale bounds and current replica count.
 
 ## LAB14-Q30 — Applied
 
-A service owner asks the administrator to resolve this requirement: A learner previews the implementation for 'Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps'. What behavior is required?
+The revisioned serverless container release evidence bundle needs a revision rollout result showing it can reference sensitive configuration without placing the clear value in ordinary settings. Which result belongs in the checkpoint?
 
-- A. Select the first accessible subscription and hide the resulting context.
-- B. Delete any older resource whose name resembles the new run ID.
-- C. Create the baseline immediately and request approval only before cleanup.
-- D. Display the context, intended changes, cost and gated branches without mutating Azure.
+- A. Query secret references and confirm command output does not reveal the stored secret value.
+- B. Query activeRevisionsMode and confirm exactly the intended latest revision is active.
+- C. Query ingress.targetPort and compare it with container startup logs and probe configuration.
+- D. Query the revision's scale rules and inspect replica changes while generating controlled demand.
 
 ## LAB14-Q31 — Applied
 
-During a scoped cleanup review, the team evaluates this situation: Which implementation step should the learner perform for 'Provision a container by using Azure Container Apps'?
+Other revisioned serverless container release components are healthy, but the revision rollout still cannot place related apps inside one networking and logging boundary. Which state causes the isolated failure?
 
-- A. Create a new revision by changing an environment variable and split traffic deliberately.
-- B. Skip the operation and edit validation.json to show a passing result.
-- C. Replace the lab action with a tenant-wide change that is easier to discover.
-- D. Copy resource identifiers from another run instead of recording returned IDs.
+- A. Validation queried only the app object and missed that the new revision is unhealthy.
+- B. Ingress forwards to port 80 while the container process listens on port 8080.
+- C. The environment variable contains the literal credential instead of a secret reference.
+- D. The app deployment references an environment in a different region.
 
 ## LAB14-Q32 — Applied
 
-An automation author must choose the correct response to this scenario: A learner previews the implementation for 'Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps'. What behavior is required?
+During a revision rollout fault drill, the revisioned serverless container release does not preserve an immutable snapshot whenever revision-scoped configuration changes. Which finding identifies the defect?
 
-- A. Create the baseline immediately and request approval only before cleanup.
-- B. Display the context, intended changes, cost and gated branches without mutating Azure.
-- C. Select the first accessible subscription and hide the resulting context.
-- D. Delete any older resource whose name resembles the new run ID.
+- A. The new revision never becomes ready, so the earlier revision remains serving traffic.
+- B. Validation queried only the app object and missed that the new revision is unhealthy.
+- C. External ingress was enabled for a service intended to be reachable only inside the environment.
+- D. The app deployment references an environment in a different region.
 
 ## LAB14-Q33 — Applied
 
-A lab run with a unique run ID reaches this decision: Which implementation step should the learner perform for 'Provision a container by using Azure Container Apps'?
+The revisioned serverless container release setup finishes, yet the revision rollout cannot move production to the newest ready version and retire the preceding active version. Which misconfiguration explains the mismatch?
 
-- A. Replace the lab action with a tenant-wide change that is easier to discover.
-- B. Copy resource identifiers from another run instead of recording returned IDs.
-- C. Create a new revision by changing an environment variable and split traffic deliberately.
-- D. Skip the operation and edit validation.json to show a passing result.
+- A. The new revision never becomes ready, so the earlier revision remains serving traffic.
+- B. The app remains in single revision mode while the runbook attempts a traffic split.
+- C. minReplicas is zero even though the workload requires one continuously warm instance.
+- D. Validation queried only the app object and missed that the new revision is unhealthy.
 
 ## LAB14-Q34 — Applied
 
-Within Lab 14, the team evaluates this scenario: While comparing the intended and actual states, the operator asks this question: A learner previews the implementation for 'Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps'. What behavior is required?
+A revision rollout break/fix in the revisioned serverless container release fails when operators try to keep several versions active at the same time. Which diagnosis fits?
 
-- A. Select the first accessible subscription and hide the resulting context.
-- B. Delete any older resource whose name resembles the new run ID.
-- C. Create the baseline immediately and request approval only before cleanup.
-- D. Display the context, intended changes, cost and gated branches without mutating Azure.
+- A. The app remains in single revision mode while the runbook attempts a traffic split.
+- B. The configured traffic weights total more than 100 percent.
+- C. The rule metadata names a secret that is not defined for the container app.
+- D. The new revision never becomes ready, so the earlier revision remains serving traffic.
 
 ## LAB14-Q35 — Applied
 
-A peer reviewer examines the proposed implementation for this scenario: Which implementation step should the learner perform for 'Provision a container by using Azure Container Apps'?
+The revisioned serverless container release troubleshooting scope is the revision rollout need to send controlled percentages of requests to two active versions. Which condition should be corrected first?
 
-- A. Create a new revision by changing an environment variable and split traffic deliberately.
-- B. Skip the operation and edit validation.json to show a passing result.
-- C. Replace the lab action with a tenant-wide change that is easier to discover.
-- D. Copy resource identifiers from another run instead of recording returned IDs.
+- A. Ingress forwards to port 80 while the container process listens on port 8080.
+- B. The environment variable contains the literal credential instead of a secret reference.
+- C. The configured traffic weights total more than 100 percent.
+- D. The app remains in single revision mode while the runbook attempts a traffic split.
 
 ## LAB14-Q36 — Applied
 
-During a controlled rollout, the change team encounters this requirement: A learner previews the implementation for 'Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps'. What behavior is required?
+The revisioned serverless container release result is partial because the revision rollout cannot route ingress to the port on which the container process actually listens. Which condition accounts for that result?
 
-- A. Create the baseline immediately and request approval only before cleanup.
-- B. Display the context, intended changes, cost and gated branches without mutating Azure.
-- C. Select the first accessible subscription and hide the resulting context.
-- D. Delete any older resource whose name resembles the new run ID.
+- A. External ingress was enabled for a service intended to be reachable only inside the environment.
+- B. The app deployment references an environment in a different region.
+- C. Ingress forwards to port 80 while the container process listens on port 8080.
+- D. The configured traffic weights total more than 100 percent.
 
 ## LAB14-Q37 — Applied
 
-A support engineer reproduces the following situation in a test environment: Which implementation step should the learner perform for 'Provision a container by using Azure Container Apps'?
+The revision rollout evidence shows the revisioned serverless container release cannot choose whether the application endpoint is externally reachable or environment-internal. Which root cause fits that evidence?
 
-- A. Replace the lab action with a tenant-wide change that is easier to discover.
-- B. Copy resource identifiers from another run instead of recording returned IDs.
-- C. Create a new revision by changing an environment variable and split traffic deliberately.
-- D. Skip the operation and edit validation.json to show a passing result.
+- A. minReplicas is zero even though the workload requires one continuously warm instance.
+- B. External ingress was enabled for a service intended to be reachable only inside the environment.
+- C. Validation queried only the app object and missed that the new revision is unhealthy.
+- D. Ingress forwards to port 80 while the container process listens on port 8080.
 
 ## LAB14-Q38 — Applied
 
-While recording validation evidence, the administrator evaluates this question: A learner previews the implementation for 'Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps'. What behavior is required?
+Although the revisioned serverless container release is meant to let the revision rollout keep required warm capacity while setting an upper scale limit, its checkpoint fails. Which revision rollout defect explains the failure?
 
-- A. Select the first accessible subscription and hide the resulting context.
-- B. Delete any older resource whose name resembles the new run ID.
-- C. Create the baseline immediately and request approval only before cleanup.
-- D. Display the context, intended changes, cost and gated branches without mutating Azure.
+- A. The rule metadata names a secret that is not defined for the container app.
+- B. The new revision never becomes ready, so the earlier revision remains serving traffic.
+- C. minReplicas is zero even though the workload requires one continuously warm instance.
+- D. External ingress was enabled for a service intended to be reachable only inside the environment.
 
 ## LAB14-Q39 — Applied
 
-A configuration owner must approve one response to this scenario: Which implementation step should the learner perform for 'Provision a container by using Azure Container Apps'?
+The revision rollout support team isolated the revisioned serverless container release incident to the attempt to translate HTTP or event demand into a desired replica count. Which condition prevents success?
 
-- A. Create a new revision by changing an environment variable and split traffic deliberately.
-- B. Skip the operation and edit validation.json to show a passing result.
-- C. Replace the lab action with a tenant-wide change that is easier to discover.
-- D. Copy resource identifiers from another run instead of recording returned IDs.
+- A. The rule metadata names a secret that is not defined for the container app.
+- B. The environment variable contains the literal credential instead of a secret reference.
+- C. The app remains in single revision mode while the runbook attempts a traffic split.
+- D. minReplicas is zero even though the workload requires one continuously warm instance.
 
 ## LAB14-Q40 — Applied
 
-Within Lab 14, the team evaluates this scenario: During post-deployment verification, the team reviews this situation: A learner previews the implementation for 'Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps'. What behavior is required?
+A revisioned serverless container release query surprises the platform administrator releasing a revisioned serverless container app during the revision rollout attempt to reference sensitive configuration without placing the clear value in ordinary settings. Which finding explains it?
 
-- A. Create the baseline immediately and request approval only before cleanup.
-- B. Display the context, intended changes, cost and gated branches without mutating Azure.
-- C. Select the first accessible subscription and hide the resulting context.
-- D. Delete any older resource whose name resembles the new run ID.
+- A. The app deployment references an environment in a different region.
+- B. The environment variable contains the literal credential instead of a secret reference.
+- C. The configured traffic weights total more than 100 percent.
+- D. The rule metadata names a secret that is not defined for the container app.
 
 ## LAB14-Q41 — Advanced
 
-Within Lab 14, the team evaluates this scenario: Validation for 'Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps' fails after setup. What is the best break/fix method?
+The revisioned serverless container release checkpoint requires both this revision rollout outcome—place related apps inside one networking and logging boundary—and a read-only revisioned serverless container release state check. Which revision rollout response is complete?
 
-- A. Change validation.json directly so the failed result reads pass.
-- B. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- C. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-- D. Rerun setup repeatedly with new names until one attempt appears successful.
+- A. First, Use single mode for straightforward replacement without simultaneous version traffic. Then, Query activeRevisionsMode and confirm exactly the intended latest revision is active.
+- B. First, Create or select the managed environment before deploying the container app into it. Then, Query managedEnvironmentId, provisioningState, defaultDomain, and logging configuration.
+- C. First, Choose internal or external ingress from the approved client reachability requirement. Then, Query ingress.external, fqdn, transport, and targetPort, then test from an appropriate network location.
+- D. First, Set minReplicas and maxReplicas from availability, cold-start, cost, and capacity constraints. Then, Query the active revision template scale bounds and current replica count.
 
 ## LAB14-Q42 — Advanced
 
-Within Lab 14, the team evaluates this scenario: During root-cause analysis, the team must resolve this question: Validation for 'Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps' fails after setup. What is the best break/fix method?
+The revisioned serverless container release runbook must preserve an immutable snapshot whenever revision-scoped configuration changes, then retain revision rollout read-back evidence. Which revisioned serverless container release pair completes both duties?
 
-- A. Rerun setup repeatedly with new names until one attempt appears successful.
-- B. Change validation.json directly so the failed result reads pass.
-- C. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- D. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+- A. First, Enable multiple mode before configuring canary or blue-green traffic weights. Then, List active revisions and confirm their combined traffic percentages equal 100.
+- B. First, Set minReplicas and maxReplicas from availability, cold-start, cost, and capacity constraints. Then, Query the active revision template scale bounds and current replica count.
+- C. First, Deploy the updated image or revision-scope settings and retain the resulting revision name. Then, List revisions and compare image, createdTime, active state, health, and traffic weight.
+- D. First, Configure a rule with the correct type, metadata, authentication references, and scale bounds. Then, Query the revision's scale rules and inspect replica changes while generating controlled demand.
 
 ## LAB14-Q43 — Advanced
 
-Within Lab 14, the team evaluates this scenario: A security and reliability review identifies this design decision: Validation for 'Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps' fails after setup. What is the best break/fix method?
+To satisfy the revision rollout requirement, operators must change the revisioned serverless container release configuration and prove it can move production to the newest ready version and retire the preceding active version. Which sequence is coherent?
 
-- A. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-- B. Rerun setup repeatedly with new names until one attempt appears successful.
-- C. Change validation.json directly so the failed result reads pass.
-- D. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+- A. First, Assign an explicit small canary weight and keep the stable revision at the remaining percentage. Then, Query ingress.traffic and match revision names, labels, and exact weights.
+- B. First, Use single mode for straightforward replacement without simultaneous version traffic. Then, Query activeRevisionsMode and confirm exactly the intended latest revision is active.
+- C. First, Configure a rule with the correct type, metadata, authentication references, and scale bounds. Then, Query the revision's scale rules and inspect replica changes while generating controlled demand.
+- D. First, Create the secret through a secure input path and reference its name from the container configuration. Then, Query secret references and confirm command output does not reveal the stored secret value.
 
 ## LAB14-Q44 — Advanced
 
-Within Lab 14, the team evaluates this scenario: While diagnosing unexpected Azure behavior, the engineer considers this situation: Validation for 'Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps' fails after setup. What is the best break/fix method?
+The platform administrator releasing a revisioned serverless container app needs a safe revisioned serverless container release change to keep several versions active at the same time, followed by revision rollout evidence. Which pair merits approval?
 
-- A. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- B. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-- C. Rerun setup repeatedly with new names until one attempt appears successful.
-- D. Change validation.json directly so the failed result reads pass.
+- A. First, Enable ingress with a target port that matches the application's listener. Then, Query ingress.targetPort and compare it with container startup logs and probe configuration.
+- B. First, Enable multiple mode before configuring canary or blue-green traffic weights. Then, List active revisions and confirm their combined traffic percentages equal 100.
+- C. First, Create the secret through a secure input path and reference its name from the container configuration. Then, Query secret references and confirm command output does not reveal the stored secret value.
+- D. First, Create or select the managed environment before deploying the container app into it. Then, Query managedEnvironmentId, provisioningState, defaultDomain, and logging configuration.
 
 ## LAB14-Q45 — Advanced
 
-Within Lab 14, the team evaluates this scenario: An architecture review requires the strongest response to this scenario: Validation for 'Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps' fails after setup. What is the best break/fix method?
+The revisioned serverless container release has two revision rollout gates: send controlled percentages of requests to two active versions, then prove the revisioned serverless container release state. Which revision rollout sequence works?
 
-- A. Change validation.json directly so the failed result reads pass.
-- B. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- C. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-- D. Rerun setup repeatedly with new names until one attempt appears successful.
+- A. First, Assign an explicit small canary weight and keep the stable revision at the remaining percentage. Then, Query ingress.traffic and match revision names, labels, and exact weights.
+- B. First, Choose internal or external ingress from the approved client reachability requirement. Then, Query ingress.external, fqdn, transport, and targetPort, then test from an appropriate network location.
+- C. First, Create or select the managed environment before deploying the container app into it. Then, Query managedEnvironmentId, provisioningState, defaultDomain, and logging configuration.
+- D. First, Deploy the updated image or revision-scope settings and retain the resulting revision name. Then, List revisions and compare image, createdTime, active state, health, and traffic weight.
 
 ## LAB14-Q46 — Advanced
 
-Within Lab 14, the team evaluates this scenario: During break/fix validation, the operator encounters this question: Validation for 'Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps' fails after setup. What is the best break/fix method?
+Which revision rollout path makes the revisioned serverless container release able to route ingress to the port on which the container process actually listens, then inspects the defining properties?
 
-- A. Rerun setup repeatedly with new names until one attempt appears successful.
-- B. Change validation.json directly so the failed result reads pass.
-- C. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- D. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+- A. First, Set minReplicas and maxReplicas from availability, cold-start, cost, and capacity constraints. Then, Query the active revision template scale bounds and current replica count.
+- B. First, Deploy the updated image or revision-scope settings and retain the resulting revision name. Then, List revisions and compare image, createdTime, active state, health, and traffic weight.
+- C. First, Use single mode for straightforward replacement without simultaneous version traffic. Then, Query activeRevisionsMode and confirm exactly the intended latest revision is active.
+- D. First, Enable ingress with a target port that matches the application's listener. Then, Query ingress.targetPort and compare it with container startup logs and probe configuration.
 
 ## LAB14-Q47 — Advanced
 
-Within Lab 14, the team evaluates this scenario: A complex support case depends on correctly interpreting this requirement: Validation for 'Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps' fails after setup. What is the best break/fix method?
+At the revisioned serverless container release approval gate, operators must show that the revision rollout can choose whether the application endpoint is externally reachable or environment-internal. Which revision rollout configure-and-check pair is defensible?
 
-- A. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-- B. Rerun setup repeatedly with new names until one attempt appears successful.
-- C. Change validation.json directly so the failed result reads pass.
-- D. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+- A. First, Choose internal or external ingress from the approved client reachability requirement. Then, Query ingress.external, fqdn, transport, and targetPort, then test from an appropriate network location.
+- B. First, Configure a rule with the correct type, metadata, authentication references, and scale bounds. Then, Query the revision's scale rules and inspect replica changes while generating controlled demand.
+- C. First, Use single mode for straightforward replacement without simultaneous version traffic. Then, Query activeRevisionsMode and confirm exactly the intended latest revision is active.
+- D. First, Enable multiple mode before configuring canary or blue-green traffic weights. Then, List active revisions and confirm their combined traffic percentages equal 100.
 
 ## LAB14-Q48 — Advanced
 
-Within Lab 14, the team evaluates this scenario: While correcting configuration drift, the team evaluates this scenario: Validation for 'Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps' fails after setup. What is the best break/fix method?
+The revisioned serverless container release forbids a partial revision rollout result. Operators must first keep required warm capacity while setting an upper scale limit and afterward confirm the revisioned serverless container release outcome. Which revision rollout sequence is complete?
 
-- A. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- B. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-- C. Rerun setup repeatedly with new names until one attempt appears successful.
-- D. Change validation.json directly so the failed result reads pass.
+- A. First, Create the secret through a secure input path and reference its name from the container configuration. Then, Query secret references and confirm command output does not reveal the stored secret value.
+- B. First, Enable multiple mode before configuring canary or blue-green traffic weights. Then, List active revisions and confirm their combined traffic percentages equal 100.
+- C. First, Assign an explicit small canary weight and keep the stable revision at the remaining percentage. Then, Query ingress.traffic and match revision names, labels, and exact weights.
+- D. First, Set minReplicas and maxReplicas from availability, cold-start, cost, and capacity constraints. Then, Query the active revision template scale bounds and current replica count.
 
 ## LAB14-Q49 — Advanced
 
-Within Lab 14, the team evaluates this scenario: A recovery exercise exposes the following technical decision: Validation for 'Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps' fails after setup. What is the best break/fix method?
+Only the revisioned serverless container release change needed to translate HTTP or event demand into a desired replica count is allowed, and revision rollout proof is mandatory. Which pair fits?
 
-- A. Change validation.json directly so the failed result reads pass.
-- B. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- C. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
-- D. Rerun setup repeatedly with new names until one attempt appears successful.
+- A. First, Create or select the managed environment before deploying the container app into it. Then, Query managedEnvironmentId, provisioningState, defaultDomain, and logging configuration.
+- B. First, Assign an explicit small canary weight and keep the stable revision at the remaining percentage. Then, Query ingress.traffic and match revision names, labels, and exact weights.
+- C. First, Configure a rule with the correct type, metadata, authentication references, and scale bounds. Then, Query the revision's scale rules and inspect replica changes while generating controlled demand.
+- D. First, Enable ingress with a target port that matches the application's listener. Then, Query ingress.targetPort and compare it with container startup logs and probe configuration.
 
 ## LAB14-Q50 — Advanced
 
-Within Lab 14, the team evaluates this scenario: During final design assurance, the reviewer must resolve this situation: Validation for 'Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps' fails after setup. What is the best break/fix method?
+The revisioned serverless container release runbook separates revision rollout mutation from validation while it must reference sensitive configuration without placing the clear value in ordinary settings. Which sequence proves it cleanly?
 
-- A. Rerun setup repeatedly with new names until one attempt appears successful.
-- B. Change validation.json directly so the failed result reads pass.
-- C. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
-- D. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+- A. First, Deploy the updated image or revision-scope settings and retain the resulting revision name. Then, List revisions and compare image, createdTime, active state, health, and traffic weight.
+- B. First, Enable ingress with a target port that matches the application's listener. Then, Query ingress.targetPort and compare it with container startup logs and probe configuration.
+- C. First, Choose internal or external ingress from the approved client reachability requirement. Then, Query ingress.external, fqdn, transport, and targetPort, then test from an appropriate network location.
+- D. First, Create the secret through a secure input path and reference its name from the container configuration. Then, Query secret references and confirm command output does not reveal the stored secret value.
+
+[Open the answer key](./ANSWERS.md)

@@ -1,15 +1,15 @@
 flowchart LR
-    A["Operator<br/>Azure CLI"] --> P["Preview and preflight"]
-    P --> S["Recorded Lab 17 boundary"]
-    S --> R1["resource group"]
-    S --> R2["two virtual networks"]
-    S --> R3["four subnets"]
-    S --> R4["bidirectional peering"]
-    S --> R5["Standard public IP"]
-    S --> V["Independent validation"]
-    V --> E["Redacted command evidence"]
-    V --> C["Previewed cleanup"]
+    A["Operator and Azure CLI"] --> H["Hub VNet"]
+    H --> HP["Hub-to-spoke peering"]
+    HP --> S["Spoke VNet and subnets"]
+    S --> SP["Spoke-to-hub peering"]
+    SP --> H
+    P["Standard static public IP"] --> E["Controlled public edge"]
+    H --> V["CIDR and peering assertions"]
+    S --> V
+    E --> V
+    V --> C["Peering before VNet cleanup"]
     classDef control fill:#e8f1ff,stroke:#2563eb,color:#102a43;
     classDef resource fill:#e9f8ef,stroke:#16803a,color:#102a43;
-    class A,P,S,V,E,C control;
-    class R1,R2,R3,R4,R5 resource;
+    class A,V,C control;
+    class H,HP,S,SP,P,E resource;
