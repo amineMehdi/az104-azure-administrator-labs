@@ -4,140 +4,140 @@ Return to [the questions](QUESTIONS.md).
 
 ## 1. A (`LAB21-Q01`)
 
-The lab's central distinction is: A load-balancing rule depends on a healthy probe and reachable backend, while Network Watcher distinguishes DNS, routing, NSG, guest firewall, and application-listener failures.
+The lab establishes this design principle: A load-balancing rule depends on a healthy probe and reachable backend, while Network Watcher distinguishes DNS, routing, NSG, guest firewall, and application-listener failures.
 
 Objectives: NW-VNET-05
 
 Why the other choices do not fit:
 
-- **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
+- **B:** This choice changes or trusts a broader scope than the recorded lab boundary.
+- **C:** This choice skips independent evidence or relies on ambiguous resource identity.
+- **D:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
 
 Source: <https://learn.microsoft.com/en-us/azure/load-balancer/quickstart-load-balancer-standard-public-powershell>
 
 ## 2. B (`LAB21-Q02`)
 
-The first implementation checkpoint is: Create two backend NICs/VMs in an NSG-protected subnet without individual public IPs.
+The reviewed hands-on action for this objective is: Create a Standard public load balancer, backend pool, TCP probe, and frontend rule.
 
 Objectives: NW-DNSLB-02
 
 Why the other choices do not fit:
 
-- **A:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
+- **A:** This choice changes or trusts a broader scope than the recorded lab boundary.
+- **C:** This choice skips independent evidence or relies on ambiguous resource identity.
+- **D:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
 
 Source: <https://learn.microsoft.com/en-us/azure/load-balancer/load-balancer-troubleshoot-health-probe-status>
 
 ## 3. C (`LAB21-Q03`)
 
-The documented permission boundary is Network Contributor and Virtual Machine Contributor on the lab resource group
+Least privilege requires the documented boundary: Network Contributor and Virtual Machine Contributor on the lab resource group
 
 Objectives: NW-DNSLB-03
 
 Why the other choices do not fit:
 
-- **A:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
+- **A:** This choice changes or trusts a broader scope than the recorded lab boundary.
+- **B:** This choice skips independent evidence or relies on ambiguous resource identity.
+- **D:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
 
 Source: <https://learn.microsoft.com/en-us/azure/network-watcher/connection-troubleshoot-overview>
 
 ## 4. D (`LAB21-Q04`)
 
-Preview-first behavior makes the default invocation non-mutating; execution requires an explicit switch.
-
-Objectives: MR-MONITOR-06
-
-Why the other choices do not fit:
-
-- **A:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-
-Source: <https://learn.microsoft.com/en-us/azure/network-watcher/connection-monitor-overview>
-
-## 5. A (`LAB21-Q05`)
-
-Validation must use the recorded scope and test the intended state independently of setup.
+Preview mode is deliberately non-mutating and exposes the complete intended boundary.
 
 Objectives: NW-VNET-05
 
 Why the other choices do not fit:
 
-- **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
+- **A:** This choice changes or trusts a broader scope than the recorded lab boundary.
+- **B:** This choice skips independent evidence or relies on ambiguous resource identity.
+- **C:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
 
-Source: <https://learn.microsoft.com/en-us/azure/load-balancer/quickstart-load-balancer-standard-public-powershell>
+Source: <https://learn.microsoft.com/en-us/azure/network-watcher/connection-monitor-overview>
 
-## 6. B (`LAB21-Q06`)
+## 5. A (`LAB21-Q05`)
 
-The live-only gate is explicit and must not be guessed: None beyond the declared role and a disposable subscription.
+The lab's reviewed command path performs this bounded action: Create two backend NICs/VMs in an NSG-protected subnet without individual public IPs.
 
 Objectives: NW-DNSLB-02
 
 Why the other choices do not fit:
 
-- **A:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
+- **B:** This choice changes or trusts a broader scope than the recorded lab boundary.
+- **C:** This choice skips independent evidence or relies on ambiguous resource identity.
+- **D:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
 
-Source: <https://learn.microsoft.com/en-us/azure/load-balancer/load-balancer-troubleshoot-health-probe-status>
+Source: <https://learn.microsoft.com/en-us/azure/load-balancer/quickstart-load-balancer-standard-public-powershell>
 
-## 7. C (`LAB21-Q07`)
+## 6. B (`LAB21-Q06`)
 
-Command evidence must come from the recorded run, exclude secrets and identifiers, and prove the intended state independently of setup.
+The independent validation path must prove Microsoft.Network/networkWatchers for the exact recorded object.
 
 Objectives: NW-DNSLB-03
 
 Why the other choices do not fit:
 
-- **A:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
+- **A:** This choice changes or trusts a broader scope than the recorded lab boundary.
+- **C:** This choice skips independent evidence or relies on ambiguous resource identity.
+- **D:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+
+Source: <https://learn.microsoft.com/en-us/azure/load-balancer/load-balancer-troubleshoot-health-probe-status>
+
+## 7. C (`LAB21-Q07`)
+
+Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared role and a disposable subscription.
+
+Objectives: NW-VNET-05
+
+Why the other choices do not fit:
+
+- **A:** This choice changes or trusts a broader scope than the recorded lab boundary.
+- **B:** This choice skips independent evidence or relies on ambiguous resource identity.
+- **D:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
 
 Source: <https://learn.microsoft.com/en-us/azure/network-watcher/connection-troubleshoot-overview>
 
 ## 8. D (`LAB21-Q08`)
 
-Recorded immutable IDs plus ownership tags provide the narrow, auditable cleanup boundary.
+Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
 
-Objectives: MR-MONITOR-06, NW-VNET-05
+Objectives: NW-DNSLB-02
 
 Why the other choices do not fit:
 
-- **A:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
+- **A:** This choice changes or trusts a broader scope than the recorded lab boundary.
+- **B:** This choice skips independent evidence or relies on ambiguous resource identity.
+- **C:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
 
 Source: <https://learn.microsoft.com/en-us/azure/network-watcher/connection-monitor-overview>
 
 ## 9. A (`LAB21-Q09`)
 
-Evidence-led repair limits drift and preserves the diagnostic value of an independent validator.
+Evidence-led repair preserves scope and makes the cause and correction auditable.
 
-Objectives: NW-VNET-05, NW-DNSLB-02
+Objectives: NW-DNSLB-03, NW-VNET-05
 
 Why the other choices do not fit:
 
-- **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
+- **B:** This choice changes or trusts a broader scope than the recorded lab boundary.
+- **C:** This choice skips independent evidence or relies on ambiguous resource identity.
+- **D:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
 
 Source: <https://learn.microsoft.com/en-us/azure/load-balancer/quickstart-load-balancer-standard-public-powershell>
 
 ## 10. B (`LAB21-Q10`)
 
-Offline validation proves artifact quality and safety contracts, not live service behavior.
+Accepted requests and offline checks do not prove the final live state.
 
-Objectives: NW-DNSLB-02, NW-DNSLB-03
+Objectives: NW-VNET-05, NW-DNSLB-02
 
 Why the other choices do not fit:
 
-- **A:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
+- **A:** This choice changes or trusts a broader scope than the recorded lab boundary.
+- **C:** This choice skips independent evidence or relies on ambiguous resource identity.
+- **D:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
 
 Source: <https://learn.microsoft.com/en-us/azure/load-balancer/load-balancer-troubleshoot-health-probe-status>

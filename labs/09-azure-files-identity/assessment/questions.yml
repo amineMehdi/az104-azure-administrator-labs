@@ -2,26 +2,23 @@
   objectiveIds:
   - ST-ACCESS-05
   difficulty: foundational
-  stem: Which statement best captures the key design principle for configure azure files, snapshots, soft delete,
-    and identity access?
+  stem: Which principle is most important when working on 'Configure identity-based access for Azure Files' in Lab
+    09?
   options:
-    A: Share snapshots and soft delete solve different recovery problems, while identity-based SMB authentication
+    A: The shortest command is always correct even when it changes a broader scope.
+    B: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+    C: Share snapshots and soft delete solve different recovery problems, while identity-based SMB authentication
       requires an approved directory source and data-plane authorization.
-    B: Every related control is interchangeable, so choose whichever command is shortest.
-    C: A command surface automatically supplies any missing authorization or configuration.
-    D: Cleanup evidence is unnecessary when a resource group has a recognizable name.
-  correctOption: A
-  explanation: 'The lab''s central distinction is: Share snapshots and soft delete solve different recovery problems,
-    while identity-based SMB authentication requires an approved directory source and data-plane authorization.'
+    D: A recognizable resource name removes the need for validation and scoped cleanup.
+  correctOption: C
+  explanation: 'The lab establishes this design principle: Share snapshots and soft delete solve different recovery
+    problems, while identity-based SMB authentication requires an approved directory source and data-plane authorization.'
   distractorExplanations:
-    A: 'Correct. The lab''s central distinction is: Share snapshots and soft delete solve different recovery problems,
-      while identity-based SMB authentication requires an approved directory source and data-plane authorization.'
-    B: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    C: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    D: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: 'Correct. The lab establishes this design principle: Share snapshots and soft delete solve different recovery
+      problems, while identity-based SMB authentication requires an approved directory source and data-plane authorization.'
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/storage/files/storage-how-to-create-file-share
   lastVerified: '2026-08-30'
@@ -29,25 +26,21 @@
   objectiveIds:
   - ST-ACCOUNTS-05
   difficulty: foundational
-  stem: You must begin the hands-on path for 'Configure identity-based access for Azure Files'. Which action matches
-    the reviewed lab sequence?
+  stem: Which lab action directly supports the objective 'Manage data by using Azure Storage Explorer and AzCopy'?
   options:
-    A: Delete similarly named resources before recording the current subscription.
-    B: Create a secure StorageV2 account and transaction-optimized file share with quota.
-    C: Change the active tenant automatically and continue without displaying the new context.
-    D: Infer configuration from resource names without querying the live control plane.
-  correctOption: B
-  explanation: 'The first implementation checkpoint is: Create a secure StorageV2 account and transaction-optimized
-    file share with quota.'
+    A: Change the active tenant without displaying or confirming the resulting context.
+    B: Search the whole tenant for a similar display name and modify the first match.
+    C: Mark the objective complete after reading documentation without checking any state.
+    D: Enable Azure Files share soft delete and create a point-in-time share snapshot.
+  correctOption: D
+  explanation: 'The reviewed hands-on action for this objective is: Enable Azure Files share soft delete and create
+    a point-in-time share snapshot.'
   distractorExplanations:
-    A: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    B: 'Correct. The first implementation checkpoint is: Create a secure StorageV2 account and transaction-optimized
-      file share with quota.'
-    C: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    D: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: 'Correct. The reviewed hands-on action for this objective is: Enable Azure Files share soft delete and create
+      a point-in-time share snapshot.'
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/storage/files/storage-snapshots-files
   lastVerified: '2026-08-30'
@@ -55,26 +48,23 @@
   objectiveIds:
   - ST-DATA-01
   difficulty: foundational
-  stem: Which authorization statement is appropriate before creating resource group, storage account, Azure file
-    share in this lab?
+  stem: Which authorization approach is appropriate before practicing 'Create and configure a file share in Azure
+    Files'?
   options:
-    A: Subscription Reader is sufficient for every create, update, role, policy, and recovery operation.
-    B: A local administrator account automatically grants Microsoft Entra and Azure permissions.
-    C: 'Confirm the active context and obtain only the declared role boundary: Contributor and Storage File Data
-      SMB Share Contributor; directory permissions for the optional identity-source path'
-    D: Skip authorization checks because all resources use an AZ104 naming prefix.
-  correctOption: C
-  explanation: The documented permission boundary is Contributor and Storage File Data SMB Share Contributor; directory
-    permissions for the optional identity-source path
+    A: 'Confirm the active context and use only the declared role boundary: Contributor and Storage File Data SMB
+      Share Contributor; directory permissions for the optional identity-source path'
+    B: Use a production subscription because its resources already exist.
+    C: Assign Global Administrator and subscription Owner for every lab regardless of the operation.
+    D: Skip role checks when the run ID contains the lab number.
+  correctOption: A
+  explanation: 'Least privilege requires the documented boundary: Contributor and Storage File Data SMB Share Contributor;
+    directory permissions for the optional identity-source path'
   distractorExplanations:
-    A: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    B: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    C: Correct. The documented permission boundary is Contributor and Storage File Data SMB Share Contributor; directory
-      permissions for the optional identity-source path
-    D: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
+    A: 'Correct. Least privilege requires the documented boundary: Contributor and Storage File Data SMB Share Contributor;
+      directory permissions for the optional identity-source path'
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/storage/files/storage-files-prevent-file-share-deletion
   lastVerified: '2026-08-30'
@@ -82,24 +72,20 @@
   objectiveIds:
   - ST-DATA-05
   difficulty: applied
-  stem: The setup command for Lab 09 is run without its execution switch. What should happen?
+  stem: A learner previews the implementation for 'Configure snapshots and soft delete for Azure Files'. What behavior
+    is required?
   options:
-    A: It should deploy everything and ask for confirmation only before cleanup.
-    B: It should log in interactively and select the first available subscription.
-    C: It should delete any older run that shares the same lab number.
-    D: It should print the intended resources, context, cost class, and gates without changing Azure.
-  correctOption: D
-  explanation: Preview-first behavior makes the default invocation non-mutating; execution requires an explicit
-    switch.
+    A: Create the baseline immediately and request approval only before cleanup.
+    B: Display the context, intended changes, cost and gated branches without mutating Azure.
+    C: Select the first accessible subscription and hide the resulting context.
+    D: Delete any older resource whose name resembles the new run ID.
+  correctOption: B
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
   distractorExplanations:
-    A: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    B: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    C: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    D: Correct. Preview-first behavior makes the default invocation non-mutating; execution requires an explicit
-      switch.
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/storage/files/storage-files-active-directory-overview
   lastVerified: '2026-08-30'
@@ -107,23 +93,21 @@
   objectiveIds:
   - ST-ACCESS-05
   difficulty: applied
-  stem: Which validation evidence most directly proves the baseline resource boundary for Lab 09?
+  stem: Which implementation step should the learner perform for 'Configure identity-based access for Azure Files'?
   options:
-    A: Query the exact recorded scope and verify the intended resource/object types, including Microsoft.Storage/storageAccounts,
-      Microsoft.Storage/storageAccounts/fileServices/shares.
-    B: Search the whole tenant by display-name prefix and accept the first match.
-    C: Treat a successful setup process exit code as proof of every data-plane and relationship requirement.
-    D: Verify only that an Azure subscription exists.
-  correctOption: A
-  explanation: Validation must use the recorded scope and test the intended state independently of setup.
+    A: Replace the lab action with a tenant-wide change that is easier to discover.
+    B: Copy resource identifiers from another run instead of recording returned IDs.
+    C: Create a secure StorageV2 account and transaction-optimized file share with quota.
+    D: Skip the operation and edit validation.json to show a passing result.
+  correctOption: C
+  explanation: 'The lab''s reviewed command path performs this bounded action: Create a secure StorageV2 account
+    and transaction-optimized file share with quota.'
   distractorExplanations:
-    A: Correct. Validation must use the recorded scope and test the intended state independently of setup.
-    B: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    C: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    D: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: 'Correct. The lab''s reviewed command path performs this bounded action: Create a secure StorageV2 account
+      and transaction-optimized file share with quota.'
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-files
   lastVerified: '2026-08-30'
@@ -131,26 +115,22 @@
   objectiveIds:
   - ST-ACCOUNTS-05
   difficulty: applied
-  stem: A learner reaches the externally gated checkpoint in Lab 09. What is the safest response?
+  stem: Which evidence most directly validates 'Manage data by using Azure Storage Explorer and AzCopy' for storage
+    account?
   options:
-    A: Invent a placeholder tenant, email address, domain, or production target and continue.
-    B: 'Stop that branch unless its prerequisites are explicitly satisfied: Identity-based SMB configuration is
-      gated by AZ104_FILES_IDENTITY_SOURCE because Entra Kerberos, AD DS, and Entra Domain Services have different
-      prerequisites.'
-    C: Broaden the assignment to subscription scope so the gate no longer applies.
-    D: Mark the checkpoint as passed because the offline tests succeeded.
-  correctOption: B
-  explanation: 'The live-only gate is explicit and must not be guessed: Identity-based SMB configuration is gated
-    by AZ104_FILES_IDENTITY_SOURCE because Entra Kerberos, AD DS, and Entra Domain Services have different prerequisites.'
+    A: Treat the setup exit code as proof of every configuration and relationship.
+    B: List the entire subscription and assume similarly named resources belong to this run.
+    C: Record a credential so another learner can replay the authenticated session.
+    D: Query the exact recorded scope and independently verify Microsoft.Storage/storageAccounts/fileServices/shares.
+  correctOption: D
+  explanation: The independent validation path must prove Microsoft.Storage/storageAccounts/fileServices/shares
+    for the exact recorded object.
   distractorExplanations:
-    A: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    B: 'Correct. The live-only gate is explicit and must not be guessed: Identity-based SMB configuration is gated
-      by AZ104_FILES_IDENTITY_SOURCE because Entra Kerberos, AD DS, and Entra Domain Services have different prerequisites.'
-    C: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    D: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: Correct. The independent validation path must prove Microsoft.Storage/storageAccounts/fileServices/shares
+      for the exact recorded object.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/storage/files/storage-how-to-create-file-share
   lastVerified: '2026-08-30'
@@ -158,73 +138,66 @@
   objectiveIds:
   - ST-DATA-01
   difficulty: applied
-  stem: Which command-side evidence best supports the first completed checkpoint in Lab 09?
+  stem: The 'Create and configure a file share in Azure Files' checkpoint reaches an external prerequisite. What
+    should happen?
   options:
-    A: Copy a successful command from an unrelated tenant and treat it as this run's evidence.
-    B: Record access tokens and keys so another learner can replay the same session.
-    C: 'Run the independent validator and retain redacted structured output for the exact recorded scope after:
-      Create a secure StorageV2 account and transaction-optimized file share with quota.'
-    D: Use the setup process exit code alone without querying resource state.
-  correctOption: C
-  explanation: Command evidence must come from the recorded run, exclude secrets and identifiers, and prove the
-    intended state independently of setup.
+    A: 'Run the branch only when this documented gate is satisfied: Identity-based SMB configuration is gated by
+      AZ104_FILES_IDENTITY_SOURCE because Entra Kerberos, AD DS, and Entra Domain Services have different prerequisites.'
+    B: Invent a domain, notification target, license, quota, or tenant value and continue.
+    C: Broaden permissions until the prerequisite can no longer block the operation.
+    D: Mark the branch passed because its command syntax was checked offline.
+  correctOption: A
+  explanation: 'Unavailable live prerequisites remain skipped or partial; the documented gate is: Identity-based
+    SMB configuration is gated by AZ104_FILES_IDENTITY_SOURCE because Entra Kerberos, AD DS, and Entra Domain Services
+    have different prerequisites.'
   distractorExplanations:
-    A: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    B: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    C: Correct. Command evidence must come from the recorded run, exclude secrets and identifiers, and prove the
-      intended state independently of setup.
-    D: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
+    A: 'Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: Identity-based
+      SMB configuration is gated by AZ104_FILES_IDENTITY_SOURCE because Entra Kerberos, AD DS, and Entra Domain
+      Services have different prerequisites.'
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/storage/files/storage-snapshots-files
   lastVerified: '2026-08-30'
 - id: LAB09-Q08
   objectiveIds:
   - ST-DATA-05
-  - ST-ACCESS-05
   difficulty: applied
-  stem: During cleanup of Lab 09, several similarly named resources exist. Which targeting method is correct?
+  stem: What is the safest command-evidence practice after completing 'Configure snapshots and soft delete for Azure
+    Files'?
   options:
-    A: Delete every resource whose name contains az104.
-    B: Delete the active subscription to guarantee that no lab resources remain.
-    C: Use creation timestamps alone and remove the oldest matching resources.
-    D: Use the exact IDs and run metadata recorded before creation, verify the lab tags, then delete only that boundary.
-  correctOption: D
-  explanation: Recorded immutable IDs plus ownership tags provide the narrow, auditable cleanup boundary.
+    A: Commit the complete account object so reviewers can identify the tenant.
+    B: Retain only redacted structured output from an independent query of the recorded run.
+    C: Save tokens, keys, passwords, or SAS values beside the validation result.
+    D: Reuse successful output from an earlier run with a similar resource name.
+  correctOption: B
+  explanation: Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
   distractorExplanations:
-    A: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    B: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    C: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    D: Correct. Recorded immutable IDs plus ownership tags provide the narrow, auditable cleanup boundary.
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: Correct. Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/storage/files/storage-files-prevent-file-share-deletion
   lastVerified: '2026-08-30'
 - id: LAB09-Q09
   objectiveIds:
   - ST-ACCESS-05
-  - ST-ACCOUNTS-05
-  difficulty: advanced
-  stem: Setup completed for Lab 09, but one required state check fails. What is the best break/fix approach?
+  difficulty: applied
+  stem: Which negative check strengthens validation of 'Configure identity-based access for Azure Files'?
   options:
-    A: Inspect the failing check and exact recorded resource, repair the smallest identified cause, then rerun validation.
-    B: Rerun setup repeatedly with new names until one run reports no error.
-    C: Edit validation.json so the failed status reads pass.
-    D: Disable all policies, locks, NSGs, and monitoring controls in the subscription.
-  correctOption: A
-  explanation: Evidence-led repair limits drift and preserves the diagnostic value of an independent validator.
+    A: Check only that at least one resource exists in the subscription.
+    B: Repair every warning automatically before recording what caused it.
+    C: Confirm the intended state and also prove that broader, anonymous, or unintended access was not introduced.
+    D: Ignore denied queries and record them as passing checks.
+  correctOption: C
+  explanation: A bounded negative assertion detects accidental privilege or exposure beyond the intended state.
   distractorExplanations:
-    A: Correct. Evidence-led repair limits drift and preserves the diagnostic value of an independent validator.
-    B: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    C: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    D: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: Correct. A bounded negative assertion detects accidental privilege or exposure beyond the intended state.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/storage/files/storage-files-active-directory-overview
   lastVerified: '2026-08-30'
@@ -233,23 +206,65 @@
   - ST-ACCOUNTS-05
   - ST-DATA-01
   difficulty: advanced
-  stem: Which completion claim is valid immediately after this repository's offline tests pass for Lab 09?
+  stem: Validation for 'Manage data by using Azure Storage Explorer and AzCopy' fails after setup. What is the best
+    break/fix method?
   options:
-    A: Every command has been proven in every Azure region and tenant type.
-    B: The documentation, schemas, script contracts, assessments, diagrams, and fixtures are offline-validated;
-      live Azure state remains pending until executed.
-    C: The lab is live-verified even if no subscription was used.
-    D: Any pending gated checkpoint can be treated as successfully completed.
-  correctOption: B
-  explanation: Offline validation proves artifact quality and safety contracts, not live service behavior.
+    A: Rerun setup repeatedly with new names until one attempt appears successful.
+    B: Change validation.json directly so the failed result reads pass.
+    C: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+    D: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+  correctOption: D
+  explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
   distractorExplanations:
-    A: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    B: Correct. Offline validation proves artifact quality and safety contracts, not live service behavior.
-    C: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    D: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-files
+  lastVerified: '2026-08-30'
+- id: LAB09-Q11
+  objectiveIds:
+  - ST-DATA-01
+  - ST-DATA-05
+  difficulty: advanced
+  stem: The operation for 'Create and configure a file share in Azure Files' is asynchronous or gated. How should
+    completion be recorded?
+  options:
+    A: Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence
+      exists.
+    B: Record pass as soon as the request is accepted, regardless of its final state.
+    C: Fabricate expected output so the assessment and documentation appear complete.
+    D: Remove the check from validation whenever the service takes longer than expected.
+  correctOption: A
+  explanation: Accepted requests and offline checks do not prove the final live state.
+  distractorExplanations:
+    A: Correct. Accepted requests and offline checks do not prove the final live state.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/storage/files/storage-how-to-create-file-share
+  lastVerified: '2026-08-30'
+- id: LAB09-Q12
+  objectiveIds:
+  - ST-DATA-05
+  - ST-ACCESS-05
+  difficulty: advanced
+  stem: An administrator discovers drift while validating 'Configure snapshots and soft delete for Azure Files'.
+    Which response preserves least privilege?
+  options:
+    A: Grant subscription Owner and tenant administrator roles to avoid further authorization errors.
+    B: Compare the live query with the recorded expectation, change only the mismatched setting, and validate again.
+    C: Replace every resource in the subscription instead of identifying the mismatch.
+    D: Accept the drift when the resource name still matches the lab prefix.
+  correctOption: B
+  explanation: The narrowest evidence-supported correction avoids unrelated changes and excess privilege.
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: Correct. The narrowest evidence-supported correction avoids unrelated changes and excess privilege.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/storage/files/storage-snapshots-files
   lastVerified: '2026-08-30'

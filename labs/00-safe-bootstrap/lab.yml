@@ -69,8 +69,8 @@ cleanup:
   localOnly: true
   reportOnlyByDefault: true
   requiresExecuteFlag: true
-screenshots:
-  status: pending
-  manifest: images/portal/manifest.yml
+assessment:
+  enabled: false
+  questionCount: 0
 lastOfflineValidated: "2026-08-30"
 lastLiveVerified: null

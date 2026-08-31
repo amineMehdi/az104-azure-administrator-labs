@@ -4,140 +4,140 @@ Return to [the questions](QUESTIONS.md).
 
 ## 1. A (`LAB19-Q01`)
 
-The lab's central distinction is: Service endpoints keep the service's public endpoint while adding subnet identity, whereas private endpoints place a private NIC in the VNet and depend on correct private DNS resolution.
+The lab establishes this design principle: Service endpoints keep the service's public endpoint while adding subnet identity, whereas private endpoints place a private NIC in the VNet and depend on correct private DNS resolution.
 
-Objectives: ST-ACCESS-01
+Objectives: NW-SECURE-04
 
 Why the other choices do not fit:
 
-- **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
+- **B:** This choice changes or trusts a broader scope than the recorded lab boundary.
+- **C:** This choice skips independent evidence or relies on ambiguous resource identity.
+- **D:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
 
 Source: <https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-service-endpoints-overview>
 
 ## 2. B (`LAB19-Q02`)
 
-The first implementation checkpoint is: Create separate service-endpoint and private-endpoint subnets with appropriate policies.
-
-Objectives: CP-APP-07
-
-Why the other choices do not fit:
-
-- **A:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-
-Source: <https://learn.microsoft.com/en-us/azure/private-link/private-endpoint-overview>
-
-## 3. C (`LAB19-Q03`)
-
-The documented permission boundary is Network Contributor and Storage Account Contributor on the lab resource group
-
-Objectives: NW-SECURE-04
-
-Why the other choices do not fit:
-
-- **A:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-
-Source: <https://learn.microsoft.com/en-us/azure/storage/common/storage-private-endpoints>
-
-## 4. D (`LAB19-Q04`)
-
-Preview-first behavior makes the default invocation non-mutating; execution requires an explicit switch.
+The reviewed hands-on action for this objective is: Enable Microsoft.Storage service endpoints and add a storage virtual-network rule.
 
 Objectives: NW-SECURE-05
 
 Why the other choices do not fit:
 
-- **A:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-
-Source: <https://learn.microsoft.com/en-us/azure/dns/private-dns-privatednszone>
-
-## 5. A (`LAB19-Q05`)
-
-Validation must use the recorded scope and test the intended state independently of setup.
-
-Objectives: ST-ACCESS-01
-
-Why the other choices do not fit:
-
-- **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-
-Source: <https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-service-endpoints-overview>
-
-## 6. B (`LAB19-Q06`)
-
-The live-only gate is explicit and must not be guessed: None beyond the declared role and a disposable subscription.
-
-Objectives: CP-APP-07
-
-Why the other choices do not fit:
-
-- **A:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
+- **A:** This choice changes or trusts a broader scope than the recorded lab boundary.
+- **C:** This choice skips independent evidence or relies on ambiguous resource identity.
+- **D:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
 
 Source: <https://learn.microsoft.com/en-us/azure/private-link/private-endpoint-overview>
 
-## 7. C (`LAB19-Q07`)
+## 3. C (`LAB19-Q03`)
 
-Command evidence must come from the recorded run, exclude secrets and identifiers, and prove the intended state independently of setup.
+Least privilege requires the documented boundary: Network Contributor and Storage Account Contributor on the lab resource group
 
 Objectives: NW-SECURE-04
 
 Why the other choices do not fit:
 
-- **A:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
+- **A:** This choice changes or trusts a broader scope than the recorded lab boundary.
+- **B:** This choice skips independent evidence or relies on ambiguous resource identity.
+- **D:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+
+Source: <https://learn.microsoft.com/en-us/azure/storage/common/storage-private-endpoints>
+
+## 4. D (`LAB19-Q04`)
+
+Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+
+Objectives: NW-SECURE-05
+
+Why the other choices do not fit:
+
+- **A:** This choice changes or trusts a broader scope than the recorded lab boundary.
+- **B:** This choice skips independent evidence or relies on ambiguous resource identity.
+- **C:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+
+Source: <https://learn.microsoft.com/en-us/azure/dns/private-dns-privatednszone>
+
+## 5. A (`LAB19-Q05`)
+
+The lab's reviewed command path performs this bounded action: Create separate service-endpoint and private-endpoint subnets with appropriate policies.
+
+Objectives: NW-SECURE-04
+
+Why the other choices do not fit:
+
+- **B:** This choice changes or trusts a broader scope than the recorded lab boundary.
+- **C:** This choice skips independent evidence or relies on ambiguous resource identity.
+- **D:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+
+Source: <https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-service-endpoints-overview>
+
+## 6. B (`LAB19-Q06`)
+
+The independent validation path must prove Microsoft.Network/privateDnsZones for the exact recorded object.
+
+Objectives: NW-SECURE-05
+
+Why the other choices do not fit:
+
+- **A:** This choice changes or trusts a broader scope than the recorded lab boundary.
+- **C:** This choice skips independent evidence or relies on ambiguous resource identity.
+- **D:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+
+Source: <https://learn.microsoft.com/en-us/azure/private-link/private-endpoint-overview>
+
+## 7. C (`LAB19-Q07`)
+
+Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared role and a disposable subscription.
+
+Objectives: NW-SECURE-04
+
+Why the other choices do not fit:
+
+- **A:** This choice changes or trusts a broader scope than the recorded lab boundary.
+- **B:** This choice skips independent evidence or relies on ambiguous resource identity.
+- **D:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
 
 Source: <https://learn.microsoft.com/en-us/azure/storage/common/storage-private-endpoints>
 
 ## 8. D (`LAB19-Q08`)
 
-Recorded immutable IDs plus ownership tags provide the narrow, auditable cleanup boundary.
+Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
 
-Objectives: NW-SECURE-05, ST-ACCESS-01
+Objectives: NW-SECURE-05
 
 Why the other choices do not fit:
 
-- **A:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
+- **A:** This choice changes or trusts a broader scope than the recorded lab boundary.
+- **B:** This choice skips independent evidence or relies on ambiguous resource identity.
+- **C:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
 
 Source: <https://learn.microsoft.com/en-us/azure/dns/private-dns-privatednszone>
 
 ## 9. A (`LAB19-Q09`)
 
-Evidence-led repair limits drift and preserves the diagnostic value of an independent validator.
+Evidence-led repair preserves scope and makes the cause and correction auditable.
 
-Objectives: ST-ACCESS-01, CP-APP-07
+Objectives: NW-SECURE-04, NW-SECURE-05
 
 Why the other choices do not fit:
 
-- **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
+- **B:** This choice changes or trusts a broader scope than the recorded lab boundary.
+- **C:** This choice skips independent evidence or relies on ambiguous resource identity.
+- **D:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
 
 Source: <https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-service-endpoints-overview>
 
 ## 10. B (`LAB19-Q10`)
 
-Offline validation proves artifact quality and safety contracts, not live service behavior.
+Accepted requests and offline checks do not prove the final live state.
 
-Objectives: CP-APP-07, NW-SECURE-04
+Objectives: NW-SECURE-05, NW-SECURE-04
 
 Why the other choices do not fit:
 
-- **A:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
+- **A:** This choice changes or trusts a broader scope than the recorded lab boundary.
+- **C:** This choice skips independent evidence or relies on ambiguous resource identity.
+- **D:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
 
 Source: <https://learn.microsoft.com/en-us/azure/private-link/private-endpoint-overview>

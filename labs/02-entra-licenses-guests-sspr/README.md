@@ -24,7 +24,7 @@ The editable Mermaid source is [diagrams/architecture.mmd](diagrams/architecture
 
 ## Scenario and outcome
 
-You are the Azure administrator for a training environment. Your task is to implement the smallest isolated configuration that demonstrates the mapped exam objectives, validate it independently, capture sanitized evidence, and remove only what this run recorded.
+You are the Azure administrator for a training environment. Your task is to implement the smallest isolated configuration that demonstrates the mapped exam objectives, validate it independently, retain redacted command evidence, and remove only what this run recorded.
 
 The key design idea is: **SSPR and group-based licensing are tenant capabilities with role and license gates; inventory and scoped pilots are safer than tenant-wide changes.**
 
@@ -72,9 +72,213 @@ Cost is not a fixed promise. Check current pricing, free allowances, quotas, and
 - Read the external gate. An unavailable gate is a documented `skipped` checkpoint, not a pass.
 - Choose a unique run ID matching `^[a-z0-9-]+$`, such as `az104l02-01`.
 
+<!-- BEGIN GENERATED INLINE COMMANDS -->
+## Complete inline command implementation
+
+The lifecycle commands below are the complete learner-facing implementation. They are embedded from the retained script files so the README and automation cannot drift. Review each stage here before running it. Use a different run ID if you later try the optional scripted lane against the same sandbox.
+
+### Preflight: `scripts/powershell/Preflight.ps1`
+
+```powershell
+#requires -Version 7.4
+[CmdletBinding()]
+[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingWriteHost', '', Justification = 'Interactive lab progress is intentionally written to the host.')]
+[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSReviewUnusedParameter', '', Justification = 'All lanes keep a consistent explicit context interface.')]
+param(
+    [string]$SubscriptionId = '',
+    [Parameter(Mandatory)][string]$Location
+)
+
+$ErrorActionPreference = 'Stop'
+$requiredModules = @(
+    'Microsoft.Graph.Authentication',
+    'Microsoft.Graph.Users',
+    'Microsoft.Graph.Groups',
+    'Microsoft.Graph.Identity.SignIns'
+)
+foreach ($module in $requiredModules) {
+    if (-not (Get-Module -ListAvailable -Name $module)) { throw "Missing required module: $module" }
+}
+
+$graphContext = Get-MgContext
+if (-not $graphContext) { throw 'No Microsoft Graph context is active. Sign in deliberately before running this lab.' }
+Write-Host "Graph tenant: $($graphContext.TenantId)"
+Write-Host "Graph account: $($graphContext.Account)"
+Write-Host 'Lab: LAB-02'
+Write-Host 'Location:' $Location
+Write-Host 'Cost class: none'
+Write-Host 'Role boundary: User Administrator and License Administrator; Authentication Policy Administrator for the SSPR policy path'
+Write-Host 'Azure provider checks are not applicable to this tenant-scoped lab.'
+Write-Host 'Preflight is read-only. It does not connect, change context, register providers, or create resources.'
+```
+
+### Setup: `scripts/powershell/Setup.ps1`
+
+```powershell
+#requires -Version 7.4
+[CmdletBinding()]
+[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingWriteHost', '', Justification = 'Interactive lab progress is intentionally written to the host.')]
+[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSReviewUnusedParameter', '', Justification = 'All lanes keep a consistent explicit context and region interface.')]
+[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseDeclaredVarsMoreThanAssignments', '', Justification = 'Named checkpoint results improve readability even when the object is used only to enforce failure handling.')]
+[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingConvertToSecureStringWithPlainText', '', Justification = 'The disposable generated VMSS credential remains in memory and is never persisted.')]
+param(
+    [string]$SubscriptionId = '',
+    [Parameter(Mandatory)][ValidatePattern('^[a-z0-9-]+$')][string]$RunId,
+    [Parameter(Mandatory)][string]$Location,
+    [string]$SecondaryLocation = $env:AZURE_SECONDARY_LOCATION,
+    [switch]$Execute
+)
+
+$ErrorActionPreference = 'Stop'
+$LabRoot = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
+$ResourceGroupName = 'rg-az104-l02-' + $RunId
+$suffix = (($RunId -replace '[^a-z0-9]', '') + '000000000000').Substring(0, 12)
+$StateDir = Join-Path $LabRoot ".state/$RunId"
+$Manifest = Join-Path $StateDir 'run.json'
+
+Write-Host 'LAB-02 plan'
+Write-Host '  subscription:' $(if ($SubscriptionId) { $SubscriptionId } else { 'tenant-scoped / not applicable' })
+Write-Host '  location:' $Location
+Write-Host '  resource group:' $(if ($false) { $ResourceGroupName } else { 'none (tenant objects)' })
+Write-Host '  cost class: none'
+Write-Host '  external gate: Requires a real disposable guest email for invitation, an available SKU for license assignment, and an authorized tenant policy change for SSPR.'
+Write-Host '  resources: security group, invited guest user, optional license assignment, optional SSPR scope'
+if (-not $Execute) {
+    Write-Host 'Preview only. Re-run with -Execute after approving context, permissions, cost, and gates.'
+    return
+}
+
+& (Join-Path $PSScriptRoot 'Preflight.ps1') -Location $Location
+if (Test-Path -LiteralPath $Manifest) { throw "State already exists at $Manifest; choose a new run ID." }
+New-Item -ItemType Directory -Path $StateDir -Force | Out-Null
+$graphContext = Get-MgContext
+$TenantId = $graphContext.TenantId
+$state = [ordered]@{
+    labId = 'LAB-02'
+    runId = $RunId
+    tenantId = $TenantId
+    subscriptionId = $SubscriptionId
+    location = $Location
+    createdAt = (Get-Date).ToUniversalTime().ToString('o')
+    status = 'recorded-before-mutation'
+    resourceGroup = [ordered]@{ name = $(if ($false) { $ResourceGroupName } else { $null }); id = $null }
+    resources = @()
+    external = [ordered]@{}
+}
+$state | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath $Manifest -Encoding utf8
+
+
+$displayName = "AZ104-L02-$RunId-SSPR-Pilot"
+$group = New-MgGroup -DisplayName $displayName -MailEnabled:$false -MailNickname ("az104l02" + $suffix) -SecurityEnabled
+$state.external.groupId = $group.Id
+if ($env:AZ104_GUEST_EMAIL) {
+    $invitation = New-MgInvitation -InvitedUserEmailAddress $env:AZ104_GUEST_EMAIL -InviteRedirectUrl 'https://myapps.microsoft.com' -SendInvitationMessage:$false
+    $state.external.guestUserId = $invitation.InvitedUser.Id
+}
+if ($env:AZ104_LICENSE_SKU_ID -and $state.external.guestUserId) {
+    Set-MgUserLicense -UserId $state.external.guestUserId -AddLicenses @(@{SkuId = [Guid]$env:AZ104_LICENSE_SKU_ID}) -RemoveLicenses @()
+    $state.external.licenseSkuId = $env:AZ104_LICENSE_SKU_ID
+}
+if ($env:AZ104_ALLOW_SSPR_POLICY_CHANGE -eq 'YES') {
+    $policy = Get-MgPolicyAuthorizationPolicy
+    $state.external.originalAllowedToUseSspr = $policy.AllowedToUseSspr
+    Update-MgPolicyAuthorizationPolicy -AllowedToUseSspr:$true
+    $state.external.ssprChanged = $true
+}
+
+$state.status = 'setup-complete'
+$state | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath $Manifest -Encoding utf8
+Write-Host "Setup complete. State: $Manifest"
+Write-Host 'Run Validate.ps1 before recording command evidence.'
+```
+
+### Validate: `scripts/powershell/Validate.ps1`
+
+```powershell
+#requires -Version 7.4
+[CmdletBinding()]
+[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSReviewUnusedParameter', '', Justification = 'Tenant and subscription lanes share a consistent validation interface.')]
+param(
+    [string]$SubscriptionId = '',
+    [Parameter(Mandatory)][ValidatePattern('^[a-z0-9-]+$')][string]$RunId
+)
+
+$ErrorActionPreference = 'Stop'
+$LabRoot = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
+$StateDir = Join-Path $LabRoot ".state/$RunId"
+$Manifest = Join-Path $StateDir 'run.json'
+$Report = Join-Path $StateDir 'validation.json'
+if (-not (Test-Path -LiteralPath $Manifest)) { throw "Missing state: $Manifest" }
+$state = Get-Content -LiteralPath $Manifest -Raw | ConvertFrom-Json -Depth 20
+$checks = [System.Collections.Generic.List[object]]::new()
+function Add-Check([string]$Id, [string]$Status, [string]$Message) {
+    $checks.Add([ordered]@{ id = $Id; status = $Status; message = $Message })
+}
+
+$graphContext = Get-MgContext
+if (-not $graphContext) { throw 'No Microsoft Graph context is active.' }
+if ($graphContext.TenantId -ne $state.tenantId) { throw 'Recorded tenant does not match the active Graph context.' }
+$groupId = $state.external.groupId
+if ($groupId) {
+    $group = Get-MgGroup -GroupId $groupId -ErrorAction SilentlyContinue
+    if ($group) { Add-Check 'entra.group' 'pass' 'The exact recorded pilot group exists.' }
+    else { Add-Check 'entra.group' 'fail' 'The recorded pilot group is absent.' }
+} else { Add-Check 'entra.group' 'warning' 'No group ID was recorded; setup did not reach the tenant mutation.' }
+if ($state.external.guestUserId) {
+    $guest = Get-MgUser -UserId $state.external.guestUserId -ErrorAction SilentlyContinue
+    if ($guest) { Add-Check 'entra.guest' 'pass' 'The exact invited guest exists.' }
+    else { Add-Check 'entra.guest' 'fail' 'A guest ID was recorded but the guest is absent.' }
+} else { Add-Check 'entra.guest' 'skipped' 'Guest invitation was gated because AZ104_GUEST_EMAIL was not supplied.' }
+$failures = @($checks | Where-Object status -eq 'fail').Count
+$warnings = @($checks | Where-Object status -in @('warning','skipped')).Count
+$result = if ($failures -gt 0) { 'fail' } elseif ($warnings -gt 0) { 'partial' } else { 'pass' }
+$output = [ordered]@{ labId = 'LAB-02'; runId = $RunId; generatedAt = (Get-Date).ToUniversalTime().ToString('o'); result = $result; checks = @($checks) }
+$output | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath $Report -Encoding utf8
+$output | ConvertTo-Json -Depth 20
+if ($result -eq 'fail') { exit 1 }
+```
+
+### Cleanup: `scripts/powershell/Cleanup.ps1`
+
+```powershell
+#requires -Version 7.4
+[CmdletBinding()]
+[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingWriteHost', '', Justification = 'Interactive cleanup previews are intentionally written to the host.')]
+[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSReviewUnusedParameter', '', Justification = 'Tenant and subscription lanes share a consistent cleanup interface.')]
+param(
+    [string]$SubscriptionId = '',
+    [Parameter(Mandatory)][ValidatePattern('^[a-z0-9-]+$')][string]$RunId,
+    [switch]$Execute
+)
+
+$ErrorActionPreference = 'Stop'
+$LabRoot = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
+$Manifest = Join-Path $LabRoot ".state/$RunId/run.json"
+if (-not (Test-Path -LiteralPath $Manifest)) { throw "Missing state: $Manifest" }
+$state = Get-Content -LiteralPath $Manifest -Raw | ConvertFrom-Json -Depth 20
+Write-Host 'Cleanup preview for LAB-02'
+Write-Host '  exact target:' $($state.external | ConvertTo-Json -Compress)
+Write-Host '  residual/soft-delete behavior must be audited after deletion.'
+if (-not $Execute) { Write-Host 'Preview only. Re-run with -Execute after checking every target.'; return }
+$graphContext = Get-MgContext
+if (-not $graphContext -or $graphContext.TenantId -ne $state.tenantId) { throw 'Active Graph tenant does not match the manifest.' }
+if ($state.external.licenseSkuId -and $state.external.guestUserId) {
+    Set-MgUserLicense -UserId $state.external.guestUserId -AddLicenses @() -RemoveLicenses @([Guid]$state.external.licenseSkuId)
+}
+if ($state.external.guestUserId) { Remove-MgUser -UserId $state.external.guestUserId -Confirm:$false -ErrorAction SilentlyContinue }
+if ($state.external.groupId) { Remove-MgGroup -GroupId $state.external.groupId -Confirm:$false -ErrorAction SilentlyContinue }
+if ($state.external.ssprChanged -and $null -ne $state.external.originalAllowedToUseSspr) {
+    Update-MgPolicyAuthorizationPolicy -AllowedToUseSspr ([bool]$state.external.originalAllowedToUseSspr)
+}
+Write-Host 'Exact active tenant objects were removed. Deleted-user retention was not purged.'
+$state.status = 'cleanup-complete'
+$state | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath $Manifest -Encoding utf8
+```
+
+<!-- END GENERATED INLINE COMMANDS -->
 ## Run the lab
 
-Run these commands from this lab folder. The examples intentionally use placeholders rather than silently reading an arbitrary subscription.
+The complete learner-facing implementations are embedded above. The commands in this section are optional shortcuts that run the identical retained script files. Run them from this lab folder. The examples intentionally use placeholders rather than silently reading an arbitrary subscription.
 
 ### 1. Preview
 
@@ -147,16 +351,6 @@ pwsh ./scripts/powershell/Validate.ps1 -RunId az104l02-01
 Inspect `.state/az104l02-01/validation.json`. A `pass` applies only to checks that could be executed. A gated or asynchronous path must remain `warning` or `skipped` until its evidence exists.
 
 Positive checks should prove the intended resources, configuration, relationships, or health. Negative checks should prove that anonymous access, excess scope, accidental inheritance, unresolved DNS, unhealthy probes, or unrecorded resources were not introduced where the scenario forbids them.
-
-## Portal evidence
-
-Portal screenshots are planned evidence captured only during an authorized live run. Until then every entry in [images/portal/manifest.yml](images/portal/manifest.yml) stays `pending`, and no placeholder image is committed. Capture and sanitization rules live in [images/README.md](images/README.md).
-
-| Planned file | Checkpoint | Portal blade | Evidence |
-|---|---:|---|---|
-| `01-groups-all-groups.png` | 1 | Microsoft Entra ID > Groups > All groups | The isolated SSPR pilot group and membership |
-| `02-users-all-users.png` | 2 | Microsoft Entra ID > Users > All users | The invited guest user and external identity type |
-| `03-protection-password-reset.png` | 4 | Microsoft Entra ID > Protection > Password reset | The selected-group SSPR scope when the gated path is authorized |
 
 ## Break/fix exercise
 

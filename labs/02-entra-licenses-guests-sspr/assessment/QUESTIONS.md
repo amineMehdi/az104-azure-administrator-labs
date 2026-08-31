@@ -4,72 +4,72 @@ Manage Entra licenses, guests, and self-service password reset
 
 Choose one answer for each question before opening the answer key.
 
-## 1. Which statement best captures the key design principle for manage entra licenses, guests, and self-service password reset? (`LAB02-Q01`)
+## 1. Which principle is most important when working on 'Manage licenses in Microsoft Entra ID' in Lab 02? (`LAB02-Q01`)
 
-- A. SSPR and group-based licensing are tenant capabilities with role and license gates; inventory and scoped pilots are safer than tenant-wide changes.
-- B. Every related control is interchangeable, so choose whichever command is shortest.
-- C. A command surface automatically supplies any missing authorization or configuration.
-- D. Cleanup evidence is unnecessary when a resource group has a recognizable name.
+- A. The shortest command is always correct even when it changes a broader scope.
+- B. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+- C. SSPR and group-based licensing are tenant capabilities with role and license gates; inventory and scoped pilots are safer than tenant-wide changes.
+- D. A recognizable resource name removes the need for validation and scoped cleanup.
 
-## 2. You must begin the hands-on path for 'Manage licenses in Microsoft Entra ID'. Which action matches the reviewed lab sequence? (`LAB02-Q02`)
+## 2. Which lab action directly supports the objective 'Manage external users'? (`LAB02-Q02`)
 
-- A. Delete similarly named resources before recording the current subscription.
-- B. Create a security group that represents the SSPR pilot cohort.
-- C. Change the active tenant automatically and continue without displaying the new context.
-- D. Infer configuration from resource names without querying the live control plane.
+- A. Change the active tenant without displaying or confirming the resulting context.
+- B. Search the whole tenant for a similar display name and modify the first match.
+- C. Mark the objective complete after reading documentation without checking any state.
+- D. Invite a disposable external account only when AZ104_GUEST_EMAIL is supplied.
 
-## 3. Which authorization statement is appropriate before creating security group, invited guest user, optional license assignment in this lab? (`LAB02-Q03`)
+## 3. Which authorization approach is appropriate before practicing 'Configure self-service password reset (SSPR)'? (`LAB02-Q03`)
 
-- A. Subscription Reader is sufficient for every create, update, role, policy, and recovery operation.
-- B. A local administrator account automatically grants Microsoft Entra and Azure permissions.
-- C. Confirm the active context and obtain only the declared role boundary: User Administrator and License Administrator; Authentication Policy Administrator for the SSPR policy path
-- D. Skip authorization checks because all resources use an AZ104 naming prefix.
+- A. Confirm the active context and use only the declared role boundary: User Administrator and License Administrator; Authentication Policy Administrator for the SSPR policy path
+- B. Use a production subscription because its resources already exist.
+- C. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
+- D. Skip role checks when the run ID contains the lab number.
 
-## 4. The setup command for Lab 02 is run without its execution switch. What should happen? (`LAB02-Q04`)
+## 4. A learner previews the implementation for 'Manage licenses in Microsoft Entra ID'. What behavior is required? (`LAB02-Q04`)
 
-- A. It should deploy everything and ask for confirmation only before cleanup.
-- B. It should log in interactively and select the first available subscription.
-- C. It should delete any older run that shares the same lab number.
-- D. It should print the intended resources, context, cost class, and gates without changing Azure.
+- A. Create the baseline immediately and request approval only before cleanup.
+- B. Display the context, intended changes, cost and gated branches without mutating Azure.
+- C. Select the first accessible subscription and hide the resulting context.
+- D. Delete any older resource whose name resembles the new run ID.
 
-## 5. Which validation evidence most directly proves the baseline resource boundary for Lab 02? (`LAB02-Q05`)
+## 5. Which implementation step should the learner perform for 'Manage external users'? (`LAB02-Q05`)
 
-- A. Query the exact recorded scope and verify the intended resource/object types, including the exact recorded object IDs.
-- B. Search the whole tenant by display-name prefix and accept the first match.
-- C. Treat a successful setup process exit code as proof of every data-plane and relationship requirement.
-- D. Verify only that an Azure subscription exists.
+- A. Replace the lab action with a tenant-wide change that is easier to discover.
+- B. Copy resource identifiers from another run instead of recording returned IDs.
+- C. Create a security group that represents the SSPR pilot cohort.
+- D. Skip the operation and edit validation.json to show a passing result.
 
-## 6. A learner reaches the externally gated checkpoint in Lab 02. What is the safest response? (`LAB02-Q06`)
+## 6. Which evidence most directly validates 'Configure self-service password reset (SSPR)' for invited guest user? (`LAB02-Q06`)
 
-- A. Invent a placeholder tenant, email address, domain, or production target and continue.
-- B. Stop that branch unless its prerequisites are explicitly satisfied: Requires a real disposable guest email for invitation, an available SKU for license assignment, and an authorized tenant policy change for SSPR.
-- C. Broaden the assignment to subscription scope so the gate no longer applies.
-- D. Mark the checkpoint as passed because the offline tests succeeded.
+- A. Treat the setup exit code as proof of every configuration and relationship.
+- B. List the entire subscription and assume similarly named resources belong to this run.
+- C. Record a credential so another learner can replay the authenticated session.
+- D. Query the exact recorded scope and independently verify the intended recorded state.
 
-## 7. Which command-side evidence best supports the first completed checkpoint in Lab 02? (`LAB02-Q07`)
+## 7. The 'Manage licenses in Microsoft Entra ID' checkpoint reaches an external prerequisite. What should happen? (`LAB02-Q07`)
 
-- A. Copy a successful command from an unrelated tenant and treat it as this run's evidence.
-- B. Record access tokens and keys so another learner can replay the same session.
-- C. Run the independent validator and retain redacted structured output for the exact recorded scope after: Create a security group that represents the SSPR pilot cohort.
-- D. Use the setup process exit code alone without querying resource state.
+- A. Run the branch only when this documented gate is satisfied: Requires a real disposable guest email for invitation, an available SKU for license assignment, and an authorized tenant policy change for SSPR.
+- B. Invent a domain, notification target, license, quota, or tenant value and continue.
+- C. Broaden permissions until the prerequisite can no longer block the operation.
+- D. Mark the branch passed because its command syntax was checked offline.
 
-## 8. During cleanup of Lab 02, several similarly named resources exist. Which targeting method is correct? (`LAB02-Q08`)
+## 8. What is the safest command-evidence practice after completing 'Manage external users'? (`LAB02-Q08`)
 
-- A. Delete every resource whose name contains az104.
-- B. Delete the active subscription to guarantee that no lab resources remain.
-- C. Use creation timestamps alone and remove the oldest matching resources.
-- D. Use the exact IDs and run metadata recorded before creation, verify the lab tags, then delete only that boundary.
+- A. Commit the complete account object so reviewers can identify the tenant.
+- B. Retain only redacted structured output from an independent query of the recorded run.
+- C. Save tokens, keys, passwords, or SAS values beside the validation result.
+- D. Reuse successful output from an earlier run with a similar resource name.
 
-## 9. Setup completed for Lab 02, but one required state check fails. What is the best break/fix approach? (`LAB02-Q09`)
+## 9. Validation for 'Configure self-service password reset (SSPR)' fails after setup. What is the best break/fix method? (`LAB02-Q09`)
 
-- A. Inspect the failing check and exact recorded resource, repair the smallest identified cause, then rerun validation.
-- B. Rerun setup repeatedly with new names until one run reports no error.
-- C. Edit validation.json so the failed status reads pass.
-- D. Disable all policies, locks, NSGs, and monitoring controls in the subscription.
+- A. Rerun setup repeatedly with new names until one attempt appears successful.
+- B. Change validation.json directly so the failed result reads pass.
+- C. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+- D. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
 
-## 10. Which completion claim is valid immediately after this repository's offline tests pass for Lab 02? (`LAB02-Q10`)
+## 10. The operation for 'Manage licenses in Microsoft Entra ID' is asynchronous or gated. How should completion be recorded? (`LAB02-Q10`)
 
-- A. Every command has been proven in every Azure region and tenant type.
-- B. The documentation, schemas, script contracts, assessments, diagrams, and fixtures are offline-validated; live Azure state remains pending until executed.
-- C. The lab is live-verified even if no subscription was used.
-- D. Any pending gated checkpoint can be treated as successfully completed.
+- A. Record pass as soon as the request is accepted, regardless of its final state.
+- B. Fabricate expected output so the assessment and documentation appear complete.
+- C. Remove the check from validation whenever the service takes longer than expected.
+- D. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.

@@ -6,10 +6,10 @@ Each completed lab includes:
 
 - `README.md` and `lab.yml`
 - one complete Azure CLI or PowerShell lane
+- the complete lifecycle command implementation embedded in the README
 - read-only validation and scoped cleanup
 - architecture diagram and command-evidence guidance
-- a portal screenshot manifest under `images/portal/` with 2–5 planned captures
-- ten questions in `assessment/QUESTIONS.md`
-- explanations in `assessment/ANSWERS.md`
+- a domain-allocated assessment in Labs 01–25
+- separate learner questions and answer explanations where assessment is enabled
 
-The machine-readable catalog is [catalog.yml](catalog.yml). All 28 folders are currently implemented and offline-validated; this does not claim a live Azure run.
+Lab 00 and Capstones 26–27 are hands-on only and link to the generated domain question-bank index. The machine-readable catalog is [catalog.yml](catalog.yml). All 28 folders are currently implemented and offline-validated; this does not claim a live Azure run.

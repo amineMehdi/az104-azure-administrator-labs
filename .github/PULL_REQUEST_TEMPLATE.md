@@ -9,7 +9,7 @@ Describe the learner-visible outcome and the mapped AZ-104 objectives.
 - [ ] Lab folder portability check
 - [ ] Cleanup reviewed for exact scope and idempotency
 - [ ] Question and answer explanations reviewed
-- [ ] Screenshot manifest and privacy review, if images changed
+- [ ] Architecture diagram and alt-text review, if visuals changed
 
 ## Azure impact
 

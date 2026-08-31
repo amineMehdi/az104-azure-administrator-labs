@@ -2,28 +2,24 @@
   objectiveIds:
   - MR-MONITOR-01
   difficulty: foundational
-  stem: Which statement best captures the key design principle for collect and analyze azure monitor metrics, logs,
-    and insights?
+  stem: Which principle is most important when working on 'Interpret metrics in Azure Monitor' in Lab 22?
   options:
     A: Metrics are numeric time series, logs are queryable records with ingestion delay and cost, and Insights packages
       add curated collection and interpretation for particular resource types.
-    B: Every related control is interchangeable, so choose whichever command is shortest.
-    C: A command surface automatically supplies any missing authorization or configuration.
-    D: Cleanup evidence is unnecessary when a resource group has a recognizable name.
+    B: The shortest command is always correct even when it changes a broader scope.
+    C: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+    D: A recognizable resource name removes the need for validation and scoped cleanup.
   correctOption: A
-  explanation: 'The lab''s central distinction is: Metrics are numeric time series, logs are queryable records with
-    ingestion delay and cost, and Insights packages add curated collection and interpretation for particular resource
-    types.'
+  explanation: 'The lab establishes this design principle: Metrics are numeric time series, logs are queryable records
+    with ingestion delay and cost, and Insights packages add curated collection and interpretation for particular
+    resource types.'
   distractorExplanations:
-    A: 'Correct. The lab''s central distinction is: Metrics are numeric time series, logs are queryable records
-      with ingestion delay and cost, and Insights packages add curated collection and interpretation for particular
-      resource types.'
-    B: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    C: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    D: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
+    A: 'Correct. The lab establishes this design principle: Metrics are numeric time series, logs are queryable
+      records with ingestion delay and cost, and Insights packages add curated collection and interpretation for
+      particular resource types.'
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/azure-monitor/metrics/metrics-getting-started
   lastVerified: '2026-08-30'
@@ -31,25 +27,21 @@
   objectiveIds:
   - MR-MONITOR-02
   difficulty: foundational
-  stem: You must begin the hands-on path for 'Interpret metrics in Azure Monitor'. Which action matches the reviewed
-    lab sequence?
+  stem: Which lab action directly supports the objective 'Configure log settings in Azure Monitor'?
   options:
-    A: Delete similarly named resources before recording the current subscription.
-    B: Create a Log Analytics workspace with bounded retention and a monitored storage account.
-    C: Change the active tenant automatically and continue without displaying the new context.
-    D: Infer configuration from resource names without querying the live control plane.
+    A: Change the active tenant without displaying or confirming the resulting context.
+    B: Discover diagnostic categories and create settings that send supported logs and metrics to the workspace.
+    C: Search the whole tenant for a similar display name and modify the first match.
+    D: Mark the objective complete after reading documentation without checking any state.
   correctOption: B
-  explanation: 'The first implementation checkpoint is: Create a Log Analytics workspace with bounded retention
-    and a monitored storage account.'
+  explanation: 'The reviewed hands-on action for this objective is: Discover diagnostic categories and create settings
+    that send supported logs and metrics to the workspace.'
   distractorExplanations:
-    A: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    B: 'Correct. The first implementation checkpoint is: Create a Log Analytics workspace with bounded retention
-      and a monitored storage account.'
-    C: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    D: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: 'Correct. The reviewed hands-on action for this objective is: Discover diagnostic categories and create settings
+      that send supported logs and metrics to the workspace.'
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/diagnostic-settings
   lastVerified: '2026-08-30'
@@ -57,75 +49,64 @@
   objectiveIds:
   - MR-MONITOR-03
   difficulty: foundational
-  stem: Which authorization statement is appropriate before creating resource group, Log Analytics workspace, storage
-    account in this lab?
+  stem: Which authorization approach is appropriate before practicing 'Query and analyze logs in Azure Monitor'?
   options:
-    A: Subscription Reader is sufficient for every create, update, role, policy, and recovery operation.
-    B: A local administrator account automatically grants Microsoft Entra and Azure permissions.
-    C: 'Confirm the active context and obtain only the declared role boundary: Monitoring Contributor and Log Analytics
+    A: Use a production subscription because its resources already exist.
+    B: Assign Global Administrator and subscription Owner for every lab regardless of the operation.
+    C: 'Confirm the active context and use only the declared role boundary: Monitoring Contributor and Log Analytics
       Contributor on the lab resource group'
-    D: Skip authorization checks because all resources use an AZ104 naming prefix.
+    D: Skip role checks when the run ID contains the lab number.
   correctOption: C
-  explanation: The documented permission boundary is Monitoring Contributor and Log Analytics Contributor on the
-    lab resource group
+  explanation: 'Least privilege requires the documented boundary: Monitoring Contributor and Log Analytics Contributor
+    on the lab resource group'
   distractorExplanations:
-    A: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    B: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    C: Correct. The documented permission boundary is Monitoring Contributor and Log Analytics Contributor on the
-      lab resource group
-    D: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: 'Correct. Least privilege requires the documented boundary: Monitoring Contributor and Log Analytics Contributor
+      on the lab resource group'
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/azure-monitor/logs/log-query-overview
   lastVerified: '2026-08-30'
 - id: LAB22-Q04
   objectiveIds:
   - MR-MONITOR-05
-  difficulty: applied
-  stem: The setup command for Lab 22 is run without its execution switch. What should happen?
+  difficulty: foundational
+  stem: Which resource or object belongs inside the recorded boundary for 'Configure and interpret monitoring of
+    virtual machines, storage accounts, and networks by using Azure Monitor Insights'?
   options:
-    A: It should deploy everything and ask for confirmation only before cleanup.
-    B: It should log in interactively and select the first available subscription.
-    C: It should delete any older run that shares the same lab number.
-    D: It should print the intended resources, context, cost class, and gates without changing Azure.
+    A: Use whichever similarly named object appears first in a broad search.
+    B: Use an unrelated shared resource without recording its immutable ID.
+    C: Use a production object when the sandbox prerequisite is unavailable.
+    D: Use the exact recorded identity and scope for diagnostic setting.
   correctOption: D
-  explanation: Preview-first behavior makes the default invocation non-mutating; execution requires an explicit
-    switch.
+  explanation: The lab records the exact scope and identity of diagnostic setting before validation and cleanup.
   distractorExplanations:
-    A: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    B: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    C: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    D: Correct. Preview-first behavior makes the default invocation non-mutating; execution requires an explicit
-      switch.
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: Correct. The lab records the exact scope and identity of diagnostic setting before validation and cleanup.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/azure-monitor/insights/insights-overview
   lastVerified: '2026-08-30'
 - id: LAB22-Q05
   objectiveIds:
   - MR-MONITOR-06
-  difficulty: applied
-  stem: Which validation evidence most directly proves the baseline resource boundary for Lab 22?
+  difficulty: foundational
+  stem: What must an administrator verify before changing optional data collection rule for 'Use Azure Network Watcher
+    and Connection monitor'?
   options:
-    A: Query the exact recorded scope and verify the intended resource/object types, including Microsoft.OperationalInsights/workspaces,
-      Microsoft.Insights/diagnosticSettings.
-    B: Search the whole tenant by display-name prefix and accept the first match.
-    C: Treat a successful setup process exit code as proof of every data-plane and relationship requirement.
-    D: Verify only that an Azure subscription exists.
+    A: Verify the tenant or subscription context, permissions, intended scope, and live gate before mutation.
+    B: Verify only that the command-line tool starts successfully.
+    C: Verify only that a resource with a similar name exists somewhere in Azure.
+    D: Verify the result after cleanup and omit the pre-change context check.
   correctOption: A
-  explanation: Validation must use the recorded scope and test the intended state independently of setup.
+  explanation: Context, authorization, scope, and gates are separate prerequisites that must be confirmed.
   distractorExplanations:
-    A: Correct. Validation must use the recorded scope and test the intended state independently of setup.
-    B: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    C: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    D: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
+    A: Correct. Context, authorization, scope, and gates are separate prerequisites that must be confirmed.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/network-watcher/connection-monitor-overview
   lastVerified: '2026-08-30'
@@ -133,25 +114,19 @@
   objectiveIds:
   - MR-MONITOR-01
   difficulty: applied
-  stem: A learner reaches the externally gated checkpoint in Lab 22. What is the safest response?
+  stem: A learner previews the implementation for 'Interpret metrics in Azure Monitor'. What behavior is required?
   options:
-    A: Invent a placeholder tenant, email address, domain, or production target and continue.
-    B: 'Stop that branch unless its prerequisites are explicitly satisfied: None beyond the declared role and a
-      disposable subscription.'
-    C: Broaden the assignment to subscription scope so the gate no longer applies.
-    D: Mark the checkpoint as passed because the offline tests succeeded.
+    A: Create the baseline immediately and request approval only before cleanup.
+    B: Display the context, intended changes, cost and gated branches without mutating Azure.
+    C: Select the first accessible subscription and hide the resulting context.
+    D: Delete any older resource whose name resembles the new run ID.
   correctOption: B
-  explanation: 'The live-only gate is explicit and must not be guessed: None beyond the declared role and a disposable
-    subscription.'
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
   distractorExplanations:
-    A: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    B: 'Correct. The live-only gate is explicit and must not be guessed: None beyond the declared role and a disposable
-      subscription.'
-    C: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    D: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/azure-monitor/metrics/metrics-getting-started
   lastVerified: '2026-08-30'
@@ -159,98 +134,194 @@
   objectiveIds:
   - MR-MONITOR-02
   difficulty: applied
-  stem: Which command-side evidence best supports the first completed checkpoint in Lab 22?
+  stem: Which implementation step should the learner perform for 'Configure log settings in Azure Monitor'?
   options:
-    A: Copy a successful command from an unrelated tenant and treat it as this run's evidence.
-    B: Record access tokens and keys so another learner can replay the same session.
-    C: 'Run the independent validator and retain redacted structured output for the exact recorded scope after:
-      Create a Log Analytics workspace with bounded retention and a monitored storage account.'
-    D: Use the setup process exit code alone without querying resource state.
+    A: Replace the lab action with a tenant-wide change that is easier to discover.
+    B: Copy resource identifiers from another run instead of recording returned IDs.
+    C: Run KQL queries that summarize activity by operation, result, and time range without assuming immediate ingestion.
+    D: Skip the operation and edit validation.json to show a passing result.
   correctOption: C
-  explanation: Command evidence must come from the recorded run, exclude secrets and identifiers, and prove the
-    intended state independently of setup.
+  explanation: 'The lab''s reviewed command path performs this bounded action: Run KQL queries that summarize activity
+    by operation, result, and time range without assuming immediate ingestion.'
   distractorExplanations:
-    A: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    B: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    C: Correct. Command evidence must come from the recorded run, exclude secrets and identifiers, and prove the
-      intended state independently of setup.
-    D: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: 'Correct. The lab''s reviewed command path performs this bounded action: Run KQL queries that summarize activity
+      by operation, result, and time range without assuming immediate ingestion.'
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/diagnostic-settings
   lastVerified: '2026-08-30'
 - id: LAB22-Q08
   objectiveIds:
   - MR-MONITOR-03
-  - MR-MONITOR-05
   difficulty: applied
-  stem: During cleanup of Lab 22, several similarly named resources exist. Which targeting method is correct?
+  stem: Which evidence most directly validates 'Query and analyze logs in Azure Monitor' for storage account?
   options:
-    A: Delete every resource whose name contains az104.
-    B: Delete the active subscription to guarantee that no lab resources remain.
-    C: Use creation timestamps alone and remove the oldest matching resources.
-    D: Use the exact IDs and run metadata recorded before creation, verify the lab tags, then delete only that boundary.
+    A: Treat the setup exit code as proof of every configuration and relationship.
+    B: List the entire subscription and assume similarly named resources belong to this run.
+    C: Record a credential so another learner can replay the authenticated session.
+    D: Query the exact recorded scope and independently verify Microsoft.Insights/diagnosticSettings.
   correctOption: D
-  explanation: Recorded immutable IDs plus ownership tags provide the narrow, auditable cleanup boundary.
+  explanation: The independent validation path must prove Microsoft.Insights/diagnosticSettings for the exact recorded
+    object.
   distractorExplanations:
-    A: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    B: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    C: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    D: Correct. Recorded immutable IDs plus ownership tags provide the narrow, auditable cleanup boundary.
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: Correct. The independent validation path must prove Microsoft.Insights/diagnosticSettings for the exact recorded
+      object.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/azure-monitor/logs/log-query-overview
   lastVerified: '2026-08-30'
 - id: LAB22-Q09
   objectiveIds:
   - MR-MONITOR-05
-  - MR-MONITOR-06
-  difficulty: advanced
-  stem: Setup completed for Lab 22, but one required state check fails. What is the best break/fix approach?
+  difficulty: applied
+  stem: The 'Configure and interpret monitoring of virtual machines, storage accounts, and networks by using Azure
+    Monitor Insights' checkpoint reaches an external prerequisite. What should happen?
   options:
-    A: Inspect the failing check and exact recorded resource, repair the smallest identified cause, then rerun validation.
-    B: Rerun setup repeatedly with new names until one run reports no error.
-    C: Edit validation.json so the failed status reads pass.
-    D: Disable all policies, locks, NSGs, and monitoring controls in the subscription.
+    A: 'Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable
+      subscription.'
+    B: Invent a domain, notification target, license, quota, or tenant value and continue.
+    C: Broaden permissions until the prerequisite can no longer block the operation.
+    D: Mark the branch passed because its command syntax was checked offline.
   correctOption: A
-  explanation: Evidence-led repair limits drift and preserves the diagnostic value of an independent validator.
+  explanation: 'Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the
+    declared role and a disposable subscription.'
   distractorExplanations:
-    A: Correct. Evidence-led repair limits drift and preserves the diagnostic value of an independent validator.
-    B: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    C: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    D: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
+    A: 'Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the
+      declared role and a disposable subscription.'
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/azure-monitor/insights/insights-overview
   lastVerified: '2026-08-30'
 - id: LAB22-Q10
   objectiveIds:
   - MR-MONITOR-06
+  difficulty: applied
+  stem: What is the safest command-evidence practice after completing 'Use Azure Network Watcher and Connection
+    monitor'?
+  options:
+    A: Commit the complete account object so reviewers can identify the tenant.
+    B: Retain only redacted structured output from an independent query of the recorded run.
+    C: Save tokens, keys, passwords, or SAS values beside the validation result.
+    D: Reuse successful output from an earlier run with a similar resource name.
+  correctOption: B
+  explanation: Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: Correct. Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/network-watcher/connection-monitor-overview
+  lastVerified: '2026-08-30'
+- id: LAB22-Q11
+  objectiveIds:
+  - MR-MONITOR-01
+  difficulty: applied
+  stem: Which negative check strengthens validation of 'Interpret metrics in Azure Monitor'?
+  options:
+    A: Check only that at least one resource exists in the subscription.
+    B: Repair every warning automatically before recording what caused it.
+    C: Confirm the intended state and also prove that broader, anonymous, or unintended access was not introduced.
+    D: Ignore denied queries and record them as passing checks.
+  correctOption: C
+  explanation: A bounded negative assertion detects accidental privilege or exposure beyond the intended state.
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: Correct. A bounded negative assertion detects accidental privilege or exposure beyond the intended state.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/azure-monitor/metrics/metrics-getting-started
+  lastVerified: '2026-08-30'
+- id: LAB22-Q12
+  objectiveIds:
+  - MR-MONITOR-02
+  difficulty: applied
+  stem: Why should the run manifest record the exact ID of Log Analytics workspace?
+  options:
+    A: It lets setup store access tokens and passwords for later reuse.
+    B: It allows cleanup to delete every object with the same prefix.
+    C: It removes the need to confirm the tenant or subscription context.
+    D: It lets validation and cleanup target the immutable object created by this run rather than a name match.
+  correctOption: D
+  explanation: Immutable recorded IDs create a deterministic validation and cleanup boundary.
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: Correct. Immutable recorded IDs create a deterministic validation and cleanup boundary.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/diagnostic-settings
+  lastVerified: '2026-08-30'
+- id: LAB22-Q13
+  objectiveIds:
+  - MR-MONITOR-03
+  - MR-MONITOR-05
+  difficulty: advanced
+  stem: Validation for 'Query and analyze logs in Azure Monitor' fails after setup. What is the best break/fix method?
+  options:
+    A: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+    B: Rerun setup repeatedly with new names until one attempt appears successful.
+    C: Change validation.json directly so the failed result reads pass.
+    D: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+  correctOption: A
+  explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
+  distractorExplanations:
+    A: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/azure-monitor/logs/log-query-overview
+  lastVerified: '2026-08-30'
+- id: LAB22-Q14
+  objectiveIds:
+  - MR-MONITOR-05
+  - MR-MONITOR-06
+  difficulty: advanced
+  stem: The operation for 'Configure and interpret monitoring of virtual machines, storage accounts, and networks
+    by using Azure Monitor Insights' is asynchronous or gated. How should completion be recorded?
+  options:
+    A: Record pass as soon as the request is accepted, regardless of its final state.
+    B: Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence
+      exists.
+    C: Fabricate expected output so the assessment and documentation appear complete.
+    D: Remove the check from validation whenever the service takes longer than expected.
+  correctOption: B
+  explanation: Accepted requests and offline checks do not prove the final live state.
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: Correct. Accepted requests and offline checks do not prove the final live state.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/azure-monitor/insights/insights-overview
+  lastVerified: '2026-08-30'
+- id: LAB22-Q15
+  objectiveIds:
+  - MR-MONITOR-06
   - MR-MONITOR-01
   difficulty: advanced
-  stem: Which completion claim is valid immediately after this repository's offline tests pass for Lab 22?
+  stem: An administrator discovers drift while validating 'Use Azure Network Watcher and Connection monitor'. Which
+    response preserves least privilege?
   options:
-    A: Every command has been proven in every Azure region and tenant type.
-    B: The documentation, schemas, script contracts, assessments, diagrams, and fixtures are offline-validated;
-      live Azure state remains pending until executed.
-    C: The lab is live-verified even if no subscription was used.
-    D: Any pending gated checkpoint can be treated as successfully completed.
-  correctOption: B
-  explanation: Offline validation proves artifact quality and safety contracts, not live service behavior.
+    A: Grant subscription Owner and tenant administrator roles to avoid further authorization errors.
+    B: Replace every resource in the subscription instead of identifying the mismatch.
+    C: Compare the live query with the recorded expectation, change only the mismatched setting, and validate again.
+    D: Accept the drift when the resource name still matches the lab prefix.
+  correctOption: C
+  explanation: The narrowest evidence-supported correction avoids unrelated changes and excess privilege.
   distractorExplanations:
-    A: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    B: Correct. Offline validation proves artifact quality and safety contracts, not live service behavior.
-    C: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    D: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: Correct. The narrowest evidence-supported correction avoids unrelated changes and excess privilege.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/network-watcher/connection-monitor-overview
   lastVerified: '2026-08-30'

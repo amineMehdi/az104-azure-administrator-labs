@@ -4,140 +4,140 @@ Return to [the questions](QUESTIONS.md).
 
 ## 1. A (`LAB25-Q01`)
 
-The lab's central distinction is: Test failover validates recovery without committing production direction, while planned/unplanned failover, commit, reprotect, and failback are separate state transitions with cost and data-loss implications.
+The lab establishes this design principle: Test failover validates recovery without committing production direction, while planned/unplanned failover, commit, reprotect, and failback are separate state transitions with cost and data-loss implications.
 
 Objectives: MR-RECOVERY-05
 
 Why the other choices do not fit:
 
-- **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
+- **B:** This choice changes or trusts a broader scope than the recorded lab boundary.
+- **C:** This choice skips independent evidence or relies on ambiguous resource identity.
+- **D:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
 
 Source: <https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-powershell>
 
 ## 2. B (`LAB25-Q02`)
 
-The first implementation checkpoint is: Create non-overlapping source and recovery VNets in the configured primary and secondary regions.
+The reviewed hands-on action for this objective is: Create a source VM and Recovery Services vault, then configure Azure-to-Azure fabric, container, policy, and network mappings.
 
 Objectives: MR-RECOVERY-06
 
 Why the other choices do not fit:
 
-- **A:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
+- **A:** This choice changes or trusts a broader scope than the recorded lab boundary.
+- **C:** This choice skips independent evidence or relies on ambiguous resource identity.
+- **D:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
 
 Source: <https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-dr-drill>
 
 ## 3. C (`LAB25-Q03`)
 
-The documented permission boundary is Site Recovery Contributor, Virtual Machine Contributor, and Network Contributor on both region scopes
+Least privilege requires the documented boundary: Site Recovery Contributor, Virtual Machine Contributor, and Network Contributor on both region scopes
 
 Objectives: MR-RECOVERY-05
 
 Why the other choices do not fit:
 
-- **A:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
+- **A:** This choice changes or trusts a broader scope than the recorded lab boundary.
+- **B:** This choice skips independent evidence or relies on ambiguous resource identity.
+- **D:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
 
 Source: <https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-failover-failback>
 
 ## 4. D (`LAB25-Q04`)
 
-Preview-first behavior makes the default invocation non-mutating; execution requires an explicit switch.
+Preview mode is deliberately non-mutating and exposes the complete intended boundary.
 
 Objectives: MR-RECOVERY-06
 
 Why the other choices do not fit:
 
-- **A:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
+- **A:** This choice changes or trusts a broader scope than the recorded lab boundary.
+- **B:** This choice skips independent evidence or relies on ambiguous resource identity.
+- **C:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
 
 Source: <https://learn.microsoft.com/en-us/azure/site-recovery/site-recovery-manage-registration-and-protection>
 
 ## 5. A (`LAB25-Q05`)
 
-Validation must use the recorded scope and test the intended state independently of setup.
+The lab's reviewed command path performs this bounded action: Create non-overlapping source and recovery VNets in the configured primary and secondary regions.
 
 Objectives: MR-RECOVERY-05
 
 Why the other choices do not fit:
 
-- **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
+- **B:** This choice changes or trusts a broader scope than the recorded lab boundary.
+- **C:** This choice skips independent evidence or relies on ambiguous resource identity.
+- **D:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
 
 Source: <https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-powershell>
 
 ## 6. B (`LAB25-Q06`)
 
-The live-only gate is explicit and must not be guessed: This elevated lab requires two approved regions and explicit cost review before live execution; test failover must use an isolated network.
+The independent validation path must prove Microsoft.Network/virtualNetworks for the exact recorded object.
 
 Objectives: MR-RECOVERY-06
 
 Why the other choices do not fit:
 
-- **A:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
+- **A:** This choice changes or trusts a broader scope than the recorded lab boundary.
+- **C:** This choice skips independent evidence or relies on ambiguous resource identity.
+- **D:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
 
 Source: <https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-dr-drill>
 
 ## 7. C (`LAB25-Q07`)
 
-Command evidence must come from the recorded run, exclude secrets and identifiers, and prove the intended state independently of setup.
+Unavailable live prerequisites remain skipped or partial; the documented gate is: This elevated lab requires two approved regions and explicit cost review before live execution; test failover must use an isolated network.
 
 Objectives: MR-RECOVERY-05
 
 Why the other choices do not fit:
 
-- **A:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
+- **A:** This choice changes or trusts a broader scope than the recorded lab boundary.
+- **B:** This choice skips independent evidence or relies on ambiguous resource identity.
+- **D:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
 
 Source: <https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-failover-failback>
 
 ## 8. D (`LAB25-Q08`)
 
-Recorded immutable IDs plus ownership tags provide the narrow, auditable cleanup boundary.
+Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
 
-Objectives: MR-RECOVERY-06, MR-RECOVERY-05
+Objectives: MR-RECOVERY-06
 
 Why the other choices do not fit:
 
-- **A:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
+- **A:** This choice changes or trusts a broader scope than the recorded lab boundary.
+- **B:** This choice skips independent evidence or relies on ambiguous resource identity.
+- **C:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
 
 Source: <https://learn.microsoft.com/en-us/azure/site-recovery/site-recovery-manage-registration-and-protection>
 
 ## 9. A (`LAB25-Q09`)
 
-Evidence-led repair limits drift and preserves the diagnostic value of an independent validator.
+Evidence-led repair preserves scope and makes the cause and correction auditable.
 
 Objectives: MR-RECOVERY-05, MR-RECOVERY-06
 
 Why the other choices do not fit:
 
-- **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
+- **B:** This choice changes or trusts a broader scope than the recorded lab boundary.
+- **C:** This choice skips independent evidence or relies on ambiguous resource identity.
+- **D:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
 
 Source: <https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-powershell>
 
 ## 10. B (`LAB25-Q10`)
 
-Offline validation proves artifact quality and safety contracts, not live service behavior.
+Accepted requests and offline checks do not prove the final live state.
 
 Objectives: MR-RECOVERY-06, MR-RECOVERY-05
 
 Why the other choices do not fit:
 
-- **A:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
+- **A:** This choice changes or trusts a broader scope than the recorded lab boundary.
+- **C:** This choice skips independent evidence or relies on ambiguous resource identity.
+- **D:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
 
 Source: <https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-dr-drill>

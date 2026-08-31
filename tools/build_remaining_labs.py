@@ -10,11 +10,18 @@ from __future__ import annotations
 import argparse
 import html
 import json
-import re
+from collections import Counter
 from pathlib import Path
 from textwrap import dedent
 
 import yaml
+
+from assessment_contract import (
+    ASSESSMENT_PLAN,
+    DOMAIN_OBJECTIVE_PREFIXES,
+    metadata_for_lab,
+)
+from sync_inline_commands import sync_lab
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -36,7 +43,6 @@ def s(
     modules: list[str],
     actions: list[str],
     expected_types: list[str],
-    portal: list[tuple[str, str]],
     sources: list[str],
     fact: str,
     gate: str = "None beyond the declared role and a disposable subscription.",
@@ -68,11 +74,6 @@ SPECS: dict[str, dict] = {
         ],
         [],
         [
-            ("Microsoft Entra ID > Groups > All groups", "The isolated SSPR pilot group and membership"),
-            ("Microsoft Entra ID > Users > All users", "The invited guest user and external identity type"),
-            ("Microsoft Entra ID > Protection > Password reset", "The selected-group SSPR scope when the gated path is authorized"),
-        ],
-        [
             "https://learn.microsoft.com/en-us/entra/fundamentals/how-to-manage-user-profile-info",
             "https://learn.microsoft.com/en-us/entra/external-id/b2b-quickstart-invite-powershell",
             "https://learn.microsoft.com/en-us/entra/identity/users/licensing-powershell-graph-examples",
@@ -101,11 +102,6 @@ SPECS: dict[str, dict] = {
         ],
         [],
         [
-            ("Resource group > Access control (IAM) > Role assignments", "The direct Reader assignment and its scope"),
-            ("Resource group > Access control (IAM) > Check access", "The principal's effective assignments"),
-            ("Subscriptions > Access control (IAM)", "The contrast between subscription and resource-group scope"),
-        ],
-        [
             "https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-powershell",
             "https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles",
             "https://learn.microsoft.com/en-us/azure/role-based-access-control/check-access",
@@ -131,11 +127,6 @@ SPECS: dict[str, dict] = {
             "Inventory the active subscription and run the optional management-group branch only with AZ104_ALLOW_MANAGEMENT_GROUP_CHANGE=YES.",
         ],
         ["Microsoft.Authorization/locks"],
-        [
-            ("Resource groups > Overview", "The lab resource group and effective tags"),
-            ("Resource group > Locks", "The CanNotDelete lock and its notes"),
-            ("Management groups", "The optional isolated management group and parent relationship"),
-        ],
         [
             "https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-cli",
             "https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources-cli",
@@ -164,12 +155,6 @@ SPECS: dict[str, dict] = {
         ],
         ["Microsoft.Authorization/policyAssignments"],
         [
-            ("Resource group > Policies", "The scoped policy assignment and parameter value"),
-            ("Policy > Compliance", "The evaluated compliance state and timestamp"),
-            ("Cost Management > Budgets", "The optional lab budget and notifications"),
-            ("Advisor > Cost", "Current cost recommendations or an empty recommendation state"),
-        ],
-        [
             "https://learn.microsoft.com/en-us/azure/governance/policy/assign-policy-powershell",
             "https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-acm-create-budgets",
             "https://learn.microsoft.com/en-us/azure/advisor/advisor-cost-recommendations",
@@ -195,12 +180,6 @@ SPECS: dict[str, dict] = {
             "Regenerate the secondary access key and prove no key enters repository state.",
         ],
         ["Microsoft.Storage/storageAccounts"],
-        [
-            ("Storage account > Overview", "Account kind, location, and redundancy"),
-            ("Storage account > Configuration", "Secure transfer, TLS, and public access settings"),
-            ("Storage account > Encryption", "Encryption services and infrastructure encryption"),
-            ("Storage account > Access keys", "Key-management interface with all key values redacted"),
-        ],
         [
             "https://learn.microsoft.com/en-us/azure/storage/common/storage-account-create",
             "https://learn.microsoft.com/en-us/azure/storage/common/storage-redundancy",
@@ -228,12 +207,6 @@ SPECS: dict[str, dict] = {
         ],
         ["Microsoft.Network/virtualNetworks", "Microsoft.Storage/storageAccounts"],
         [
-            ("Storage account > Networking", "Default deny and the allowed virtual network rule"),
-            ("Storage account > Containers", "The private container"),
-            ("Container > Access policy", "The stored access policy and expiry"),
-            ("Storage account > Shared access signature", "SAS controls with token values excluded"),
-        ],
-        [
             "https://learn.microsoft.com/en-us/azure/storage/common/storage-network-security",
             "https://learn.microsoft.com/en-us/azure/storage/common/storage-sas-overview",
             "https://learn.microsoft.com/en-us/rest/api/storageservices/define-stored-access-policy",
@@ -259,12 +232,6 @@ SPECS: dict[str, dict] = {
             "Configure object replication and use AzCopy for a sample upload when AZCOPY is installed.",
         ],
         ["Microsoft.Storage/storageAccounts"],
-        [
-            ("Storage account > Data protection", "Versioning, change feed, and soft-delete settings"),
-            ("Storage account > Lifecycle management", "The tiering and version cleanup rule"),
-            ("Storage account > Object replication", "Source and destination replication policy"),
-            ("Container > Blobs", "Sample blob versions and access tier"),
-        ],
         [
             "https://learn.microsoft.com/en-us/azure/storage/blobs/lifecycle-management-overview",
             "https://learn.microsoft.com/en-us/azure/storage/blobs/versioning-overview",
@@ -292,12 +259,6 @@ SPECS: dict[str, dict] = {
             "Inventory identity-based SMB options and configure only the authorized AZ104_FILES_IDENTITY_SOURCE path.",
         ],
         ["Microsoft.Storage/storageAccounts", "Microsoft.Storage/storageAccounts/fileServices/shares"],
-        [
-            ("Storage account > File shares", "The share, quota, and selected tier"),
-            ("File share > Snapshots", "The point-in-time share snapshot"),
-            ("Storage account > Data protection", "Azure Files soft-delete retention"),
-            ("Storage account > File shares > Identity-based access", "The configured or gated directory source"),
-        ],
         [
             "https://learn.microsoft.com/en-us/azure/storage/files/storage-how-to-create-file-share",
             "https://learn.microsoft.com/en-us/azure/storage/files/storage-snapshots-files",
@@ -330,11 +291,6 @@ SPECS.update({
         ],
         ["Microsoft.Resources/deployments", "Microsoft.Storage/storageAccounts"],
         [
-            ("Resource group > Deployments", "Deployment inputs, outputs, and operations"),
-            ("Resource group > Export template", "The generated ARM representation and limitations"),
-            ("Storage account > Overview", "The resource produced from Bicep"),
-        ],
-        [
             "https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/overview",
             "https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/deploy-cli",
             "https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/decompile",
@@ -361,12 +317,6 @@ SPECS.update({
         ],
         ["Microsoft.Compute/virtualMachines", "Microsoft.Compute/disks", "Microsoft.Network/virtualNetworks"],
         [
-            ("Virtual machine > Overview", "VM size, power state, and availability metadata"),
-            ("Virtual machine > Disks", "OS/data disk attachment and caching"),
-            ("Virtual machine > Configuration", "Encryption at host state when supported"),
-            ("Virtual machine > Size", "Available resize choices and current SKU"),
-        ],
-        [
             "https://learn.microsoft.com/en-us/azure/virtual-machines/linux/quick-create-cli",
             "https://learn.microsoft.com/en-us/azure/virtual-machines/resize-vm",
             "https://learn.microsoft.com/en-us/azure/virtual-machines/linux/attach-disk-portal",
@@ -392,12 +342,6 @@ SPECS.update({
             "Use move validation for a destination resource group and document the different process required for another region or subscription.",
         ],
         ["Microsoft.Compute/virtualMachineScaleSets", "Microsoft.Compute/availabilitySets"],
-        [
-            ("Virtual machine scale set > Overview", "Orchestration mode, instance count, and zones"),
-            ("Virtual machine scale set > Scaling", "Manual capacity and autoscale bounds"),
-            ("Availability set > Overview", "Fault and update domain configuration"),
-            ("Resource group > Move", "Move validation results or documented dependency blockers"),
-        ],
         [
             "https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/flexible-virtual-machine-scale-sets",
             "https://learn.microsoft.com/en-us/azure/virtual-machines/availability-set-overview",
@@ -426,11 +370,6 @@ SPECS.update({
         ],
         ["Microsoft.ContainerRegistry/registries", "Microsoft.ContainerInstance/containerGroups"],
         [
-            ("Container registry > Repositories", "Imported repository, tag, and digest"),
-            ("Container instance > Containers", "Image, resources, restart policy, and status"),
-            ("Container instance > Logs", "Application output from the running sample"),
-        ],
-        [
             "https://learn.microsoft.com/en-us/azure/container-registry/container-registry-get-started-azure-cli",
             "https://learn.microsoft.com/en-us/azure/container-registry/container-registry-import-images",
             "https://learn.microsoft.com/en-us/azure/container-instances/container-instances-quickstart",
@@ -456,12 +395,6 @@ SPECS.update({
             "Configure bounded HTTP scaling and compare replicas, revisions, and provisioning state.",
         ],
         ["Microsoft.App/managedEnvironments", "Microsoft.App/containerApps"],
-        [
-            ("Container App > Overview", "Application URL, environment, and provisioning state"),
-            ("Container App > Revisions and replicas", "Active revisions, traffic, and replicas"),
-            ("Container App > Scale", "Minimum, maximum, and HTTP scaling rule"),
-            ("Container App > Log stream", "Runtime output from a selected replica"),
-        ],
         [
             "https://learn.microsoft.com/en-us/azure/container-apps/get-started",
             "https://learn.microsoft.com/en-us/azure/container-apps/revisions",
@@ -489,12 +422,6 @@ SPECS.update({
         ],
         ["Microsoft.Web/serverfarms", "Microsoft.Web/sites", "Microsoft.Insights/autoscalesettings"],
         [
-            ("App Service plan > Scale out", "Manual capacity and autoscale configuration"),
-            ("App Service > Deployment slots", "Production and staging slots"),
-            ("Deployment slot > Configuration", "Slot-specific application settings"),
-            ("App Service > Activity log", "Slot swap operation and result"),
-        ],
-        [
             "https://learn.microsoft.com/en-us/azure/app-service/quickstart-powershell",
             "https://learn.microsoft.com/en-us/azure/app-service/manage-scale-up",
             "https://learn.microsoft.com/en-us/azure/app-service/manage-scale-per-app",
@@ -520,12 +447,6 @@ SPECS.update({
             "Validate the DNS TXT/CNAME records and bind AZ104_CUSTOM_HOSTNAME and AZ104_CERTIFICATE_PATH only when supplied.",
         ],
         ["Microsoft.Web/serverfarms", "Microsoft.Web/sites", "Microsoft.Storage/storageAccounts", "Microsoft.Network/virtualNetworks"],
-        [
-            ("App Service > Configuration > General settings", "HTTPS-only and minimum inbound TLS"),
-            ("App Service > Networking", "Regional VNet integration"),
-            ("App Service > Backups", "Backup destination and schedule with secrets hidden"),
-            ("App Service > Custom domains", "Validated custom hostname and TLS binding when gated inputs exist"),
-        ],
         [
             "https://learn.microsoft.com/en-us/azure/app-service/configure-ssl-bindings",
             "https://learn.microsoft.com/en-us/azure/app-service/app-service-web-tutorial-custom-domain",
@@ -554,12 +475,6 @@ SPECS.update({
         ],
         ["Microsoft.Network/virtualNetworks", "Microsoft.Network/publicIPAddresses"],
         [
-            ("Virtual network > Address space", "Non-overlapping hub and spoke prefixes"),
-            ("Virtual network > Subnets", "Application and management subnet boundaries"),
-            ("Virtual network > Peerings", "Connected bidirectional peerings"),
-            ("Public IP address > Overview", "Standard SKU, static allocation, and zones"),
-        ],
-        [
             "https://learn.microsoft.com/en-us/azure/virtual-network/quick-create-powershell",
             "https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-manage-peering",
             "https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/public-ip-addresses",
@@ -584,12 +499,6 @@ SPECS.update({
             "Use effective NSG and route queries plus Network Watcher diagnostics to explain a blocked connection.",
         ],
         ["Microsoft.Network/networkSecurityGroups", "Microsoft.Network/applicationSecurityGroups", "Microsoft.Network/routeTables", "Microsoft.Network/virtualNetworks"],
-        [
-            ("Network security group > Security rules", "Custom priorities, source ASG, destination ASG, and port"),
-            ("Network interface > Effective security rules", "Combined subnet and NIC rule evaluation"),
-            ("Network interface > Effective routes", "System and user-defined route selection"),
-            ("Network Watcher > IP flow verify", "Allow or deny result and matching rule"),
-        ],
         [
             "https://learn.microsoft.com/en-us/azure/virtual-network/manage-network-security-group",
             "https://learn.microsoft.com/en-us/azure/virtual-network/application-security-groups",
@@ -655,105 +564,6 @@ def write_text(path: Path, content: str) -> None:
         handle.write(normalized)
 
 
-def safe_id(value: str) -> str:
-    return re.sub(r"[^a-z0-9]+", "-", value.lower()).strip("-")
-
-
-# Checkpoint that each authored portal capture evidences, per generated lab.
-PORTAL_CHECKPOINT_MAP: dict[str, list[int]] = {
-    "02": [1, 2, 4],
-    "03": [3, 4, 4],
-    "04": [2, 3, 4],
-    "05": [2, 3, 4, 4],
-    "06": [1, 2, 3, 4],
-    "07": [3, 4, 4, 4],
-    "08": [2, 3, 4, 4],
-    "09": [1, 2, 2, 4],
-    "10": [3, 4, 3],
-    "11": [1, 3, 2, 4],
-    "12": [2, 3, 1, 4],
-    "13": [2, 3, 4],
-    "14": [2, 3, 4, 4],
-    "15": [2, 3, 3, 4],
-    "16": [1, 2, 3, 4],
-    "17": [1, 1, 2, 3],
-    "18": [2, 4, 4, 4],
-    "19": [2, 4, 4, 1],
-    "20": [2, 1, 4, 3],
-    "21": [2, 3, 3, 4],
-    "22": [4, 3, 2, 4],
-    "23": [3, 1, 4, 4],
-    "24": [2, 3, 1, 4],
-    "25": [3, 3, 4, 3],
-    "26": [1, 2, 3, 4],
-    "27": [3, 2, 3, 4],
-}
-
-
-def portal_captures(number: str, spec: dict) -> list[dict]:
-    checkpoints = PORTAL_CHECKPOINT_MAP[number]
-    if len(checkpoints) != len(spec["portal"]):
-        raise ValueError(f"Lab {number}: portal capture and checkpoint-map lengths differ")
-    captures: list[dict] = []
-    for index, ((blade, evidence), checkpoint) in enumerate(zip(spec["portal"], checkpoints), 1):
-        segments = [safe_id(part) for part in blade.split(">")]
-        name = "-".join(segments[-2:]) if len(segments) > 1 else segments[0]
-        captures.append(
-            {
-                "file": f"{index:02d}-{name}.png",
-                "checkpoint": checkpoint,
-                "portalBlade": blade.strip(),
-                "evidenceShown": evidence.strip(),
-                "captureDate": None,
-                "region": None,
-                "redactions": [],
-                "portalConfirmed": False,
-                "status": "pending",
-            }
-        )
-    return captures
-
-
-def render_portal_manifest(number: str, spec: dict) -> dict:
-    return {
-        "schemaVersion": "1.0",
-        "labId": f"LAB-{number}",
-        "status": "pending",
-        "source": (
-            "Every capture must come from a signed-in session of the real Azure Portal "
-            "(https://portal.azure.com) against the disposable lab environment; fabricated or "
-            "placeholder images are forbidden."
-        ),
-        "captures": portal_captures(number, spec),
-    }
-
-
-def render_images_readme(number: str) -> str:
-    return f"""# Lab {number} portal evidence
-
-This folder holds sanitized Azure Portal screenshots for Lab {number} and the manifest that tracks them.
-
-## Contract
-
-- [portal/manifest.yml](portal/manifest.yml) lists every planned capture with its checkpoint, blade, and expected evidence.
-- A PNG enters this folder only after an authorized live run and full sanitization; fabricated or placeholder images are forbidden.
-- Statuses progress `pending` → `captured` → `sanitized` → `verified`; raw (`captured`) files must never be committed.
-- Two to five captures per lab, PNG only, at most 1920 px wide, and roughly 500 KB or less after optimization.
-
-## Sanitization checklist
-
-Before a capture may be recorded as `sanitized`:
-
-1. Crop to the relevant blade and remove browser chrome, bookmarks, other tabs, and unrelated resources.
-2. Irreversibly redact tenant and subscription GUIDs, account names, email addresses and UPNs, tokens, keys, public IPs, and billing details.
-3. Strip all image metadata (EXIF, XMP, and text chunks) and re-encode as an optimized PNG.
-4. Update the matching manifest entry: capture date, region (or `not-applicable` for tenant-plane blades), the redactions performed, `portalConfirmed: true`, and the new status.
-5. Record `verified` only after a second manual review confirms no identifying content remains.
-
-Repository-wide rules live in [docs/evidence-handling.md](../../../docs/evidence-handling.md).
-"""
-
-
 def command_lane(spec: dict) -> str:
     return "cli" if "CLI" in spec["surface"] else "powershell"
 
@@ -776,136 +586,251 @@ def difficulty_for(number: int) -> str:
     return "advanced"
 
 
-def make_questions(number: str, spec: dict, objective_records: list[dict]) -> list[dict]:
-    """Create ten original, source-backed checks with balanced answer positions."""
-    difficulties = ["foundational"] * 3 + ["applied"] * 5 + ["advanced"] * 2
-    correct_positions = ["A", "B", "C", "D", "A", "B", "C", "D", "A", "B"]
-    objective_ids = [item["id"] for item in objective_records]
-    titles = [item["title"] for item in objective_records]
-    resources = ", ".join(spec["resources"][:3]) or "the recorded tenant objects"
-    expected = ", ".join(spec["expected_types"][:2]) or "the exact recorded object IDs"
-    gate = spec["gate"]
-    sources = spec["sources"]
-
-    templates = [
-        (
-            f"Which statement best captures the key design principle for {spec['title'].lower()}?",
-            spec["fact"],
-            "Every related control is interchangeable, so choose whichever command is shortest.",
-            "A command surface automatically supplies any missing authorization or configuration.",
-            "Cleanup evidence is unnecessary when a resource group has a recognizable name.",
-            f"The lab's central distinction is: {spec['fact']}",
-        ),
-        (
-            f"You must begin the hands-on path for '{titles[0]}'. Which action matches the reviewed lab sequence?",
-            spec["actions"][0],
-            "Delete similarly named resources before recording the current subscription.",
-            "Change the active tenant automatically and continue without displaying the new context.",
-            "Infer configuration from resource names without querying the live control plane.",
-            f"The first implementation checkpoint is: {spec['actions'][0]}",
-        ),
-        (
-            f"Which authorization statement is appropriate before creating {resources} in this lab?",
-            f"Confirm the active context and obtain only the declared role boundary: {spec['role']}",
-            "Subscription Reader is sufficient for every create, update, role, policy, and recovery operation.",
-            "A local administrator account automatically grants Microsoft Entra and Azure permissions.",
-            "Skip authorization checks because all resources use an AZ104 naming prefix.",
-            f"The documented permission boundary is {spec['role']}",
-        ),
-        (
-            f"The setup command for Lab {number} is run without its execution switch. What should happen?",
-            "It should print the intended resources, context, cost class, and gates without changing Azure.",
-            "It should deploy everything and ask for confirmation only before cleanup.",
-            "It should log in interactively and select the first available subscription.",
-            "It should delete any older run that shares the same lab number.",
-            "Preview-first behavior makes the default invocation non-mutating; execution requires an explicit switch.",
-        ),
-        (
-            f"Which validation evidence most directly proves the baseline resource boundary for Lab {number}?",
-            f"Query the exact recorded scope and verify the intended resource/object types, including {expected}.",
-            "Search the whole tenant by display-name prefix and accept the first match.",
-            "Treat a successful setup process exit code as proof of every data-plane and relationship requirement.",
-            "Verify only that an Azure subscription exists.",
-            "Validation must use the recorded scope and test the intended state independently of setup.",
-        ),
-        (
-            f"A learner reaches the externally gated checkpoint in Lab {number}. What is the safest response?",
-            f"Stop that branch unless its prerequisites are explicitly satisfied: {gate}",
-            "Invent a placeholder tenant, email address, domain, or production target and continue.",
-            "Broaden the assignment to subscription scope so the gate no longer applies.",
-            "Mark the checkpoint as passed because the offline tests succeeded.",
-            f"The live-only gate is explicit and must not be guessed: {gate}",
-        ),
-        (
-            f"Which command-side evidence best supports the first completed checkpoint in Lab {number}?",
-            f"Run the independent validator and retain redacted structured output for the exact recorded scope after: {spec['actions'][0]}",
-            "Copy a successful command from an unrelated tenant and treat it as this run's evidence.",
-            "Record access tokens and keys so another learner can replay the same session.",
-            "Use the setup process exit code alone without querying resource state.",
-            "Command evidence must come from the recorded run, exclude secrets and identifiers, and prove the intended state independently of setup.",
-        ),
-        (
-            f"During cleanup of Lab {number}, several similarly named resources exist. Which targeting method is correct?",
-            "Use the exact IDs and run metadata recorded before creation, verify the lab tags, then delete only that boundary.",
-            "Delete every resource whose name contains az104.",
-            "Delete the active subscription to guarantee that no lab resources remain.",
-            "Use creation timestamps alone and remove the oldest matching resources.",
-            "Recorded immutable IDs plus ownership tags provide the narrow, auditable cleanup boundary.",
-        ),
-        (
-            f"Setup completed for Lab {number}, but one required state check fails. What is the best break/fix approach?",
-            "Inspect the failing check and exact recorded resource, repair the smallest identified cause, then rerun validation.",
-            "Rerun setup repeatedly with new names until one run reports no error.",
-            "Edit validation.json so the failed status reads pass.",
-            "Disable all policies, locks, NSGs, and monitoring controls in the subscription.",
-            "Evidence-led repair limits drift and preserves the diagnostic value of an independent validator.",
-        ),
-        (
-            f"Which completion claim is valid immediately after this repository's offline tests pass for Lab {number}?",
-            "The documentation, schemas, script contracts, assessments, diagrams, and fixtures are offline-validated; live Azure state remains pending until executed.",
-            "Every command has been proven in every Azure region and tenant type.",
-            "The lab is live-verified even if no subscription was used.",
-            "Any pending gated checkpoint can be treated as successfully completed.",
-            "Offline validation proves artifact quality and safety contracts, not live service behavior.",
-        ),
+def _answer_positions(number: str) -> list[str]:
+    """Return the domain-wide balanced answer-position slice for one lab."""
+    plan = ASSESSMENT_PLAN[number]
+    domain = str(plan["primaryDomain"])
+    domain_numbers = [
+        lab_number
+        for lab_number, item in ASSESSMENT_PLAN.items()
+        if item.get("enabled") and item.get("primaryDomain") == domain
     ]
+    offset = sum(int(ASSESSMENT_PLAN[item]["questionCount"]) for item in domain_numbers if item < number)
+    schedule = list("ABCD" * 12 + "AB")
+    count = int(plan["questionCount"])
+    return schedule[offset : offset + count]
 
+
+def make_questions(number: str, spec: dict, objective_records: list[dict]) -> list[dict]:
+    """Create the allocated original, source-backed questions for one domain lab."""
+    plan = ASSESSMENT_PLAN[number]
+    if not plan["enabled"]:
+        return []
+
+    domain = str(plan["primaryDomain"])
+    prefix = DOMAIN_OBJECTIVE_PREFIXES[domain]
+    objectives = [record for record in objective_records if record["id"].startswith(prefix)]
+    if not objectives:
+        raise ValueError(f"Lab {number} has no objectives in its assessment domain {domain}")
+
+    difficulties = list(plan["difficulties"])
+    positions = _answer_positions(number)
+    occurrences: Counter[str] = Counter()
+    resources = spec["resources"] or ["the recorded lab boundary"]
+    expected_types = spec["expected_types"] or ["the intended recorded state"]
     questions: list[dict] = []
-    for index, template in enumerate(templates):
-        stem, correct, wrong1, wrong2, wrong3, explanation = template
-        correct_position = correct_positions[index]
-        wrongs = iter([wrong1, wrong2, wrong3])
-        options = {letter: correct if letter == correct_position else next(wrongs) for letter in "ABCD"}
-        objective_id = objective_ids[index % len(objective_ids)]
-        # Include a second objective on scenario questions while retaining full primary coverage.
-        mapped = [objective_id]
-        if index in {7, 8, 9} and len(objective_ids) > 1:
-            mapped.append(objective_ids[(index + 1) % len(objective_ids)])
-        distractors = {
-            letter: (
-                f"Correct. {explanation}"
-                if letter == correct_position
-                else "This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state."
-            )
-            for letter in "ABCD"
-        }
+
+    for index, (difficulty, correct_position) in enumerate(zip(difficulties, positions), 1):
+        objective = objectives[(index - 1) % len(objectives)]
+        objective_title = objective["title"]
+        action = spec["actions"][(index - 1) % len(spec["actions"])]
+        resource = resources[(index - 1) % len(resources)]
+        expected = expected_types[(index - 1) % len(expected_types)]
+        variant = occurrences[difficulty]
+        occurrences[difficulty] += 1
+
+        if difficulty == "foundational":
+            templates = [
+                (
+                    f"Which principle is most important when working on '{objective_title}' in Lab {number}?",
+                    spec["fact"],
+                    "The shortest command is always correct even when it changes a broader scope.",
+                    "A successful sign-in automatically supplies every required Azure and Microsoft Entra role.",
+                    "A recognizable resource name removes the need for validation and scoped cleanup.",
+                    f"The lab establishes this design principle: {spec['fact']}",
+                ),
+                (
+                    f"Which lab action directly supports the objective '{objective_title}'?",
+                    action,
+                    "Change the active tenant without displaying or confirming the resulting context.",
+                    "Search the whole tenant for a similar display name and modify the first match.",
+                    "Mark the objective complete after reading documentation without checking any state.",
+                    f"The reviewed hands-on action for this objective is: {action}",
+                ),
+                (
+                    f"Which authorization approach is appropriate before practicing '{objective_title}'?",
+                    f"Confirm the active context and use only the declared role boundary: {spec['role']}",
+                    "Use a production subscription because its resources already exist.",
+                    "Assign Global Administrator and subscription Owner for every lab regardless of the operation.",
+                    "Skip role checks when the run ID contains the lab number.",
+                    f"Least privilege requires the documented boundary: {spec['role']}",
+                ),
+                (
+                    f"Which resource or object belongs inside the recorded boundary for '{objective_title}'?",
+                    f"Use the exact recorded identity and scope for {resource}.",
+                    "Use whichever similarly named object appears first in a broad search.",
+                    "Use an unrelated shared resource without recording its immutable ID.",
+                    "Use a production object when the sandbox prerequisite is unavailable.",
+                    f"The lab records the exact scope and identity of {resource} before validation and cleanup.",
+                ),
+                (
+                    f"What must an administrator verify before changing {resource} for '{objective_title}'?",
+                    "Verify the tenant or subscription context, permissions, intended scope, and live gate before mutation.",
+                    "Verify only that the command-line tool starts successfully.",
+                    "Verify only that a resource with a similar name exists somewhere in Azure.",
+                    "Verify the result after cleanup and omit the pre-change context check.",
+                    "Context, authorization, scope, and gates are separate prerequisites that must be confirmed.",
+                ),
+                (
+                    f"Which expected state best supports '{objective_title}' after the baseline is created?",
+                    f"An independent query confirms {expected} inside the exact recorded run boundary.",
+                    "The setup process exits successfully without any independent state query.",
+                    "A copied view from an unrelated environment appears similar to the expected configuration.",
+                    "The resource group name contains AZ104 even though its contents were not inspected.",
+                    f"Independent validation must confirm {expected} in the current run.",
+                ),
+            ]
+        elif difficulty == "applied":
+            templates = [
+                (
+                    f"A learner previews the implementation for '{objective_title}'. What behavior is required?",
+                    "Display the context, intended changes, cost and gated branches without mutating Azure.",
+                    "Create the baseline immediately and request approval only before cleanup.",
+                    "Select the first accessible subscription and hide the resulting context.",
+                    "Delete any older resource whose name resembles the new run ID.",
+                    "Preview mode is deliberately non-mutating and exposes the complete intended boundary.",
+                ),
+                (
+                    f"Which implementation step should the learner perform for '{objective_title}'?",
+                    action,
+                    "Replace the lab action with a tenant-wide change that is easier to discover.",
+                    "Copy resource identifiers from another run instead of recording returned IDs.",
+                    "Skip the operation and edit validation.json to show a passing result.",
+                    f"The lab's reviewed command path performs this bounded action: {action}",
+                ),
+                (
+                    f"Which evidence most directly validates '{objective_title}' for {resource}?",
+                    f"Query the exact recorded scope and independently verify {expected}.",
+                    "Treat the setup exit code as proof of every configuration and relationship.",
+                    "List the entire subscription and assume similarly named resources belong to this run.",
+                    "Record a credential so another learner can replay the authenticated session.",
+                    f"The independent validation path must prove {expected} for the exact recorded object.",
+                ),
+                (
+                    f"The '{objective_title}' checkpoint reaches an external prerequisite. What should happen?",
+                    f"Run the branch only when this documented gate is satisfied: {spec['gate']}",
+                    "Invent a domain, notification target, license, quota, or tenant value and continue.",
+                    "Broaden permissions until the prerequisite can no longer block the operation.",
+                    "Mark the branch passed because its command syntax was checked offline.",
+                    f"Unavailable live prerequisites remain skipped or partial; the documented gate is: {spec['gate']}",
+                ),
+                (
+                    f"What is the safest command-evidence practice after completing '{objective_title}'?",
+                    "Retain only redacted structured output from an independent query of the recorded run.",
+                    "Commit the complete account object so reviewers can identify the tenant.",
+                    "Save tokens, keys, passwords, or SAS values beside the validation result.",
+                    "Reuse successful output from an earlier run with a similar resource name.",
+                    "Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.",
+                ),
+                (
+                    f"Which negative check strengthens validation of '{objective_title}'?",
+                    "Confirm the intended state and also prove that broader, anonymous, or unintended access was not introduced.",
+                    "Check only that at least one resource exists in the subscription.",
+                    "Repair every warning automatically before recording what caused it.",
+                    "Ignore denied queries and record them as passing checks.",
+                    "A bounded negative assertion detects accidental privilege or exposure beyond the intended state.",
+                ),
+                (
+                    f"Why should the run manifest record the exact ID of {resource}?",
+                    "It lets validation and cleanup target the immutable object created by this run rather than a name match.",
+                    "It lets setup store access tokens and passwords for later reuse.",
+                    "It allows cleanup to delete every object with the same prefix.",
+                    "It removes the need to confirm the tenant or subscription context.",
+                    "Immutable recorded IDs create a deterministic validation and cleanup boundary.",
+                ),
+                (
+                    f"Several similarly named resources exist when cleaning up '{objective_title}'. What is correct?",
+                    "Verify the recorded IDs and ownership tags, preview the targets, and delete only this run's boundary.",
+                    "Delete all resources containing az104 in their names.",
+                    "Delete the active subscription to guarantee that no lab state remains.",
+                    "Choose targets only by creation time and remove the oldest objects.",
+                    "Cleanup must use the exact recorded boundary and a separate execution confirmation.",
+                ),
+            ]
+        else:
+            templates = [
+                (
+                    f"Validation for '{objective_title}' fails after setup. What is the best break/fix method?",
+                    "Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.",
+                    "Rerun setup repeatedly with new names until one attempt appears successful.",
+                    "Change validation.json directly so the failed result reads pass.",
+                    "Disable unrelated policies, locks, network controls, and monitoring across the subscription.",
+                    "Evidence-led repair preserves scope and makes the cause and correction auditable.",
+                ),
+                (
+                    f"The operation for '{objective_title}' is asynchronous or gated. How should completion be recorded?",
+                    "Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.",
+                    "Record pass as soon as the request is accepted, regardless of its final state.",
+                    "Fabricate expected output so the assessment and documentation appear complete.",
+                    "Remove the check from validation whenever the service takes longer than expected.",
+                    "Accepted requests and offline checks do not prove the final live state.",
+                ),
+                (
+                    f"An administrator discovers drift while validating '{objective_title}'. Which response preserves least privilege?",
+                    "Compare the live query with the recorded expectation, change only the mismatched setting, and validate again.",
+                    "Grant subscription Owner and tenant administrator roles to avoid further authorization errors.",
+                    "Replace every resource in the subscription instead of identifying the mismatch.",
+                    "Accept the drift when the resource name still matches the lab prefix.",
+                    "The narrowest evidence-supported correction avoids unrelated changes and excess privilege.",
+                ),
+                (
+                    f"Which claim about '{objective_title}' is valid after repository-only tests pass?",
+                    "Its documentation, command contracts, assessment, diagram, and fixtures are offline-validated; live state remains unverified.",
+                    "Every command has been proven in all Azure regions and tenant types.",
+                    "The lab is live-verified even though no authorized Azure run occurred.",
+                    "Every unavailable gated branch can be reported as successfully completed.",
+                    "Offline validation proves repository artifacts, not live Azure behavior.",
+                ),
+                (
+                    f"Which combined evidence is strongest for the advanced '{objective_title}' scenario?",
+                    f"Recorded IDs, an independent query proving {expected}, a bounded negative check, and a residual-state audit after cleanup.",
+                    "A successful setup exit code and a resource name containing the lab number.",
+                    "A broad subscription inventory that is not tied to the run manifest.",
+                    "A copied command example with no output from the active environment.",
+                    "Strong evidence connects the exact run boundary, positive and negative state, and verified cleanup.",
+                ),
+            ]
+
+        stem, correct, wrong_a, wrong_b, wrong_c, explanation = templates[variant % len(templates)]
+        wrongs = [wrong_a, wrong_b, wrong_c]
+        wrong_explanations = [
+            "This choice changes or trusts a broader scope than the recorded lab boundary.",
+            "This choice skips independent evidence or relies on ambiguous resource identity.",
+            "This choice conflicts with the lab's authorization, safety, or truthful-status contract.",
+        ]
+        wrong_iter = iter(zip(wrongs, wrong_explanations))
+        options: dict[str, str] = {}
+        distractors: dict[str, str] = {}
+        for letter in "ABCD":
+            if letter == correct_position:
+                options[letter] = correct
+                distractors[letter] = f"Correct. {explanation}"
+            else:
+                option, distractor = next(wrong_iter)
+                options[letter] = option
+                distractors[letter] = distractor
+
+        mapped = [objective["id"]]
+        if difficulty == "advanced" and len(objectives) > 1:
+            second = objectives[index % len(objectives)]["id"]
+            if second not in mapped:
+                mapped.append(second)
+
         questions.append(
             {
-                "id": f"LAB{number}-Q{index + 1:02d}",
+                "id": f"LAB{number}-Q{index:02d}",
                 "objectiveIds": mapped,
-                "difficulty": difficulties[index],
+                "difficulty": difficulty,
                 "stem": stem,
                 "options": options,
                 "correctOption": correct_position,
                 "explanation": explanation,
                 "distractorExplanations": distractors,
-                "sourceUrls": [sources[index % len(sources)]],
+                "sourceUrls": [spec["sources"][(index - 1) % len(spec["sources"])]],
                 "lastVerified": REVIEW_DATE,
             }
         )
     return questions
-
-
 def render_questions(number: str, title: str, questions: list[dict]) -> tuple[str, str]:
     question_lines = [f"# Lab {number} knowledge check", "", title, "", "Choose one answer for each question before opening the answer key.", ""]
     answer_lines = [f"# Lab {number} answer key", "", f"Return to [the questions](QUESTIONS.md).", ""]
@@ -1014,10 +939,7 @@ def make_lab_metadata(number: str, slug: str, spec: dict, objectives: list[dict]
             "requiresExecuteFlag": True,
             "residualAuditRequired": True,
         },
-        "screenshots": {
-            "status": "pending",
-            "manifest": "images/portal/manifest.yml",
-        },
+        "assessment": metadata_for_lab(number),
         "lastOfflineValidated": REVIEW_DATE if status == "offline-validated" else None,
         "lastLiveVerified": None,
     }
@@ -1067,10 +989,13 @@ def render_readme(number: str, slug: str, spec: dict, objectives: list[dict]) ->
             ]
         )
     actions_block = "\n".join(action_sections)
-    portal_rows = "\n".join(
-        f"| `{item['file']}` | {item['checkpoint']} | {item['portalBlade']} | {item['evidenceShown']} |"
-        for item in portal_captures(number, spec)
-    )
+    if ASSESSMENT_PLAN[number]["enabled"]:
+        exam_practice = """- Complete [assessment/QUESTIONS.md](assessment/QUESTIONS.md) without opening the answer key.
+- Review [assessment/ANSWERS.md](assessment/ANSWERS.md) and trace each explanation to its Microsoft Learn source.
+- Revisit every mapped objective whose answer you could not justify from the resource state."""
+    else:
+        exam_practice = """This hands-on lab has no separate question set. Use the generated
+[domain question-bank index](../../docs/question-bank-index.md) after completing the practical work."""
     providers = ", ".join(f"`{provider}`" for provider in spec["providers"]) or "No Azure resource provider; tenant/Graph plane only"
     modules = ", ".join(f"`{module}`" for module in spec["modules"]) or "No extra PowerShell modules"
     return f"""# Lab {number}: {spec['title']}
@@ -1097,7 +1022,7 @@ The editable Mermaid source is [diagrams/architecture.mmd](diagrams/architecture
 
 ## Scenario and outcome
 
-You are the Azure administrator for a training environment. Your task is to implement the smallest isolated configuration that demonstrates the mapped exam objectives, validate it independently, capture sanitized evidence, and remove only what this run recorded.
+You are the Azure administrator for a training environment. Your task is to implement the smallest isolated configuration that demonstrates the mapped exam objectives, validate it independently, retain redacted command evidence, and remove only what this run recorded.
 
 The key design idea is: **{spec['fact']}**
 
@@ -1144,7 +1069,7 @@ Cost is not a fixed promise. Check current pricing, free allowances, quotas, and
 
 ## Run the lab
 
-Run these commands from this lab folder. The examples intentionally use placeholders rather than silently reading an arbitrary subscription.
+The complete learner-facing implementations are embedded above. The commands in this section are optional shortcuts that run the identical retained script files. Run them from this lab folder. The examples intentionally use placeholders rather than silently reading an arbitrary subscription.
 
 ### 1. Preview
 
@@ -1175,14 +1100,6 @@ Inspect `.state/az104l{number}-01/validation.json`. A `pass` applies only to che
 
 Positive checks should prove the intended resources, configuration, relationships, or health. Negative checks should prove that anonymous access, excess scope, accidental inheritance, unresolved DNS, unhealthy probes, or unrecorded resources were not introduced where the scenario forbids them.
 
-## Portal evidence
-
-Portal screenshots are planned evidence captured only during an authorized live run. Until then every entry in [images/portal/manifest.yml](images/portal/manifest.yml) stays `pending`, and no placeholder image is committed. Capture and sanitization rules live in [images/README.md](images/README.md).
-
-| Planned file | Checkpoint | Portal blade | Evidence |
-|---|---:|---|---|
-{portal_rows}
-
 ## Break/fix exercise
 
 1. Pick one reversible configuration created inside the recorded lab boundary.
@@ -1211,9 +1128,7 @@ Run validation again after deletion. Some services use soft delete, retained rec
 
 ## Exam practice
 
-- Complete [assessment/QUESTIONS.md](assessment/QUESTIONS.md) without opening the answer key.
-- Review [assessment/ANSWERS.md](assessment/ANSWERS.md) and trace each explanation to its Microsoft Learn source.
-- Revisit every mapped objective whose answer you could not justify from the resource state.
+{exam_practice}
 
 ## Microsoft Learn sources
 
@@ -1235,7 +1150,7 @@ def render_diagram(number: str, spec: dict) -> tuple[str, str]:
     mermaid_lines.extend(
         [
             '    S --> V["Independent validation"]',
-            '    V --> E["Sanitized evidence"]',
+            '    V --> E["Redacted command evidence"]',
             '    V --> C["Previewed cleanup"]',
             "    classDef control fill:#e8f1ff,stroke:#2563eb,color:#102a43;",
             "    classDef resource fill:#e9f8ef,stroke:#16803a,color:#102a43;",
@@ -1253,7 +1168,7 @@ def render_diagram(number: str, spec: dict) -> tuple[str, str]:
         arrows.append(f'<path d="M 455 155 L 500 {y + 20}" class="arrow"/>')
     svg = f'''<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">
 <title id="title">Lab {number} architecture</title>
-<desc id="desc">Preview-first operator workflow, a recorded lab boundary, intended resources, independent validation, sanitized evidence, and scoped cleanup.</desc>
+<desc id="desc">Preview-first operator workflow, a recorded lab boundary, intended resources, independent validation, redacted command evidence, and scoped cleanup.</desc>
 <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#46647f"/></marker></defs>
 <style>text{{font-family:Segoe UI,Arial,sans-serif;font-size:14px;fill:#102a43}} .control{{fill:#e8f1ff;stroke:#2563eb;stroke-width:2}} .resource{{fill:#e9f8ef;stroke:#16803a;stroke-width:2}} .arrow{{fill:none;stroke:#46647f;stroke-width:2;marker-end:url(#arrow)}}</style>
 <rect width="100%" height="100%" fill="#ffffff"/>
@@ -1266,7 +1181,7 @@ def render_diagram(number: str, spec: dict) -> tuple[str, str]:
 {''.join(arrows)}
 <rect x="40" y="215" width="180" height="50" rx="8" class="control"/><text x="130" y="237" text-anchor="middle">Independent validation</text><text x="130" y="256" text-anchor="middle">positive + negative</text>
 <path d="M275 165 L220 230" class="arrow"/>
-<rect x="40" y="290" width="180" height="50" rx="8" class="control"/><text x="130" y="312" text-anchor="middle">Evidence + cleanup</text><text x="130" y="331" text-anchor="middle">sanitized and scoped</text>
+<rect x="40" y="290" width="180" height="50" rx="8" class="control"/><text x="130" y="312" text-anchor="middle">Evidence + cleanup</text><text x="130" y="331" text-anchor="middle">redacted and scoped</text>
 <path d="M130 265 L130 290" class="arrow"/>
 </svg>'''
     return "\n".join(mermaid_lines), svg
@@ -2110,12 +2025,6 @@ SPECS.update({
         ],
         ["Microsoft.Network/privateEndpoints", "Microsoft.Network/privateDnsZones", "Microsoft.Network/virtualNetworks", "Microsoft.Storage/storageAccounts"],
         [
-            ("Storage account > Networking", "Service endpoint rule, private endpoint, and default access"),
-            ("Private endpoint > DNS configuration", "FQDN and private IP mapping"),
-            ("Private DNS zone > Recordsets", "Storage-account private A record"),
-            ("Virtual network > Subnets", "Endpoint policies and service endpoint state"),
-        ],
-        [
             "https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-service-endpoints-overview",
             "https://learn.microsoft.com/en-us/azure/private-link/private-endpoint-overview",
             "https://learn.microsoft.com/en-us/azure/storage/common/storage-private-endpoints",
@@ -2141,12 +2050,6 @@ SPECS.update({
             "Verify authoritative name servers and perform external delegation only for AZ104_OWNED_DNS_ZONE.",
         ],
         ["Microsoft.Network/bastionHosts", "Microsoft.Network/dnsZones", "Microsoft.Network/publicIPAddresses", "Microsoft.Network/virtualNetworks"],
-        [
-            ("Bastion > Overview", "Provisioning state, SKU, public IP, and VNet"),
-            ("Virtual network > Subnets", "AzureBastionSubnet prefix and association"),
-            ("DNS zone > Overview", "Azure authoritative name servers"),
-            ("DNS zone > Recordsets", "A, CNAME, and TXT examples"),
-        ],
         [
             "https://learn.microsoft.com/en-us/azure/bastion/tutorial-create-host-cli",
             "https://learn.microsoft.com/en-us/azure/bastion/configuration-settings",
@@ -2175,12 +2078,6 @@ SPECS.update({
         ],
         ["Microsoft.Network/loadBalancers", "Microsoft.Compute/virtualMachines", "Microsoft.Network/networkWatchers"],
         [
-            ("Load balancer > Backend pools", "Both backend NIC configurations"),
-            ("Load balancer > Health probes", "Probe protocol, port, and health status"),
-            ("Load balancer > Insights", "Data-path health and frontend/backend mapping"),
-            ("Network Watcher > Connection troubleshoot", "Reachability, latency, and fault details"),
-        ],
-        [
             "https://learn.microsoft.com/en-us/azure/load-balancer/quickstart-load-balancer-standard-public-powershell",
             "https://learn.microsoft.com/en-us/azure/load-balancer/load-balancer-troubleshoot-health-probe-status",
             "https://learn.microsoft.com/en-us/azure/network-watcher/connection-troubleshoot-overview",
@@ -2206,12 +2103,6 @@ SPECS.update({
             "Query platform metrics and compare baseline monitoring with VM, Storage, and Network Insights dependencies.",
         ],
         ["Microsoft.OperationalInsights/workspaces", "Microsoft.Insights/diagnosticSettings", "Microsoft.Storage/storageAccounts"],
-        [
-            ("Monitor > Metrics", "Selected resource metric, aggregation, and time grain"),
-            ("Log Analytics workspace > Logs", "KQL query text and returned schema/results"),
-            ("Resource > Diagnostic settings", "Destination workspace and enabled categories"),
-            ("Monitor > Insights", "Onboarding or interpreted health for VM, storage, and network"),
-        ],
         [
             "https://learn.microsoft.com/en-us/azure/azure-monitor/metrics/metrics-getting-started",
             "https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/diagnostic-settings",
@@ -2240,12 +2131,6 @@ SPECS.update({
         ],
         ["Microsoft.Insights/actionGroups", "Microsoft.Insights/metricAlerts", "Microsoft.Insights/activityLogAlerts", "Microsoft.AlertsManagement/actionRules"],
         [
-            ("Monitor > Alerts > Alert rules", "Metric and activity-log conditions and scopes"),
-            ("Monitor > Alerts > Action groups", "Receivers and common alert schema"),
-            ("Monitor > Alerts > Alert processing rules", "Schedule, filters, and action behavior"),
-            ("Monitor > Alerts", "A test or historical alert lifecycle when available"),
-        ],
-        [
             "https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/action-groups",
             "https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-create-metric-alert-rule",
             "https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-activity-log",
@@ -2272,12 +2157,6 @@ SPECS.update({
             "Run a restore workflow, inspect Backup reports/alerts prerequisites, then stop protection and delete backup data before vault cleanup.",
         ],
         ["Microsoft.RecoveryServices/vaults", "Microsoft.DataProtection/backupVaults", "Microsoft.Compute/virtualMachines"],
-        [
-            ("Recovery Services vault > Backup policies", "Schedule, retention, and protected item count"),
-            ("Recovery Services vault > Backup jobs", "On-demand backup or restore job status"),
-            ("Backup vault > Backup instances", "Modern vault workload and protection state"),
-            ("Business Continuity Center > Alerts or Reports", "Configured monitoring destination and current state"),
-        ],
         [
             "https://learn.microsoft.com/en-us/azure/backup/backup-create-recovery-services-vault",
             "https://learn.microsoft.com/en-us/azure/backup/create-manage-backup-vault",
@@ -2307,12 +2186,6 @@ SPECS.update({
         ],
         ["Microsoft.RecoveryServices/vaults", "Microsoft.Compute/virtualMachines", "Microsoft.Network/virtualNetworks"],
         [
-            ("Recovery Services vault > Replicated items", "Replication health, RPO, and recovery region"),
-            ("Replicated item > Compute and Network", "Target VM, disk, VNet, subnet, and IP choices"),
-            ("Recovery Services vault > Site Recovery jobs", "Test failover and cleanup job sequence"),
-            ("Resource group > Recovery VM", "Isolated test-failover VM before cleanup"),
-        ],
-        [
             "https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-powershell",
             "https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-dr-drill",
             "https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-failover-failback",
@@ -2339,12 +2212,6 @@ SPECS.update({
             "Enable diagnostic settings, queries, alerts, and an operator dashboard before running end-to-end validation and cleanup.",
         ],
         ["Microsoft.Network/virtualNetworks", "Microsoft.Storage/storageAccounts", "Microsoft.Compute/virtualMachines", "Microsoft.Network/loadBalancers", "Microsoft.OperationalInsights/workspaces"],
-        [
-            ("Resource group > Overview", "Complete tagged deployment inventory"),
-            ("Network topology", "Subnets, NSGs, private endpoint, and load balancer"),
-            ("Resource group > Access control and Policies", "Scoped RBAC and policy evidence"),
-            ("Monitor > Logs and Alerts", "Diagnostics, query results, and alert rules"),
-        ],
         [
             "https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/deploy-cli",
             "https://learn.microsoft.com/en-us/azure/architecture/framework/",
@@ -2373,12 +2240,6 @@ SPECS.update({
             "Protect the test workload, run a restore or isolated recovery drill, verify recovered state, and remove protection/resources in dependency order.",
         ],
         ["Microsoft.Compute/virtualMachines", "Microsoft.OperationalInsights/workspaces", "Microsoft.RecoveryServices/vaults"],
-        [
-            ("Resource group > Activity log", "Operational timeline for fault, repair, backup, and cleanup"),
-            ("Network Watcher", "Effective-rule or connection diagnostic evidence"),
-            ("Monitor > Logs and Alerts", "KQL diagnosis and alert lifecycle"),
-            ("Recovery Services vault > Jobs", "Backup and restore/recovery drill result"),
-        ],
         [
             "https://learn.microsoft.com/en-us/azure/network-watcher/network-watcher-ip-flow-verify-overview",
             "https://learn.microsoft.com/en-us/azure/azure-monitor/logs/log-query-overview",
@@ -2617,7 +2478,6 @@ def generate_lab(number: str, spec: dict, objectives_index: dict[str, dict], for
 
     metadata = make_lab_metadata(number, slug, spec, objectives, status)
     questions = make_questions(number, spec, objectives)
-    question_md, answer_md = render_questions(number, spec["title"], questions)
     mermaid, svg = render_diagram(number, spec)
     lane = command_lane(spec)
     test, test_readme, fixture = render_tests(number, lane)
@@ -2625,18 +2485,22 @@ def generate_lab(number: str, spec: dict, objectives_index: dict[str, dict], for
     files: dict[str, str] = {
         "lab.yml": yaml_text(metadata),
         "README.md": render_readme(number, slug, spec, objectives),
-        "assessment/questions.yml": yaml_text(questions),
-        "assessment/QUESTIONS.md": question_md,
-        "assessment/ANSWERS.md": answer_md,
         "diagrams/architecture.mmd": mermaid,
         "diagrams/architecture.svg": svg,
         "solution/README.md": render_solution(number, spec),
         "tests/Contract.Tests.ps1": test,
         "tests/README.md": test_readme,
         "tests/fixtures/validation.sample.json": json.dumps(fixture, indent=2),
-        "images/README.md": render_images_readme(number),
-        "images/portal/manifest.yml": yaml_text(render_portal_manifest(number, spec)),
     }
+    if ASSESSMENT_PLAN[number]["enabled"]:
+        question_md, answer_md = render_questions(number, spec["title"], questions)
+        files.update(
+            {
+                "assessment/questions.yml": yaml_text(questions),
+                "assessment/QUESTIONS.md": question_md,
+                "assessment/ANSWERS.md": answer_md,
+            }
+        )
     if lane == "cli":
         files.update(
             {
@@ -2658,6 +2522,7 @@ def generate_lab(number: str, spec: dict, objectives_index: dict[str, dict], for
     files.update(artifact_files(number))
     for relative, content in files.items():
         write_text(lab_dir / relative, content)
+    sync_lab(lab_dir, check=False)
     return slug
 
 
@@ -2665,8 +2530,10 @@ def update_catalog(status: str) -> None:
     path = LABS_ROOT / "catalog.yml"
     catalog = yaml.safe_load(path.read_text(encoding="utf-8"))
     for item in catalog["labs"]:
-        if item["id"] in SPECS:
+        number = str(item["id"]).zfill(2)
+        if number in SPECS:
             item["status"] = status
+            item["assessmentQuestionCount"] = metadata_for_lab(number)["questionCount"]
     write_text(path, yaml_text(catalog))
 
 

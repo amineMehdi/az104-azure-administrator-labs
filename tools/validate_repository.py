@@ -14,12 +14,21 @@ from urllib.parse import unquote
 import yaml
 from jsonschema import Draft202012Validator, FormatChecker
 
+from assessment_contract import (
+    ASSESSMENT_PLAN,
+    DOMAIN_DISPLAY_NAMES,
+    DOMAIN_OBJECTIVE_PREFIXES,
+    expected_domain_difficulties,
+    metadata_for_lab,
+)
+
 
 ROOT = Path(__file__).resolve().parents[1]
 LAB_PATTERN = re.compile(r"^(\d{2})-[a-z0-9]+(?:-[a-z0-9]+)*$")
 MARKDOWN_LINK = re.compile(r"!?\[[^\]]*\]\(([^)]+)\)")
-SCREENSHOT_STAGES = ["pending", "captured", "sanitized", "verified"]
 MERMAID_TYPES = ("flowchart", "graph", "sequenceDiagram", "classDiagram", "stateDiagram", "erDiagram")
+INLINE_COMMANDS_BEGIN = "<!-- BEGIN GENERATED INLINE COMMANDS -->"
+INLINE_COMMANDS_END = "<!-- END GENERATED INLINE COMMANDS -->"
 IGNORED_DIRECTORY_NAMES = {
     ".cache",
     ".git",
@@ -140,16 +149,32 @@ def validate_catalog(results: Results) -> dict[str, dict]:
 
 def validate_assessment(
     lab_dir: Path,
+    lab: dict,
     valid_objectives: set[str],
     results: Results,
-) -> set[str]:
+) -> tuple[set[str], list[dict]]:
+    number = lab_dir.name[:2]
+    expected_metadata = metadata_for_lab(number)
+    metadata = lab.get("assessment") or {}
     assessment_dir = lab_dir / "assessment"
+    if metadata != expected_metadata:
+        results.error(
+            f"{lab_dir.name}: assessment metadata must match the locked allocation {expected_metadata}"
+        )
+
+    if not metadata.get("enabled"):
+        if assessment_dir.exists():
+            results.error(f"{lab_dir.name}: disabled assessment must not have an assessment directory")
+        else:
+            results.ok(f"{lab_dir.name}: assessment is intentionally disabled")
+        return set(), []
+
     required = ["questions.yml", "QUESTIONS.md", "ANSWERS.md"]
     for name in required:
         if not (assessment_dir / name).exists():
             results.error(f"{lab_dir.name}: missing assessment/{name}")
     if not all((assessment_dir / name).exists() for name in required):
-        return set()
+        return set(), []
 
     questions = load_yaml(assessment_dir / "questions.yml")
     validate_with_schema(
@@ -159,30 +184,42 @@ def validate_assessment(
         results,
     )
     if not isinstance(questions, list):
-        return set()
+        return set(), []
+
+    expected_count = metadata.get("questionCount")
+    if len(questions) != expected_count:
+        results.error(f"{lab_dir.name}: expected {expected_count} questions; found {len(questions)}")
+    else:
+        results.ok(f"{lab_dir.name}: contains its declared {expected_count} questions")
 
     ids = [question.get("id") for question in questions]
-    if len(ids) != len(set(ids)):
-        results.error(f"{lab_dir.name}: duplicate question IDs")
+    expected_ids = [f"LAB{number}-Q{index:02d}" for index in range(1, len(questions) + 1)]
+    if ids != expected_ids:
+        results.error(f"{lab_dir.name}: question IDs must be unique and contiguous from Q01")
+    else:
+        results.ok(f"{lab_dir.name}: question IDs are unique and contiguous")
 
     difficulties = Counter(question.get("difficulty") for question in questions)
-    if difficulties != Counter({"foundational": 3, "applied": 5, "advanced": 2}):
-        results.error(f"{lab_dir.name}: required difficulty mix is 3 foundational, 5 applied, 2 advanced")
+    expected_difficulties = Counter(ASSESSMENT_PLAN[number]["difficulties"])
+    if difficulties != expected_difficulties:
+        results.error(
+            f"{lab_dir.name}: difficulty mix must be {dict(expected_difficulties)}; found {dict(difficulties)}"
+        )
     else:
-        results.ok(f"{lab_dir.name}: question difficulty mix is 3/5/2")
-
-    answers = Counter(question.get("correctOption") for question in questions)
-    if set(answers) != {"A", "B", "C", "D"} or min(answers.values()) < 2 or max(answers.values()) > 3:
-        results.error(f"{lab_dir.name}: answer positions must be balanced 2–3 times per option")
-    else:
-        results.ok(f"{lab_dir.name}: answer positions are balanced")
+        results.ok(f"{lab_dir.name}: question difficulty mix matches its allocation")
 
     mapped: set[str] = set()
+    domain = metadata.get("primaryDomain")
+    objective_prefix = DOMAIN_OBJECTIVE_PREFIXES.get(domain, "")
     for question in questions:
         for objective in question.get("objectiveIds", []):
             mapped.add(objective)
             if objective not in valid_objectives:
                 results.error(f"{question.get('id')}: unknown objective ID {objective}")
+            elif not objective.startswith(objective_prefix):
+                results.error(
+                    f"{question.get('id')}: objective {objective} does not belong to primary domain {domain}"
+                )
 
     question_text = (assessment_dir / "QUESTIONS.md").read_text(encoding="utf-8")
     answer_text = (assessment_dir / "ANSWERS.md").read_text(encoding="utf-8")
@@ -191,56 +228,9 @@ def validate_assessment(
             results.error(f"{lab_dir.name}: {question_id} missing from QUESTIONS.md")
         if question_id not in answer_text:
             results.error(f"{lab_dir.name}: {question_id} missing from ANSWERS.md")
-    return mapped
-
-
-def validate_screenshots(lab_dir: Path, lab: dict, results: Results) -> None:
-    manifest_path = lab_dir / "images" / "portal" / "manifest.yml"
-    if not manifest_path.exists():
-        results.error(f"{lab_dir.name}: missing images/portal/manifest.yml")
-        return
-    manifest = load_yaml(manifest_path)
-    validate_with_schema(
-        manifest,
-        ROOT / "curriculum" / "screenshot-manifest-schema.json",
-        f"{lab_dir.name}/images/portal/manifest.yml",
-        results,
-    )
-    if not isinstance(manifest, dict):
-        return
-    if manifest.get("labId") != lab.get("id"):
-        results.error(f"{lab_dir.name}: screenshot manifest labId does not match lab.yml")
-
-    captures = manifest.get("captures") or []
-    files = [item.get("file") for item in captures]
-    if len(files) != len(set(files)):
-        results.error(f"{lab_dir.name}: duplicate capture file names in screenshot manifest")
-
-    stages = [item.get("status") for item in captures if item.get("status") in SCREENSHOT_STAGES]
-    expected = min(stages, key=SCREENSHOT_STAGES.index) if stages else "pending"
-    if manifest.get("status") != expected:
-        results.error(
-            f"{lab_dir.name}: manifest status must equal the least-advanced capture stage ({expected})"
-        )
-    if (lab.get("screenshots") or {}).get("status") != manifest.get("status"):
-        results.error(f"{lab_dir.name}: lab.yml screenshots.status disagrees with the manifest status")
-
-    portal_dir = manifest_path.parent
-    for item in captures:
-        file_name = item.get("file") or ""
-        image_path = portal_dir / file_name
-        committed_allowed = item.get("status") in {"sanitized", "verified"}
-        if committed_allowed and not image_path.exists():
-            results.error(f"{lab_dir.name}: {file_name} is {item.get('status')} but the image file is missing")
-        if not committed_allowed and image_path.exists():
-            results.error(
-                f"{lab_dir.name}: {file_name} exists on disk but its status is {item.get('status')}; "
-                "only sanitized or verified images may be committed"
-            )
-    listed = set(files)
-    for png in (lab_dir / "images").rglob("*.png"):
-        if png.name not in listed:
-            results.error(f"{lab_dir.name}: {png.relative_to(lab_dir)} has no screenshot manifest entry")
+    if re.search(r"correctOption|distractorExplanations|^# .*answer key", question_text, re.MULTILINE | re.I):
+        results.error(f"{lab_dir.name}: QUESTIONS.md exposes answer-key metadata")
+    return mapped, [{"domain": domain, **question} for question in questions]
 
 
 def validate_diagram(lab_dir: Path, results: Results) -> None:
@@ -263,11 +253,12 @@ def validate_lab_dirs(
     catalog: dict[str, dict],
     release: bool,
     results: Results,
-) -> set[str]:
+) -> tuple[set[str], list[dict]]:
     labs_root = ROOT / "labs"
     lab_dirs = sorted(path for path in labs_root.iterdir() if path.is_dir() and LAB_PATTERN.fullmatch(path.name))
     question_coverage: set[str] = set()
-    required_files = ["README.md", "lab.yml", "diagrams/architecture.mmd", "images/README.md"]
+    question_records: list[dict] = []
+    required_files = ["README.md", "lab.yml", "diagrams/architecture.mmd", "diagrams/architecture.svg"]
 
     for lab_dir in lab_dirs:
         number = lab_dir.name[:2]
@@ -288,6 +279,8 @@ def validate_lab_dirs(
             results.error(f"{lab_dir.name}: folder, slug, and lab ID disagree")
         if number not in catalog:
             results.error(f"{lab_dir.name}: no matching catalog entry")
+        elif catalog[number].get("assessmentQuestionCount") != (lab.get("assessment") or {}).get("questionCount"):
+            results.error(f"{lab_dir.name}: catalog assessmentQuestionCount disagrees with lab.yml")
         for objective in lab.get("objectives", []):
             if objective not in official | foundations:
                 results.error(f"{lab_dir.name}: unknown objective ID {objective}")
@@ -301,8 +294,17 @@ def validate_lab_dirs(
                 if not any(name.startswith(stage.lower()) for name in names):
                     results.error(f"{lab_dir.name}: {lane.name} lane is missing {stage}")
 
-        question_coverage |= validate_assessment(lab_dir, official | foundations, results)
-        validate_screenshots(lab_dir, lab, results)
+        readme_path = lab_dir / "README.md"
+        if readme_path.exists():
+            readme = readme_path.read_text(encoding="utf-8", errors="replace")
+            if INLINE_COMMANDS_BEGIN not in readme or INLINE_COMMANDS_END not in readme:
+                results.error(f"{lab_dir.name}: README does not embed the complete lifecycle commands")
+            else:
+                results.ok(f"{lab_dir.name}: README contains the generated inline command lane")
+
+        mapped, records = validate_assessment(lab_dir, lab, official | foundations, results)
+        question_coverage |= mapped
+        question_records.extend(records)
         validate_diagram(lab_dir, results)
 
         validation_fixture = lab_dir / "tests" / "fixtures" / "validation.sample.json"
@@ -328,7 +330,72 @@ def validate_lab_dirs(
         results.error(f"Release mode requires 28 implemented lab folders; found {len(lab_dirs)}")
     else:
         results.ok(f"Found {len(lab_dirs)} implemented lab folder(s); catalog retains the full 28-lab roadmap")
-    return question_coverage
+    return question_coverage, question_records
+
+
+def validate_domain_question_contract(question_records: list[dict], results: Results) -> None:
+    if len(question_records) != 250:
+        results.error(f"Assessment contract requires 250 questions; found {len(question_records)}")
+    else:
+        results.ok("Assessment bank contains exactly 250 questions")
+
+    expected_difficulties = expected_domain_difficulties()
+    for domain, display_name in DOMAIN_DISPLAY_NAMES.items():
+        records = [question for question in question_records if question.get("domain") == domain]
+        if len(records) != 50:
+            results.error(f"{display_name}: expected 50 questions; found {len(records)}")
+            continue
+        results.ok(f"{display_name}: contains exactly 50 questions")
+
+        difficulties = Counter(question.get("difficulty") for question in records)
+        if difficulties != expected_difficulties[domain]:
+            results.error(
+                f"{display_name}: difficulty mix must be {dict(expected_difficulties[domain])}; "
+                f"found {dict(difficulties)}"
+            )
+        else:
+            results.ok(f"{display_name}: difficulty mix is 15 foundational / 25 applied / 10 advanced")
+
+        answers = Counter(question.get("correctOption") for question in records)
+        if set(answers) != {"A", "B", "C", "D"} or any(count not in {12, 13} for count in answers.values()):
+            results.error(f"{display_name}: answer positions must each occur 12 or 13 times; found {dict(answers)}")
+        else:
+            results.ok(f"{display_name}: answer positions are balanced 12–13 times each")
+
+
+def validate_no_screenshot_contract(results: Results) -> None:
+    prohibited_paths = [
+        ROOT / "curriculum" / "screenshot-manifest-schema.json",
+        ROOT / "tools" / "validate_images.py",
+    ]
+    prohibited_paths.extend((ROOT / "labs").glob("[0-9][0-9]-*/images"))
+    existing = [path for path in prohibited_paths if path.exists()]
+    for path in existing:
+        results.error(f"Obsolete Portal screenshot artifact remains: {path.relative_to(ROOT)}")
+    if not existing:
+        results.ok("No Portal screenshot directories, schema, or image validator remain")
+
+    patterns = {
+        "Portal screenshot requirement": re.compile(r"portal\s+screenshots?", re.I),
+        "screenshot manifest reference": re.compile(r"screenshot[- ]manifest|images[/\\]portal", re.I),
+        "Portal evidence section": re.compile(r"^##\s+Portal evidence\s*$", re.I | re.M),
+    }
+    matches = 0
+    for path in ROOT.rglob("*"):
+        if (
+            not path.is_file()
+            or is_ignored_path(path)
+            or path.resolve() == Path(__file__).resolve()
+            or path.suffix.lower() not in {".md", ".py", ".yml", ".yaml", ".json"}
+        ):
+            continue
+        text = path.read_text(encoding="utf-8", errors="ignore")
+        for label, pattern in patterns.items():
+            if pattern.search(text):
+                matches += 1
+                results.error(f"{path.relative_to(ROOT)} still contains {label}")
+    if not matches:
+        results.ok("Documentation and tooling contain no Portal screenshot contract")
 
 
 def validate_markdown_links(results: Results) -> None:
@@ -401,22 +468,20 @@ def main() -> int:
 
     official, foundations = collect_blueprint(results)
     catalog = validate_catalog(results)
-    coverage = validate_lab_dirs(official, foundations, catalog, args.release, results)
+    coverage, question_records = validate_lab_dirs(official, foundations, catalog, args.release, results)
+    validate_domain_question_contract(question_records, results)
+    validate_no_screenshot_contract(results)
     validate_markdown_links(results)
     validate_secret_markers(results)
     validate_workflows_are_offline(results)
 
-    if args.release:
-        missing = official - coverage
-        if missing:
-            results.error(f"Release mode: {len(missing)} official objectives have no assessment question")
-        else:
-            results.ok("Release mode: all 82 official objectives have assessment coverage")
-    else:
-        results.warn(
-            f"Milestone mode: assessment coverage currently includes {len(coverage & official)}/82 official "
-            f"and {len(coverage & foundations)}/5 foundation objectives"
+    missing = official - coverage
+    if missing:
+        results.error(
+            f"{len(missing)} official objectives have no assessment question: {', '.join(sorted(missing))}"
         )
+    else:
+        results.ok("All 82 official objectives have assessment coverage")
 
     print("\nPASS")
     for message in results.passes:

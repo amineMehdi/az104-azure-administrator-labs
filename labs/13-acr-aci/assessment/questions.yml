@@ -2,26 +2,23 @@
   objectiveIds:
   - CP-CONTAINERS-01
   difficulty: foundational
-  stem: Which statement best captures the key design principle for publish images with acr and run azure container
-    instances?
+  stem: Which principle is most important when working on 'Create and manage an Azure Container Registry' in Lab
+    13?
   options:
-    A: ACR stores image artifacts and ACI runs container groups; registry admin credentials are not required when
+    A: The shortest command is always correct even when it changes a broader scope.
+    B: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+    C: ACR stores image artifacts and ACI runs container groups; registry admin credentials are not required when
       managed identities or scoped tokens are available.
-    B: Every related control is interchangeable, so choose whichever command is shortest.
-    C: A command surface automatically supplies any missing authorization or configuration.
-    D: Cleanup evidence is unnecessary when a resource group has a recognizable name.
-  correctOption: A
-  explanation: 'The lab''s central distinction is: ACR stores image artifacts and ACI runs container groups; registry
-    admin credentials are not required when managed identities or scoped tokens are available.'
+    D: A recognizable resource name removes the need for validation and scoped cleanup.
+  correctOption: C
+  explanation: 'The lab establishes this design principle: ACR stores image artifacts and ACI runs container groups;
+    registry admin credentials are not required when managed identities or scoped tokens are available.'
   distractorExplanations:
-    A: 'Correct. The lab''s central distinction is: ACR stores image artifacts and ACI runs container groups; registry
-      admin credentials are not required when managed identities or scoped tokens are available.'
-    B: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    C: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    D: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: 'Correct. The lab establishes this design principle: ACR stores image artifacts and ACI runs container groups;
+      registry admin credentials are not required when managed identities or scoped tokens are available.'
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/container-registry/container-registry-get-started-azure-cli
   lastVerified: '2026-08-30'
@@ -29,49 +26,42 @@
   objectiveIds:
   - CP-CONTAINERS-02
   difficulty: foundational
-  stem: You must begin the hands-on path for 'Create and manage an Azure Container Registry'. Which action matches
-    the reviewed lab sequence?
+  stem: Which lab action directly supports the objective 'Provision a container by using Azure Container Instances'?
   options:
-    A: Delete similarly named resources before recording the current subscription.
-    B: Create a globally unique Basic ACR with the admin account disabled.
-    C: Change the active tenant automatically and continue without displaying the new context.
-    D: Infer configuration from resource names without querying the live control plane.
-  correctOption: B
-  explanation: 'The first implementation checkpoint is: Create a globally unique Basic ACR with the admin account
-    disabled.'
+    A: Change the active tenant without displaying or confirming the resulting context.
+    B: Search the whole tenant for a similar display name and modify the first match.
+    C: Mark the objective complete after reading documentation without checking any state.
+    D: Import a public Microsoft sample image and inspect repository and tag metadata.
+  correctOption: D
+  explanation: 'The reviewed hands-on action for this objective is: Import a public Microsoft sample image and inspect
+    repository and tag metadata.'
   distractorExplanations:
-    A: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    B: 'Correct. The first implementation checkpoint is: Create a globally unique Basic ACR with the admin account
-      disabled.'
-    C: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    D: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: 'Correct. The reviewed hands-on action for this objective is: Import a public Microsoft sample image and
+      inspect repository and tag metadata.'
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/container-registry/container-registry-import-images
   lastVerified: '2026-08-30'
 - id: LAB13-Q03
   objectiveIds:
   - CP-CONTAINERS-04
-  difficulty: foundational
-  stem: Which authorization statement is appropriate before creating resource group, Basic container registry, container
-    group in this lab?
+  difficulty: applied
+  stem: A learner previews the implementation for 'Manage sizing and scaling for containers, including Azure Container
+    Instances and Azure Container Apps'. What behavior is required?
   options:
-    A: Subscription Reader is sufficient for every create, update, role, policy, and recovery operation.
-    B: A local administrator account automatically grants Microsoft Entra and Azure permissions.
-    C: 'Confirm the active context and obtain only the declared role boundary: Contributor on the lab resource group'
-    D: Skip authorization checks because all resources use an AZ104 naming prefix.
-  correctOption: C
-  explanation: The documented permission boundary is Contributor on the lab resource group
+    A: Display the context, intended changes, cost and gated branches without mutating Azure.
+    B: Create the baseline immediately and request approval only before cleanup.
+    C: Select the first accessible subscription and hide the resulting context.
+    D: Delete any older resource whose name resembles the new run ID.
+  correctOption: A
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
   distractorExplanations:
-    A: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    B: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    C: Correct. The documented permission boundary is Contributor on the lab resource group
-    D: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
+    A: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/container-instances/container-instances-quickstart
   lastVerified: '2026-08-30'
@@ -79,24 +69,21 @@
   objectiveIds:
   - CP-CONTAINERS-01
   difficulty: applied
-  stem: The setup command for Lab 13 is run without its execution switch. What should happen?
+  stem: Which implementation step should the learner perform for 'Create and manage an Azure Container Registry'?
   options:
-    A: It should deploy everything and ask for confirmation only before cleanup.
-    B: It should log in interactively and select the first available subscription.
-    C: It should delete any older run that shares the same lab number.
-    D: It should print the intended resources, context, cost class, and gates without changing Azure.
-  correctOption: D
-  explanation: Preview-first behavior makes the default invocation non-mutating; execution requires an explicit
-    switch.
+    A: Replace the lab action with a tenant-wide change that is easier to discover.
+    B: Inspect CPU, memory, restart policy, events, logs, and current container state.
+    C: Copy resource identifiers from another run instead of recording returned IDs.
+    D: Skip the operation and edit validation.json to show a passing result.
+  correctOption: B
+  explanation: 'The lab''s reviewed command path performs this bounded action: Inspect CPU, memory, restart policy,
+    events, logs, and current container state.'
   distractorExplanations:
-    A: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    B: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    C: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    D: Correct. Preview-first behavior makes the default invocation non-mutating; execution requires an explicit
-      switch.
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: 'Correct. The lab''s reviewed command path performs this bounded action: Inspect CPU, memory, restart policy,
+      events, logs, and current container state.'
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/container-instances/container-instances-container-groups
   lastVerified: '2026-08-30'
@@ -104,148 +91,44 @@
   objectiveIds:
   - CP-CONTAINERS-02
   difficulty: applied
-  stem: Which validation evidence most directly proves the baseline resource boundary for Lab 13?
+  stem: Which evidence most directly validates 'Provision a container by using Azure Container Instances' for Basic
+    container registry?
   options:
-    A: Query the exact recorded scope and verify the intended resource/object types, including Microsoft.ContainerRegistry/registries,
-      Microsoft.ContainerInstance/containerGroups.
-    B: Search the whole tenant by display-name prefix and accept the first match.
-    C: Treat a successful setup process exit code as proof of every data-plane and relationship requirement.
-    D: Verify only that an Azure subscription exists.
-  correctOption: A
-  explanation: Validation must use the recorded scope and test the intended state independently of setup.
+    A: Treat the setup exit code as proof of every configuration and relationship.
+    B: List the entire subscription and assume similarly named resources belong to this run.
+    C: Query the exact recorded scope and independently verify Microsoft.ContainerRegistry/registries.
+    D: Record a credential so another learner can replay the authenticated session.
+  correctOption: C
+  explanation: The independent validation path must prove Microsoft.ContainerRegistry/registries for the exact recorded
+    object.
   distractorExplanations:
-    A: Correct. Validation must use the recorded scope and test the intended state independently of setup.
-    B: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    C: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    D: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: Correct. The independent validation path must prove Microsoft.ContainerRegistry/registries for the exact
+      recorded object.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/container-registry/container-registry-get-started-azure-cli
   lastVerified: '2026-08-30'
 - id: LAB13-Q06
   objectiveIds:
   - CP-CONTAINERS-04
-  difficulty: applied
-  stem: A learner reaches the externally gated checkpoint in Lab 13. What is the safest response?
-  options:
-    A: Invent a placeholder tenant, email address, domain, or production target and continue.
-    B: 'Stop that branch unless its prerequisites are explicitly satisfied: None beyond the declared role and a
-      disposable subscription.'
-    C: Broaden the assignment to subscription scope so the gate no longer applies.
-    D: Mark the checkpoint as passed because the offline tests succeeded.
-  correctOption: B
-  explanation: 'The live-only gate is explicit and must not be guessed: None beyond the declared role and a disposable
-    subscription.'
-  distractorExplanations:
-    A: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    B: 'Correct. The live-only gate is explicit and must not be guessed: None beyond the declared role and a disposable
-      subscription.'
-    C: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    D: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-  sourceUrls:
-  - https://learn.microsoft.com/en-us/azure/container-registry/container-registry-import-images
-  lastVerified: '2026-08-30'
-- id: LAB13-Q07
-  objectiveIds:
   - CP-CONTAINERS-01
-  difficulty: applied
-  stem: Which command-side evidence best supports the first completed checkpoint in Lab 13?
+  difficulty: advanced
+  stem: Validation for 'Manage sizing and scaling for containers, including Azure Container Instances and Azure
+    Container Apps' fails after setup. What is the best break/fix method?
   options:
-    A: Copy a successful command from an unrelated tenant and treat it as this run's evidence.
-    B: Record access tokens and keys so another learner can replay the same session.
-    C: 'Run the independent validator and retain redacted structured output for the exact recorded scope after:
-      Create a globally unique Basic ACR with the admin account disabled.'
-    D: Use the setup process exit code alone without querying resource state.
-  correctOption: C
-  explanation: Command evidence must come from the recorded run, exclude secrets and identifiers, and prove the
-    intended state independently of setup.
-  distractorExplanations:
-    A: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    B: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    C: Correct. Command evidence must come from the recorded run, exclude secrets and identifiers, and prove the
-      intended state independently of setup.
-    D: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-  sourceUrls:
-  - https://learn.microsoft.com/en-us/azure/container-instances/container-instances-quickstart
-  lastVerified: '2026-08-30'
-- id: LAB13-Q08
-  objectiveIds:
-  - CP-CONTAINERS-02
-  - CP-CONTAINERS-04
-  difficulty: applied
-  stem: During cleanup of Lab 13, several similarly named resources exist. Which targeting method is correct?
-  options:
-    A: Delete every resource whose name contains az104.
-    B: Delete the active subscription to guarantee that no lab resources remain.
-    C: Use creation timestamps alone and remove the oldest matching resources.
-    D: Use the exact IDs and run metadata recorded before creation, verify the lab tags, then delete only that boundary.
+    A: Rerun setup repeatedly with new names until one attempt appears successful.
+    B: Change validation.json directly so the failed result reads pass.
+    C: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+    D: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
   correctOption: D
-  explanation: Recorded immutable IDs plus ownership tags provide the narrow, auditable cleanup boundary.
+  explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
   distractorExplanations:
-    A: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    B: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    C: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    D: Correct. Recorded immutable IDs plus ownership tags provide the narrow, auditable cleanup boundary.
-  sourceUrls:
-  - https://learn.microsoft.com/en-us/azure/container-instances/container-instances-container-groups
-  lastVerified: '2026-08-30'
-- id: LAB13-Q09
-  objectiveIds:
-  - CP-CONTAINERS-04
-  - CP-CONTAINERS-01
-  difficulty: advanced
-  stem: Setup completed for Lab 13, but one required state check fails. What is the best break/fix approach?
-  options:
-    A: Inspect the failing check and exact recorded resource, repair the smallest identified cause, then rerun validation.
-    B: Rerun setup repeatedly with new names until one run reports no error.
-    C: Edit validation.json so the failed status reads pass.
-    D: Disable all policies, locks, NSGs, and monitoring controls in the subscription.
-  correctOption: A
-  explanation: Evidence-led repair limits drift and preserves the diagnostic value of an independent validator.
-  distractorExplanations:
-    A: Correct. Evidence-led repair limits drift and preserves the diagnostic value of an independent validator.
-    B: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    C: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    D: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-  sourceUrls:
-  - https://learn.microsoft.com/en-us/azure/container-registry/container-registry-get-started-azure-cli
-  lastVerified: '2026-08-30'
-- id: LAB13-Q10
-  objectiveIds:
-  - CP-CONTAINERS-01
-  - CP-CONTAINERS-02
-  difficulty: advanced
-  stem: Which completion claim is valid immediately after this repository's offline tests pass for Lab 13?
-  options:
-    A: Every command has been proven in every Azure region and tenant type.
-    B: The documentation, schemas, script contracts, assessments, diagrams, and fixtures are offline-validated;
-      live Azure state remains pending until executed.
-    C: The lab is live-verified even if no subscription was used.
-    D: Any pending gated checkpoint can be treated as successfully completed.
-  correctOption: B
-  explanation: Offline validation proves artifact quality and safety contracts, not live service behavior.
-  distractorExplanations:
-    A: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    B: Correct. Offline validation proves artifact quality and safety contracts, not live service behavior.
-    C: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    D: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/container-registry/container-registry-import-images
   lastVerified: '2026-08-30'

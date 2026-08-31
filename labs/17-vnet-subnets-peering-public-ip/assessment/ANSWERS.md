@@ -4,140 +4,140 @@ Return to [the questions](QUESTIONS.md).
 
 ## 1. A (`LAB17-Q01`)
 
-The lab's central distinction is: VNet peering is non-transitive and requires compatible address spaces and two directional peering objects, while Standard public IPs are secure by default until an NSG permits traffic.
+The lab establishes this design principle: VNet peering is non-transitive and requires compatible address spaces and two directional peering objects, while Standard public IPs are secure by default until an NSG permits traffic.
 
 Objectives: NW-VNET-01
 
 Why the other choices do not fit:
 
-- **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
+- **B:** This choice changes or trusts a broader scope than the recorded lab boundary.
+- **C:** This choice skips independent evidence or relies on ambiguous resource identity.
+- **D:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
 
 Source: <https://learn.microsoft.com/en-us/azure/virtual-network/quick-create-powershell>
 
 ## 2. B (`LAB17-Q02`)
 
-The first implementation checkpoint is: Create hub and spoke address spaces that do not overlap and subdivide them into purpose-specific subnets.
+The reviewed hands-on action for this objective is: Create both sides of VNet peering and interpret Connected, Initiated, and Disconnected states.
 
 Objectives: NW-VNET-02
 
 Why the other choices do not fit:
 
-- **A:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
+- **A:** This choice changes or trusts a broader scope than the recorded lab boundary.
+- **C:** This choice skips independent evidence or relies on ambiguous resource identity.
+- **D:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
 
 Source: <https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-manage-peering>
 
 ## 3. C (`LAB17-Q03`)
 
-The documented permission boundary is Network Contributor on the lab resource group
+Least privilege requires the documented boundary: Network Contributor on the lab resource group
 
 Objectives: NW-VNET-03
 
 Why the other choices do not fit:
 
-- **A:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
+- **A:** This choice changes or trusts a broader scope than the recorded lab boundary.
+- **B:** This choice skips independent evidence or relies on ambiguous resource identity.
+- **D:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
 
 Source: <https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/public-ip-addresses>
 
 ## 4. D (`LAB17-Q04`)
 
-Preview-first behavior makes the default invocation non-mutating; execution requires an explicit switch.
+Preview mode is deliberately non-mutating and exposes the complete intended boundary.
 
 Objectives: NW-VNET-01
 
 Why the other choices do not fit:
 
-- **A:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
+- **A:** This choice changes or trusts a broader scope than the recorded lab boundary.
+- **B:** This choice skips independent evidence or relies on ambiguous resource identity.
+- **C:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
 
 Source: <https://learn.microsoft.com/en-us/azure/virtual-network/quick-create-powershell>
 
 ## 5. A (`LAB17-Q05`)
 
-Validation must use the recorded scope and test the intended state independently of setup.
+The lab's reviewed command path performs this bounded action: Create hub and spoke address spaces that do not overlap and subdivide them into purpose-specific subnets.
 
 Objectives: NW-VNET-02
 
 Why the other choices do not fit:
 
-- **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
+- **B:** This choice changes or trusts a broader scope than the recorded lab boundary.
+- **C:** This choice skips independent evidence or relies on ambiguous resource identity.
+- **D:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
 
 Source: <https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-manage-peering>
 
 ## 6. B (`LAB17-Q06`)
 
-The live-only gate is explicit and must not be guessed: None beyond the declared role and a disposable subscription.
+The independent validation path must prove Microsoft.Network/publicIPAddresses for the exact recorded object.
 
 Objectives: NW-VNET-03
 
 Why the other choices do not fit:
 
-- **A:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
+- **A:** This choice changes or trusts a broader scope than the recorded lab boundary.
+- **C:** This choice skips independent evidence or relies on ambiguous resource identity.
+- **D:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
 
 Source: <https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/public-ip-addresses>
 
 ## 7. C (`LAB17-Q07`)
 
-Command evidence must come from the recorded run, exclude secrets and identifiers, and prove the intended state independently of setup.
+Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the declared role and a disposable subscription.
 
 Objectives: NW-VNET-01
 
 Why the other choices do not fit:
 
-- **A:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
+- **A:** This choice changes or trusts a broader scope than the recorded lab boundary.
+- **B:** This choice skips independent evidence or relies on ambiguous resource identity.
+- **D:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
 
 Source: <https://learn.microsoft.com/en-us/azure/virtual-network/quick-create-powershell>
 
 ## 8. D (`LAB17-Q08`)
 
-Recorded immutable IDs plus ownership tags provide the narrow, auditable cleanup boundary.
+Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
 
-Objectives: NW-VNET-02, NW-VNET-03
+Objectives: NW-VNET-02
 
 Why the other choices do not fit:
 
-- **A:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
+- **A:** This choice changes or trusts a broader scope than the recorded lab boundary.
+- **B:** This choice skips independent evidence or relies on ambiguous resource identity.
+- **C:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
 
 Source: <https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-manage-peering>
 
 ## 9. A (`LAB17-Q09`)
 
-Evidence-led repair limits drift and preserves the diagnostic value of an independent validator.
+Evidence-led repair preserves scope and makes the cause and correction auditable.
 
 Objectives: NW-VNET-03, NW-VNET-01
 
 Why the other choices do not fit:
 
-- **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
+- **B:** This choice changes or trusts a broader scope than the recorded lab boundary.
+- **C:** This choice skips independent evidence or relies on ambiguous resource identity.
+- **D:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
 
 Source: <https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/public-ip-addresses>
 
 ## 10. B (`LAB17-Q10`)
 
-Offline validation proves artifact quality and safety contracts, not live service behavior.
+Accepted requests and offline checks do not prove the final live state.
 
 Objectives: NW-VNET-01, NW-VNET-02
 
 Why the other choices do not fit:
 
-- **A:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
+- **A:** This choice changes or trusts a broader scope than the recorded lab boundary.
+- **C:** This choice skips independent evidence or relies on ambiguous resource identity.
+- **D:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
 
 Source: <https://learn.microsoft.com/en-us/azure/virtual-network/quick-create-powershell>

@@ -99,7 +99,7 @@ Labs can be run locally, in GitHub Codespaces, or in Azure Cloud Shell. Tool ver
 - [Study plan](docs/study-plan.md)
 - [Troubleshooting](docs/troubleshooting.md)
 - [Command cheat sheet](docs/command-cheatsheet.md)
-- [CLI, PowerShell, and portal evidence handling](docs/evidence-handling.md)
+- [CLI and PowerShell evidence handling](docs/evidence-handling.md)
 - [Assessment authoring guide](docs/assessment-guide.md)
 - [Question bank index](docs/question-bank-index.md)
 - [Implementation status](docs/implementation-status.md)
@@ -113,7 +113,8 @@ Labs can be run locally, in GitHub Codespaces, or in Azure Cloud Shell. Tool ver
 - Cleanup is idempotent and limited to the recorded run ID.
 - Pull-request CI never authenticates to Azure.
 - Live verification is based on redacted Azure CLI or PowerShell validation output and cleanup evidence.
-- Each lab plans 2–5 sanitized Azure Portal screenshots in `images/portal/manifest.yml`; they are captured only during authorized live batches, and placeholder images are forbidden.
+- Mermaid and SVG architecture diagrams are the repository's only instructional visuals.
+- The assessment bank contains exactly 50 questions for each of the five official domains.
 
 ## License
 

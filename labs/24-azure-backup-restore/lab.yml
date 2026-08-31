@@ -78,8 +78,9 @@ cleanup:
   reportOnlyByDefault: true
   requiresExecuteFlag: true
   residualAuditRequired: true
-screenshots:
-  status: pending
-  manifest: images/portal/manifest.yml
+assessment:
+  enabled: true
+  questionCount: 15
+  primaryDomain: monitor-recovery
 lastOfflineValidated: '2026-08-30'
 lastLiveVerified: null

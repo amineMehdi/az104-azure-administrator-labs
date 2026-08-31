@@ -3,8 +3,8 @@
   "$id": "https://example.invalid/az104/question-schema.json",
   "title": "AZ-104 lab question list",
   "type": "array",
-  "minItems": 10,
-  "maxItems": 10,
+  "minItems": 1,
+  "maxItems": 99,
   "items": {
     "type": "object",
     "required": [
@@ -20,7 +20,7 @@
       "lastVerified"
     ],
     "properties": {
-      "id": { "type": "string", "pattern": "^LAB[0-9]{2}-Q(?:0[1-9]|10)$" },
+      "id": { "type": "string", "pattern": "^LAB[0-9]{2}-Q(?:0[1-9]|[1-9][0-9])$" },
       "objectiveIds": {
         "type": "array",
         "minItems": 1,

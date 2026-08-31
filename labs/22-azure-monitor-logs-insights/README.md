@@ -26,7 +26,7 @@ The editable Mermaid source is [diagrams/architecture.mmd](diagrams/architecture
 
 ## Scenario and outcome
 
-You are the Azure administrator for a training environment. Your task is to implement the smallest isolated configuration that demonstrates the mapped exam objectives, validate it independently, capture sanitized evidence, and remove only what this run recorded.
+You are the Azure administrator for a training environment. Your task is to implement the smallest isolated configuration that demonstrates the mapped exam objectives, validate it independently, retain redacted command evidence, and remove only what this run recorded.
 
 The key design idea is: **Metrics are numeric time series, logs are queryable records with ingestion delay and cost, and Insights packages add curated collection and interpretation for particular resource types.**
 
@@ -75,9 +75,275 @@ Cost is not a fixed promise. Check current pricing, free allowances, quotas, and
 - Read the external gate. An unavailable gate is a documented `skipped` checkpoint, not a pass.
 - Choose a unique run ID matching `^[a-z0-9-]+$`, such as `az104l22-01`.
 
+<!-- BEGIN GENERATED INLINE COMMANDS -->
+## Complete inline command implementation
+
+The lifecycle commands below are the complete learner-facing implementation. They are embedded from the retained script files so the README and automation cannot drift. Review each stage here before running it. Use a different run ID if you later try the optional scripted lane against the same sandbox.
+
+### Preflight: `scripts/cli/preflight.sh`
+
+```bash
+#!/usr/bin/env bash
+set -euo pipefail
+
+SUBSCRIPTION_ID="${AZURE_SUBSCRIPTION_ID:-}"
+LOCATION="${AZURE_LOCATION:-}"
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --subscription-id) SUBSCRIPTION_ID="$2"; shift 2 ;;
+    --location) LOCATION="$2"; shift 2 ;;
+    *) echo "Unknown argument: $1" >&2; exit 2 ;;
+  esac
+done
+
+[[ -n "$SUBSCRIPTION_ID" ]] || { echo "Supply --subscription-id or AZURE_SUBSCRIPTION_ID." >&2; exit 2; }
+[[ -n "$LOCATION" ]] || { echo "Supply --location or AZURE_LOCATION." >&2; exit 2; }
+
+require_tool() { command -v "$1" >/dev/null 2>&1 || { echo "Missing required tool: $1" >&2; exit 3; }; }
+require_tool az
+require_tool jq
+
+
+ACCOUNT_JSON="$(az account show --output json)"
+ACTIVE_SUBSCRIPTION="$(jq -r '.id' <<<"$ACCOUNT_JSON")"
+ACTIVE_TENANT="$(jq -r '.tenantId' <<<"$ACCOUNT_JSON")"
+[[ "$ACTIVE_SUBSCRIPTION" == "$SUBSCRIPTION_ID" ]] || {
+  echo "Context mismatch: active subscription is $ACTIVE_SUBSCRIPTION, expected $SUBSCRIPTION_ID." >&2
+  echo "Select the intended context yourself; this script will not change it." >&2
+  exit 4
+}
+
+echo "Lab: LAB-22"
+echo "Tenant: $ACTIVE_TENANT"
+echo "Subscription: $ACTIVE_SUBSCRIPTION"
+echo "Location: $LOCATION"
+echo "Cost class: moderate"
+echo "Role boundary: Monitoring Contributor and Log Analytics Contributor on the lab resource group"
+
+for provider in Microsoft.Insights Microsoft.OperationalInsights Microsoft.Storage; do
+  state="$(az provider show --namespace "$provider" --query registrationState --output tsv 2>/dev/null || true)"
+  printf 'Provider %-38s %s
+' "$provider" "${state:-Unavailable}"
+done
+
+echo "Preflight is read-only. Register missing providers only after an explicit scope and cost review."
+```
+
+### Setup: `scripts/cli/setup.sh`
+
+```bash
+#!/usr/bin/env bash
+set -euo pipefail
+
+LAB_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+SUBSCRIPTION_ID="${AZURE_SUBSCRIPTION_ID:-}"
+LOCATION="${AZURE_LOCATION:-}"
+SECONDARY_LOCATION="${AZURE_SECONDARY_LOCATION:-}"
+RUN_ID=""
+EXECUTE=false
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --subscription-id) SUBSCRIPTION_ID="$2"; shift 2 ;;
+    --location) LOCATION="$2"; shift 2 ;;
+    --secondary-location) SECONDARY_LOCATION="$2"; shift 2 ;;
+    --run-id) RUN_ID="$2"; shift 2 ;;
+    --execute) EXECUTE=true; shift ;;
+    *) echo "Unknown argument: $1" >&2; exit 2 ;;
+  esac
+done
+
+[[ -n "$SUBSCRIPTION_ID" && -n "$LOCATION" && -n "$RUN_ID" ]] || {
+  echo "Usage: $0 --subscription-id ID --location REGION --run-id RUN [--secondary-location REGION] [--execute]" >&2
+  exit 2
+}
+[[ "$RUN_ID" =~ ^[a-z0-9-]+$ ]] || { echo "Run ID must match ^[a-z0-9-]+$." >&2; exit 2; }
+
+RG="rg-az104-l22-${RUN_ID}"
+SUFFIX="$(printf '%s' "$RUN_ID" | tr -cd 'a-z0-9' | tail -c 12)"
+STATE_DIR="$LAB_ROOT/.state/$RUN_ID"
+MANIFEST="$STATE_DIR/run.json"
+EXPIRES_ON="$(date -u -d '+1 day' +%F 2>/dev/null || date -u +%F)"
+
+echo "LAB-22 plan"
+echo "  subscription: $SUBSCRIPTION_ID"
+echo "  location: $LOCATION"
+echo "  resource group: $RG"
+echo "  cost class: moderate"
+echo "  external gate: None beyond the declared role and a disposable subscription."
+echo "  resources: resource group, Log Analytics workspace, storage account, diagnostic setting, optional data collection rule"
+
+if [[ "$EXECUTE" != true ]]; then
+  echo "Preview only. Re-run with --execute after approving context, permissions, cost, and gates."
+  exit 0
+fi
+
+"$LAB_ROOT/scripts/cli/preflight.sh" --subscription-id "$SUBSCRIPTION_ID" --location "$LOCATION"
+[[ ! -e "$MANIFEST" ]] || { echo "State already exists at $MANIFEST; choose a new run ID." >&2; exit 5; }
+mkdir -p "$STATE_DIR"
+TENANT_ID="$(az account show --query tenantId --output tsv)"
+jq -n   --arg labId "LAB-22" --arg runId "$RUN_ID" --arg tenantId "$TENANT_ID"   --arg subscriptionId "$SUBSCRIPTION_ID" --arg location "$LOCATION" --arg rgName "$RG"   --arg createdAt "$(date -u +%Y-%m-%dT%H:%M:%SZ)"   '{labId:$labId,runId:$runId,tenantId:$tenantId,subscriptionId:$subscriptionId,location:$location,createdAt:$createdAt,status:"recorded-before-mutation",resourceGroup:{name:$rgName,id:null},resources:[],external:{}}' >"$MANIFEST"
+
+az group create --subscription "$SUBSCRIPTION_ID" --name "$RG" --location "$LOCATION"   --tags purpose=az104-lab labId=22 runId="$RUN_ID" expiresOn="$EXPIRES_ON" --output none
+RG_ID="$(az group show --subscription "$SUBSCRIPTION_ID" --name "$RG" --query id --output tsv)"
+jq --arg id "$RG_ID" '.resourceGroup.id=$id | .status="baseline-created"' "$MANIFEST" >"$MANIFEST.tmp"
+mv -f "$MANIFEST.tmp" "$MANIFEST"
+
+WORKSPACE="law-${SUFFIX}"
+STORAGE="st22${SUFFIX}"
+az monitor log-analytics workspace create --resource-group "$RG" --workspace-name "$WORKSPACE" --location "$LOCATION" --retention-time 30 --output none
+az storage account create --resource-group "$RG" --name "$STORAGE" --location "$LOCATION" --sku Standard_LRS --kind StorageV2 --https-only true --allow-blob-public-access false --output none
+WORKSPACE_ID=$(az monitor log-analytics workspace show --resource-group "$RG" --workspace-name "$WORKSPACE" --query id --output tsv)
+STORAGE_ID=$(az storage account show --resource-group "$RG" --name "$STORAGE" --query id --output tsv)
+az monitor diagnostic-settings create --name "diag-${RUN_ID}" --resource "$STORAGE_ID" --workspace "$WORKSPACE_ID" --metrics '[{"category":"Transaction","enabled":true}]' --output none
+
+az resource list --subscription "$SUBSCRIPTION_ID" --resource-group "$RG" --output json >"$STATE_DIR/resources.json"
+jq --slurpfile resources "$STATE_DIR/resources.json" '.resources=($resources[0] | map({id,name,type,location})) | .status="setup-complete"' "$MANIFEST" >"$MANIFEST.tmp"
+mv -f "$MANIFEST.tmp" "$MANIFEST"
+echo "Setup complete. State: $MANIFEST"
+echo "Run scripts/cli/validate.sh before recording command evidence."
+```
+
+### Validate: `scripts/cli/validate.sh`
+
+```bash
+#!/usr/bin/env bash
+set -euo pipefail
+
+LAB_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+SUBSCRIPTION_ID="${AZURE_SUBSCRIPTION_ID:-}"
+RUN_ID=""
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --subscription-id) SUBSCRIPTION_ID="$2"; shift 2 ;;
+    --run-id) RUN_ID="$2"; shift 2 ;;
+    *) echo "Unknown argument: $1" >&2; exit 2 ;;
+  esac
+done
+[[ -n "$SUBSCRIPTION_ID" && -n "$RUN_ID" ]] || { echo "Supply --subscription-id and --run-id." >&2; exit 2; }
+
+STATE_DIR="$LAB_ROOT/.state/$RUN_ID"
+MANIFEST="$STATE_DIR/run.json"
+REPORT="$STATE_DIR/validation.json"
+[[ -f "$MANIFEST" ]] || { echo "Missing state: $MANIFEST" >&2; exit 5; }
+ACTIVE_SUB="$(az account show --query id --output tsv)"
+[[ "$ACTIVE_SUB" == "$SUBSCRIPTION_ID" ]] || { echo "Active subscription does not match the requested subscription." >&2; exit 4; }
+RECORDED_SUB="$(jq -r '.subscriptionId' "$MANIFEST")"
+[[ "$RECORDED_SUB" == "$SUBSCRIPTION_ID" ]] || { echo "Recorded subscription mismatch." >&2; exit 4; }
+RG="$(jq -r '.resourceGroup.name' "$MANIFEST")"
+RG_ID="$(jq -r '.resourceGroup.id' "$MANIFEST")"
+
+checks='[]'
+add_check() {
+  checks="$(jq -c --arg id "$1" --arg status "$2" --arg message "$3" '. + [{id:$id,status:$status,message:$message}]' <<<"$checks")"
+}
+
+actual_rg_id="$(az group show --subscription "$SUBSCRIPTION_ID" --name "$RG" --query id --output tsv 2>/dev/null || true)"
+if [[ -z "$actual_rg_id" ]]; then
+  add_check context.resource-group fail "The recorded resource group is absent."
+elif [[ "${actual_rg_id,,}" != "${RG_ID,,}" ]]; then
+  add_check context.resource-group fail "The resource-group ID does not match the run manifest."
+else
+  add_check context.resource-group pass "The exact recorded resource group exists."
+fi
+
+purpose="$(az group show --name "$RG" --query tags.purpose --output tsv 2>/dev/null || true)"
+lab_id="$(az group show --name "$RG" --query tags.labId --output tsv 2>/dev/null || true)"
+run_id="$(az group show --name "$RG" --query tags.runId --output tsv 2>/dev/null || true)"
+if [[ "$purpose" == "az104-lab" && "$lab_id" == "22" && "$run_id" == "$RUN_ID" ]]; then
+  add_check ownership.tags pass "purpose, labId, and runId tags match the manifest."
+else
+  add_check ownership.tags fail "Ownership tags do not match; cleanup must not proceed."
+fi
+
+resources="$(az resource list --subscription "$SUBSCRIPTION_ID" --resource-group "$RG" --output json 2>/dev/null || echo '[]')"
+EXPECTED_TYPES=(
+  "Microsoft.OperationalInsights/workspaces"
+  "Microsoft.Insights/diagnosticSettings"
+  "Microsoft.Storage/storageAccounts"
+)
+if [[ "${#EXPECTED_TYPES[@]}" -eq 0 ]]; then
+  add_check resources.baseline warning "This lab validates external or tenant-scoped state separately."
+else
+  for expected in "${EXPECTED_TYPES[@]}"; do
+    count="$(jq --arg expected "${expected,,}" '[.[] | select((.type | ascii_downcase) == $expected)] | length' <<<"$resources")"
+    if [[ "$count" -gt 0 ]]; then
+      add_check "resource.$(tr '/.' '--' <<<"$expected")" pass "Found $count resource(s) of type $expected."
+    else
+      add_check "resource.$(tr '/.' '--' <<<"$expected")" warning "No top-level resource of type $expected was returned; inspect nested or gated checkpoint state."
+    fi
+  done
+fi
+
+failures="$(jq '[.[] | select(.status == "fail")] | length' <<<"$checks")"
+warnings="$(jq '[.[] | select(.status == "warning" or .status == "skipped")] | length' <<<"$checks")"
+result=pass
+[[ "$warnings" -eq 0 ]] || result=partial
+[[ "$failures" -eq 0 ]] || result=fail
+jq -n --arg labId "LAB-22" --arg runId "$RUN_ID" --arg generatedAt "$(date -u +%Y-%m-%dT%H:%M:%SZ)" --arg result "$result" --argjson checks "$checks"   '{labId:$labId,runId:$runId,generatedAt:$generatedAt,result:$result,checks:$checks}' >"$REPORT"
+cat "$REPORT"
+[[ "$result" != fail ]]
+```
+
+### Cleanup: `scripts/cli/cleanup.sh`
+
+```bash
+#!/usr/bin/env bash
+set -euo pipefail
+
+LAB_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+SUBSCRIPTION_ID="${AZURE_SUBSCRIPTION_ID:-}"
+RUN_ID=""
+EXECUTE=false
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --subscription-id) SUBSCRIPTION_ID="$2"; shift 2 ;;
+    --run-id) RUN_ID="$2"; shift 2 ;;
+    --execute) EXECUTE=true; shift ;;
+    *) echo "Unknown argument: $1" >&2; exit 2 ;;
+  esac
+done
+[[ -n "$SUBSCRIPTION_ID" && -n "$RUN_ID" ]] || { echo "Supply --subscription-id and --run-id." >&2; exit 2; }
+
+MANIFEST="$LAB_ROOT/.state/$RUN_ID/run.json"
+[[ -f "$MANIFEST" ]] || { echo "Missing state: $MANIFEST" >&2; exit 5; }
+[[ "$(az account show --query id --output tsv)" == "$SUBSCRIPTION_ID" ]] || { echo "Active subscription mismatch." >&2; exit 4; }
+[[ "$(jq -r '.subscriptionId' "$MANIFEST")" == "$SUBSCRIPTION_ID" ]] || { echo "Recorded subscription mismatch." >&2; exit 4; }
+RG="$(jq -r '.resourceGroup.name' "$MANIFEST")"
+RG_ID="$(jq -r '.resourceGroup.id' "$MANIFEST")"
+echo "Cleanup preview for LAB-22:"
+echo "  exact resource group ID: $RG_ID"
+echo "  recorded child resources: $(jq '.resources | length' "$MANIFEST")"
+echo "  residual/soft-delete behavior must be audited after deletion."
+if [[ "$EXECUTE" != true ]]; then
+  echo "Preview only. Re-run with --execute after checking every target."
+  exit 0
+fi
+
+actual="$(az group show --name "$RG" --query id --output tsv 2>/dev/null || true)"
+if [[ -z "$actual" ]]; then echo "Resource group is already absent; cleanup is idempotent."; exit 0; fi
+purpose="$(az group show --name "$RG" --query tags.purpose --output tsv)"
+lab_id="$(az group show --name "$RG" --query tags.labId --output tsv)"
+run_id="$(az group show --name "$RG" --query tags.runId --output tsv)"
+[[ "${actual,,}" == "${RG_ID,,}" && "$purpose" == az104-lab && "$lab_id" == 22 && "$run_id" == "$RUN_ID" ]] || {
+  echo "ID or ownership-tag verification failed; refusing cleanup." >&2; exit 6;
+}
+
+az group delete --ids "$RG_ID" --yes --output none
+
+if az group exists --name "$RG" | grep -qi true; then
+  echo "Resource group still exists; deletion may be asynchronous or blocked." >&2
+  exit 7
+fi
+jq '.status="cleanup-complete"' "$MANIFEST" >"$MANIFEST.tmp" && mv -f "$MANIFEST.tmp" "$MANIFEST"
+echo "Active resource-group cleanup complete. Audit soft-deleted or externally retained items separately."
+```
+
+<!-- END GENERATED INLINE COMMANDS -->
 ## Run the lab
 
-Run these commands from this lab folder. The examples intentionally use placeholders rather than silently reading an arbitrary subscription.
+The complete learner-facing implementations are embedded above. The commands in this section are optional shortcuts that run the identical retained script files. Run them from this lab folder. The examples intentionally use placeholders rather than silently reading an arbitrary subscription.
 
 ### 1. Preview
 
@@ -150,17 +416,6 @@ Evidence to retain:
 Inspect `.state/az104l22-01/validation.json`. A `pass` applies only to checks that could be executed. A gated or asynchronous path must remain `warning` or `skipped` until its evidence exists.
 
 Positive checks should prove the intended resources, configuration, relationships, or health. Negative checks should prove that anonymous access, excess scope, accidental inheritance, unresolved DNS, unhealthy probes, or unrecorded resources were not introduced where the scenario forbids them.
-
-## Portal evidence
-
-Portal screenshots are planned evidence captured only during an authorized live run. Until then every entry in [images/portal/manifest.yml](images/portal/manifest.yml) stays `pending`, and no placeholder image is committed. Capture and sanitization rules live in [images/README.md](images/README.md).
-
-| Planned file | Checkpoint | Portal blade | Evidence |
-|---|---:|---|---|
-| `01-monitor-metrics.png` | 4 | Monitor > Metrics | Selected resource metric, aggregation, and time grain |
-| `02-log-analytics-workspace-logs.png` | 3 | Log Analytics workspace > Logs | KQL query text and returned schema/results |
-| `03-resource-diagnostic-settings.png` | 2 | Resource > Diagnostic settings | Destination workspace and enabled categories |
-| `04-monitor-insights.png` | 4 | Monitor > Insights | Onboarding or interpreted health for VM, storage, and network |
 
 ## Break/fix exercise
 

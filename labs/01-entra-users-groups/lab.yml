@@ -63,8 +63,9 @@ cleanup:
   reportOnlyByDefault: true
   requiresExecuteFlag: true
   softDeleteNote: User deletion is recoverable until deleted-item retention expires unless explicitly purged.
-screenshots:
-  status: pending
-  manifest: images/portal/manifest.yml
+assessment:
+  enabled: true
+  primaryDomain: identity-governance
+  questionCount: 10
 lastOfflineValidated: "2026-08-30"
 lastLiveVerified: null

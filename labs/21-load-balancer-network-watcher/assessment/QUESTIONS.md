@@ -4,72 +4,72 @@ Load balance workloads and troubleshoot with Network Watcher
 
 Choose one answer for each question before opening the answer key.
 
-## 1. Which statement best captures the key design principle for load balance workloads and troubleshoot with network watcher? (`LAB21-Q01`)
+## 1. Which principle is most important when working on 'Troubleshoot network connectivity' in Lab 21? (`LAB21-Q01`)
 
 - A. A load-balancing rule depends on a healthy probe and reachable backend, while Network Watcher distinguishes DNS, routing, NSG, guest firewall, and application-listener failures.
-- B. Every related control is interchangeable, so choose whichever command is shortest.
-- C. A command surface automatically supplies any missing authorization or configuration.
-- D. Cleanup evidence is unnecessary when a resource group has a recognizable name.
+- B. The shortest command is always correct even when it changes a broader scope.
+- C. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+- D. A recognizable resource name removes the need for validation and scoped cleanup.
 
-## 2. You must begin the hands-on path for 'Troubleshoot network connectivity'. Which action matches the reviewed lab sequence? (`LAB21-Q02`)
+## 2. Which lab action directly supports the objective 'Configure an internal or public load balancer'? (`LAB21-Q02`)
 
-- A. Delete similarly named resources before recording the current subscription.
-- B. Create two backend NICs/VMs in an NSG-protected subnet without individual public IPs.
-- C. Change the active tenant automatically and continue without displaying the new context.
-- D. Infer configuration from resource names without querying the live control plane.
+- A. Change the active tenant without displaying or confirming the resulting context.
+- B. Create a Standard public load balancer, backend pool, TCP probe, and frontend rule.
+- C. Search the whole tenant for a similar display name and modify the first match.
+- D. Mark the objective complete after reading documentation without checking any state.
 
-## 3. Which authorization statement is appropriate before creating resource group, virtual network, two backend VMs in this lab? (`LAB21-Q03`)
+## 3. Which authorization approach is appropriate before practicing 'Troubleshoot load balancing'? (`LAB21-Q03`)
 
-- A. Subscription Reader is sufficient for every create, update, role, policy, and recovery operation.
-- B. A local administrator account automatically grants Microsoft Entra and Azure permissions.
-- C. Confirm the active context and obtain only the declared role boundary: Network Contributor and Virtual Machine Contributor on the lab resource group
-- D. Skip authorization checks because all resources use an AZ104 naming prefix.
+- A. Use a production subscription because its resources already exist.
+- B. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
+- C. Confirm the active context and use only the declared role boundary: Network Contributor and Virtual Machine Contributor on the lab resource group
+- D. Skip role checks when the run ID contains the lab number.
 
-## 4. The setup command for Lab 21 is run without its execution switch. What should happen? (`LAB21-Q04`)
+## 4. A learner previews the implementation for 'Troubleshoot network connectivity'. What behavior is required? (`LAB21-Q04`)
 
-- A. It should deploy everything and ask for confirmation only before cleanup.
-- B. It should log in interactively and select the first available subscription.
-- C. It should delete any older run that shares the same lab number.
-- D. It should print the intended resources, context, cost class, and gates without changing Azure.
+- A. Create the baseline immediately and request approval only before cleanup.
+- B. Select the first accessible subscription and hide the resulting context.
+- C. Delete any older resource whose name resembles the new run ID.
+- D. Display the context, intended changes, cost and gated branches without mutating Azure.
 
-## 5. Which validation evidence most directly proves the baseline resource boundary for Lab 21? (`LAB21-Q05`)
+## 5. Which implementation step should the learner perform for 'Configure an internal or public load balancer'? (`LAB21-Q05`)
 
-- A. Query the exact recorded scope and verify the intended resource/object types, including Microsoft.Network/loadBalancers, Microsoft.Compute/virtualMachines.
-- B. Search the whole tenant by display-name prefix and accept the first match.
-- C. Treat a successful setup process exit code as proof of every data-plane and relationship requirement.
-- D. Verify only that an Azure subscription exists.
+- A. Create two backend NICs/VMs in an NSG-protected subnet without individual public IPs.
+- B. Replace the lab action with a tenant-wide change that is easier to discover.
+- C. Copy resource identifiers from another run instead of recording returned IDs.
+- D. Skip the operation and edit validation.json to show a passing result.
 
-## 6. A learner reaches the externally gated checkpoint in Lab 21. What is the safest response? (`LAB21-Q06`)
+## 6. Which evidence most directly validates 'Troubleshoot load balancing' for load-balancing rule? (`LAB21-Q06`)
 
-- A. Invent a placeholder tenant, email address, domain, or production target and continue.
-- B. Stop that branch unless its prerequisites are explicitly satisfied: None beyond the declared role and a disposable subscription.
-- C. Broaden the assignment to subscription scope so the gate no longer applies.
-- D. Mark the checkpoint as passed because the offline tests succeeded.
+- A. Treat the setup exit code as proof of every configuration and relationship.
+- B. Query the exact recorded scope and independently verify Microsoft.Network/networkWatchers.
+- C. List the entire subscription and assume similarly named resources belong to this run.
+- D. Record a credential so another learner can replay the authenticated session.
 
-## 7. Which command-side evidence best supports the first completed checkpoint in Lab 21? (`LAB21-Q07`)
+## 7. The 'Troubleshoot network connectivity' checkpoint reaches an external prerequisite. What should happen? (`LAB21-Q07`)
 
-- A. Copy a successful command from an unrelated tenant and treat it as this run's evidence.
-- B. Record access tokens and keys so another learner can replay the same session.
-- C. Run the independent validator and retain redacted structured output for the exact recorded scope after: Create two backend NICs/VMs in an NSG-protected subnet without individual public IPs.
-- D. Use the setup process exit code alone without querying resource state.
+- A. Invent a domain, notification target, license, quota, or tenant value and continue.
+- B. Broaden permissions until the prerequisite can no longer block the operation.
+- C. Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.
+- D. Mark the branch passed because its command syntax was checked offline.
 
-## 8. During cleanup of Lab 21, several similarly named resources exist. Which targeting method is correct? (`LAB21-Q08`)
+## 8. What is the safest command-evidence practice after completing 'Configure an internal or public load balancer'? (`LAB21-Q08`)
 
-- A. Delete every resource whose name contains az104.
-- B. Delete the active subscription to guarantee that no lab resources remain.
-- C. Use creation timestamps alone and remove the oldest matching resources.
-- D. Use the exact IDs and run metadata recorded before creation, verify the lab tags, then delete only that boundary.
+- A. Commit the complete account object so reviewers can identify the tenant.
+- B. Save tokens, keys, passwords, or SAS values beside the validation result.
+- C. Reuse successful output from an earlier run with a similar resource name.
+- D. Retain only redacted structured output from an independent query of the recorded run.
 
-## 9. Setup completed for Lab 21, but one required state check fails. What is the best break/fix approach? (`LAB21-Q09`)
+## 9. Validation for 'Troubleshoot load balancing' fails after setup. What is the best break/fix method? (`LAB21-Q09`)
 
-- A. Inspect the failing check and exact recorded resource, repair the smallest identified cause, then rerun validation.
-- B. Rerun setup repeatedly with new names until one run reports no error.
-- C. Edit validation.json so the failed status reads pass.
-- D. Disable all policies, locks, NSGs, and monitoring controls in the subscription.
+- A. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+- B. Rerun setup repeatedly with new names until one attempt appears successful.
+- C. Change validation.json directly so the failed result reads pass.
+- D. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
 
-## 10. Which completion claim is valid immediately after this repository's offline tests pass for Lab 21? (`LAB21-Q10`)
+## 10. The operation for 'Troubleshoot network connectivity' is asynchronous or gated. How should completion be recorded? (`LAB21-Q10`)
 
-- A. Every command has been proven in every Azure region and tenant type.
-- B. The documentation, schemas, script contracts, assessments, diagrams, and fixtures are offline-validated; live Azure state remains pending until executed.
-- C. The lab is live-verified even if no subscription was used.
-- D. Any pending gated checkpoint can be treated as successfully completed.
+- A. Record pass as soon as the request is accepted, regardless of its final state.
+- B. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
+- C. Fabricate expected output so the assessment and documentation appear complete.
+- D. Remove the check from validation whenever the service takes longer than expected.

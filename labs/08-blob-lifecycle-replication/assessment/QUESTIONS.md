@@ -4,72 +4,100 @@ Manage Blob lifecycle, tiers, versioning, replication, and AzCopy
 
 Choose one answer for each question before opening the answer key.
 
-## 1. Which statement best captures the key design principle for manage blob lifecycle, tiers, versioning, replication, and azcopy? (`LAB08-Q01`)
+## 1. Which principle is most important when working on 'Configure object replication' in Lab 08? (`LAB08-Q01`)
 
 - A. Object replication depends on versioning and change feed, while lifecycle rules act asynchronously and should be validated as configuration rather than immediate data movement.
-- B. Every related control is interchangeable, so choose whichever command is shortest.
-- C. A command surface automatically supplies any missing authorization or configuration.
-- D. Cleanup evidence is unnecessary when a resource group has a recognizable name.
+- B. The shortest command is always correct even when it changes a broader scope.
+- C. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+- D. A recognizable resource name removes the need for validation and scoped cleanup.
 
-## 2. You must begin the hands-on path for 'Configure object replication'. Which action matches the reviewed lab sequence? (`LAB08-Q02`)
+## 2. Which lab action directly supports the objective 'Manage data by using Azure Storage Explorer and AzCopy'? (`LAB08-Q02`)
 
-- A. Delete similarly named resources before recording the current subscription.
-- B. Create source and destination general-purpose v2 accounts with change feed and blob versioning.
-- C. Change the active tenant automatically and continue without displaying the new context.
-- D. Infer configuration from resource names without querying the live control plane.
+- A. Change the active tenant without displaying or confirming the resulting context.
+- B. Enable blob and container soft delete and create private containers.
+- C. Search the whole tenant for a similar display name and modify the first match.
+- D. Mark the objective complete after reading documentation without checking any state.
 
-## 3. Which authorization statement is appropriate before creating resource group, two StorageV2 accounts, blob containers in this lab? (`LAB08-Q03`)
+## 3. Which authorization approach is appropriate before practicing 'Create and configure a container in Azure Blob Storage'? (`LAB08-Q03`)
 
-- A. Subscription Reader is sufficient for every create, update, role, policy, and recovery operation.
-- B. A local administrator account automatically grants Microsoft Entra and Azure permissions.
-- C. Confirm the active context and obtain only the declared role boundary: Contributor and Storage Blob Data Contributor on the lab resource group
-- D. Skip authorization checks because all resources use an AZ104 naming prefix.
+- A. Use a production subscription because its resources already exist.
+- B. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
+- C. Confirm the active context and use only the declared role boundary: Contributor and Storage Blob Data Contributor on the lab resource group
+- D. Skip role checks when the run ID contains the lab number.
 
-## 4. The setup command for Lab 08 is run without its execution switch. What should happen? (`LAB08-Q04`)
+## 4. Which resource or object belongs inside the recorded boundary for 'Configure storage tiers'? (`LAB08-Q04`)
 
-- A. It should deploy everything and ask for confirmation only before cleanup.
-- B. It should log in interactively and select the first available subscription.
-- C. It should delete any older run that shares the same lab number.
-- D. It should print the intended resources, context, cost class, and gates without changing Azure.
+- A. Use whichever similarly named object appears first in a broad search.
+- B. Use an unrelated shared resource without recording its immutable ID.
+- C. Use a production object when the sandbox prerequisite is unavailable.
+- D. Use the exact recorded identity and scope for lifecycle policy.
 
-## 5. Which validation evidence most directly proves the baseline resource boundary for Lab 08? (`LAB08-Q05`)
+## 5. A learner previews the implementation for 'Configure soft delete for blobs and containers'. What behavior is required? (`LAB08-Q05`)
 
-- A. Query the exact recorded scope and verify the intended resource/object types, including Microsoft.Storage/storageAccounts.
-- B. Search the whole tenant by display-name prefix and accept the first match.
-- C. Treat a successful setup process exit code as proof of every data-plane and relationship requirement.
-- D. Verify only that an Azure subscription exists.
+- A. Display the context, intended changes, cost and gated branches without mutating Azure.
+- B. Create the baseline immediately and request approval only before cleanup.
+- C. Select the first accessible subscription and hide the resulting context.
+- D. Delete any older resource whose name resembles the new run ID.
 
-## 6. A learner reaches the externally gated checkpoint in Lab 08. What is the safest response? (`LAB08-Q06`)
+## 6. Which implementation step should the learner perform for 'Configure blob lifecycle management'? (`LAB08-Q06`)
 
-- A. Invent a placeholder tenant, email address, domain, or production target and continue.
-- B. Stop that branch unless its prerequisites are explicitly satisfied: None beyond the declared role and a disposable subscription.
-- C. Broaden the assignment to subscription scope so the gate no longer applies.
-- D. Mark the checkpoint as passed because the offline tests succeeded.
+- A. Replace the lab action with a tenant-wide change that is easier to discover.
+- B. Enable blob and container soft delete and create private containers.
+- C. Copy resource identifiers from another run instead of recording returned IDs.
+- D. Skip the operation and edit validation.json to show a passing result.
 
-## 7. Which command-side evidence best supports the first completed checkpoint in Lab 08? (`LAB08-Q07`)
+## 7. Which evidence most directly validates 'Configure blob versioning' for two StorageV2 accounts? (`LAB08-Q07`)
 
-- A. Copy a successful command from an unrelated tenant and treat it as this run's evidence.
-- B. Record access tokens and keys so another learner can replay the same session.
-- C. Run the independent validator and retain redacted structured output for the exact recorded scope after: Create source and destination general-purpose v2 accounts with change feed and blob versioning.
-- D. Use the setup process exit code alone without querying resource state.
+- A. Treat the setup exit code as proof of every configuration and relationship.
+- B. List the entire subscription and assume similarly named resources belong to this run.
+- C. Query the exact recorded scope and independently verify Microsoft.Storage/storageAccounts.
+- D. Record a credential so another learner can replay the authenticated session.
 
-## 8. During cleanup of Lab 08, several similarly named resources exist. Which targeting method is correct? (`LAB08-Q08`)
+## 8. The 'Configure object replication' checkpoint reaches an external prerequisite. What should happen? (`LAB08-Q08`)
 
-- A. Delete every resource whose name contains az104.
-- B. Delete the active subscription to guarantee that no lab resources remain.
-- C. Use creation timestamps alone and remove the oldest matching resources.
-- D. Use the exact IDs and run metadata recorded before creation, verify the lab tags, then delete only that boundary.
+- A. Invent a domain, notification target, license, quota, or tenant value and continue.
+- B. Broaden permissions until the prerequisite can no longer block the operation.
+- C. Mark the branch passed because its command syntax was checked offline.
+- D. Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable subscription.
 
-## 9. Setup completed for Lab 08, but one required state check fails. What is the best break/fix approach? (`LAB08-Q09`)
+## 9. What is the safest command-evidence practice after completing 'Manage data by using Azure Storage Explorer and AzCopy'? (`LAB08-Q09`)
 
-- A. Inspect the failing check and exact recorded resource, repair the smallest identified cause, then rerun validation.
-- B. Rerun setup repeatedly with new names until one run reports no error.
-- C. Edit validation.json so the failed status reads pass.
-- D. Disable all policies, locks, NSGs, and monitoring controls in the subscription.
+- A. Retain only redacted structured output from an independent query of the recorded run.
+- B. Commit the complete account object so reviewers can identify the tenant.
+- C. Save tokens, keys, passwords, or SAS values beside the validation result.
+- D. Reuse successful output from an earlier run with a similar resource name.
 
-## 10. Which completion claim is valid immediately after this repository's offline tests pass for Lab 08? (`LAB08-Q10`)
+## 10. Which negative check strengthens validation of 'Create and configure a container in Azure Blob Storage'? (`LAB08-Q10`)
 
-- A. Every command has been proven in every Azure region and tenant type.
-- B. The documentation, schemas, script contracts, assessments, diagrams, and fixtures are offline-validated; live Azure state remains pending until executed.
-- C. The lab is live-verified even if no subscription was used.
-- D. Any pending gated checkpoint can be treated as successfully completed.
+- A. Check only that at least one resource exists in the subscription.
+- B. Confirm the intended state and also prove that broader, anonymous, or unintended access was not introduced.
+- C. Repair every warning automatically before recording what caused it.
+- D. Ignore denied queries and record them as passing checks.
+
+## 11. Why should the run manifest record the exact ID of resource group? (`LAB08-Q11`)
+
+- A. It lets setup store access tokens and passwords for later reuse.
+- B. It allows cleanup to delete every object with the same prefix.
+- C. It lets validation and cleanup target the immutable object created by this run rather than a name match.
+- D. It removes the need to confirm the tenant or subscription context.
+
+## 12. Validation for 'Configure soft delete for blobs and containers' fails after setup. What is the best break/fix method? (`LAB08-Q12`)
+
+- A. Rerun setup repeatedly with new names until one attempt appears successful.
+- B. Change validation.json directly so the failed result reads pass.
+- C. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+- D. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+
+## 13. The operation for 'Configure blob lifecycle management' is asynchronous or gated. How should completion be recorded? (`LAB08-Q13`)
+
+- A. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
+- B. Record pass as soon as the request is accepted, regardless of its final state.
+- C. Fabricate expected output so the assessment and documentation appear complete.
+- D. Remove the check from validation whenever the service takes longer than expected.
+
+## 14. An administrator discovers drift while validating 'Configure blob versioning'. Which response preserves least privilege? (`LAB08-Q14`)
+
+- A. Grant subscription Owner and tenant administrator roles to avoid further authorization errors.
+- B. Compare the live query with the recorded expectation, change only the mismatched setting, and validate again.
+- C. Replace every resource in the subscription instead of identifying the mismatch.
+- D. Accept the drift when the resource name still matches the lab prefix.

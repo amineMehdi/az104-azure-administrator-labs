@@ -4,72 +4,86 @@ Configure Azure Files, snapshots, soft delete, and identity access
 
 Choose one answer for each question before opening the answer key.
 
-## 1. Which statement best captures the key design principle for configure azure files, snapshots, soft delete, and identity access? (`LAB09-Q01`)
+## 1. Which principle is most important when working on 'Configure identity-based access for Azure Files' in Lab 09? (`LAB09-Q01`)
 
-- A. Share snapshots and soft delete solve different recovery problems, while identity-based SMB authentication requires an approved directory source and data-plane authorization.
-- B. Every related control is interchangeable, so choose whichever command is shortest.
-- C. A command surface automatically supplies any missing authorization or configuration.
-- D. Cleanup evidence is unnecessary when a resource group has a recognizable name.
+- A. The shortest command is always correct even when it changes a broader scope.
+- B. A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+- C. Share snapshots and soft delete solve different recovery problems, while identity-based SMB authentication requires an approved directory source and data-plane authorization.
+- D. A recognizable resource name removes the need for validation and scoped cleanup.
 
-## 2. You must begin the hands-on path for 'Configure identity-based access for Azure Files'. Which action matches the reviewed lab sequence? (`LAB09-Q02`)
+## 2. Which lab action directly supports the objective 'Manage data by using Azure Storage Explorer and AzCopy'? (`LAB09-Q02`)
 
-- A. Delete similarly named resources before recording the current subscription.
-- B. Create a secure StorageV2 account and transaction-optimized file share with quota.
-- C. Change the active tenant automatically and continue without displaying the new context.
-- D. Infer configuration from resource names without querying the live control plane.
+- A. Change the active tenant without displaying or confirming the resulting context.
+- B. Search the whole tenant for a similar display name and modify the first match.
+- C. Mark the objective complete after reading documentation without checking any state.
+- D. Enable Azure Files share soft delete and create a point-in-time share snapshot.
 
-## 3. Which authorization statement is appropriate before creating resource group, storage account, Azure file share in this lab? (`LAB09-Q03`)
+## 3. Which authorization approach is appropriate before practicing 'Create and configure a file share in Azure Files'? (`LAB09-Q03`)
 
-- A. Subscription Reader is sufficient for every create, update, role, policy, and recovery operation.
-- B. A local administrator account automatically grants Microsoft Entra and Azure permissions.
-- C. Confirm the active context and obtain only the declared role boundary: Contributor and Storage File Data SMB Share Contributor; directory permissions for the optional identity-source path
-- D. Skip authorization checks because all resources use an AZ104 naming prefix.
+- A. Confirm the active context and use only the declared role boundary: Contributor and Storage File Data SMB Share Contributor; directory permissions for the optional identity-source path
+- B. Use a production subscription because its resources already exist.
+- C. Assign Global Administrator and subscription Owner for every lab regardless of the operation.
+- D. Skip role checks when the run ID contains the lab number.
 
-## 4. The setup command for Lab 09 is run without its execution switch. What should happen? (`LAB09-Q04`)
+## 4. A learner previews the implementation for 'Configure snapshots and soft delete for Azure Files'. What behavior is required? (`LAB09-Q04`)
 
-- A. It should deploy everything and ask for confirmation only before cleanup.
-- B. It should log in interactively and select the first available subscription.
-- C. It should delete any older run that shares the same lab number.
-- D. It should print the intended resources, context, cost class, and gates without changing Azure.
+- A. Create the baseline immediately and request approval only before cleanup.
+- B. Display the context, intended changes, cost and gated branches without mutating Azure.
+- C. Select the first accessible subscription and hide the resulting context.
+- D. Delete any older resource whose name resembles the new run ID.
 
-## 5. Which validation evidence most directly proves the baseline resource boundary for Lab 09? (`LAB09-Q05`)
+## 5. Which implementation step should the learner perform for 'Configure identity-based access for Azure Files'? (`LAB09-Q05`)
 
-- A. Query the exact recorded scope and verify the intended resource/object types, including Microsoft.Storage/storageAccounts, Microsoft.Storage/storageAccounts/fileServices/shares.
-- B. Search the whole tenant by display-name prefix and accept the first match.
-- C. Treat a successful setup process exit code as proof of every data-plane and relationship requirement.
-- D. Verify only that an Azure subscription exists.
+- A. Replace the lab action with a tenant-wide change that is easier to discover.
+- B. Copy resource identifiers from another run instead of recording returned IDs.
+- C. Create a secure StorageV2 account and transaction-optimized file share with quota.
+- D. Skip the operation and edit validation.json to show a passing result.
 
-## 6. A learner reaches the externally gated checkpoint in Lab 09. What is the safest response? (`LAB09-Q06`)
+## 6. Which evidence most directly validates 'Manage data by using Azure Storage Explorer and AzCopy' for storage account? (`LAB09-Q06`)
 
-- A. Invent a placeholder tenant, email address, domain, or production target and continue.
-- B. Stop that branch unless its prerequisites are explicitly satisfied: Identity-based SMB configuration is gated by AZ104_FILES_IDENTITY_SOURCE because Entra Kerberos, AD DS, and Entra Domain Services have different prerequisites.
-- C. Broaden the assignment to subscription scope so the gate no longer applies.
-- D. Mark the checkpoint as passed because the offline tests succeeded.
+- A. Treat the setup exit code as proof of every configuration and relationship.
+- B. List the entire subscription and assume similarly named resources belong to this run.
+- C. Record a credential so another learner can replay the authenticated session.
+- D. Query the exact recorded scope and independently verify Microsoft.Storage/storageAccounts/fileServices/shares.
 
-## 7. Which command-side evidence best supports the first completed checkpoint in Lab 09? (`LAB09-Q07`)
+## 7. The 'Create and configure a file share in Azure Files' checkpoint reaches an external prerequisite. What should happen? (`LAB09-Q07`)
 
-- A. Copy a successful command from an unrelated tenant and treat it as this run's evidence.
-- B. Record access tokens and keys so another learner can replay the same session.
-- C. Run the independent validator and retain redacted structured output for the exact recorded scope after: Create a secure StorageV2 account and transaction-optimized file share with quota.
-- D. Use the setup process exit code alone without querying resource state.
+- A. Run the branch only when this documented gate is satisfied: Identity-based SMB configuration is gated by AZ104_FILES_IDENTITY_SOURCE because Entra Kerberos, AD DS, and Entra Domain Services have different prerequisites.
+- B. Invent a domain, notification target, license, quota, or tenant value and continue.
+- C. Broaden permissions until the prerequisite can no longer block the operation.
+- D. Mark the branch passed because its command syntax was checked offline.
 
-## 8. During cleanup of Lab 09, several similarly named resources exist. Which targeting method is correct? (`LAB09-Q08`)
+## 8. What is the safest command-evidence practice after completing 'Configure snapshots and soft delete for Azure Files'? (`LAB09-Q08`)
 
-- A. Delete every resource whose name contains az104.
-- B. Delete the active subscription to guarantee that no lab resources remain.
-- C. Use creation timestamps alone and remove the oldest matching resources.
-- D. Use the exact IDs and run metadata recorded before creation, verify the lab tags, then delete only that boundary.
+- A. Commit the complete account object so reviewers can identify the tenant.
+- B. Retain only redacted structured output from an independent query of the recorded run.
+- C. Save tokens, keys, passwords, or SAS values beside the validation result.
+- D. Reuse successful output from an earlier run with a similar resource name.
 
-## 9. Setup completed for Lab 09, but one required state check fails. What is the best break/fix approach? (`LAB09-Q09`)
+## 9. Which negative check strengthens validation of 'Configure identity-based access for Azure Files'? (`LAB09-Q09`)
 
-- A. Inspect the failing check and exact recorded resource, repair the smallest identified cause, then rerun validation.
-- B. Rerun setup repeatedly with new names until one run reports no error.
-- C. Edit validation.json so the failed status reads pass.
-- D. Disable all policies, locks, NSGs, and monitoring controls in the subscription.
+- A. Check only that at least one resource exists in the subscription.
+- B. Repair every warning automatically before recording what caused it.
+- C. Confirm the intended state and also prove that broader, anonymous, or unintended access was not introduced.
+- D. Ignore denied queries and record them as passing checks.
 
-## 10. Which completion claim is valid immediately after this repository's offline tests pass for Lab 09? (`LAB09-Q10`)
+## 10. Validation for 'Manage data by using Azure Storage Explorer and AzCopy' fails after setup. What is the best break/fix method? (`LAB09-Q10`)
 
-- A. Every command has been proven in every Azure region and tenant type.
-- B. The documentation, schemas, script contracts, assessments, diagrams, and fixtures are offline-validated; live Azure state remains pending until executed.
-- C. The lab is live-verified even if no subscription was used.
-- D. Any pending gated checkpoint can be treated as successfully completed.
+- A. Rerun setup repeatedly with new names until one attempt appears successful.
+- B. Change validation.json directly so the failed result reads pass.
+- C. Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+- D. Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+
+## 11. The operation for 'Create and configure a file share in Azure Files' is asynchronous or gated. How should completion be recorded? (`LAB09-Q11`)
+
+- A. Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence exists.
+- B. Record pass as soon as the request is accepted, regardless of its final state.
+- C. Fabricate expected output so the assessment and documentation appear complete.
+- D. Remove the check from validation whenever the service takes longer than expected.
+
+## 12. An administrator discovers drift while validating 'Configure snapshots and soft delete for Azure Files'. Which response preserves least privilege? (`LAB09-Q12`)
+
+- A. Grant subscription Owner and tenant administrator roles to avoid further authorization errors.
+- B. Compare the live query with the recorded expectation, change only the mismatched setting, and validate again.
+- C. Replace every resource in the subscription instead of identifying the mismatch.
+- D. Accept the drift when the resource name still matches the lab prefix.

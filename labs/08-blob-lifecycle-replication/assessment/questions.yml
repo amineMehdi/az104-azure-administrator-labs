@@ -2,26 +2,24 @@
   objectiveIds:
   - ST-ACCOUNTS-03
   difficulty: foundational
-  stem: Which statement best captures the key design principle for manage blob lifecycle, tiers, versioning, replication,
-    and azcopy?
+  stem: Which principle is most important when working on 'Configure object replication' in Lab 08?
   options:
     A: Object replication depends on versioning and change feed, while lifecycle rules act asynchronously and should
       be validated as configuration rather than immediate data movement.
-    B: Every related control is interchangeable, so choose whichever command is shortest.
-    C: A command surface automatically supplies any missing authorization or configuration.
-    D: Cleanup evidence is unnecessary when a resource group has a recognizable name.
+    B: The shortest command is always correct even when it changes a broader scope.
+    C: A successful sign-in automatically supplies every required Azure and Microsoft Entra role.
+    D: A recognizable resource name removes the need for validation and scoped cleanup.
   correctOption: A
-  explanation: 'The lab''s central distinction is: Object replication depends on versioning and change feed, while
-    lifecycle rules act asynchronously and should be validated as configuration rather than immediate data movement.'
+  explanation: 'The lab establishes this design principle: Object replication depends on versioning and change feed,
+    while lifecycle rules act asynchronously and should be validated as configuration rather than immediate data
+    movement.'
   distractorExplanations:
-    A: 'Correct. The lab''s central distinction is: Object replication depends on versioning and change feed, while
-      lifecycle rules act asynchronously and should be validated as configuration rather than immediate data movement.'
-    B: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    C: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    D: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
+    A: 'Correct. The lab establishes this design principle: Object replication depends on versioning and change
+      feed, while lifecycle rules act asynchronously and should be validated as configuration rather than immediate
+      data movement.'
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/storage/blobs/lifecycle-management-overview
   lastVerified: '2026-08-30'
@@ -29,25 +27,21 @@
   objectiveIds:
   - ST-ACCOUNTS-05
   difficulty: foundational
-  stem: You must begin the hands-on path for 'Configure object replication'. Which action matches the reviewed lab
-    sequence?
+  stem: Which lab action directly supports the objective 'Manage data by using Azure Storage Explorer and AzCopy'?
   options:
-    A: Delete similarly named resources before recording the current subscription.
-    B: Create source and destination general-purpose v2 accounts with change feed and blob versioning.
-    C: Change the active tenant automatically and continue without displaying the new context.
-    D: Infer configuration from resource names without querying the live control plane.
+    A: Change the active tenant without displaying or confirming the resulting context.
+    B: Enable blob and container soft delete and create private containers.
+    C: Search the whole tenant for a similar display name and modify the first match.
+    D: Mark the objective complete after reading documentation without checking any state.
   correctOption: B
-  explanation: 'The first implementation checkpoint is: Create source and destination general-purpose v2 accounts
-    with change feed and blob versioning.'
+  explanation: 'The reviewed hands-on action for this objective is: Enable blob and container soft delete and create
+    private containers.'
   distractorExplanations:
-    A: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    B: 'Correct. The first implementation checkpoint is: Create source and destination general-purpose v2 accounts
-      with change feed and blob versioning.'
-    C: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    D: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: 'Correct. The reviewed hands-on action for this objective is: Enable blob and container soft delete and create
+      private containers.'
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/storage/blobs/versioning-overview
   lastVerified: '2026-08-30'
@@ -55,51 +49,43 @@
   objectiveIds:
   - ST-DATA-02
   difficulty: foundational
-  stem: Which authorization statement is appropriate before creating resource group, two StorageV2 accounts, blob
-    containers in this lab?
+  stem: Which authorization approach is appropriate before practicing 'Create and configure a container in Azure
+    Blob Storage'?
   options:
-    A: Subscription Reader is sufficient for every create, update, role, policy, and recovery operation.
-    B: A local administrator account automatically grants Microsoft Entra and Azure permissions.
-    C: 'Confirm the active context and obtain only the declared role boundary: Contributor and Storage Blob Data
-      Contributor on the lab resource group'
-    D: Skip authorization checks because all resources use an AZ104 naming prefix.
+    A: Use a production subscription because its resources already exist.
+    B: Assign Global Administrator and subscription Owner for every lab regardless of the operation.
+    C: 'Confirm the active context and use only the declared role boundary: Contributor and Storage Blob Data Contributor
+      on the lab resource group'
+    D: Skip role checks when the run ID contains the lab number.
   correctOption: C
-  explanation: The documented permission boundary is Contributor and Storage Blob Data Contributor on the lab resource
-    group
+  explanation: 'Least privilege requires the documented boundary: Contributor and Storage Blob Data Contributor
+    on the lab resource group'
   distractorExplanations:
-    A: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    B: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    C: Correct. The documented permission boundary is Contributor and Storage Blob Data Contributor on the lab resource
-      group
-    D: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: 'Correct. Least privilege requires the documented boundary: Contributor and Storage Blob Data Contributor
+      on the lab resource group'
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/storage/blobs/soft-delete-blob-overview
   lastVerified: '2026-08-30'
 - id: LAB08-Q04
   objectiveIds:
   - ST-DATA-03
-  difficulty: applied
-  stem: The setup command for Lab 08 is run without its execution switch. What should happen?
+  difficulty: foundational
+  stem: Which resource or object belongs inside the recorded boundary for 'Configure storage tiers'?
   options:
-    A: It should deploy everything and ask for confirmation only before cleanup.
-    B: It should log in interactively and select the first available subscription.
-    C: It should delete any older run that shares the same lab number.
-    D: It should print the intended resources, context, cost class, and gates without changing Azure.
+    A: Use whichever similarly named object appears first in a broad search.
+    B: Use an unrelated shared resource without recording its immutable ID.
+    C: Use a production object when the sandbox prerequisite is unavailable.
+    D: Use the exact recorded identity and scope for lifecycle policy.
   correctOption: D
-  explanation: Preview-first behavior makes the default invocation non-mutating; execution requires an explicit
-    switch.
+  explanation: The lab records the exact scope and identity of lifecycle policy before validation and cleanup.
   distractorExplanations:
-    A: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    B: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    C: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    D: Correct. Preview-first behavior makes the default invocation non-mutating; execution requires an explicit
-      switch.
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: Correct. The lab records the exact scope and identity of lifecycle policy before validation and cleanup.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/storage/blobs/object-replication-overview
   lastVerified: '2026-08-30'
@@ -107,22 +93,20 @@
   objectiveIds:
   - ST-DATA-04
   difficulty: applied
-  stem: Which validation evidence most directly proves the baseline resource boundary for Lab 08?
+  stem: A learner previews the implementation for 'Configure soft delete for blobs and containers'. What behavior
+    is required?
   options:
-    A: Query the exact recorded scope and verify the intended resource/object types, including Microsoft.Storage/storageAccounts.
-    B: Search the whole tenant by display-name prefix and accept the first match.
-    C: Treat a successful setup process exit code as proof of every data-plane and relationship requirement.
-    D: Verify only that an Azure subscription exists.
+    A: Display the context, intended changes, cost and gated branches without mutating Azure.
+    B: Create the baseline immediately and request approval only before cleanup.
+    C: Select the first accessible subscription and hide the resulting context.
+    D: Delete any older resource whose name resembles the new run ID.
   correctOption: A
-  explanation: Validation must use the recorded scope and test the intended state independently of setup.
+  explanation: Preview mode is deliberately non-mutating and exposes the complete intended boundary.
   distractorExplanations:
-    A: Correct. Validation must use the recorded scope and test the intended state independently of setup.
-    B: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    C: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    D: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
+    A: Correct. Preview mode is deliberately non-mutating and exposes the complete intended boundary.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-v10
   lastVerified: '2026-08-30'
@@ -130,25 +114,21 @@
   objectiveIds:
   - ST-DATA-06
   difficulty: applied
-  stem: A learner reaches the externally gated checkpoint in Lab 08. What is the safest response?
+  stem: Which implementation step should the learner perform for 'Configure blob lifecycle management'?
   options:
-    A: Invent a placeholder tenant, email address, domain, or production target and continue.
-    B: 'Stop that branch unless its prerequisites are explicitly satisfied: None beyond the declared role and a
-      disposable subscription.'
-    C: Broaden the assignment to subscription scope so the gate no longer applies.
-    D: Mark the checkpoint as passed because the offline tests succeeded.
+    A: Replace the lab action with a tenant-wide change that is easier to discover.
+    B: Enable blob and container soft delete and create private containers.
+    C: Copy resource identifiers from another run instead of recording returned IDs.
+    D: Skip the operation and edit validation.json to show a passing result.
   correctOption: B
-  explanation: 'The live-only gate is explicit and must not be guessed: None beyond the declared role and a disposable
-    subscription.'
+  explanation: 'The lab''s reviewed command path performs this bounded action: Enable blob and container soft delete
+    and create private containers.'
   distractorExplanations:
-    A: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    B: 'Correct. The live-only gate is explicit and must not be guessed: None beyond the declared role and a disposable
-      subscription.'
-    C: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    D: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: 'Correct. The lab''s reviewed command path performs this bounded action: Enable blob and container soft delete
+      and create private containers.'
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/storage/blobs/lifecycle-management-overview
   lastVerified: '2026-08-30'
@@ -156,98 +136,172 @@
   objectiveIds:
   - ST-DATA-07
   difficulty: applied
-  stem: Which command-side evidence best supports the first completed checkpoint in Lab 08?
+  stem: Which evidence most directly validates 'Configure blob versioning' for two StorageV2 accounts?
   options:
-    A: Copy a successful command from an unrelated tenant and treat it as this run's evidence.
-    B: Record access tokens and keys so another learner can replay the same session.
-    C: 'Run the independent validator and retain redacted structured output for the exact recorded scope after:
-      Create source and destination general-purpose v2 accounts with change feed and blob versioning.'
-    D: Use the setup process exit code alone without querying resource state.
+    A: Treat the setup exit code as proof of every configuration and relationship.
+    B: List the entire subscription and assume similarly named resources belong to this run.
+    C: Query the exact recorded scope and independently verify Microsoft.Storage/storageAccounts.
+    D: Record a credential so another learner can replay the authenticated session.
   correctOption: C
-  explanation: Command evidence must come from the recorded run, exclude secrets and identifiers, and prove the
-    intended state independently of setup.
+  explanation: The independent validation path must prove Microsoft.Storage/storageAccounts for the exact recorded
+    object.
   distractorExplanations:
-    A: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    B: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    C: Correct. Command evidence must come from the recorded run, exclude secrets and identifiers, and prove the
-      intended state independently of setup.
-    D: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: Correct. The independent validation path must prove Microsoft.Storage/storageAccounts for the exact recorded
+      object.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/storage/blobs/versioning-overview
   lastVerified: '2026-08-30'
 - id: LAB08-Q08
   objectiveIds:
   - ST-ACCOUNTS-03
-  - ST-ACCOUNTS-05
   difficulty: applied
-  stem: During cleanup of Lab 08, several similarly named resources exist. Which targeting method is correct?
+  stem: The 'Configure object replication' checkpoint reaches an external prerequisite. What should happen?
   options:
-    A: Delete every resource whose name contains az104.
-    B: Delete the active subscription to guarantee that no lab resources remain.
-    C: Use creation timestamps alone and remove the oldest matching resources.
-    D: Use the exact IDs and run metadata recorded before creation, verify the lab tags, then delete only that boundary.
+    A: Invent a domain, notification target, license, quota, or tenant value and continue.
+    B: Broaden permissions until the prerequisite can no longer block the operation.
+    C: Mark the branch passed because its command syntax was checked offline.
+    D: 'Run the branch only when this documented gate is satisfied: None beyond the declared role and a disposable
+      subscription.'
   correctOption: D
-  explanation: Recorded immutable IDs plus ownership tags provide the narrow, auditable cleanup boundary.
+  explanation: 'Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the
+    declared role and a disposable subscription.'
   distractorExplanations:
-    A: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    B: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    C: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    D: Correct. Recorded immutable IDs plus ownership tags provide the narrow, auditable cleanup boundary.
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: 'Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the
+      declared role and a disposable subscription.'
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/storage/blobs/soft-delete-blob-overview
   lastVerified: '2026-08-30'
 - id: LAB08-Q09
   objectiveIds:
   - ST-ACCOUNTS-05
-  - ST-DATA-02
-  difficulty: advanced
-  stem: Setup completed for Lab 08, but one required state check fails. What is the best break/fix approach?
+  difficulty: applied
+  stem: What is the safest command-evidence practice after completing 'Manage data by using Azure Storage Explorer
+    and AzCopy'?
   options:
-    A: Inspect the failing check and exact recorded resource, repair the smallest identified cause, then rerun validation.
-    B: Rerun setup repeatedly with new names until one run reports no error.
-    C: Edit validation.json so the failed status reads pass.
-    D: Disable all policies, locks, NSGs, and monitoring controls in the subscription.
+    A: Retain only redacted structured output from an independent query of the recorded run.
+    B: Commit the complete account object so reviewers can identify the tenant.
+    C: Save tokens, keys, passwords, or SAS values beside the validation result.
+    D: Reuse successful output from an earlier run with a similar resource name.
   correctOption: A
-  explanation: Evidence-led repair limits drift and preserves the diagnostic value of an independent validator.
+  explanation: Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
   distractorExplanations:
-    A: Correct. Evidence-led repair limits drift and preserves the diagnostic value of an independent validator.
-    B: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    C: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    D: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
+    A: Correct. Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/storage/blobs/object-replication-overview
   lastVerified: '2026-08-30'
 - id: LAB08-Q10
   objectiveIds:
   - ST-DATA-02
-  - ST-DATA-03
-  difficulty: advanced
-  stem: Which completion claim is valid immediately after this repository's offline tests pass for Lab 08?
+  difficulty: applied
+  stem: Which negative check strengthens validation of 'Create and configure a container in Azure Blob Storage'?
   options:
-    A: Every command has been proven in every Azure region and tenant type.
-    B: The documentation, schemas, script contracts, assessments, diagrams, and fixtures are offline-validated;
-      live Azure state remains pending until executed.
-    C: The lab is live-verified even if no subscription was used.
-    D: Any pending gated checkpoint can be treated as successfully completed.
+    A: Check only that at least one resource exists in the subscription.
+    B: Confirm the intended state and also prove that broader, anonymous, or unintended access was not introduced.
+    C: Repair every warning automatically before recording what caused it.
+    D: Ignore denied queries and record them as passing checks.
   correctOption: B
-  explanation: Offline validation proves artifact quality and safety contracts, not live service behavior.
+  explanation: A bounded negative assertion detects accidental privilege or exposure beyond the intended state.
   distractorExplanations:
-    A: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    B: Correct. Offline validation proves artifact quality and safety contracts, not live service behavior.
-    C: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
-    D: This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with
-      live Azure state.
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: Correct. A bounded negative assertion detects accidental privilege or exposure beyond the intended state.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
   sourceUrls:
   - https://learn.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-v10
+  lastVerified: '2026-08-30'
+- id: LAB08-Q11
+  objectiveIds:
+  - ST-DATA-03
+  difficulty: applied
+  stem: Why should the run manifest record the exact ID of resource group?
+  options:
+    A: It lets setup store access tokens and passwords for later reuse.
+    B: It allows cleanup to delete every object with the same prefix.
+    C: It lets validation and cleanup target the immutable object created by this run rather than a name match.
+    D: It removes the need to confirm the tenant or subscription context.
+  correctOption: C
+  explanation: Immutable recorded IDs create a deterministic validation and cleanup boundary.
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: Correct. Immutable recorded IDs create a deterministic validation and cleanup boundary.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/storage/blobs/lifecycle-management-overview
+  lastVerified: '2026-08-30'
+- id: LAB08-Q12
+  objectiveIds:
+  - ST-DATA-04
+  - ST-DATA-06
+  difficulty: advanced
+  stem: Validation for 'Configure soft delete for blobs and containers' fails after setup. What is the best break/fix
+    method?
+  options:
+    A: Rerun setup repeatedly with new names until one attempt appears successful.
+    B: Change validation.json directly so the failed result reads pass.
+    C: Disable unrelated policies, locks, network controls, and monitoring across the subscription.
+    D: Inspect the exact failing query, repair the smallest identified mismatch, and rerun independent validation.
+  correctOption: D
+  explanation: Evidence-led repair preserves scope and makes the cause and correction auditable.
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: This choice skips independent evidence or relies on ambiguous resource identity.
+    C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+    D: Correct. Evidence-led repair preserves scope and makes the cause and correction auditable.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/storage/blobs/versioning-overview
+  lastVerified: '2026-08-30'
+- id: LAB08-Q13
+  objectiveIds:
+  - ST-DATA-06
+  - ST-DATA-07
+  difficulty: advanced
+  stem: The operation for 'Configure blob lifecycle management' is asynchronous or gated. How should completion
+    be recorded?
+  options:
+    A: Record the observed state and timestamp, and keep the result warning, skipped, or partial until final evidence
+      exists.
+    B: Record pass as soon as the request is accepted, regardless of its final state.
+    C: Fabricate expected output so the assessment and documentation appear complete.
+    D: Remove the check from validation whenever the service takes longer than expected.
+  correctOption: A
+  explanation: Accepted requests and offline checks do not prove the final live state.
+  distractorExplanations:
+    A: Correct. Accepted requests and offline checks do not prove the final live state.
+    B: This choice changes or trusts a broader scope than the recorded lab boundary.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/storage/blobs/soft-delete-blob-overview
+  lastVerified: '2026-08-30'
+- id: LAB08-Q14
+  objectiveIds:
+  - ST-DATA-07
+  - ST-ACCOUNTS-03
+  difficulty: advanced
+  stem: An administrator discovers drift while validating 'Configure blob versioning'. Which response preserves
+    least privilege?
+  options:
+    A: Grant subscription Owner and tenant administrator roles to avoid further authorization errors.
+    B: Compare the live query with the recorded expectation, change only the mismatched setting, and validate again.
+    C: Replace every resource in the subscription instead of identifying the mismatch.
+    D: Accept the drift when the resource name still matches the lab prefix.
+  correctOption: B
+  explanation: The narrowest evidence-supported correction avoids unrelated changes and excess privilege.
+  distractorExplanations:
+    A: This choice changes or trusts a broader scope than the recorded lab boundary.
+    B: Correct. The narrowest evidence-supported correction avoids unrelated changes and excess privilege.
+    C: This choice skips independent evidence or relies on ambiguous resource identity.
+    D: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
+  sourceUrls:
+  - https://learn.microsoft.com/en-us/azure/storage/blobs/object-replication-overview
   lastVerified: '2026-08-30'

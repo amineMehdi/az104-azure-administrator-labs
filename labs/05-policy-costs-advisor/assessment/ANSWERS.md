@@ -4,140 +4,140 @@ Return to [the questions](QUESTIONS.md).
 
 ## 1. A (`LAB05-Q01`)
 
-The lab's central distinction is: Policy compliance is eventually evaluated, budgets notify rather than stop spending, and Advisor recommendations remain advisory until an administrator acts.
+The lab establishes this design principle: Policy compliance is eventually evaluated, budgets notify rather than stop spending, and Advisor recommendations remain advisory until an administrator acts.
 
 Objectives: IG-GOVERN-01
 
 Why the other choices do not fit:
 
-- **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
+- **B:** This choice changes or trusts a broader scope than the recorded lab boundary.
+- **C:** This choice skips independent evidence or relies on ambiguous resource identity.
+- **D:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
 
 Source: <https://learn.microsoft.com/en-us/azure/governance/policy/assign-policy-powershell>
 
 ## 2. B (`LAB05-Q02`)
 
-The first implementation checkpoint is: Create the tagged policy-test resource group.
+The reviewed hands-on action for this objective is: Assign the built-in Require a tag and its value on resources policy at resource-group scope.
 
 Objectives: IG-GOVERN-06
 
 Why the other choices do not fit:
 
-- **A:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
+- **A:** This choice changes or trusts a broader scope than the recorded lab boundary.
+- **C:** This choice skips independent evidence or relies on ambiguous resource identity.
+- **D:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
 
 Source: <https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-acm-create-budgets>
 
 ## 3. C (`LAB05-Q03`)
 
-The documented permission boundary is Resource Policy Contributor at the lab scope; Cost Management Contributor for the optional budget path
+Least privilege requires the documented boundary: Resource Policy Contributor at the lab scope; Cost Management Contributor for the optional budget path
 
 Objectives: IG-GOVERN-07
 
 Why the other choices do not fit:
 
-- **A:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
+- **A:** This choice changes or trusts a broader scope than the recorded lab boundary.
+- **B:** This choice skips independent evidence or relies on ambiguous resource identity.
+- **D:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
 
 Source: <https://learn.microsoft.com/en-us/azure/advisor/advisor-cost-recommendations>
 
 ## 4. D (`LAB05-Q04`)
 
-Preview-first behavior makes the default invocation non-mutating; execution requires an explicit switch.
+Preview mode is deliberately non-mutating and exposes the complete intended boundary.
 
 Objectives: IG-GOVERN-01
 
 Why the other choices do not fit:
 
-- **A:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
+- **A:** This choice changes or trusts a broader scope than the recorded lab boundary.
+- **B:** This choice skips independent evidence or relies on ambiguous resource identity.
+- **C:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
 
 Source: <https://learn.microsoft.com/en-us/azure/governance/policy/assign-policy-powershell>
 
 ## 5. A (`LAB05-Q05`)
 
-Validation must use the recorded scope and test the intended state independently of setup.
+The lab's reviewed command path performs this bounded action: Create the tagged policy-test resource group.
 
 Objectives: IG-GOVERN-06
 
 Why the other choices do not fit:
 
-- **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
+- **B:** This choice changes or trusts a broader scope than the recorded lab boundary.
+- **C:** This choice skips independent evidence or relies on ambiguous resource identity.
+- **D:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
 
 Source: <https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-acm-create-budgets>
 
 ## 6. B (`LAB05-Q06`)
 
-The live-only gate is explicit and must not be guessed: Budget creation requires AZ104_BUDGET_EMAIL and Cost Management authorization; otherwise the lab inventories cost controls without creating one.
+The independent validation path must prove Microsoft.Authorization/policyAssignments for the exact recorded object.
 
 Objectives: IG-GOVERN-07
 
 Why the other choices do not fit:
 
-- **A:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
+- **A:** This choice changes or trusts a broader scope than the recorded lab boundary.
+- **C:** This choice skips independent evidence or relies on ambiguous resource identity.
+- **D:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
 
 Source: <https://learn.microsoft.com/en-us/azure/advisor/advisor-cost-recommendations>
 
 ## 7. C (`LAB05-Q07`)
 
-Command evidence must come from the recorded run, exclude secrets and identifiers, and prove the intended state independently of setup.
+Unavailable live prerequisites remain skipped or partial; the documented gate is: Budget creation requires AZ104_BUDGET_EMAIL and Cost Management authorization; otherwise the lab inventories cost controls without creating one.
 
 Objectives: IG-GOVERN-01
 
 Why the other choices do not fit:
 
-- **A:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
+- **A:** This choice changes or trusts a broader scope than the recorded lab boundary.
+- **B:** This choice skips independent evidence or relies on ambiguous resource identity.
+- **D:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
 
 Source: <https://learn.microsoft.com/en-us/azure/governance/policy/assign-policy-powershell>
 
 ## 8. D (`LAB05-Q08`)
 
-Recorded immutable IDs plus ownership tags provide the narrow, auditable cleanup boundary.
+Evidence must come from the current run, prove state independently, and exclude secrets and identifiers.
 
-Objectives: IG-GOVERN-06, IG-GOVERN-07
+Objectives: IG-GOVERN-06
 
 Why the other choices do not fit:
 
-- **A:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
+- **A:** This choice changes or trusts a broader scope than the recorded lab boundary.
+- **B:** This choice skips independent evidence or relies on ambiguous resource identity.
+- **C:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
 
 Source: <https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-acm-create-budgets>
 
 ## 9. A (`LAB05-Q09`)
 
-Evidence-led repair limits drift and preserves the diagnostic value of an independent validator.
+Evidence-led repair preserves scope and makes the cause and correction auditable.
 
 Objectives: IG-GOVERN-07, IG-GOVERN-01
 
 Why the other choices do not fit:
 
-- **B:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
+- **B:** This choice changes or trusts a broader scope than the recorded lab boundary.
+- **C:** This choice skips independent evidence or relies on ambiguous resource identity.
+- **D:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
 
 Source: <https://learn.microsoft.com/en-us/azure/advisor/advisor-cost-recommendations>
 
 ## 10. B (`LAB05-Q10`)
 
-Offline validation proves artifact quality and safety contracts, not live service behavior.
+Accepted requests and offline checks do not prove the final live state.
 
 Objectives: IG-GOVERN-01, IG-GOVERN-06
 
 Why the other choices do not fit:
 
-- **A:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **C:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
-- **D:** This choice either exceeds the declared scope, skips required evidence, or confuses offline validation with live Azure state.
+- **A:** This choice changes or trusts a broader scope than the recorded lab boundary.
+- **C:** This choice skips independent evidence or relies on ambiguous resource identity.
+- **D:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
 
 Source: <https://learn.microsoft.com/en-us/azure/governance/policy/assign-policy-powershell>

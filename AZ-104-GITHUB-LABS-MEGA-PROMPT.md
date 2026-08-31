@@ -375,6 +375,8 @@ Rules:
 - The core path must not depend on clicking through the Azure Portal.
 - Where the blueprint explicitly names the Portal or Azure Storage Explorer, add a concise UI-recognition or optional interface exercise. Do not mislabel a conceptual note as a completed hands-on objective.
 - Commands must be copyable, use parameters/variables, avoid deprecated aliases, and show expected output or a meaningful assertion.
+- Embed the complete preflight, setup, validation, and cleanup implementations directly in each lab README and synchronize them from the retained script files.
+- Treat script invocations as optional automation shortcuts, not substitutes for visible learner-facing commands.
 - Explain why a command matters before asking the learner to run it.
 - Never expose passwords, keys, connection strings, SAS values, or tokens in commands, shell history, logs, evidence files, or committed state.
 - Prefer SSH keys, managed identities, Entra authentication, and least-privilege RBAC.
@@ -396,7 +398,7 @@ Command evidence is the canonical verification surface. Architecture SVGs and Me
 
 ## Architecture visuals
 
-In addition to Portal images, every topology or workflow lab must include:
+Every topology or workflow lab must include:
 
 - Mermaid source in `diagrams/architecture.mmd`.
 - A checked-in SVG rendering for accessibility and reuse.
@@ -444,6 +446,10 @@ tenantScopedChanges:
 externalRequirements:
 validation:
 cleanup:
+assessment:
+  enabled:
+  primaryDomain:
+  questionCount:
 lastOfflineValidated:
 lastLiveVerified:
 ```
@@ -471,7 +477,7 @@ Use the same high-quality structure without making the writing robotic:
 15. A read-only validation command and explanation of pass/fail/warning/skipped.
 16. Cleanup command, exact deletion scope, asynchronous deletion notes, and residual-resource audit.
 17. Tenant-level restoration steps when the lab changes shared settings.
-18. Exam takeaways, common misconceptions, and 3–5 reasoning questions.
+18. Exam takeaways, common misconceptions, and the applicable domain assessment link.
 19. Official Microsoft references with a `last verified` date.
 20. Accessibility-friendly descriptions and alt text for architecture visuals.
 
@@ -685,15 +691,16 @@ The prompt intentionally separates local repository creation from live Azure exe
 
 The CLI/PowerShell-first rule is compatible with the exam's administration topics, while Microsoft also names Azure Storage Explorer and AzCopy. The repository should use command-line implementation and verification, with concise interface-awareness notes where an objective explicitly names another tool.
 
-## Approved assessment addendum
+## Approved assessment contract
 
 The project owner subsequently approved the following requirements, which extend the mega prompt and take precedence where it is silent:
 
-- Create exactly ten original multiple-choice questions per lab: 280 questions across 28 labs.
+- Create exactly 250 original multiple-choice questions: 50 for each of the five official AZ-104 domains.
 - Give every question four options (A–D) and exactly one correct answer.
-- Store the source in `assessment/questions.yml`, learner questions in `assessment/QUESTIONS.md`, and explanations in `assessment/ANSWERS.md` inside each lab folder.
-- Map every question to official objective IDs or clearly marked non-exam foundation IDs.
+- Store the source in `assessment/questions.yml`, learner questions in `assessment/QUESTIONS.md`, and explanations in `assessment/ANSWERS.md` inside Labs 01–25 according to the locked allocation.
+- Keep Lab 00 and Capstones 26–27 hands-on only, without separate assessment directories.
+- Map every question only to official objective IDs in its lab's declared primary assessment domain.
 - Assess every one of the 82 official objective bullets at least once.
-- Use a 3 foundational / 5 applied / 2 advanced difficulty mix per lab.
+- Use a 15 foundational / 25 applied / 10 advanced difficulty mix in each domain.
 - Explain why the correct option is right and why each distractor is wrong, citing current official Microsoft documentation.
-- Balance correct-answer positions and prohibit exam dumps, copied practice questions, ambiguous trick wording, and synthetic claims that questions came from the real exam.
+- Use each correct-answer position 12 or 13 times per domain and prohibit exam dumps, copied practice questions, ambiguous trick wording, and synthetic claims that questions came from the real exam.

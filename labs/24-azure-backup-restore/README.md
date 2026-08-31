@@ -26,7 +26,7 @@ The editable Mermaid source is [diagrams/architecture.mmd](diagrams/architecture
 
 ## Scenario and outcome
 
-You are the Azure administrator for a training environment. Your task is to implement the smallest isolated configuration that demonstrates the mapped exam objectives, validate it independently, capture sanitized evidence, and remove only what this run recorded.
+You are the Azure administrator for a training environment. Your task is to implement the smallest isolated configuration that demonstrates the mapped exam objectives, validate it independently, retain redacted command evidence, and remove only what this run recorded.
 
 The key design idea is: **Vault type must match the workload, protection creates retained recovery points, and vault deletion requires ordered removal of protected items, soft-delete state, and dependencies.**
 
@@ -76,9 +76,233 @@ Cost is not a fixed promise. Check current pricing, free allowances, quotas, and
 - Read the external gate. An unavailable gate is a documented `skipped` checkpoint, not a pass.
 - Choose a unique run ID matching `^[a-z0-9-]+$`, such as `az104l24-01`.
 
+<!-- BEGIN GENERATED INLINE COMMANDS -->
+## Complete inline command implementation
+
+The lifecycle commands below are the complete learner-facing implementation. They are embedded from the retained script files so the README and automation cannot drift. Review each stage here before running it. Use a different run ID if you later try the optional scripted lane against the same sandbox.
+
+### Preflight: `scripts/powershell/Preflight.ps1`
+
+```powershell
+#requires -Version 7.4
+[CmdletBinding()]
+[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingWriteHost', '', Justification = 'Interactive lab progress is intentionally written to the host.')]
+[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSReviewUnusedParameter', '', Justification = 'All lanes keep a consistent explicit context interface.')]
+param(
+    [Parameter(Mandatory)][string]$SubscriptionId,
+    [Parameter(Mandatory)][string]$Location
+)
+
+$ErrorActionPreference = 'Stop'
+$requiredModules = @(
+    'Az.Accounts',
+    'Az.Resources',
+    'Az.RecoveryServices',
+    'Az.DataProtection',
+    'Az.Compute',
+    'Az.Network'
+)
+foreach ($module in $requiredModules) {
+    if (-not (Get-Module -ListAvailable -Name $module)) { throw "Missing required module: $module" }
+}
+
+if (-not $SubscriptionId) { throw 'Supply -SubscriptionId explicitly.' }
+$context = Get-AzContext
+if (-not $context) { throw 'No Az PowerShell context is active. Sign in deliberately before running this lab.' }
+if ($context.Subscription.Id -ne $SubscriptionId) {
+    throw "Context mismatch: active subscription is $($context.Subscription.Id), expected $SubscriptionId. This script will not switch it."
+}
+Write-Host "Tenant: $($context.Tenant.Id)"
+Write-Host "Subscription: $($context.Subscription.Id)"
+Write-Host 'Lab: LAB-24'
+Write-Host 'Location:' $Location
+Write-Host 'Cost class: moderate'
+Write-Host 'Role boundary: Backup Contributor and Virtual Machine Contributor on the lab resource group'
+$providers = @(
+    'Microsoft.Compute',
+    'Microsoft.DataProtection',
+    'Microsoft.RecoveryServices'
+)
+foreach ($provider in $providers) {
+    $item = Get-AzResourceProvider -ProviderNamespace $provider -ErrorAction SilentlyContinue
+    $states = @($item.ResourceTypes.RegistrationState | Sort-Object -Unique) -join ','
+    Write-Host ("Provider {0,-38} {1}" -f $provider, $(if ($states) { $states } else { 'Unavailable' }))
+}
+Write-Host 'Preflight is read-only. It does not connect, change context, register providers, or create resources.'
+```
+
+### Setup: `scripts/powershell/Setup.ps1`
+
+```powershell
+#requires -Version 7.4
+[CmdletBinding()]
+[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingWriteHost', '', Justification = 'Interactive lab progress is intentionally written to the host.')]
+[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSReviewUnusedParameter', '', Justification = 'All lanes keep a consistent explicit context and region interface.')]
+[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseDeclaredVarsMoreThanAssignments', '', Justification = 'Named checkpoint results improve readability even when the object is used only to enforce failure handling.')]
+[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingConvertToSecureStringWithPlainText', '', Justification = 'The disposable generated VMSS credential remains in memory and is never persisted.')]
+param(
+    [Parameter(Mandatory)][string]$SubscriptionId,
+    [Parameter(Mandatory)][ValidatePattern('^[a-z0-9-]+$')][string]$RunId,
+    [Parameter(Mandatory)][string]$Location,
+    [string]$SecondaryLocation = $env:AZURE_SECONDARY_LOCATION,
+    [switch]$Execute
+)
+
+$ErrorActionPreference = 'Stop'
+$LabRoot = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
+$ResourceGroupName = 'rg-az104-l24-' + $RunId
+$suffix = (($RunId -replace '[^a-z0-9]', '') + '000000000000').Substring(0, 12)
+$StateDir = Join-Path $LabRoot ".state/$RunId"
+$Manifest = Join-Path $StateDir 'run.json'
+
+Write-Host 'LAB-24 plan'
+Write-Host '  subscription:' $(if ($SubscriptionId) { $SubscriptionId } else { 'tenant-scoped / not applicable' })
+Write-Host '  location:' $Location
+Write-Host '  resource group:' $(if ($true) { $ResourceGroupName } else { 'none (tenant objects)' })
+Write-Host '  cost class: moderate'
+Write-Host '  external gate: None beyond the declared role and a disposable subscription.'
+Write-Host '  resources: resource group, Recovery Services vault, Backup vault, backup policy, protected test VM, backup instance and restore job'
+if (-not $Execute) {
+    Write-Host 'Preview only. Re-run with -Execute after approving context, permissions, cost, and gates.'
+    return
+}
+
+& (Join-Path $PSScriptRoot 'Preflight.ps1') -SubscriptionId $SubscriptionId -Location $Location
+if (Test-Path -LiteralPath $Manifest) { throw "State already exists at $Manifest; choose a new run ID." }
+New-Item -ItemType Directory -Path $StateDir -Force | Out-Null
+$context = Get-AzContext
+$TenantId = $context.Tenant.Id
+$state = [ordered]@{
+    labId = 'LAB-24'
+    runId = $RunId
+    tenantId = $TenantId
+    subscriptionId = $SubscriptionId
+    location = $Location
+    createdAt = (Get-Date).ToUniversalTime().ToString('o')
+    status = 'recorded-before-mutation'
+    resourceGroup = [ordered]@{ name = $(if ($true) { $ResourceGroupName } else { $null }); id = $null }
+    resources = @()
+    external = [ordered]@{}
+}
+$state | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath $Manifest -Encoding utf8
+$tags = @{ purpose = 'az104-lab'; labId = '24'; runId = $RunId; expiresOn = (Get-Date).ToUniversalTime().AddDays(1).ToString('yyyy-MM-dd') }
+$resourceGroup = New-AzResourceGroup -Name $ResourceGroupName -Location $Location -Tag $tags
+$state.resourceGroup.id = $resourceGroup.ResourceId
+$state.status = 'baseline-created'
+$state | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath $Manifest -Encoding utf8
+
+$vault = New-AzRecoveryServicesVault -ResourceGroupName $ResourceGroupName -Name ("rsv-" + $suffix) -Location $Location
+Set-AzRecoveryServicesVaultContext -Vault $vault
+$policy = Get-AzRecoveryServicesBackupProtectionPolicy -WorkloadType AzureVM | Select-Object -First 1
+$state.external.recoveryVaultId = $vault.ID
+$backupVaultName = "bv-$suffix"
+New-AzResource -ResourceGroupName $ResourceGroupName -ResourceType 'Microsoft.DataProtection/backupVaults' -Name $backupVaultName -ApiVersion '2023-01-01' -Location $Location -Properties @{ storageSettings = @(@{ datastoreType = 'VaultStore'; type = 'LocallyRedundant' }) } -Force | Out-Null
+
+$state.resources = @(Get-AzResource -ResourceGroupName $ResourceGroupName | ForEach-Object {
+    [ordered]@{ id = $_.ResourceId; name = $_.Name; type = $_.ResourceType; location = $_.Location }
+})
+$state.status = 'setup-complete'
+$state | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath $Manifest -Encoding utf8
+Write-Host "Setup complete. State: $Manifest"
+Write-Host 'Run Validate.ps1 before recording command evidence.'
+```
+
+### Validate: `scripts/powershell/Validate.ps1`
+
+```powershell
+#requires -Version 7.4
+[CmdletBinding()]
+[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSReviewUnusedParameter', '', Justification = 'Tenant and subscription lanes share a consistent validation interface.')]
+param(
+    [Parameter(Mandatory)][string]$SubscriptionId,
+    [Parameter(Mandatory)][ValidatePattern('^[a-z0-9-]+$')][string]$RunId
+)
+
+$ErrorActionPreference = 'Stop'
+$LabRoot = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
+$StateDir = Join-Path $LabRoot ".state/$RunId"
+$Manifest = Join-Path $StateDir 'run.json'
+$Report = Join-Path $StateDir 'validation.json'
+if (-not (Test-Path -LiteralPath $Manifest)) { throw "Missing state: $Manifest" }
+$state = Get-Content -LiteralPath $Manifest -Raw | ConvertFrom-Json -Depth 20
+$checks = [System.Collections.Generic.List[object]]::new()
+function Add-Check([string]$Id, [string]$Status, [string]$Message) {
+    $checks.Add([ordered]@{ id = $Id; status = $Status; message = $Message })
+}
+
+$context = Get-AzContext
+if (-not $context -or $context.Subscription.Id -ne $SubscriptionId) { throw 'Active Az context does not match -SubscriptionId.' }
+if ($state.subscriptionId -ne $SubscriptionId) { throw 'Recorded subscription mismatch.' }
+$rg = Get-AzResourceGroup -Name $state.resourceGroup.name -ErrorAction SilentlyContinue
+if (-not $rg) { Add-Check 'context.resource-group' 'fail' 'The recorded resource group is absent.' }
+elseif ($rg.ResourceId -ne $state.resourceGroup.id) { Add-Check 'context.resource-group' 'fail' 'The resource-group ID differs from the manifest.' }
+else { Add-Check 'context.resource-group' 'pass' 'The exact recorded resource group exists.' }
+if ($rg -and $rg.Tags.purpose -eq 'az104-lab' -and $rg.Tags.labId -eq '24' -and $rg.Tags.runId -eq $RunId) {
+    Add-Check 'ownership.tags' 'pass' 'purpose, labId, and runId tags match.'
+} else { Add-Check 'ownership.tags' 'fail' 'Ownership tags do not match.' }
+$resources = @(Get-AzResource -ResourceGroupName $state.resourceGroup.name -ErrorAction SilentlyContinue)
+$expectedTypes = @(
+    'Microsoft.RecoveryServices/vaults',
+    'Microsoft.DataProtection/backupVaults',
+    'Microsoft.Compute/virtualMachines'
+)
+foreach ($type in $expectedTypes) {
+    $count = @($resources | Where-Object ResourceType -eq $type).Count
+    if ($count -gt 0) { Add-Check ("resource." + ($type -replace '[/\.]','-')) 'pass' "Found $count resource(s) of type $type." }
+    else { Add-Check ("resource." + ($type -replace '[/\.]','-')) 'warning' "No top-level $type was returned; inspect nested or gated state." }
+}
+$failures = @($checks | Where-Object status -eq 'fail').Count
+$warnings = @($checks | Where-Object status -in @('warning','skipped')).Count
+$result = if ($failures -gt 0) { 'fail' } elseif ($warnings -gt 0) { 'partial' } else { 'pass' }
+$output = [ordered]@{ labId = 'LAB-24'; runId = $RunId; generatedAt = (Get-Date).ToUniversalTime().ToString('o'); result = $result; checks = @($checks) }
+$output | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath $Report -Encoding utf8
+$output | ConvertTo-Json -Depth 20
+if ($result -eq 'fail') { exit 1 }
+```
+
+### Cleanup: `scripts/powershell/Cleanup.ps1`
+
+```powershell
+#requires -Version 7.4
+[CmdletBinding()]
+[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingWriteHost', '', Justification = 'Interactive cleanup previews are intentionally written to the host.')]
+[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSReviewUnusedParameter', '', Justification = 'Tenant and subscription lanes share a consistent cleanup interface.')]
+param(
+    [Parameter(Mandatory)][string]$SubscriptionId,
+    [Parameter(Mandatory)][ValidatePattern('^[a-z0-9-]+$')][string]$RunId,
+    [switch]$Execute
+)
+
+$ErrorActionPreference = 'Stop'
+$LabRoot = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
+$Manifest = Join-Path $LabRoot ".state/$RunId/run.json"
+if (-not (Test-Path -LiteralPath $Manifest)) { throw "Missing state: $Manifest" }
+$state = Get-Content -LiteralPath $Manifest -Raw | ConvertFrom-Json -Depth 20
+Write-Host 'Cleanup preview for LAB-24'
+Write-Host '  exact target:' $state.resourceGroup.id
+Write-Host '  residual/soft-delete behavior must be audited after deletion.'
+if (-not $Execute) { Write-Host 'Preview only. Re-run with -Execute after checking every target.'; return }
+$context = Get-AzContext
+if (-not $context -or $context.Subscription.Id -ne $SubscriptionId) { throw 'Active Az context does not match -SubscriptionId.' }
+if ($state.subscriptionId -ne $SubscriptionId) { throw 'Recorded subscription mismatch.' }
+$rg = Get-AzResourceGroup -Name $state.resourceGroup.name -ErrorAction SilentlyContinue
+if (-not $rg) { Write-Host 'Resource group is already absent; cleanup is idempotent.'; return }
+if ($rg.ResourceId -ne $state.resourceGroup.id -or $rg.Tags.purpose -ne 'az104-lab' -or $rg.Tags.labId -ne '24' -or $rg.Tags.runId -ne $RunId) {
+    throw 'ID or ownership-tag verification failed; refusing cleanup.'
+}
+
+Remove-AzResourceGroup -Id $state.resourceGroup.id -Force
+$remaining = Get-AzResourceGroup -Name $state.resourceGroup.name -ErrorAction SilentlyContinue
+if ($remaining) { throw 'Resource group still exists; inspect soft-delete dependencies, locks, or asynchronous operations.' }
+Write-Host 'Active resource-group cleanup completed. Audit soft-deleted and externally retained items separately.'
+$state.status = 'cleanup-complete'
+$state | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath $Manifest -Encoding utf8
+```
+
+<!-- END GENERATED INLINE COMMANDS -->
 ## Run the lab
 
-Run these commands from this lab folder. The examples intentionally use placeholders rather than silently reading an arbitrary subscription.
+The complete learner-facing implementations are embedded above. The commands in this section are optional shortcuts that run the identical retained script files. Run them from this lab folder. The examples intentionally use placeholders rather than silently reading an arbitrary subscription.
 
 ### 1. Preview
 
@@ -151,17 +375,6 @@ pwsh ./scripts/powershell/Validate.ps1 -RunId az104l24-01 -SubscriptionId <subsc
 Inspect `.state/az104l24-01/validation.json`. A `pass` applies only to checks that could be executed. A gated or asynchronous path must remain `warning` or `skipped` until its evidence exists.
 
 Positive checks should prove the intended resources, configuration, relationships, or health. Negative checks should prove that anonymous access, excess scope, accidental inheritance, unresolved DNS, unhealthy probes, or unrecorded resources were not introduced where the scenario forbids them.
-
-## Portal evidence
-
-Portal screenshots are planned evidence captured only during an authorized live run. Until then every entry in [images/portal/manifest.yml](images/portal/manifest.yml) stays `pending`, and no placeholder image is committed. Capture and sanitization rules live in [images/README.md](images/README.md).
-
-| Planned file | Checkpoint | Portal blade | Evidence |
-|---|---:|---|---|
-| `01-recovery-services-vault-backup-policies.png` | 2 | Recovery Services vault > Backup policies | Schedule, retention, and protected item count |
-| `02-recovery-services-vault-backup-jobs.png` | 3 | Recovery Services vault > Backup jobs | On-demand backup or restore job status |
-| `03-backup-vault-backup-instances.png` | 1 | Backup vault > Backup instances | Modern vault workload and protection state |
-| `04-business-continuity-center-alerts-or-reports.png` | 4 | Business Continuity Center > Alerts or Reports | Configured monitoring destination and current state |
 
 ## Break/fix exercise
 
