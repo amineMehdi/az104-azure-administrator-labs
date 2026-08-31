@@ -9,17 +9,11 @@ objectives:
 - MR-RECOVERY-03
 - MR-RECOVERY-04
 - MR-RECOVERY-07
-track: az-powershell
+track: azure-cli
 status: offline-validated
 testedToolVersions:
+  azureCli: '>=2.88.0'
   powershell: '>=7.4'
-  modules:
-  - Az.Accounts
-  - Az.Resources
-  - Az.RecoveryServices
-  - Az.DataProtection
-  - Az.Compute
-  - Az.Network
 estimatedMinutes: 150
 difficulty: advanced
 cost:
@@ -41,9 +35,9 @@ permissions:
 prerequisites:
 - A disposable non-production Azure environment
 - An active context that matches the explicitly supplied tenant and subscription
-- The command surface and dependencies for Az PowerShell
 - 'Authorization boundary: Backup Contributor and Virtual Machine Contributor on the lab resource group'
 - 'External gate review: None beyond the declared role and a disposable subscription.'
+- Azure CLI hosted in PowerShell 7.4 or later
 providers:
   observed:
   - Microsoft.Compute
@@ -64,7 +58,7 @@ tenantScopedChanges: []
 externalRequirements: []
 validation:
   commandLanes:
-  - scripts/powershell/Validate.ps1
+  - scripts/cli/Validate.ps1
   output: .state/<run-id>/validation.json
   statuses:
   - pass

@@ -7,15 +7,11 @@ objectives:
 - IG-USERS-03
 - IG-USERS-04
 - IG-USERS-05
-track: powershell-graph
+track: azure-cli
 status: offline-validated
 testedToolVersions:
+  azureCli: '>=2.88.0'
   powershell: '>=7.4'
-  modules: &id001
-  - Microsoft.Graph.Authentication
-  - Microsoft.Graph.Users
-  - Microsoft.Graph.Groups
-  - Microsoft.Graph.Identity.SignIns
 estimatedMinutes: 105
 difficulty: foundational
 cost:
@@ -26,15 +22,20 @@ permissions:
   azureRbacRoles: []
   entraRoles:
   - User Administrator and License Administrator; Authentication Policy Administrator for the SSPR policy path
-  graphScopes: *id001
+  graphScopes:
+  - User.Invite.All
+  - User.ReadWrite.All
+  - Group.ReadWrite.All
+  - Directory.ReadWrite.All
+  - Policy.ReadWrite.Authorization
 prerequisites:
 - A disposable non-production Azure environment
 - An active context that matches the explicitly supplied tenant and subscription
-- The command surface and dependencies for Microsoft Graph PowerShell
 - 'Authorization boundary: User Administrator and License Administrator; Authentication Policy Administrator for
   the SSPR policy path'
 - 'External gate review: Requires a real disposable guest email for invitation, an available SKU for license assignment,
   and an authorized tenant policy change for SSPR.'
+- Azure CLI hosted in PowerShell 7.4 or later
 providers:
   observed: []
   registeredByLab: []
@@ -44,7 +45,7 @@ regions:
   secondary: null
 creates:
   azureResources: []
-  entraObjects: &id002
+  entraObjects: &id001
   - security group
   - invited guest user
   - optional license assignment
@@ -52,13 +53,13 @@ creates:
   localArtifacts:
   - .state/<run-id>/run.json
   - .state/<run-id>/validation.json
-tenantScopedChanges: *id002
+tenantScopedChanges: *id001
 externalRequirements:
 - Requires a real disposable guest email for invitation, an available SKU for license assignment, and an authorized
   tenant policy change for SSPR.
 validation:
   commandLanes:
-  - scripts/powershell/Validate.ps1
+  - scripts/cli/Validate.ps1
   output: .state/<run-id>/validation.json
   statuses:
   - pass

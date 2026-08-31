@@ -55,31 +55,31 @@ Every lab is self-contained under `labs/<number>-<slug>/`. It does not import ru
 | 00 | Safe bootstrap | CLI + PowerShell | Offline-validated |
 | 01 | Entra users and groups | Azure CLI/Graph | Offline-validated |
 | 02 | Entra licenses, guests, and SSPR | Graph/Entra PowerShell | Offline-validated |
-| 03 | Azure RBAC scopes | Az PowerShell | Offline-validated |
+| 03 | Azure RBAC scopes | Azure CLI | Offline-validated |
 | 04 | Resource hierarchy, tags, and locks | Azure CLI | Offline-validated |
-| 05 | Policy, costs, and Advisor | Az PowerShell | Offline-validated |
+| 05 | Policy, costs, and Advisor | Azure CLI | Offline-validated |
 | 06 | Storage accounts and security | Azure CLI | Offline-validated |
-| 07 | Storage networking and SAS | Az PowerShell | Offline-validated |
+| 07 | Storage networking and SAS | Azure CLI | Offline-validated |
 | 08 | Blob lifecycle and replication | Azure CLI | Offline-validated |
-| 09 | Azure Files identity | Az PowerShell | Offline-validated |
+| 09 | Azure Files identity | Azure CLI | Offline-validated |
 | 10 | ARM and Bicep lifecycle | Azure CLI + Bicep | Offline-validated |
 | 11 | VM lifecycle, disks, and host encryption | Azure CLI | Offline-validated |
-| 12 | VM resilience, scale, and mobility | Az PowerShell | Offline-validated |
+| 12 | VM resilience, scale, and mobility | Azure CLI | Offline-validated |
 | 13 | ACR and ACI | Azure CLI | Offline-validated |
 | 14 | Azure Container Apps | Azure CLI | Offline-validated |
-| 15 | App Service scaling and slots | Az PowerShell | Offline-validated |
+| 15 | App Service scaling and slots | Azure CLI | Offline-validated |
 | 16 | App Service TLS, DNS, backup, and networking | Azure CLI | Offline-validated |
-| 17 | VNets, subnets, peering, and public IPs | Az PowerShell | Offline-validated |
+| 17 | VNets, subnets, peering, and public IPs | Azure CLI | Offline-validated |
 | 18 | Routing, NSGs, and ASGs | Azure CLI | Offline-validated |
-| 19 | Service and private endpoints | Az PowerShell | Offline-validated |
+| 19 | Service and private endpoints | Azure CLI | Offline-validated |
 | 20 | Azure DNS and Bastion | Azure CLI | Offline-validated |
-| 21 | Load Balancer and Network Watcher | Az PowerShell | Offline-validated |
+| 21 | Load Balancer and Network Watcher | Azure CLI | Offline-validated |
 | 22 | Azure Monitor logs and Insights | Azure CLI + KQL | Offline-validated |
 | 23 | Monitor alerts and actions | Azure CLI | Offline-validated |
-| 24 | Azure Backup and restore | Az PowerShell | Offline-validated |
-| 25 | Site Recovery and failover | Az PowerShell | Offline-validated |
+| 24 | Azure Backup and restore | Azure CLI | Offline-validated |
+| 25 | Site Recovery and failover | Azure CLI | Offline-validated |
 | 26 | Capstone: build | Azure CLI + Bicep | Offline-validated |
-| 27 | Capstone: operate and recover | Az PowerShell + KQL | Offline-validated |
+| 27 | Capstone: operate and recover | Azure CLI + KQL | Offline-validated |
 
 ## Start here
 

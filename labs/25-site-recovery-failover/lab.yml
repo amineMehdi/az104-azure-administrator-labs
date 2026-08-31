@@ -6,16 +6,11 @@ domain: Monitor and maintain Azure resources
 objectives:
 - MR-RECOVERY-05
 - MR-RECOVERY-06
-track: az-powershell
+track: azure-cli
 status: offline-validated
 testedToolVersions:
+  azureCli: '>=2.88.0'
   powershell: '>=7.4'
-  modules:
-  - Az.Accounts
-  - Az.Resources
-  - Az.RecoveryServices
-  - Az.Compute
-  - Az.Network
 estimatedMinutes: 180
 difficulty: advanced
 cost:
@@ -37,11 +32,11 @@ permissions:
 prerequisites:
 - A disposable non-production Azure environment
 - An active context that matches the explicitly supplied tenant and subscription
-- The command surface and dependencies for Az PowerShell
 - 'Authorization boundary: Site Recovery Contributor, Virtual Machine Contributor, and Network Contributor on both
   region scopes'
 - 'External gate review: This elevated lab requires two approved regions and explicit cost review before live execution;
   test failover must use an isolated network.'
+- Azure CLI hosted in PowerShell 7.4 or later
 providers:
   observed:
   - Microsoft.Compute
@@ -64,7 +59,7 @@ externalRequirements:
   must use an isolated network.
 validation:
   commandLanes:
-  - scripts/powershell/Validate.ps1
+  - scripts/cli/Validate.ps1
   output: .state/<run-id>/validation.json
   statuses:
   - pass

@@ -12,9 +12,8 @@ objectives:
 track: azure-cli
 status: offline-validated
 testedToolVersions:
-  azureCli: 2.88.0
-  bash: 5.x (Git for Windows lane)
-  jq: '>=1.6'
+  azureCli: '>=2.88.0'
+  powershell: '>=7.4'
 estimatedMinutes: 135
 difficulty: intermediate
 cost:
@@ -35,9 +34,9 @@ permissions:
 prerequisites:
 - A disposable non-production Azure environment
 - An active context that matches the explicitly supplied tenant and subscription
-- The command surface and dependencies for Azure CLI and KQL
 - 'Authorization boundary: Monitoring Contributor and Log Analytics Contributor on the lab resource group'
 - 'External gate review: None beyond the declared role and a disposable subscription.'
+- Azure CLI hosted in PowerShell 7.4 or later
 providers:
   observed:
   - Microsoft.Insights
@@ -58,7 +57,7 @@ tenantScopedChanges: []
 externalRequirements: []
 validation:
   commandLanes:
-  - scripts/cli/validate.sh
+  - scripts/cli/Validate.ps1
   output: .state/<run-id>/validation.json
   statuses:
   - pass

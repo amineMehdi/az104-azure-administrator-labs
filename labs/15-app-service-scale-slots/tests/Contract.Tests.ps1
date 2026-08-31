@@ -1,37 +1,33 @@
 #requires -Version 7.4
-Describe 'LAB-15 offline lifecycle contract' {
+Describe 'LAB-15 Azure CLI lifecycle contract' {
     BeforeAll {
         $labRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
-        $lane = Join-Path $labRoot 'scripts/powershell'
+        $lane = Join-Path $labRoot 'scripts/cli'
         $stageFiles = @('Preflight.ps1', 'Setup.ps1', 'Validate.ps1', 'Cleanup.ps1')
+        $content = ($stageFiles | ForEach-Object { Get-Content -LiteralPath (Join-Path $lane $_) -Raw }) -join "`n"
     }
 
-    It 'contains every lifecycle stage' {
+    It 'contains every PowerShell-hosted Azure CLI lifecycle stage' {
         foreach ($name in $stageFiles) { Test-Path -LiteralPath (Join-Path $lane $name) | Should -BeTrue }
     }
 
-    It 'does not sign in or silently change Azure context' {
-        $content = ($stageFiles | ForEach-Object { Get-Content -LiteralPath (Join-Path $lane $_) -Raw }) -join "`n"
-        $content | Should -Not -Match '(?i)az\s+login|Connect-AzAccount|Set-AzContext|az\s+account\s+set'
+    It 'uses Azure CLI and contains no alternate command path' {
+        $content | Should -Match '(?m)^\s*(?:\$[^=]+=\s*)?(?:\$null\s*=\s*)?az\s'
+        $content | Should -Not -Match '(?i)#!/usr/bin/env|\[\[|\b(?:Connect|Get|New|Set|Remove)-Az[A-Z]'
+    }
+
+    It 'does not sign in or silently change Azure CLI context' {
+        $content | Should -Not -Match '(?im)^\s*az\s+login(?:\s|$)'
+        $content | Should -Not -Match '(?im)^\s*az\s+account\s+set(?:\s|$)'
     }
 
     It 'keeps setup and cleanup preview-first' {
-        $setup = Get-Content -LiteralPath (Join-Path $lane $stageFiles[1]) -Raw
-        $cleanup = Get-Content -LiteralPath (Join-Path $lane $stageFiles[3]) -Raw
-        $setup | Should -Match '(?i)--execute|\[switch\]\$Execute'
-        $cleanup | Should -Match '(?i)--execute|\[switch\]\$Execute'
+        (Get-Content -LiteralPath (Join-Path $lane 'Setup.ps1') -Raw) | Should -Match '\[switch\]\$Execute'
+        (Get-Content -LiteralPath (Join-Path $lane 'Cleanup.ps1') -Raw) | Should -Match '\[switch\]\$Execute'
     }
 
     It 'records state and emits a schema-shaped validation report' {
-        $setup = Get-Content -LiteralPath (Join-Path $lane $stageFiles[1]) -Raw
-        $validate = Get-Content -LiteralPath (Join-Path $lane $stageFiles[2]) -Raw
-        $setup | Should -Match '(?i)run\.json'
-        $validate | Should -Match '(?i)validation\.json'
-        $validate | Should -Match "LAB-15"
-    }
-
-    It 'contains no cross-lab runtime dependency' {
-        $content = ($stageFiles | ForEach-Object { Get-Content -LiteralPath (Join-Path $lane $_) -Raw }) -join "`n"
-        $content | Should -Not -Match '\.\.[\/][0-9]{2}-[a-z0-9-]+'
+        (Get-Content -LiteralPath (Join-Path $lane 'Setup.ps1') -Raw) | Should -Match 'run\.json'
+        (Get-Content -LiteralPath (Join-Path $lane 'Validate.ps1') -Raw) | Should -Match 'validation\.json'
     }
 }

@@ -6,28 +6,28 @@ labs:
 - id: '00'
   slug: safe-bootstrap
   domain: foundation
-  track: both
+  track: azure-cli
   status: offline-validated
   estimatedMinutes: 60
   assessmentQuestionCount: 0
 - id: '01'
   slug: entra-users-groups
   domain: identity-governance
-  track: azure-cli-graph
+  track: azure-cli
   status: offline-validated
   estimatedMinutes: 75
   assessmentQuestionCount: 10
 - id: '02'
   slug: entra-licenses-guests-sspr
   domain: identity-governance
-  track: graph-entra-powershell
+  track: azure-cli
   status: offline-validated
   estimatedMinutes: 105
   assessmentQuestionCount: 10
 - id: '03'
   slug: azure-rbac-scopes
   domain: identity-governance
-  track: az-powershell
+  track: azure-cli
   status: offline-validated
   estimatedMinutes: 90
   assessmentQuestionCount: 10
@@ -41,7 +41,7 @@ labs:
 - id: '05'
   slug: policy-costs-advisor
   domain: identity-governance
-  track: az-powershell
+  track: azure-cli
   status: offline-validated
   estimatedMinutes: 120
   assessmentQuestionCount: 10
@@ -55,7 +55,7 @@ labs:
 - id: '07'
   slug: storage-network-sas
   domain: storage
-  track: az-powershell
+  track: azure-cli
   status: offline-validated
   estimatedMinutes: 105
   assessmentQuestionCount: 12
@@ -69,14 +69,14 @@ labs:
 - id: 09
   slug: azure-files-identity
   domain: storage
-  track: az-powershell
+  track: azure-cli
   status: offline-validated
   estimatedMinutes: 135
   assessmentQuestionCount: 12
 - id: '10'
   slug: arm-bicep-lifecycle
   domain: compute
-  track: both
+  track: azure-cli-bicep
   status: offline-validated
   estimatedMinutes: 120
   assessmentQuestionCount: 10
@@ -90,7 +90,7 @@ labs:
 - id: '12'
   slug: vm-resilience-scale-mobility
   domain: compute
-  track: az-powershell
+  track: azure-cli
   status: offline-validated
   estimatedMinutes: 150
   assessmentQuestionCount: 8
@@ -111,7 +111,7 @@ labs:
 - id: '15'
   slug: app-service-scale-slots
   domain: compute
-  track: az-powershell
+  track: azure-cli
   status: offline-validated
   estimatedMinutes: 120
   assessmentQuestionCount: 7
@@ -125,7 +125,7 @@ labs:
 - id: '17'
   slug: vnet-subnets-peering-public-ip
   domain: networking
-  track: az-powershell
+  track: azure-cli
   status: offline-validated
   estimatedMinutes: 105
   assessmentQuestionCount: 10
@@ -139,7 +139,7 @@ labs:
 - id: '19'
   slug: service-private-endpoints
   domain: networking
-  track: az-powershell
+  track: azure-cli
   status: offline-validated
   estimatedMinutes: 120
   assessmentQuestionCount: 10
@@ -153,14 +153,14 @@ labs:
 - id: '21'
   slug: load-balancer-network-watcher
   domain: networking
-  track: az-powershell
+  track: azure-cli
   status: offline-validated
   estimatedMinutes: 150
   assessmentQuestionCount: 10
 - id: '22'
   slug: azure-monitor-logs-insights
   domain: monitor-recovery
-  track: both
+  track: azure-cli
   status: offline-validated
   estimatedMinutes: 135
   assessmentQuestionCount: 15
@@ -174,28 +174,28 @@ labs:
 - id: '24'
   slug: azure-backup-restore
   domain: monitor-recovery
-  track: az-powershell
+  track: azure-cli
   status: offline-validated
   estimatedMinutes: 150
   assessmentQuestionCount: 15
 - id: '25'
   slug: site-recovery-failover
   domain: monitor-recovery
-  track: az-powershell
+  track: azure-cli
   status: offline-validated
   estimatedMinutes: 180
   assessmentQuestionCount: 10
 - id: '26'
   slug: capstone-build
   domain: capstone
-  track: learner-choice
+  track: azure-cli-bicep
   status: offline-validated
   estimatedMinutes: 180
   assessmentQuestionCount: 0
 - id: '27'
   slug: capstone-operate-recover
   domain: capstone
-  track: opposite-surface
+  track: azure-cli
   status: offline-validated
   estimatedMinutes: 180
   assessmentQuestionCount: 0

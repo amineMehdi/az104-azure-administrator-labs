@@ -7,14 +7,11 @@ objectives:
 - IG-GOVERN-01
 - IG-GOVERN-06
 - IG-GOVERN-07
-track: az-powershell
+track: azure-cli
 status: offline-validated
 testedToolVersions:
+  azureCli: '>=2.88.0'
   powershell: '>=7.4'
-  modules:
-  - Az.Accounts
-  - Az.Resources
-  - Az.Advisor
 estimatedMinutes: 120
 difficulty: foundational
 cost:
@@ -30,11 +27,11 @@ permissions:
 prerequisites:
 - A disposable non-production Azure environment
 - An active context that matches the explicitly supplied tenant and subscription
-- The command surface and dependencies for Az PowerShell
 - 'Authorization boundary: Resource Policy Contributor at the lab scope; Cost Management Contributor for the optional
   budget path'
 - 'External gate review: Budget creation requires AZ104_BUDGET_EMAIL and Cost Management authorization; otherwise
   the lab inventories cost controls without creating one.'
+- Azure CLI hosted in PowerShell 7.4 or later
 providers:
   observed:
   - Microsoft.Authorization
@@ -61,7 +58,7 @@ externalRequirements:
   controls without creating one.
 validation:
   commandLanes:
-  - scripts/powershell/Validate.ps1
+  - scripts/cli/Validate.ps1
   output: .state/<run-id>/validation.json
   statuses:
   - pass

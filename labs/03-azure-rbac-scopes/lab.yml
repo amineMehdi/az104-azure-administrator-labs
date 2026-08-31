@@ -7,13 +7,11 @@ objectives:
 - IG-ACCESS-01
 - IG-ACCESS-02
 - IG-ACCESS-03
-track: az-powershell
+track: azure-cli
 status: offline-validated
 testedToolVersions:
+  azureCli: '>=2.88.0'
   powershell: '>=7.4'
-  modules:
-  - Az.Accounts
-  - Az.Resources
 estimatedMinutes: 90
 difficulty: foundational
 cost:
@@ -29,9 +27,9 @@ permissions:
 prerequisites:
 - A disposable non-production Azure environment
 - An active context that matches the explicitly supplied tenant and subscription
-- The command surface and dependencies for Az PowerShell
 - 'Authorization boundary: User Access Administrator or Owner at the lab resource-group scope'
 - 'External gate review: Requires the object ID of a disposable principal in AZ104_PRINCIPAL_OBJECT_ID.'
+- Azure CLI hosted in PowerShell 7.4 or later
 providers:
   observed:
   - Microsoft.Authorization
@@ -54,7 +52,7 @@ externalRequirements:
 - Requires the object ID of a disposable principal in AZ104_PRINCIPAL_OBJECT_ID.
 validation:
   commandLanes:
-  - scripts/powershell/Validate.ps1
+  - scripts/cli/Validate.ps1
   output: .state/<run-id>/validation.json
   statuses:
   - pass

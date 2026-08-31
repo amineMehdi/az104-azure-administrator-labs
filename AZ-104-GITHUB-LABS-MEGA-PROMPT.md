@@ -60,7 +60,7 @@ Create a production-quality repository named `az-104-cli-powershell-labs` contai
 The repository must:
 
 1. Trace every current official AZ-104 objective to at least one lab.
-2. Use Azure CLI, Az PowerShell, Microsoft Graph/Entra PowerShell, or `az rest` as the canonical implementation surface for every required administrative action.
+2. Use Azure CLI, Azure CLI hosted in PowerShell, Azure CLI with `az rest`, or `az rest` as the canonical implementation surface for every required administrative action.
 3. Produce redacted, structured Azure CLI or PowerShell validation evidence for live-tested labs.
 4. Include an architecture diagram and objective validation for every lab.
 5. Include safe, idempotent cleanup and a residual-resource check for every lab.
@@ -94,8 +94,8 @@ blueprintBaseline: 2026-04-17
 labCount: 28
 commandMode: hybrid
 primaryCommandSurface: Azure CLI
-secondaryCommandSurface: Az PowerShell
-evidenceMode: redacted-cli-or-powershell
+secondaryCommandSurface: Azure CLI hosted in PowerShell
+evidenceMode: redacted-azure-cli
 defaultRegion: configurable
 secondaryRegion: configurable
 liveAzureDeployment: requires-user-authorization
@@ -288,33 +288,33 @@ Create these exact folders unless the freshness gate proves that a current bluep
 | `00-safe-bootstrap` | Tools, authentication, subscription context, naming, tags, provider/quota checks, cost warnings, validation, safe cleanup | Both | 45–60m |
 | `01-entra-users-groups` | Users, groups, memberships, and properties | Azure CLI/Graph | 60–75m |
 | `02-entra-licenses-guests-sspr` | License assignment, B2B invitation, and SSPR | Graph/Entra PowerShell | 75–105m |
-| `03-azure-rbac-scopes` | Built-in roles, assignments at multiple scopes, inherited and effective access | Az PowerShell | 75–90m |
+| `03-azure-rbac-scopes` | Built-in roles, assignments at multiple scopes, inherited and effective access | Azure CLI hosted in PowerShell | 75–90m |
 | `04-resource-hierarchy-tags-locks` | Subscriptions, management groups, resource groups, tags, and locks | Azure CLI | 75–90m |
-| `05-policy-costs-advisor` | Policy definitions/initiatives/remediation, budgets, alerts, and Advisor | Az PowerShell | 90–120m |
+| `05-policy-costs-advisor` | Policy definitions/initiatives/remediation, budgets, alerts, and Advisor | Azure CLI hosted in PowerShell | 90–120m |
 | `06-storage-accounts-security` | Account configuration, redundancy, encryption, and keys | Azure CLI | 75–90m |
-| `07-storage-network-sas` | Firewall/VNet access, SAS, stored access policy, and positive/negative tests | Az PowerShell | 90–105m |
+| `07-storage-network-sas` | Firewall/VNet access, SAS, stored access policy, and positive/negative tests | Azure CLI hosted in PowerShell | 90–105m |
 | `08-blob-lifecycle-replication` | Containers, tiers, versioning, soft delete, lifecycle, object replication, and AzCopy | Azure CLI | 105–120m |
-| `09-azure-files-identity` | File shares, identity-based access, snapshots, soft delete, AzCopy, and Storage Explorer awareness | Az PowerShell | 105–135m |
+| `09-azure-files-identity` | File shares, identity-based access, snapshots, soft delete, AzCopy, and Storage Explorer awareness | Azure CLI hosted in PowerShell | 105–135m |
 | `10-arm-bicep-lifecycle` | Interpret, modify, validate, what-if, deploy, export, and decompile | Both | 105–120m |
 | `11-vm-lifecycle-disks-encryption` | VM creation, sizes, disks, and encryption at host | Azure CLI | 90–120m |
-| `12-vm-resilience-scale-mobility` | Zones, availability sets, VMSS, autoscaling, and RG/subscription/region mobility | Az PowerShell | 120–150m |
+| `12-vm-resilience-scale-mobility` | Zones, availability sets, VMSS, autoscaling, and RG/subscription/region mobility | Azure CLI hosted in PowerShell | 120–150m |
 | `13-acr-aci` | Azure Container Registry and Azure Container Instances | Azure CLI | 75–105m |
 | `14-container-apps` | Environments, revisions, ingress, sizing, and scaling | Azure CLI | 90–120m |
-| `15-app-service-scale-slots` | Plans, apps, scale up/out, deployment slots, and swap | Az PowerShell | 105–120m |
+| `15-app-service-scale-slots` | Plans, apps, scale up/out, deployment slots, and swap | Azure CLI hosted in PowerShell | 105–120m |
 | `16-app-service-tls-dns-backup-network` | TLS/certificates, custom DNS, backup, and networking | Azure CLI | 120–150m |
-| `17-vnet-subnets-peering-public-ip` | VNets, subnets, public IPs, and peering | Az PowerShell | 90–105m |
+| `17-vnet-subnets-peering-public-ip` | VNets, subnets, public IPs, and peering | Azure CLI hosted in PowerShell | 90–105m |
 | `18-routing-nsg-asg` | UDRs, NSGs, ASGs, effective rules, and connectivity diagnosis | Azure CLI | 105–120m |
-| `19-service-private-endpoints` | Service endpoints, private endpoints, private DNS, and public-access denial | Az PowerShell | 105–120m |
+| `19-service-private-endpoints` | Service endpoints, private endpoints, private DNS, and public-access denial | Azure CLI hosted in PowerShell | 105–120m |
 | `20-azure-dns-bastion` | Public/private DNS concepts and secure Bastion access | Azure CLI | 105–120m |
-| `21-load-balancer-network-watcher` | Public/internal load balancers, probes, troubleshooting, Network Watcher, and Connection Monitor | Az PowerShell | 120–150m |
+| `21-load-balancer-network-watcher` | Public/internal load balancers, probes, troubleshooting, Network Watcher, and Connection Monitor | Azure CLI hosted in PowerShell | 120–150m |
 | `22-azure-monitor-logs-insights` | Metrics, diagnostic settings, Log Analytics, KQL, and Insights | Both | 105–135m |
 | `23-monitor-alerts-actions` | Alert rules, action groups, alert processing rules, and controlled triggering | Azure CLI | 75–105m |
-| `24-azure-backup-restore` | Recovery Services vault, Backup vault, policies, backup, restore, reports, and alerts | Az PowerShell | 120–150m |
-| `25-site-recovery-failover` | Azure-to-Azure replication, isolated test failover/failover, and cleanup | Az PowerShell | 150–180m |
+| `24-azure-backup-restore` | Recovery Services vault, Backup vault, policies, backup, restore, reports, and alerts | Azure CLI hosted in PowerShell | 120–150m |
+| `25-site-recovery-failover` | Azure-to-Azure replication, isolated test failover/failover, and cleanup | Azure CLI hosted in PowerShell | 150–180m |
 | `26-capstone-build` | Secure, governed, highly available, observable workload | Learner choice | 180m |
 | `27-capstone-operate-recover` | Fault injection, diagnosis, restore/failover, optimization, and complete teardown | Opposite tool | 180m |
 
-If Lab 26 is completed with Azure CLI, require Az PowerShell for Lab 27, and vice versa.
+If Lab 26 is completed with Azure CLI, require Azure CLI hosted in PowerShell for Lab 27, and vice versa.
 
 ## Separate-folder invariant
 
@@ -334,11 +334,11 @@ labs/
 │   │   └── architecture.svg
 │   ├── scripts/
 │   │   ├── cli/
-│   │   │   ├── preflight.sh
-│   │   │   ├── setup.sh
-│   │   │   ├── validate.sh
-│   │   │   └── cleanup.sh
-│   │   └── powershell/
+│   │   │   ├── Preflight.ps1
+│   │   │   ├── Setup.ps1
+│   │   │   ├── Validate.ps1
+│   │   │   └── Cleanup.ps1
+│   │   └── cli/
 │   │       ├── Preflight.ps1
 │   │       ├── Setup.ps1
 │   │       ├── Validate.ps1
@@ -368,7 +368,7 @@ Rules:
 
 - Every required configuration action must be performed through Azure CLI or PowerShell.
 - Use Azure CLI as the general default.
-- Use current Az PowerShell, Microsoft Graph PowerShell, or Microsoft Entra PowerShell where those are the maintained and more reliable administrative interfaces.
+- Use current Azure CLI hosted in PowerShell, Azure CLI with `az rest`, or Azure CLI with `az rest` where those are the maintained and more reliable administrative interfaces.
 - Do not use the retired `AzureAD` or `MSOnline` modules.
 - Stable Microsoft Graph v1.0 via `az rest` is acceptable where regular `az` commands do not expose a required Entra operation.
 - Allow Bicep CLI, AzCopy, KQL, `curl`, `openssl`, `dig`, `nslookup`, and similar focused companion tools only when needed by the objective.
@@ -383,7 +383,7 @@ Rules:
 
 ## CLI and PowerShell evidence policy
 
-Every live-tested lab must prove its result with commands from the declared Azure CLI, Az PowerShell, or Microsoft Graph PowerShell lane.
+Every live-tested lab must prove its result with commands from the declared Azure CLI, Azure CLI hosted in PowerShell, or Azure CLI with `az rest` lane.
 
 For each live run:
 
@@ -632,7 +632,7 @@ Pull-request CI must not authenticate to Azure. It should perform:
 - YAML and JSON schema validation.
 - Coverage validation: every official objective maps to at least one lab and a verification method.
 - Lab-folder portability and forbidden cross-lab reference checks.
-- Bash syntax, ShellCheck, and formatting checks.
+- PowerShell parsing, PSScriptAnalyzer, and formatting checks.
 - PowerShell parser, PSScriptAnalyzer, and Pester unit/mocked tests.
 - Bicep build/lint and ARM template validation.
 - GitHub Actions lint.

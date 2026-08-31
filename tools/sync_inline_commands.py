@@ -45,7 +45,9 @@ def render_section(lab_dir: Path) -> str:
     for path in _lifecycle_files(lab_dir):
         relative = path.relative_to(lab_dir).as_posix()
         stage = path.stem.lower()
-        fence = "bash" if path.suffix.lower() == ".sh" else "powershell"
+        if path.suffix.lower() != ".ps1":
+            raise ValueError(f"{lab_dir.name}: lifecycle files must be PowerShell-hosted Azure CLI scripts")
+        fence = "powershell"
         lines.extend(
             [
                 f"### {stage.capitalize()}: `{relative}`",

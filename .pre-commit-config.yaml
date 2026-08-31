@@ -14,9 +14,3 @@ repos:
         language: system
         pass_filenames: false
         always_run: true
-      - id: validate-images
-        name: Validate committed portal images
-        entry: python tools/validate_images.py
-        language: system
-        pass_filenames: false
-        always_run: true

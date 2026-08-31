@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1120" height="520" viewBox="0 0 1120 520" role="img" aria-labelledby="title desc">
   <title id="title">Safe bootstrap workflow</title>
-  <desc id="desc">A learner uses either Azure CLI or Az PowerShell to read Azure account, location, provider, and quota information. Setup and validation write only to a lab-local state folder. Cleanup removes only that selected local run.</desc>
+  <desc id="desc">A learner uses either Azure CLI hosted in PowerShell to read Azure account, location, provider, and quota information. Setup and validation write only to a lab-local state folder. Cleanup removes only that selected local run.</desc>
   <defs>
     <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#57606a"/></marker>
     <style>
@@ -16,7 +16,7 @@
   <text x="410" y="145" text-anchor="middle" class="label">Azure CLI</text>
   <text x="410" y="170" text-anchor="middle" class="small">preflight • setup • validate</text>
   <rect class="box" x="300" y="285" width="220" height="90" fill="#e7f3ff" stroke="#0969da"/>
-  <text x="410" y="325" text-anchor="middle" class="label">Az PowerShell</text>
+  <text x="410" y="325" text-anchor="middle" class="label">Azure CLI</text>
   <text x="410" y="350" text-anchor="middle" class="small">preflight • setup • validate</text>
   <rect class="box" x="670" y="105" width="390" height="120" fill="#eaf5ea" stroke="#1a7f37"/>
   <text x="865" y="145" text-anchor="middle" class="label">Azure control plane</text>

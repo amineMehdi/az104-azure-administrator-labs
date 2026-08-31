@@ -7,14 +7,11 @@ objectives:
 - NW-VNET-01
 - NW-VNET-02
 - NW-VNET-03
-track: az-powershell
+track: azure-cli
 status: offline-validated
 testedToolVersions:
+  azureCli: '>=2.88.0'
   powershell: '>=7.4'
-  modules:
-  - Az.Accounts
-  - Az.Resources
-  - Az.Network
 estimatedMinutes: 105
 difficulty: intermediate
 cost:
@@ -35,9 +32,9 @@ permissions:
 prerequisites:
 - A disposable non-production Azure environment
 - An active context that matches the explicitly supplied tenant and subscription
-- The command surface and dependencies for Az PowerShell
 - 'Authorization boundary: Network Contributor on the lab resource group'
 - 'External gate review: None beyond the declared role and a disposable subscription.'
+- Azure CLI hosted in PowerShell 7.4 or later
 providers:
   observed:
   - Microsoft.Network
@@ -56,7 +53,7 @@ tenantScopedChanges: []
 externalRequirements: []
 validation:
   commandLanes:
-  - scripts/powershell/Validate.ps1
+  - scripts/cli/Validate.ps1
   output: .state/<run-id>/validation.json
   statuses:
   - pass

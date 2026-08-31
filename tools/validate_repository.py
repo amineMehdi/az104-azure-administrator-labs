@@ -285,14 +285,25 @@ def validate_lab_dirs(
             if objective not in official | foundations:
                 results.error(f"{lab_dir.name}: unknown objective ID {objective}")
 
-        lanes = [path for path in (lab_dir / "scripts").glob("*") if path.is_dir()] if (lab_dir / "scripts").exists() else []
-        if not lanes:
-            results.error(f"{lab_dir.name}: no complete command lane under scripts/")
-        for lane in lanes:
-            names = {path.name.lower() for path in lane.iterdir() if path.is_file()}
-            for stage in ("preflight", "setup", "validate", "cleanup"):
-                if not any(name.startswith(stage.lower()) for name in names):
-                    results.error(f"{lab_dir.name}: {lane.name} lane is missing {stage}")
+        scripts_root = lab_dir / "scripts"
+        lanes = [path for path in scripts_root.glob("*") if path.is_dir()] if scripts_root.exists() else []
+        if [lane.name for lane in lanes] != ["cli"]:
+            results.error(f"{lab_dir.name}: scripts/ must contain only the Azure CLI lane")
+        else:
+            lane = lanes[0]
+            expected_names = {"preflight.ps1", "setup.ps1", "validate.ps1", "cleanup.ps1"}
+            files = [path for path in lane.iterdir() if path.is_file()]
+            names = {path.name.lower() for path in files}
+            if names != expected_names:
+                results.error(f"{lab_dir.name}: cli lane must contain exactly the four PowerShell lifecycle files")
+            for script in files:
+                script_text = script.read_text(encoding="utf-8", errors="replace")
+                if not re.search(r"(?m)^\s*(?:\$[^=]+=\s*)?(?:\$null\s*=\s*)?az\s", script_text):
+                    results.error(f"{script.relative_to(ROOT)}: does not contain an Azure CLI command")
+                if re.search(r"\b(?:Connect|Get|New|Set|Update|Remove)-(?:Az|Mg)[A-Z]", script_text):
+                    results.error(f"{script.relative_to(ROOT)}: contains a non-CLI Azure command")
+            if lab.get("track") not in {"azure-cli", "azure-cli-bicep"}:
+                results.error(f"{lab_dir.name}: track must declare Azure CLI")
 
         readme_path = lab_dir / "README.md"
         if readme_path.exists():
@@ -301,6 +312,10 @@ def validate_lab_dirs(
                 results.error(f"{lab_dir.name}: README does not embed the complete lifecycle commands")
             else:
                 results.ok(f"{lab_dir.name}: README contains the generated inline command lane")
+            if re.search(r"(?im)^\*\*Status:\*\*\s*Offline-validated", readme):
+                results.error(f"{lab_dir.name}: README contains the removed offline status banner")
+            if not all(f"scripts/cli/{stage}.ps1" in readme for stage in ("Preflight", "Setup", "Validate", "Cleanup")):
+                results.error(f"{lab_dir.name}: README does not expose every Azure CLI lifecycle stage")
 
         mapped, records = validate_assessment(lab_dir, lab, official | foundations, results)
         question_coverage |= mapped
@@ -320,7 +335,7 @@ def validate_lab_dirs(
             if (
                 text_file.is_file()
                 and not is_ignored_path(text_file)
-                and text_file.suffix.lower() in {".md", ".sh", ".ps1"}
+                and text_file.suffix.lower() in {".md", ".ps1"}
             ):
                 text = text_file.read_text(encoding="utf-8", errors="replace")
                 if re.search(r"\.\.[/\\](?:\d{2}-)[a-z0-9-]+", text, flags=re.IGNORECASE):
@@ -445,7 +460,7 @@ def validate_workflows_are_offline(results: Results) -> None:
     prohibited = {
         "Azure login action": re.compile(r"azure/login@", re.I),
         "Azure CLI login": re.compile(r"(?<![A-Za-z])az\s+login(?:\s|$)", re.I),
-        "Az PowerShell login": re.compile(r"Connect-AzAccount", re.I),
+        "alternate Azure login": re.compile(r"Connect-AzAccount", re.I),
         "Azure credential secret": re.compile(r"AZURE_(?:CLIENT|TENANT|SUBSCRIPTION)(?:_ID)?", re.I),
     }
     hits = 0

@@ -28,8 +28,7 @@ Only first-party Microsoft sources are authoritative for the exam blueprint and 
 | Source ID | Source | Curriculum use | Verified |
 |---|---|---|---|
 | `SRC-AZ-CLI` | [Azure CLI documentation](https://learn.microsoft.com/en-us/cli/azure/) | Azure CLI command syntax and reference | 2026-08-30 |
-| `SRC-AZ-PS` | [Azure PowerShell documentation](https://learn.microsoft.com/en-us/powershell/azure/) | Az PowerShell command syntax and module guidance | 2026-08-30 |
-| `SRC-GRAPH-PS` | [Microsoft Graph PowerShell documentation](https://learn.microsoft.com/en-us/powershell/microsoftgraph/) | Microsoft Entra user, group, guest, and license operations | 2026-08-30 |
+| `SRC-AZ-REST` | [Azure CLI REST command](https://learn.microsoft.com/en-us/cli/azure/reference-index#az-rest) | Microsoft Graph and Azure REST operations not exposed by a dedicated command group | 2026-08-30 |
 | `SRC-BICEP` | [Bicep documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/) | Infrastructure-as-code interpretation, deployment, export, and decompilation | 2026-08-30 |
 | `SRC-AZCOPY` | [Get started with AzCopy](https://learn.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-v10) | Storage data movement exercises | 2026-08-30 |
 | `SRC-KQL` | [Kusto Query Language overview](https://learn.microsoft.com/en-us/kusto/query/) | Azure Monitor log queries and troubleshooting | 2026-08-30 |

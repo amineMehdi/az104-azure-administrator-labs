@@ -1,17 +1,16 @@
 id: LAB-01
 slug: 01-entra-users-groups
 title: Create and manage Microsoft Entra users and groups
-blueprintVersion: "2026-04-17"
+blueprintVersion: '2026-04-17'
 domain: Manage Azure identities and governance
 objectives:
-  - IG-USERS-01
-  - IG-USERS-02
-track: azure-cli-graph
+- IG-USERS-01
+- IG-USERS-02
+track: azure-cli
 status: offline-validated
 testedToolVersions:
-  azureCli: "2.88.0"
-  bash: "5.x (Git for Windows lane)"
-  jq: ">=1.6"
+  azureCli: '>=2.88.0'
+  powershell: '>=7.4'
 estimatedMinutes: 75
 difficulty: foundational
 cost:
@@ -21,14 +20,16 @@ cost:
 permissions:
   azureRbacRoles: []
   entraRoles:
-    - User Administrator at tenant scope is recommended for the complete exercise
+  - User Administrator at tenant scope is recommended for the complete exercise
   graphScopes:
-    - Delegated user and group write permissions exposed to Azure CLI by the signed-in tenant
+  - User.ReadWrite.All
+  - Group.ReadWrite.All
+  - Directory.ReadWrite.All
 prerequisites:
-  - A disposable non-production Microsoft Entra tenant
-  - Authorization to create and delete two cloud-only users and one security group
-  - Azure CLI, Bash, and jq 1.6 or newer
-  - A verified tenant domain that can be used for cloud-only user principal names
+- A disposable non-production Microsoft Entra tenant
+- Authorization to create and delete two cloud-only users and one security group
+- A verified tenant domain that can be used for cloud-only user principal names
+- Azure CLI hosted in PowerShell 7.4 or later
 providers:
   observed: []
   registeredByLab: []
@@ -37,26 +38,26 @@ regions:
 creates:
   azureResources: []
   entraObjects:
-    - Two cloud-only member users
-    - One security group
-    - One group membership
-    - One group owner assignment
+  - Two cloud-only member users
+  - One security group
+  - One group membership
+  - One group owner assignment
   localArtifacts:
-    - .state/<run-id>/run.json
-    - .state/<run-id>/validation.json
+  - .state/<run-id>/run.json
+  - .state/<run-id>/validation.json
 tenantScopedChanges:
-  - Microsoft Entra user objects
-  - Microsoft Entra security group, membership, and ownership
+- Microsoft Entra user objects
+- Microsoft Entra security group, membership, and ownership
 externalRequirements: []
 validation:
   commandLanes:
-    - scripts/cli/validate.sh
+  - scripts/cli/Validate.ps1
   output: .state/<run-id>/validation.json
   statuses:
-    - pass
-    - fail
-    - warning
-    - skipped
+  - pass
+  - fail
+  - warning
+  - skipped
 cleanup:
   azureDeletion: none
   entraDeletion: exact recorded object IDs only
@@ -67,5 +68,5 @@ assessment:
   enabled: true
   primaryDomain: identity-governance
   questionCount: 10
-lastOfflineValidated: "2026-08-30"
+lastOfflineValidated: '2026-08-30'
 lastLiveVerified: null

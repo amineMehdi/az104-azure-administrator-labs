@@ -35,10 +35,6 @@ jobs:
       - name: Confirm generated indexes are current
         run: python tools/generate_indexes.py --check
 
-      - name: Parse every Bash command lane
-        shell: bash
-        run: find labs -type f -path '*/scripts/cli/*.sh' -print0 | xargs -0 -r -n1 bash -n
-
       - name: Install PowerShell quality modules
         shell: pwsh
         run: |
@@ -50,7 +46,7 @@ jobs:
         shell: pwsh
         run: |
           $scripts = Get-ChildItem labs -Recurse -Filter '*.ps1' |
-            Where-Object { $_.FullName -match '[\\/]scripts[\\/]powershell[\\/]' }
+            Where-Object { $_.FullName -match '[\\/]scripts[\\/]cli[\\/]' }
           $findings = $scripts | ForEach-Object {
             Invoke-ScriptAnalyzer -Path $_.FullName -Severity Warning,Error
           }
@@ -80,9 +76,6 @@ jobs:
 
       - name: Spell-check documentation
         run: npx --yes cspell@8.14.4 --no-progress "**/*.md"
-
-      - name: ShellCheck every Bash command lane
-        run: find labs -type f -path '*/scripts/cli/*.sh' -print0 | xargs -0 -r shellcheck --severity=warning
 
       - name: Lint GitHub Actions workflows
         run: |

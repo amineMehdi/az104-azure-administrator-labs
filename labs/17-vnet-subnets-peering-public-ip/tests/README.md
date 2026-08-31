@@ -6,6 +6,7 @@ Run from the repository root:
 Invoke-Pester -Path labs/*/tests -Output Detailed
 ```
 
-The contract test checks that the `powershell` lane contains preflight, setup, validation, and cleanup; never signs in or silently changes context; keeps mutations behind an explicit execution switch; records state; and has no runtime dependency on another lab.
-
-These are offline safety and structure tests. They do not claim that Azure resources were deployed.
+The contract verifies one complete `scripts/cli` lane with `Preflight.ps1`,
+`Setup.ps1`, `Validate.ps1`, and `Cleanup.ps1`; Azure operations must use
+Azure CLI, setup and cleanup remain preview-first, and scripts never sign in or
+silently switch context. These offline tests do not claim a live deployment.

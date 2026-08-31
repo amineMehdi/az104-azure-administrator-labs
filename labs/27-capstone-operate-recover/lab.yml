@@ -20,18 +20,11 @@ objectives:
 - MR-RECOVERY-04
 - MR-RECOVERY-06
 - MR-RECOVERY-07
-track: az-powershell
+track: azure-cli
 status: offline-validated
 testedToolVersions:
+  azureCli: '>=2.88.0'
   powershell: '>=7.4'
-  modules:
-  - Az.Accounts
-  - Az.Resources
-  - Az.Network
-  - Az.Compute
-  - Az.Monitor
-  - Az.OperationalInsights
-  - Az.RecoveryServices
 estimatedMinutes: 180
 difficulty: advanced
 cost:
@@ -54,11 +47,11 @@ permissions:
 prerequisites:
 - A disposable non-production Azure environment
 - An active context that matches the explicitly supplied tenant and subscription
-- The command surface and dependencies for Az PowerShell and KQL
 - 'Authorization boundary: Contributor, Monitoring Contributor, Backup Contributor, and Network Contributor on the
   capstone resource group'
 - 'External gate review: The live recovery drill requires cost review and an isolated workload; production failover
   or irreversible deletion is never inferred from this capstone.'
+- Azure CLI hosted in PowerShell 7.4 or later
 providers:
   observed:
   - Microsoft.Authorization
@@ -84,7 +77,7 @@ externalRequirements:
   is never inferred from this capstone.
 validation:
   commandLanes:
-  - scripts/powershell/Validate.ps1
+  - scripts/cli/Validate.ps1
   output: .state/<run-id>/validation.json
   statuses:
   - pass

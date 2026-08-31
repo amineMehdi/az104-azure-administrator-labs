@@ -56,7 +56,7 @@ Why the other choices do not fit:
 - **B:** This choice skips independent evidence or relies on ambiguous resource identity.
 - **C:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
 
-Source: <https://learn.microsoft.com/en-us/powershell/module/az.storage/>
+Source: <https://learn.microsoft.com/en-us/cli/azure/storage>
 
 ## 5. A (`LAB07-Q05`)
 
@@ -112,7 +112,7 @@ Why the other choices do not fit:
 - **B:** This choice skips independent evidence or relies on ambiguous resource identity.
 - **C:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
 
-Source: <https://learn.microsoft.com/en-us/powershell/module/az.storage/>
+Source: <https://learn.microsoft.com/en-us/cli/azure/storage>
 
 ## 9. A (`LAB07-Q09`)
 
@@ -168,4 +168,4 @@ Why the other choices do not fit:
 - **B:** This choice skips independent evidence or relies on ambiguous resource identity.
 - **C:** This choice conflicts with the lab's authorization, safety, or truthful-status contract.
 
-Source: <https://learn.microsoft.com/en-us/powershell/module/az.storage/>
+Source: <https://learn.microsoft.com/en-us/cli/azure/storage>

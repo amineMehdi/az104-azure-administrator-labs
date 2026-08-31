@@ -1,24 +1,20 @@
 id: LAB-00
 slug: 00-safe-bootstrap
 title: Safe Azure lab bootstrap
-blueprintVersion: "2026-04-17"
+blueprintVersion: '2026-04-17'
 domain: Foundation
 objectiveCoverage: non-exam-foundation
 objectives:
-  - FD-TOOLS-01
-  - FD-CONTEXT-01
-  - FD-COST-01
-  - FD-SAFETY-01
-  - FD-CLEANUP-01
-track: both
+- FD-TOOLS-01
+- FD-CONTEXT-01
+- FD-COST-01
+- FD-SAFETY-01
+- FD-CLEANUP-01
+track: azure-cli
 status: offline-validated
 testedToolVersions:
-  azureCli: "2.88.0"
-  powerShell: "7.6.5"
-  azAccounts: "2.12.1"
-  azResources: "6.5.3"
-  azCompute: "5.5.0"
-  jq: ">=1.6 (CLI lane)"
+  azureCli: '>=2.88.0'
+  powershell: '>=7.4'
 estimatedMinutes: 60
 difficulty: foundational
 cost:
@@ -27,21 +23,20 @@ cost:
   notes: This lab creates no Azure resources. Read-only Azure queries do not incur resource charges.
 permissions:
   azureRbacRoles:
-    - Reader at the target subscription is recommended for all discovery checks
+  - Reader at the target subscription is recommended for all discovery checks
   entraRoles: []
   graphScopes: []
 prerequisites:
-  - A non-production Azure sandbox subscription
-  - An interactive Azure CLI or Az PowerShell sign-in
-  - Bash and jq for the CLI lane, or PowerShell 7 for the PowerShell lane
+- A non-production Azure sandbox subscription
+- Azure CLI hosted in PowerShell 7.4 or later
 providers:
   observed:
-    - Microsoft.Authorization
-    - Microsoft.Compute
-    - Microsoft.Insights
-    - Microsoft.Network
-    - Microsoft.RecoveryServices
-    - Microsoft.Storage
+  - Microsoft.Authorization
+  - Microsoft.Compute
+  - Microsoft.Insights
+  - Microsoft.Network
+  - Microsoft.RecoveryServices
+  - Microsoft.Storage
   registeredByLab: []
 regions:
   defaultPrimary: westeurope
@@ -50,20 +45,19 @@ regions:
 creates:
   azureResources: []
   localArtifacts:
-    - .state/<run-id>/run.json
-    - .state/<run-id>/validation.json
+  - .state/<run-id>/run.json
+  - .state/<run-id>/validation.json
 tenantScopedChanges: []
 externalRequirements: []
 validation:
   commandLanes:
-    - scripts/cli/validate.sh
-    - scripts/powershell/Validate.ps1
+  - scripts/cli/Validate.ps1
   output: .state/<run-id>/validation.json
   statuses:
-    - pass
-    - fail
-    - warning
-    - skipped
+  - pass
+  - fail
+  - warning
+  - skipped
 cleanup:
   azureDeletion: none
   localOnly: true
@@ -72,5 +66,5 @@ cleanup:
 assessment:
   enabled: false
   questionCount: 0
-lastOfflineValidated: "2026-08-30"
+lastOfflineValidated: '2026-08-30'
 lastLiveVerified: null

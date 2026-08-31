@@ -9,16 +9,11 @@ objectives:
 - CP-APP-07
 - NW-SECURE-04
 - NW-SECURE-05
-track: az-powershell
+track: azure-cli
 status: offline-validated
 testedToolVersions:
+  azureCli: '>=2.88.0'
   powershell: '>=7.4'
-  modules:
-  - Az.Accounts
-  - Az.Resources
-  - Az.Network
-  - Az.Storage
-  - Az.PrivateDns
 estimatedMinutes: 120
 difficulty: intermediate
 cost:
@@ -41,9 +36,9 @@ permissions:
 prerequisites:
 - A disposable non-production Azure environment
 - An active context that matches the explicitly supplied tenant and subscription
-- The command surface and dependencies for Az PowerShell
 - 'Authorization boundary: Network Contributor and Storage Account Contributor on the lab resource group'
 - 'External gate review: None beyond the declared role and a disposable subscription.'
+- Azure CLI hosted in PowerShell 7.4 or later
 providers:
   observed:
   - Microsoft.Network
@@ -63,7 +58,7 @@ tenantScopedChanges: []
 externalRequirements: []
 validation:
   commandLanes:
-  - scripts/powershell/Validate.ps1
+  - scripts/cli/Validate.ps1
   output: .state/<run-id>/validation.json
   statuses:
   - pass

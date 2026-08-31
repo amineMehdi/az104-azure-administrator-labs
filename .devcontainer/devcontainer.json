@@ -11,7 +11,7 @@
       "version": "22"
     }
   },
-  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y --no-install-recommends shellcheck tesseract-ocr && az bicep install && python -m pip install --user -r requirements-dev.txt && python tools/check_toolchain.py",
+  "postCreateCommand": "az bicep install && python -m pip install --user -r requirements-dev.txt && python tools/check_toolchain.py",
   "customizations": {
     "vscode": {
       "extensions": [

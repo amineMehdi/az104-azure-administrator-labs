@@ -8,16 +8,11 @@ objectives:
 - CP-VM-04
 - CP-VM-06
 - CP-VM-07
-track: az-powershell
+track: azure-cli
 status: offline-validated
 testedToolVersions:
+  azureCli: '>=2.88.0'
   powershell: '>=7.4'
-  modules:
-  - Az.Accounts
-  - Az.Resources
-  - Az.Network
-  - Az.Compute
-  - Az.Monitor
 estimatedMinutes: 150
 difficulty: intermediate
 cost:
@@ -38,10 +33,10 @@ permissions:
 prerequisites:
 - A disposable non-production Azure environment
 - An active context that matches the explicitly supplied tenant and subscription
-- The command surface and dependencies for Az PowerShell
 - 'Authorization boundary: Virtual Machine Contributor, Network Contributor, and move permissions on source and
   destination scopes'
 - 'External gate review: None beyond the declared role and a disposable subscription.'
+- Azure CLI hosted in PowerShell 7.4 or later
 providers:
   observed:
   - Microsoft.Compute
@@ -63,7 +58,7 @@ tenantScopedChanges: []
 externalRequirements: []
 validation:
   commandLanes:
-  - scripts/powershell/Validate.ps1
+  - scripts/cli/Validate.ps1
   output: .state/<run-id>/validation.json
   statuses:
   - pass

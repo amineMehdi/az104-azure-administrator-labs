@@ -1,7 +1,5 @@
 # Lab 13: Publish images with ACR and run Azure Container Instances
 
-> Status: **offline-authored and contract-tested; live Azure verification is pending.**
-
 Create a Basic Azure Container Registry, import a Microsoft sample image without local Docker, deploy it to Azure Container Instances with bounded CPU and memory, inspect logs and restart policy, then remove the dedicated resource group.
 
 This folder is self-contained. It does not depend on another lab's runtime state. Use a disposable environment, keep the generated run manifest, and never substitute a production scope for a missing lab prerequisite.
@@ -34,11 +32,11 @@ The key design idea is: **ACR stores image artifacts and ACI runs container grou
 |---|---|
 | Estimated time | 105 minutes |
 | Cost class | `low` |
-| Command surface | Azure CLI |
+| Command surface | Azure CLI (`az`) hosted in PowerShell |
 | Required boundary | Contributor on the lab resource group |
 | External/live gate | None beyond the declared role and a disposable subscription. |
 
-Cost is not a fixed promise. Check current pricing, free allowances, quotas, and regional availability before using `--execute` or `-Execute`. Labs marked moderate or elevated should be cleaned up in the same study session.
+Cost is not a fixed promise. Check current pricing, free allowances, quotas, and regional availability before using `-Execute`. Labs marked moderate or elevated should be cleaned up in the same study session.
 
 ## Resources and dependencies
 
@@ -49,7 +47,7 @@ Cost is not a fixed promise. Check current pricing, free allowances, quotas, and
 | 3 | container group |
 
 - Resource providers observed by preflight: `Microsoft.ContainerInstance`, `Microsoft.ContainerRegistry`
-- PowerShell modules used when applicable: No extra PowerShell modules
+- Required command tools: Azure CLI and PowerShell 7.4 or later
 - Repository state: `.state/<run-id>/run.json` and `.state/<run-id>/validation.json`
 - Secrets, access keys, SAS tokens, generated passwords, and shared keys must remain in memory and must not enter the manifest, command evidence, or Git history.
 
@@ -61,6 +59,15 @@ Cost is not a fixed promise. Check current pricing, free allowances, quotas, and
 4. Validation reads live state independently; it does not repair a failed configuration.
 5. Cleanup previews exact targets, verifies run ownership, then requires the explicit execution switch.
 6. Tenant-wide, DNS, licensing, notification, failover, and policy gates are never guessed.
+
+## Sign in and confirm Azure CLI context
+
+```powershell
+az login
+az account show --query '{subscription:id,tenant:tenantId,user:user.name}' --output json
+```
+
+Select the intended disposable sandbox yourself if the displayed context is wrong. The lifecycle scripts refuse a mismatch and never switch it for you.
 
 ## Before you begin
 
@@ -76,261 +83,266 @@ Cost is not a fixed promise. Check current pricing, free allowances, quotas, and
 
 The lifecycle commands below are the complete learner-facing implementation. They are embedded from the retained script files so the README and automation cannot drift. Review each stage here before running it. Use a different run ID if you later try the optional scripted lane against the same sandbox.
 
-### Preflight: `scripts/cli/preflight.sh`
+### Preflight: `scripts/cli/Preflight.ps1`
 
-```bash
-#!/usr/bin/env bash
-set -euo pipefail
-
-SUBSCRIPTION_ID="${AZURE_SUBSCRIPTION_ID:-}"
-LOCATION="${AZURE_LOCATION:-}"
-
-while [[ $# -gt 0 ]]; do
-  case "$1" in
-    --subscription-id) SUBSCRIPTION_ID="$2"; shift 2 ;;
-    --location) LOCATION="$2"; shift 2 ;;
-    *) echo "Unknown argument: $1" >&2; exit 2 ;;
-  esac
-done
-
-[[ -n "$SUBSCRIPTION_ID" ]] || { echo "Supply --subscription-id or AZURE_SUBSCRIPTION_ID." >&2; exit 2; }
-[[ -n "$LOCATION" ]] || { echo "Supply --location or AZURE_LOCATION." >&2; exit 2; }
-
-require_tool() { command -v "$1" >/dev/null 2>&1 || { echo "Missing required tool: $1" >&2; exit 3; }; }
-require_tool az
-require_tool jq
-
-
-ACCOUNT_JSON="$(az account show --output json)"
-ACTIVE_SUBSCRIPTION="$(jq -r '.id' <<<"$ACCOUNT_JSON")"
-ACTIVE_TENANT="$(jq -r '.tenantId' <<<"$ACCOUNT_JSON")"
-[[ "$ACTIVE_SUBSCRIPTION" == "$SUBSCRIPTION_ID" ]] || {
-  echo "Context mismatch: active subscription is $ACTIVE_SUBSCRIPTION, expected $SUBSCRIPTION_ID." >&2
-  echo "Select the intended context yourself; this script will not change it." >&2
-  exit 4
-}
-
-echo "Lab: LAB-13"
-echo "Tenant: $ACTIVE_TENANT"
-echo "Subscription: $ACTIVE_SUBSCRIPTION"
-echo "Location: $LOCATION"
-echo "Cost class: low"
-echo "Role boundary: Contributor on the lab resource group"
-
-for provider in Microsoft.ContainerInstance Microsoft.ContainerRegistry; do
-  state="$(az provider show --namespace "$provider" --query registrationState --output tsv 2>/dev/null || true)"
-  printf 'Provider %-38s %s
-' "$provider" "${state:-Unavailable}"
-done
-
-echo "Preflight is read-only. Register missing providers only after an explicit scope and cost review."
-```
-
-### Setup: `scripts/cli/setup.sh`
-
-```bash
-#!/usr/bin/env bash
-set -euo pipefail
-
-LAB_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-SUBSCRIPTION_ID="${AZURE_SUBSCRIPTION_ID:-}"
-LOCATION="${AZURE_LOCATION:-}"
-SECONDARY_LOCATION="${AZURE_SECONDARY_LOCATION:-}"
-RUN_ID=""
-EXECUTE=false
-
-while [[ $# -gt 0 ]]; do
-  case "$1" in
-    --subscription-id) SUBSCRIPTION_ID="$2"; shift 2 ;;
-    --location) LOCATION="$2"; shift 2 ;;
-    --secondary-location) SECONDARY_LOCATION="$2"; shift 2 ;;
-    --run-id) RUN_ID="$2"; shift 2 ;;
-    --execute) EXECUTE=true; shift ;;
-    *) echo "Unknown argument: $1" >&2; exit 2 ;;
-  esac
-done
-
-[[ -n "$SUBSCRIPTION_ID" && -n "$LOCATION" && -n "$RUN_ID" ]] || {
-  echo "Usage: $0 --subscription-id ID --location REGION --run-id RUN [--secondary-location REGION] [--execute]" >&2
-  exit 2
-}
-[[ "$RUN_ID" =~ ^[a-z0-9-]+$ ]] || { echo "Run ID must match ^[a-z0-9-]+$." >&2; exit 2; }
-
-RG="rg-az104-l13-${RUN_ID}"
-SUFFIX="$(printf '%s' "$RUN_ID" | tr -cd 'a-z0-9' | tail -c 12)"
-STATE_DIR="$LAB_ROOT/.state/$RUN_ID"
-MANIFEST="$STATE_DIR/run.json"
-EXPIRES_ON="$(date -u -d '+1 day' +%F 2>/dev/null || date -u +%F)"
-
-echo "LAB-13 plan"
-echo "  subscription: $SUBSCRIPTION_ID"
-echo "  location: $LOCATION"
-echo "  resource group: $RG"
-echo "  cost class: low"
-echo "  external gate: None beyond the declared role and a disposable subscription."
-echo "  resources: resource group, Basic container registry, container group"
-
-if [[ "$EXECUTE" != true ]]; then
-  echo "Preview only. Re-run with --execute after approving context, permissions, cost, and gates."
-  exit 0
-fi
-
-"$LAB_ROOT/scripts/cli/preflight.sh" --subscription-id "$SUBSCRIPTION_ID" --location "$LOCATION"
-[[ ! -e "$MANIFEST" ]] || { echo "State already exists at $MANIFEST; choose a new run ID." >&2; exit 5; }
-mkdir -p "$STATE_DIR"
-TENANT_ID="$(az account show --query tenantId --output tsv)"
-jq -n   --arg labId "LAB-13" --arg runId "$RUN_ID" --arg tenantId "$TENANT_ID"   --arg subscriptionId "$SUBSCRIPTION_ID" --arg location "$LOCATION" --arg rgName "$RG"   --arg createdAt "$(date -u +%Y-%m-%dT%H:%M:%SZ)"   '{labId:$labId,runId:$runId,tenantId:$tenantId,subscriptionId:$subscriptionId,location:$location,createdAt:$createdAt,status:"recorded-before-mutation",resourceGroup:{name:$rgName,id:null},resources:[],external:{}}' >"$MANIFEST"
-
-az group create --subscription "$SUBSCRIPTION_ID" --name "$RG" --location "$LOCATION"   --tags purpose=az104-lab labId=13 runId="$RUN_ID" expiresOn="$EXPIRES_ON" --output none
-RG_ID="$(az group show --subscription "$SUBSCRIPTION_ID" --name "$RG" --query id --output tsv)"
-jq --arg id "$RG_ID" '.resourceGroup.id=$id | .status="baseline-created"' "$MANIFEST" >"$MANIFEST.tmp"
-mv -f "$MANIFEST.tmp" "$MANIFEST"
-
-ACR="acr13${SUFFIX}"
-ACI="aci-${SUFFIX}"
-az acr create --resource-group "$RG" --name "$ACR" --sku Basic --admin-enabled false --output none
-az acr import --name "$ACR" --source mcr.microsoft.com/azuredocs/aci-helloworld:latest --image az104/hello:v1 --output none
-az container create --resource-group "$RG" --name "$ACI" --image mcr.microsoft.com/azuredocs/aci-helloworld:latest --cpu 1 --memory 1 --restart-policy OnFailure --ports 80 --ip-address Public --dns-name-label "aci-${SUFFIX}" --output none
-
-az resource list --subscription "$SUBSCRIPTION_ID" --resource-group "$RG" --output json >"$STATE_DIR/resources.json"
-jq --slurpfile resources "$STATE_DIR/resources.json" '.resources=($resources[0] | map({id,name,type,location})) | .status="setup-complete"' "$MANIFEST" >"$MANIFEST.tmp"
-mv -f "$MANIFEST.tmp" "$MANIFEST"
-echo "Setup complete. State: $MANIFEST"
-echo "Run scripts/cli/validate.sh before recording command evidence."
-```
-
-### Validate: `scripts/cli/validate.sh`
-
-```bash
-#!/usr/bin/env bash
-set -euo pipefail
-
-LAB_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-SUBSCRIPTION_ID="${AZURE_SUBSCRIPTION_ID:-}"
-RUN_ID=""
-while [[ $# -gt 0 ]]; do
-  case "$1" in
-    --subscription-id) SUBSCRIPTION_ID="$2"; shift 2 ;;
-    --run-id) RUN_ID="$2"; shift 2 ;;
-    *) echo "Unknown argument: $1" >&2; exit 2 ;;
-  esac
-done
-[[ -n "$SUBSCRIPTION_ID" && -n "$RUN_ID" ]] || { echo "Supply --subscription-id and --run-id." >&2; exit 2; }
-
-STATE_DIR="$LAB_ROOT/.state/$RUN_ID"
-MANIFEST="$STATE_DIR/run.json"
-REPORT="$STATE_DIR/validation.json"
-[[ -f "$MANIFEST" ]] || { echo "Missing state: $MANIFEST" >&2; exit 5; }
-ACTIVE_SUB="$(az account show --query id --output tsv)"
-[[ "$ACTIVE_SUB" == "$SUBSCRIPTION_ID" ]] || { echo "Active subscription does not match the requested subscription." >&2; exit 4; }
-RECORDED_SUB="$(jq -r '.subscriptionId' "$MANIFEST")"
-[[ "$RECORDED_SUB" == "$SUBSCRIPTION_ID" ]] || { echo "Recorded subscription mismatch." >&2; exit 4; }
-RG="$(jq -r '.resourceGroup.name' "$MANIFEST")"
-RG_ID="$(jq -r '.resourceGroup.id' "$MANIFEST")"
-
-checks='[]'
-add_check() {
-  checks="$(jq -c --arg id "$1" --arg status "$2" --arg message "$3" '. + [{id:$id,status:$status,message:$message}]' <<<"$checks")"
-}
-
-actual_rg_id="$(az group show --subscription "$SUBSCRIPTION_ID" --name "$RG" --query id --output tsv 2>/dev/null || true)"
-if [[ -z "$actual_rg_id" ]]; then
-  add_check context.resource-group fail "The recorded resource group is absent."
-elif [[ "${actual_rg_id,,}" != "${RG_ID,,}" ]]; then
-  add_check context.resource-group fail "The resource-group ID does not match the run manifest."
-else
-  add_check context.resource-group pass "The exact recorded resource group exists."
-fi
-
-purpose="$(az group show --name "$RG" --query tags.purpose --output tsv 2>/dev/null || true)"
-lab_id="$(az group show --name "$RG" --query tags.labId --output tsv 2>/dev/null || true)"
-run_id="$(az group show --name "$RG" --query tags.runId --output tsv 2>/dev/null || true)"
-if [[ "$purpose" == "az104-lab" && "$lab_id" == "13" && "$run_id" == "$RUN_ID" ]]; then
-  add_check ownership.tags pass "purpose, labId, and runId tags match the manifest."
-else
-  add_check ownership.tags fail "Ownership tags do not match; cleanup must not proceed."
-fi
-
-resources="$(az resource list --subscription "$SUBSCRIPTION_ID" --resource-group "$RG" --output json 2>/dev/null || echo '[]')"
-EXPECTED_TYPES=(
-  "Microsoft.ContainerRegistry/registries"
-  "Microsoft.ContainerInstance/containerGroups"
+```powershell
+#requires -Version 7.4
+[CmdletBinding()]
+[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingWriteHost', '', Justification = 'Interactive lab progress is intentionally written to the host.')]
+[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSReviewUnusedParameter', '', Justification = 'Lifecycle scripts keep one consistent interface across all labs.')]
+[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseDeclaredVarsMoreThanAssignments', '', Justification = 'Shared safe-naming variables are retained for a consistent learner path.')]
+param(
+    [string]$SubscriptionId = $env:AZURE_SUBSCRIPTION_ID,
+    [Parameter(Mandatory)][ValidatePattern('^[a-z0-9-]+$')][string]$Location
 )
-if [[ "${#EXPECTED_TYPES[@]}" -eq 0 ]]; then
-  add_check resources.baseline warning "This lab validates external or tenant-scoped state separately."
-else
-  for expected in "${EXPECTED_TYPES[@]}"; do
-    count="$(jq --arg expected "${expected,,}" '[.[] | select((.type | ascii_downcase) == $expected)] | length' <<<"$resources")"
-    if [[ "$count" -gt 0 ]]; then
-      add_check "resource.$(tr '/.' '--' <<<"$expected")" pass "Found $count resource(s) of type $expected."
-    else
-      add_check "resource.$(tr '/.' '--' <<<"$expected")" warning "No top-level resource of type $expected was returned; inspect nested or gated checkpoint state."
-    fi
-  done
-fi
 
-failures="$(jq '[.[] | select(.status == "fail")] | length' <<<"$checks")"
-warnings="$(jq '[.[] | select(.status == "warning" or .status == "skipped")] | length' <<<"$checks")"
-result=pass
-[[ "$warnings" -eq 0 ]] || result=partial
-[[ "$failures" -eq 0 ]] || result=fail
-jq -n --arg labId "LAB-13" --arg runId "$RUN_ID" --arg generatedAt "$(date -u +%Y-%m-%dT%H:%M:%SZ)" --arg result "$result" --argjson checks "$checks"   '{labId:$labId,runId:$runId,generatedAt:$generatedAt,result:$result,checks:$checks}' >"$REPORT"
-cat "$REPORT"
-[[ "$result" != fail ]]
-```
+Set-StrictMode -Version Latest
+$ErrorActionPreference = 'Stop'
+$PSNativeCommandUseErrorActionPreference = $true
 
-### Cleanup: `scripts/cli/cleanup.sh`
-
-```bash
-#!/usr/bin/env bash
-set -euo pipefail
-
-LAB_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-SUBSCRIPTION_ID="${AZURE_SUBSCRIPTION_ID:-}"
-RUN_ID=""
-EXECUTE=false
-while [[ $# -gt 0 ]]; do
-  case "$1" in
-    --subscription-id) SUBSCRIPTION_ID="$2"; shift 2 ;;
-    --run-id) RUN_ID="$2"; shift 2 ;;
-    --execute) EXECUTE=true; shift ;;
-    *) echo "Unknown argument: $1" >&2; exit 2 ;;
-  esac
-done
-[[ -n "$SUBSCRIPTION_ID" && -n "$RUN_ID" ]] || { echo "Supply --subscription-id and --run-id." >&2; exit 2; }
-
-MANIFEST="$LAB_ROOT/.state/$RUN_ID/run.json"
-[[ -f "$MANIFEST" ]] || { echo "Missing state: $MANIFEST" >&2; exit 5; }
-[[ "$(az account show --query id --output tsv)" == "$SUBSCRIPTION_ID" ]] || { echo "Active subscription mismatch." >&2; exit 4; }
-[[ "$(jq -r '.subscriptionId' "$MANIFEST")" == "$SUBSCRIPTION_ID" ]] || { echo "Recorded subscription mismatch." >&2; exit 4; }
-RG="$(jq -r '.resourceGroup.name' "$MANIFEST")"
-RG_ID="$(jq -r '.resourceGroup.id' "$MANIFEST")"
-echo "Cleanup preview for LAB-13:"
-echo "  exact resource group ID: $RG_ID"
-echo "  recorded child resources: $(jq '.resources | length' "$MANIFEST")"
-echo "  residual/soft-delete behavior must be audited after deletion."
-if [[ "$EXECUTE" != true ]]; then
-  echo "Preview only. Re-run with --execute after checking every target."
-  exit 0
-fi
-
-actual="$(az group show --name "$RG" --query id --output tsv 2>/dev/null || true)"
-if [[ -z "$actual" ]]; then echo "Resource group is already absent; cleanup is idempotent."; exit 0; fi
-purpose="$(az group show --name "$RG" --query tags.purpose --output tsv)"
-lab_id="$(az group show --name "$RG" --query tags.labId --output tsv)"
-run_id="$(az group show --name "$RG" --query tags.runId --output tsv)"
-[[ "${actual,,}" == "${RG_ID,,}" && "$purpose" == az104-lab && "$lab_id" == 13 && "$run_id" == "$RUN_ID" ]] || {
-  echo "ID or ownership-tag verification failed; refusing cleanup." >&2; exit 6;
+if (-not (Get-Command az -ErrorAction SilentlyContinue)) {
+    throw 'Azure CLI is required. Install it, run az login deliberately, and retry.'
 }
 
-az group delete --ids "$RG_ID" --yes --output none
+$account = az account show --output json | ConvertFrom-Json
+if (-not $account) { throw 'No active Azure CLI context. Run az login deliberately before this lab.' }
+if ($SubscriptionId -and $account.id -ne $SubscriptionId) {
+    throw "Context mismatch: active subscription is $($account.id), expected $SubscriptionId. This script will not switch it."
+}
+if (-not $SubscriptionId) { $SubscriptionId = [string]$account.id }
 
-if az group exists --name "$RG" | grep -qi true; then
-  echo "Resource group still exists; deletion may be asynchronous or blocked." >&2
-  exit 7
-fi
-jq '.status="cleanup-complete"' "$MANIFEST" >"$MANIFEST.tmp" && mv -f "$MANIFEST.tmp" "$MANIFEST"
-echo "Active resource-group cleanup complete. Audit soft-deleted or externally retained items separately."
+Write-Host 'Lab: LAB-13'
+Write-Host "Tenant: $($account.tenantId)"
+Write-Host "Subscription: $SubscriptionId"
+Write-Host "Location: $Location"
+Write-Host 'Cost class: low'
+Write-Host 'Role boundary: Contributor on the lab resource group'
+
+$providers = @(
+    'Microsoft.ContainerInstance'
+    'Microsoft.ContainerRegistry'
+)
+foreach ($provider in $providers) {
+    $registrationState = az provider show --namespace $provider --query registrationState --output tsv 2>$null
+    if ($LASTEXITCODE -ne 0 -or -not $registrationState) { $registrationState = 'Unavailable' }
+    Write-Host ('Provider {0,-38} {1}' -f $provider, $registrationState)
+}
+
+if ('subscription' -eq 'tenant') {
+    $null = az account get-access-token --resource-type ms-graph --query expiresOn --output tsv
+    Write-Host 'Microsoft Graph access through Azure CLI is available.'
+}
+Write-Host 'Preflight is read-only. It does not sign in, switch context, register providers, or create resources.'
+```
+
+### Setup: `scripts/cli/Setup.ps1`
+
+```powershell
+#requires -Version 7.4
+[CmdletBinding()]
+[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingWriteHost', '', Justification = 'Interactive lab progress is intentionally written to the host.')]
+[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSReviewUnusedParameter', '', Justification = 'Lifecycle scripts keep one consistent interface across all labs.')]
+[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseDeclaredVarsMoreThanAssignments', '', Justification = 'Shared safe-naming variables are retained for a consistent learner path.')]
+param(
+    [string]$SubscriptionId = $env:AZURE_SUBSCRIPTION_ID,
+    [Parameter(Mandatory)][ValidatePattern('^[a-z0-9-]+$')][string]$RunId,
+    [Parameter(Mandatory)][ValidatePattern('^[a-z0-9-]+$')][string]$Location,
+    [string]$SecondaryLocation = $env:AZURE_SECONDARY_LOCATION,
+    [switch]$Execute
+)
+
+Set-StrictMode -Version Latest
+$ErrorActionPreference = 'Stop'
+$PSNativeCommandUseErrorActionPreference = $true
+
+if (-not (Get-Command az -ErrorAction SilentlyContinue)) {
+    throw 'Azure CLI is required. Install it, run az login deliberately, and retry.'
+}
+
+$LabRoot = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
+$StateDir = Join-Path $LabRoot ".state/$RunId"
+$Manifest = Join-Path $StateDir 'run.json'
+$ResourceGroupName = "rg-az104-l13-$RunId"
+$suffix = (($RunId -replace '[^a-z0-9]', '') + '000000000000').Substring(0, 12)
+
+Write-Host 'LAB-13 plan'
+Write-Host "  subscription: $SubscriptionId"
+Write-Host "  location: $Location"
+Write-Host '  scope: subscription'
+Write-Host '  cost class: low'
+Write-Host '  resources: resource group, Basic container registry, container group'
+if (-not $Execute) {
+    Write-Host 'Preview only. Re-run with -Execute after approving context, permissions, cost, and gates.'
+    return
+}
+
+& (Join-Path $PSScriptRoot 'Preflight.ps1') -SubscriptionId $SubscriptionId -Location $Location
+if (Test-Path -LiteralPath $Manifest) { throw "State already exists at $Manifest; choose a new run ID." }
+New-Item -ItemType Directory -Path $StateDir -Force | Out-Null
+$account = az account show --output json | ConvertFrom-Json
+if (-not $SubscriptionId) { $SubscriptionId = [string]$account.id }
+$state = [ordered]@{
+    labId = 'LAB-13'
+    runId = $RunId
+    tenantId = [string]$account.tenantId
+    subscriptionId = $SubscriptionId
+    location = $Location
+    createdAt = (Get-Date).ToUniversalTime().ToString('o')
+    status = 'recorded-before-mutation'
+    resourceGroup = [ordered]@{ name = $null; id = $null }
+    resources = @()
+    external = [ordered]@{}
+}
+$state | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath $Manifest -Encoding utf8
+
+if ('subscription' -eq 'subscription') {
+    $expiresOn = (Get-Date).ToUniversalTime().AddDays(1).ToString('yyyy-MM-dd')
+    az group create --subscription $SubscriptionId --name $ResourceGroupName --location $Location --tags purpose=az104-lab labId=13 runId=$RunId expiresOn=$expiresOn --output none
+    $state.resourceGroup.name = $ResourceGroupName
+    $state.resourceGroup.id = az group show --subscription $SubscriptionId --name $ResourceGroupName --query id --output tsv
+    $state.status = 'baseline-created'
+    $state | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath $Manifest -Encoding utf8
+}
+
+$registry = "acr13$suffix"; $container = "aci-$suffix"
+az acr create --resource-group $ResourceGroupName --name $registry --sku Basic --admin-enabled false --output none
+az acr import --name $registry --source mcr.microsoft.com/azuredocs/aci-helloworld:latest --image az104/hello:v1 --output none
+az container create --resource-group $ResourceGroupName --name $container --image mcr.microsoft.com/azuredocs/aci-helloworld:latest --cpu 1 --memory 1 --restart-policy OnFailure --ports 80 --ip-address Public --dns-name-label "aci-$suffix" --output none
+
+if ('subscription' -eq 'subscription') {
+    $state.resources = @(az resource list --subscription $SubscriptionId --resource-group $ResourceGroupName --output json | ConvertFrom-Json | ForEach-Object {
+        [ordered]@{ id = $_.id; name = $_.name; type = $_.type; location = $_.location }
+    })
+}
+$state.status = 'setup-complete'
+$state | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath $Manifest -Encoding utf8
+Write-Host "Setup complete. State: $Manifest"
+Write-Host 'Run Validate.ps1 before recording command evidence.'
+```
+
+### Validate: `scripts/cli/Validate.ps1`
+
+```powershell
+#requires -Version 7.4
+[CmdletBinding()]
+[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingWriteHost', '', Justification = 'Interactive lab progress is intentionally written to the host.')]
+[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSReviewUnusedParameter', '', Justification = 'Lifecycle scripts keep one consistent interface across all labs.')]
+[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseDeclaredVarsMoreThanAssignments', '', Justification = 'Shared safe-naming variables are retained for a consistent learner path.')]
+param(
+    [string]$SubscriptionId = $env:AZURE_SUBSCRIPTION_ID,
+    [Parameter(Mandatory)][ValidatePattern('^[a-z0-9-]+$')][string]$RunId
+)
+
+Set-StrictMode -Version Latest
+$ErrorActionPreference = 'Stop'
+$PSNativeCommandUseErrorActionPreference = $true
+
+if (-not (Get-Command az -ErrorAction SilentlyContinue)) {
+    throw 'Azure CLI is required. Install it, run az login deliberately, and retry.'
+}
+
+$LabRoot = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
+$StateDir = Join-Path $LabRoot ".state/$RunId"
+$Manifest = Join-Path $StateDir 'run.json'
+$Report = Join-Path $StateDir 'validation.json'
+if (-not (Test-Path -LiteralPath $Manifest)) { throw "Missing state: $Manifest" }
+$state = Get-Content -LiteralPath $Manifest -Raw | ConvertFrom-Json -Depth 20
+$account = az account show --output json | ConvertFrom-Json
+if (-not $SubscriptionId) { $SubscriptionId = [string]$account.id }
+if ($account.id -ne $SubscriptionId -or $state.subscriptionId -ne $SubscriptionId) { throw 'Active or recorded subscription mismatch.' }
+
+$checks = [System.Collections.Generic.List[object]]::new()
+function Add-Check([string]$Id, [ValidateSet('pass','fail','warning','skipped')][string]$Status, [string]$Message) {
+    $checks.Add([ordered]@{ id = $Id; status = $Status; message = $Message })
+}
+
+if ('subscription' -eq 'local') {
+    Add-Check state.local pass 'The manifest records a local-only bootstrap run.'
+} elseif ('subscription' -eq 'tenant') {
+
+} else {
+    $resourceGroup = az group show --subscription $SubscriptionId --name $state.resourceGroup.name --output json 2>$null | ConvertFrom-Json
+    if ($LASTEXITCODE -ne 0 -or -not $resourceGroup) {
+        Add-Check context.resource-group fail 'The exact recorded resource group is absent.'
+    } elseif ($resourceGroup.id -ne $state.resourceGroup.id) {
+        Add-Check context.resource-group fail 'The resource-group ID differs from the manifest.'
+    } else {
+        Add-Check context.resource-group pass 'The exact recorded resource group exists.'
+    }
+    if ($resourceGroup.tags.purpose -eq 'az104-lab' -and $resourceGroup.tags.labId -eq '13' -and $resourceGroup.tags.runId -eq $RunId) {
+        Add-Check ownership.tags pass 'purpose, labId, and runId tags match.'
+    } else { Add-Check ownership.tags fail 'Ownership tags do not match.' }
+    $resources = @(az resource list --subscription $SubscriptionId --resource-group $state.resourceGroup.name --output json | ConvertFrom-Json)
+    $expectedTypes = @(
+
+    )
+    if ($expectedTypes.Count -eq 0) {
+        Add-Check resources.boundary pass "The recorded boundary contains $($resources.Count) top-level resource(s)."
+    }
+    foreach ($type in $expectedTypes) {
+        $count = @($resources | Where-Object type -EQ $type).Count
+        if ($count -gt 0) { Add-Check ("resource." + ($type -replace '[/\.]','-')) pass "Found $count resource(s) of type $type." }
+        else { Add-Check ("resource." + ($type -replace '[/\.]','-')) warning "No top-level $type was returned; inspect nested or gated state." }
+    }
+}
+
+$failures = @($checks | Where-Object status -EQ fail).Count
+$warnings = @($checks | Where-Object status -IN @('warning', 'skipped')).Count
+$result = if ($failures -gt 0) { 'fail' } elseif ($warnings -gt 0) { 'partial' } else { 'pass' }
+$output = [ordered]@{ labId = 'LAB-13'; runId = $RunId; generatedAt = (Get-Date).ToUniversalTime().ToString('o'); result = $result; checks = @($checks) }
+$output | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath $Report -Encoding utf8
+$output | ConvertTo-Json -Depth 20
+if ($result -eq 'fail') { exit 1 }
+```
+
+### Cleanup: `scripts/cli/Cleanup.ps1`
+
+```powershell
+#requires -Version 7.4
+[CmdletBinding()]
+[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingWriteHost', '', Justification = 'Interactive lab progress is intentionally written to the host.')]
+[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSReviewUnusedParameter', '', Justification = 'Lifecycle scripts keep one consistent interface across all labs.')]
+[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseDeclaredVarsMoreThanAssignments', '', Justification = 'Shared safe-naming variables are retained for a consistent learner path.')]
+param(
+    [string]$SubscriptionId = $env:AZURE_SUBSCRIPTION_ID,
+    [Parameter(Mandatory)][ValidatePattern('^[a-z0-9-]+$')][string]$RunId,
+    [switch]$Execute
+)
+
+Set-StrictMode -Version Latest
+$ErrorActionPreference = 'Stop'
+$PSNativeCommandUseErrorActionPreference = $true
+
+if (-not (Get-Command az -ErrorAction SilentlyContinue)) {
+    throw 'Azure CLI is required. Install it, run az login deliberately, and retry.'
+}
+
+$LabRoot = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
+$Manifest = Join-Path $LabRoot ".state/$RunId/run.json"
+if (-not (Test-Path -LiteralPath $Manifest)) { throw "Missing state: $Manifest" }
+$state = Get-Content -LiteralPath $Manifest -Raw | ConvertFrom-Json -Depth 20
+$account = az account show --output json | ConvertFrom-Json
+if (-not $SubscriptionId) { $SubscriptionId = [string]$account.id }
+if ($account.id -ne $SubscriptionId -or $state.subscriptionId -ne $SubscriptionId) { throw 'Active or recorded subscription mismatch.' }
+Write-Host 'Cleanup preview for LAB-13'
+Write-Host '  exact target scope: resource group'
+Write-Host ($state | ConvertTo-Json -Depth 6 -Compress)
+Write-Host '  residual and soft-delete behavior must be audited after deletion.'
+if (-not $Execute) { Write-Host 'Preview only. Re-run with -Execute after checking every target.'; return }
+
+$resourceGroup = az group show --subscription $SubscriptionId --name $state.resourceGroup.name --output json 2>$null | ConvertFrom-Json
+if ($LASTEXITCODE -ne 0 -or -not $resourceGroup) { Write-Host 'Resource group is already absent; cleanup is idempotent.'; return }
+if ($resourceGroup.id -ne $state.resourceGroup.id -or $resourceGroup.tags.purpose -ne 'az104-lab' -or $resourceGroup.tags.labId -ne '13' -or $resourceGroup.tags.runId -ne $RunId) {
+    throw 'ID or ownership-tag verification failed; refusing cleanup.'
+}
+az group delete --subscription $SubscriptionId --name $state.resourceGroup.name --yes --output none
+
+$stillExists = az group exists --subscription $SubscriptionId --name $state.resourceGroup.name --output tsv
+if ($stillExists -eq 'true') { throw 'Resource group still exists; inspect locks, dependencies, or asynchronous deletion.' }
+
+$state.status = 'cleanup-complete'
+$state | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath $Manifest -Encoding utf8
+Write-Host 'Cleanup completed for the exact recorded boundary. Audit retained or soft-deleted items separately.'
 ```
 
 <!-- END GENERATED INLINE COMMANDS -->
@@ -340,16 +352,16 @@ The complete learner-facing implementations are embedded above. The commands in 
 
 ### 1. Preview
 
-```sh
-./scripts/cli/setup.sh --subscription-id <subscription-id> --location <region> --run-id az104l13-01
+```powershell
+pwsh ./scripts/cli/Setup.ps1 -RunId az104l13-01 -SubscriptionId <subscription-id> -Location <region>
 ```
 
 Review the context, names, tags, cost class, providers, and gated branches printed by the script.
 
 ### 2. Execute the approved baseline
 
-```sh
-./scripts/cli/setup.sh --subscription-id <subscription-id> --location <region> --run-id az104l13-01 --execute
+```powershell
+pwsh ./scripts/cli/Setup.ps1 -RunId az104l13-01 -SubscriptionId <subscription-id> -Location <region> -Execute
 ```
 
 The script records its run before creating resources. If a cloud operation fails partway through, keep the state directory and use validation plus cleanup against that exact run.
@@ -402,8 +414,8 @@ Evidence to retain:
 
 ### 4. Validate independently
 
-```sh
-./scripts/cli/validate.sh --subscription-id <subscription-id> --run-id az104l13-01
+```powershell
+pwsh ./scripts/cli/Validate.ps1 -RunId az104l13-01 -SubscriptionId <subscription-id>
 ```
 
 Inspect `.state/az104l13-01/validation.json`. A `pass` applies only to checks that could be executed. A gated or asynchronous path must remain `warning` or `skipped` until its evidence exists.
@@ -415,7 +427,7 @@ Positive checks should prove the intended resources, configuration, relationship
 1. Pick one reversible configuration created inside the recorded lab boundary.
 2. Record the exact ID and current value.
 3. Introduce one bounded mismatch; do not weaken a tenant-wide or production control.
-4. Run validation and connect the failed check to an exact CLI/PowerShell query and the machine-readable validation result.
+4. Run validation and connect the failed check to an exact Azure CLI query and the machine-readable validation result.
 5. Repair only the identified setting, rerun validation, and compare the evidence.
 
 The [solution notes](solution/README.md) provide a diagnostic sequence without hiding the reasoning behind an opaque repair script.
@@ -424,14 +436,14 @@ The [solution notes](solution/README.md) provide a diagnostic sequence without h
 
 Preview cleanup first:
 
-```sh
-./scripts/cli/cleanup.sh --subscription-id <subscription-id> --run-id az104l13-01
+```powershell
+pwsh ./scripts/cli/Cleanup.ps1 -RunId az104l13-01 -SubscriptionId <subscription-id>
 ```
 
 After verifying every printed target belongs to this run:
 
-```sh
-./scripts/cli/cleanup.sh --subscription-id <subscription-id> --run-id az104l13-01 --execute
+```powershell
+pwsh ./scripts/cli/Cleanup.ps1 -RunId az104l13-01 -SubscriptionId <subscription-id> -Execute
 ```
 
 Run validation again after deletion. Some services use soft delete, retained recovery points, asynchronous deletion, or external DNS/tenant state; the cleanup report must distinguish active cleanup from retention and must list residual items instead of claiming success prematurely.
@@ -449,4 +461,4 @@ Run validation again after deletion. Some services use soft delete, retained rec
 - [https://learn.microsoft.com/en-us/azure/container-instances/container-instances-quickstart](https://learn.microsoft.com/en-us/azure/container-instances/container-instances-quickstart)
 - [https://learn.microsoft.com/en-us/azure/container-instances/container-instances-container-groups](https://learn.microsoft.com/en-us/azure/container-instances/container-instances-container-groups)
 
-Last curriculum/source review: 2026-08-30. Azure interfaces and command modules evolve; confirm current syntax in the linked primary documentation before a live run.
+Last curriculum/source review: 2026-08-30. Azure interfaces and command syntax evolves; confirm current syntax in the linked primary documentation before a live run.

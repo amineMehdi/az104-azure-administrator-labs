@@ -8,14 +8,11 @@ objectives:
 - ST-ACCOUNTS-05
 - ST-DATA-01
 - ST-DATA-05
-track: az-powershell
+track: azure-cli
 status: offline-validated
 testedToolVersions:
+  azureCli: '>=2.88.0'
   powershell: '>=7.4'
-  modules:
-  - Az.Accounts
-  - Az.Resources
-  - Az.Storage
 estimatedMinutes: 135
 difficulty: foundational
 cost:
@@ -36,11 +33,11 @@ permissions:
 prerequisites:
 - A disposable non-production Azure environment
 - An active context that matches the explicitly supplied tenant and subscription
-- The command surface and dependencies for Az PowerShell
 - 'Authorization boundary: Contributor and Storage File Data SMB Share Contributor; directory permissions for the
   optional identity-source path'
 - 'External gate review: Identity-based SMB configuration is gated by AZ104_FILES_IDENTITY_SOURCE because Entra
   Kerberos, AD DS, and Entra Domain Services have different prerequisites.'
+- Azure CLI hosted in PowerShell 7.4 or later
 providers:
   observed:
   - Microsoft.Storage
@@ -61,7 +58,7 @@ externalRequirements:
   Domain Services have different prerequisites.
 validation:
   commandLanes:
-  - scripts/powershell/Validate.ps1
+  - scripts/cli/Validate.ps1
   output: .state/<run-id>/validation.json
   statuses:
   - pass

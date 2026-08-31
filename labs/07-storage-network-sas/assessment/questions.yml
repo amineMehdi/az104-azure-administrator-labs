@@ -85,7 +85,7 @@
     C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
     D: Correct. The lab records the exact scope and identity of blob container before validation and cleanup.
   sourceUrls:
-  - https://learn.microsoft.com/en-us/powershell/module/az.storage/
+  - https://learn.microsoft.com/en-us/cli/azure/storage
   lastVerified: '2026-08-30'
 - id: LAB07-Q05
   objectiveIds:
@@ -173,7 +173,7 @@
     D: 'Correct. Unavailable live prerequisites remain skipped or partial; the documented gate is: None beyond the
       declared role and a disposable subscription.'
   sourceUrls:
-  - https://learn.microsoft.com/en-us/powershell/module/az.storage/
+  - https://learn.microsoft.com/en-us/cli/azure/storage
   lastVerified: '2026-08-30'
 - id: LAB07-Q09
   objectiveIds:
@@ -257,5 +257,5 @@
     C: This choice conflicts with the lab's authorization, safety, or truthful-status contract.
     D: Correct. Accepted requests and offline checks do not prove the final live state.
   sourceUrls:
-  - https://learn.microsoft.com/en-us/powershell/module/az.storage/
+  - https://learn.microsoft.com/en-us/cli/azure/storage
   lastVerified: '2026-08-30'
