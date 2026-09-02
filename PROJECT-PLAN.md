@@ -25,5 +25,3 @@ The first authorized pilot is limited to Labs 00, 01, 06, 14, 17, and 22 in a di
 ## Completion rule
 
 A repository release passes offline acceptance only after its content, inline commands, scripts, metadata, diagrams, applicable assessments, site, and portability checks all pass. No lab is labeled `live-verified` until a separately authorized Azure run completes its learner lane, break/fix exercise, redacted Azure CLI evidence, deterministic cleanup, and residual-resource audit.
-
-See [AZ-104-GITHUB-LABS-MEGA-PROMPT.md](AZ-104-GITHUB-LABS-MEGA-PROMPT.md) for the detailed project charter.
