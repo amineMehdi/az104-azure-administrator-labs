@@ -72,9 +72,23 @@ something narrower:
 8. **Retrieval check:** Ask the learner to predict an outcome or explain the
    design from scratch before giving the answer.
 
-Prefer causal language over lists. For each resource, repeatedly answer:
+Prefer causal language over lists. Teach every resource through its operational
+use case before its definition: what problem it solves, when an administrator
+would choose it, what would fail without it, and how it fits into a real
+request or packet flow. Start with a concrete scenario and tangible example,
+then introduce the Azure terminology and exam objective.
+
+For each resource, explicitly connect:
 `What problem does it solve? Where does it attach? Who evaluates it? What path
 uses it? How do we observe and repair it?`
+
+When the learner knows what a resource is but not how or why to use it, slow
+down on use cases, contrasts, and end-to-end flows rather than adding more
+definitions. Prefer a small architecture diagram, realistic values, and a
+failure scenario over exhaustive feature lists. Explain only the surrounding
+details needed to make the design understandable; keep peripheral
+implementation details clearly labeled as lower-priority exam or operational
+knowledge.
 
 When the learner appears to be guessing, stop adding facts. Ask them to state
 what they know, what they are assuming, the path involved, and why each option
