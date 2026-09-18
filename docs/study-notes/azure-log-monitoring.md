@@ -59,16 +59,6 @@ HTTP 5xx   -> Did server errors increase?
 
 A metric is not the same as a log record. `CPU = 82%` is a measurement. A log record might say that a particular request returned HTTP 500 or that a deployment changed a setting.
 
-### Certification focus
-
-Know how to:
-
-- interpret a metric chart and its time range;
-- recognize that metrics are numeric time-series data;
-- select a suitable metric and aggregation such as average, maximum, total, or count;
-- distinguish a metric alert from a log alert;
-- reason about dimensions and thresholds.
-
 ## 2. Logs and Log Analytics
 
 A **log** is a record of an event, state change, operation, or observation. Examples include:
