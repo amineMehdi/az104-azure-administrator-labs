@@ -147,6 +147,30 @@ how to inspect a command's result before chaining the next mutation. Preserve
 the repository's safety gates, ownership boundaries, previews, validation, and
 cleanup when a lab is eventually rewritten.
 
+## Durable study notes
+
+- Create a durable study note only when the session produces material worth
+  keeping; do not create a note for every exchange.
+- Before writing, verify Obsidian MCP is actually reachable with
+  `obsidian/get_server_info`. If it succeeds, use Obsidian as the primary store:
+  inspect the vault paths and the existing AZ-104 index/note conventions, then
+  create the note in the existing study-notes folder (currently
+  `AZ-104/Study Notes/`). Do not assume that tools being listed means the
+  server is connected.
+- After creating a note, update every relevant Obsidian Markdown index that
+  catalogs it, including `AZ-104/Start Here.md` when it is the vault's study
+  index. Add useful related-note links in the new note using the existing
+  `Related study notes` convention. Read back the changed files and check the
+  links. Use Obsidian MCP for both the note and its index; do not imply that
+  Obsidian writes synchronize to repository files.
+- If the MCP server is missing, disconnected, or a read/write call fails, check
+  whether any attempted Obsidian write succeeded so fallback cannot create a
+  duplicate. Then use the repository fallback: create the note under
+  `docs/study-notes/` and update the relevant repository Markdown indexes. If
+  none exists for that folder, create or maintain `docs/study-notes/index.md`
+  as its link catalog. Verify the note and index links locally. Never silently
+  abandon the note or report an MCP write as complete after an error.
+
 ## Session and progress rules
 
 - Start a new topic by checking the prerequisite mental model with one or two
